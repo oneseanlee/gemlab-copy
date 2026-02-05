@@ -1,7 +1,19 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap');
+
+>>>>>>> 9462543 (Initial commit: GemLab replication complete)
+>>>>>>> 901a0d3 (Initial commit: GemLab project with all refinements)
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 901a0d3 (Initial commit: GemLab project with all refinements)
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
@@ -103,3 +115,64 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+<<<<<<< HEAD
+=======
+=======
+:root {
+  --font-title: 'Zalando Sans Expanded', 'Arial Black', sans-serif;
+  --font-body: 'Rethink Sans', 'Open Sans', sans-serif;
+
+  font-family: var(--font-body);
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: #213547;
+  background-color: #ffffff;
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #BFD5E6 40%, #5D8AA8 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  /* place-items: center;  <-- Removing this because it centers vertically */
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.refill-title,
+.stat-number,
+.stat-label-large,
+.press-logo {
+  font-family: var(--font-title);
+  font-weight: 700;
+}
+
+p,
+span,
+a,
+li,
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-body);
+}
+>>>>>>> 9462543 (Initial commit: GemLab replication complete)
+>>>>>>> 901a0d3 (Initial commit: GemLab project with all refinements)
