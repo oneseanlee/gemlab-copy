@@ -1,0 +1,637 @@
+.listicle-container {
+    background-color: #ddeafa;
+    min-height: 100vh;
+    font-family: 'Rethink Sans', sans-serif;
+    color: #1a1a1a;
+}
+
+.advertorial-banner {
+    background-color: #F1F5F9;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    color: #64748B;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.listicle-header {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.gemlab-logo {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+    display: inline-block;
+}
+
+.hero-card {
+    background: white;
+    border-radius: 2rem;
+    max-width: 1200px;
+    /* Updated from 800px */
+    width: 100%;
+    aspect-ratio: 1200 / 480;
+    /* Enforce 5:2 ratio */
+    margin: 0 auto 3rem;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center content vertically in the fixed height */
+}
+
+@media (max-width: 1024px) {
+    .hero-card {
+        aspect-ratio: auto;
+        padding: 3rem 2rem;
+    }
+}
+
+.hero-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 3.5rem;
+    /* Larger to match screenshot */
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
+}
+
+.hero-divider {
+    height: 1px;
+    background-color: #E2E8F0;
+    margin: 2.5rem auto;
+    width: 100%;
+    /* Full width of content area effectively */
+    max-width: 90%;
+}
+
+.hero-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #4A5568;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.social-proof {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 1.1rem;
+}
+
+.press-logos {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    align-items: center;
+    /* Align vertically center for images */
+    flex-wrap: wrap;
+    opacity: 1;
+    margin-top: 3rem;
+    filter: grayscale(100%);
+    /* Make logos black/grey */
+    opacity: 0.7;
+    /* Slight fade for elegance */
+}
+
+.press-logo {
+    display: block;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Logo Simulations */
+.press-logo.esquire {
+    height: 2rem;
+}
+
+.press-logo.buzzfeed {
+    height: 2rem;
+}
+
+/* Optional: Add the red dot? */
+
+.press-logo.mens-journal {
+    height: 2rem;
+}
+
+.press-logo.mens-health {
+    height: 2rem;
+}
+
+/* Product Shot Section */
+.product-showcase {
+    background: white;
+    border-radius: 2rem;
+    max-width: 800px;
+    width: 100%;
+    aspect-ratio: 800 / 600;
+    /* Enforce 4:3 ratio strictly */
+    margin: 0 auto 3rem;
+    padding: 0;
+    /* Remove padding to let image fill */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Center content in the box */
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Clip image to border radius */
+}
+
+.product-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    /* Fill the flex container */
+}
+
+/* ... existing code ... */
+
+.bottles-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Fill the container completely */
+    display: block;
+}
+
+/* List Items */
+.reason-card {
+    background: white;
+    border-radius: 2rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 4rem 3rem 3rem;
+    /* Extra top padding for number */
+    position: relative;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.list-number {
+    position: absolute;
+    top: -1.5rem;
+    /* Half inside, half outside? Or completely inside top? Re-checking screenshot: It's centered inside top with some padding above. */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3rem;
+    height: 3rem;
+    background-color: #CCFF00;
+    /* Neon Lime */
+    color: #1a1a1a;
+    /* Assuming dark text number */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    top: 2rem;
+    /* Adjusted based on screenshot layout (inside card) */
+}
+
+.list-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 1.75rem;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+}
+
+.list-description {
+    color: #4A5568;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.list-image {
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.list-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image-card {
+    background: white;
+    border-radius: 2rem;
+    max-width: 800px;
+    width: 100%;
+    aspect-ratio: 800 / 600;
+    /* Match product showcase ratio or similar standard? User said "filled with image". Usually 4:3 or 3:2. Let's stick to 4:3 generally or auto if height varies. */
+    /* Actually, for general list images, let's allow them to determine height but enforce full width fill. 
+       The screenshot shows a portrait/square-ish image. 
+       Let's try a fixed aspect ratio similar to product showcase for consistency: 800/600 or 4:3. */
+    aspect-ratio: 4/3;
+    margin: 0 auto 3rem;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.step-overlay {
+    /* For the arm steps image */
+    position: relative;
+}
+
+.step-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-badge {
+    background-color: #CCFF00;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #1a1a1a;
+}
+
+.step-text {
+    color: white;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.comparison-container {
+    display: flex;
+    width: 100%;
+}
+
+.comparison-half {
+    flex: 1;
+    position: relative;
+}
+
+.comparison-label {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .reason-card,
+    .hero-card,
+    .product-showcase {
+        padding: 2rem 1.5rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .list-title {
+        font-size: 1.5rem;
+    }
+
+    .press-logos {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Comparison Table */
+.comparison-section {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+}
+
+.comparison-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #1a1a1a;
+}
+
+.comparison-table {
+    display: flex;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.comparison-header-col {
+    flex: 0 0 15%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 250px;
+    /* Space for the product images in other cols */
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.comparison-header-row {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    min-height: 80px;
+}
+
+.comparison-col {
+    flex: 1;
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-col.gemlab {
+    background-color: #CCFF00;
+    /* Neon Lime */
+    border: 2px solid #1a1a1a;
+    transform: scale(1.02);
+    z-index: 10;
+}
+
+.comparison-col.competitor {
+    background-color: #F8FAFC;
+    color: #64748B;
+}
+
+.col-image {
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.col-image img {
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.col-brand-name {
+    text-align: center;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+}
+
+.comparison-row {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    min-height: 80px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.comparison-col.gemlab .comparison-row {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.check-list-item {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.check-icon {
+    min-width: 1rem;
+    font-weight: bold;
+}
+
+.gemlab .check-icon {
+    color: #1a1a1a;
+}
+
+.competitor .check-icon.good {
+    color: #1a1a1a;
+}
+
+.competitor .check-icon.bad {
+    color: #EF4444;
+}
+
+/* Travel Kit Offer */
+.travel-kit-banner {
+    background: linear-gradient(135deg, #E2E8F0 0%, #475569 50%, #1E293B 100%);
+    border-radius: 2rem;
+    max-width: 1200px;
+    /* Updated from 1000px */
+    width: 100%;
+    aspect-ratio: 1200 / 480;
+    /* Enforce 5:2 ratio */
+    margin: 4rem auto;
+    padding: 3rem 4rem;
+    /* Adjusted padding to fit content in height */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ensure content scales/fits if needed, though flexbox usually handles it.
+   On very small screens, aspect-ratio might squeeze content too much. 
+   User asked for "maintain this with every device", but strict ratio on mobile text is impossible without scaling.
+   I will use a media query to relax it on mobile to avoid broken layout, OR use container queries if needed.
+   For now, I'll let standard responsive CSS handle the mobile stack (defined below in media query) 
+   which naturally overrides the aspect-ratio constraint if flex-direction changes or height becomes auto.
+*/
+
+.offer-content {
+    flex: 1;
+    max-width: 500px;
+    z-index: 2;
+}
+
+.offer-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.offer-description {
+    font-size: 1rem;
+    color: #E2E8F0;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.countdown-timer {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.time-box {
+    background: #CCFF00;
+    color: #1a1a1a;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    min-width: 70px;
+}
+
+.time-value {
+    font-weight: 800;
+    font-size: 1.5rem;
+    display: block;
+    line-height: 1;
+}
+
+.time-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.cta-button {
+    background: #CBD5E1;
+    color: #1a1a1a;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+}
+
+.cta-button:hover {
+    background: #F1F5F9;
+    transform: translateY(-2px);
+}
+
+.offer-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.offer-image img {
+    max-width: 120%;
+    filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.5));
+}
+
+/* Legal Footer */
+.legal-footer {
+    background-color: #1E293B;
+    color: #94A3B8;
+    text-align: center;
+    padding: 3rem 1rem;
+    font-size: 0.75rem;
+    line-height: 1.6;
+}
+
+.legal-text {
+    max-width: 800px;
+    margin: 0 auto 1rem;
+}
+
+.copyright {
+    color: #64748B;
+}
+
+@media (max-width: 768px) {
+    .comparison-table {
+        flex-direction: column;
+    }
+
+    .comparison-header-col {
+        display: none;
+    }
+
+    .travel-kit-banner {
+        flex-direction: column-reverse;
+        padding: 2rem;
+        text-align: center;
+        aspect-ratio: auto;
+        /* Reset ratio on mobile to fit stacked content naturally */
+        min-height: auto;
+    }
+
+    .offer-content {
+        margin-top: 2rem;
+    }
+
+    .countdown-timer {
+        justify-content: center;
+    }
+
+    .offer-image img {
+        max-width: 100%;
+    }
+}

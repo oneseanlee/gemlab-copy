@@ -10,7 +10,6 @@ const BenefitsTimeline = () => {
                 <div className="benefits-image-col">
                     <div className="benefits-image">
                         <img src="/images/sec3.webp" alt="Magic Foam" />
-                        <div className="overlay-text">MAGIC FOAM</div>
                     </div>
                 </div>
 
