@@ -1,0 +1,114 @@
+.benefits-section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.benefits-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #000;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.benefits-container {
+    display: flex;
+    gap: 3rem;
+    text-align: left;
+}
+
+.benefits-image-col {
+    flex: 1;
+}
+
+.benefits-image {
+    width: 100%;
+    max-width: 590px;
+    aspect-ratio: 590 / 660;
+    height: auto;
+    background-color: #333;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    background-image: radial-gradient(circle, #555, #222);
+    margin: 0 auto;
+    /* Center it */
+}
+
+.benefits-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.benefits-image .overlay-text {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: #ccff00;
+    /* Neon green type color */
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-weight: 300;
+    font-size: 1.5rem;
+    border: 1px solid #ccff00;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+.timeline-col {
+    flex: 1;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    padding-bottom: 3rem;
+    border-left: 2px dashed #ccc;
+}
+
+.timeline-item:last-child {
+    border-left: none;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -9px;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background-color: #ff6b6b;
+    /* Salmon/Red color */
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px #ff6b6b;
+}
+
+.timeline-tag {
+    display: inline-block;
+    background-color: #ccff00;
+    color: #000;
+    font-weight: 800;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.timeline-content h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #000;
+}
+
+.timeline-content p {
+    color: #444;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}

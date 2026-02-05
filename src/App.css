@@ -1,4 +1,8 @@
 #root {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 901a0d3 (Initial commit: GemLab project with all refinements)
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -40,3 +44,13 @@
 .read-the-docs {
   color: #888;
 }
+<<<<<<< HEAD
+=======
+=======
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 2rem 0 2rem;
+    text-align: center;
+}
+>>>>>>> 9462543 (Initial commit: GemLab replication complete)
+>>>>>>> 901a0d3 (Initial commit: GemLab project with all refinements)

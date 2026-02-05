@@ -1,0 +1,114 @@
+.testimonials-section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.testimonial-card {
+    background-color: #dbe4ef;
+    /* Light blue-grey */
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-images {
+    display: flex;
+    height: 200px;
+}
+
+.test-img {
+    flex: 1;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #555;
+    font-size: 0.8rem;
+}
+
+.test-img.before {
+    border-right: 1px solid #fff;
+    background-image: linear-gradient(135deg, #ddd 0%, #eee 100%);
+}
+
+.test-img.after {
+    background-image: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    /* Slight color variation */
+}
+
+.testimonial-content {
+    padding: 1.5rem;
+}
+
+.testimonial-content h3 {
+    margin: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+}
+
+.customer-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.customer-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.verified-badge {
+    background-color: #1a1a1a;
+    color: #ccff00;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.testimonial-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+}
+
+.testimonial-features li {
+    font-size: 0.85rem;
+    color: #444;
+    margin-bottom: 0.3rem;
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+.testimonial-features li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+    /* Green check */
+    font-size: 0.8rem;
+}
+
+.testimonial-quote {
+    font-style: italic;
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
