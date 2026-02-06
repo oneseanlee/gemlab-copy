@@ -1,196 +1,71 @@
 
-
-# TPrime365 Landing Page Implementation Plan
+# Two-Column Hero Section for TPrime365
 
 ## Overview
-Create a new landing page at `/tprime365` for the TPrime365 testosterone optimizer product, matching the professional look and feel of the existing GemLab listicle page while adapting the design for this pharmaceutical/supplement product.
+Transform the TPrime365 hero section from a single centered column layout to a two-column layout, matching the visual style used in the GemLab listicle page (similar to the travel-kit-banner pattern).
 
-## Design Approach
-The new page will reuse the existing design language including:
-- Light blue gradient background (`#ddeafa`)
-- White rounded cards with shadows (border-radius: 2rem)
-- Zalando Sans Expanded for headlines
-- Rethink Sans for body text
-- Neon lime accent color (`#CCFF00`) for highlights
-- 5:2 and 4:3 aspect ratio cards where appropriate
+## Current State
+The hero section is currently a centered, single-column card with:
+- Title
+- Divider
+- Subtitle (ingredients list)
+- Price banner
+- Guarantee text
+- CTA button
 
----
+## Proposed Layout
 
-## Page Structure & Sections
+```text
++------------------------------------------------------------------+
+|                                                                  |
+|   [LEFT COLUMN - 55%]              [RIGHT COLUMN - 45%]          |
+|                                                                  |
+|   The Only 4-in-1 Testosterone     +----------------------+      |
+|   Optimizer With Sublingual        |                      |      |
+|   Delivery                         |   [Product Image]    |      |
+|                                    |   Placeholder or     |      |
+|   Enclomiphene + Spermidine +      |   bottle visual      |      |
+|   Boron + Vitamin C                |                      |      |
+|                                    +----------------------+      |
+|   [$149/month banner]                                            |
+|   Guarantee text                                                 |
+|   [START YOUR OPTIMIZATION ->]                                   |
+|                                                                  |
++------------------------------------------------------------------+
+```
 
-### 1. Header
-- Simple header with "TPrime365" logo (styled like GEMLAB logo)
-- Optional "Advertorial" banner if needed
+## Changes Required
 
-### 2. Hero Section
-A large white card containing:
-- Main headline: "The Only 4-in-1 Testosterone Optimizer With Sublingual Delivery"
-- Subheadline with ingredient list
-- Price banner: "$149/month"
-- HappyMD physician consultation note
-- Money-back guarantee callout
-- Large CTA button: "START YOUR OPTIMIZATION"
+### 1. TPrime365Page.tsx - Hero Section Structure
+Update the hero card to use a two-column flexbox layout:
+- Left column: Title, subtitle, price banner, guarantee, CTA button
+- Right column: Placeholder image area (styled box or actual image if available)
 
-### 3. The Problem Section
-Three problem cards showing what's wrong with traditional solutions:
-- Injectable TRT (with list of cons)
-- Oral Pills (with list of cons)
-- Single-Ingredient Solutions (with list of cons)
-Each using a dark/red color scheme to indicate "bad" options
+### 2. TPrime365Page.css - Hero Styling
+Add new CSS classes:
+- `.tprime-hero-card` - Change to `display: flex` with `justify-content: space-between`
+- `.tprime-hero-content` - Left column wrapper (flex: 1, text-align: left)
+- `.tprime-hero-image` - Right column wrapper (flex: 0 0 40%, display: flex, centered)
+- Remove the divider (doesn't fit two-column layout well)
+- Adjust title and text alignment to left-align
 
-### 4. The Solution Section
-- Headline: "TPrime365: Your Natural Testosterone, Amplified"
-- Visual 4-pillar diagram showing:
-  - Enclomiphene 25mg
-  - Spermidine 10mg
-  - Boron 10mg
-  - Vitamin C 10mg
-- MODS Max Gold sublingual delivery callout
-
-### 5. Ingredient Breakdown Section
-Four detailed ingredient cards (grid layout):
-- **Pillar 1: Enclomiphene** - Hormone Optimization
-- **Pillar 2: Spermidine** - Testosterone + Longevity
-- **Pillar 3: Boron** - Strength & Vitality
-- **Pillar 4: Vitamin C** - Protection & Support
-
-Each card includes:
-- Icon/badge
-- "What It Does" bullet list
-- "The Science" bullet list
-
-### 6. Delivery Advantage Section
-Two-column comparison:
-- Left: "Oral Capsules (Competitors)" with cons
-- Right: "Sublingual (TPrime365)" with pros
-- MODS Max Gold Technology callout box
-
-### 7. Who Is This For Section
-Three persona cards:
-- The Performer (Age 25-40)
-- The Rebuilder (Age 40-55)
-- The Optimizer (Age 55+)
-
-### 8. Benefits Section
-3x3 icon grid showing:
-- Energy & Drive
-- Lean Muscle Growth
-- Mental Clarity
-- Libido & Performance
-- Faster Recovery
-- Fat Loss
-- Better Sleep
-- Bone Density
-- Longevity
-
-### 9. Comparison Table Section
-Full-width comparison table (styled like the GemLab vs Competitors table):
-- TPrime365 vs Hims vs Maximus vs Strut vs TRT Clinics
-- Rows: Price, Dose, Delivery, Ingredients, Fertility, etc.
-- TPrime365 column highlighted with lime accent
-
-### 10. Value Breakdown Section
-Visual value stack showing:
-- What's included and retail values
-- Total value vs your price
-- Savings calculation
-
-### 11. How It Works Section
-3-step process flow:
-1. Complete Order & Health Assessment
-2. Physician Review via HappyMD
-3. Receive & Start Optimizing
-
-With timeline callout: "Order to delivery: 7-10 days"
-
-### 12. Dosing Instructions Section
-Card with:
-- When to take (30-60 min before bedtime)
-- How to take (sublingual)
-- Pro tips box
-
-### 13. Safety & Quality Section
-Trust badges grid:
-- FDA-Registered 503A Facility
-- Money-Back Guarantee
-- Third-Party Tested
-- Made in USA
-- Licensed Physician Oversight
-- HIPAA Compliant
-
-### 14. Contraindications Section
-Important safety information with list of conditions
-
-### 15. FAQ Section
-Accordion-style FAQ matching the GemLab accordion component
-
-### 16. Testimonials Section
-Placeholder section for future testimonials
-
-### 17. Final CTA Section
-Large CTA card with:
-- Headline: "Ready to Reclaim Your Prime?"
-- Price callout
-- Large CTA button
-- Trust bullet points below button
-- Trust badge strip
-
-### 18. Footer
-- Contact information
-- HappyMD attribution
-- Legal links
-
----
-
-## Files to Create
-
-### New Files:
-1. `src/pages/TPrime365Page.tsx` - Main page component
-2. `src/pages/TPrime365Page.css` - Page-specific styles
-
-### Files to Modify:
-1. `src/App.tsx` - Add route for `/tprime365`
-
----
+### 3. Responsive Behavior
+On mobile (768px and below):
+- Stack columns vertically (flex-direction: column)
+- Image appears above or below content
+- Text returns to center alignment
 
 ## Technical Details
 
-### Component Reuse
-- Reuse existing CSS patterns from ListiclePage.css
-- Follow same card styling conventions
-- Use existing color variables and fonts from index.css
+### File: src/pages/TPrime365Page.tsx
+Lines 49-66 will be modified to wrap content in two column containers.
 
-### Responsive Design
-- Mobile-first approach
-- Cards stack vertically on mobile
-- Comparison table scrolls horizontally or stacks
-- CTA buttons remain full-width on mobile
+### File: src/pages/TPrime365Page.css  
+Lines 26-114 will be updated with new flexbox layout and column styling.
 
-### Key Style Classes to Create
-- `.tprime-hero-card` - Hero section styling
-- `.problem-card` - Problem section cards (red accents)
-- `.pillar-card` - Ingredient pillar cards
-- `.comparison-col.tprime` - Highlighted TPrime column
-- `.process-step` - How it works steps
-- `.trust-badge` - Safety badges
-- `.faq-item` - FAQ accordion items
-- `.final-cta` - Final CTA section
-
-### Color Scheme
-- Primary: `#CCFF00` (neon lime) - CTAs, accents
-- Background: `#ddeafa` (light blue)
-- Cards: `#FFFFFF` (white)
-- Problem cards: Dark gradients with red accents
-- Text: `#1a1a1a` (primary), `#4A5568` (secondary)
-
----
-
-## Implementation Order
-
-1. Create the route in App.tsx
-2. Create TPrime365Page.tsx with basic structure
-3. Create TPrime365Page.css with all section styles
-4. Build out each section from top to bottom
-5. Add responsive breakpoints
-6. Test on mobile/tablet/desktop
-
+### Image Placeholder
+Since there's no specific TPrime365 product image available yet, we'll create a styled placeholder box with:
+- Rounded corners
+- Light gray background or gradient
+- "Product Image" text or icon
+- This can easily be replaced with a real image later
