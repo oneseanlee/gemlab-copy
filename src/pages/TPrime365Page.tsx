@@ -48,21 +48,29 @@ const TPrime365Page = () => {
 
             {/* Hero Section */}
             <div className="tprime-hero-card">
-                <h1 className="tprime-hero-title">
-                    The Only 4-in-1 Testosterone Optimizer<br />
-                    With Sublingual Delivery
-                </h1>
-                <div className="tprime-hero-divider"></div>
-                <p className="tprime-hero-subtitle">
-                    <strong>Enclomiphene + Spermidine + Boron + Vitamin C</strong><br />
-                    Prescription-grade testosterone optimization for men who demand more
-                </p>
-                <div className="tprime-price-banner">
-                    <span className="price">$149/month</span>
-                    <span className="price-note">Includes Licensed Physician Consultation via HappyMD</span>
+                <div className="tprime-hero-content">
+                    <h1 className="tprime-hero-title">
+                        The Only 4-in-1 Testosterone Optimizer<br />
+                        With Sublingual Delivery
+                    </h1>
+                    <p className="tprime-hero-subtitle">
+                        <strong>Enclomiphene + Spermidine + Boron + Vitamin C</strong><br />
+                        Prescription-grade testosterone optimization for men who demand more
+                    </p>
+                    <div className="tprime-price-banner">
+                        <span className="price">$149/month</span>
+                        <span className="price-note">Includes Licensed Physician Consultation via HappyMD</span>
+                    </div>
+                    <p className="tprime-guarantee">If not approved by physician, fully refunded</p>
+                    <button className="tprime-cta-button">START YOUR OPTIMIZATION →</button>
                 </div>
-                <p className="tprime-guarantee">If not approved by physician, fully refunded</p>
-                <button className="tprime-cta-button">START YOUR OPTIMIZATION →</button>
+                <div className="tprime-hero-image">
+                    <div className="tprime-hero-image-placeholder">
+                        <span className="placeholder-icon">💧</span>
+                        <span className="placeholder-text">TPrime365™</span>
+                        <span className="placeholder-subtext">Sublingual Formula</span>
+                    </div>
+                </div>
             </div>
 
             {/* Section 1: The Problem */}
