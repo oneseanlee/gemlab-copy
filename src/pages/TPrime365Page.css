@@ -1,0 +1,1055 @@
+/* TPrime365 Landing Page Styles */
+/* Matches GemLab listicle design language */
+
+.tprime-container {
+    background-color: #ddeafa;
+    min-height: 100vh;
+    font-family: 'Rethink Sans', sans-serif;
+    color: #1a1a1a;
+}
+
+/* Header */
+.tprime-header {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.tprime-logo {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #1a1a1a;
+    display: inline-block;
+}
+
+/* Hero Card */
+.tprime-hero-card {
+    background: white;
+    border-radius: 2rem;
+    max-width: 1200px;
+    width: calc(100% - 2rem);
+    margin: 0 auto 3rem;
+    padding: 4rem 3rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.tprime-hero-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 3rem;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
+}
+
+.tprime-hero-divider {
+    height: 1px;
+    background-color: #E2E8F0;
+    margin: 2rem auto;
+    max-width: 80%;
+}
+
+.tprime-hero-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #4A5568;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tprime-price-banner {
+    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    color: white;
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tprime-price-banner .price {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.tprime-price-banner .price-note {
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+.tprime-guarantee {
+    color: #10B981;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.tprime-cta-button {
+    background-color: #CCFF00;
+    color: #1a1a1a;
+    border: none;
+    padding: 1.25rem 3rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    font-family: 'Rethink Sans', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(204, 255, 0, 0.4);
+}
+
+.tprime-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(204, 255, 0, 0.5);
+}
+
+.tprime-cta-button.large {
+    padding: 1.5rem 4rem;
+    font-size: 1.25rem;
+}
+
+/* Section Headers */
+.section-header {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+}
+
+.section-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 2.25rem;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+/* Problem Cards */
+.problem-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+}
+
+.problem-card {
+    background: linear-gradient(145deg, #2D3748 0%, #1A202C 100%);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    color: white;
+    text-align: center;
+}
+
+.problem-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.problem-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #EF4444;
+}
+
+.problem-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.problem-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #CBD5E0;
+    font-size: 0.9rem;
+}
+
+.problem-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #EF4444;
+}
+
+/* Solution Section */
+.solution-section {
+    background: white;
+    border-radius: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.pillars-diagram {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.pillar-box {
+    background: #F7FAFC;
+    border: 2px solid #E2E8F0;
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pillar-name {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.pillar-dose {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #10B981;
+}
+
+.delivery-badge {
+    background: #CCFF00;
+    color: #1a1a1a;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    display: inline-block;
+    margin: 1.5rem 0;
+}
+
+.formula-tagline {
+    font-size: 1.25rem;
+    color: #4A5568;
+    font-weight: 600;
+}
+
+/* Ingredient Grid */
+.ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+}
+
+.ingredient-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.ingredient-badge {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.ingredient-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 1.125rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.ingredient-subtitle {
+    color: #10B981;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.ingredient-section {
+    margin-bottom: 1.5rem;
+}
+
+.ingredient-section h4 {
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.ingredient-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ingredient-section li {
+    padding: 0.35rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    color: #4A5568;
+    font-size: 0.875rem;
+}
+
+.ingredient-section li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #CCFF00;
+}
+
+/* Delivery Comparison */
+.delivery-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto 2rem;
+    padding: 0 1rem;
+}
+
+.delivery-col {
+    border-radius: 1.5rem;
+    padding: 2rem;
+}
+
+.delivery-col.competitor {
+    background: #F8FAFC;
+    border: 2px solid #E2E8F0;
+}
+
+.delivery-col.tprime {
+    background: #CCFF00;
+    border: 2px solid #1a1a1a;
+}
+
+.delivery-col-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.delivery-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+}
+
+.delivery-list li {
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.delivery-result {
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.delivery-result.bad {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.delivery-result.good {
+    background: #1a1a1a;
+    color: white;
+}
+
+.mods-callout {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 2px solid #CCFF00;
+}
+
+.mods-callout h4 {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    margin-bottom: 1rem;
+}
+
+.mods-callout p {
+    color: #4A5568;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Persona Grid */
+.persona-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+}
+
+.persona-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.persona-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.persona-age {
+    background: #CCFF00;
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.persona-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.persona-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    color: #4A5568;
+    font-size: 0.9rem;
+}
+
+.persona-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #CCFF00;
+}
+
+/* Benefits Grid */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+}
+
+.benefit-item {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.benefit-item h4 {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.benefit-item p {
+    color: #4A5568;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* Comparison Table */
+.comparison-table-wrapper {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+    overflow-x: auto;
+}
+
+.comparison-table-full {
+    width: 100%;
+    background: white;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border-collapse: collapse;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-table-full th,
+.comparison-table-full td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #E2E8F0;
+    font-size: 0.875rem;
+}
+
+.comparison-table-full th {
+    background: #F7FAFC;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-weight: 700;
+}
+
+.comparison-table-full th.highlight,
+.comparison-table-full td.highlight {
+    background: #CCFF00;
+}
+
+.comparison-table-full td:first-child {
+    text-align: left;
+    font-weight: 600;
+}
+
+/* Value Stack */
+.value-stack-card {
+    background: white;
+    border-radius: 2rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 2.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.value-stack-card h3 {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.value-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.value-item.special {
+    background: #F0FDF4;
+    margin: 0 -2.5rem;
+    padding: 1rem 2.5rem;
+    border: none;
+}
+
+.value-name {
+    font-weight: 500;
+}
+
+.value-price {
+    color: #4A5568;
+    font-size: 0.875rem;
+}
+
+.value-total {
+    margin-top: 2rem;
+    background: #1a1a1a;
+    color: white;
+    margin: 2rem -2.5rem -2.5rem;
+    padding: 2rem 2.5rem;
+    border-radius: 0 0 2rem 2rem;
+}
+
+.total-row, .your-price-row, .savings-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.highlight-price {
+    color: #CCFF00;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+/* Process Steps */
+.process-steps {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    padding: 0 1rem;
+}
+
+.process-step {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.step-number {
+    position: absolute;
+    top: -0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #CCFF00;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-weight: 800;
+}
+
+.step-icon {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.process-step h4 {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.process-step ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.process-step li {
+    padding: 0.35rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    color: #4A5568;
+    font-size: 0.9rem;
+}
+
+.process-step li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #CCFF00;
+}
+
+.process-arrow {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #4A5568;
+    padding: 0.5rem 0;
+}
+
+.timeline-callout {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: #CCFF00;
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Dosing Card */
+.dosing-card {
+    background: white;
+    border-radius: 2rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dosing-item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 0;
+}
+
+.dosing-label {
+    font-weight: 700;
+    min-width: 80px;
+    color: #1a1a1a;
+}
+
+.dosing-supply {
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+.pro-tip-box {
+    background: #F0FDF4;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 2px solid #10B981;
+}
+
+.pro-tip-box h4 {
+    margin-bottom: 1rem;
+}
+
+.pro-tip-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pro-tip-box li {
+    padding: 0.35rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    color: #4A5568;
+    font-size: 0.875rem;
+}
+
+.pro-tip-box li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #10B981;
+}
+
+/* Trust Badges */
+.trust-badges-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+}
+
+.trust-badge {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.trust-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.trust-badge h4 {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.trust-badge p {
+    color: #4A5568;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+/* Safety Section */
+.safety-section {
+    background: #FEF2F2;
+    border-radius: 2rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 2.5rem;
+    border: 2px solid #FECACA;
+}
+
+.safety-section h3 {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    color: #DC2626;
+    margin-bottom: 1rem;
+}
+
+.contraindications-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.contraindications-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.contraindications-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #DC2626;
+}
+
+.report-adverse {
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
+.disclaimer {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #4A5568;
+    font-style: italic;
+}
+
+/* FAQ Section */
+.faq-section {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+}
+
+.faq-item {
+    background: white;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.faq-header {
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-family: 'Rethink Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.faq-header.active {
+    background: #F7FAFC;
+}
+
+.faq-arrow {
+    font-size: 0.75rem;
+    color: #4A5568;
+}
+
+.faq-content {
+    padding: 0 1.5rem 1.5rem;
+    color: #4A5568;
+    line-height: 1.6;
+}
+
+/* Testimonials */
+.testimonials-section {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.testimonials-placeholder {
+    color: #64748B;
+    font-style: italic;
+}
+
+/* Final CTA */
+.final-cta-card {
+    background: linear-gradient(145deg, #1a1a1a 0%, #2D3748 100%);
+    border-radius: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
+    padding: 4rem 3rem;
+    text-align: center;
+    color: white;
+}
+
+.final-cta-title {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.final-cta-subtitle {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.final-price-callout {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.final-price {
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 3rem;
+    color: #CCFF00;
+}
+
+.final-price-note {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.final-guarantee {
+    color: #10B981;
+    font-weight: 600;
+}
+
+.cta-trust-points {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+    margin: 2rem 0;
+    font-size: 0.875rem;
+}
+
+.cta-trust-strip {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+/* Footer */
+.tprime-footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.footer-company, .footer-contact, .footer-physician {
+    margin-bottom: 1.5rem;
+}
+
+.footer-company p, .footer-contact p, .footer-physician p {
+    margin: 0.25rem 0;
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+.tprime-footer a {
+    color: #CCFF00;
+    text-decoration: none;
+}
+
+.tprime-footer a:hover {
+    text-decoration: underline;
+}
+
+.footer-legal {
+    margin: 1.5rem 0;
+}
+
+.footer-legal a {
+    color: white;
+    opacity: 0.7;
+    font-size: 0.8rem;
+}
+
+.footer-copyright {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .problem-cards-grid,
+    .ingredient-grid,
+    .persona-grid,
+    .benefits-grid,
+    .trust-badges-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .pillars-diagram {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .tprime-hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .problem-cards-grid,
+    .ingredient-grid,
+    .delivery-comparison,
+    .persona-grid,
+    .benefits-grid,
+    .trust-badges-grid,
+    .dosing-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .pillars-diagram {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .tprime-hero-card,
+    .solution-section,
+    .value-stack-card,
+    .dosing-card,
+    .safety-section,
+    .final-cta-card {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        padding: 2rem 1.5rem;
+    }
+    
+    .value-item.special {
+        margin: 0 -1.5rem;
+        padding: 1rem 1.5rem;
+    }
+    
+    .value-total {
+        margin: 2rem -1.5rem -2rem;
+        padding: 1.5rem;
+    }
+    
+    .final-cta-title {
+        font-size: 1.75rem;
+    }
+    
+    .final-price {
+        font-size: 2rem;
+    }
+    
+    .cta-trust-points {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-trust-strip {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}

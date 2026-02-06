@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ListiclePage from "./pages/ListiclePage";
+import TPrime365Page from "./pages/TPrime365Page";
 import NotFound from "./pages/NotFound";
 import './App.css';
 
@@ -13,6 +14,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/listicle" element={<ListiclePage />} />
+        <Route path="/tprime365" element={<TPrime365Page />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
