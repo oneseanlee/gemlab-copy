@@ -9,12 +9,16 @@ const ListiclePage = () => {
                 Advertorial
             </div>
 
-            <div className="listicle-header">
-                <div className="gemlab-logo">TPrime365</div>
-            </div>
-
             {/* Hero Section */}
             <div className="hero-card">
+                <div className="article-meta">
+                    <span className="category-badge">MEN'S HEALTH</span>
+                    <span className="meta-separator">•</span>
+                    <span className="publish-date">February 7, 2026</span>
+                    <span className="meta-separator">•</span>
+                    <span className="read-time">4 min read</span>
+                </div>
+
                 <h1 className="hero-title">
                     5 Reasons TPrime365 Is Helping Men Optimize Their Testosterone Naturally
                 </h1>
@@ -23,10 +27,17 @@ const ListiclePage = () => {
                     Here are 5 reasons why TPrime365's 4-in-1 sublingual formula is becoming the top choice for men who struggle with low energy, declining muscle, and reduced drive — even after trying TRT clinics and other solutions.
                 </p>
 
+                <div className="author-byline">
+                    <div className="author-avatar">JM</div>
+                    <div className="author-info">
+                        <span className="author-name">James Mitchell</span>
+                        <span className="author-title">Health & Wellness Editor</span>
+                    </div>
+                </div>
+
                 <div className="social-proof">
+                    <span>★★★★★</span>
                     <span>Trusted By 2,500+ Men</span>
-                    <span className="stars">★★★★★</span>
-                    <span>Real Reviews & Proven Results</span>
                 </div>
 
                 <div className="press-logos">
