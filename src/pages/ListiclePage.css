@@ -168,6 +168,7 @@
     height: auto;
     object-fit: contain;
     display: block;
+    border-radius: 1.5rem;
 }
 
 /* List Items */
@@ -256,6 +257,7 @@
     height: auto;
     object-fit: contain;
     display: block;
+    border-radius: 1.5rem;
 }
 
 .step-overlay {
