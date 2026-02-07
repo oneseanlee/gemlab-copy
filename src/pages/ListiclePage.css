@@ -17,19 +17,74 @@
     border-bottom: 1px solid #E2E8F0;
 }
 
-.listicle-header {
-    text-align: center;
-    padding: 2rem 0;
+/* Article Metadata - Editorial Style */
+.article-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    color: #64748B;
 }
 
-.gemlab-logo {
-    font-family: 'Zalando Sans Expanded', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    color: #1a1a1a;
+.category-badge {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.meta-separator {
+    color: #CBD5E1;
+}
+
+.publish-date,
+.read-time {
+    font-weight: 500;
+}
+
+/* Author Byline */
+.author-byline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
     margin-bottom: 2rem;
-    display: inline-block;
+}
+
+.author-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #1E293B;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.author-name {
+    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 0.9rem;
+}
+
+.author-title {
+    font-size: 0.8rem;
+    color: #64748B;
 }
 
 .hero-card {
