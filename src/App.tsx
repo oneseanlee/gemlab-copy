@@ -12,9 +12,10 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<ListiclePage />} />
         <Route path="/article" element={<ListiclePage />} />
         <Route path="/tprime365" element={<TPrime365Page />} />
+        <Route path="/home" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
