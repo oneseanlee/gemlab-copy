@@ -44,10 +44,16 @@ const ListiclePage = () => {
                 </div>
             </div>
 
+            {/* Brand Introduction */}
+            <div className="brand-intro">
+                <span className="brand-intro-text">A Product By</span>
+                <img src="/images/best365labs-logo.png" alt="Best365Labs" className="brand-logo" />
+            </div>
+
             {/* Product Showcase - Visual */}
             <div className="product-showcase">
                 <div className="product-image-container">
-                    <img src="/images/tprime-product-benefits.png" alt="TPrime365 Product with Benefits" className="bottles-image" />
+                    <img src="/images/tprime-bottle.png" alt="TPrime365 Bottle" className="bottles-image" />
                 </div>
             </div>
 
@@ -93,7 +99,7 @@ const ListiclePage = () => {
                 </p>
             </div>
             <div className="image-card step-overlay">
-                <img src="/images/tprime-lifestyle-collage.png" alt="Men using TPrime365" />
+                <img src="/images/tprime-label.png" alt="TPrime365 Label Details" />
             </div>
 
             {/* Reason 4 */}
