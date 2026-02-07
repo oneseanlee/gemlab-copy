@@ -13,7 +13,7 @@ const App = () => (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/listicle" element={<ListiclePage />} />
+        <Route path="/article" element={<ListiclePage />} />
         <Route path="/tprime365" element={<TPrime365Page />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
