@@ -5,10 +5,6 @@ import '../index.css';
 const ListiclePage = () => {
     return (
         <div className="listicle-container">
-            <div className="advertorial-banner">
-                Advertorial
-            </div>
-
             {/* Hero Section */}
             <div className="hero-card">
                 <div className="article-meta">
