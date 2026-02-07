@@ -1,123 +1,88 @@
 
-# Convert ListiclePage to TPrime365 Advertorial
+
+# Update Article Page: Images & Route Change
 
 ## Overview
-Transform the current GemLab skincare listicle page into a TPrime365 testosterone optimizer advertorial, keeping the exact same layout, design patterns, and visual structure while updating all content.
-
-## Current Page Structure (to maintain)
-1. Advertorial banner
-2. Header with logo
-3. Hero card with title, subtitle, social proof, and press logos
-4. Product showcase image card
-5. Five numbered "reason" cards with alternating image cards
-6. Two-column offer banner (appears twice)
-7. Comparison table section (Us vs Competitors)
-8. Legal footer with copyright
-
-## Content Transformation
-
-### Header
-- Change logo from "GEMLAB" to "TPrime365"
-
-### Hero Section
-**Current:** "5 Reasons GemLab Is Helping Men Fix Their Skin Faster"
-**New:** "5 Reasons TPrime365 Is Helping Men Optimize Their Testosterone Naturally"
-
-**Subtitle:** "Here are 5 reasons why TPrime365's 4-in-1 sublingual formula is becoming the top choice for men who struggle with low energy, declining muscle, and reduced drive - even after trying TRT clinics and other solutions."
-
-**Social Proof:** "Trusted By 2,500+ Men" with star rating
-
-**Press Logos:** Keep same logos (Esquire, BuzzFeed, Men's Journal, Men's Health)
-
-### Product Showcase
-- Keep placeholder image structure (will use existing placeholder images)
-
-### Reason 1
-**Title:** "A 4-in-1 Formula That Works With Your Body, Not Against It"
-**Description:** TPrime365 combines Enclomiphene (25mg), Spermidine (10mg), Boron (10mg), and Vitamin C (10mg) in one powerful sublingual formula. Unlike TRT, it stimulates your natural testosterone production through the HPG axis - preserving fertility and testicular function.
-
-### Reason 2
-**Title:** "Made For Men Who Want Results Without Needles"
-**Description:** If you're tired of weekly injections, testicular shrinkage, and lifetime dependency, TPrime365 is your answer. Our sublingual delivery bypasses the digestive system entirely, giving you the full dose - not the 40-60% you'd lose with oral pills.
-
-### Reason 3
-**Title:** "Physician-Verified, FDA-Registered Pharmacy"
-**Description:** TPrime365 follows a physician-supervised approach to testosterone optimization. Every order is reviewed by a licensed physician via HappyMD. Compounded at an FDA-registered 503A facility in Salt Lake City, Utah.
-
-### Reason 4
-**Title:** "Visible Results In Just 2-4 Weeks"
-**Description:** Men typically see 60-664% testosterone increase within 2-4 weeks. Energy improves, brain fog lifts, libido returns, and muscle starts building more easily. By week 4, most men report feeling like themselves again - or better.
-
-### Reason 5
-**Title:** "Longevity Benefits Beyond Just Testosterone"
-**Description:** Spermidine activates autophagy (cellular renewal), slashes cortisol by 58%, and has been linked to 5-year survival benefits. This isn't just testosterone optimization - it's healthspan extension.
-
-### Offer Banners (both instances)
-**Title:** "LIMITED TIME OFFER - $149/month"
-**Description:** "Order TPrime365 today. Includes licensed physician consultation via HappyMD. If not approved, you receive a full refund - no questions asked."
-**CTA:** "START YOUR OPTIMIZATION"
-**Countdown timer:** Keep structure (can be static 00:00:00 placeholders)
-
-### Comparison Section
-**Title:** "TPrime365 vs Traditional Alternatives"
-
-**TPrime365 Column (highlighted):**
-- Rating: 4.9/5
-- Product Info: "TPrime365 is the only 4-in-1 testosterone optimizer with sublingual delivery. Enclomiphene + Spermidine + Boron + Vitamin C, physician-supervised, FDA-registered pharmacy."
-- Pros:
-  - 60-664% testosterone increase in 2-4 weeks
-  - Preserves natural production & fertility
-  - Sublingual delivery - full dose absorbed
-  - Longevity benefits (autophagy activation)
-  - Physician consultation included
-  - Money-back guarantee if not approved
-- Cons:
-  - Requires consistent daily use
-  - Prescription required (physician must approve)
-
-**Competitor Column (TRT Clinics):**
-- Rating: 3.8/5
-- Product Info: "Traditional TRT clinics use testosterone injections that shut down natural production, cause testicular atrophy, and create lifetime dependency."
-- Pros:
-  - Immediate testosterone increase
-  - Widely available
-  - Established treatment protocol
-- Cons:
-  - Shuts down natural production
-  - Testicular atrophy guaranteed
-  - Fertility often destroyed
-  - Weekly injections required
-  - Lifetime dependency
-
-### Legal Footer
-Update disclaimer text to TPrime365-specific:
-- Prescription-only compound notice
-- FDA statement disclaimer
-- Best365Labs contact info
-- HappyMD physician consultation attribution
+Transform the current `/listicle` page into `/article` with strategically placed TPrime365 product images to maximize conversions. The uploaded images are high-quality marketing assets that should be embedded directly into the page.
 
 ---
 
-## Files to Modify
+## Changes Required
 
-### src/pages/ListiclePage.tsx
-- Update header logo text
-- Update hero section content (title, subtitle, social proof)
-- Update all 5 reason cards with TPrime365 content
-- Update offer banner content (both instances)
-- Update comparison table content
-- Update legal footer text
-- Keep all image placeholders as-is (using existing imported images)
+### 1. Route Change
+Update the route from `/listicle` to `/article` in App.tsx.
 
-### src/pages/ListiclePage.css
-- No changes needed - keep exact same styling
+### 2. Image Placement Strategy for Maximum Conversions
+
+Based on conversion optimization best practices, here's the recommended placement for each uploaded image:
+
+| Image | Placement | Rationale |
+|-------|-----------|-----------|
+| **Image 1** (Product bottle with benefits icons) | Product Showcase section (after hero) | First visual impression - shows the product prominently with key benefits. This is the "above the fold" product shot that anchors trust. |
+| **Image 2** (Risk-Free with testimonial) | First Offer Banner section | Social proof + risk reversal messaging. The "RISK FREE" and "AFTER TPRIME365" testimonial creates urgency and reduces purchase anxiety. |
+| **Image 9** (Lifestyle collage with men using product) | After Reason 3 (Physician-Verified) | Shows real men using the product, builds credibility after discussing medical legitimacy. Lifestyle imagery increases relatability. |
+| **Image 10** (What's Included bundle) | Second Offer Banner section | Value stack visualization before final CTA. Shows everything they get, increasing perceived value right before purchase decision. |
+
+### 3. File Organization
+Copy the 4 uploaded images to the public/images folder:
+- `tprime-product-benefits.png` (Image 1)
+- `tprime-risk-free.png` (Image 2)
+- `tprime-lifestyle-collage.png` (Image 9)
+- `tprime-whats-included.png` (Image 10)
 
 ---
 
-## Technical Notes
-- Keep all existing CSS classes unchanged
-- Keep all existing image imports and placeholders
-- Only modify text content within the JSX
-- Maintain exact same component structure
-- Keep countdown timer static (00:00:00)
-- Keep press logos unchanged (same images)
+## Detailed Implementation
+
+### Files to Modify
+
+**src/App.tsx**
+- Change route path from `/listicle` to `/article`
+
+**src/pages/ListiclePage.tsx**
+- Update image sources to use the new TPrime365 images:
+  - Product Showcase: `tprime-product-benefits.png`
+  - Image after Reason 1: Keep existing or use lifestyle image
+  - Image after Reason 3: `tprime-lifestyle-collage.png`
+  - First Offer Banner: `tprime-risk-free.png`
+  - Second Offer Banner: `tprime-whats-included.png`
+  - Comparison table TPrime365 column: Extract bottle from one of the images
+
+### Image Placement Details
+
+**Product Showcase Section (Line 52-56)**
+Replace current placeholder with Image 1 (product bottle with benefits icons).
+This creates immediate product recognition.
+
+**After Reason 1 (Line 69-71)**
+Keep existing image or replace with a cropped version of the product.
+
+**After Reason 3 (Line 99-101)**
+Replace with Image 9 (lifestyle collage) - shows real men using the product, perfect after discussing physician verification.
+
+**First Offer Banner (Line 155-157)**
+Replace with Image 2 (Risk-Free testimonial) - the "RISK FREE" messaging reinforces the offer copy.
+
+**Second Offer Banner (Line 261-263)**
+Replace with Image 10 (What's Included) - shows the full value bundle, creates perceived value before final CTA.
+
+---
+
+## Conversion Optimization Rationale
+
+1. **Product first** - Image 1 in the showcase establishes what they're buying
+2. **Social proof early** - Image 2 with testimonial builds trust at first offer point
+3. **Lifestyle relatability** - Image 9 shows diverse men using the product
+4. **Value visualization** - Image 10 shows the complete bundle with bonuses
+5. **Consistent branding** - All images feature the TPrime365 bottle and Best365Labs branding
+
+---
+
+## Technical Steps
+
+1. Copy uploaded images to `public/images/` folder
+2. Update `src/App.tsx` to change route from `/listicle` to `/article`
+3. Update `src/pages/ListiclePage.tsx` to use new image paths
+4. Remove old placeholder image imports that are no longer needed
+5. Test responsive behavior of new images
+
