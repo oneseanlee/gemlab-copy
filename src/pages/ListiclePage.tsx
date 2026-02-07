@@ -68,8 +68,8 @@ const ListiclePage = () => {
                     Unlike TRT, it stimulates your natural testosterone production through the HPG axis — preserving fertility and testicular function.
                 </p>
             </div>
-            <div className="image-card">
-                <img src="/images/tprime-natural-optimization.jpg" alt="Natural testosterone optimization" />
+            <div className="image-card testimonial-card">
+                <img src="/images/testimonial-kerry-reyes.png" alt="Kerry Reyes testimonial - Early Tester" />
             </div>
 
             {/* Reason 2 */}
@@ -82,8 +82,8 @@ const ListiclePage = () => {
                     If you're tired of weekly injections, testicular shrinkage, and lifetime dependency, TPrime365 is your answer. Our sublingual delivery bypasses the digestive system entirely, giving you the full dose — not the 40-60% you'd lose with oral pills.
                 </p>
             </div>
-            <div className="image-card">
-                <img src="/images/tprime-sublingual-delivery.jpg" alt="Sublingual delivery system" />
+            <div className="image-card testimonial-card">
+                <img src="/images/testimonial-sean-lee.png" alt="Sean Lee testimonial - Business Professional" />
             </div>
 
             {/* Reason 3 */}
@@ -112,8 +112,8 @@ const ListiclePage = () => {
                     Men typically see 60-664% testosterone increase within 2-4 weeks. Energy improves, brain fog lifts, libido returns, and muscle starts building more easily. By week 4, most men report feeling like themselves again — or better.
                 </p>
             </div>
-            <div className="image-card">
-                <img src="/images/tprime-visible-results.jpg" alt="Results in 2-4 weeks" />
+            <div className="image-card testimonial-card">
+                <img src="/images/testimonial-brett-earnshaw.png" alt="Brett Earnshaw testimonial - Early Tester" />
             </div>
 
             {/* Reason 5 */}
@@ -127,8 +127,8 @@ const ListiclePage = () => {
                     This isn't just testosterone optimization — it's healthspan extension.
                 </p>
             </div>
-            <div className="image-card">
-                <img src="/images/tprime-longevity.jpg" alt="Longevity benefits" />
+            <div className="image-card testimonial-card">
+                <img src="/images/testimonial-mike-vandyke.png" alt="Mike VanDyke testimonial - Early Tester" />
             </div>
 
             {/* Offer Banner - Top */}
@@ -156,6 +156,20 @@ const ListiclePage = () => {
                 </div>
                 <div className="offer-image">
                     <img src="/images/tprime-risk-free.png" alt="TPrime365 Risk Free Guarantee" />
+                </div>
+            </div>
+
+            {/* Founders Testimonials Section */}
+            <div className="founders-section">
+                <h2 className="founders-title">From The Founders</h2>
+                <p className="founders-subtitle">The minds behind TPrime365 share their vision</p>
+                <div className="founders-grid">
+                    <div className="founder-card">
+                        <img src="/images/testimonial-darren-lopez.png" alt="Darren Lopez - Co-Founder" />
+                    </div>
+                    <div className="founder-card">
+                        <img src="/images/testimonial-dan-schmidt.png" alt="Dan Schmidt - Co-Founder" />
+                    </div>
                 </div>
             </div>
 
