@@ -2,17 +2,6 @@ import React from 'react';
 import './ListiclePage.css';
 import '../index.css';
 
-// Using local images if available, otherwise placeholders
-import cedarwoodImg from '../../Source Images/Cedarwood_dce964ee-7b55-4b81-9aee-e34c406886f6.webp';
-import almondImg from '../../Source Images/Almond_Milk_47e93f36-efa0-4408-8b2c-e687cc6f0933.webp';
-import sunflowerImg from '../../Source Images/Citrus_Herb_13762097-0fc0-4c76-97d0-8789cb32b42f.webp';
-import sec3Img from '../../Source Images/sec3.webp';
-import sec2Img from '../../Source Images/sec2.webp';
-import sec4Img from '../../Source Images/sec4.webp';
-import heroImg from '../../Source Images/shutterstock_2492074411_2619622d-2a1a-4eae-8396-e3cbc16d9744.webp';
-import menFaceWashImg from '../../Source Images/shutterstock_2492074411-2.webp';
-const shutterstockKitImg = heroImg;
-
 const ListiclePage = () => {
     return (
         <div className="listicle-container">
@@ -67,7 +56,7 @@ const ListiclePage = () => {
                 </p>
             </div>
             <div className="image-card">
-                <img src={sec2Img} alt="Natural testosterone optimization" />
+                <img src="/images/tprime-natural-optimization.jpg" alt="Natural testosterone optimization" />
             </div>
 
             {/* Reason 2 */}
@@ -81,7 +70,7 @@ const ListiclePage = () => {
                 </p>
             </div>
             <div className="image-card">
-                <img src={almondImg} alt="Sublingual delivery system" />
+                <img src="/images/tprime-sublingual-delivery.jpg" alt="Sublingual delivery system" />
             </div>
 
             {/* Reason 3 */}
@@ -111,7 +100,7 @@ const ListiclePage = () => {
                 </p>
             </div>
             <div className="image-card">
-                <img src={sec4Img} alt="Results in 2-4 weeks" />
+                <img src="/images/tprime-visible-results.jpg" alt="Results in 2-4 weeks" />
             </div>
 
             {/* Reason 5 */}
@@ -126,7 +115,7 @@ const ListiclePage = () => {
                 </p>
             </div>
             <div className="image-card">
-                <img src={menFaceWashImg} alt="Longevity benefits" />
+                <img src="/images/tprime-longevity.jpg" alt="Longevity benefits" />
             </div>
 
             {/* Offer Banner - Top */}
@@ -172,7 +161,7 @@ const ListiclePage = () => {
                     {/* TPrime365 Column */}
                     <div className="comparison-col gemlab">
                         <div className="col-image">
-                            <img src={heroImg} alt="TPrime365 Bottle" />
+                            <img src="/images/tprime-product-benefits.png" alt="TPrime365 Bottle" />
                         </div>
                         <div className="col-brand-name">TPrime365</div>
 
