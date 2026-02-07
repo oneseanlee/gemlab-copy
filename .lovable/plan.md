@@ -1,71 +1,123 @@
 
-# Two-Column Hero Section for TPrime365
+# Convert ListiclePage to TPrime365 Advertorial
 
 ## Overview
-Transform the TPrime365 hero section from a single centered column layout to a two-column layout, matching the visual style used in the GemLab listicle page (similar to the travel-kit-banner pattern).
+Transform the current GemLab skincare listicle page into a TPrime365 testosterone optimizer advertorial, keeping the exact same layout, design patterns, and visual structure while updating all content.
 
-## Current State
-The hero section is currently a centered, single-column card with:
-- Title
-- Divider
-- Subtitle (ingredients list)
-- Price banner
-- Guarantee text
-- CTA button
+## Current Page Structure (to maintain)
+1. Advertorial banner
+2. Header with logo
+3. Hero card with title, subtitle, social proof, and press logos
+4. Product showcase image card
+5. Five numbered "reason" cards with alternating image cards
+6. Two-column offer banner (appears twice)
+7. Comparison table section (Us vs Competitors)
+8. Legal footer with copyright
 
-## Proposed Layout
+## Content Transformation
 
-```text
-+------------------------------------------------------------------+
-|                                                                  |
-|   [LEFT COLUMN - 55%]              [RIGHT COLUMN - 45%]          |
-|                                                                  |
-|   The Only 4-in-1 Testosterone     +----------------------+      |
-|   Optimizer With Sublingual        |                      |      |
-|   Delivery                         |   [Product Image]    |      |
-|                                    |   Placeholder or     |      |
-|   Enclomiphene + Spermidine +      |   bottle visual      |      |
-|   Boron + Vitamin C                |                      |      |
-|                                    +----------------------+      |
-|   [$149/month banner]                                            |
-|   Guarantee text                                                 |
-|   [START YOUR OPTIMIZATION ->]                                   |
-|                                                                  |
-+------------------------------------------------------------------+
-```
+### Header
+- Change logo from "GEMLAB" to "TPrime365"
 
-## Changes Required
+### Hero Section
+**Current:** "5 Reasons GemLab Is Helping Men Fix Their Skin Faster"
+**New:** "5 Reasons TPrime365 Is Helping Men Optimize Their Testosterone Naturally"
 
-### 1. TPrime365Page.tsx - Hero Section Structure
-Update the hero card to use a two-column flexbox layout:
-- Left column: Title, subtitle, price banner, guarantee, CTA button
-- Right column: Placeholder image area (styled box or actual image if available)
+**Subtitle:** "Here are 5 reasons why TPrime365's 4-in-1 sublingual formula is becoming the top choice for men who struggle with low energy, declining muscle, and reduced drive - even after trying TRT clinics and other solutions."
 
-### 2. TPrime365Page.css - Hero Styling
-Add new CSS classes:
-- `.tprime-hero-card` - Change to `display: flex` with `justify-content: space-between`
-- `.tprime-hero-content` - Left column wrapper (flex: 1, text-align: left)
-- `.tprime-hero-image` - Right column wrapper (flex: 0 0 40%, display: flex, centered)
-- Remove the divider (doesn't fit two-column layout well)
-- Adjust title and text alignment to left-align
+**Social Proof:** "Trusted By 2,500+ Men" with star rating
 
-### 3. Responsive Behavior
-On mobile (768px and below):
-- Stack columns vertically (flex-direction: column)
-- Image appears above or below content
-- Text returns to center alignment
+**Press Logos:** Keep same logos (Esquire, BuzzFeed, Men's Journal, Men's Health)
 
-## Technical Details
+### Product Showcase
+- Keep placeholder image structure (will use existing placeholder images)
 
-### File: src/pages/TPrime365Page.tsx
-Lines 49-66 will be modified to wrap content in two column containers.
+### Reason 1
+**Title:** "A 4-in-1 Formula That Works With Your Body, Not Against It"
+**Description:** TPrime365 combines Enclomiphene (25mg), Spermidine (10mg), Boron (10mg), and Vitamin C (10mg) in one powerful sublingual formula. Unlike TRT, it stimulates your natural testosterone production through the HPG axis - preserving fertility and testicular function.
 
-### File: src/pages/TPrime365Page.css  
-Lines 26-114 will be updated with new flexbox layout and column styling.
+### Reason 2
+**Title:** "Made For Men Who Want Results Without Needles"
+**Description:** If you're tired of weekly injections, testicular shrinkage, and lifetime dependency, TPrime365 is your answer. Our sublingual delivery bypasses the digestive system entirely, giving you the full dose - not the 40-60% you'd lose with oral pills.
 
-### Image Placeholder
-Since there's no specific TPrime365 product image available yet, we'll create a styled placeholder box with:
-- Rounded corners
-- Light gray background or gradient
-- "Product Image" text or icon
-- This can easily be replaced with a real image later
+### Reason 3
+**Title:** "Physician-Verified, FDA-Registered Pharmacy"
+**Description:** TPrime365 follows a physician-supervised approach to testosterone optimization. Every order is reviewed by a licensed physician via HappyMD. Compounded at an FDA-registered 503A facility in Salt Lake City, Utah.
+
+### Reason 4
+**Title:** "Visible Results In Just 2-4 Weeks"
+**Description:** Men typically see 60-664% testosterone increase within 2-4 weeks. Energy improves, brain fog lifts, libido returns, and muscle starts building more easily. By week 4, most men report feeling like themselves again - or better.
+
+### Reason 5
+**Title:** "Longevity Benefits Beyond Just Testosterone"
+**Description:** Spermidine activates autophagy (cellular renewal), slashes cortisol by 58%, and has been linked to 5-year survival benefits. This isn't just testosterone optimization - it's healthspan extension.
+
+### Offer Banners (both instances)
+**Title:** "LIMITED TIME OFFER - $149/month"
+**Description:** "Order TPrime365 today. Includes licensed physician consultation via HappyMD. If not approved, you receive a full refund - no questions asked."
+**CTA:** "START YOUR OPTIMIZATION"
+**Countdown timer:** Keep structure (can be static 00:00:00 placeholders)
+
+### Comparison Section
+**Title:** "TPrime365 vs Traditional Alternatives"
+
+**TPrime365 Column (highlighted):**
+- Rating: 4.9/5
+- Product Info: "TPrime365 is the only 4-in-1 testosterone optimizer with sublingual delivery. Enclomiphene + Spermidine + Boron + Vitamin C, physician-supervised, FDA-registered pharmacy."
+- Pros:
+  - 60-664% testosterone increase in 2-4 weeks
+  - Preserves natural production & fertility
+  - Sublingual delivery - full dose absorbed
+  - Longevity benefits (autophagy activation)
+  - Physician consultation included
+  - Money-back guarantee if not approved
+- Cons:
+  - Requires consistent daily use
+  - Prescription required (physician must approve)
+
+**Competitor Column (TRT Clinics):**
+- Rating: 3.8/5
+- Product Info: "Traditional TRT clinics use testosterone injections that shut down natural production, cause testicular atrophy, and create lifetime dependency."
+- Pros:
+  - Immediate testosterone increase
+  - Widely available
+  - Established treatment protocol
+- Cons:
+  - Shuts down natural production
+  - Testicular atrophy guaranteed
+  - Fertility often destroyed
+  - Weekly injections required
+  - Lifetime dependency
+
+### Legal Footer
+Update disclaimer text to TPrime365-specific:
+- Prescription-only compound notice
+- FDA statement disclaimer
+- Best365Labs contact info
+- HappyMD physician consultation attribution
+
+---
+
+## Files to Modify
+
+### src/pages/ListiclePage.tsx
+- Update header logo text
+- Update hero section content (title, subtitle, social proof)
+- Update all 5 reason cards with TPrime365 content
+- Update offer banner content (both instances)
+- Update comparison table content
+- Update legal footer text
+- Keep all image placeholders as-is (using existing imported images)
+
+### src/pages/ListiclePage.css
+- No changes needed - keep exact same styling
+
+---
+
+## Technical Notes
+- Keep all existing CSS classes unchanged
+- Keep all existing image imports and placeholders
+- Only modify text content within the JSX
+- Maintain exact same component structure
+- Keep countdown timer static (00:00:00)
+- Keep press logos unchanged (same images)
