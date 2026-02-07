@@ -51,7 +51,7 @@ const ListiclePage = () => {
             {/* Product Showcase - Visual */}
             <div className="product-showcase">
                 <div className="product-image-container">
-                    <img src="/images/listicle-2.webp" alt="TPrime365 Bottles" className="bottles-image" />
+                    <img src="/images/tprime-product-benefits.png" alt="TPrime365 Product with Benefits" className="bottles-image" />
                 </div>
             </div>
 
@@ -97,7 +97,7 @@ const ListiclePage = () => {
                 </p>
             </div>
             <div className="image-card step-overlay">
-                <img src={sec3Img} alt="FDA-registered pharmacy" />
+                <img src="/images/tprime-lifestyle-collage.png" alt="Men using TPrime365" />
             </div>
 
             {/* Reason 4 */}
@@ -153,7 +153,7 @@ const ListiclePage = () => {
                     <button className="cta-button">START YOUR OPTIMIZATION</button>
                 </div>
                 <div className="offer-image">
-                    <img src={shutterstockKitImg} alt="TPrime365 Product" />
+                    <img src="/images/tprime-risk-free.png" alt="TPrime365 Risk Free Guarantee" />
                 </div>
             </div>
 
@@ -259,7 +259,7 @@ const ListiclePage = () => {
                     <button className="cta-button">START YOUR OPTIMIZATION</button>
                 </div>
                 <div className="offer-image">
-                    <img src={shutterstockKitImg} alt="TPrime365 Product" />
+                    <img src="/images/tprime-whats-included.png" alt="TPrime365 What's Included Bundle" />
                 </div>
             </div>
 
