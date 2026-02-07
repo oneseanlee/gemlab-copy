@@ -141,6 +141,30 @@
     font-size: 1.1rem;
 }
 
+/* Brand Introduction */
+.brand-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.brand-intro-text {
+    font-size: 0.875rem;
+    color: #64748B;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.brand-logo {
+    height: 2.5rem;
+    width: auto;
+    object-fit: contain;
+}
+
 .press-logos {
     display: flex;
     justify-content: center;
@@ -231,15 +255,12 @@
 .list-number {
     position: absolute;
     top: -1.5rem;
-    /* Half inside, half outside? Or completely inside top? Re-checking screenshot: It's centered inside top with some padding above. */
     left: 50%;
     transform: translateX(-50%);
     width: 3rem;
     height: 3rem;
-    background-color: #CCFF00;
-    /* Neon Lime */
-    color: #1a1a1a;
-    /* Assuming dark text number */
+    background-color: #29ABE2;
+    color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -317,12 +338,12 @@
 }
 
 .step-badge {
-    background-color: #CCFF00;
+    background-color: #29ABE2;
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
     font-weight: 700;
     font-size: 0.875rem;
-    color: #1a1a1a;
+    color: white;
 }
 
 .step-text {
@@ -429,9 +450,8 @@
 }
 
 .comparison-col.gemlab {
-    background-color: #CCFF00;
-    /* Neon Lime */
-    border: 2px solid #1a1a1a;
+    background: linear-gradient(135deg, #E8F7FC 0%, #D0EFFA 100%);
+    border: 2px solid #29ABE2;
     transform: scale(1.02);
     z-index: 10;
 }
@@ -565,8 +585,8 @@
 }
 
 .time-box {
-    background: #CCFF00;
-    color: #1a1a1a;
+    background: #29ABE2;
+    color: white;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     text-align: center;
