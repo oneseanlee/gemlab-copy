@@ -4,7 +4,7 @@
   --b365-blue: #3376b0;
   --b365-blue-dark: #2a6191;
   --b365-navy: #0A1628;
-  --b365-light-blue: #EBF4FB;
+  --b365-light-blue: #b8ccde;
   --b365-white: #FFFFFF;
   --b365-gray: #F5F7FA;
   --b365-border: #E5E9F0;
@@ -155,7 +155,7 @@
 .b365-hero-container {
   max-width: 1280px;
   margin: 0 auto;
-  background: var(--b365-white);
+  background: #b8ccde;
   border-radius: 24px;
   overflow: hidden;
   display: grid;
