@@ -1,189 +1,64 @@
 
 
-# Award-Winning Advertorial Transformation
+# Import Ocean Rays HTML as New Homepage
 
 ## Overview
-Replace the 4 AI-generated images with 6 professional testimonial images provided by the user, ensure all images display their full dimensions without cropping, and elevate the overall design to an award-winning level.
+Convert the uploaded Ocean Rays HTML page into a React component, make it the site's homepage (`/`), and move the current article (ListiclePage) to `/article`.
 
 ---
 
-## Current AI-Generated Images to Replace
-
-| Location | Current Image | New Image |
-|----------|---------------|-----------|
-| After Reason 1 | `tprime-natural-optimization.jpg` | Kerry Reyes testimonial (3.png) |
-| After Reason 2 | `tprime-sublingual-delivery.jpg` | Sean Lee testimonial (4.png) |
-| After Reason 4 | `tprime-visible-results.jpg` | Brett Earnshaw testimonial (7.png) |
-| After Reason 5 | `tprime-longevity.jpg` | Mike VanDyke testimonial (8.png) |
-| NEW: After comparison | - | Darren Lopez testimonial (5.png) |
-| NEW: After comparison | - | Dan Schmidt testimonial (6.png) |
+## What This Does
+- The Ocean Rays sea moss gel page becomes the homepage visitors see at `/`
+- The TPrime365 article page moves to `/article`
+- No changes to the article page itself -- it stays exactly as-is
 
 ---
 
-## Implementation Plan
+## Technical Details
 
-### Step 1: Copy User Images to Project
-Save all 6 testimonial images to `public/images/`:
-- `testimonial-kerry-reyes.png` (3.png - bodybuilder)
-- `testimonial-sean-lee.png` (4.png - business professional)
-- `testimonial-darren-lopez.png` (5.png - co-founder)
-- `testimonial-dan-schmidt.png` (6.png - co-founder)
-- `testimonial-brett-earnshaw.png` (7.png - early tester)
-- `testimonial-mike-vandyke.png` (8.png - early tester)
+### 1. Create New Component: `src/pages/OceanRaysPage.tsx`
+Convert the raw HTML into a React component as-is:
+- Replace `class=` with `className=`
+- Replace `<iconify-icon>` elements with equivalent inline SVGs or keep them using the iconify web component (add the iconify script to `index.html`)
+- Convert inline `style=` attributes to React syntax (`{{ }}`)
+- Keep all Tailwind classes, images, and structure exactly as provided
+- Add the custom CSS (glass-panel, mesh-gradient, marquee animation, no-scrollbar) either inline or in a companion CSS file
 
-### Step 2: Update Image Sources in ListiclePage.tsx
-- Replace 4 AI image paths with new testimonial images
-- Add a new "Testimonials" section after the comparison table featuring the remaining 2 images (co-founders)
-- Update alt text to match the testimonial content
+### 2. Create `src/pages/OceanRaysPage.css`
+Extract the custom styles from the HTML:
+- `.glass-panel` backdrop blur styles
+- `.mesh-gradient` radial gradient background
+- `.no-scrollbar` scrollbar hiding
+- `@keyframes marquee` animation
+- Google Fonts import for Plus Jakarta Sans
 
-### Step 3: Fix Image Display CSS for Full Visibility
-Update `.image-card img` styling to ensure images show their complete dimensions:
+### 3. Update `index.html`
+Add the Iconify script tag so `<iconify-icon>` web components work:
+```
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+```
+Add Plus Jakarta Sans font link.
 
-```text
-Current CSS:
-.image-card img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;  <-- Good, but may need aspect ratio help
-    border-radius: 1.5rem;
-}
+### 4. Update Routing: `src/App.tsx`
+```
+/           -> OceanRaysPage (NEW homepage)
+/article    -> ListiclePage (current article, unchanged)
+/tprime365  -> TPrime365Page (unchanged)
+/home       -> Home (old homepage, unchanged)
 ```
 
-Enhanced CSS approach:
-- Remove any fixed heights that could cause cropping
-- Ensure `object-fit: contain` is applied consistently
-- Add proper aspect-ratio handling for square testimonial images
-- Remove overflow: hidden where it causes clipping
-
-### Step 4: Award-Winning Design Enhancements
-
-**Typography & Spacing:**
-- Add subtle letter-spacing to headers
-- Increase line-height for better readability
-- Add elegant dividers between sections
-
-**Visual Hierarchy:**
-- Add subtle gradient overlays to cards
-- Enhance box-shadow for depth
-- Add hover states with smooth transitions
-
-**Testimonial Image Cards:**
-- Display as full-width with no cropping
-- Add subtle shadow and hover lift effect
-- Ensure rounded corners match design system (1.5rem)
-
-**New Founders Section:**
-- Create a "Meet The Team" or "From The Founders" section
-- Display Darren Lopez and Dan Schmidt testimonials side-by-side
-- Use elegant card layout matching the design language
-
 ---
+
+## Files to Create
+- `src/pages/OceanRaysPage.tsx` -- Full React conversion of the uploaded HTML
+- `src/pages/OceanRaysPage.css` -- Custom styles extracted from the HTML
 
 ## Files to Modify
+- `index.html` -- Add Iconify script and Plus Jakarta Sans font
+- `src/App.tsx` -- Update routing so `/` points to OceanRaysPage
 
-### public/images/
-- Copy 6 testimonial images with descriptive names
-
-### src/pages/ListiclePage.tsx
-- Update image sources for Reasons 1, 2, 4, 5
-- Add new Founders testimonial section after comparison table
-- Clean up any redundant code
-
-### src/pages/ListiclePage.css
-- Fix `.image-card` and `.image-card img` to prevent cropping
-- Add new `.founders-section` and `.founder-card` styles
-- Enhance overall visual polish with:
-  - Improved shadows
-  - Smoother transitions
-  - Better spacing
-
----
-
-## CSS Changes Detail
-
-```text
-Image Card Fixes:
-- Remove overflow: hidden from .image-card (or adjust carefully)
-- Ensure object-fit: contain with proper max-height
-- Add explicit aspect-ratio for testimonial images if needed
-
-New Founders Section:
-.founders-section {
-    max-width: 1200px;
-    margin: 4rem auto;
-    text-align: center;
-}
-
-.founders-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-}
-
-.founder-card {
-    border-radius: 2rem;
-    overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-}
-
-.founder-card img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-}
-```
-
----
-
-## Visual Result
-
-The page will feature:
-1. Professional real testimonials with embedded quotes (not AI placeholders)
-2. All images display completely without any cropping
-3. Cohesive blue accent color throughout
-4. Enhanced visual depth and polish
-5. New "Founders" section adding credibility
-6. Smooth hover interactions
-7. Magazine-quality editorial aesthetic
-
----
-
-## Image Placement Strategy
-
-```text
-┌─────────────────────────────────────────┐
-│            HERO CARD                     │
-├─────────────────────────────────────────┤
-│         Brand Intro (Logo)               │
-├─────────────────────────────────────────┤
-│         Product Showcase                 │
-├─────────────────────────────────────────┤
-│ Reason 1 Card                            │
-│ [Kerry Reyes Testimonial - Full Image]   │  ← NEW
-├─────────────────────────────────────────┤
-│ Reason 2 Card                            │
-│ [Sean Lee Testimonial - Full Image]      │  ← NEW
-├─────────────────────────────────────────┤
-│ Reason 3 Card                            │
-│ [Label Details Image]                    │
-├─────────────────────────────────────────┤
-│ Reason 4 Card                            │
-│ [Brett Earnshaw Testimonial - Full]      │  ← NEW
-├─────────────────────────────────────────┤
-│ Reason 5 Card                            │
-│ [Mike VanDyke Testimonial - Full Image]  │  ← NEW
-├─────────────────────────────────────────┤
-│         OFFER BANNER #1                  │
-├─────────────────────────────────────────┤
-│         COMPARISON TABLE                 │
-├─────────────────────────────────────────┤
-│         FROM THE FOUNDERS                │  ← NEW SECTION
-│ [Darren Lopez]    [Dan Schmidt]          │
-├─────────────────────────────────────────┤
-│         OFFER BANNER #2                  │
-├─────────────────────────────────────────┤
-│            FOOTER                        │
-└─────────────────────────────────────────┘
-```
+## Files NOT Changed
+- `src/pages/ListiclePage.tsx` -- No changes
+- `src/pages/ListiclePage.css` -- No changes
+- All other existing pages -- No changes
 
