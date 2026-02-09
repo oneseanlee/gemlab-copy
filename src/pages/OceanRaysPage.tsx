@@ -12,9 +12,8 @@ const OceanRaysPage = () => {
           <button className="md:hidden text-slate-600">
             <iconify-icon icon="lucide:menu" width="24" stroke-width="1.5"></iconify-icon>
           </button>
-          <a href="#" className="text-xl font-medium tracking-tighter uppercase text-slate-900 flex items-center gap-2">
-            <iconify-icon icon="lucide:waves" className="text-teal-500" width="20" stroke-width="1.5"></iconify-icon>
-            Ocean Rays
+          <a href="#" className="flex items-center">
+            <img src="/images/best365labs-logo.png" alt="Best365 Labs" className="h-8" />
           </a>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
             <a href="#shop" className="hover:text-slate-900 transition-colors duration-200">Shop</a>
@@ -289,9 +288,8 @@ const OceanRaysPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
             <div className="col-span-2 md:col-span-1">
-              <a href="#" className="text-lg font-medium tracking-tighter uppercase text-slate-900 flex items-center gap-2 mb-6">
-                <iconify-icon icon="lucide:waves" className="text-teal-500" width="18" stroke-width="1.5"></iconify-icon>
-                Ocean Rays
+              <a href="#" className="flex items-center mb-6">
+                <img src="/images/best365labs-logo.png" alt="Best365 Labs" className="h-7" />
               </a>
               <p className="text-sm text-slate-500 mb-6">Elevating human consciousness through cellular nutrition. Sourced with respect for the ocean.</p>
               <div className="flex gap-4">
