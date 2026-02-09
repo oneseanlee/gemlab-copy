@@ -34,7 +34,10 @@
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.05em;
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 101;
 }
 .b365-promo-banner button {
   position: absolute;
@@ -143,11 +146,11 @@
 
 /* Hero */
 .b365-hero {
-  padding: 140px 24px 0;
+  padding: 150px 24px 0;
   background-color: var(--b365-light-blue);
 }
 .b365-hero.no-banner {
-  padding-top: 120px;
+  padding-top: 100px;
 }
 .b365-hero-container {
   max-width: 1280px;
