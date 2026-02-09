@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useState } from 'react';
 import './OceanRaysPage.css';
+import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 
 const products = [
   {
@@ -151,7 +152,7 @@ const OceanRaysPage = () => {
           </ul>
           <div className="b365-nav-right">
             <a href="#" className="b365-login-link">Log In</a>
-            <a href="#products" className="b365-btn-primary">Get Started</a>
+            <AnimatedCTA href="#products" small>Get Started</AnimatedCTA>
           </div>
         </div>
       </nav>
@@ -170,10 +171,10 @@ const OceanRaysPage = () => {
             </p>
             <p className="tertiary">Powered by MODS Max™ 10x Absorption Technology.</p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href="#products" className="b365-btn-primary">
+              <AnimatedCTA href="#products">
                 Start my evaluation
                 <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
-              </a>
+              </AnimatedCTA>
             </div>
           </div>
         </div>
@@ -274,10 +275,10 @@ const OceanRaysPage = () => {
             <p>
               For approved clients, clinical data shows testosterone increases of 60–664% within 2–4 weeks — with no testicular atrophy, no fertility suppression, and no hormonal dependency.
             </p>
-            <a href="#products" className="b365-btn-primary" style={{ marginTop: 8 }}>
+            <AnimatedCTA href="#products" style={{ marginTop: 8 }}>
               Start my evaluation
               <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
-            </a>
+            </AnimatedCTA>
           </div>
           <div className="b365-guarantee-image">
             <img src="/images/tprime-bottle.png" alt="TPrime365 bottle" />
@@ -404,10 +405,10 @@ const OceanRaysPage = () => {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: 48 }}>
-          <a href="#products" className="b365-btn-primary">
+          <AnimatedCTA href="#products">
             Start my evaluation
             <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
-          </a>
+          </AnimatedCTA>
         </div>
       </section>
 

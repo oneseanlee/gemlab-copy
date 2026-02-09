@@ -1,0 +1,97 @@
+.animated-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  height: 50px;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #3376b0 0%, #2a6191 50%, #3376b0 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: transform 1000ms cubic-bezier(0.15, 0.83, 0.66, 1),
+              box-shadow 400ms ease;
+  box-shadow:
+    inset 0 2px 8px rgba(255, 255, 255, 0.2),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.25),
+    0 4px 14px rgba(51, 118, 176, 0.35);
+}
+
+.animated-cta:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 2px 8px rgba(255, 255, 255, 0.2),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.25),
+    0 8px 24px rgba(51, 118, 176, 0.45);
+}
+
+/* Default text layer */
+.animated-cta .cta-text-default {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 500ms ease-out, opacity 500ms ease-out, filter 500ms ease-out;
+}
+
+.animated-cta:hover .cta-text-default {
+  transform: translateY(32px);
+  opacity: 0;
+  filter: blur(6px);
+}
+
+/* Hover text layer */
+.animated-cta .cta-text-hover {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform: translateY(-32px);
+  opacity: 0;
+  filter: blur(6px);
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out, filter 300ms ease-in-out;
+  font-weight: 600;
+}
+
+.animated-cta:hover .cta-text-hover {
+  transform: translateY(0);
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* Glow */
+.animated-cta .cta-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #3376b0, #5a9fd4, #3376b0);
+  opacity: 0;
+  filter: blur(20px);
+  z-index: -1;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+}
+
+.animated-cta:hover .cta-glow {
+  opacity: 1;
+}
+
+/* Small variant for nav */
+.animated-cta.cta-sm {
+  min-width: 140px;
+  height: 42px;
+  padding: 10px 24px;
+  font-size: 14px;
+}
