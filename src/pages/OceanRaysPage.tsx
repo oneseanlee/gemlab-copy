@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './OceanRaysPage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
+import SharedFooter from '../components/SharedFooter/SharedFooter';
 
 const products = [
   {
@@ -440,66 +441,7 @@ const OceanRaysPage = () => {
       </section>
 
       {/* 12. Footer */}
-      <footer className="b365-footer">
-        <div className="b365-footer-inner">
-          <div className="b365-footer-grid">
-            <div className="b365-footer-brand">
-              <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 32, filter: 'brightness(10)' }} />
-              <p>Precision-grade optimization protocols powered by MODS Max™ technology.</p>
-              <div className="b365-footer-social">
-                <a href="#" aria-label="Instagram"><iconify-icon icon="lucide:instagram" width="18"></iconify-icon></a>
-                <a href="#" aria-label="Twitter"><iconify-icon icon="lucide:twitter" width="18"></iconify-icon></a>
-                <a href="#" aria-label="Facebook"><iconify-icon icon="lucide:facebook" width="18"></iconify-icon></a>
-                <a href="#" aria-label="YouTube"><iconify-icon icon="lucide:youtube" width="18"></iconify-icon></a>
-              </div>
-            </div>
-            <div>
-              <h4>Products</h4>
-              <ul>
-                <li><a href="#">TPrime365™</a></li>
-                <li><a href="#">GLP-1 Protocol</a></li>
-                <li><a href="#">UCOS System</a></li>
-                <li><a href="#">Bundles</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Resources</h4>
-              <ul>
-                <li><a href="#">The Science</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Blog</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Company</h4>
-              <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Careers</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="b365-footer-newsletter">
-            <span>Stay optimized:</span>
-            <input type="email" placeholder="Enter your email" />
-            <AnimatedCTA href="#" small>Subscribe</AnimatedCTA>
-          </div>
-
-          <div className="b365-footer-compliance">
-            <p>
-              Best 365 Labs is an e-commerce platform. Medical services, evaluations, and prescriptions are provided by independent licensed healthcare professionals through the happyMD network. Best 365 Labs does not provide medical advice, diagnoses, or prescriptions.
-            </p>
-            <p>
-              *These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. Methylene Blue should NOT be used by patients with glucose-6-phosphate dehydrogenase (G6PD) deficiency. It may also interact with psychiatric medications (MAOIs/SSRIs). Consult your healthcare provider before use.
-            </p>
-          </div>
-
-          <div className="b365-footer-copyright">
-            © {new Date().getFullYear()} Best 365 Labs, Inc. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <SharedFooter />
     </div>
   );
 };

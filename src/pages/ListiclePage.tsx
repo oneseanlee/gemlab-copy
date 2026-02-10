@@ -1,6 +1,7 @@
 import React from 'react';
 import './ListiclePage.css';
 import '../index.css';
+import SharedFooter from '../components/SharedFooter/SharedFooter';
 
 const ListiclePage = () => {
     return (
@@ -279,15 +280,8 @@ const ListiclePage = () => {
                 </div>
             </div>
 
-            {/* Footer Legal */}
-            <div className="legal-footer">
-                <p className="legal-text">
-                    *TPrime365 is a prescription-only compound. All orders require physician approval via HappyMD. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary. Compounded at an FDA-registered 503A pharmacy in Salt Lake City, Utah.
-                </p>
-                <div className="copyright">
-                    © 2025, Best365Labs. <a href="#" style={{ color: 'inherit', textDecoration: 'underline' }}>Terms of Service</a> | <a href="#" style={{ color: 'inherit', textDecoration: 'underline' }}>Privacy Policy</a>
-                </div>
-            </div>
+            {/* Footer */}
+            <SharedFooter />
         </div>
     );
 };
