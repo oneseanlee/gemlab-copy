@@ -152,7 +152,7 @@ const OceanRaysPage = () => {
           </ul>
           <div className="b365-nav-right">
             <a href="#" className="b365-login-link">Log In</a>
-            <AnimatedCTA href="#products" small>Get Started</AnimatedCTA>
+            <AnimatedCTA href="#products" small>Join the Community</AnimatedCTA>
           </div>
         </div>
       </nav>
