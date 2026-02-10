@@ -388,7 +388,32 @@ const OceanRaysPage = () => {
         </div>
       </section>
 
-      {/* 10. 3-Step Process */}
+      {/* 10. Digital Guides & Resources */}
+      <section className="b365-section b365-guides-section">
+        <h2 className="b365-serif" style={{ textAlign: 'center', marginBottom: 12 }}>
+          Digital Guides & <em>Resources</em>
+        </h2>
+        <p style={{ textAlign: 'center', color: 'var(--b365-text-secondary)', maxWidth: 560, margin: '0 auto 48px', fontSize: 15 }}>
+          Expert-backed guides to help you make informed decisions about your health optimization journey.
+        </p>
+        <div className="b365-guides-grid">
+          {[
+            { img: '/images/guide-renting-testosterone.png', title: 'The Difference Between Renting Testosterone and Owning It' },
+            { img: '/images/guide-testosterone-fertility.png', title: 'Testosterone Optimization Without Sacrificing Fertility' },
+            { img: '/images/guide-before-trt.png', title: 'Before You Commit to TRT — Answer These Questions' },
+          ].map((guide, i) => (
+            <a href="#" className="b365-guide-card" key={i}>
+              <img src={guide.img} alt={guide.title} />
+              <h4>{guide.title}</h4>
+            </a>
+          ))}
+        </div>
+        <div style={{ textAlign: 'center', marginTop: 40 }}>
+          <AnimatedCTA href="#">See All Guides</AnimatedCTA>
+        </div>
+      </section>
+
+      {/* 11. 3-Step Process */}
       <section className="b365-section b365-section-alt" id="process">
         <h2 className="b365-section-heading b365-serif">It's easy to <em>get started.</em></h2>
         <div className="b365-steps-grid">
@@ -416,7 +441,7 @@ const OceanRaysPage = () => {
         </div>
       </section>
 
-      {/* 11. FAQ */}
+      {/* 12. FAQ */}
       <section className="b365-section" id="faq">
         <div className="b365-faq-layout">
           <div className="b365-faq-left">
@@ -437,31 +462,6 @@ const OceanRaysPage = () => {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* 12. Digital Guides & Resources */}
-      <section className="b365-section b365-guides-section">
-        <h2 className="b365-serif" style={{ textAlign: 'center', marginBottom: 12 }}>
-          Digital Guides & <em>Resources</em>
-        </h2>
-        <p style={{ textAlign: 'center', color: 'var(--b365-text-secondary)', maxWidth: 560, margin: '0 auto 48px', fontSize: 15 }}>
-          Expert-backed guides to help you make informed decisions about your health optimization journey.
-        </p>
-        <div className="b365-guides-grid">
-          {[
-            { img: '/images/guide-renting-testosterone.png', title: 'The Difference Between Renting Testosterone and Owning It' },
-            { img: '/images/guide-testosterone-fertility.png', title: 'Testosterone Optimization Without Sacrificing Fertility' },
-            { img: '/images/guide-before-trt.png', title: 'Before You Commit to TRT — Answer These Questions' },
-          ].map((guide, i) => (
-            <a href="#" className="b365-guide-card" key={i}>
-              <img src={guide.img} alt={guide.title} />
-              <h4>{guide.title}</h4>
-            </a>
-          ))}
-        </div>
-        <div style={{ textAlign: 'center', marginTop: 40 }}>
-          <AnimatedCTA href="#">See All Guides</AnimatedCTA>
         </div>
       </section>
 
