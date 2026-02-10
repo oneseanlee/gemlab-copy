@@ -9,7 +9,7 @@ import StatsSection from '../components/StatsSection/StatsSection'
 import Testimonials from '../components/Testimonials/Testimonials'
 import LogoCarousel from '../components/LogoCarousel/LogoCarousel'
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
-import Footer from '../components/Footer/Footer'
+import SharedFooter from '../components/SharedFooter/SharedFooter'
 import '../App.css'
 
 function Home() {
@@ -25,7 +25,7 @@ function Home() {
             <StatsSection />
             <Testimonials />
             <LogoCarousel />
-            <Footer />
+            <SharedFooter />
             <ScrollToTop />
         </div>
     )
