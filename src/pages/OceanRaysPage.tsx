@@ -161,18 +161,7 @@ const OceanRaysPage = () => {
       <section className={`b365-hero ${!showBanner ? 'no-banner' : ''}`}>
         <div className="b365-hero-container">
           <div className="b365-hero-image">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="b365-hero-video"
-              poster="/images/tprime-natural-optimization.jpg"
-            >
-              <source src="/images/hero-animation.webm" type="video/webm" />
-              {/* Fallback to poster image for unsupported browsers */}
-              <img src="/images/tprime-natural-optimization.jpg" alt="Athletic man — natural testosterone optimization" />
-            </video>
+            <img src="/images/hero-couple.png" alt="Athletic couple with Best 365 Labs products" />
           </div>
           <div className="b365-hero-text">
             <h1 className="b365-serif">Your Hormones, <em>Optimized.</em></h1>
