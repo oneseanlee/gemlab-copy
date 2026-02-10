@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './TPrime365Page.css';
+import SharedFooter from '../components/SharedFooter/SharedFooter';
 
 const TPrime365Page = () => {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -708,24 +709,7 @@ const TPrime365Page = () => {
             </div>
 
             {/* Footer */}
-            <footer className="tprime-footer">
-                <div className="footer-company">
-                    <p>Compounded by an FDA-Registered 503A Facility for Best365Labs</p>
-                    <p>Salt Lake City, Utah</p>
-                    <p><a href="https://best365labs.com">best365labs.com</a></p>
-                </div>
-                <div className="footer-contact">
-                    <p>Questions? <a href="mailto:support@best365labs.com">support@best365labs.com</a> | 1-385-421-5651</p>
-                </div>
-                <div className="footer-physician">
-                    <p>Physician consultations facilitated by HappyMD</p>
-                    <p>Independent licensed healthcare providers</p>
-                </div>
-                <div className="footer-legal">
-                    <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
-                </div>
-                <p className="footer-copyright">© 2025 Best365Labs. All rights reserved.</p>
-            </footer>
+            <SharedFooter />
         </div>
     );
 };
