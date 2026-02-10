@@ -234,8 +234,8 @@ const OceanRaysPage = () => {
               <div className="price">{product.price}<span>{product.priceSuffix}</span></div>
               <p className="price-note">{product.priceNote}</p>
               <div className="card-actions">
-                <button className="b365-btn-primary">Start evaluation</button>
-                <button className="b365-btn-outline">Learn more</button>
+                <AnimatedCTA href="#" className="card-cta">Start evaluation</AnimatedCTA>
+                <a href="#" className="b365-btn-outline">Learn more</a>
               </div>
             </div>
           ))}
@@ -351,7 +351,7 @@ const OceanRaysPage = () => {
                 No pills, no injections, no gut disruption
               </li>
             </ul>
-            <button className="btn-white">Learn More</button>
+            <AnimatedCTA href="#" className="btn-white-cta">Learn More</AnimatedCTA>
           </div>
           <div className="b365-power-up-visual">
             <img src="/images/tprime-sublingual-delivery.jpg" alt="MODS Max sublingual delivery technology" />
@@ -417,10 +417,10 @@ const OceanRaysPage = () => {
         <div className="b365-faq-layout">
           <div className="b365-faq-left">
             <h2>You have questions, <em>we have answers.</em></h2>
-            <a href="#" className="b365-btn-outline" style={{ marginTop: 8 }}>
+            <AnimatedCTA href="#" style={{ marginTop: 8 }}>
               <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
               Contact Support
-            </a>
+            </AnimatedCTA>
           </div>
           <div>
             {faqData.map((item, i) => (
@@ -480,7 +480,7 @@ const OceanRaysPage = () => {
           <div className="b365-footer-newsletter">
             <span>Stay optimized:</span>
             <input type="email" placeholder="Enter your email" />
-            <button className="b365-btn-primary">Subscribe</button>
+            <AnimatedCTA href="#" small>Subscribe</AnimatedCTA>
           </div>
 
           <div className="b365-footer-compliance">
