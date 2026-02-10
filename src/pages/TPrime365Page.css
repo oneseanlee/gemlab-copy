@@ -531,7 +531,7 @@
   background: rgba(51, 118, 176, 0.06);
 }
 .tprime-value-total {
-  background: var(--b365-navy);
+  background: var(--b365-blue);
   color: #fff;
   padding: 24px 32px;
 }
@@ -702,7 +702,7 @@
 
 /* ─── Final CTA ─── */
 .tprime-final-cta {
-  background: linear-gradient(135deg, var(--b365-navy) 0%, #1a2a44 100%);
+  background: linear-gradient(135deg, #3376b0 0%, #2a6191 100%);
   border-radius: 24px;
   max-width: 1000px;
   margin: 0 auto;
@@ -726,7 +726,7 @@
   margin-bottom: 32px;
 }
 .tprime-final-price-box {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.15);
   border-radius: 16px;
   padding: 28px;
   margin-bottom: 28px;
