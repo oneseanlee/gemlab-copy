@@ -368,8 +368,8 @@ const OceanRaysPage = () => {
         <div className="b365-testimonials-grid">
           {[
             { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw' },
-            { img: '/images/testimonial-dan-schmidt.png', name: 'Dan Schmidt' },
-            { img: '/images/testimonial-darren-lopez.png', name: 'Darren Lopez' },
+            { img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes' },
+            { img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke' },
             { img: '/images/testimonial-sean-lee.png', name: 'Sean Lee' },
           ].map((t, i) => (
             <div className="b365-testimonial-card" key={i}>
