@@ -303,10 +303,40 @@
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
   border-radius: 20px;
-  padding: 32px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   transition: box-shadow 0.3s, transform 0.2s;
+  overflow: hidden;
+}
+.b365-product-card .product-card-image {
+  background: linear-gradient(180deg, #f0f4f8 0%, #e8edf2 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 24px 24px 0;
+  height: 220px;
+  overflow: hidden;
+}
+.b365-product-card .product-card-image img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.12));
+}
+.b365-product-card .tags,
+.b365-product-card h3,
+.b365-product-card .best-for,
+.b365-product-card .benefits-list,
+.b365-product-card .price,
+.b365-product-card .price-note,
+.b365-product-card .card-actions {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.b365-product-card .tags {
+  padding-top: 24px;
 }
 .b365-product-card:hover {
   box-shadow: 0 8px 32px rgba(0,0,0,0.06);
@@ -385,6 +415,7 @@
 .b365-product-card .card-actions {
   display: flex;
   gap: 10px;
+  padding-bottom: 32px;
 }
 .b365-product-card .card-actions .b365-btn-primary,
 .b365-product-card .card-actions .b365-btn-outline {
