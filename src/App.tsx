@@ -6,21 +6,29 @@ import TPrime365Page from "./pages/TPrime365Page";
 import OceanRaysPage from "./pages/OceanRaysPage";
 import GLP1Page from "./pages/GLP1Page";
 import NotFound from "./pages/NotFound";
+import { useCartSync } from "./hooks/useCartSync";
 import './App.css';
 
 const queryClient = new QueryClient();
 
+const AppRoutes = () => {
+  useCartSync();
+  return (
+    <Routes>
+      <Route path="/" element={<OceanRaysPage />} />
+      <Route path="/article" element={<ListiclePage />} />
+      <Route path="/tprime365" element={<TPrime365Page />} />
+      <Route path="/glp1" element={<GLP1Page />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<OceanRaysPage />} />
-        <Route path="/article" element={<ListiclePage />} />
-        <Route path="/tprime365" element={<TPrime365Page />} />
-        <Route path="/glp1" element={<GLP1Page />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   </QueryClientProvider>
 );

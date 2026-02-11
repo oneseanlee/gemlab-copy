@@ -5,10 +5,41 @@ import '../pages/OceanRaysPage.css';
 import '../pages/TPrime365Page.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
+import { CartDrawer } from '../components/CartDrawer';
+import { useCartStore } from '../stores/cartStore';
+import { GLP1_VARIANT_ID } from '../lib/shopify';
+
+// Minimal product shape for cart
+const GLP1_PRODUCT = {
+    node: {
+        id: 'gid://shopify/Product/8542135132284',
+        title: 'GLP-1 Optimization Protocol — Complete 30-Day System',
+        description: 'Complete 30-Day GLP-1 optimization protocol with Triple Power Methylene Blue and Metabolism+.',
+        handle: 'glp-1-optimization-protocol',
+        priceRange: { minVariantPrice: { amount: '39.95', currencyCode: 'USD' } },
+        images: { edges: [{ node: { url: '/placeholder.svg', altText: 'GLP-1 Optimization Protocol' } }] },
+        variants: { edges: [{ node: { id: GLP1_VARIANT_ID, title: '30-Day Protocol', price: { amount: '39.95', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Size', value: '30-Day Protocol' }] } }] },
+        options: [{ name: 'Size', values: ['30-Day Protocol'] }],
+    }
+};
 
 const GLP1Page = () => {
     const [showBanner, setShowBanner] = useState(true);
     const [openFaq, setOpenFaq] = useState<number | null>(0);
+    const addItem = useCartStore(state => state.addItem);
+    const isLoading = useCartStore(state => state.isLoading);
+
+    const handleOrderNow = async (e?: React.MouseEvent) => {
+        e?.preventDefault();
+        await addItem({
+            product: GLP1_PRODUCT,
+            variantId: GLP1_VARIANT_ID,
+            variantTitle: '30-Day Protocol',
+            price: { amount: '39.95', currencyCode: 'USD' },
+            quantity: 1,
+            selectedOptions: [{ name: 'Size', value: '30-Day Protocol' }],
+        });
+    };
 
     const faqItems = [
         {
@@ -72,8 +103,10 @@ const GLP1Page = () => {
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
                     <div className="b365-nav-right">
-                        <a href="#" className="b365-login-link">Log In</a>
-                        <AnimatedCTA href="#" small>Order Now</AnimatedCTA>
+                        <CartDrawer />
+                        <AnimatedCTA href="#" small onClick={handleOrderNow} disabled={isLoading}>
+                            {isLoading ? 'Adding...' : 'Order Now'}
+                        </AnimatedCTA>
                     </div>
                 </div>
             </nav>
@@ -99,8 +132,8 @@ const GLP1Page = () => {
                             <span className="price-strike">$90.00</span>
                         </div>
                         <p className="guarantee-text">Complete 30-Day Protocol + FREE Shipping</p>
-                        <AnimatedCTA href="#">
-                            Order Now — $39.95
+                        <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
+                            {isLoading ? 'Adding to Cart...' : 'Order Now — $39.95'}
                             <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
                         </AnimatedCTA>
                     </div>
@@ -414,8 +447,8 @@ const GLP1Page = () => {
                         <span className="note">Complete 30-Day Protocol — Total Value: $131.00</span>
                         <span className="guarantee-text">Save $91.05 (70% OFF) + FREE Shipping</span>
                     </div>
-                    <AnimatedCTA href="#" className="btn-white-cta">
-                        Order Now — $39.95
+                    <AnimatedCTA href="#" className="btn-white-cta" onClick={handleOrderNow} disabled={isLoading}>
+                        {isLoading ? 'Adding to Cart...' : 'Order Now — $39.95'}
                         <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
