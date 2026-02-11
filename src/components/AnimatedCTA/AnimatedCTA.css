@@ -94,6 +94,7 @@
   height: 42px;
   padding: 10px 24px;
   font-size: 14px;
+  white-space: nowrap;
 }
 
 /* Card variant — full width inside product cards */

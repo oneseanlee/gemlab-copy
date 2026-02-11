@@ -30,7 +30,7 @@
   background-color: var(--b365-blue);
   color: #fff;
   text-align: center;
-  padding: 10px 16px;
+  padding: 10px 40px 10px 16px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -38,10 +38,12 @@
   top: 0;
   width: 100%;
   z-index: 101;
+  box-sizing: border-box;
+  line-height: 1.4;
 }
 .b365-promo-banner button {
   position: absolute;
-  right: 16px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -50,6 +52,7 @@
   cursor: pointer;
   font-size: 18px;
   line-height: 1;
+  padding: 4px;
 }
 
 /* Navigation */
@@ -64,6 +67,15 @@
 }
 .b365-nav.with-banner {
   top: 37px;
+}
+@media (max-width: 640px) {
+  .b365-nav.with-banner {
+    top: auto;
+  }
+  .b365-promo-banner + .b365-nav,
+  .b365-nav.with-banner {
+    top: 33px;
+  }
 }
 .b365-nav-inner {
   max-width: 1280px;
@@ -94,7 +106,8 @@
 .b365-nav-right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  flex-shrink: 0;
 }
 .b365-btn-primary {
   background-color: var(--b365-blue);
@@ -897,8 +910,33 @@
 }
 
 @media (max-width: 640px) {
+  .b365-promo-banner {
+    font-size: 11px;
+    padding: 8px 36px 8px 12px;
+    letter-spacing: 0.02em;
+  }
   .b365-nav-links {
     display: none;
+  }
+  .b365-nav-inner {
+    padding: 0 12px;
+    height: 56px;
+    gap: 8px;
+  }
+  .b365-nav-inner img {
+    height: 28px !important;
+  }
+  .b365-nav-right {
+    gap: 8px;
+  }
+  .b365-nav-right .b365-login-link {
+    display: none;
+  }
+  .b365-nav-right .animated-cta.cta-sm {
+    min-width: unset;
+    height: 36px;
+    padding: 6px 14px;
+    font-size: 12px;
   }
   .b365-hero {
     padding: 120px 16px 0;
