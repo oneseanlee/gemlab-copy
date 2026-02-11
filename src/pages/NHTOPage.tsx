@@ -1,0 +1,558 @@
+// @ts-nocheck
+import React, { useState } from 'react';
+import './NHTOPage.css';
+import '../pages/OceanRaysPage.css';
+import '../pages/TPrime365Page.css';
+import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
+import SharedFooter from '../components/SharedFooter/SharedFooter';
+import { CartDrawer } from '../components/CartDrawer';
+import { useCartStore } from '../stores/cartStore';
+
+// TODO: Replace with real Shopify variant ID once the NHTO bundle product is created
+const NHTO_VARIANT_ID = 'gid://shopify/ProductVariant/PLACEHOLDER_NHTO';
+const NHTO_PRODUCT = {
+    node: {
+        id: 'gid://shopify/Product/PLACEHOLDER_NHTO',
+        title: 'Non-Hormonal Testosterone Optimizer — Complete System',
+        description: 'Complete Non-Hormonal Testosterone Optimizer system with UCOS bundle and physician consultation.',
+        handle: 'nhto-complete-system',
+        priceRange: { minVariantPrice: { amount: '300.00', currencyCode: 'USD' } },
+        images: { edges: [{ node: { url: '/placeholder.svg', altText: 'NHTO System' } }] },
+        variants: { edges: [{ node: { id: NHTO_VARIANT_ID, title: 'Complete System', price: { amount: '300.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Bundle', value: 'Complete System' }] } }] },
+        options: [{ name: 'Bundle', values: ['Complete System'] }],
+    }
+};
+
+const NHTOPage = () => {
+    const [showBanner, setShowBanner] = useState(true);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
+    const addItem = useCartStore(state => state.addItem);
+    const isLoading = useCartStore(state => state.isLoading);
+
+    const handleOrderNow = async (e?: React.MouseEvent) => {
+        e?.preventDefault();
+        await addItem({
+            product: NHTO_PRODUCT,
+            variantId: NHTO_VARIANT_ID,
+            variantTitle: 'Complete System',
+            price: { amount: '300.00', currencyCode: 'USD' },
+            quantity: 1,
+            selectedOptions: [{ name: 'Bundle', value: 'Complete System' }],
+        });
+    };
+
+    const faqItems = [
+        { question: "How is the consultation facilitated?", answer: "Your consultation is facilitated through happyMD, a licensed telehealth platform. After you complete your health intake, an independent licensed physician reviews your information and determines eligibility for the Non-Hormonal Testosterone Optimizer prescription." },
+        { question: "What happens if I'm not approved?", answer: "If the independent physician determines you're not a candidate for prescription treatment, your $140 consultation + optimizer fee is fully refunded. You keep the UCOS supplements ($160 value) regardless of approval." },
+        { question: "Can I use this with my current TRT?", answer: "Yes! The Non-Hormonal Testosterone Optimizer powered by MODS Max is specifically designed to work alongside TRT. It helps maintain testicular function, preserve fertility, and optimize hormone balance that TRT alone can compromise." },
+        { question: "Does this preserve fertility?", answer: "Yes. Unlike traditional TRT which suppresses sperm production, the Non-Hormonal Testosterone Optimizer stimulates natural LH/FSH production, maintaining your body's natural reproductive function." },
+        { question: "How quickly will I see results?", answer: "Most men notice improvements in energy and mood within 2-3 weeks. Testosterone levels typically increase significantly within 3-6 weeks. The UCOS supplements provide additional cellular optimization benefits from day one." },
+        { question: "Are there side effects?", answer: "Clinical data shows zero adverse events across all patients. The non-hormonal approach avoids the common side effects of traditional TRT including testicular atrophy, fertility suppression, and estrogen issues." },
+        { question: "Is this FDA approved?", answer: "The Non-Hormonal Testosterone Optimizer is compounded at an FDA-registered 503A facility. The UCOS supplements are manufactured in FDA-registered facilities. These statements have not been evaluated by the FDA." },
+        { question: "What's included in the bundle?", answer: "The complete system includes: Non-Hormonal Testosterone Optimizer (Rx, 30-day supply), Activate365 (morning cellular activation), Mito365 (peak performance enhancement), Restore365 (overnight recovery), and a licensed physician consultation via happyMD." },
+        { question: "How do I take the products?", answer: "Activate365 first thing after waking, Mito365 15 minutes after Activate365, Restore365 30-60 minutes before bed, and the Non-Hormonal Testosterone Optimizer as prescribed by your physician." },
+        { question: "Who is happyMD?", answer: "happyMD is a licensed telehealth platform that connects patients with board-certified physicians. They facilitate the medical consultation and prescription process for the Non-Hormonal Testosterone Optimizer." },
+    ];
+
+    return (
+        <div className="nhto-page">
+
+            {/* 1. Promo Banner */}
+            {showBanner && (
+                <div className="b365-promo-banner">
+                    🔥 SAVE $159 — Complete Testosterone Optimization System + Physician Consultation
+                    <button onClick={() => setShowBanner(false)} aria-label="Close banner">✕</button>
+                </div>
+            )}
+
+            {/* 2. Navigation */}
+            <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
+                <div className="b365-nav-inner">
+                    <button className="b365-hamburger" aria-label="Menu">
+                        <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
+                    </button>
+                    <a href="/">
+                        <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
+                    </a>
+                    <ul className="b365-nav-links">
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#results">Results</a></li>
+                        <li><a href="#compare">Compare</a></li>
+                        <li><a href="#bundle">Bundle</a></li>
+                    </ul>
+                    <div className="b365-nav-right">
+                        <CartDrawer />
+                        <AnimatedCTA href="#" small onClick={handleOrderNow} disabled={isLoading}>
+                            {isLoading ? 'Adding...' : 'Get The System'}
+                        </AnimatedCTA>
+                    </div>
+                </div>
+            </nav>
+
+            {/* 3. Hero Section */}
+            <section className={`nhto-hero-section ${!showBanner ? 'no-banner' : ''}`}>
+                <div className="tprime-hero-container">
+                    <div className="tprime-hero-img">
+                        {/* PLACEHOLDER IMAGE — Needs: NHTO bottle + UCOS system products together */}
+                        <img src="/images/product-nhto.png" alt="Non-Hormonal Testosterone Optimizer — Complete System" />
+                    </div>
+                    <div className="tprime-hero-text">
+                        <h1>Revolutionary Non-Hormonal <em>Testosterone Optimizer</em></h1>
+                        <p className="subhead">Restore your testosterone naturally. No injections, no hormones, no fertility risks.</p>
+                        <ul className="nhto-hero-benefits">
+                            <li><iconify-icon icon="lucide:check-circle" width="18"></iconify-icon><span><strong>Maintains Testicular Function</strong> — Preserves natural size and health</span></li>
+                            <li><iconify-icon icon="lucide:check-circle" width="18"></iconify-icon><span><strong>Protects Fertility</strong> — Maintains sperm production capacity</span></li>
+                            <li><iconify-icon icon="lucide:check-circle" width="18"></iconify-icon><span><strong>Stimulates Natural LH/FSH</strong> — Keeps hormone system active</span></li>
+                        </ul>
+                        <p className="nhto-consult-note">
+                            <iconify-icon icon="lucide:shield-check" width="14"></iconify-icon>
+                            Get medical consultation with refund protection
+                        </p>
+                        <div className="price-row">
+                            <span className="price-big">$300</span>
+                            <span className="price-note">Complete System + Medical Consultation Included</span>
+                        </div>
+                        <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
+                            {isLoading ? 'Adding to Cart...' : 'YES! I Want My System + Consultation'}
+                        </AnimatedCTA>
+                        <div className="nhto-happymd-badge">
+                            <iconify-icon icon="lucide:gift" width="18"></iconify-icon>
+                            <div>
+                                <strong>Consultation Facilitated by happyMD</strong><br />
+                                <span>$200 Value — Includes Licensed Physician Evaluation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 4. Trust Strip */}
+            <div className="nhto-trust-strip">
+                {[
+                    { icon: 'lucide:truck', title: 'Free Shipping', desc: 'Nationwide delivery' },
+                    { icon: 'lucide:shield-check', title: '60-Day Guarantee', desc: 'Money-back promise' },
+                    { icon: 'lucide:award', title: 'Premium Quality', desc: 'Made in USA' },
+                    { icon: 'lucide:stethoscope', title: 'Doctor Consultation', desc: 'Included with order' },
+                ].map((badge, i) => (
+                    <div className="nhto-trust-badge" key={i}>
+                        <div className="icon-wrap">
+                            <iconify-icon icon={badge.icon} width="22"></iconify-icon>
+                        </div>
+                        <h4>{badge.title}</h4>
+                        <p>{badge.desc}</p>
+                    </div>
+                ))}
+            </div>
+
+            {/* 5. Critical Information — TRT Side Effects */}
+            <section className="b365-section" id="benefits">
+                <p className="nhto-section-label">CRITICAL INFORMATION</p>
+                <h2 className="b365-section-heading b365-serif">If You're Considering TRT,<br /> <em>You Need to Know This</em></h2>
+                <div className="nhto-problem-grid">
+                    {[
+                        { icon: 'lucide:shrink', title: 'Testicular Atrophy', desc: 'Up to 17% volume decrease in studies' },
+                        { icon: 'lucide:baby', title: 'Fertility Impact', desc: 'Significant sperm production suppression' },
+                        { icon: 'lucide:link', title: 'Hormonal Dependency', desc: 'Natural production shutdown' },
+                        { icon: 'lucide:alert-triangle', title: 'Estrogen Issues', desc: 'Increased aromatization and side effects' },
+                    ].map((card, i) => (
+                        <div className="nhto-problem-card" key={i}>
+                            <div className="icon-wrap">
+                                <iconify-icon icon={card.icon} width="22"></iconify-icon>
+                            </div>
+                            <h3>{card.title}</h3>
+                            <p>{card.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 6. The Non-Hormonal Alternative */}
+            <section className="b365-section b365-section-alt">
+                <h2 className="b365-section-heading b365-serif">The Non-Hormonal Alternative That Protects <em>Your Vitality</em></h2>
+                <div className="tprime-delivery-grid">
+                    <div className="tprime-delivery-card">
+                        <h3>TRT Alone</h3>
+                        <ul>
+                            {['Shuts down natural testosterone production', 'Causes testicular atrophy (up to 17%)', 'Destroys fertility and sperm production', 'Creates lifetime hormonal dependency', 'Increases estrogen conversion'].map((item, i) => (
+                                <li key={i}><iconify-icon icon="lucide:x" width="16" class="icon-x"></iconify-icon>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="tprime-delivery-card highlight">
+                        <h3>MODS Max + TRT</h3>
+                        <ul>
+                            {['Maintains natural testosterone production', 'Preserves testicular size and function', 'Protects fertility and sperm count', 'Easy to discontinue — no dependency', 'Optimal estrogen management'].map((item, i) => (
+                                <li key={i}><iconify-icon icon="lucide:check" width="16" class="icon-check"></iconify-icon>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <div style={{ height: 40 }}></div>
+                <div className="nhto-benefit-grid">
+                    {[
+                        { icon: 'lucide:shield', title: 'Maintains Testicular Function', desc: 'Preserves natural size and health while optimizing testosterone production' },
+                        { icon: 'lucide:baby', title: 'Protects Fertility', desc: 'Maintains sperm production capacity unlike traditional TRT' },
+                        { icon: 'lucide:activity', title: 'Stimulates Natural LH/FSH', desc: 'Keeps your hormone system active and functioning properly' },
+                        { icon: 'lucide:sliders', title: 'Optimizes Hormone Balance', desc: 'Better overall hormone management without dependency' },
+                    ].map((card, i) => (
+                        <div className="nhto-benefit-card" key={i}>
+                            <div className="icon-wrap">
+                                <iconify-icon icon={card.icon} width="22"></iconify-icon>
+                            </div>
+                            <h3>{card.title}</h3>
+                            <p>{card.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 7. How It Works (4 Steps) */}
+            <section className="b365-section">
+                <h2 className="b365-section-heading b365-serif">How It <em>Works</em></h2>
+                <div className="nhto-steps-grid">
+                    {[
+                        { num: '01', title: 'Complete Your Health Intake', desc: 'Submit your health history through our secure online form. Takes just 5 minutes.' },
+                        { num: '02', title: 'Licensed Provider Review', desc: 'An independent licensed physician (via happyMD) reviews your information to determine eligibility.' },
+                        { num: '03', title: 'Supplements Ship Immediately', desc: 'Your Ultimate Cellular Optimization bundle "UCOS" ships right away — yours to keep regardless of approval.' },
+                        { num: '04', title: 'Prescription Issued If Approved', desc: 'If the provider determines you\'re a candidate, your prescription is issued and fulfilled.' },
+                    ].map((step, i) => (
+                        <div className="b365-step-card" key={i}>
+                            <div className="step-number">{step.num}</div>
+                            <h3 className="b365-serif">{step.title}</h3>
+                            <p>{step.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 8. Clinical Results / Real Transformations */}
+            <section className="b365-section b365-section-alt" id="results">
+                <p className="nhto-section-label">CLINICAL RESULTS</p>
+                <h2 className="b365-section-heading b365-serif">Real <em>Transformations</em></h2>
+                <p style={{ textAlign: 'center', color: 'var(--b365-text-secondary)', marginBottom: 32, fontSize: 15, maxWidth: 700, marginLeft: 'auto', marginRight: 'auto' }}>
+                    Men across all ages are experiencing dramatic improvements in energy, vitality, and overall wellness.
+                </p>
+                <div className="nhto-safety-badge">
+                    <span><iconify-icon icon="lucide:shield-check" width="16"></iconify-icon> ZERO Adverse Events Across ALL Patients</span>
+                </div>
+                <div className="nhto-stats-strip">
+                    {[
+                        { value: '664%', label: 'Max T Increase' },
+                        { value: '3 Weeks', label: 'Avg. Results Time' },
+                        { value: '100%', label: 'Patient Safety' },
+                        { value: '1000+', label: 'ng/dL Achieved' },
+                    ].map((stat, i) => (
+                        <div className="nhto-stat-item" key={i}>
+                            <span className="stat-value">{stat.value}</span>
+                            <span className="stat-label">{stat.label}</span>
+                        </div>
+                    ))}
+                </div>
+                <div className="nhto-results-grid">
+                    {[
+                        { name: 'Alex T.', age: 'Age 32', increase: 'Up to 664%', time: 'in 3 weeks', before: '120 ng/dL', after: '917 ng/dL', quote: '"I went from feeling like an old man to having the energy of a teenager."' },
+                        { name: 'Marcus L.', age: 'Age 30', increase: 'Up to 130%', time: 'in 6 weeks', before: '566 ng/dL', after: '1,305 ng/dL', quote: '"Brain fog lifted, workouts exploded, confidence skyrocketed."' },
+                        { name: 'David R.', age: 'Age 45', increase: 'Up to 202%', time: 'in 4 weeks', before: '380 ng/dL', after: '1,150 ng/dL', quote: '"My productivity is through the roof. Best investment I\'ve made in myself."' },
+                        { name: 'Mark', age: 'Age 60', increase: 'Up to 400%+', time: 'in 4 weeks', before: 'Low 200s', after: '1,000+ ng/dL', quote: '"I feel 20 years younger. My energy is through the roof."' },
+                    ].map((t, i) => (
+                        <div className="nhto-result-card" key={i}>
+                            {/* PLACEHOLDER IMAGE — Needs: Testimonial profile photo */}
+                            <img className="result-avatar" src="/placeholder.svg" alt={t.name} />
+                            <div className="result-name">{t.name}</div>
+                            <div className="result-age">{t.age}</div>
+                            <div className="result-increase">{t.increase}<br /><span style={{ fontSize: 12, fontWeight: 400, fontFamily: 'Plus Jakarta Sans, sans-serif', color: 'var(--b365-text-secondary)' }}>{t.time}</span></div>
+                            <div className="result-levels">
+                                <span className="level-before">{t.before}</span>
+                                <iconify-icon icon="lucide:arrow-right" width="14" style={{ color: 'var(--b365-text-secondary)' }}></iconify-icon>
+                                <span className="level-after">{t.after}</span>
+                            </div>
+                            <div className="result-quote">{t.quote}</div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 9. Complete Product Breakdown */}
+            <section className="b365-section" id="bundle">
+                <p className="nhto-section-label">WHAT'S INCLUDED</p>
+                <h2 className="b365-section-heading b365-serif">Complete <em>Product Breakdown</em></h2>
+                <div className="nhto-product-grid">
+                    {[
+                        {
+                            img: '/placeholder.svg', title: 'Non-Hormonal Testosterone Optimizer', tag: 'Rx Formula', tagClass: 'tag-rx',
+                            subtitle: 'Powered by MODS Max',
+                            items: ['Clinical-grade Enclomiphene', 'Boron 10mg for free testosterone', 'Vitamin C for cellular protection', 'Patent-pending 10X absorption delivery']
+                        },
+                        {
+                            img: '/placeholder.svg', title: 'Activate365 — Morning Cellular Activation', tag: 'UCOS', tagClass: 'tag-supp',
+                            items: ['Spermidine 10mg: Activates autophagy', 'NAD+ 20mg: Immediate cellular energy', 'Boron 10mg: Hormone optimization', 'MODS Max Technology: 10x absorption']
+                        },
+                        {
+                            img: '/placeholder.svg', title: 'Mito365 — Peak Performance Enhancement', tag: 'UCOS', tagClass: 'tag-supp',
+                            items: ['Methylene Blue 10mg: 30-40% ATP increase', 'GHK-Cu Peptide 10mg: Faster tissue repair', 'PQQ 20mg: Creates new mitochondria', 'NAD+ 150mg + B12 + Vitamin C']
+                        },
+                        {
+                            img: '/placeholder.svg', title: 'Restore365 — Overnight Recovery', tag: 'UCOS', tagClass: 'tag-supp',
+                            items: ['Enhanced Melatonin: 50-70% faster sleep onset', 'GABA 50mg: Deep sleep support', 'Boron 10mg: Growth hormone release', 'Zinc: Immune and tissue repair']
+                        },
+                    ].map((product, i) => (
+                        <div className="nhto-product-card" key={i}>
+                            <div className="nhto-product-img">
+                                {/* PLACEHOLDER IMAGE — Needs: Individual product bottle shot */}
+                                <img src={product.img} alt={product.title} />
+                            </div>
+                            <div className="nhto-product-info">
+                                <h3>{product.title}</h3>
+                                <span className={`product-tag ${product.tagClass}`}>{product.tag}</span>
+                                {product.subtitle && <p style={{ fontSize: 13, color: 'var(--b365-blue)', fontWeight: 600, marginBottom: 12 }}>{product.subtitle}</p>}
+                                <ul>
+                                    {product.items.map((item, j) => (
+                                        <li key={j}><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    ))}
+                    {/* Consultation card */}
+                    <div className="nhto-product-card full-width">
+                        <div className="icon-wrap" style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--b365-light-blue)', color: 'var(--b365-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <iconify-icon icon="lucide:stethoscope" width="24"></iconify-icon>
+                        </div>
+                        <div className="nhto-product-info">
+                            <h3>Licensed Physician Consultation via happyMD</h3>
+                            <span className="product-tag tag-rx">$200 VALUE</span>
+                            <ul>
+                                <li><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>Board-certified physician review</li>
+                                <li><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>Personalized optimization protocol</li>
+                                <li><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>Prescription issued if medically approved</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 10. Order Summary / Value Stack */}
+            <section className="b365-section b365-section-alt">
+                <div className="nhto-save-callout">
+                    <span className="save-amount"><iconify-icon icon="lucide:flame" width="16"></iconify-icon> SAVE $159 TODAY ONLY</span>
+                    <span className="regular-price">Regular Price: $459</span>
+                </div>
+                <div className="nhto-order-summary">
+                    <div className="nhto-order-header">
+                        <h3>📦 Order Summary</h3>
+                    </div>
+                    <div className="nhto-order-body">
+                        <div className="nhto-order-row">
+                            <div className="order-label">
+                                <strong>Ultimate Cellular Optimization System (3 Products)</strong>
+                                <span>Yours to keep regardless of medical approval</span>
+                                <div><span className="nhto-refund-badge non-refundable">NON-REFUNDABLE</span></div>
+                            </div>
+                            <div className="order-price">$160</div>
+                        </div>
+                        <div className="nhto-order-row">
+                            <div className="order-label">
+                                <strong>Non-Hormonal Testosterone Optimizer + Physician Consultation</strong>
+                                <span>Licensed physician (via happyMD) reviews eligibility — prescription issued if approved</span>
+                                <div><span className="nhto-refund-badge refundable">REFUNDABLE IF NOT APPROVED</span></div>
+                            </div>
+                            <div className="order-price">$140</div>
+                        </div>
+                        <div className="nhto-order-row">
+                            <div className="order-label"><strong>Shipping</strong></div>
+                            <div className="order-price" style={{ color: 'var(--b365-green)' }}>FREE</div>
+                        </div>
+                    </div>
+                    <div className="nhto-order-total">
+                        <span>Total Package Price</span>
+                        <span>$300</span>
+                    </div>
+                </div>
+                <div style={{ textAlign: 'center', marginTop: 32 }}>
+                    <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
+                        {isLoading ? 'Adding to Cart...' : 'YES! I Want My System + Consultation →'}
+                    </AnimatedCTA>
+                </div>
+            </section>
+
+            {/* 11. Risk-Free Promise */}
+            <section className="b365-section">
+                <div className="nhto-promise-card">
+                    <h3><iconify-icon icon="lucide:shield-check" width="24" style={{ verticalAlign: 'middle', marginRight: 8 }}></iconify-icon>Our Risk-Free Promise</h3>
+                    <p>If the independent physician determines you're not a candidate for prescription treatment, your <strong>$140 consultation + optimizer fee is fully refunded</strong>. You keep the UCOS supplements ($160 value) regardless of approval — so you still get incredible cellular optimization benefits.</p>
+                    <p className="promise-bold">You have NOTHING to lose... except the opportunity to optimize your hormones naturally!</p>
+                </div>
+            </section>
+
+            {/* 12. Doctor Testimonials */}
+            <section className="b365-section b365-section-alt">
+                <p className="nhto-section-label">DOCTOR TESTIMONIALS</p>
+                <h2 className="b365-section-heading b365-serif">What Medical Professionals <em>Say</em></h2>
+                <div className="nhto-doctor-grid">
+                    {[
+                        { icon: 'lucide:user', name: 'Dr. Steven Warren, MD, PhD', credential: '35+ years experience, Triple Board-Certified', quote: '"The clinical results with Testosterone Optimizer powered by MODS Max are unprecedented. Men are getting their lives back without compromising their natural hormone production."' },
+                        { icon: 'lucide:user', name: 'Board-Certified Urologist', credential: '15+ years TRT experience', quote: '"I\'ve been prescribing TRT for 15 years. Adding this to my protocols has eliminated most of the side effects I used to see. Testicular atrophy is virtually non-existent now."' },
+                        { icon: 'lucide:user', name: 'Dr. K, Cardiologist', credential: 'Participant & Medical Professional', quote: '"As a cardiologist who experienced the benefits firsthand, the cardiovascular safety profile is excellent. The patent-pending delivery system is revolutionary."' },
+                    ].map((doc, i) => (
+                        <div className="nhto-doctor-card" key={i}>
+                            <div className="icon-wrap">
+                                <iconify-icon icon={doc.icon} width="24"></iconify-icon>
+                            </div>
+                            <h4>{doc.name}</h4>
+                            <div className="credential">{doc.credential}</div>
+                            <blockquote>{doc.quote}</blockquote>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 13. Scientific Comparison Table */}
+            <section className="b365-section" id="compare">
+                <p className="nhto-section-label">SCIENTIFIC COMPARISON</p>
+                <h2 className="b365-section-heading b365-serif">MODS Max vs. <em>Traditional TRT</em></h2>
+                <div className="tprime-table-wrap">
+                    <table className="tprime-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th className="highlight-col">MODS Max + TRT</th>
+                                <th>TRT Alone</th>
+                                <th>No Treatment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Testicular Function</td><td className="highlight-col positive">✅ Maintains</td><td className="negative">❌ Up to 17% atrophy</td><td className="negative">❌ Declining</td></tr>
+                            <tr><td>Fertility</td><td className="highlight-col positive">✅ Preserved</td><td className="negative">❌ Suppressed</td><td className="negative">❌ May decline</td></tr>
+                            <tr><td>Hormone Balance</td><td className="highlight-col positive">✅ Natural LH/FSH</td><td className="negative">❌ Shut down</td><td className="negative">❌ Imbalanced</td></tr>
+                            <tr><td>Estrogen Control</td><td className="highlight-col positive">✅ Optimal management</td><td className="negative">❌ Often elevated</td><td>❌ Variable</td></tr>
+                            <tr><td>Dependency Risk</td><td className="highlight-col positive">✅ Easy to stop</td><td className="negative">❌ Difficult</td><td className="positive">✅ None</td></tr>
+                            <tr><td>Total Testosterone</td><td className="highlight-col positive">✅ Highest</td><td>⚠️ Limited</td><td className="negative">❌ Dropping</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            {/* 14. Final CTA */}
+            <section className="b365-section">
+                <div className="tprime-final-cta">
+                    <h2>Get Your Complete System <em>Now!</em></h2>
+                    <p className="subtitle">🔥 Transform Your Energy in 24 Hours — Ships Today!</p>
+                    <div className="tprime-final-price-box">
+                        <span className="big-price">$300</span>
+                        <span className="note">Complete System — SAVE $159</span>
+                        <span className="guarantee-text">✅ Testosterone Optimizer + UCOS + Consultation with Refund Protection</span>
+                    </div>
+                    <div className="nhto-payment-breakdown">
+                        <div className="nhto-payment-row">
+                            <span>UCOS System (3 Products)<span className="refund-note">NON-REFUNDABLE</span></span>
+                            <span>$160</span>
+                        </div>
+                        <div className="nhto-payment-row">
+                            <span>NHTO + Consultation<span className="refund-note">REFUNDABLE IF NOT APPROVED</span></span>
+                            <span>$140</span>
+                        </div>
+                        <div className="nhto-payment-row">
+                            <span>Shipping</span>
+                            <span>FREE</span>
+                        </div>
+                        <div className="nhto-payment-row">
+                            <span>Total</span>
+                            <span>$300</span>
+                        </div>
+                    </div>
+                    <AnimatedCTA href="#" className="btn-white-cta" onClick={handleOrderNow} disabled={isLoading}>
+                        {isLoading ? 'Adding to Cart...' : 'Get the System →'}
+                    </AnimatedCTA>
+                    <div className="tprime-cta-trust-points">
+                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Licensed physician reviews every order</span>
+                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Refund protection if not approved</span>
+                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> FDA-registered compounding pharmacy</span>
+                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Free shipping — discreet packaging</span>
+                    </div>
+                    <div className="tprime-cta-trust-strip">
+                        <span><iconify-icon icon="lucide:lock" width="14"></iconify-icon> Secure Checkout</span>
+                        <span><iconify-icon icon="lucide:shield-check" width="14"></iconify-icon> Satisfaction Guaranteed</span>
+                        <span><iconify-icon icon="lucide:package" width="14"></iconify-icon> FREE Fast Shipping</span>
+                    </div>
+                </div>
+            </section>
+
+            {/* 15. Product Timing Schedule */}
+            <section className="b365-section b365-section-alt">
+                <h2 className="b365-section-heading b365-serif">Your Daily <em>Optimization Schedule</em></h2>
+                <div className="nhto-timing-grid">
+                    {[
+                        { icon: 'lucide:sunrise', when: 'Morning', title: 'Activate365', desc: 'First thing after waking' },
+                        { icon: 'lucide:clock', when: '15 Min Later', title: 'Mito365', desc: '15 minutes after Activate365' },
+                        { icon: 'lucide:moon', when: 'Evening', title: 'Restore365', desc: '30-60 min before bed' },
+                        { icon: 'lucide:pill', when: 'As Prescribed', title: 'NHTO', desc: 'Per physician instructions' },
+                    ].map((t, i) => (
+                        <div className="nhto-timing-card" key={i}>
+                            <div className="timing-icon">
+                                <iconify-icon icon={t.icon} width="22"></iconify-icon>
+                            </div>
+                            <span className="timing-when">{t.when}</span>
+                            <h4>{t.title}</h4>
+                            <p>{t.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 16. FAQ */}
+            <section className="b365-section" id="faq">
+                <p className="nhto-section-label">❓ Medical Questions</p>
+                <div className="b365-faq-layout">
+                    <div className="b365-faq-left">
+                        <h2>Frequently Asked <em>Questions</em></h2>
+                        <AnimatedCTA href="#" style={{ marginTop: 8 }}>
+                            <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
+                            Contact Support
+                        </AnimatedCTA>
+                    </div>
+                    <div>
+                        {faqItems.map((item, index) => (
+                            <div className="b365-faq-item" key={index}>
+                                <button className="b365-faq-trigger" onClick={() => setOpenFaq(openFaq === index ? null : index)}>
+                                    {item.question}
+                                    <span className="faq-icon">{openFaq === index ? '−' : '+'}</span>
+                                </button>
+                                {openFaq === index && <div className="b365-faq-answer">{item.answer}</div>}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 17. Safety Information */}
+            <section className="b365-section b365-section-alt">
+                <div className="tprime-safety">
+                    <h3>Important Safety Information</h3>
+                    <ul>
+                        {[
+                            'These statements have not been evaluated by the Food and Drug Administration',
+                            'This product is not intended to diagnose, treat, cure, or prevent any disease',
+                            'Methylene Blue should NOT be used by patients with glucose-6-phosphate dehydrogenase (G6PD) deficiency',
+                            'Methylene Blue may interact with MAO inhibitors, SSRIs, and other psychiatric medications',
+                            'Consult with a healthcare professional before use',
+                        ].map((item, i) => (
+                            <li key={i}>
+                                <iconify-icon icon="lucide:alert-circle" width="14"></iconify-icon>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                    <p className="report">Questions? Call us: (385) 421-5651 | info@best365labs.com</p>
+                    <p className="disclaimer">
+                        *These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. The Non-Hormonal Testosterone Optimizer is a compounded drug for Rx ONLY.
+                    </p>
+                </div>
+            </section>
+
+            {/* 18. Footer */}
+            <SharedFooter />
+        </div>
+    );
+};
+
+export default NHTOPage;

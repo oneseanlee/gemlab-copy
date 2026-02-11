@@ -1,0 +1,711 @@
+/* NHTO Landing Page — Non-Hormonal Testosterone Optimizer */
+/* Reuses homepage CSS variables and patterns from OceanRaysPage.css & TPrime365Page.css */
+
+.nhto-page {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--b365-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--b365-white);
+}
+
+/* ─── Hero ─── */
+.nhto-hero-section {
+  padding: 150px 24px 0;
+  background-color: var(--b365-white);
+}
+.nhto-hero-section.no-banner {
+  padding-top: 100px;
+}
+
+.nhto-hero-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+.nhto-hero-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--b365-text-secondary);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.nhto-hero-benefits li strong {
+  color: var(--b365-text);
+}
+.nhto-hero-benefits li iconify-icon {
+  color: var(--b365-green);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.nhto-consult-note {
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nhto-happymd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(51, 118, 176, 0.08);
+  border: 1px solid rgba(51, 118, 176, 0.2);
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+}
+.nhto-happymd-badge strong {
+  color: var(--b365-blue);
+  font-size: 14px;
+}
+
+/* ─── Trust Strip ─── */
+.nhto-trust-strip {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.nhto-trust-badge {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+}
+.nhto-trust-badge .icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--b365-light-blue);
+  color: var(--b365-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+.nhto-trust-badge h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--b365-text);
+  margin: 0 0 4px;
+}
+.nhto-trust-badge p {
+  font-size: 12px;
+  color: var(--b365-text-secondary);
+  margin: 0;
+}
+
+/* ─── Critical Info / Problem Cards (4 col) ─── */
+.nhto-problem-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.nhto-problem-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+}
+.nhto-problem-card .icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #FEE2E2;
+  color: #EF4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+.nhto-problem-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #EF4444;
+  margin: 0 0 8px;
+}
+.nhto-problem-card p {
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─── Section Label ─── */
+.nhto-section-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--b365-blue);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* ─── Benefit Cards (4 col) ─── */
+.nhto-benefit-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.nhto-benefit-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+}
+.nhto-benefit-card .icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--b365-light-blue);
+  color: var(--b365-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+.nhto-benefit-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--b365-text);
+  margin: 0 0 8px;
+}
+.nhto-benefit-card p {
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─── Steps (4 col) ─── */
+.nhto-steps-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ─── Stats Strip ─── */
+.nhto-stats-strip {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.nhto-stat-item {
+  text-align: center;
+}
+.nhto-stat-item .stat-value {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--b365-blue);
+  display: block;
+  margin-bottom: 4px;
+}
+.nhto-stat-item .stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--b365-text-secondary);
+}
+
+.nhto-safety-badge {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.nhto-safety-badge span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--b365-green);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 9999px;
+}
+
+/* ─── Testimonial Result Cards ─── */
+.nhto-results-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.nhto-result-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+}
+.nhto-result-card .result-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 12px;
+  display: block;
+  background: var(--b365-light-blue);
+}
+.nhto-result-card .result-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--b365-text);
+  margin-bottom: 2px;
+}
+.nhto-result-card .result-age {
+  font-size: 12px;
+  color: var(--b365-text-secondary);
+  margin-bottom: 12px;
+}
+.nhto-result-card .result-increase {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--b365-green);
+  margin-bottom: 12px;
+}
+.nhto-result-card .result-levels {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+.nhto-result-card .level-before {
+  color: #EF4444;
+  font-weight: 600;
+  text-decoration: line-through;
+}
+.nhto-result-card .level-after {
+  color: var(--b365-green);
+  font-weight: 700;
+}
+.nhto-result-card .result-quote {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--b365-text-secondary);
+  line-height: 1.6;
+}
+
+/* ─── Product Breakdown ─── */
+.nhto-product-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.nhto-product-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  gap: 24px;
+}
+.nhto-product-card.full-width {
+  grid-column: 1 / -1;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+.nhto-product-img {
+  width: 100px;
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--b365-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nhto-product-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.nhto-product-info h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--b365-text);
+  margin: 0 0 4px;
+}
+.nhto-product-info .product-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  margin-bottom: 12px;
+}
+.nhto-product-info .tag-rx {
+  background: rgba(51, 118, 176, 0.1);
+  color: var(--b365-blue);
+}
+.nhto-product-info .tag-supp {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--b365-green);
+}
+.nhto-product-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.nhto-product-info li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.nhto-product-info li iconify-icon {
+  color: var(--b365-blue);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ─── Order Summary ─── */
+.nhto-order-summary {
+  background: var(--b365-white);
+  border: 2px solid var(--b365-blue);
+  border-radius: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.nhto-order-header {
+  background: var(--b365-blue);
+  color: #fff;
+  padding: 20px 28px;
+  text-align: center;
+}
+.nhto-order-header h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+.nhto-order-header p {
+  font-size: 14px;
+  opacity: 0.9;
+  margin: 0;
+}
+.nhto-order-body {
+  padding: 0;
+}
+.nhto-order-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--b365-border);
+}
+.nhto-order-row:last-child {
+  border-bottom: none;
+}
+.nhto-order-row .order-label {
+  flex: 1;
+}
+.nhto-order-row .order-label strong {
+  display: block;
+  font-size: 14px;
+  color: var(--b365-text);
+  margin-bottom: 4px;
+}
+.nhto-order-row .order-label span {
+  font-size: 12px;
+  color: var(--b365-text-secondary);
+}
+.nhto-order-row .order-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--b365-text);
+  flex-shrink: 0;
+}
+.nhto-refund-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-top: 4px;
+}
+.nhto-refund-badge.non-refundable {
+  background: #DBEAFE;
+  color: #1D4ED8;
+}
+.nhto-refund-badge.refundable {
+  background: #DCFCE7;
+  color: #15803D;
+}
+.nhto-order-total {
+  background: var(--b365-navy);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 28px;
+}
+.nhto-order-total span:first-child {
+  font-size: 16px;
+  font-weight: 600;
+}
+.nhto-order-total span:last-child {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.nhto-save-callout {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.nhto-save-callout .save-amount {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--b365-green);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 9999px;
+}
+.nhto-save-callout .regular-price {
+  display: block;
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+  margin-top: 6px;
+}
+
+/* ─── Risk-Free Promise ─── */
+.nhto-promise-card {
+  background: #F0FDF4;
+  border: 2px solid #86EFAC;
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.nhto-promise-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--b365-text);
+  margin: 0 0 16px;
+}
+.nhto-promise-card p {
+  font-size: 14px;
+  color: var(--b365-text-secondary);
+  line-height: 1.7;
+  margin: 0 0 12px;
+}
+.nhto-promise-card .promise-bold {
+  font-weight: 700;
+  color: var(--b365-green);
+  font-size: 15px;
+}
+
+/* ─── Doctor Testimonials ─── */
+.nhto-doctor-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.nhto-doctor-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+}
+.nhto-doctor-card .icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--b365-light-blue);
+  color: var(--b365-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.nhto-doctor-card h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--b365-text);
+  margin: 0 0 4px;
+}
+.nhto-doctor-card .credential {
+  font-size: 12px;
+  color: var(--b365-blue);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.nhto-doctor-card blockquote {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--b365-text-secondary);
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* ─── Timing Schedule ─── */
+.nhto-timing-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.nhto-timing-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 20px;
+  padding: 24px 20px;
+  text-align: center;
+}
+.nhto-timing-card .timing-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--b365-light-blue);
+  color: var(--b365-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+.nhto-timing-card .timing-when {
+  display: inline-block;
+  background: var(--b365-light-blue);
+  color: var(--b365-blue);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 10px;
+}
+.nhto-timing-card h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--b365-text);
+  margin: 0 0 6px;
+}
+.nhto-timing-card p {
+  font-size: 12px;
+  color: var(--b365-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ─── Final CTA Payment Breakdown ─── */
+.nhto-payment-breakdown {
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 24px auto;
+  max-width: 500px;
+  text-align: left;
+}
+.nhto-payment-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.nhto-payment-row:last-child {
+  border-bottom: none;
+  font-weight: 700;
+  font-size: 16px;
+}
+.nhto-payment-row .refund-note {
+  font-size: 10px;
+  opacity: 0.7;
+  display: block;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .nhto-trust-strip,
+  .nhto-problem-grid,
+  .nhto-benefit-grid,
+  .nhto-stats-strip,
+  .nhto-results-grid,
+  .nhto-timing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .nhto-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .nhto-product-grid {
+    grid-template-columns: 1fr;
+  }
+  .nhto-doctor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .nhto-hero-section {
+    padding: 120px 16px 0;
+  }
+  .nhto-trust-strip,
+  .nhto-problem-grid,
+  .nhto-benefit-grid,
+  .nhto-stats-strip,
+  .nhto-results-grid,
+  .nhto-steps-grid,
+  .nhto-timing-grid {
+    grid-template-columns: 1fr;
+  }
+  .nhto-product-card {
+    flex-direction: column;
+  }
+  .nhto-order-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .nhto-order-row .order-price {
+    font-size: 18px;
+  }
+}
