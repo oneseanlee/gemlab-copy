@@ -70,7 +70,7 @@
 }
 @media (max-width: 640px) {
   .b365-nav.with-banner {
-    top: 52px;
+    top: 56px;
   }
 }
 .b365-nav-inner {
@@ -916,8 +916,8 @@
     display: none;
   }
   .b365-nav-inner {
-    padding: 0 16px;
-    height: 60px;
+    padding: 4px 16px;
+    height: 64px;
     gap: 12px;
   }
   .b365-nav-inner img {
@@ -931,12 +931,12 @@
   }
   .b365-nav-right .animated-cta.cta-sm {
     min-width: unset;
-    height: 38px;
-    padding: 8px 18px;
-    font-size: 12px;
+    height: 40px;
+    padding: 8px 20px;
+    font-size: 13px;
   }
   .b365-hero {
-    padding: 120px 16px 0;
+    padding: 140px 16px 0;
   }
   .b365-hero-text {
     padding: 32px 24px;
