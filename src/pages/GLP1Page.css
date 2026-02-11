@@ -1,0 +1,347 @@
+/* GLP-1 Optimization Protocol Landing Page */
+/* Reuses homepage CSS variables and patterns from OceanRaysPage.css */
+
+.glp1-page {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--b365-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--b365-white);
+}
+
+/* ─── Hero ─── */
+.glp1-hero-section {
+  padding: 150px 24px 0;
+  background-color: var(--b365-white);
+}
+.glp1-hero-section.no-banner {
+  padding-top: 100px;
+}
+
+/* Hero badge */
+.glp1-save-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--b365-green);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  margin-bottom: 24px;
+}
+
+/* Price row with strikethrough */
+.glp1-price-row {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.glp1-price-row .price-big {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--b365-text);
+}
+.glp1-price-row .price-strike {
+  font-size: 18px;
+  color: var(--b365-text-secondary);
+  text-decoration: line-through;
+}
+
+/* ─── Crisis Table ─── */
+.glp1-crisis-intro {
+  text-align: center;
+  font-size: 18px;
+  color: var(--b365-text-secondary);
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.glp1-callout-card {
+  background: var(--b365-white);
+  border: 2px solid var(--b365-blue);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 800px;
+  margin: 40px auto 0;
+  text-align: center;
+}
+.glp1-callout-card h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--b365-text);
+  margin: 0 0 12px;
+}
+.glp1-callout-card p {
+  font-size: 14px;
+  color: var(--b365-text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ─── Protocol Cards (blue icons instead of red) ─── */
+.glp1-protocol-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.glp1-protocol-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  text-align: center;
+}
+.glp1-protocol-card .icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--b365-light-blue);
+  color: var(--b365-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.glp1-protocol-card .timing-badge {
+  display: inline-block;
+  background: var(--b365-light-blue);
+  color: var(--b365-blue);
+  padding: 4px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.glp1-protocol-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--b365-text);
+  margin: 0 0 8px;
+}
+.glp1-protocol-card .product-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--b365-blue);
+  margin-bottom: 16px;
+}
+.glp1-protocol-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+.glp1-protocol-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.glp1-protocol-card li iconify-icon {
+  color: var(--b365-blue);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ─── Perspective Cards ─── */
+.glp1-perspective-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.glp1-perspective-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.glp1-perspective-card .icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--b365-light-blue);
+  color: var(--b365-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.glp1-perspective-card span {
+  font-size: 14px;
+  color: var(--b365-text);
+  font-weight: 500;
+}
+
+.glp1-perspective-outcome {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--b365-white);
+  border: 2px solid var(--b365-blue);
+  border-radius: 20px;
+  padding: 32px;
+}
+.glp1-perspective-outcome h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--b365-text);
+  margin: 0 0 16px;
+  text-align: center;
+}
+.glp1-perspective-outcome ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.glp1-perspective-outcome li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--b365-text-secondary);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.glp1-perspective-outcome li iconify-icon {
+  color: var(--b365-green);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.glp1-daily-cost {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--b365-blue);
+}
+
+/* ─── Timeline Stages ─── */
+.glp1-timeline-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.glp1-timeline-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+}
+.glp1-timeline-card .stage-badge {
+  display: inline-block;
+  background: var(--b365-light-blue);
+  color: var(--b365-blue);
+  padding: 4px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.glp1-timeline-card h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--b365-text);
+  margin: 0 0 8px;
+}
+.glp1-timeline-card p {
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─── Solution Callout (after timeline) ─── */
+.glp1-solution-callout {
+  background: var(--b365-white);
+  border: 2px solid var(--b365-blue);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.glp1-solution-callout h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--b365-text);
+  margin: 0 0 20px;
+  text-align: center;
+}
+.glp1-solution-callout ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.glp1-solution-callout li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--b365-text-secondary);
+  line-height: 1.5;
+}
+.glp1-solution-callout li iconify-icon {
+  color: var(--b365-green);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.glp1-solution-callout .bottom-line {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--b365-blue);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .glp1-protocol-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .glp1-timeline-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .glp1-solution-callout ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .glp1-hero-section {
+    padding: 120px 16px 0;
+  }
+  .glp1-protocol-grid {
+    grid-template-columns: 1fr;
+  }
+  .glp1-perspective-grid {
+    grid-template-columns: 1fr;
+  }
+  .glp1-timeline-grid {
+    grid-template-columns: 1fr;
+  }
+}
