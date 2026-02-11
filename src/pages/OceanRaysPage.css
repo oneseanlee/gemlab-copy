@@ -70,11 +70,7 @@
 }
 @media (max-width: 640px) {
   .b365-nav.with-banner {
-    top: auto;
-  }
-  .b365-promo-banner + .b365-nav,
-  .b365-nav.with-banner {
-    top: 33px;
+    top: 52px;
   }
 }
 .b365-nav-inner {
@@ -912,30 +908,31 @@
 @media (max-width: 640px) {
   .b365-promo-banner {
     font-size: 11px;
-    padding: 8px 36px 8px 12px;
+    padding: 14px 36px 14px 16px;
     letter-spacing: 0.02em;
+    line-height: 1.5;
   }
   .b365-nav-links {
     display: none;
   }
   .b365-nav-inner {
-    padding: 0 12px;
-    height: 56px;
-    gap: 8px;
+    padding: 0 16px;
+    height: 60px;
+    gap: 12px;
   }
   .b365-nav-inner img {
-    height: 28px !important;
+    height: 30px !important;
   }
   .b365-nav-right {
-    gap: 8px;
+    gap: 10px;
   }
   .b365-nav-right .b365-login-link {
     display: none;
   }
   .b365-nav-right .animated-cta.cta-sm {
     min-width: unset;
-    height: 36px;
-    padding: 6px 14px;
+    height: 38px;
+    padding: 8px 18px;
     font-size: 12px;
   }
   .b365-hero {
