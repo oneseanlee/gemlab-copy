@@ -707,6 +707,26 @@
   translate: none;
   transform: none;
 }
+.b365-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.b365-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: var(--b365-border);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.b365-dot.active {
+  background: var(--b365-blue);
+  transform: scale(1.3);
+}
 
 /* 3-Step Process */
 .b365-steps-grid {
