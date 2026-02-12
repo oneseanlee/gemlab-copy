@@ -405,10 +405,11 @@
     text-align: center;
   }
   .glp1-page .pillar-name {
-    font-size: 12px;
+    font-size: 11px;
   }
   .glp1-page .pillar-dose {
-    font-size: 11px;
+    font-size: 13px;
+    font-weight: 700;
   }
 }
 
