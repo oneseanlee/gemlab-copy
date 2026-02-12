@@ -974,6 +974,18 @@
   .b365-footer-grid {
     grid-template-columns: 1fr;
   }
+  .b365-table-wrap {
+    border-radius: 10px;
+  }
+  .b365-table th {
+    font-size: 11px;
+    padding: 10px 8px;
+  }
+  .b365-table td {
+    font-size: 12px;
+    padding: 10px 8px;
+    line-height: 1.4;
+  }
   .b365-guarantee h2,
   .b365-power-up h2,
   .b365-faq-left h2 {
