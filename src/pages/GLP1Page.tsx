@@ -131,6 +131,10 @@ const GLP1Page = () => {
                             <span className="price-strike">$90.00</span>
                         </div>
                         <p className="guarantee-text">Complete 30-Day Protocol + FREE Shipping</p>
+                        <a href="/glp1-intake" className="glp1-intake-link">
+                            <iconify-icon icon="lucide:clipboard-list" width="16"></iconify-icon>
+                            Start GLP-1 Intake Form →
+                        </a>
                         <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
                             {isLoading ? 'Adding to Cart...' : 'Order Now — $39.95'}
                             <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>

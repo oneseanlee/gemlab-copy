@@ -7,6 +7,7 @@ import OceanRaysPage from "./pages/OceanRaysPage";
 import GLP1Page from "./pages/GLP1Page";
 import NHTOPage from "./pages/NHTOPage";
 import NHTOIntakePage from "./pages/NHTOIntakePage";
+import GLP1IntakePage from "./pages/GLP1IntakePage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsConditionsPage from "./pages/TermsConditionsPage";
 import ReturnPolicyPage from "./pages/ReturnPolicyPage";
@@ -26,6 +27,7 @@ const AppRoutes = () => {
       <Route path="/glp1" element={<GLP1Page />} />
       <Route path="/nhto" element={<NHTOPage />} />
       <Route path="/nhto-intake" element={<NHTOIntakePage />} />
+      <Route path="/glp1-intake" element={<GLP1IntakePage />} />
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
       <Route path="/terms" element={<TermsConditionsPage />} />
       <Route path="/returns" element={<ReturnPolicyPage />} />
