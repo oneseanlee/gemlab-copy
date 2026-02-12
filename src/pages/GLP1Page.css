@@ -396,6 +396,20 @@
   .glp1-clinical-grid .stat-desc {
     font-size: 11px;
   }
+  .glp1-page .tprime-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .glp1-page .tprime-pillar {
+    padding: 14px 10px;
+    text-align: center;
+  }
+  .glp1-page .pillar-name {
+    font-size: 12px;
+  }
+  .glp1-page .pillar-dose {
+    font-size: 11px;
+  }
 }
 
 /* ─── Cart trigger button ─── */
