@@ -387,7 +387,8 @@
 }
 .b365-product-card .benefits-list {
   list-style: none;
-  padding: 0;
+  padding-left: 32px;
+  padding-right: 32px;
   margin: 0 0 24px;
   flex: 1;
 }
@@ -423,14 +424,15 @@
 }
 .b365-product-card .card-actions {
   display: flex;
+  justify-content: center;
   gap: 10px;
   padding-bottom: 32px;
 }
 .b365-product-card .card-actions .b365-btn-primary,
-.b365-product-card .card-actions .b365-btn-outline {
-  flex: 1;
+.b365-product-card .card-actions .b365-btn-outline,
+.b365-product-card .card-actions .card-cta {
   justify-content: center;
-  padding: 12px 16px;
+  padding: 12px 32px;
   font-size: 13px;
 }
 
