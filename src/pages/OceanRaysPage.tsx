@@ -188,16 +188,21 @@ const OceanRaysPage = () => {
         {/* Benefits Row */}
         <div className="b365-benefits-row">
           {[
-            { icon: 'lucide:brain', label: 'Sharper Focus' },
-            { icon: 'lucide:flame', label: 'Increased Drive' },
-            { icon: 'lucide:zap', label: 'Elevated Energy' },
-            { icon: 'lucide:dumbbell', label: 'Stronger Body Composition' },
+            { icon: 'lucide:brain', label: 'Sharper Focus', image: '/images/benefit-focus.png' },
+            { icon: 'lucide:flame', label: 'Increased Drive', image: '/images/benefit-drive.png' },
+            { icon: 'lucide:zap', label: 'Elevated Energy', image: '/images/benefit-energy.png' },
+            { icon: 'lucide:dumbbell', label: 'Stronger Body Composition', image: '/images/benefit-body.png' },
           ].map((b, i) => (
             <div className="b365-benefit-card" key={i}>
-              <div className="icon-wrap">
-                <iconify-icon icon={b.icon} width="22"></iconify-icon>
+              <div className="benefit-card-img">
+                <img src={b.image} alt={b.label} />
               </div>
-              <h4>{b.label}</h4>
+              <div className="benefit-card-content">
+                <div className="icon-wrap">
+                  <iconify-icon icon={b.icon} width="22"></iconify-icon>
+                </div>
+                <h4>{b.label}</h4>
+              </div>
             </div>
           ))}
         </div>
