@@ -118,7 +118,7 @@ const GLP1Page = () => {
                         <img src="/images/glp1-hero.png" alt="GLP-1 Optimization Protocol — Triple Power Methylene Blue and Metabolism+ product bundle" />
                     </div>
                     <div className="tprime-hero-text">
-                        <div className="glp1-save-badge">
+                        <div className="glp1-save-badge text-primary">
                             <iconify-icon icon="lucide:tag" width="14"></iconify-icon>
                             Save $50 + FREE Shipping
                         </div>
@@ -130,7 +130,7 @@ const GLP1Page = () => {
                             <span className="price-big">$39.95</span>
                             <span className="price-strike">$90.00</span>
                         </div>
-                        <p className="guarantee-text">Complete 30-Day Protocol + FREE Shipping</p>
+                        <p className="guarantee-text text-primary">Complete 30-Day Protocol + FREE Shipping</p>
                         <a href="/glp1-intake" className="glp1-intake-link">
                             <iconify-icon icon="lucide:clipboard-list" width="16"></iconify-icon>
                             Start GLP-1 Intake Form →
@@ -450,9 +450,9 @@ const GLP1Page = () => {
             <section className="b365-section">
                 <div className="tprime-final-cta">
                     <h2>Start Your GLP-1 <em>Optimization Today</em></h2>
-                    <p className="subtitle text-primary-foreground">Every day on GLP-1 without mitochondrial support is another day of muscle loss and metabolic stress.</p>
+                    <p className="subtitle">Every day on GLP-1 without mitochondrial support is another day of muscle loss and metabolic stress.</p>
                     <div className="tprime-final-price-box">
-                        <span className="big-price text-primary-foreground">$39.95</span>
+                        <span className="big-price">$39.95</span>
                         <span className="note">Complete 30-Day Protocol — Total Value: $131.00</span>
                         <span className="guarantee-text">Save $91.05 (70% OFF) + FREE Shipping</span>
                     </div>
