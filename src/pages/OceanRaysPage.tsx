@@ -170,10 +170,6 @@ const TestimonialsCarousel = () => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className="b365-carousel-nav">
-        <CarouselPrevious />
-        <CarouselNext />
-      </div>
       <div className="b365-carousel-dots">
         {Array.from({ length: count }).map((_, i) => (
           <button
