@@ -459,11 +459,11 @@
   margin-top: 12px;
   font-size: 14px;
   font-weight: 600;
-  color: #b8860b;
+  color: #3376b0;
   text-decoration: none;
   transition: color 0.2s;
 }
 .glp1-intake-link:hover {
-  color: #9a7209;
+  color: #2a6191;
   text-decoration: underline;
 }
