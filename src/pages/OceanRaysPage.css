@@ -968,6 +968,18 @@
   .b365-product-grid {
     grid-template-columns: 1fr;
   }
+  .b365-product-card .product-card-image {
+    height: auto;
+    aspect-ratio: 1 / 1;
+    padding: 16px;
+    align-items: center;
+  }
+  .b365-product-card .product-card-image img {
+    object-fit: contain;
+    object-position: center;
+    max-height: 100%;
+    width: 100%;
+  }
   .b365-testimonials-grid {
     grid-template-columns: 1fr 1fr;
   }
