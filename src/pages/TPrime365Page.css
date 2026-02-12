@@ -542,8 +542,9 @@
   font-size: 15px;
 }
 .tprime-value-total .highlight-price {
-  color: var(--b365-blue);
+  color: #16a34a;
   font-size: 24px;
+  font-weight: 800;
   font-weight: 700;
 }
 
