@@ -237,9 +237,8 @@ const OceanRaysPage = () => {
               </ul>
               <div className="price">{product.price}<span>{product.priceSuffix}</span></div>
               <p className="price-note">{product.priceNote}</p>
-              <div className="card-actions">
+              <div className="card-actions" style={{ justifyContent: 'center' }}>
                 <AnimatedCTA href="#" className="card-cta">Start evaluation</AnimatedCTA>
-                <a href="#" className="b365-btn-outline">Learn more</a>
               </div>
             </div>
           ))}
