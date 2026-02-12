@@ -110,36 +110,39 @@
   text-align: center;
 }
 .protocol-card-header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  min-height: 200px;
 }
 .protocol-product-img {
-  width: 100px;
-  height: 120px;
+  width: 100%;
+  max-width: 180px;
+  height: auto;
   object-fit: contain;
 }
-.glp1-protocol-card .icon-wrap {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: var(--b365-light-blue);
-  color: var(--b365-blue);
+.protocol-icon-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-.glp1-protocol-card .timing-badge {
-  display: inline-block;
+  gap: 6px;
   background: var(--b365-light-blue);
   color: var(--b365-blue);
-  padding: 4px 16px;
+  padding: 6px 14px;
   border-radius: 9999px;
   font-size: 12px;
   font-weight: 600;
-  margin-bottom: 12px;
+  white-space: nowrap;
+}
+.glp1-protocol-card .icon-wrap {
+  display: none;
+}
+.glp1-protocol-card .timing-badge {
+  display: none;
 }
 .glp1-protocol-card h3 {
   font-family: 'Playfair Display', Georgia, serif;
