@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './OceanRaysPage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '../components/ui/carousel';
 
 const products = [
   {
@@ -378,26 +379,36 @@ const OceanRaysPage = () => {
       {/* 9. Testimonials */}
       <section className="b365-section">
         <h2 className="b365-section-heading b365-serif">Real Clients. <em>Real Results.</em></h2>
-        <div className="b365-testimonials-grid">
-          {[
-            { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw' },
-            { img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes' },
-            { img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke' },
-            { img: '/images/testimonial-sean-lee.png', name: 'Sean Lee' },
-          ].map((t, i) => (
-            <div className="b365-testimonial-card" key={i}>
-              <img src={t.img} alt={t.name} />
-              <div className="card-body">
-                <div className="name">{t.name}</div>
-                <div className="product-using">Using: TPrime365™</div>
-                <div className="verified">
-                  <iconify-icon icon="lucide:badge-check" width="14"></iconify-icon>
-                  Verified buyer
+        <Carousel opts={{ align: 'start', loop: true }} className="b365-testimonials-carousel">
+          <CarouselContent className="-ml-4">
+            {[
+              { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw' },
+              { img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes' },
+              { img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke' },
+              { img: '/images/testimonial-sean-lee.png', name: 'Sean Lee' },
+              { img: '/images/testimonial-ernesto-cruz.png', name: 'Ernesto Cruz' },
+              { img: '/images/testimonial-jay-atkins.png', name: 'Jay Atkins' },
+            ].map((t, i) => (
+              <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                <div className="b365-testimonial-card">
+                  <img src={t.img} alt={t.name} />
+                  <div className="card-body">
+                    <div className="name">{t.name}</div>
+                    <div className="product-using">Using: TPrime365™</div>
+                    <div className="verified">
+                      <iconify-icon icon="lucide:badge-check" width="14"></iconify-icon>
+                      Verified buyer
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="b365-carousel-nav">
+            <CarouselPrevious />
+            <CarouselNext />
+          </div>
+        </Carousel>
       </section>
 
       {/* 10. Digital Guides & Resources */}

@@ -654,12 +654,10 @@
 }
 
 /* Testimonials */
-.b365-testimonials-grid {
+.b365-testimonials-carousel {
   max-width: 1280px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  padding: 0 48px;
 }
 .b365-testimonial-card {
   background: var(--b365-white);
@@ -667,6 +665,7 @@
   border-radius: 20px;
   overflow: hidden;
   transition: transform 0.2s;
+  height: 100%;
 }
 .b365-testimonial-card:hover {
   transform: translateY(-4px);
@@ -696,6 +695,17 @@
   font-size: 11px;
   font-weight: 600;
   color: var(--b365-green);
+}
+.b365-carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.b365-carousel-nav button {
+  position: static;
+  translate: none;
+  transform: none;
 }
 
 /* 3-Step Process */
@@ -933,8 +943,8 @@
     grid-template-columns: 1fr;
     text-align: center;
   }
-  .b365-testimonials-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .b365-testimonials-carousel {
+    padding: 0 40px;
   }
   .b365-steps-grid {
     grid-template-columns: 1fr;
@@ -1054,8 +1064,8 @@
     max-height: 100%;
     width: 100%;
   }
-  .b365-testimonials-grid {
-    grid-template-columns: 1fr 1fr;
+  .b365-testimonials-carousel {
+    padding: 0 24px;
   }
   .b365-footer-grid {
     grid-template-columns: 1fr;
