@@ -7,6 +7,7 @@ import OceanRaysPage from "./pages/OceanRaysPage";
 import GLP1Page from "./pages/GLP1Page";
 import NHTOPage from "./pages/NHTOPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsConditionsPage from "./pages/TermsConditionsPage";
 import NotFound from "./pages/NotFound";
 import { useCartSync } from "./hooks/useCartSync";
 import './App.css';
@@ -23,6 +24,7 @@ const AppRoutes = () => {
       <Route path="/glp1" element={<GLP1Page />} />
       <Route path="/nhto" element={<NHTOPage />} />
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
+      <Route path="/terms" element={<TermsConditionsPage />} />
       <Route path="/home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
