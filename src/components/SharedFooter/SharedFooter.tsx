@@ -26,7 +26,7 @@ const SharedFooter = () => {
             <ul>
               <li><a href="/privacy">Privacy Policy</a></li>
               <li><a href="/terms">Terms and Conditions</a></li>
-              <li><a href="#">Return Policy</a></li>
+              <li><a href="/returns">Return Policy</a></li>
             </ul>
           </div>
 
