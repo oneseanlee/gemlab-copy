@@ -189,15 +189,14 @@ const GLP1Page = () => {
                             items: ['Sustains metabolic activation throughout eating window', 'Maintains energy levels and supports lean muscle preservation']
                         },
                     ].map((card, i) => (
-                        <div className="glp1-protocol-card" key={i}>
+                    <div className="glp1-protocol-card" key={i}>
                             <div className="protocol-card-header">
                                 <img src={card.image} alt={card.product} className="protocol-product-img" />
-                                <div className="protocol-icon-badge">
-                                    <iconify-icon icon={card.icon} width="18"></iconify-icon>
-                                    <span>{card.timing}</span>
-                                </div>
                             </div>
-                            <h3>{card.title}</h3>
+                            <div className="protocol-icon-badge">
+                                <iconify-icon icon={card.icon} width="18"></iconify-icon>
+                                <span>{card.timing}</span>
+                            </div>
                             <h3>{card.title}</h3>
                             <p className="product-name">{card.product}</p>
                             <ul>
