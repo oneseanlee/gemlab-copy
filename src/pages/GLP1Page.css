@@ -351,6 +351,9 @@
   .glp1-solution-callout ul {
     grid-template-columns: 1fr;
   }
+  .glp1-page .tprime-ingredient-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
@@ -371,6 +374,9 @@
     grid-template-columns: 1fr;
   }
   .glp1-timeline-grid {
+    grid-template-columns: 1fr;
+  }
+  .glp1-page .tprime-ingredient-grid {
     grid-template-columns: 1fr;
   }
 }

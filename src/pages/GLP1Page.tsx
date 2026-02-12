@@ -324,7 +324,7 @@ const GLP1Page = () => {
             {/* 10. Three Longevity Pathways */}
             <section className="b365-section" id="science">
                 <h2 className="b365-section-heading b365-serif">Three Longevity Pathways <em>Working Together</em></h2>
-                <div className="tprime-ingredient-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                <div className="tprime-ingredient-grid">
                     {[
                         {
                             icon: 'lucide:zap', title: 'AMPK Activation', subtitle: 'The Metabolic Master Switch',
