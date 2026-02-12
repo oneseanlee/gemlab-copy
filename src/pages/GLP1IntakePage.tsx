@@ -86,8 +86,11 @@ const GLP1IntakePage = () => {
           <div className="intake-iframe-wrapper">
             <iframe
               id="happymd-glp1-intake-embed"
-              src="https://happymd.co/embed/glp1-consultation"
-              title="GLP-1 Medical Intake Form"
+              src="https://happymd.co/embed/glp1-consultation?vendor_id=best365labgqzb&tracking_code=direct-intake"
+              width="100%"
+              height="1000px"
+              style={{ border: 'none', maxWidth: '100%', display: 'block' }}
+              title="happyMD GLP-1 Medical Intake"
               allow="camera; microphone"
               loading="lazy"
             />
