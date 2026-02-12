@@ -237,7 +237,7 @@ const GLP1Page = () => {
             {/* 7. Clinical Results */}
             <section className="b365-section b365-section-alt" id="results">
                 <h2 className="b365-section-heading b365-serif">Clinical <em>Results</em></h2>
-                <div className="b365-stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                <div className="b365-stats-grid glp1-clinical-grid">
                     {[
                         { label: 'Mitochondrial Density', value: '22-30%', desc: 'Increased mitochondrial density with protocol support' },
                         { label: 'ATP Production', value: '+38%', desc: 'Boost in cellular energy production' },

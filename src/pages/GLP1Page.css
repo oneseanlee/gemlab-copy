@@ -379,6 +379,22 @@
   .glp1-page .tprime-ingredient-grid {
     grid-template-columns: 1fr;
   }
+  .glp1-clinical-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  .glp1-clinical-grid .b365-stat-card {
+    padding: 16px 12px;
+  }
+  .glp1-clinical-grid .stat-label {
+    font-size: 11px;
+  }
+  .glp1-clinical-grid .stat-value {
+    font-size: 22px;
+  }
+  .glp1-clinical-grid .stat-desc {
+    font-size: 11px;
+  }
 }
 
 /* ─── Cart trigger button ─── */
