@@ -994,8 +994,9 @@
     font-size: 30px;
   }
   .b365-benefits-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     padding: 32px 16px 48px;
+    gap: 12px;
   }
   .b365-benefit-card {
     height: 110px;
