@@ -948,9 +948,14 @@
   }
   .b365-hero-text {
     padding: 32px 24px;
+    text-align: center;
+    align-items: center;
   }
   .b365-hero-text h1 {
     font-size: 32px;
+  }
+  .b365-hero-text div[style] {
+    justify-content: center !important;
   }
   .b365-section {
     padding: 64px 16px;
@@ -961,6 +966,16 @@
   .b365-benefits-row {
     grid-template-columns: 1fr 1fr;
     padding: 32px 16px 48px;
+  }
+  .b365-benefit-card {
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .b365-faq-left {
+    text-align: center;
+    align-items: center;
   }
   .b365-tabs {
     flex-direction: column;
