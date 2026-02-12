@@ -1,0 +1,178 @@
+.intake-page {
+  min-height: 100vh;
+  background: #fafaf8;
+  color: #1a1a1a;
+}
+
+/* Reuse privacy-nav pattern */
+.intake-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 16px 0;
+}
+
+.intake-nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.intake-back-link {
+  font-size: 14px;
+  color: #555;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.intake-back-link:hover {
+  color: #1a1a1a;
+}
+
+/* Header */
+.intake-header {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 56px 24px 0;
+  text-align: center;
+}
+
+.intake-header h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 4.5vw, 40px);
+  font-weight: 700;
+  color: #0d0d0d;
+  margin-bottom: 12px;
+}
+
+.intake-header-desc {
+  font-size: 15px;
+  color: #555;
+  max-width: 620px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+/* Trust Badges */
+.intake-trust-badges {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.intake-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 20px 12px;
+  background: #f0f0ec;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.intake-badge-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #b8860b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.intake-badge h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.intake-badge p {
+  font-size: 12px;
+  color: #777;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Iframe Container */
+.intake-iframe-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+}
+
+.intake-iframe-wrapper {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.intake-iframe-wrapper iframe {
+  width: 100%;
+  min-height: 800px;
+  border: none;
+  display: block;
+}
+
+/* Bottom CTA */
+.intake-bottom-cta {
+  text-align: center;
+  padding: 0 24px 64px;
+}
+
+.intake-bottom-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  text-decoration: none;
+  padding: 12px 28px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+.intake-bottom-cta a:hover {
+  color: #1a1a1a;
+  border-color: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .intake-trust-badges {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0 8px;
+  }
+
+  .intake-badge {
+    flex-direction: row;
+    text-align: left;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .intake-header {
+    padding-top: 40px;
+  }
+
+  .intake-iframe-wrapper iframe {
+    min-height: 600px;
+  }
+}

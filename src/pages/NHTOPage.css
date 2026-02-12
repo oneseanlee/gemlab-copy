@@ -1,6 +1,20 @@
 /* NHTO Landing Page — Non-Hormonal Testosterone Optimizer */
 /* Reuses homepage CSS variables and patterns from OceanRaysPage.css & TPrime365Page.css */
 
+.nhto-step-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #b8860b;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nhto-step-link:hover {
+  color: #8b6914;
+  text-decoration: underline;
+}
+
 .nhto-page {
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--b365-text);

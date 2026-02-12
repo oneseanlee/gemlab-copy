@@ -211,7 +211,7 @@ const NHTOPage = () => {
                 <h2 className="b365-section-heading b365-serif">How It <em>Works</em></h2>
                 <div className="nhto-steps-grid">
                     {[
-                        { num: '01', title: 'Complete Your Health Intake', desc: 'Submit your health history through our secure online form. Takes just 5 minutes.' },
+                        { num: '01', title: 'Complete Your Health Intake', desc: 'Submit your health history through our secure online form. Takes just 5 minutes.', link: '/nhto-intake' },
                         { num: '02', title: 'Licensed Provider Review', desc: 'An independent licensed physician (via happyMD) reviews your information to determine eligibility.' },
                         { num: '03', title: 'Supplements Ship Immediately', desc: 'Your Ultimate Cellular Optimization bundle "UCOS" ships right away — yours to keep regardless of approval.' },
                         { num: '04', title: 'Prescription Issued If Approved', desc: 'If the provider determines you\'re a candidate, your prescription is issued and fulfilled.' },
@@ -220,6 +220,11 @@ const NHTOPage = () => {
                             <div className="step-number">{step.num}</div>
                             <h3 className="b365-serif">{step.title}</h3>
                             <p>{step.desc}</p>
+                            {'link' in step && (
+                                <a href={(step as any).link} className="nhto-step-link">
+                                    Start Intake Form →
+                                </a>
+                            )}
                         </div>
                     ))}
                 </div>
