@@ -739,14 +739,15 @@
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 48px;
   font-weight: 700;
-  color: var(--b365-light-blue);
+  color: #fff;
 }
 .tprime-final-price-box .note {
   font-size: 14px;
+  color: #fff;
   opacity: 0.85;
 }
 .tprime-final-price-box .guarantee-text {
-  color: var(--b365-green);
+  color: #fff;
   font-weight: 600;
   font-size: 14px;
 }
