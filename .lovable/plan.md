@@ -1,45 +1,38 @@
 
 
-# NHTO Intake Form Page
+# GLP-1 Medical Intake Form Page
 
 ## Overview
-Create a new dedicated intake form page at `/nhto-intake` that embeds the happyMD testosterone consultation iframe. The page will follow the existing medical-grade aesthetic and reuse the privacy/legal page styling patterns for consistency.
+Create a new GLP-1 intake form page at `/glp1-intake` that mirrors the existing NHTO intake page pattern but is tailored for GLP-1 consultations. Includes the cell365power tracking script from the Replit source.
 
 ## What Gets Built
 
-**A professional intake form page featuring:**
-- Sticky top navigation bar with the Best365 Labs logo and a "Back to NHTO Products" link
-- A clean header section with the title "Testosterone Optimization Intake Form" and a brief description
-- Three trust badges in a row: HIPAA Compliant, Licensed Providers, Testosterone Support
-- The embedded happyMD iframe (full-width, auto-resizing via postMessage listener)
-- A bottom "Back to NHTO Products" button
-- Consistent branding with the site's Playfair Display headings and Plus Jakarta Sans body text
+A clean, professional intake form page with:
+- Sticky nav with Best365 Labs logo and "Back to GLP-1 Products" link
+- Header: "GLP-1 Medical Intake Form" with HIPAA description
+- Three trust badges: HIPAA Compliant, Licensed Providers, Quick Process (5-10 minutes)
+- Embedded happyMD GLP-1 iframe (auto-resizing)
+- Cell365power external tracking script injection
+- Bottom "Back to GLP-1 Products" button
+- Shared footer
 
 ## Technical Details
 
-### New Files
-1. **`src/pages/NHTOIntakePage.tsx`** -- The page component containing:
-   - `useEffect` to scroll to top on mount
-   - `useEffect` with a `postMessage` listener for iframe resize/submit/error events from `https://happymd.co`
-   - Sticky nav bar (reusing `.privacy-nav` pattern from PrivacyPolicyPage.css)
-   - Header with title, description, and three trust badges (using Lucide icons: `FileText`, `Shield`, `Clock`)
-   - `<iframe>` element with `id="happymd-testosterone-embed"` pointing to the happyMD testosterone form URL
-   - "Back to NHTO Products" button at the bottom linking to `/nhto`
+### New File
+1. **`src/pages/GLP1IntakePage.tsx`** -- Based on existing `NHTOIntakePage.tsx` with these differences:
+   - Title: "GLP-1 Medical Intake Form"
+   - Description references GLP-1 telehealth consultation
+   - Third trust badge: "Quick Process" / "Takes only 5-10 minutes" (using `Clock` icon)
+   - Iframe ID: `happymd-glp1-intake-embed`
+   - Iframe src: `https://happymd.co/embed/glp1-consultation` (placeholder, easily updated)
+   - Additional `useEffect` to inject the tracking script (`https://links.cell365power.com/js/external-tracking.js` with `data-tracking-id`)
+   - Back links point to `/glp1` instead of `/nhto`
 
-2. **`src/pages/NHTOIntakePage.css`** -- Styling that:
-   - Reuses patterns from `PrivacyPolicyPage.css` for the nav and page layout
-   - Adds trust badge row styling (3-column grid, icon + label + description)
-   - Styles the iframe container for full-width, minimum height (~800px), no border, rounded corners
-   - Responsive adjustments for mobile (stacking trust badges, padding adjustments)
+### No New CSS Needed
+The existing `NHTOIntakePage.css` classes (`.intake-page`, `.intake-nav`, `.intake-header`, `.intake-trust-badges`, `.intake-iframe-container`, etc.) are generic enough to be reused directly -- just import the same CSS file.
 
 ### Modified Files
-3. **`src/App.tsx`** -- Add route: `<Route path="/nhto-intake" element={<NHTOIntakePage />} />`
+2. **`src/App.tsx`** -- Add import and route: `<Route path="/glp1-intake" element={<GLP1IntakePage />} />`
 
-4. **`src/pages/NHTOPage.tsx`** -- Add a link/button in the "How It Works" section (Step 1) or hero area that directs users to `/nhto-intake` to complete their intake form.
-
-### Key Implementation Notes
-- The iframe `src` URL will need to be confirmed (the Replit code references `happymd.co` but the exact embed URL path needs to be set -- will use a placeholder that can be easily updated)
-- The `postMessage` handler validates origin is `https://happymd.co` before processing resize, submit, or error events
-- Uses `react-router-dom` (not `wouter` as in the Replit version) to match the existing project routing
-- Navigation uses `<a href="/nhto">` or `useNavigate()` for the back button
+3. **`src/pages/GLP1Page.tsx`** -- Add a "Start Intake Form" link somewhere visible (e.g., in the hero section or near the order CTAs) pointing to `/glp1-intake`
 
