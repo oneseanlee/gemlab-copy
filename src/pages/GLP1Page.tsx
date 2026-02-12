@@ -192,11 +192,12 @@ const GLP1Page = () => {
                         <div className="glp1-protocol-card" key={i}>
                             <div className="protocol-card-header">
                                 <img src={card.image} alt={card.product} className="protocol-product-img" />
-                                <div className="icon-wrap">
-                                    <iconify-icon icon={card.icon} width="22"></iconify-icon>
+                                <div className="protocol-icon-badge">
+                                    <iconify-icon icon={card.icon} width="18"></iconify-icon>
+                                    <span>{card.timing}</span>
                                 </div>
                             </div>
-                            <span className="timing-badge">{card.timing}</span>
+                            <h3>{card.title}</h3>
                             <h3>{card.title}</h3>
                             <p className="product-name">{card.product}</p>
                             <ul>
