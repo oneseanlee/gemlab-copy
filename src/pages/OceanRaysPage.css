@@ -584,6 +584,7 @@
 .b365-power-up {
   background: linear-gradient(135deg, var(--b365-blue) 0%, #1E8FBF 100%);
   color: #fff;
+  overflow: hidden;
 }
 .b365-power-up-inner {
   max-width: 1280px;
@@ -640,11 +641,16 @@
 .b365-power-up-visual {
   display: flex;
   justify-content: center;
+  align-items: flex-end;
+  align-self: stretch;
+  margin-bottom: -80px;
+  margin-top: -40px;
 }
 .b365-power-up-visual img {
-  max-height: 360px;
+  max-height: 560px;
+  width: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.25));
 }
 
 /* Testimonials */
