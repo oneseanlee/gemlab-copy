@@ -34,13 +34,13 @@ const SharedFooter = () => {
           <div>
             <h4>Follow Us</h4>
             <div className="shared-footer-social">
-              <a href="#" aria-label="Facebook">
+              <a href="https://www.facebook.com/Best365Labs" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <iconify-icon icon="lucide:facebook" width="18"></iconify-icon>
               </a>
-              <a href="#" aria-label="Instagram">
+              <a href="https://www.instagram.com/best365labs/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <iconify-icon icon="lucide:instagram" width="18"></iconify-icon>
               </a>
-              <a href="#" aria-label="YouTube">
+              <a href="https://www.youtube.com/channel/UCZpFZ__arXCIsboHoRAMQWw" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                 <iconify-icon icon="lucide:youtube" width="18"></iconify-icon>
               </a>
             </div>
