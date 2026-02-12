@@ -189,9 +189,9 @@ const OceanRaysPage = () => {
         <div className="b365-benefits-row">
           {[
             { icon: 'lucide:brain', label: 'Sharper Focus', image: '/images/benefit-focus.png' },
-            { icon: 'lucide:flame', label: 'Increased Drive', image: '/images/benefit-drive.png' },
+            { icon: 'lucide:flame', label: 'Increased Drive', image: '/images/benefit-drive-new.png' },
             { icon: 'lucide:zap', label: 'Elevated Energy', image: '/images/benefit-energy.png' },
-            { icon: 'lucide:dumbbell', label: 'Stronger Body Composition', image: '/images/benefit-body.png' },
+            { icon: 'lucide:dumbbell', label: 'Stronger Body', image: '/images/benefit-body.png' },
           ].map((b, i) => (
             <div className="b365-benefit-card" key={i}>
               <div className="benefit-card-img">
