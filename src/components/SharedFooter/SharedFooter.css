@@ -153,5 +153,19 @@
   .shared-footer-grid {
     grid-template-columns: 1fr;
     gap: 28px;
+    text-align: center;
+  }
+  .shared-footer-brand img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .shared-footer-social {
+    justify-content: center;
+  }
+  .shared-footer-contact,
+  .shared-footer-legal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

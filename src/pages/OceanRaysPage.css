@@ -886,6 +886,12 @@
   .b365-guarantee {
     grid-template-columns: 1fr;
     gap: 40px;
+    text-align: center;
+  }
+  .b365-guarantee div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .b365-power-up-inner {
     grid-template-columns: 1fr;
