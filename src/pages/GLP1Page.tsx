@@ -115,8 +115,7 @@ const GLP1Page = () => {
             <section className={`glp1-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        {/* PLACEHOLDER IMAGE — Needs: Styled product photography of Triple Power Methylene Blue bottle + Metabolism+ tablets together */}
-                        <img src="/placeholder.svg" alt="GLP-1 Optimization Protocol — Triple Power Methylene Blue and Metabolism+ product bundle" />
+                        <img src="/images/glp1-hero.png" alt="GLP-1 Optimization Protocol — Triple Power Methylene Blue and Metabolism+ product bundle" />
                     </div>
                     <div className="tprime-hero-text">
                         <div className="glp1-save-badge">
