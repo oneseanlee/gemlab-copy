@@ -1,38 +1,32 @@
 
 
-# GLP-1 Medical Intake Form Page
+# Fix Mobile Stacking for "Three Longevity Pathways" Section
 
-## Overview
-Create a new GLP-1 intake form page at `/glp1-intake` that mirrors the existing NHTO intake page pattern but is tailored for GLP-1 consultations. Includes the cell365power tracking script from the Replit source.
+## Problem
+The grid on line 327 of `GLP1Page.tsx` has an inline style `gridTemplateColumns: 'repeat(3, 1fr)'` that overrides the responsive CSS breakpoints, forcing 3 columns on all screen sizes including mobile.
 
-## What Gets Built
+## Solution
+Remove the inline `style` prop from the grid div so the existing responsive CSS in `GLP1Page.css` can handle the layout. Then add a mobile-specific CSS rule to ensure the `.tprime-ingredient-grid` stacks to a single column on small screens.
 
-A clean, professional intake form page with:
-- Sticky nav with Best365 Labs logo and "Back to GLP-1 Products" link
-- Header: "GLP-1 Medical Intake Form" with HIPAA description
-- Three trust badges: HIPAA Compliant, Licensed Providers, Quick Process (5-10 minutes)
-- Embedded happyMD GLP-1 iframe (auto-resizing)
-- Cell365power external tracking script injection
-- Bottom "Back to GLP-1 Products" button
-- Shared footer
+## Changes
 
-## Technical Details
+### 1. `src/pages/GLP1Page.tsx` (line 327)
+- Remove the inline `style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}` from the div
+- Keep the `tprime-ingredient-grid` class which already has responsive rules
 
-### New File
-1. **`src/pages/GLP1IntakePage.tsx`** -- Based on existing `NHTOIntakePage.tsx` with these differences:
-   - Title: "GLP-1 Medical Intake Form"
-   - Description references GLP-1 telehealth consultation
-   - Third trust badge: "Quick Process" / "Takes only 5-10 minutes" (using `Clock` icon)
-   - Iframe ID: `happymd-glp1-intake-embed`
-   - Iframe src: `https://happymd.co/embed/glp1-consultation` (placeholder, easily updated)
-   - Additional `useEffect` to inject the tracking script (`https://links.cell365power.com/js/external-tracking.js` with `data-tracking-id`)
-   - Back links point to `/glp1` instead of `/nhto`
+### 2. `src/pages/GLP1Page.css`
+- Add a mobile rule inside the existing `@media (max-width: 640px)` block:
+  ```
+  .glp1-page .tprime-ingredient-grid {
+    grid-template-columns: 1fr;
+  }
+  ```
+- Add a tablet rule inside the `@media (max-width: 1024px)` block:
+  ```
+  .glp1-page .tprime-ingredient-grid {
+    grid-template-columns: 1fr;
+  }
+  ```
 
-### No New CSS Needed
-The existing `NHTOIntakePage.css` classes (`.intake-page`, `.intake-nav`, `.intake-header`, `.intake-trust-badges`, `.intake-iframe-container`, etc.) are generic enough to be reused directly -- just import the same CSS file.
-
-### Modified Files
-2. **`src/App.tsx`** -- Add import and route: `<Route path="/glp1-intake" element={<GLP1IntakePage />} />`
-
-3. **`src/pages/GLP1Page.tsx`** -- Add a "Start Intake Form" link somewhere visible (e.g., in the hero section or near the order CTAs) pointing to `/glp1-intake`
+This ensures the three pathway cards stack vertically on mobile and tablet for a cleaner reading experience.
 
