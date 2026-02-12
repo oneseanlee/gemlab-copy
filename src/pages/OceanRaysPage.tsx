@@ -20,6 +20,7 @@ const products = [
     priceSuffix: '/mo',
     priceNote: 'Includes Physician Consultation',
     image: '/images/product-tprime.png',
+    mobileImage: '/images/mobile-tprime.png',
   },
   {
     id: 2,
@@ -36,6 +37,7 @@ const products = [
     priceSuffix: '',
     priceNote: 'Launch Offer (Reg. $90.00)',
     image: '/images/product-glp-protocol.png',
+    mobileImage: '/images/mobile-glp-protocol.png',
   },
   {
     id: 3,
@@ -52,6 +54,7 @@ const products = [
     priceSuffix: '',
     priceNote: '3-Product Synergistic Stack',
     image: '/images/product-ucos.png',
+    mobileImage: '/images/mobile-ucos.png',
   },
   {
     id: 4,
@@ -68,6 +71,7 @@ const products = [
     priceSuffix: '',
     priceNote: 'Total Value: $655',
     image: '/images/product-glp1-ucos.png',
+    mobileImage: '/images/mobile-glp1-ucos.png',
   },
   {
     id: 5,
@@ -84,6 +88,7 @@ const products = [
     priceSuffix: '',
     priceNote: 'Physician Review via happyMD Included',
     image: '/images/product-nhto.png',
+    mobileImage: '/images/mobile-nhto.png',
   },
 ];
 
@@ -218,7 +223,10 @@ const OceanRaysPage = () => {
           {filteredProducts.map(product => (
             <div className="b365-product-card" key={product.id}>
               <div className="product-card-image">
-                <img src={product.image} alt={product.name} />
+                <picture>
+                  <source media="(max-width: 640px)" srcSet={product.mobileImage} />
+                  <img src={product.image} alt={product.name} />
+                </picture>
               </div>
               <div className="tags">
                 {product.tags.map((tag, i) => (
