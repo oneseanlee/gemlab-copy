@@ -6,6 +6,7 @@ import TPrime365Page from "./pages/TPrime365Page";
 import OceanRaysPage from "./pages/OceanRaysPage";
 import GLP1Page from "./pages/GLP1Page";
 import NHTOPage from "./pages/NHTOPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import NotFound from "./pages/NotFound";
 import { useCartSync } from "./hooks/useCartSync";
 import './App.css';
@@ -21,6 +22,7 @@ const AppRoutes = () => {
       <Route path="/tprime365" element={<TPrime365Page />} />
       <Route path="/glp1" element={<GLP1Page />} />
       <Route path="/nhto" element={<NHTOPage />} />
+      <Route path="/privacy" element={<PrivacyPolicyPage />} />
       <Route path="/home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
