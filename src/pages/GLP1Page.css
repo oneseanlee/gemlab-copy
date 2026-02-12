@@ -110,25 +110,22 @@
   text-align: center;
 }
 .protocol-card-header {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  min-height: 200px;
+  margin-bottom: 12px;
+  min-height: 240px;
 }
 .protocol-product-img {
   width: 100%;
-  max-width: 180px;
+  max-width: 100%;
   height: auto;
   object-fit: contain;
 }
 .protocol-icon-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   background: var(--b365-light-blue);
   color: var(--b365-blue);
@@ -137,6 +134,7 @@
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
+  margin: 0 auto 12px;
 }
 .glp1-protocol-card .icon-wrap {
   display: none;
