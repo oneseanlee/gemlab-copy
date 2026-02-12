@@ -173,22 +173,28 @@ const GLP1Page = () => {
                         {
                             icon: 'lucide:sunrise', timing: 'Upon Waking', title: 'Morning Activation',
                             product: '1 mL Triple Power Methylene Blue',
+                            image: '/images/triple-power-methylene-blue.png',
                             items: ['Activates AMPK (fat burning), Sirtuins (cellular repair), and Autophagy (cellular cleanup)', 'Contains USP Methylene Blue, NAD+, Spermidine, Vitamin C, and MODS Max™']
                         },
                         {
                             icon: 'lucide:coffee', timing: 'With Breakfast', title: 'Metabolic Ignition',
                             product: '2 Tablets Metabolism+',
+                            image: '/images/metabolism-plus.png',
                             items: ['Ignites metabolism with USP Methylene Blue, L-Theanine, Caffeine, Guarana, and Green Tea', 'Enhances energy production and fat oxidation']
                         },
                         {
                             icon: 'lucide:utensils', timing: 'With Lunch', title: 'Sustained Activation',
                             product: '2 Tablets Metabolism+',
+                            image: '/images/metabolism-plus.png',
                             items: ['Sustains metabolic activation throughout eating window', 'Maintains energy levels and supports lean muscle preservation']
                         },
                     ].map((card, i) => (
                         <div className="glp1-protocol-card" key={i}>
-                            <div className="icon-wrap">
-                                <iconify-icon icon={card.icon} width="22"></iconify-icon>
+                            <div className="protocol-card-header">
+                                <img src={card.image} alt={card.product} className="protocol-product-img" />
+                                <div className="icon-wrap">
+                                    <iconify-icon icon={card.icon} width="22"></iconify-icon>
+                                </div>
                             </div>
                             <span className="timing-badge">{card.timing}</span>
                             <h3>{card.title}</h3>
