@@ -381,7 +381,7 @@ const GLP1Page = () => {
                     <div className="tprime-value-item special"><span className="name">Complete Protocol Guide</span><span className="price">$29 value</span></div>
                     <div className="tprime-value-total">
                         <div className="row"><span>TOTAL VALUE:</span><span>$131.00</span></div>
-                        <div className="row"><span>YOUR PRICE:</span><span className="highlight-price">$39.95</span></div>
+                        <div className="row text-cyan-400"><span>YOUR PRICE:</span><span className="highlight-price">$39.95</span></div>
                         <div className="row"><span>YOU SAVE:</span><span>$91.05 (70% OFF)</span></div>
                     </div>
                 </div>
