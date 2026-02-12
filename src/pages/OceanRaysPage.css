@@ -956,6 +956,15 @@
     grid-template-columns: 1fr 1fr;
     padding: 32px 16px 48px;
   }
+  .b365-tabs {
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 16px;
+  }
+  .b365-tab {
+    width: 100%;
+    text-align: center;
+  }
   .b365-product-grid {
     grid-template-columns: 1fr;
   }
