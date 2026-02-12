@@ -1,0 +1,146 @@
+.privacy-page {
+  min-height: 100vh;
+  background: #fafaf8;
+  color: #1a1a1a;
+}
+
+.privacy-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 16px 0;
+}
+
+.privacy-nav-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.privacy-back-link {
+  font-size: 14px;
+  color: #555;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.privacy-back-link:hover {
+  color: #1a1a1a;
+}
+
+.privacy-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+  line-height: 1.8;
+}
+
+.privacy-content h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #0d0d0d;
+}
+
+.privacy-updated {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.privacy-notice {
+  background: #f0f0ec;
+  border-left: 3px solid #b8860b;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  border-radius: 0 8px 8px 0;
+}
+.privacy-notice p {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #444;
+  margin-bottom: 12px;
+}
+.privacy-notice p:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-content h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 48px;
+  margin-bottom: 16px;
+  color: #0d0d0d;
+}
+
+.privacy-content p {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 16px;
+}
+
+.privacy-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 16px;
+}
+.privacy-content ul li {
+  font-size: 15px;
+  color: #444;
+  padding: 6px 0 6px 20px;
+  position: relative;
+}
+.privacy-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b8860b;
+}
+
+.privacy-contact {
+  font-style: normal;
+  font-size: 15px;
+  color: #444;
+  background: #f5f5f2;
+  padding: 24px;
+  border-radius: 12px;
+  margin: 16px 0 32px;
+  line-height: 2;
+}
+.privacy-contact strong {
+  color: #1a1a1a;
+  font-size: 16px;
+}
+.privacy-contact a {
+  color: #b8860b;
+  text-decoration: none;
+  font-weight: 500;
+}
+.privacy-contact a:hover {
+  text-decoration: underline;
+}
+
+.privacy-agreement {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}

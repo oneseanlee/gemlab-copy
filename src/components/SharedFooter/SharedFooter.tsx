@@ -24,7 +24,7 @@ const SharedFooter = () => {
           <div className="shared-footer-legal">
             <h4>Legal</h4>
             <ul>
-              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="/privacy">Privacy Policy</a></li>
               <li><a href="#">Terms and Conditions</a></li>
               <li><a href="#">Return Policy</a></li>
             </ul>
