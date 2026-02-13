@@ -247,9 +247,6 @@ const TPrime365Page = () => {
             <section className="b365-section">
                 <h2 className="b365-section-heading b365-serif">Built For Men Who <em>Want More</em></h2>
                 <div className="tprime-persona-layout">
-                    <div className="tprime-persona-image">
-                        <img src="/images/tprime-persona-athlete.png" alt="Athletic man" />
-                    </div>
                     <div className="tprime-persona-cards">
                     {[
                         { title: 'The Performer', age: 'Age 25-40', items: ['Peak performance at work', 'Competitive edge in fitness', 'Mental clarity & drive', 'Maintaining lean muscle'] },
@@ -269,6 +266,9 @@ const TPrime365Page = () => {
                             </ul>
                         </div>
                     ))}
+                    </div>
+                    <div className="tprime-persona-image">
+                        <img src="/images/tprime-persona-athlete.png" alt="Athletic man" />
                     </div>
                 </div>
             </section>
