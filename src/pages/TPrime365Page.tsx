@@ -246,7 +246,11 @@ const TPrime365Page = () => {
             {/* 8. Who Is This For */}
             <section className="b365-section">
                 <h2 className="b365-section-heading b365-serif">Built For Men Who <em>Want More</em></h2>
-                <div className="tprime-persona-grid">
+                <div className="tprime-persona-layout">
+                    <div className="tprime-persona-image">
+                        <img src="/images/tprime-persona-athlete.png" alt="Athletic man" />
+                    </div>
+                    <div className="tprime-persona-cards">
                     {[
                         { title: 'The Performer', age: 'Age 25-40', items: ['Peak performance at work', 'Competitive edge in fitness', 'Mental clarity & drive', 'Maintaining lean muscle'] },
                         { title: 'The Rebuilder', age: 'Age 40-55', items: ['Energy levels declining', 'Losing muscle despite working out', 'Low libido', 'Brain fog setting in'] },
@@ -265,6 +269,7 @@ const TPrime365Page = () => {
                             </ul>
                         </div>
                     ))}
+                    </div>
                 </div>
             </section>
 
