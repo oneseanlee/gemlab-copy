@@ -477,7 +477,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.80);
   z-index: 0;
 }
 .glp1-transformation-section > * {
