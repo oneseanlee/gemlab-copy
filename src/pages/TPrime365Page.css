@@ -350,12 +350,29 @@
 }
 
 /* ─── Persona Cards ─── */
-.tprime-persona-grid {
+.tprime-persona-layout {
   max-width: 1280px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.tprime-persona-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tprime-persona-image img {
+  max-height: 560px;
+  width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.1));
+}
+.tprime-persona-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .tprime-persona-card {
   background: var(--b365-white);
@@ -818,8 +835,13 @@
   .tprime-hero-text h1 {
     font-size: 38px;
   }
+  .tprime-persona-layout {
+    grid-template-columns: 1fr;
+  }
+  .tprime-persona-image img {
+    max-height: 400px;
+  }
   .tprime-problem-grid,
-  .tprime-persona-grid,
   .tprime-benefits-grid,
   .tprime-trust-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -853,8 +875,10 @@
     gap: 4px;
     align-items: flex-start;
   }
+  .tprime-persona-image img {
+    max-height: 320px;
+  }
   .tprime-problem-grid,
-  .tprime-persona-grid,
   .tprime-benefits-grid,
   .tprime-trust-grid {
     grid-template-columns: 1fr;
