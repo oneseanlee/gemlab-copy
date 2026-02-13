@@ -534,7 +534,8 @@
   justify-content: center;
 }
 .b365-guarantee-image img {
-  max-height: 400px;
+  max-height: 500px;
+  width: 100%;
   object-fit: contain;
 }
 
