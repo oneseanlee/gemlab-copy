@@ -358,7 +358,7 @@ const OceanRaysPage = () => {
             </AnimatedCTA>
           </div>
           <div className="b365-guarantee-image">
-            <img src="/images/tprime-bottle.png" alt="TPrime365 bottle" />
+            <img src="/images/tprime-guarantee-hero.png" alt="TPrime365 product with athlete" />
           </div>
         </div>
       </section>
