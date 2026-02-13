@@ -450,7 +450,7 @@ const GLP1Page = () => {
             <section className="b365-section">
                 <div className="tprime-final-cta">
                     <h2>Start Your GLP-1 <em>Optimization Today</em></h2>
-                    <p className="subtitle">Every day on GLP-1 without mitochondrial support is another day of muscle loss and metabolic stress.</p>
+                    <p className="subtitle text-primary-foreground">Every day on GLP-1 without mitochondrial support is another day of muscle loss and metabolic stress.</p>
                     <div className="tprime-final-price-box">
                         <span className="big-price">$39.95</span>
                         <span className="note">Complete 30-Day Protocol — Total Value: $131.00</span>
