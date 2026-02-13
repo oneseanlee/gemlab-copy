@@ -256,7 +256,7 @@ const GLP1Page = () => {
             </section>
 
             {/* 8. The Transformation */}
-            <section className="b365-section">
+            <section className="b365-section glp1-transformation-section">
                 <h2 className="b365-section-heading b365-serif">The Transformation <em>You'll Experience</em></h2>
                 <div className="tprime-delivery-grid">
                     <div className="tprime-delivery-card">
