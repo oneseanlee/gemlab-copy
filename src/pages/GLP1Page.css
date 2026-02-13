@@ -473,14 +473,3 @@
   background: url('/images/glp1-transformation-bg.jpg') center right / cover no-repeat;
   position: relative;
 }
-.glp1-transformation-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.80);
-  z-index: 0;
-}
-.glp1-transformation-section > * {
-  position: relative;
-  z-index: 1;
-}
