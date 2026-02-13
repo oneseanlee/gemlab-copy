@@ -81,7 +81,7 @@ const TPrime365Page = () => {
             <section className={`tprime-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        <img src="/images/tprime-bottle.png" alt="TPrime365 bottle" />
+                        <img src="/images/nhto_hero.png" alt="TPrime365 bottle" />
                     </div>
                     <div className="tprime-hero-text">
                         <h1>The Only 4-in-1 Testosterone <em>Optimizer</em></h1>
