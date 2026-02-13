@@ -848,6 +848,11 @@
   .tprime-hero-text h1 {
     font-size: 32px;
   }
+  .tprime-hero-text .price-row {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
   .tprime-problem-grid,
   .tprime-persona-grid,
   .tprime-benefits-grid,
