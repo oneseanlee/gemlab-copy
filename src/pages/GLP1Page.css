@@ -470,6 +470,6 @@
 
 /* ─── Transformation Section Background ─── */
 .glp1-transformation-section {
-  background: url('/images/glp1-transformation-bg.jpg') center right / cover no-repeat;
+  background: none;
   position: relative;
 }
