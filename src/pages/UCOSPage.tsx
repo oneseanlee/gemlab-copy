@@ -89,8 +89,7 @@ const UCOSPage = () => {
             <section className={`ucos-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        {/* PLACEHOLDER IMAGE — Needs: All 3 products (Activate365, Mito365, Restore365) together */}
-                        <img src="/images/product-ucos.png" alt="Ultimate Cellular Optimization System — Activate365, Mito365, Restore365" />
+                        <img src="/images/ucos-hero.png" alt="Ultimate Cellular Optimization System — Activate365, Mito365, Restore365" />
                     </div>
                     <div className="tprime-hero-text">
                         <p className="ucos-section-label" style={{ textAlign: 'left', marginBottom: 8 }}>Revolutionary Benefits for Both Men and Women</p>
