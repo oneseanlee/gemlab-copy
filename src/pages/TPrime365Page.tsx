@@ -6,54 +6,54 @@ import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 
 const TPrime365Page = () => {
-    const [showBanner, setShowBanner] = useState(true);
-    const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [showBanner, setShowBanner] = useState(true);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-    const faqItems = [
-        {
-            question: "How is this different from TRT injections?",
-            answer: "TPrime365 stimulates your NATURAL testosterone production through the HPG axis. TRT shuts down your natural production, causes testicular atrophy, and eliminates fertility. TPrime365 preserves all of that while optimizing your levels."
-        },
-        {
-            question: "What happens if I'm not approved?",
-            answer: "You receive a 100% refund. An independent licensed physician reviews every order. If they determine TPrime365 isn't right for you based on your health assessment, your payment is fully refunded — no questions asked."
-        },
-        {
-            question: "When do I pay?",
-            answer: "Payment is processed when you complete your order and health assessment. If the physician does not approve your prescription, you are immediately refunded."
-        },
-        {
-            question: "Will I lose my gains if I stop?",
-            answer: "No. Because TPrime365 works with your natural system (not replacing it), you can discontinue without major withdrawal effects. Your body continues producing testosterone naturally."
-        },
-        {
-            question: "How long until I see results?",
-            answer: "Most men notice improvements in energy and mood within 2 weeks. Testosterone levels typically increase 60-664% within 2-4 weeks. Full benefits develop over 8-12 weeks."
-        },
-        {
-            question: "Do I need blood work?",
-            answer: "The physician may recommend baseline testosterone levels, but it's not always required for approval. Many men proceed based on symptoms alone."
-        },
-        {
-            question: "Is this subscription-based?",
-            answer: "Yes, TPrime365 is a monthly subscription. You can pause or cancel anytime, though we recommend at least 3 months for optimal results."
-        },
-        {
-            question: "Can I take this with other supplements?",
-            answer: "TPrime365 is designed as a complete system. The reviewing physician will evaluate any other medications or supplements you're taking during the approval process."
-        }
-    ];
+  const faqItems = [
+  {
+    question: "How is this different from TRT injections?",
+    answer: "TPrime365 stimulates your NATURAL testosterone production through the HPG axis. TRT shuts down your natural production, causes testicular atrophy, and eliminates fertility. TPrime365 preserves all of that while optimizing your levels."
+  },
+  {
+    question: "What happens if I'm not approved?",
+    answer: "You receive a 100% refund. An independent licensed physician reviews every order. If they determine TPrime365 isn't right for you based on your health assessment, your payment is fully refunded — no questions asked."
+  },
+  {
+    question: "When do I pay?",
+    answer: "Payment is processed when you complete your order and health assessment. If the physician does not approve your prescription, you are immediately refunded."
+  },
+  {
+    question: "Will I lose my gains if I stop?",
+    answer: "No. Because TPrime365 works with your natural system (not replacing it), you can discontinue without major withdrawal effects. Your body continues producing testosterone naturally."
+  },
+  {
+    question: "How long until I see results?",
+    answer: "Most men notice improvements in energy and mood within 2 weeks. Testosterone levels typically increase 60-664% within 2-4 weeks. Full benefits develop over 8-12 weeks."
+  },
+  {
+    question: "Do I need blood work?",
+    answer: "The physician may recommend baseline testosterone levels, but it's not always required for approval. Many men proceed based on symptoms alone."
+  },
+  {
+    question: "Is this subscription-based?",
+    answer: "Yes, TPrime365 is a monthly subscription. You can pause or cancel anytime, though we recommend at least 3 months for optimal results."
+  },
+  {
+    question: "Can I take this with other supplements?",
+    answer: "TPrime365 is designed as a complete system. The reviewing physician will evaluate any other medications or supplements you're taking during the approval process."
+  }];
 
-    return (
-        <div className="tprime-page">
+
+  return (
+    <div className="tprime-page">
 
             {/* 1. Promo Banner */}
-            {showBanner && (
-                <div className="b365-promo-banner">
+            {showBanner &&
+      <div className="b365-promo-banner">
                     MODS Max™ 10x Absorption Technology — Now Available in All Products
                     <button onClick={() => setShowBanner(false)} aria-label="Close banner">✕</button>
                 </div>
-            )}
+      }
 
             {/* 2. Navigation */}
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
@@ -81,7 +81,7 @@ const TPrime365Page = () => {
             <section className={`tprime-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        <img src="/images/nhto_hero.png" alt="TPrime365 bottle" />
+                        <img src="/images/tprime-bottle.png" alt="TPrime365 bottle" />
                     </div>
                     <div className="tprime-hero-text">
                         <h1>The Only 4-in-1 Testosterone <em>Optimizer</em></h1>
@@ -106,25 +106,25 @@ const TPrime365Page = () => {
                 <h2 className="b365-section-heading b365-serif">Traditional Solutions Are <em>Broken</em></h2>
                 <div className="tprime-problem-grid">
                     {[
-                        { title: 'Injectable TRT', icon: 'lucide:syringe', items: ['Shuts down natural production', 'Testicular atrophy guaranteed', 'Fertility destroyed', 'Lifetime dependency'] },
-                        { title: 'Oral Pills', icon: 'lucide:pill', items: ['Poor absorption (first-pass liver metabolism)', 'Inconsistent results', 'Half the dose wasted', 'Daily capsule hassle'] },
-                        { title: 'Single-Ingredient Solutions', icon: 'lucide:flask-conical', items: ['One-dimensional approach', 'Missing synergistic compounds', 'Expensive to stack separately', 'No longevity benefits'] },
-                    ].map((card, i) => (
-                        <div className="tprime-problem-card" key={i}>
+          { title: 'Injectable TRT', icon: 'lucide:syringe', items: ['Shuts down natural production', 'Testicular atrophy guaranteed', 'Fertility destroyed', 'Lifetime dependency'] },
+          { title: 'Oral Pills', icon: 'lucide:pill', items: ['Poor absorption (first-pass liver metabolism)', 'Inconsistent results', 'Half the dose wasted', 'Daily capsule hassle'] },
+          { title: 'Single-Ingredient Solutions', icon: 'lucide:flask-conical', items: ['One-dimensional approach', 'Missing synergistic compounds', 'Expensive to stack separately', 'No longevity benefits'] }].
+          map((card, i) =>
+          <div className="tprime-problem-card" key={i}>
                             <div className="icon-wrap">
                                 <iconify-icon icon={card.icon} width="22"></iconify-icon>
                             </div>
                             <h3>{card.title}</h3>
                             <ul>
-                                {card.items.map((item, j) => (
-                                    <li key={j}>
+                                {card.items.map((item, j) =>
+              <li key={j}>
                                         <iconify-icon icon="lucide:x" width="14"></iconify-icon>
                                         {item}
                                     </li>
-                                ))}
+              )}
                             </ul>
                         </div>
-                    ))}
+          )}
                 </div>
             </section>
 
@@ -133,16 +133,16 @@ const TPrime365Page = () => {
                 <h2 className="b365-section-heading b365-serif">TPrime365™: Your Natural Testosterone, <em>Amplified</em></h2>
                 <div className="tprime-pillars-grid">
                     {[
-                        { name: 'Enclomiphene', dose: '25mg' },
-                        { name: 'Spermidine', dose: '10mg' },
-                        { name: 'Boron', dose: '10mg' },
-                        { name: 'Vitamin C', dose: '10mg' },
-                    ].map((p, i) => (
-                        <div className="tprime-pillar" key={i}>
+          { name: 'Enclomiphene', dose: '25mg' },
+          { name: 'Spermidine', dose: '10mg' },
+          { name: 'Boron', dose: '10mg' },
+          { name: 'Vitamin C', dose: '10mg' }].
+          map((p, i) =>
+          <div className="tprime-pillar" key={i}>
                             <span className="pillar-name">{p.name}</span>
                             <span className="pillar-dose">{p.dose}</span>
                         </div>
-                    ))}
+          )}
                 </div>
                 <div className="tprime-delivery-badge">
                     <span>Sublingual Delivery via MODS Max Gold™</span>
@@ -155,56 +155,56 @@ const TPrime365Page = () => {
                 <h2 className="b365-section-heading b365-serif">The Science Behind <em>Each Pillar</em></h2>
                 <div className="tprime-ingredient-grid">
                     {[
-                        {
-                            icon: 'lucide:dna', title: 'Pillar 1: Enclomiphene 25mg', subtitle: 'The Foundation — Hormone Optimization',
-                            sections: [
-                                { heading: 'What It Does:', items: ['Blocks estrogen receptors at the pituitary', 'Signals your body to produce MORE testosterone naturally', 'Increases LH & FSH (the hormones that make testosterone)', 'Preserves fertility & testicular function'] },
-                                { heading: 'The Science:', items: ['60-664% testosterone increase in 2-4 weeks', 'Non-hormonal: Won\'t shut down your natural production', 'Fertility-safe: Keeps sperm production active'] },
-                            ]
-                        },
-                        {
-                            icon: 'lucide:zap', title: 'Pillar 2: Spermidine 10mg', subtitle: 'The Longevity Amplifier — Testosterone + Longevity',
-                            sections: [
-                                { heading: 'What It Does:', items: ['Boosts testosterone production directly (+48.9% in men under 50)', 'Slashes cortisol by 58% (the testosterone killer)', 'Reduces estradiol by 55.9% in 83% of men', 'Activates autophagy (cellular renewal & anti-aging)'] },
-                                { heading: 'The Science:', items: ['5-year survival benefit in epidemiological studies', '40% reduction in fatal heart failure risk', 'Supports Leydig cell function (where testosterone is made)'] },
-                            ]
-                        },
-                        {
-                            icon: 'lucide:dumbbell', title: 'Pillar 3: Boron 10mg', subtitle: 'The Free Testosterone Liberator — Strength & Vitality',
-                            sections: [
-                                { heading: 'What It Does:', items: ['Increases FREE testosterone (the usable form)', 'Reduces SHBG (the protein that binds testosterone)', 'Supports bone density & strength', 'Reduces inflammation'] },
-                                { heading: 'The Science:', items: ['28% increase in free testosterone in 1 week', 'Decreases estradiol levels', 'Improves vitamin D utilization'] },
-                            ]
-                        },
-                        {
-                            icon: 'lucide:shield', title: 'Pillar 4: Vitamin C 10mg', subtitle: 'The Cellular Protector — Protection & Support',
-                            sections: [
-                                { heading: 'What It Does:', items: ['Powerful antioxidant protection', 'Supports Leydig cell health', 'Enhances absorption of other nutrients', 'Reduces oxidative stress'] },
-                                { heading: 'The Science:', items: ['Protects testosterone-producing cells', 'Supports immune function', 'Essential for cellular repair'] },
-                            ]
-                        },
-                    ].map((card, i) => (
-                        <div className="tprime-ingredient-card" key={i}>
+          {
+            icon: 'lucide:dna', title: 'Pillar 1: Enclomiphene 25mg', subtitle: 'The Foundation — Hormone Optimization',
+            sections: [
+            { heading: 'What It Does:', items: ['Blocks estrogen receptors at the pituitary', 'Signals your body to produce MORE testosterone naturally', 'Increases LH & FSH (the hormones that make testosterone)', 'Preserves fertility & testicular function'] },
+            { heading: 'The Science:', items: ['60-664% testosterone increase in 2-4 weeks', 'Non-hormonal: Won\'t shut down your natural production', 'Fertility-safe: Keeps sperm production active'] }]
+
+          },
+          {
+            icon: 'lucide:zap', title: 'Pillar 2: Spermidine 10mg', subtitle: 'The Longevity Amplifier — Testosterone + Longevity',
+            sections: [
+            { heading: 'What It Does:', items: ['Boosts testosterone production directly (+48.9% in men under 50)', 'Slashes cortisol by 58% (the testosterone killer)', 'Reduces estradiol by 55.9% in 83% of men', 'Activates autophagy (cellular renewal & anti-aging)'] },
+            { heading: 'The Science:', items: ['5-year survival benefit in epidemiological studies', '40% reduction in fatal heart failure risk', 'Supports Leydig cell function (where testosterone is made)'] }]
+
+          },
+          {
+            icon: 'lucide:dumbbell', title: 'Pillar 3: Boron 10mg', subtitle: 'The Free Testosterone Liberator — Strength & Vitality',
+            sections: [
+            { heading: 'What It Does:', items: ['Increases FREE testosterone (the usable form)', 'Reduces SHBG (the protein that binds testosterone)', 'Supports bone density & strength', 'Reduces inflammation'] },
+            { heading: 'The Science:', items: ['28% increase in free testosterone in 1 week', 'Decreases estradiol levels', 'Improves vitamin D utilization'] }]
+
+          },
+          {
+            icon: 'lucide:shield', title: 'Pillar 4: Vitamin C 10mg', subtitle: 'The Cellular Protector — Protection & Support',
+            sections: [
+            { heading: 'What It Does:', items: ['Powerful antioxidant protection', 'Supports Leydig cell health', 'Enhances absorption of other nutrients', 'Reduces oxidative stress'] },
+            { heading: 'The Science:', items: ['Protects testosterone-producing cells', 'Supports immune function', 'Essential for cellular repair'] }]
+
+          }].
+          map((card, i) =>
+          <div className="tprime-ingredient-card" key={i}>
                             <div className="icon-wrap">
                                 <iconify-icon icon={card.icon} width="22"></iconify-icon>
                             </div>
                             <h3>{card.title}</h3>
                             <p className="ingredient-subtitle">{card.subtitle}</p>
-                            {card.sections.map((sec, j) => (
-                                <div key={j}>
+                            {card.sections.map((sec, j) =>
+            <div key={j}>
                                     <h4>{sec.heading}</h4>
                                     <ul>
-                                        {sec.items.map((item, k) => (
-                                            <li key={k}>
+                                        {sec.items.map((item, k) =>
+                <li key={k}>
                                                 <iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>
                                                 {item}
                                             </li>
-                                        ))}
+                )}
                                     </ul>
                                 </div>
-                            ))}
+            )}
                         </div>
-                    ))}
+          )}
                 </div>
             </section>
 
@@ -215,24 +215,24 @@ const TPrime365Page = () => {
                     <div className="tprime-delivery-card">
                         <h3>Oral Capsules (Competitors)</h3>
                         <ul>
-                            {['First-pass liver metabolism', '40-60% lost before absorption', 'Slow, inconsistent results', 'Digestive breakdown', 'Takes 1-2 hours to absorb'].map((item, i) => (
-                                <li key={i}>
+                            {['First-pass liver metabolism', '40-60% lost before absorption', 'Slow, inconsistent results', 'Digestive breakdown', 'Takes 1-2 hours to absorb'].map((item, i) =>
+              <li key={i}>
                                     <iconify-icon icon="lucide:x" width="16" class="icon-x"></iconify-icon>
                                     {item}
                                 </li>
-                            ))}
+              )}
                         </ul>
                         <div className="tprime-delivery-result bad">→ You pay for 25mg, but only get ~10-12mg</div>
                     </div>
                     <div className="tprime-delivery-card highlight">
                         <h3>Sublingual (TPrime365™)</h3>
                         <ul>
-                            {['Direct bloodstream delivery', 'Bypasses digestive system', 'Enhanced bioavailability', 'Rapid absorption (30-60 seconds)', 'Patent-pending MODS Max Gold™ technology'].map((item, i) => (
-                                <li key={i}>
+                            {['Direct bloodstream delivery', 'Bypasses digestive system', 'Enhanced bioavailability', 'Rapid absorption (30-60 seconds)', 'Patent-pending MODS Max Gold™ technology'].map((item, i) =>
+              <li key={i}>
                                     <iconify-icon icon="lucide:check" width="16" class="icon-check"></iconify-icon>
                                     {item}
                                 </li>
-                            ))}
+              )}
                         </ul>
                         <div className="tprime-delivery-result good">→ You get the FULL 25mg dose working for you</div>
                     </div>
@@ -248,23 +248,23 @@ const TPrime365Page = () => {
                 <h2 className="b365-section-heading b365-serif">Built For Men Who <em>Want More</em></h2>
                 <div className="tprime-persona-grid">
                     {[
-                        { title: 'The Performer', age: 'Age 25-40', items: ['Peak performance at work', 'Competitive edge in fitness', 'Mental clarity & drive', 'Maintaining lean muscle'] },
-                        { title: 'The Rebuilder', age: 'Age 40-55', items: ['Energy levels declining', 'Losing muscle despite working out', 'Low libido', 'Brain fog setting in'] },
-                        { title: 'The Optimizer', age: 'Age 55+', items: ['Want to feel 40, not 60', 'Protect what you\'ve built', 'Stay active & vital', 'Extend healthspan'] },
-                    ].map((persona, i) => (
-                        <div className="tprime-persona-card" key={i}>
+          { title: 'The Performer', age: 'Age 25-40', items: ['Peak performance at work', 'Competitive edge in fitness', 'Mental clarity & drive', 'Maintaining lean muscle'] },
+          { title: 'The Rebuilder', age: 'Age 40-55', items: ['Energy levels declining', 'Losing muscle despite working out', 'Low libido', 'Brain fog setting in'] },
+          { title: 'The Optimizer', age: 'Age 55+', items: ['Want to feel 40, not 60', 'Protect what you\'ve built', 'Stay active & vital', 'Extend healthspan'] }].
+          map((persona, i) =>
+          <div className="tprime-persona-card" key={i}>
                             <h3>{persona.title}</h3>
                             <span className="age-badge">{persona.age}</span>
                             <ul>
-                                {persona.items.map((item, j) => (
-                                    <li key={j}>
+                                {persona.items.map((item, j) =>
+              <li key={j}>
                                         <iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>
                                         {item}
                                     </li>
-                                ))}
+              )}
                             </ul>
                         </div>
-                    ))}
+          )}
                 </div>
             </section>
 
@@ -273,24 +273,24 @@ const TPrime365Page = () => {
                 <h2 className="b365-section-heading b365-serif">What You'll <em>Experience</em></h2>
                 <div className="tprime-benefits-grid">
                     {[
-                        { icon: 'lucide:flame', title: 'Energy & Drive', desc: 'Wake up ready to conquer. No more afternoon crashes.' },
-                        { icon: 'lucide:dumbbell', title: 'Lean Muscle Growth', desc: 'Build and maintain muscle more easily. Faster recovery.' },
-                        { icon: 'lucide:brain', title: 'Mental Clarity', desc: 'Sharp focus. Better decision-making. Confidence restored.' },
-                        { icon: 'lucide:heart', title: 'Libido & Performance', desc: 'Reignite desire. Perform like your younger self.' },
-                        { icon: 'lucide:zap', title: 'Faster Recovery', desc: 'Bounce back from workouts. Less soreness, more gains.' },
-                        { icon: 'lucide:target', title: 'Fat Loss', desc: 'Shed stubborn fat, especially around the midsection.' },
-                        { icon: 'lucide:moon', title: 'Better Sleep', desc: 'Deeper, more restorative rest. Wake refreshed.' },
-                        { icon: 'lucide:bone', title: 'Bone Density', desc: 'Stronger bones. Reduced fracture risk.' },
-                        { icon: 'lucide:dna', title: 'Longevity', desc: 'Cellular renewal. Healthspan extension. Age better.' },
-                    ].map((b, i) => (
-                        <div className="tprime-benefit-card" key={i}>
+          { icon: 'lucide:flame', title: 'Energy & Drive', desc: 'Wake up ready to conquer. No more afternoon crashes.' },
+          { icon: 'lucide:dumbbell', title: 'Lean Muscle Growth', desc: 'Build and maintain muscle more easily. Faster recovery.' },
+          { icon: 'lucide:brain', title: 'Mental Clarity', desc: 'Sharp focus. Better decision-making. Confidence restored.' },
+          { icon: 'lucide:heart', title: 'Libido & Performance', desc: 'Reignite desire. Perform like your younger self.' },
+          { icon: 'lucide:zap', title: 'Faster Recovery', desc: 'Bounce back from workouts. Less soreness, more gains.' },
+          { icon: 'lucide:target', title: 'Fat Loss', desc: 'Shed stubborn fat, especially around the midsection.' },
+          { icon: 'lucide:moon', title: 'Better Sleep', desc: 'Deeper, more restorative rest. Wake refreshed.' },
+          { icon: 'lucide:bone', title: 'Bone Density', desc: 'Stronger bones. Reduced fracture risk.' },
+          { icon: 'lucide:dna', title: 'Longevity', desc: 'Cellular renewal. Healthspan extension. Age better.' }].
+          map((b, i) =>
+          <div className="tprime-benefit-card" key={i}>
                             <div className="icon-wrap">
                                 <iconify-icon icon={b.icon} width="22"></iconify-icon>
                             </div>
                             <h4>{b.title}</h4>
                             <p>{b.desc}</p>
                         </div>
-                    ))}
+          )}
                 </div>
             </section>
 
@@ -396,12 +396,12 @@ const TPrime365Page = () => {
                             For Best Results:
                         </h4>
                         <ul>
-                            {['Take on an empty stomach', 'Avoid eating/drinking 15 minutes before and after', 'Store at room temperature (do not freeze)', 'Track your progress weekly'].map((item, i) => (
-                                <li key={i}>
+                            {['Take on an empty stomach', 'Avoid eating/drinking 15 minutes before and after', 'Store at room temperature (do not freeze)', 'Track your progress weekly'].map((item, i) =>
+              <li key={i}>
                                     <iconify-icon icon="lucide:check" width="14"></iconify-icon>
                                     {item}
                                 </li>
-                            ))}
+              )}
                         </ul>
                     </div>
                 </div>
@@ -412,21 +412,21 @@ const TPrime365Page = () => {
                 <h2 className="b365-section-heading b365-serif">Pharmaceutical-Grade <em>Standards</em></h2>
                 <div className="tprime-trust-grid">
                     {[
-                        { icon: 'lucide:building-2', title: 'FDA-Registered 503A Compounding Facility', desc: 'Manufactured in Salt Lake City, UT under strict quality controls' },
-                        { icon: 'lucide:badge-check', title: '100% Money-Back Guarantee', desc: 'Full refund if prescription not approved by independent physician' },
-                        { icon: 'lucide:microscope', title: 'Third-Party Tested', desc: 'Every batch verified for purity and potency' },
-                        { icon: 'lucide:flag', title: 'Made in the USA', desc: 'American-made, American quality' },
-                        { icon: 'lucide:stethoscope', title: 'Licensed Physician Oversight', desc: 'Real doctors reviewing every case' },
-                        { icon: 'lucide:lock', title: 'HIPAA Compliant', desc: 'Your health data stays private and secure' },
-                    ].map((badge, i) => (
-                        <div className="tprime-trust-card" key={i}>
+          { icon: 'lucide:building-2', title: 'FDA-Registered 503A Compounding Facility', desc: 'Manufactured in Salt Lake City, UT under strict quality controls' },
+          { icon: 'lucide:badge-check', title: '100% Money-Back Guarantee', desc: 'Full refund if prescription not approved by independent physician' },
+          { icon: 'lucide:microscope', title: 'Third-Party Tested', desc: 'Every batch verified for purity and potency' },
+          { icon: 'lucide:flag', title: 'Made in the USA', desc: 'American-made, American quality' },
+          { icon: 'lucide:stethoscope', title: 'Licensed Physician Oversight', desc: 'Real doctors reviewing every case' },
+          { icon: 'lucide:lock', title: 'HIPAA Compliant', desc: 'Your health data stays private and secure' }].
+          map((badge, i) =>
+          <div className="tprime-trust-card" key={i}>
                             <div className="icon-wrap">
                                 <iconify-icon icon={badge.icon} width="22"></iconify-icon>
                             </div>
                             <h4>{badge.title}</h4>
                             <p>{badge.desc}</p>
                         </div>
-                    ))}
+          )}
                 </div>
             </section>
 
@@ -436,12 +436,12 @@ const TPrime365Page = () => {
                     <h3>Important Safety Information</h3>
                     <p style={{ fontSize: 14, color: 'var(--b365-text-secondary)' }}>TPrime365 May Not Be Appropriate If You:</p>
                     <ul>
-                        {['Have prostate cancer or breast cancer', 'Have severe liver or kidney disease', 'Are under 18 years of age', 'Are allergic to any ingredients', 'Are taking certain medications (physician will review)'].map((item, i) => (
-                            <li key={i}>
+                        {['Have prostate cancer or breast cancer', 'Have severe liver or kidney disease', 'Are under 18 years of age', 'Are allergic to any ingredients', 'Are taking certain medications (physician will review)'].map((item, i) =>
+            <li key={i}>
                                 <iconify-icon icon="lucide:alert-circle" width="14"></iconify-icon>
                                 {item}
                             </li>
-                        ))}
+            )}
                     </ul>
                     <p className="report">Report adverse events: 1-385-421-5651</p>
                     <p className="disclaimer">
@@ -461,15 +461,15 @@ const TPrime365Page = () => {
                         </AnimatedCTA>
                     </div>
                     <div>
-                        {faqItems.map((item, index) => (
-                            <div className="b365-faq-item" key={index}>
+                        {faqItems.map((item, index) =>
+            <div className="b365-faq-item" key={index}>
                                 <button className="b365-faq-trigger" onClick={() => setOpenFaq(openFaq === index ? null : index)}>
                                     {item.question}
                                     <span className="faq-icon">{openFaq === index ? '−' : '+'}</span>
                                 </button>
                                 {openFaq === index && <div className="b365-faq-answer">{item.answer}</div>}
                             </div>
-                        ))}
+            )}
                     </div>
                 </div>
             </section>
@@ -478,7 +478,7 @@ const TPrime365Page = () => {
             <section className="b365-section">
                 <div className="tprime-final-cta">
                     <h2>Ready to Reclaim Your <em>Prime?</em></h2>
-                    <p className="subtitle">Join thousands of men optimizing their testosterone naturally with TPrime365™</p>
+                    <p className="subtitle text-primary-foreground">Join thousands of men optimizing their testosterone naturally with TPrime365™</p>
                     <div className="tprime-final-price-box">
                         <span className="big-price">$149/month</span>
                         <span className="note">Includes everything: Formula + Physician Consultation + Free Shipping</span>
@@ -505,8 +505,8 @@ const TPrime365Page = () => {
 
             {/* Footer */}
             <SharedFooter />
-        </div>
-    );
+        </div>);
+
 };
 
 export default TPrime365Page;
