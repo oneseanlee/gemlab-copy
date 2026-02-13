@@ -31,7 +31,7 @@ const AppRoutes = () => {
       <Route path="/nhto-intake" element={<NHTOIntakePage />} />
       <Route path="/glp1-intake" element={<GLP1IntakePage />} />
       <Route path="/ucos" element={<UCOSPage />} />
-      <Route path="/glp1-bundle" element={<GLP1BundlePage />} />
+      <Route path="/glp1-ucos" element={<GLP1BundlePage />} />
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
       <Route path="/terms" element={<TermsConditionsPage />} />
       <Route path="/returns" element={<ReturnPolicyPage />} />
