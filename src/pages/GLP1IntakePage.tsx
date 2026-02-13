@@ -46,7 +46,7 @@ const GLP1IntakePage = () => {
           <a href="/">
             <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
           </a>
-          <a href="/glp1" className="intake-back-link">← Back to GLP-1 Products</a>
+          <a href="/glp1-protocol" className="intake-back-link">← Back to GLP-1 Products</a>
         </div>
       </nav>
 
@@ -98,7 +98,7 @@ const GLP1IntakePage = () => {
         </div>
 
         <div className="intake-bottom-cta">
-          <a href="/glp1">← Back to GLP-1 Products</a>
+          <a href="/glp1-protocol">← Back to GLP-1 Products</a>
         </div>
       </main>
 

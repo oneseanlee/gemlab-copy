@@ -25,7 +25,7 @@ const AppRoutes = () => {
       <Route path="/" element={<OceanRaysPage />} />
       <Route path="/article" element={<ListiclePage />} />
       <Route path="/tprime365" element={<TPrime365Page />} />
-      <Route path="/glp1" element={<GLP1Page />} />
+      <Route path="/glp1-protocol" element={<GLP1Page />} />
       <Route path="/nhto" element={<NHTOPage />} />
       <Route path="/nhto-intake" element={<NHTOIntakePage />} />
       <Route path="/glp1-intake" element={<GLP1IntakePage />} />
