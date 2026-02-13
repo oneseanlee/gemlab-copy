@@ -150,9 +150,9 @@ const UCOSPage = () => {
                 </p>
                 <div className="ucos-flow-grid">
                     {[
-                        { img: '/placeholder.svg', time: 'Morning', timeClass: 'morning', title: 'Activate365', subtitle: 'Morning Cellular Activation', desc: 'Sublingual primer with Spermidine, NAD+, and Boron to activate autophagy and prime cellular energy.' },
-                        { img: '/placeholder.svg', time: 'Mid-Day', timeClass: 'midday', title: 'Mito365', subtitle: 'All-Day Mitochondrial Power', desc: 'Tablet matrix with Methylene Blue, PQQ, NAD+, and GHK-Cu for sustained mitochondrial performance.' },
-                        { img: '/placeholder.svg', time: 'Evening', timeClass: 'evening', title: 'Restore365', subtitle: 'Overnight Recovery Optimization', desc: 'Sublingual recovery with Melatonin, GABA, and Boron for deep sleep and cellular repair.' },
+                        { img: '/images/activate365.png', time: 'Morning', timeClass: 'morning', title: 'Activate365', subtitle: 'Morning Cellular Activation', desc: 'Sublingual primer with Spermidine, NAD+, and Boron to activate autophagy and prime cellular energy.' },
+                        { img: '/images/mito365.png', time: 'Mid-Day', timeClass: 'midday', title: 'Mito365', subtitle: 'All-Day Mitochondrial Power', desc: 'Tablet matrix with Methylene Blue, PQQ, NAD+, and GHK-Cu for sustained mitochondrial performance.' },
+                        { img: '/images/restore365.png', time: 'Evening', timeClass: 'evening', title: 'Restore365', subtitle: 'Overnight Recovery Optimization', desc: 'Sublingual recovery with Melatonin, GABA, and Boron for deep sleep and cellular repair.' },
                     ].map((product, i) => (
                         <div className="ucos-flow-card" key={i}>
                             {/* PLACEHOLDER IMAGE — Needs: Individual product bottle */}
