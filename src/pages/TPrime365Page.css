@@ -370,9 +370,9 @@
   filter: drop-shadow(0 8px 24px rgba(0,0,0,0.1));
 }
 .tprime-persona-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 .tprime-persona-card {
   background: var(--b365-white);
