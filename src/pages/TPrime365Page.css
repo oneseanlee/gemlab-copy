@@ -25,16 +25,17 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 520px;
+  min-height: 580px;
 }
 .tprime-hero-img {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 16px;
 }
 .tprime-hero-img img {
-  max-height: 420px;
+  max-height: 540px;
+  max-width: 100%;
   object-fit: contain;
   filter: drop-shadow(0 16px 40px rgba(0,0,0,0.15));
 }
@@ -808,7 +809,7 @@
     grid-template-columns: 1fr;
   }
   .tprime-hero-img {
-    height: 300px;
+    height: 360px;
   }
   .tprime-hero-text {
     padding: 40px 32px;
