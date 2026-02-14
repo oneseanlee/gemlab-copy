@@ -93,8 +93,7 @@ const GLP1BundlePage = () => {
             <section className={`glp1b-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        {/* PLACEHOLDER IMAGE — Needs: All 4 products (Activate365, Mito365, Metabolism Plus, Restore365) together */}
-                        <img src="/images/product-glp1-ucos.png" alt="GLP-1 Cellular Optimization System — 4 Products" />
+                        <img src="/images/glp1-ucos-hero.png" alt="GLP-1 Cellular Optimization System — 4 Products" />
                     </div>
                     <div className="tprime-hero-text">
                         <p className="glp1b-section-label" style={{ textAlign: 'left', marginBottom: 8 }}>✨ Complete GLP-1 Optimization Bundle</p>
