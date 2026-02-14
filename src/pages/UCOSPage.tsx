@@ -324,16 +324,19 @@ const UCOSPage = () => {
                         <p>Complete 24-Hour Cellular Optimization System</p>
                     </div>
                     <div className="ucos-bundle-body">
-                        <div className="ucos-bundle-hero-img">
-                            {/* PLACEHOLDER IMAGE — Needs: All 3 products together in bundle shot */}
-                            <img src="/images/product-ucos.png" alt="UCOS Complete Bundle" />
+                        <div className="ucos-bundle-top-row">
+                            <div className="ucos-bundle-hero-img">
+                                <img src="/images/product-ucos.png" alt="UCOS Complete Bundle" />
+                            </div>
+                            <div className="ucos-bundle-pricing">
+                                <div className="ucos-bundle-price-row">
+                                    <span className="old-price">$459</span>
+                                    <span className="new-price">$258</span>
+                                    <span className="save-badge">SAVE $201</span>
+                                </div>
+                                <p style={{ fontSize: 14, color: 'var(--b365-text-secondary)', marginBottom: 0 }}>That's 44% OFF Regular Price!</p>
+                            </div>
                         </div>
-                        <div className="ucos-bundle-price-row">
-                            <span className="old-price">$459</span>
-                            <span className="new-price">$258</span>
-                            <span className="save-badge">SAVE $201</span>
-                        </div>
-                        <p style={{ textAlign: 'center', fontSize: 14, color: 'var(--b365-text-secondary)', marginBottom: 8 }}>That's 44% OFF Regular Price!</p>
 
                         <h4 style={{ textAlign: 'center', fontSize: 15, fontWeight: 700, color: 'var(--b365-text)', marginBottom: 16 }}>What You Get:</h4>
                         <div className="ucos-bundle-products">
