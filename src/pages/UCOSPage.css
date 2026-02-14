@@ -337,28 +337,17 @@
 .ucos-bundle-body {
   padding: 32px;
 }
-.ucos-bundle-top-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: center;
+.ucos-bundle-hero-img {
+  text-align: center;
   margin-bottom: 24px;
 }
-.ucos-bundle-hero-img {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .ucos-bundle-hero-img img {
-  max-height: 340px;
-  width: 100%;
+  max-height: 240px;
   object-fit: contain;
 }
-.ucos-bundle-pricing {
-  text-align: center;
-}
 .ucos-bundle-price-row {
-  margin-bottom: 12px;
+  text-align: center;
+  margin-bottom: 24px;
 }
 .ucos-bundle-price-row .old-price {
   font-size: 16px;
@@ -584,9 +573,6 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
-  .ucos-bundle-top-row {
-    grid-template-columns: 1fr;
   }
   .ucos-bundle-products {
     grid-template-columns: 1fr;
