@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './GLP1BundlePage.css';
 import '../pages/OceanRaysPage.css';
 import '../pages/TPrime365Page.css';
@@ -28,6 +28,8 @@ const GLP1BundlePage = () => {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const addItem = useCartStore(state => state.addItem);
     const isLoading = useCartStore(state => state.isLoading);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [isMuted, setIsMuted] = useState(true);
 
     const handleOrderNow = async (e?: React.MouseEvent) => {
         e?.preventDefault();
@@ -94,8 +96,9 @@ const GLP1BundlePage = () => {
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <p className="glp1b-section-label" style={{ marginBottom: 12 }}>✨ Complete GLP-1 Optimization Bundle</p>
-                        <div style={{ overflow: 'hidden', borderRadius: 16, aspectRatio: '16/9', maxHeight: 520, width: '100%' }}>
+                        <div style={{ overflow: 'hidden', borderRadius: 16, aspectRatio: '16/9', maxHeight: 520, width: '100%', position: 'relative' }}>
                             <video
+                                ref={videoRef}
                                 src="https://storage.googleapis.com/msgsndr/aYvoAsXxf5xBOSngnm2U/media/6966cb954d18c5dcdb2173e1.mp4"
                                 autoPlay
                                 muted
@@ -103,6 +106,35 @@ const GLP1BundlePage = () => {
                                 playsInline
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
+                            <button
+                                onClick={() => {
+                                    if (videoRef.current) {
+                                        videoRef.current.muted = !videoRef.current.muted;
+                                        setIsMuted(!isMuted);
+                                    }
+                                }}
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 16,
+                                    right: 16,
+                                    background: 'rgba(0,0,0,0.6)',
+                                    border: 'none',
+                                    borderRadius: '50%',
+                                    width: 40,
+                                    height: 40,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    cursor: 'pointer',
+                                    color: '#fff',
+                                    fontSize: 18,
+                                    backdropFilter: 'blur(4px)',
+                                    transition: 'background 0.2s',
+                                }}
+                                aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+                            >
+                                {isMuted ? '🔇' : '🔊'}
+                            </button>
                         </div>
                         <div className="glp1b-hero-badges" style={{ marginTop: 16 }}>
                             <span className="glp1b-hero-badge">
