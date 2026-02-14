@@ -94,7 +94,7 @@ const GLP1BundlePage = () => {
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <p className="glp1b-section-label" style={{ marginBottom: 12 }}>✨ Complete GLP-1 Optimization Bundle</p>
-                        <div style={{ overflow: 'hidden', borderRadius: 16, aspectRatio: '1/1', maxHeight: 520, width: '100%' }}>
+                        <div style={{ overflow: 'hidden', borderRadius: 16, aspectRatio: '16/9', maxHeight: 520, width: '100%' }}>
                             <video
                                 src="https://storage.googleapis.com/msgsndr/aYvoAsXxf5xBOSngnm2U/media/6966cb954d18c5dcdb2173e1.mp4"
                                 autoPlay
