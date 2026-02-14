@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import './EarlyTestersCarousel.css';
 
 const testimonials = [
@@ -12,7 +13,10 @@ const testimonials = [
 ];
 
 const EarlyTestersCarousel = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: 'start', slidesToScroll: 1 },
+    [Autoplay({ delay: 4000, stopOnInteraction: false })]
+  );
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const onSelect = useCallback(() => {
