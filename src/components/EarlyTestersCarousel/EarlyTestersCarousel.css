@@ -1,5 +1,5 @@
 .early-testers-carousel {
-  max-width: 700px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .early-testers-slide {
-  flex: 0 0 100%;
+  flex: 0 0 50%;
   min-width: 0;
   padding: 0 8px;
 }
@@ -42,4 +42,10 @@
 .early-testers-dot.active {
   background: var(--b365-blue, #3376b0);
   transform: scale(1.2);
+}
+
+@media (max-width: 640px) {
+  .early-testers-slide {
+    flex: 0 0 100%;
+  }
 }
