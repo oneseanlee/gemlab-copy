@@ -349,29 +349,32 @@
   object-fit: contain;
 }
 .ucos-bundle-price-row {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   margin-bottom: 24px;
 }
 .ucos-bundle-price-row .old-price {
   font-size: 16px;
   color: var(--b365-text-secondary);
   text-decoration: line-through;
-  margin-right: 12px;
 }
 .ucos-bundle-price-row .new-price {
   font-size: 42px;
   font-weight: 800;
   color: #16a34a;
+  line-height: 1;
 }
 .ucos-bundle-price-row .save-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background: #16a34a;
   color: #fff;
   font-size: 13px;
   font-weight: 700;
   padding: 6px 16px;
   border-radius: 9999px;
-  margin-left: 12px;
 }
 .ucos-bundle-products {
   display: grid;
