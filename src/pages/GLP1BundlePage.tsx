@@ -92,7 +92,7 @@ const GLP1BundlePage = () => {
             {/* 3. Hero Section */}
             <section className={`glp1b-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
-                    <div className="tprime-hero-img" style={{ overflow: 'hidden', borderRadius: 16, aspectRatio: '16/9', maxHeight: 520 }}>
+                    <div className="tprime-hero-img" style={{ overflow: 'hidden', borderRadius: 16, aspectRatio: '16/9', maxHeight: 520, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <video
                             src="https://storage.googleapis.com/msgsndr/aYvoAsXxf5xBOSngnm2U/media/6966cb954d18c5dcdb2173e1.mp4"
                             autoPlay
@@ -106,7 +106,7 @@ const GLP1BundlePage = () => {
                         <p className="glp1b-section-label" style={{ textAlign: 'left', marginBottom: 8 }}>✨ Complete GLP-1 Optimization Bundle</p>
                         <h1>GLP-1 Cellular<br />Optimization System<br /><em>for Daily Energy + Recovery</em></h1>
                         <p className="subhead">The complete 4-product system designed to support lean mass, daily energy, and metabolic health during GLP-1 routines.</p>
-                        <div className="glp1b-hero-badges" style={{ flexWrap: 'nowrap' }}>
+                        <div className="glp1b-hero-badges">
                             <span className="glp1b-hero-badge">
                                 <iconify-icon icon="lucide:shield" width="14"></iconify-icon>
                                 Supports lean mass
