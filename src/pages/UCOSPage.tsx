@@ -125,19 +125,18 @@ const UCOSPage = () => {
             {/* 4. Trust Badges */}
             <div className="ucos-trust-strip">
                 {[
-        { icon: 'lucide:badge-check', label: 'VERIFIED', value: '10x', title: 'Absorption', desc: 'MODS Max™' },
-        { icon: 'lucide:clock', label: 'COMPLETE', value: '24', title: 'Hour System', desc: '' },
-        { icon: 'lucide:flag', label: '', value: '★', title: 'USA Made', desc: 'CGMP Facility' },
-        { icon: 'lucide:shield-check', label: '', value: '', title: 'Quality Tested', desc: '' }].
+        { icon: 'lucide:badge-check', value: '10X', title: 'Faster Absorption', desc: 'MODS Max™' },
+        { icon: 'lucide:clock', value: '24 Hr', title: 'Sustained Support', desc: 'Time-Release System' },
+        { icon: 'lucide:flag', value: 'USA Made', title: 'cGMP Certified', desc: 'Quality Controlled' },
+        { icon: 'lucide:shield-check', value: 'Quality Tested', title: 'Third-Party Verified', desc: 'Lab Assured' }].
         map((badge, i) =>
         <div className="ucos-trust-badge" key={i}>
                         <div className="icon-wrap">
                             <iconify-icon icon={badge.icon} width="22"></iconify-icon>
                         </div>
-                        {badge.label && <div className="trust-label">{badge.label}</div>}
-                        {badge.value && <div className="trust-value">{badge.value}</div>}
+                        <div className="trust-value">{badge.value}</div>
                         <h4>{badge.title}</h4>
-                        {badge.desc && <p>{badge.desc}</p>}
+                        <p>{badge.desc}</p>
                     </div>
         )}
             </div>
