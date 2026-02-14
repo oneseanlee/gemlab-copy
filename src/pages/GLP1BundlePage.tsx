@@ -1,5 +1,6 @@
 // @ts-nocheck
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import Lottie from 'lottie-react';
 import './GLP1BundlePage.css';
 import '../pages/OceanRaysPage.css';
 import '../pages/TPrime365Page.css';
@@ -8,6 +9,19 @@ import SharedFooter from '../components/SharedFooter/SharedFooter';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import EarlyTestersCarousel from '../components/EarlyTestersCarousel/EarlyTestersCarousel';
+
+const CertificateLottie = () => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetch('/images/certificate-lottie.json').then(r => r.json()).then(setData);
+  }, []);
+  if (!data) return <div style={{ width: 80, height: 80, margin: '0 auto 16px' }} />;
+  return (
+    <div style={{ width: 80, height: 80, margin: '0 auto 16px' }}>
+      <Lottie animationData={data} loop={true} />
+    </div>
+  );
+};
 
 // TODO: Replace with real Shopify variant ID once the GLP-1 Bundle product is created
 const GLP1_BUNDLE_VARIANT_ID = 'gid://shopify/ProductVariant/PLACEHOLDER_GLP1_BUNDLE';
@@ -461,7 +475,7 @@ const GLP1BundlePage = () => {
             {/* 12. 60-Day Guarantee */}
             <section className="b365-section">
                 <div className="glp1b-guarantee-card">
-                    <iconify-icon icon="lucide:shield-check" width="48" style={{ color: 'var(--b365-green)', marginBottom: 16, display: 'block' }}></iconify-icon>
+                    <CertificateLottie />
                     <h3>Our 60-Day Satisfaction Guarantee</h3>
                     <p>Try the GLP-1 Cellular Optimization System risk-free for 60 days. If you're not satisfied with your experience, simply return it for a full refund. No questions asked.</p>
                     <p style={{ fontWeight: 600, color: 'var(--b365-text)', marginTop: 16 }}>Your satisfaction is our priority.</p>
