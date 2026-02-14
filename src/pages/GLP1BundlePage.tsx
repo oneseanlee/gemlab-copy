@@ -92,7 +92,7 @@ const GLP1BundlePage = () => {
             {/* 3. Hero Section */}
             <section className={`glp1b-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
-                    <div className="tprime-hero-img">
+                    <div className="tprime-hero-img" style={{ overflow: 'hidden', borderRadius: 16, aspectRatio: '9/16', maxHeight: 520 }}>
                         <video
                             src="https://storage.googleapis.com/msgsndr/aYvoAsXxf5xBOSngnm2U/media/6966cb954d18c5dcdb2173e1.mp4"
                             autoPlay
