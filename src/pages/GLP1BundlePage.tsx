@@ -168,10 +168,10 @@ const GLP1BundlePage = () => {
                 </p>
                 <div className="glp1b-flow-grid">
                     {[
-                        { img: '/placeholder.svg', time: 'Morning', timeClass: 'morning', title: 'Activate365', subtitle: 'Muscle Protection & Hormone Support', items: ['Preserve lean muscle mass during weight loss', 'Support healthy testosterone & growth hormone levels', 'Maintain strength and vitality'] },
-                        { img: '/placeholder.svg', time: 'Mid-Day', timeClass: 'midday', title: 'Mito365', subtitle: 'Cellular Energy & Anti-Fatigue', items: ['Supports energy and reduces fatigue', 'Boost mitochondrial energy production', 'Enhance focus and mental clarity'] },
-                        { img: '/placeholder.svg', time: 'Afternoon', timeClass: 'afternoon', title: 'Metabolism Plus', subtitle: 'Metabolic Support for GLP-1 Users*', items: ['Designed specifically for GLP-1 users', 'Support healthy metabolic function during weight loss', 'Support metabolic health while preserving muscle'] },
-                        { img: '/placeholder.svg', time: 'Evening', timeClass: 'evening', title: 'Restore365', subtitle: 'Sleep & Muscle Recovery', items: ['Improve sleep quality disrupted by weight loss', 'Enhance overnight muscle recovery & repair', 'Reduce stress from body composition changes'] },
+                        { img: '/images/glp1-activate365.png', time: 'Morning', timeClass: 'morning', title: 'Activate365', subtitle: 'Muscle Protection & Hormone Support', items: ['Preserve lean muscle mass during weight loss', 'Support healthy testosterone & growth hormone levels', 'Maintain strength and vitality'] },
+                        { img: '/images/glp1-mito365.png', time: 'Mid-Day', timeClass: 'midday', title: 'Mito365', subtitle: 'Cellular Energy & Anti-Fatigue', items: ['Supports energy and reduces fatigue', 'Boost mitochondrial energy production', 'Enhance focus and mental clarity'] },
+                        { img: '/images/glp1-metabolism.png', time: 'Afternoon', timeClass: 'afternoon', title: 'Metabolism Plus', subtitle: 'Metabolic Support for GLP-1 Users*', items: ['Designed specifically for GLP-1 users', 'Support healthy metabolic function during weight loss', 'Support metabolic health while preserving muscle'] },
+                        { img: '/images/glp1-restore365.png', time: 'Evening', timeClass: 'evening', title: 'Restore365', subtitle: 'Sleep & Muscle Recovery', items: ['Improve sleep quality disrupted by weight loss', 'Enhance overnight muscle recovery & repair', 'Reduce stress from body composition changes'] },
                     ].map((product, i) => (
                         <div className="glp1b-flow-card" key={i}>
                             {/* PLACEHOLDER IMAGE — Needs: Individual product bottle */}
