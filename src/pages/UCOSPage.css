@@ -93,6 +93,10 @@
   font-weight: 700;
   color: var(--b365-text);
   margin-bottom: 4px;
+  line-height: 1.2;
+}
+.ucos-trust-badge .trust-value.text-long {
+  font-size: 20px;
 }
 .ucos-trust-badge h4 {
   font-size: 13px;
