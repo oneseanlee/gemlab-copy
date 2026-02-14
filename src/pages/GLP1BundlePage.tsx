@@ -92,21 +92,19 @@ const GLP1BundlePage = () => {
             {/* 3. Hero Section */}
             <section className={`glp1b-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
-                    <div className="tprime-hero-img" style={{ overflow: 'hidden', borderRadius: 16, aspectRatio: '16/9', maxHeight: 520, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <video
-                            src="https://storage.googleapis.com/msgsndr/aYvoAsXxf5xBOSngnm2U/media/6966cb954d18c5dcdb2173e1.mp4"
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 16 }}
-                        />
-                    </div>
-                    <div className="tprime-hero-text">
-                        <p className="glp1b-section-label" style={{ textAlign: 'left', marginBottom: 8 }}>✨ Complete GLP-1 Optimization Bundle</p>
-                        <h1>GLP-1 Cellular<br />Optimization System<br /><em>for Daily Energy + Recovery</em></h1>
-                        <p className="subhead">The complete 4-product system designed to support lean mass, daily energy, and metabolic health during GLP-1 routines.</p>
-                        <div className="glp1b-hero-badges">
+                    <div className="tprime-hero-img" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <p className="glp1b-section-label" style={{ marginBottom: 12 }}>✨ Complete GLP-1 Optimization Bundle</p>
+                        <div style={{ overflow: 'hidden', borderRadius: 16, aspectRatio: '1/1', maxHeight: 520, width: '100%' }}>
+                            <video
+                                src="https://storage.googleapis.com/msgsndr/aYvoAsXxf5xBOSngnm2U/media/6966cb954d18c5dcdb2173e1.mp4"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                        </div>
+                        <div className="glp1b-hero-badges" style={{ marginTop: 16 }}>
                             <span className="glp1b-hero-badge">
                                 <iconify-icon icon="lucide:shield" width="14"></iconify-icon>
                                 Supports lean mass
@@ -120,6 +118,10 @@ const GLP1BundlePage = () => {
                                 Supports metabolic health
                             </span>
                         </div>
+                    </div>
+                    <div className="tprime-hero-text">
+                        <h1>GLP-1 Cellular<br />Optimization System<br /><em>for Daily Energy + Recovery</em></h1>
+                        <p className="subhead">The complete 4-product system designed to support lean mass, daily energy, and metabolic health during GLP-1 routines.</p>
                         <div className="price-row">
                             <span className="price-big">$279</span>
                             <span className="price-note" style={{ textDecoration: 'line-through', marginRight: 8 }}>$655</span>
