@@ -172,15 +172,15 @@ const UCOSPage = () => {
                 <div className="ucos-product-detail-grid">
                     {[
                         {
-                            img: '/placeholder.svg', title: 'Morning Cellular Activation (Activate365)',
+                            img: '/images/benefit-morning-activation.jpg', title: 'Morning Cellular Activation (Activate365)',
                             items: ['Spermidine 10mg — Activates autophagy & cellular renewal', 'NAD+ 20mg — Immediate cellular energy production', 'Boron 10mg — Hormone optimization & priming', 'MODS Max™ — 10x enhanced sublingual absorption']
                         },
                         {
-                            img: '/placeholder.svg', title: 'All-Day Mitochondrial Power (Mito365)',
+                            img: '/images/benefit-midday-power.jpg', title: 'All-Day Mitochondrial Power (Mito365)',
                             items: ['Methylene Blue 10mg — 30-40% ATP increase', 'PQQ 20mg — Creates new mitochondria (biogenesis)', 'NAD+ 150mg — Maximum cellular energy', 'GHK-Cu Peptide 10mg — Tissue repair & recovery']
                         },
                         {
-                            img: '/placeholder.svg', title: 'Overnight Recovery Optimization (Restore365)',
+                            img: '/images/benefit-evening-restore.jpg', title: 'Overnight Recovery Optimization (Restore365)',
                             items: ['Enhanced Melatonin 600mcg — 50-70% faster sleep onset', 'GABA 50mg — Deep sleep support', 'Boron 10mg — Growth hormone release', 'MODS Max™ Sleep Matrix — Overnight cellular repair']
                         },
                     ].map((product, i) => (

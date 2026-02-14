@@ -176,18 +176,16 @@
   overflow: hidden;
 }
 .ucos-product-detail-card .product-img-wrap {
-  background: linear-gradient(180deg, #f0f4f8 0%, #e8edf2 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  height: 200px;
+  overflow: hidden;
+  height: 220px;
 }
 .ucos-product-detail-card .product-img-wrap img {
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.12));
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .ucos-product-detail-card .product-detail-body {
   padding: 24px;
