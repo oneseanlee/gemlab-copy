@@ -93,7 +93,14 @@ const GLP1BundlePage = () => {
             <section className={`glp1b-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        <img src="/images/glp1-ucos-hero.png" alt="GLP-1 Cellular Optimization System — 4 Products" />
+                        <video
+                            src="https://storage.googleapis.com/msgsndr/aYvoAsXxf5xBOSngnm2U/media/6966cb954d18c5dcdb2173e1.mp4"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 16 }}
+                        />
                     </div>
                     <div className="tprime-hero-text">
                         <p className="glp1b-section-label" style={{ textAlign: 'left', marginBottom: 8 }}>✨ Complete GLP-1 Optimization Bundle</p>
