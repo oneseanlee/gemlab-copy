@@ -134,7 +134,7 @@ const UCOSPage = () => {
                         <div className="icon-wrap">
                             <iconify-icon icon={badge.icon} width="22"></iconify-icon>
                         </div>
-                        <div className="trust-value">{badge.value}</div>
+                        <div className={`trust-value${badge.value.length > 4 ? ' text-long' : ''}`}>{badge.value}</div>
                         <h4>{badge.title}</h4>
                         <p>{badge.desc}</p>
                     </div>
