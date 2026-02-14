@@ -7,6 +7,7 @@ import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
+import EarlyTestersCarousel from '../components/EarlyTestersCarousel/EarlyTestersCarousel';
 
 // TODO: Replace with real Shopify variant ID once the GLP-1 Bundle product is created
 const GLP1_BUNDLE_VARIANT_ID = 'gid://shopify/ProductVariant/PLACEHOLDER_GLP1_BUNDLE';
@@ -283,24 +284,7 @@ const GLP1BundlePage = () => {
                 </div>
 
                 <h3 style={{ textAlign: 'center', fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, fontWeight: 600, color: 'var(--b365-text)', marginBottom: 24 }}>Early Testers</h3>
-                <div className="ucos-testimonial-grid">
-                    {[
-          { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', role: 'Early Tester', quote: "My testosterone went from 658 to 749 in two months—more energy, sharper focus, better performance. This system changed my life." },
-          { img: '/placeholder.svg', name: 'Mike VanDyke', role: 'Early Tester', quote: "I experienced rapid improvements in energy and cellular performance. It's a game-changer for anyone serious about health." },
-          { img: '/placeholder.svg', name: 'Whitney Lopez', role: 'Early Tester & Controller', quote: "As a busy professional, the system gave me noticeable improvements in energy and focus—plus, I trust the science behind it." },
-          { img: '/placeholder.svg', name: 'Jordan Sides', role: 'Early Tester & Research Participant', quote: "I wanted real results and evidence. This program delivered both—better wellness, sharper mind, and research I could be part of every step." },
-          { img: '/placeholder.svg', name: 'Maryanne Van Dyke', role: 'Early Tester & Influencer', quote: "The Cellular Optimization System helped me level up my health and share authentic results with my audience—real energy, real confidence, every day." }].
-          map((t, i) =>
-          <div className="ucos-testimonial-card" key={i}>
-                            <img className="testimonial-avatar" src={t.img} alt={t.name} />
-                            <div className="testimonial-body">
-                                <h4>{t.name}</h4>
-                                <div className="role">{t.role}</div>
-                                <blockquote>"{t.quote}"</blockquote>
-                            </div>
-                        </div>
-          )}
-                </div>
+                <EarlyTestersCarousel />
 
                 <div style={{ textAlign: 'center', marginTop: 32 }}>
                     <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
