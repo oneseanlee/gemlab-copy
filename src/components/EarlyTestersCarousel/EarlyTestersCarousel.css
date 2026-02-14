@@ -1,0 +1,45 @@
+.early-testers-carousel {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.early-testers-viewport {
+  overflow: hidden;
+}
+
+.early-testers-container {
+  display: flex;
+}
+
+.early-testers-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding: 0 8px;
+}
+
+.early-testers-slide .ucos-testimonial-card {
+  margin: 0;
+}
+
+.early-testers-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.early-testers-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: var(--b365-border, #d1d5db);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.early-testers-dot.active {
+  background: var(--b365-blue, #3376b0);
+  transform: scale(1.2);
+}
