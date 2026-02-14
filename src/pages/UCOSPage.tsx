@@ -11,55 +11,55 @@ import { useCartStore } from '../stores/cartStore';
 // TODO: Replace with real Shopify variant ID once the UCOS product is created
 const UCOS_VARIANT_ID = 'gid://shopify/ProductVariant/PLACEHOLDER_UCOS';
 const UCOS_PRODUCT = {
-    node: {
-        id: 'gid://shopify/Product/PLACEHOLDER_UCOS',
-        title: 'Ultimate Cellular Optimization System',
-        description: 'Complete 24-Hour Cellular Optimization System — Activate365, Mito365, Restore365',
-        handle: 'ucos-complete-system',
-        priceRange: { minVariantPrice: { amount: '258.00', currencyCode: 'USD' } },
-        images: { edges: [{ node: { url: '/placeholder.svg', altText: 'UCOS System' } }] },
-        variants: { edges: [{ node: { id: UCOS_VARIANT_ID, title: 'Complete System', price: { amount: '258.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Bundle', value: 'Complete System' }] } }] },
-        options: [{ name: 'Bundle', values: ['Complete System'] }],
-    }
+  node: {
+    id: 'gid://shopify/Product/PLACEHOLDER_UCOS',
+    title: 'Ultimate Cellular Optimization System',
+    description: 'Complete 24-Hour Cellular Optimization System — Activate365, Mito365, Restore365',
+    handle: 'ucos-complete-system',
+    priceRange: { minVariantPrice: { amount: '258.00', currencyCode: 'USD' } },
+    images: { edges: [{ node: { url: '/placeholder.svg', altText: 'UCOS System' } }] },
+    variants: { edges: [{ node: { id: UCOS_VARIANT_ID, title: 'Complete System', price: { amount: '258.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Bundle', value: 'Complete System' }] } }] },
+    options: [{ name: 'Bundle', values: ['Complete System'] }]
+  }
 };
 
 const UCOSPage = () => {
-    const [showBanner, setShowBanner] = useState(true);
-    const [openFaq, setOpenFaq] = useState<number | null>(0);
-    const addItem = useCartStore(state => state.addItem);
-    const isLoading = useCartStore(state => state.isLoading);
+  const [showBanner, setShowBanner] = useState(true);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const addItem = useCartStore((state) => state.addItem);
+  const isLoading = useCartStore((state) => state.isLoading);
 
-    const handleOrderNow = async (e?: React.MouseEvent) => {
-        e?.preventDefault();
-        await addItem({
-            product: UCOS_PRODUCT,
-            variantId: UCOS_VARIANT_ID,
-            variantTitle: 'Complete System',
-            price: { amount: '258.00', currencyCode: 'USD' },
-            quantity: 1,
-            selectedOptions: [{ name: 'Bundle', value: 'Complete System' }],
-        });
-    };
+  const handleOrderNow = async (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    await addItem({
+      product: UCOS_PRODUCT,
+      variantId: UCOS_VARIANT_ID,
+      variantTitle: 'Complete System',
+      price: { amount: '258.00', currencyCode: 'USD' },
+      quantity: 1,
+      selectedOptions: [{ name: 'Bundle', value: 'Complete System' }]
+    });
+  };
 
-    const faqItems = [
-        { question: "How does the 24-hour cellular optimization system work?", answer: "The system uses three precision-timed supplements: Activate365 in the morning to prime your cells with spermidine, NAD+, and boron; Mito365 at midday to supercharge mitochondrial function with Methylene Blue, PQQ, and NAD+; and Restore365 in the evening to optimize deep sleep and overnight recovery with melatonin, GABA, and boron. Together, they create a complete 24-hour optimization cycle." },
-        { question: "What makes this different from taking individual supplements?", answer: "Individual supplements lack coordination and timing. Our system is precisely engineered so each formula amplifies the others — morning activation feeds into midday energy production, which feeds into evening recovery. The cumulative synergy delivers results that individual supplements simply cannot match. Plus, our MODS Max™ delivery technology provides up to 10x enhanced absorption." },
-        { question: "Are the ingredients safe and third-party tested?", answer: "Yes. All products are manufactured in FDA-registered, cGMP-certified facilities in the USA. Every batch is third-party tested for purity and potency. Important: Methylene Blue (in Mito365) should NOT be used by patients with G6PD deficiency or those taking MAOIs/SSRIs." },
-        { question: "How quickly will I see results with the cellular system?", answer: "Many users report noticeable improvements in energy and focus within the first 1-2 weeks. Sleep quality improvements with Restore365 are often noticed within the first few nights. Full systemic benefits typically develop over 4-8 weeks of consistent use." },
-        { question: "What is MODS Max™ delivery technology?", answer: "MODS Max™ (Microdose Optimized Delivery System) is our patent-pending sublingual delivery technology. It uses microdose reactive oxygen species to briefly open mucosal barriers, enabling direct bloodstream absorption that bypasses the digestive system. This results in up to 10x enhanced bioavailability compared to standard oral supplements." },
-        { question: "How do I contact 365 Labs for support?", answer: "You can reach our support team by phone at (385) 421-5651 or by email at info@best365labs.com. Our team is available to answer any questions about the system, ingredients, or your order." },
-    ];
+  const faqItems = [
+  { question: "How does the 24-hour cellular optimization system work?", answer: "The system uses three precision-timed supplements: Activate365 in the morning to prime your cells with spermidine, NAD+, and boron; Mito365 at midday to supercharge mitochondrial function with Methylene Blue, PQQ, and NAD+; and Restore365 in the evening to optimize deep sleep and overnight recovery with melatonin, GABA, and boron. Together, they create a complete 24-hour optimization cycle." },
+  { question: "What makes this different from taking individual supplements?", answer: "Individual supplements lack coordination and timing. Our system is precisely engineered so each formula amplifies the others — morning activation feeds into midday energy production, which feeds into evening recovery. The cumulative synergy delivers results that individual supplements simply cannot match. Plus, our MODS Max™ delivery technology provides up to 10x enhanced absorption." },
+  { question: "Are the ingredients safe and third-party tested?", answer: "Yes. All products are manufactured in FDA-registered, cGMP-certified facilities in the USA. Every batch is third-party tested for purity and potency. Important: Methylene Blue (in Mito365) should NOT be used by patients with G6PD deficiency or those taking MAOIs/SSRIs." },
+  { question: "How quickly will I see results with the cellular system?", answer: "Many users report noticeable improvements in energy and focus within the first 1-2 weeks. Sleep quality improvements with Restore365 are often noticed within the first few nights. Full systemic benefits typically develop over 4-8 weeks of consistent use." },
+  { question: "What is MODS Max™ delivery technology?", answer: "MODS Max™ (Microdose Optimized Delivery System) is our patent-pending sublingual delivery technology. It uses microdose reactive oxygen species to briefly open mucosal barriers, enabling direct bloodstream absorption that bypasses the digestive system. This results in up to 10x enhanced bioavailability compared to standard oral supplements." },
+  { question: "How do I contact 365 Labs for support?", answer: "You can reach our support team by phone at (385) 421-5651 or by email at info@best365labs.com. Our team is available to answer any questions about the system, ingredients, or your order." }];
 
-    return (
-        <div className="ucos-page">
+
+  return (
+    <div className="ucos-page">
 
             {/* 1. Promo Banner */}
-            {showBanner && (
-                <div className="b365-promo-banner">
+            {showBanner &&
+      <div className="b365-promo-banner">
                     🔥 SAVE $201 — Ultimate Cellular Optimization System — Today Only
                     <button onClick={() => setShowBanner(false)} aria-label="Close banner">✕</button>
                 </div>
-            )}
+      }
 
             {/* 2. Navigation */}
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
@@ -125,12 +125,12 @@ const UCOSPage = () => {
             {/* 4. Trust Badges */}
             <div className="ucos-trust-strip">
                 {[
-                    { icon: 'lucide:badge-check', label: 'VERIFIED', value: '10x', title: 'Absorption', desc: 'MODS Max™' },
-                    { icon: 'lucide:clock', label: 'COMPLETE', value: '24', title: 'Hour System', desc: '' },
-                    { icon: 'lucide:flag', label: '', value: '★', title: 'USA Made', desc: 'CGMP Facility' },
-                    { icon: 'lucide:shield-check', label: '', value: '', title: 'Quality Tested', desc: '' },
-                ].map((badge, i) => (
-                    <div className="ucos-trust-badge" key={i}>
+        { icon: 'lucide:badge-check', label: 'VERIFIED', value: '10x', title: 'Absorption', desc: 'MODS Max™' },
+        { icon: 'lucide:clock', label: 'COMPLETE', value: '24', title: 'Hour System', desc: '' },
+        { icon: 'lucide:flag', label: '', value: '★', title: 'USA Made', desc: 'CGMP Facility' },
+        { icon: 'lucide:shield-check', label: '', value: '', title: 'Quality Tested', desc: '' }].
+        map((badge, i) =>
+        <div className="ucos-trust-badge" key={i}>
                         <div className="icon-wrap">
                             <iconify-icon icon={badge.icon} width="22"></iconify-icon>
                         </div>
@@ -139,7 +139,7 @@ const UCOSPage = () => {
                         <h4>{badge.title}</h4>
                         {badge.desc && <p>{badge.desc}</p>}
                     </div>
-                ))}
+        )}
             </div>
 
             {/* 5. Complete Cellular Integration */}
@@ -150,11 +150,11 @@ const UCOSPage = () => {
                 </p>
                 <div className="ucos-flow-grid">
                     {[
-                        { img: '/images/activate365.png', time: 'Morning', timeClass: 'morning', title: 'Activate365', subtitle: 'Morning Cellular Activation', desc: 'Sublingual primer with Spermidine, NAD+, and Boron to activate autophagy and prime cellular energy.' },
-                        { img: '/images/mito365.png', time: 'Mid-Day', timeClass: 'midday', title: 'Mito365', subtitle: 'All-Day Mitochondrial Power', desc: 'Tablet matrix with Methylene Blue, PQQ, NAD+, and GHK-Cu for sustained mitochondrial performance.' },
-                        { img: '/images/restore365.png', time: 'Evening', timeClass: 'evening', title: 'Restore365', subtitle: 'Overnight Recovery Optimization', desc: 'Sublingual recovery with Melatonin, GABA, and Boron for deep sleep and cellular repair.' },
-                    ].map((product, i) => (
-                        <div className="ucos-flow-card" key={i}>
+          { img: '/images/activate365.png', time: 'Morning', timeClass: 'morning', title: 'Activate365', subtitle: 'Morning Cellular Activation', desc: 'Sublingual primer with Spermidine, NAD+, and Boron to activate autophagy and prime cellular energy.' },
+          { img: '/images/mito365.png', time: 'Mid-Day', timeClass: 'midday', title: 'Mito365', subtitle: 'All-Day Mitochondrial Power', desc: 'Tablet matrix with Methylene Blue, PQQ, NAD+, and GHK-Cu for sustained mitochondrial performance.' },
+          { img: '/images/restore365.png', time: 'Evening', timeClass: 'evening', title: 'Restore365', subtitle: 'Overnight Recovery Optimization', desc: 'Sublingual recovery with Melatonin, GABA, and Boron for deep sleep and cellular repair.' }].
+          map((product, i) =>
+          <div className="ucos-flow-card" key={i}>
                             {/* PLACEHOLDER IMAGE — Needs: Individual product bottle */}
                             <img className="flow-img" src={product.img} alt={product.title} />
                             <span className={`flow-time ${product.timeClass}`}>{product.time}</span>
@@ -162,7 +162,7 @@ const UCOSPage = () => {
                             <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--b365-blue)', marginBottom: 8 }}>{product.subtitle}</p>
                             <p>{product.desc}</p>
                         </div>
-                    ))}
+          )}
                 </div>
             </section>
 
@@ -171,20 +171,20 @@ const UCOSPage = () => {
                 <h2 className="b365-section-heading b365-serif">Cellular Optimization <em>Benefits</em></h2>
                 <div className="ucos-product-detail-grid">
                     {[
-                        {
-                            img: '/images/benefit-morning-activation.jpg', title: 'Morning Cellular Activation (Activate365)',
-                            items: ['Spermidine 10mg — Activates autophagy & cellular renewal', 'NAD+ 20mg — Immediate cellular energy production', 'Boron 10mg — Hormone optimization & priming', 'MODS Max™ — 10x enhanced sublingual absorption']
-                        },
-                        {
-                            img: '/images/benefit-midday-power.jpg', title: 'All-Day Mitochondrial Power (Mito365)',
-                            items: ['Methylene Blue 10mg — 30-40% ATP increase', 'PQQ 20mg — Creates new mitochondria (biogenesis)', 'NAD+ 150mg — Maximum cellular energy', 'GHK-Cu Peptide 10mg — Tissue repair & recovery']
-                        },
-                        {
-                            img: '/images/benefit-evening-restore.jpg', title: 'Overnight Recovery Optimization (Restore365)',
-                            items: ['Enhanced Melatonin 600mcg — 50-70% faster sleep onset', 'GABA 50mg — Deep sleep support', 'Boron 10mg — Growth hormone release', 'MODS Max™ Sleep Matrix — Overnight cellular repair']
-                        },
-                    ].map((product, i) => (
-                        <div className="ucos-product-detail-card" key={i}>
+          {
+            img: '/placeholder.svg', title: 'Morning Cellular Activation (Activate365)',
+            items: ['Spermidine 10mg — Activates autophagy & cellular renewal', 'NAD+ 20mg — Immediate cellular energy production', 'Boron 10mg — Hormone optimization & priming', 'MODS Max™ — 10x enhanced sublingual absorption']
+          },
+          {
+            img: '/placeholder.svg', title: 'All-Day Mitochondrial Power (Mito365)',
+            items: ['Methylene Blue 10mg — 30-40% ATP increase', 'PQQ 20mg — Creates new mitochondria (biogenesis)', 'NAD+ 150mg — Maximum cellular energy', 'GHK-Cu Peptide 10mg — Tissue repair & recovery']
+          },
+          {
+            img: '/placeholder.svg', title: 'Overnight Recovery Optimization (Restore365)',
+            items: ['Enhanced Melatonin 600mcg — 50-70% faster sleep onset', 'GABA 50mg — Deep sleep support', 'Boron 10mg — Growth hormone release', 'MODS Max™ Sleep Matrix — Overnight cellular repair']
+          }].
+          map((product, i) =>
+          <div className="ucos-product-detail-card" key={i}>
                             <div className="product-img-wrap">
                                 {/* PLACEHOLDER IMAGE — Needs: Product bottle shot */}
                                 <img src={product.img} alt={product.title} />
@@ -192,13 +192,13 @@ const UCOSPage = () => {
                             <div className="product-detail-body">
                                 <h3>{product.title}</h3>
                                 <ul>
-                                    {product.items.map((item, j) => (
-                                        <li key={j}><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>{item}</li>
-                                    ))}
+                                    {product.items.map((item, j) =>
+                <li key={j}><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>{item}</li>
+                )}
                                 </ul>
                             </div>
                         </div>
-                    ))}
+          )}
                 </div>
             </section>
 
@@ -207,24 +207,24 @@ const UCOSPage = () => {
                 <h2 className="b365-section-heading b365-serif">Experience Targeted Benefits <em>Throughout Your Day</em></h2>
                 <div className="tprime-benefits-grid">
                     {[
-                        { icon: 'lucide:zap', title: 'Sustained Daily Energy', desc: 'No more crashes — steady energy from morning to evening.' },
-                        { icon: 'lucide:brain', title: 'Enhanced Mental Clarity', desc: 'Sharper focus and cognitive performance all day long.' },
-                        { icon: 'lucide:dumbbell', title: 'Improved Physical Performance', desc: 'Better workouts, faster recovery, and increased endurance.' },
-                        { icon: 'lucide:activity', title: 'All-Day Sustained Energy', desc: 'Mitochondrial power keeps you performing at your peak.' },
-                        { icon: 'lucide:sparkles', title: 'Enhanced Cognitive Function', desc: 'Methylene Blue and NAD+ work together for mental clarity.' },
-                        { icon: 'lucide:heart', title: 'Better Cellular Health', desc: 'PQQ creates new mitochondria while NAD+ powers existing ones.' },
-                        { icon: 'lucide:moon', title: 'Deeper Restorative Sleep', desc: 'Optimized melatonin and GABA for quality deep sleep.' },
-                        { icon: 'lucide:refresh-cw', title: 'Faster Muscle Recovery', desc: 'Overnight cellular repair with growth hormone support.' },
-                        { icon: 'lucide:bed', title: 'Improved Sleep Patterns', desc: 'Fall asleep faster and wake refreshed with consistent quality.' },
-                    ].map((b, i) => (
-                        <div className="tprime-benefit-card" key={i}>
+          { icon: 'lucide:zap', title: 'Sustained Daily Energy', desc: 'No more crashes — steady energy from morning to evening.' },
+          { icon: 'lucide:brain', title: 'Enhanced Mental Clarity', desc: 'Sharper focus and cognitive performance all day long.' },
+          { icon: 'lucide:dumbbell', title: 'Improved Physical Performance', desc: 'Better workouts, faster recovery, and increased endurance.' },
+          { icon: 'lucide:activity', title: 'All-Day Sustained Energy', desc: 'Mitochondrial power keeps you performing at your peak.' },
+          { icon: 'lucide:sparkles', title: 'Enhanced Cognitive Function', desc: 'Methylene Blue and NAD+ work together for mental clarity.' },
+          { icon: 'lucide:heart', title: 'Better Cellular Health', desc: 'PQQ creates new mitochondria while NAD+ powers existing ones.' },
+          { icon: 'lucide:moon', title: 'Deeper Restorative Sleep', desc: 'Optimized melatonin and GABA for quality deep sleep.' },
+          { icon: 'lucide:refresh-cw', title: 'Faster Muscle Recovery', desc: 'Overnight cellular repair with growth hormone support.' },
+          { icon: 'lucide:bed', title: 'Improved Sleep Patterns', desc: 'Fall asleep faster and wake refreshed with consistent quality.' }].
+          map((b, i) =>
+          <div className="tprime-benefit-card" key={i}>
                             <div className="icon-wrap">
                                 <iconify-icon icon={b.icon} width="22"></iconify-icon>
                             </div>
                             <h4>{b.title}</h4>
                             <p>{b.desc}</p>
                         </div>
-                    ))}
+          )}
                 </div>
             </section>
 
@@ -246,14 +246,14 @@ const UCOSPage = () => {
                 </p>
                 <div className="ucos-stats-grid">
                     {[
-                        { icon: 'lucide:dna', value: '170mg', label: 'TOTAL DAILY NAD+', desc: 'Maximum cellular energy production and longevity pathway activation throughout entire 24-hour cycle' },
-                        { icon: 'lucide:shield', value: '160mg', label: 'TOTAL DAILY VITAMIN C', desc: 'Complete antioxidant protection during enhanced cellular activity and overnight recovery processes' },
-                        { icon: 'lucide:gem', value: '20mg', label: 'TOTAL DAILY BORON', desc: 'Full hormone optimization cycle with morning priming and evening restoration support' },
-                        { icon: 'lucide:zap', value: '10x', label: 'ENHANCED ABSORPTION', desc: 'MODS Max technology maximizes bioavailability of all nutrients for exponential benefit enhancement' },
-                        { icon: 'lucide:refresh-cw', value: '24/7', label: 'COMPLETE AUTOPHAGY CYCLE', desc: 'Morning activation with spermidine, sustained throughout day, enhanced during sleep recovery' },
-                        { icon: 'lucide:flame', value: '3x', label: 'TRIPLE MITOCHONDRIAL SUPPORT', desc: 'Methylene Blue optimization + PQQ biogenesis + NAD+ power for maximum cellular energy' },
-                    ].map((stat, i) => (
-                        <div className="ucos-stat-card" key={i}>
+          { icon: 'lucide:dna', value: '170mg', label: 'TOTAL DAILY NAD+', desc: 'Maximum cellular energy production and longevity pathway activation throughout entire 24-hour cycle' },
+          { icon: 'lucide:shield', value: '160mg', label: 'TOTAL DAILY VITAMIN C', desc: 'Complete antioxidant protection during enhanced cellular activity and overnight recovery processes' },
+          { icon: 'lucide:gem', value: '20mg', label: 'TOTAL DAILY BORON', desc: 'Full hormone optimization cycle with morning priming and evening restoration support' },
+          { icon: 'lucide:zap', value: '10x', label: 'ENHANCED ABSORPTION', desc: 'MODS Max technology maximizes bioavailability of all nutrients for exponential benefit enhancement' },
+          { icon: 'lucide:refresh-cw', value: '24/7', label: 'COMPLETE AUTOPHAGY CYCLE', desc: 'Morning activation with spermidine, sustained throughout day, enhanced during sleep recovery' },
+          { icon: 'lucide:flame', value: '3x', label: 'TRIPLE MITOCHONDRIAL SUPPORT', desc: 'Methylene Blue optimization + PQQ biogenesis + NAD+ power for maximum cellular energy' }].
+          map((stat, i) =>
+          <div className="ucos-stat-card" key={i}>
                             <div className="stat-icon">
                                 <iconify-icon icon={stat.icon} width="22"></iconify-icon>
                             </div>
@@ -261,7 +261,7 @@ const UCOSPage = () => {
                             <div className="stat-label">{stat.label}</div>
                             <p className="stat-desc">{stat.desc}</p>
                         </div>
-                    ))}
+          )}
                 </div>
             </section>
 
@@ -273,10 +273,10 @@ const UCOSPage = () => {
                 <h3 style={{ textAlign: 'center', fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, fontWeight: 600, color: 'var(--b365-text)', marginBottom: 24 }}>Co-Founders</h3>
                 <div className="ucos-testimonial-grid" style={{ marginBottom: 40 }}>
                     {[
-                        { img: '/images/testimonial-dan-schmidt.png', name: 'Dan Schmidt', role: 'Co-Founder', quote: "I'm proud to help build a system that combines the latest science with real-world results—empowering everyone to achieve peak cellular health." },
-                        { img: '/images/testimonial-darren-lopez.png', name: 'Darren Lopez', role: 'Co-Founder', quote: "Our goal was simple: create a solution that truly helps people reclaim their energy, resilience, and confidence by optimizing health at the cellular level." },
-                    ].map((t, i) => (
-                        <div className="ucos-testimonial-card" key={i}>
+          { img: '/images/testimonial-dan-schmidt.png', name: 'Dan Schmidt', role: 'Co-Founder', quote: "I'm proud to help build a system that combines the latest science with real-world results—empowering everyone to achieve peak cellular health." },
+          { img: '/images/testimonial-darren-lopez.png', name: 'Darren Lopez', role: 'Co-Founder', quote: "Our goal was simple: create a solution that truly helps people reclaim their energy, resilience, and confidence by optimizing health at the cellular level." }].
+          map((t, i) =>
+          <div className="ucos-testimonial-card" key={i}>
                             <img className="testimonial-avatar" src={t.img} alt={t.name} />
                             <div className="testimonial-body">
                                 <h4>{t.name}</h4>
@@ -284,19 +284,19 @@ const UCOSPage = () => {
                                 <blockquote>"{t.quote}"</blockquote>
                             </div>
                         </div>
-                    ))}
+          )}
                 </div>
 
                 <h3 style={{ textAlign: 'center', fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, fontWeight: 600, color: 'var(--b365-text)', marginBottom: 24 }}>Early Testers</h3>
                 <div className="ucos-testimonial-grid">
                     {[
-                        { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', role: 'Early Tester', quote: "My testosterone went from 658 to 749 in two months—more energy, sharper focus, better performance. This system changed my life." },
-                        { img: '/placeholder.svg', name: 'Mike VanDyke', role: 'Early Tester', quote: "I experienced rapid improvements in energy and cellular performance. It's a game-changer for anyone serious about health." },
-                        { img: '/placeholder.svg', name: 'Whitney Lopez', role: 'Early Tester & Controller', quote: "As a busy professional, the system gave me noticeable improvements in energy and focus—plus, I trust the science behind it." },
-                        { img: '/placeholder.svg', name: 'Jordan Sides', role: 'Early Tester & Research Participant', quote: "I wanted real results and evidence. This program delivered both—better wellness, sharper mind, and research I could be part of every step." },
-                        { img: '/placeholder.svg', name: 'Maryanne Van Dyke', role: 'Early Tester & Influencer', quote: "The Cellular Optimization System helped me level up my health and share authentic results with my audience—real energy, real confidence, every day." },
-                    ].map((t, i) => (
-                        <div className="ucos-testimonial-card" key={i}>
+          { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', role: 'Early Tester', quote: "My testosterone went from 658 to 749 in two months—more energy, sharper focus, better performance. This system changed my life." },
+          { img: '/placeholder.svg', name: 'Mike VanDyke', role: 'Early Tester', quote: "I experienced rapid improvements in energy and cellular performance. It's a game-changer for anyone serious about health." },
+          { img: '/placeholder.svg', name: 'Whitney Lopez', role: 'Early Tester & Controller', quote: "As a busy professional, the system gave me noticeable improvements in energy and focus—plus, I trust the science behind it." },
+          { img: '/placeholder.svg', name: 'Jordan Sides', role: 'Early Tester & Research Participant', quote: "I wanted real results and evidence. This program delivered both—better wellness, sharper mind, and research I could be part of every step." },
+          { img: '/placeholder.svg', name: 'Maryanne Van Dyke', role: 'Early Tester & Influencer', quote: "The Cellular Optimization System helped me level up my health and share authentic results with my audience—real energy, real confidence, every day." }].
+          map((t, i) =>
+          <div className="ucos-testimonial-card" key={i}>
                             <img className="testimonial-avatar" src={t.img} alt={t.name} />
                             <div className="testimonial-body">
                                 <h4>{t.name}</h4>
@@ -304,7 +304,7 @@ const UCOSPage = () => {
                                 <blockquote>"{t.quote}"</blockquote>
                             </div>
                         </div>
-                    ))}
+          )}
                 </div>
 
                 <div style={{ textAlign: 'center', marginTop: 32 }}>
@@ -453,7 +453,7 @@ const UCOSPage = () => {
             <section className="b365-section">
                 <div className="tprime-final-cta">
                     <h2>Get Your Complete System <em>Now!</em></h2>
-                    <p className="subtitle">🔥 Transform Your Energy in 24 Hours — Ships Today!</p>
+                    <p className="subtitle text-primary-foreground">🔥 Transform Your Energy in 24 Hours — Ships Today!</p>
                     <p style={{ fontSize: 14, opacity: 0.85, marginBottom: 24, maxWidth: 600, marginLeft: 'auto', marginRight: 'auto' }}>
                         Complete 24-hour cellular optimization system with precision-timed formulas for maximum results
                     </p>
@@ -501,15 +501,15 @@ const UCOSPage = () => {
                         </AnimatedCTA>
                     </div>
                     <div>
-                        {faqItems.map((item, index) => (
-                            <div className="b365-faq-item" key={index}>
+                        {faqItems.map((item, index) =>
+            <div className="b365-faq-item" key={index}>
                                 <button className="b365-faq-trigger" onClick={() => setOpenFaq(openFaq === index ? null : index)}>
                                     {item.question}
                                     <span className="faq-icon">{openFaq === index ? '−' : '+'}</span>
                                 </button>
                                 {openFaq === index && <div className="b365-faq-answer">{item.answer}</div>}
                             </div>
-                        ))}
+            )}
                     </div>
                 </div>
             </section>
@@ -530,8 +530,8 @@ const UCOSPage = () => {
 
             {/* Footer */}
             <SharedFooter />
-        </div>
-    );
+        </div>);
+
 };
 
 export default UCOSPage;
