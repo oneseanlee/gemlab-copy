@@ -317,7 +317,7 @@ const OceanRaysPage = () => {
               <div className="price">{product.price}<span>{product.priceSuffix}</span></div>
               <p className="price-note">{product.priceNote}</p>
               <div className="card-actions" style={{ justifyContent: 'center' }}>
-                <AnimatedCTA href={product.href} className="card-cta">Start evaluation</AnimatedCTA>
+                <AnimatedCTA href={product.href} className="card-cta">Get Started</AnimatedCTA>
               </div>
             </div>
           ))}
