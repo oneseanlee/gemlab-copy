@@ -23,6 +23,7 @@ const products = [
     priceNote: 'Includes Physician Consultation',
     image: '/images/product-tprime.png',
     mobileImage: '/images/mobile-tprime.png',
+    href: '/tprime365',
   },
   {
     id: 2,
@@ -40,6 +41,7 @@ const products = [
     priceNote: 'Launch Offer (Reg. $90.00)',
     image: '/images/product-glp-protocol.png',
     mobileImage: '/images/mobile-glp-protocol.png',
+    href: '/glp1-protocol',
   },
   {
     id: 3,
@@ -57,6 +59,7 @@ const products = [
     priceNote: '3-Product Synergistic Stack',
     image: '/images/product-ucos.png',
     mobileImage: '/images/mobile-ucos.png',
+    href: '/ucos',
   },
   {
     id: 4,
@@ -74,6 +77,7 @@ const products = [
     priceNote: 'Total Value: $655',
     image: '/images/product-glp1-ucos.png',
     mobileImage: '/images/mobile-glp1-ucos.png',
+    href: '/glp1-ucos',
   },
   {
     id: 5,
@@ -91,6 +95,7 @@ const products = [
     priceNote: 'Physician Review via happyMD Included',
     image: '/images/product-nhto.png',
     mobileImage: '/images/mobile-nhto.png',
+    href: '/nhto',
   },
 ];
 
@@ -208,7 +213,7 @@ const OceanRaysPage = () => {
           <button className="b365-hamburger" aria-label="Menu">
             <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
           </button>
-          <a href="#">
+          <a href="/">
             <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
           </a>
           <ul className="b365-nav-links">
@@ -312,7 +317,7 @@ const OceanRaysPage = () => {
               <div className="price">{product.price}<span>{product.priceSuffix}</span></div>
               <p className="price-note">{product.priceNote}</p>
               <div className="card-actions" style={{ justifyContent: 'center' }}>
-                <AnimatedCTA href="#" className="card-cta">Start evaluation</AnimatedCTA>
+                <AnimatedCTA href={product.href} className="card-cta">Start evaluation</AnimatedCTA>
               </div>
             </div>
           ))}
@@ -428,7 +433,7 @@ const OceanRaysPage = () => {
                 No pills, no injections, no gut disruption
               </li>
             </ul>
-            <AnimatedCTA href="#" className="btn-white-cta">Learn More</AnimatedCTA>
+            <AnimatedCTA href="#science" className="btn-white-cta">Learn More</AnimatedCTA>
           </div>
           <div className="b365-power-up-visual">
             <img src="/images/tprime-sublingual-delivery.jpg" alt="MODS Max sublingual delivery technology" />
@@ -456,14 +461,14 @@ const OceanRaysPage = () => {
             { img: '/images/guide-testosterone-fertility.png', title: 'Testosterone Optimization Without Sacrificing Fertility' },
             { img: '/images/guide-before-trt.png', title: 'Before You Commit to TRT — Answer These Questions' },
           ].map((guide, i) => (
-            <a href="#" className="b365-guide-card" key={i}>
+            <a href="/article" className="b365-guide-card" key={i}>
               <img src={guide.img} alt={guide.title} />
               <h4>{guide.title}</h4>
             </a>
           ))}
         </div>
         <div style={{ textAlign: 'center', marginTop: 40 }}>
-          <AnimatedCTA href="#">See All Guides</AnimatedCTA>
+          <AnimatedCTA href="/article">See All Guides</AnimatedCTA>
         </div>
       </section>
 
@@ -500,7 +505,7 @@ const OceanRaysPage = () => {
         <div className="b365-faq-layout">
           <div className="b365-faq-left">
             <h2>You have questions, <em>we have answers.</em></h2>
-            <AnimatedCTA href="#" style={{ marginTop: 8 }}>
+            <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
               <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
               Contact Support
             </AnimatedCTA>
