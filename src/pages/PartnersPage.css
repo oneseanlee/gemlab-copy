@@ -1,4 +1,4 @@
-/* Partners / Affiliate Page — Homepage-Matching Design */
+/* Partners / Affiliate Page — TPrime365-Matching Design */
 
 .partners-page {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -8,32 +8,35 @@
   background: var(--b365-white);
 }
 
-/* ─── Hero (Homepage Card Style) ─── */
-.partners-hero {
-  padding: 140px 24px 0;
+/* ─── Hero (Matching TPrime365 Hero) ─── */
+.partners-hero-section {
+  padding: 150px 24px 0;
   background-color: var(--b365-white);
+}
+.partners-hero-section.no-banner {
+  padding-top: 100px;
 }
 .partners-hero-container {
   max-width: 1280px;
   margin: 0 auto;
-  background: #b8ccde;
+  background: var(--b365-light-blue);
   border-radius: 24px;
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 480px;
+  min-height: 580px;
 }
-.partners-hero-image {
-  overflow: hidden;
+.partners-hero-img {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px;
+  padding: 16px;
 }
-.partners-hero-image img {
-  width: 70%;
-  max-width: 260px;
+.partners-hero-img img {
+  max-height: 600px;
+  max-width: 110%;
   object-fit: contain;
+  filter: drop-shadow(0 16px 40px rgba(0,0,0,0.15));
 }
 .partners-hero-text {
   padding: 64px 56px;
@@ -61,7 +64,7 @@
   font-weight: 700;
   line-height: 1.15;
   color: var(--b365-text);
-  margin: 0 0 20px;
+  margin: 0 0 24px;
 }
 .partners-hero-text h1 em {
   font-style: italic;
@@ -103,7 +106,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
   color: var(--b365-blue);
 }
 .partners-value-card h3 {
@@ -219,7 +221,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
   color: var(--b365-blue);
 }
 .partners-audience-card h4 {
@@ -342,7 +343,7 @@
 }
 .partners-trust-icon {
   color: var(--b365-blue);
-  font-size: 24px;
+  display: flex;
 }
 
 /* ─── Application CTA (Light Blue Card) ─── */
@@ -353,7 +354,7 @@
 .partners-apply-card {
   max-width: 900px;
   margin: 0 auto;
-  background: #b8ccde;
+  background: var(--b365-light-blue);
   border-radius: 24px;
   padding: 80px 56px;
   text-align: center;
@@ -394,18 +395,19 @@
   .partners-value-grid { grid-template-columns: repeat(2, 1fr); }
   .partners-products-grid { grid-template-columns: repeat(3, 1fr); }
   .partners-hero-container { grid-template-columns: 1fr; min-height: auto; }
-  .partners-hero-image { padding: 40px 40px 0; }
+  .partners-hero-img { padding: 40px 40px 0; }
   .partners-hero-text { padding: 40px; text-align: center; }
   .partners-hero-badge { margin-left: auto; margin-right: auto; }
   .partners-ugc-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-  .partners-hero { padding: 110px 16px 0; }
+  .partners-hero-section { padding: 110px 16px 0; }
+  .partners-hero-section.no-banner { padding-top: 80px; }
   .partners-hero-text h1 { font-size: 34px; }
   .partners-hero-text .subhead { font-size: 15px; }
   .partners-hero-text { padding: 32px 24px; }
-  .partners-hero-image { padding: 32px 32px 0; }
+  .partners-hero-img { padding: 32px 32px 0; }
 
   .partners-value-grid { grid-template-columns: 1fr; gap: 16px; }
   .partners-products-grid { grid-template-columns: 1fr 1fr; gap: 16px; }

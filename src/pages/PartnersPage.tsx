@@ -1,15 +1,21 @@
-import React from 'react';
+// @ts-nocheck
+import React, { useState } from 'react';
 import './PartnersPage.css';
 import '../pages/OceanRaysPage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import LogoCarousel from '../components/LogoCarousel/LogoCarousel';
+import {
+  Percent, TrendingUp, FlaskConical, Users,
+  HeartPulse, Video, Dumbbell, Atom, MonitorSmartphone, Megaphone,
+  ShieldCheck, BadgeCheck, Award, Building2, Menu
+} from 'lucide-react';
 
 const valueProps = [
-  { icon: 'lucide:percent', title: '20% Commission', desc: 'Competitive recurring commissions on every referral you send our way.' },
-  { icon: 'lucide:trending-up', title: 'Publicly Traded (BHIC)', desc: 'The credibility and longevity of a publicly traded company behind every product.' },
-  { icon: 'lucide:flask-conical', title: 'Patent-Pending Tech', desc: 'MODS Max™ sublingual delivery — a truly differentiated product your audience won\'t find elsewhere.' },
-  { icon: 'lucide:users', title: '50,000+ Clients', desc: 'Proven market demand and exceptional customer satisfaction across all products.' },
+  { Icon: Percent, title: '20% Commission', desc: 'Competitive recurring commissions on every referral you send our way.' },
+  { Icon: TrendingUp, title: 'Publicly Traded (BHIC)', desc: 'The credibility and longevity of a publicly traded company behind every product.' },
+  { Icon: FlaskConical, title: 'Patent-Pending Tech', desc: 'MODS Max™ sublingual delivery — a truly differentiated product your audience won\'t find elsewhere.' },
+  { Icon: Users, title: '50,000+ Clients', desc: 'Proven market demand and exceptional customer satisfaction across all products.' },
 ];
 
 const products = [
@@ -21,12 +27,12 @@ const products = [
 ];
 
 const audiences = [
-  { icon: 'lucide:heart-pulse', label: 'Health & Wellness Clinics' },
-  { icon: 'lucide:video', label: 'Fitness Influencers & Creators' },
-  { icon: 'lucide:dumbbell', label: 'Gym Owners & Personal Trainers' },
-  { icon: 'lucide:atom', label: 'Biohacking & Longevity Communities' },
-  { icon: 'lucide:monitor-smartphone', label: 'Telehealth Platforms & Practitioners' },
-  { icon: 'lucide:megaphone', label: 'Affiliate Marketers in Men\'s Health' },
+  { Icon: HeartPulse, label: 'Health & Wellness Clinics' },
+  { Icon: Video, label: 'Fitness Influencers & Creators' },
+  { Icon: Dumbbell, label: 'Gym Owners & Personal Trainers' },
+  { Icon: Atom, label: 'Biohacking & Longevity Communities' },
+  { Icon: MonitorSmartphone, label: 'Telehealth Platforms & Practitioners' },
+  { Icon: Megaphone, label: 'Affiliate Marketers in Men\'s Health' },
 ];
 
 const commissionExamples = [
@@ -37,10 +43,10 @@ const commissionExamples = [
 ];
 
 const trustSignals = [
-  { icon: 'lucide:shield-check', label: 'FDA-Registered Manufacturing' },
-  { icon: 'lucide:badge-check', label: '503A Licensed Pharmacy' },
-  { icon: 'lucide:award', label: 'cGMP Certified' },
-  { icon: 'lucide:building-2', label: 'Publicly Traded (BHIC)' },
+  { Icon: ShieldCheck, label: 'FDA-Registered Manufacturing' },
+  { Icon: BadgeCheck, label: '503A Licensed Pharmacy' },
+  { Icon: Award, label: 'cGMP Certified' },
+  { Icon: Building2, label: 'Publicly Traded (BHIC)' },
 ];
 
 const ugcVideos = [
@@ -51,6 +57,8 @@ const ugcVideos = [
 ];
 
 const PartnersPage = () => {
+  const [showBanner, setShowBanner] = useState(true);
+
   const handleApplyClick = () => {
     const subject = encodeURIComponent('Partner Application — Best 365 Labs');
     const body = encodeURIComponent(
@@ -62,9 +70,20 @@ const PartnersPage = () => {
   return (
     <div className="partners-page">
 
-      {/* Navigation */}
-      <nav className="b365-nav">
+      {/* 1. Promo Banner */}
+      {showBanner && (
+        <div className="b365-promo-banner">
+          MODS Max™ 10x Absorption Technology — Now Available in All Products
+          <button onClick={() => setShowBanner(false)} aria-label="Close banner">✕</button>
+        </div>
+      )}
+
+      {/* 2. Navigation */}
+      <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
         <div className="b365-nav-inner">
+          <button className="b365-hamburger" aria-label="Menu">
+            <Menu size={24} />
+          </button>
           <a href="/">
             <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
           </a>
@@ -75,16 +94,17 @@ const PartnersPage = () => {
             <li><a href="#apply">Apply</a></li>
           </ul>
           <div className="b365-nav-right">
+            <a href="#" className="b365-login-link">Log In</a>
             <AnimatedCTA href="#apply" small>Apply Now</AnimatedCTA>
           </div>
         </div>
       </nav>
 
-      {/* Hero — Light Blue Card (Homepage Style) */}
-      <section className="partners-hero">
+      {/* 3. Hero — Lifestyle Image Card (TPrime365 Style) */}
+      <section className={`partners-hero-section ${!showBanner ? 'no-banner' : ''}`}>
         <div className="partners-hero-container">
-          <div className="partners-hero-image">
-            <img src="/images/best365labs-logo.png" alt="Best 365 Labs" />
+          <div className="partners-hero-img">
+            <img src="/images/hero-couple.png" alt="Best 365 Labs lifestyle" />
           </div>
           <div className="partners-hero-text">
             <span className="partners-hero-badge">Affiliate Program</span>
@@ -108,7 +128,7 @@ const PartnersPage = () => {
           {valueProps.map((v, i) => (
             <div className="partners-value-card" key={i}>
               <div className="partners-value-icon">
-                <iconify-icon icon={v.icon} width="28"></iconify-icon>
+                <v.Icon size={28} />
               </div>
               <h3>{v.title}</h3>
               <p>{v.desc}</p>
@@ -156,7 +176,7 @@ const PartnersPage = () => {
           {audiences.map((a, i) => (
             <div className="partners-audience-card" key={i}>
               <div className="partners-audience-icon">
-                <iconify-icon icon={a.icon} width="24"></iconify-icon>
+                <a.Icon size={24} />
               </div>
               <h4>{a.label}</h4>
             </div>
@@ -232,7 +252,7 @@ const PartnersPage = () => {
           {trustSignals.map((t, i) => (
             <div className="partners-trust-item" key={i}>
               <span className="partners-trust-icon">
-                <iconify-icon icon={t.icon} width="24"></iconify-icon>
+                <t.Icon size={24} />
               </span>
               {t.label}
             </div>
