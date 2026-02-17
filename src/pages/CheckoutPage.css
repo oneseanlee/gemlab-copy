@@ -314,3 +314,38 @@
 .checkout-empty a:hover {
   text-decoration: underline;
 }
+
+/* Secure Badge */
+.checkout-secure-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: var(--b365-gray, #F5F7FA);
+  border: 1px solid var(--b365-border, #E5E9F0);
+  border-radius: 12px;
+}
+
+.checkout-secure-badge svg {
+  flex-shrink: 0;
+  color: var(--b365-blue, #3376b0);
+  margin-top: 2px;
+}
+
+.checkout-secure-badge strong {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--b365-text, #0F1724);
+  display: block;
+  margin-bottom: 0.125rem;
+}
+
+.checkout-secure-badge p {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.8rem;
+  color: var(--b365-text-secondary, #5A6578);
+  margin: 0;
+  line-height: 1.5;
+}

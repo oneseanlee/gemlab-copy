@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, ExternalLink, Loader2, ShoppingCart } from "lucide-react";
+import { ArrowLeft, ExternalLink, Loader2, ShoppingCart, ShieldCheck } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import "./CheckoutPage.css";
@@ -194,6 +194,14 @@ const CheckoutPage = () => {
                   </>
                 )}
               </button>
+
+              <div className="checkout-secure-badge">
+                <ShieldCheck size={20} />
+                <div>
+                  <strong>Secure Checkout – SSL Encrypted</strong>
+                  <p>Ensuring your financial and personal details are secure during every transaction.</p>
+                </div>
+              </div>
             </div>
 
             {/* Order Summary */}
