@@ -217,9 +217,9 @@ export interface BuyerIdentity {
       address1: string;
       address2?: string;
       city: string;
-      provinceCode: string;
+      province: string;
       zip: string;
-      countryCode: string;
+      country: string;
     };
   }>;
 }
