@@ -2,10 +2,12 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import {
   type CartItem,
+  type BuyerIdentity,
   createShopifyCart,
   addLineToShopifyCart,
   updateShopifyCartLine,
   removeLineFromShopifyCart,
+  updateCartBuyerIdentity,
   storefrontApiRequest,
   CART_QUERY,
 } from '@/lib/shopify';
@@ -22,6 +24,7 @@ interface CartStore {
   clearCart: () => void;
   syncCart: () => Promise<void>;
   getCheckoutUrl: () => string | null;
+  updateBuyerIdentity: (identity: BuyerIdentity) => Promise<{ success: boolean; checkoutUrl?: string }>;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -116,6 +119,24 @@ export const useCartStore = create<CartStore>()(
 
       clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
       getCheckoutUrl: () => get().checkoutUrl,
+
+      updateBuyerIdentity: async (identity) => {
+        const { cartId, clearCart } = get();
+        if (!cartId) return { success: false };
+
+        set({ isLoading: true });
+        try {
+          const result = await updateCartBuyerIdentity(cartId, identity);
+          if (result.cartNotFound) { clearCart(); return { success: false }; }
+          if (result.checkoutUrl) { set({ checkoutUrl: result.checkoutUrl }); }
+          return { success: result.success, checkoutUrl: result.checkoutUrl };
+        } catch (error) {
+          console.error('Failed to update buyer identity:', error);
+          return { success: false };
+        } finally {
+          set({ isLoading: false });
+        }
+      },
 
       syncCart: async () => {
         const { cartId, isSyncing, clearCart } = get();
