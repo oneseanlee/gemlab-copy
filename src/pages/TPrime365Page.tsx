@@ -294,6 +294,23 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
+            {/* UGC Video Testimonials */}
+            <section className="b365-section b365-section-alt">
+              <h2 className="b365-section-heading b365-serif">Real Men. Real <em>Results.</em></h2>
+              <div className="tprime-ugc-grid">
+                {[
+                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec46bac245857f16caa.mp4',
+                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec4a9efde243ace875b.mp4',
+                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec43b3cc9f4a7114cf0.mp4',
+                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec41d5e04501a7a9db9.mp4',
+                ].map((src, i) => (
+                  <div className="tprime-ugc-card" key={i}>
+                    <video controls playsInline preload="metadata" src={src} />
+                  </div>
+                ))}
+              </div>
+            </section>
+
             {/* 10. Comparison Table */}
             <section className="b365-section" id="compare">
                 <h2 className="b365-section-heading b365-serif">The Only Formula That <em>Does It All</em></h2>
