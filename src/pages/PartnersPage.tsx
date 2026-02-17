@@ -43,6 +43,13 @@ const trustSignals = [
   { icon: 'lucide:building-2', label: 'Publicly Traded (BHIC)' },
 ];
 
+const ugcVideos = [
+  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec46bac245857f16caa.mp4',
+  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec4a9efde243ace875b.mp4',
+  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec43b3cc9f4a7114cf0.mp4',
+  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec41d5e04501a7a9db9.mp4',
+];
+
 const PartnersPage = () => {
   const handleApplyClick = () => {
     const subject = encodeURIComponent('Partner Application — Best 365 Labs');
@@ -73,17 +80,22 @@ const PartnersPage = () => {
         </div>
       </nav>
 
-      {/* Hero */}
+      {/* Hero — Light Blue Card (Homepage Style) */}
       <section className="partners-hero">
-        <div className="partners-hero-inner">
-          <span className="partners-hero-badge">Affiliate Program</span>
-          <h1>Partner With<br />Best 365 <em>Labs</em></h1>
-          <p className="subhead">
-            Earn 20% commission on every sale. Join the movement redefining men's health optimization with patent-pending technology and a publicly traded brand.
-          </p>
-          <AnimatedCTA href="#apply" className="btn-white-cta">
-            Apply to Become a Partner
-          </AnimatedCTA>
+        <div className="partners-hero-container">
+          <div className="partners-hero-image">
+            <img src="/images/best365labs-logo.png" alt="Best 365 Labs" />
+          </div>
+          <div className="partners-hero-text">
+            <span className="partners-hero-badge">Affiliate Program</span>
+            <h1>Partner With<br />Best 365 <em>Labs</em></h1>
+            <p className="subhead">
+              Earn 20% commission on every sale. Join the movement redefining men's health optimization with patent-pending technology and a publicly traded brand.
+            </p>
+            <AnimatedCTA href="#apply">
+              Apply to Become a Partner
+            </AnimatedCTA>
+          </div>
         </div>
       </section>
 
@@ -123,8 +135,20 @@ const PartnersPage = () => {
         </div>
       </section>
 
-      {/* Who This Is For */}
+      {/* UGC Video Testimonials */}
       <section className="b365-section">
+        <h2 className="b365-section-heading b365-serif">See the <em>Results</em></h2>
+        <div className="partners-ugc-grid">
+          {ugcVideos.map((src, i) => (
+            <div className="partners-ugc-card" key={i}>
+              <video controls playsInline preload="metadata" src={src} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Who This Is For */}
+      <section className="b365-section b365-section-alt">
         <h2 className="b365-section-heading b365-serif">
           Who This Is <em>For</em>
         </h2>
@@ -141,7 +165,7 @@ const PartnersPage = () => {
       </section>
 
       {/* How It Works */}
-      <section className="b365-section b365-section-alt">
+      <section className="b365-section">
         <h2 className="b365-section-heading b365-serif">
           How It <em>Works</em>
         </h2>
@@ -167,7 +191,7 @@ const PartnersPage = () => {
       </section>
 
       {/* Commission Breakdown */}
-      <section id="earnings" className="b365-section">
+      <section id="earnings" className="b365-section b365-section-alt">
         <h2 className="b365-section-heading b365-serif">
           Earning <em>Potential</em>
         </h2>
@@ -200,7 +224,7 @@ const PartnersPage = () => {
       </section>
 
       {/* Trust Signals */}
-      <section className="b365-section b365-section-alt">
+      <section className="b365-section">
         <h2 className="b365-section-heading b365-serif">
           Trusted & <em>Verified</em>
         </h2>
@@ -217,16 +241,15 @@ const PartnersPage = () => {
         <LogoCarousel />
       </section>
 
-      {/* Application CTA */}
+      {/* Application CTA — Light Blue Card */}
       <section id="apply" className="partners-apply-section">
-        <div className="partners-apply-inner">
+        <div className="partners-apply-card">
           <h2>Ready to <em>Partner?</em></h2>
           <p>
             Send us your details and our partnerships team will get back to you within 48 hours with everything you need to start earning.
           </p>
           <AnimatedCTA
             href="#"
-            className="btn-white-cta"
             onClick={(e: React.MouseEvent) => { e.preventDefault(); handleApplyClick(); }}
           >
             Apply Now — Start Earning 20%
