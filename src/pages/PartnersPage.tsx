@@ -104,7 +104,7 @@ const PartnersPage = () => {
       <section className={`partners-hero-section ${!showBanner ? 'no-banner' : ''}`}>
         <div className="partners-hero-container">
           <div className="partners-hero-img">
-            <img src="/images/hero-couple.png" alt="Best 365 Labs lifestyle" />
+            <img src="/placeholder.svg" alt="Best 365 Labs partner program" />
           </div>
           <div className="partners-hero-text">
             <span className="partners-hero-badge">Affiliate Program</span>
