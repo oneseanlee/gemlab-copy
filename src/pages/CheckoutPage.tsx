@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, ExternalLink, Loader2, ShoppingCart, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ExternalLink, Loader2, ShoppingCart, ShieldCheck, Minus, Plus } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import "./CheckoutPage.css";
@@ -25,7 +25,7 @@ type CheckoutFormData = z.infer<typeof checkoutSchema>;
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
-  const { items, isLoading, updateBuyerIdentity, getCheckoutUrl } = useCartStore();
+  const { items, isLoading, updateBuyerIdentity, getCheckoutUrl, updateQuantity } = useCartStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const totalPrice = items.reduce(
@@ -194,14 +194,6 @@ const CheckoutPage = () => {
                   </>
                 )}
               </button>
-
-              <div className="checkout-secure-badge">
-                <ShieldCheck size={20} />
-                <div>
-                  <strong>Secure Checkout – SSL Encrypted</strong>
-                  <p>Ensuring your financial and personal details are secure during every transaction.</p>
-                </div>
-              </div>
             </div>
 
             {/* Order Summary */}
@@ -210,20 +202,29 @@ const CheckoutPage = () => {
               {items.map((item) => (
                 <div key={item.variantId} className="checkout-summary-item">
                   <div className="checkout-summary-item-image">
-                    {item.product.node.images?.edges?.[0]?.node && (
+                    {item.product.node.images?.edges?.[0]?.node ? (
                       <img
                         src={item.product.node.images.edges[0].node.url}
                         alt={item.product.node.title}
                       />
+                    ) : (
+                      <div className="checkout-summary-item-placeholder" />
                     )}
                   </div>
                   <div className="checkout-summary-item-details">
                     <h4>{item.product.node.title}</h4>
-                    <p>
-                      Qty: {item.quantity}
-                      {item.selectedOptions.length > 0 &&
-                        ` · ${item.selectedOptions.map((o) => o.value).join(" · ")}`}
-                    </p>
+                    <div className="checkout-qty-controls">
+                      <button type="button" className="checkout-qty-btn" onClick={() => updateQuantity(item.variantId, item.quantity - 1)}>
+                        <Minus size={12} />
+                      </button>
+                      <span className="checkout-qty-value">{item.quantity}</span>
+                      <button type="button" className="checkout-qty-btn" onClick={() => updateQuantity(item.variantId, item.quantity + 1)}>
+                        <Plus size={12} />
+                      </button>
+                      {item.selectedOptions.length > 0 && (
+                        <span className="checkout-qty-options">{item.selectedOptions.map((o) => o.value).join(" · ")}</span>
+                      )}
+                    </div>
                   </div>
                   <div className="checkout-summary-item-price">
                     ${(parseFloat(item.price.amount) * item.quantity).toFixed(2)}
@@ -247,6 +248,14 @@ const CheckoutPage = () => {
               <div className="checkout-summary-total">
                 <span>Total</span>
                 <span>${totalPrice.toFixed(2)}</span>
+              </div>
+
+              <div className="checkout-secure-badge">
+                <ShieldCheck size={20} />
+                <div>
+                  <strong>Secure Checkout – SSL Encrypted</strong>
+                  <p>Ensuring your financial and personal details are secure during every transaction.</p>
+                </div>
               </div>
             </div>
           </div>
