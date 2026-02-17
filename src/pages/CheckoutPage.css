@@ -1,14 +1,17 @@
+/* Best 365 Labs — Checkout Page (Maximus Aesthetic) */
+
 .checkout-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0f1a 0%, #111827 50%, #0a0f1a 100%);
-  color: #f0f4f8;
-  font-family: var(--font-body);
+  background-color: var(--b365-white, #FFFFFF);
+  color: var(--b365-text, #0F1724);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 .checkout-container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 2.5rem 1.5rem 4rem;
 }
 
 .checkout-header {
@@ -17,33 +20,37 @@
   justify-content: space-between;
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--b365-border, #E5E9F0);
 }
 
 .checkout-header h1 {
-  font-family: var(--font-title);
-  font-size: 1.75rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--b365-text, #0F1724);
 }
 
 .checkout-back-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--b365-text-secondary, #5A6578);
   text-decoration: none;
   font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  border: none;
   transition: color 0.2s;
 }
 
 .checkout-back-link:hover {
-  color: #fff;
+  color: var(--b365-blue, #3376b0);
 }
 
 .checkout-grid {
   display: grid;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: 1fr 380px;
   gap: 3rem;
   align-items: start;
 }
@@ -53,27 +60,30 @@
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  .checkout-summary {
+    order: -1;
+  }
 }
 
 /* Form Section */
 .checkout-form-section {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .checkout-section {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 1.5rem;
+  background: var(--b365-white, #FFFFFF);
+  border: 1px solid var(--b365-border, #E5E9F0);
+  border-radius: 16px;
+  padding: 1.75rem;
 }
 
 .checkout-section h2 {
-  font-family: var(--font-title);
-  font-size: 1.1rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.15rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--b365-text, #0F1724);
   margin-bottom: 1.25rem;
 }
 
@@ -87,36 +97,37 @@
 
 .checkout-field label {
   display: block;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--b365-text-secondary, #5A6578);
   margin-bottom: 0.375rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 .checkout-field input,
 .checkout-field select {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  color: #fff;
+  background: var(--b365-gray, #F5F7FA);
+  border: 1px solid var(--b365-border, #E5E9F0);
+  border-radius: 10px;
+  color: var(--b365-text, #0F1724);
   font-size: 0.95rem;
-  font-family: var(--font-body);
-  transition: border-color 0.2s, background 0.2s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
   box-sizing: border-box;
 }
 
 .checkout-field input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: #aab3c0;
 }
 
 .checkout-field input:focus,
 .checkout-field select:focus {
-  border-color: rgba(93, 138, 168, 0.6);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--b365-blue, #3376b0);
+  box-shadow: 0 0 0 3px rgba(51, 118, 176, 0.1);
 }
 
 .checkout-field-row {
@@ -125,37 +136,43 @@
   gap: 1rem;
 }
 
+@media (max-width: 500px) {
+  .checkout-field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .checkout-field-error {
   font-size: 0.75rem;
-  color: #f87171;
+  color: #ef4444;
   margin-top: 0.25rem;
 }
 
 /* Order Summary */
 .checkout-summary {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 1.5rem;
+  background: var(--b365-gray, #F5F7FA);
+  border: 1px solid var(--b365-border, #E5E9F0);
+  border-radius: 16px;
+  padding: 1.75rem;
   position: sticky;
   top: 2rem;
 }
 
 .checkout-summary h2 {
-  font-family: var(--font-title);
-  font-size: 1.1rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.15rem;
   font-weight: 600;
-  color: #fff;
-  margin-bottom: 1.25rem;
+  color: var(--b365-text, #0F1724);
+  margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--b365-border, #E5E9F0);
 }
 
 .checkout-summary-item {
   display: flex;
   gap: 0.75rem;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--b365-border, #E5E9F0);
 }
 
 .checkout-summary-item:last-of-type {
@@ -165,10 +182,11 @@
 .checkout-summary-item-image {
   width: 56px;
   height: 56px;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--b365-white, #fff);
+  border: 1px solid var(--b365-border, #E5E9F0);
 }
 
 .checkout-summary-item-image img {
@@ -185,7 +203,7 @@
 .checkout-summary-item-details h4 {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--b365-text, #0F1724);
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -194,14 +212,14 @@
 
 .checkout-summary-item-details p {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--b365-text-secondary, #5A6578);
   margin: 0.125rem 0 0;
 }
 
 .checkout-summary-item-price {
   font-size: 0.875rem;
-  font-weight: 600;
-  color: #fff;
+  font-weight: 700;
+  color: var(--b365-text, #0F1724);
   flex-shrink: 0;
 }
 
@@ -211,45 +229,45 @@
   align-items: center;
   padding-top: 1rem;
   margin-top: 0.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--b365-border, #E5E9F0);
 }
 
 .checkout-summary-total span:first-child {
-  font-family: var(--font-title);
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--b365-text, #0F1724);
 }
 
 .checkout-summary-total span:last-child {
-  font-family: var(--font-title);
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--b365-text, #0F1724);
 }
 
 /* Submit Button */
 .checkout-submit-btn {
   width: 100%;
-  padding: 1rem;
-  background: linear-gradient(135deg, #5D8AA8, #3a6b8a);
+  padding: 14px;
+  background-color: var(--b365-blue, #3376b0);
   border: none;
-  border-radius: 10px;
+  border-radius: 9999px;
   color: #fff;
-  font-family: var(--font-title);
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: opacity 0.2s, transform 0.1s;
+  transition: background-color 0.2s, transform 0.15s;
   margin-top: 1.5rem;
 }
 
 .checkout-submit-btn:hover:not(:disabled) {
-  opacity: 0.9;
+  background-color: var(--b365-blue-dark, #2a6191);
   transform: translateY(-1px);
 }
 
@@ -258,24 +276,31 @@
   cursor: not-allowed;
 }
 
+/* Empty State */
 .checkout-empty {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 5rem 2rem;
 }
 
 .checkout-empty h2 {
-  font-family: var(--font-title);
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.5rem;
-  color: #fff;
-  margin-bottom: 1rem;
+  color: var(--b365-text, #0F1724);
+  margin-bottom: 0.75rem;
 }
 
 .checkout-empty p {
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 2rem;
+  color: var(--b365-text-secondary, #5A6578);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
 }
 
 .checkout-empty a {
-  color: #5D8AA8;
+  color: var(--b365-blue, #3376b0);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.checkout-empty a:hover {
   text-decoration: underline;
 }
