@@ -128,8 +128,8 @@
 .checkout-field select:focus,
 .checkout-field input:focus-visible,
 .checkout-field select:focus-visible {
-  border-color: var(--b365-blue, #3376b0);
-  box-shadow: 0 0 0 3px rgba(51, 118, 176, 0.1);
+  border-color: #1cb9db;
+  box-shadow: 0 0 0 4px rgba(28, 185, 219, 0.15), 0 0 12px rgba(28, 185, 219, 0.1);
   outline: none !important;
 }
 
