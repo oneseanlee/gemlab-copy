@@ -54,6 +54,7 @@ const products = [
       'GHK-Cu Peptide + PQQ for mitochondrial biogenesis',
       'Evening recovery with GABA + Melatonin + Zinc',
     ],
+    originalPrice: '$459',
     price: '$175',
     priceSuffix: '',
     priceNote: '3-Product Synergistic Stack',
@@ -72,6 +73,7 @@ const products = [
       'GLP-1 medication prescribed if medically appropriate',
       'Risk-Free: $140 refund if not approved; keep the $139 supplement bundle',
     ],
+    originalPrice: '$655',
     price: '$175',
     priceSuffix: '',
     priceNote: 'Total Value: $655',
@@ -90,6 +92,7 @@ const products = [
       'Complete 3-product cellular optimization stack',
       '$140 refundable if not medically approved; $160 stack is yours to keep',
     ],
+    originalPrice: '$459',
     price: '$250',
     priceSuffix: '',
     priceNote: 'Physician Review via happyMD Included',
@@ -314,7 +317,14 @@ const OceanRaysPage = () => {
                   </li>
                 ))}
               </ul>
-              <div className="price">{product.price}<span>{product.priceSuffix}</span></div>
+              <div className="price">
+                {product.originalPrice && (
+                  <span style={{ textDecoration: 'line-through', color: '#999', fontSize: 16, marginRight: 8 }}>
+                    {product.originalPrice}
+                  </span>
+                )}
+                {product.price}<span>{product.priceSuffix}</span>
+              </div>
               <p className="price-note">{product.priceNote}</p>
               <div className="card-actions" style={{ justifyContent: 'center' }}>
                 <AnimatedCTA href={product.href} className="card-cta">Get Started</AnimatedCTA>
