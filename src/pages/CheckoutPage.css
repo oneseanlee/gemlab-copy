@@ -343,9 +343,17 @@
   margin-top: 1.5rem;
 }
 
+.checkout-submit-btn svg:last-child {
+  transition: transform 0.3s ease;
+}
+
 .checkout-submit-btn:hover:not(:disabled) {
   background-color: var(--b365-blue-dark, #2a6191);
   transform: translateY(-1px);
+}
+
+.checkout-submit-btn:hover:not(:disabled) svg:last-child {
+  transform: translateX(4px);
 }
 
 .checkout-submit-btn:disabled {
