@@ -1,0 +1,392 @@
+/* Partners / Affiliate Page — B2B Professional Design */
+
+.partners-page {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--b365-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--b365-white);
+}
+
+/* ─── Hero ─── */
+.partners-hero {
+  background: linear-gradient(160deg, #0A1628 0%, #112240 60%, #1a3a5c 100%);
+  color: #fff;
+  padding: 160px 24px 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.partners-hero::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: 50%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(51,118,176,0.12) 0%, transparent 70%);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.partners-hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.partners-hero-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(51,118,176,0.25);
+  border: 1px solid rgba(51,118,176,0.4);
+  color: #7eb8e0;
+  padding: 6px 18px;
+  border-radius: 999px;
+  margin-bottom: 28px;
+}
+.partners-hero h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.12;
+  margin: 0 0 20px;
+}
+.partners-hero h1 em {
+  font-style: italic;
+  font-weight: 500;
+}
+.partners-hero .subhead {
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 36px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─── Value Props ─── */
+.partners-value-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.partners-value-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 16px;
+  padding: 36px 28px;
+  text-align: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.partners-value-card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+}
+.partners-value-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 18px;
+  background: var(--b365-gray);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--b365-blue);
+}
+.partners-value-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: var(--b365-text);
+}
+.partners-value-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--b365-text-secondary);
+  margin: 0;
+}
+
+/* ─── Product Portfolio ─── */
+.partners-products-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.partners-product-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 14px;
+  padding: 28px 20px;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+}
+.partners-product-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+}
+.partners-product-card h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--b365-text);
+}
+.partners-product-price {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--b365-blue);
+  margin-bottom: 8px;
+}
+.partners-product-hook {
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+  line-height: 1.5;
+}
+.partners-product-commission {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #16a34a;
+  background: rgba(22,163,74,0.08);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-top: 10px;
+}
+
+/* ─── Who This Is For ─── */
+.partners-audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.partners-audience-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: box-shadow 0.3s ease;
+}
+.partners-audience-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.partners-audience-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background: var(--b365-gray);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--b365-blue);
+}
+.partners-audience-card h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--b365-text);
+}
+
+/* ─── How It Works ─── */
+.partners-steps {
+  display: flex;
+  gap: 48px;
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: flex-start;
+  justify-content: center;
+}
+.partners-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+.partners-step-number {
+  width: 56px;
+  height: 56px;
+  background: var(--b365-blue);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 auto 18px;
+}
+.partners-step h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--b365-text);
+}
+.partners-step p {
+  font-size: 14px;
+  color: var(--b365-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+.partners-step-connector {
+  position: absolute;
+  top: 28px;
+  right: -32px;
+  color: var(--b365-border);
+  font-size: 20px;
+}
+
+/* ─── Commission Breakdown ─── */
+.partners-commission-table {
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--b365-border);
+  background: var(--b365-white);
+}
+.partners-commission-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.partners-commission-table thead {
+  background: var(--b365-navy);
+  color: #fff;
+}
+.partners-commission-table th {
+  padding: 16px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+}
+.partners-commission-table td {
+  padding: 16px 20px;
+  font-size: 15px;
+  border-bottom: 1px solid var(--b365-border);
+  color: var(--b365-text);
+}
+.partners-commission-table tr:last-child td {
+  border-bottom: none;
+}
+.partners-commission-table .earning-highlight {
+  font-weight: 800;
+  color: #16a34a;
+}
+.partners-commission-note {
+  text-align: center;
+  font-size: 14px;
+  color: var(--b365-text-secondary);
+  margin-top: 20px;
+}
+
+/* ─── Trust Signals ─── */
+.partners-trust-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto 40px;
+}
+.partners-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--b365-text);
+}
+.partners-trust-icon {
+  color: var(--b365-blue);
+  font-size: 24px;
+}
+
+/* ─── Application CTA ─── */
+.partners-apply-section {
+  background: linear-gradient(160deg, #0A1628 0%, #112240 60%, #1a3a5c 100%);
+  color: #fff;
+  padding: 96px 24px;
+  text-align: center;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+.partners-apply-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.partners-apply-section h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 38px;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+.partners-apply-section h2 em {
+  font-style: italic;
+  font-weight: 500;
+}
+.partners-apply-section p {
+  font-size: 17px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+/* ─── Sub-heading ─── */
+.partners-sub {
+  font-size: 16px;
+  color: var(--b365-text-secondary);
+  text-align: center;
+  max-width: 600px;
+  margin: -20px auto 48px;
+  line-height: 1.6;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .partners-value-grid { grid-template-columns: repeat(2, 1fr); }
+  .partners-products-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .partners-hero { padding: 120px 20px 72px; }
+  .partners-hero h1 { font-size: 36px; }
+  .partners-hero .subhead { font-size: 16px; }
+
+  .partners-value-grid { grid-template-columns: 1fr; gap: 16px; }
+  .partners-products-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .partners-audience-grid { grid-template-columns: 1fr; gap: 14px; }
+  .partners-steps { flex-direction: column; gap: 32px; align-items: center; }
+  .partners-step-connector { display: none; }
+
+  .partners-commission-table { border-radius: 12px; }
+  .partners-commission-table th,
+  .partners-commission-table td { padding: 12px 14px; font-size: 13px; }
+
+  .partners-apply-section { padding: 64px 20px; }
+  .partners-apply-section h2 { font-size: 30px; }
+}
+
+@media (max-width: 480px) {
+  .partners-products-grid { grid-template-columns: 1fr; }
+}
