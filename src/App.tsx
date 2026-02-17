@@ -13,6 +13,7 @@ import GLP1BundlePage from "./pages/GLP1BundlePage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsConditionsPage from "./pages/TermsConditionsPage";
 import ReturnPolicyPage from "./pages/ReturnPolicyPage";
+import PartnersPage from "./pages/PartnersPage";
 import NotFound from "./pages/NotFound";
 import { useCartSync } from "./hooks/useCartSync";
 import './App.css';
@@ -35,6 +36,7 @@ const AppRoutes = () => {
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
       <Route path="/terms" element={<TermsConditionsPage />} />
       <Route path="/returns" element={<ReturnPolicyPage />} />
+      <Route path="/partners" element={<PartnersPage />} />
       <Route path="/home" element={<Home />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
