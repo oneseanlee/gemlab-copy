@@ -1,50 +1,73 @@
 
 
-# Add Discount Pricing to Homepage Product Cards
+# Add UGC Video Testimonials to TPrime365 Page
 
-## What Changes
+## Overview
+Add a new section to the TPrime365 page featuring four AI-generated UGC (user-generated content) style videos. These serve as social proof and make the page feel more authentic and engaging.
 
-Update three product cards on the homepage to display the original price with a strikethrough next to the current discounted price, so visitors immediately see the savings.
+## Recommended Placement
 
-## Products to Update
+**After the "What You'll Experience" benefits section (Section 9) and before the Comparison Table (Section 10).**
 
-| Product | Current Price Shown | Original Price | Savings |
-|---|---|---|---|
-| Ultimate Cellular Optimization System | $175 | $459 | Save $284 |
-| GLP-1 Cellular Bundle | $175 | $655 | Save $480 |
-| Non-Hormonal Testosterone Bundle | $250 | $459 | Save $209 |
+This is the ideal spot because:
+- The visitor has already learned what the product does and its benefits
+- Video testimonials reinforce those claims with "real people" before hitting the comparison table
+- It breaks up the text-heavy content with engaging media
+- It sits right before the decision-making sections (comparison, pricing, CTA)
 
-Note: The original prices are pulled from each product's dedicated sales page. If any of these original prices are incorrect, let me know before I implement.
+## What It Will Look Like
 
-## Visual Treatment
-
-Each discounted card's price area will show:
-- The original price in a smaller, strikethrough style (e.g., ~~$459~~)
-- The current price in the existing bold green/large style
-- The existing `priceNote` will remain below
-
-This matches the pattern already used on the GLP-1 Protocol card which shows "Launch Offer (Reg. $90.00)".
+A full-width section with:
+- Section heading: **"Real Men. Real Results."** (or similar)
+- 4 videos in a responsive grid (2x2 on desktop, 1-column on mobile)
+- Each video plays inline with controls, poster frame auto-generated
+- Clean card styling consistent with the rest of the page
 
 ## Technical Details
 
-### Data Changes (OceanRaysPage.tsx)
-Add an `originalPrice` field to the three product objects in the `products` array:
-- UCOS (id 3): `originalPrice: '$459'`
-- GLP-1 Bundle (id 4): `originalPrice: '$655'`
-- NHTO Bundle (id 5): `originalPrice: '$459'`
+### 1. Add video files to public directory
+Copy the 4 MP4 files into `public/images/` with clean filenames:
+- `tprime-ugc-1.mp4`
+- `tprime-ugc-2.mp4`
+- `tprime-ugc-3.mp4`
+- `tprime-ugc-4.mp4`
 
-### Render Changes (OceanRaysPage.tsx)
-Update the price display in the product card template (around line 317) to conditionally render the original price with strikethrough styling when `originalPrice` exists:
+Since these are external URLs, we will reference them directly as video sources rather than downloading them.
 
+### 2. Add new section in TPrime365Page.tsx
+Insert a new section between the Benefits grid (Section 9, ~line 295) and the Comparison Table (Section 10, ~line 298):
+
+```tsx
+{/* UGC Video Testimonials */}
+<section className="b365-section b365-section-alt">
+  <h2 className="b365-section-heading b365-serif">
+    Real Men. Real <em>Results.</em>
+  </h2>
+  <div className="tprime-ugc-grid">
+    {ugcVideos.map((video, i) => (
+      <div className="tprime-ugc-card" key={i}>
+        <video
+          controls
+          playsInline
+          preload="metadata"
+          src={video.src}
+        />
+      </div>
+    ))}
+  </div>
+</section>
 ```
-{product.originalPrice && (
-  <span style={{ textDecoration: 'line-through', color: '#999', fontSize: 16, marginRight: 8 }}>
-    {product.originalPrice}
-  </span>
-)}
-{product.price}
-```
 
-### No CSS file changes needed
-Inline styles will keep it simple and consistent with patterns already used elsewhere in the codebase (e.g., the GLP-1 Bundle page already uses inline `textDecoration: 'line-through'`).
+The video URLs will point directly to the external storage URLs provided.
+
+### 3. Add CSS styles in TPrime365Page.css
+New styles for the UGC grid:
+- `.tprime-ugc-grid`: 2-column grid on desktop, 1-column on mobile
+- `.tprime-ugc-card`: Rounded corners, subtle shadow, overflow hidden
+- `video` element: 100% width, aspect-ratio 9/16 (vertical UGC style)
+- Responsive breakpoint at 768px for single column
+
+### Files Modified
+- `src/pages/TPrime365Page.tsx` -- new UGC video section
+- `src/pages/TPrime365Page.css` -- grid and card styles for the videos
 
