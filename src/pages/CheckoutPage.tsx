@@ -180,20 +180,6 @@ const CheckoutPage = () => {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                className="checkout-submit-btn"
-                disabled={isSubmitting || isLoading}
-              >
-                {isSubmitting ? (
-                  <Loader2 size={20} className="animate-spin" />
-                ) : (
-                  <>
-                    <ExternalLink size={18} />
-                    Continue to Payment
-                  </>
-                )}
-              </button>
             </div>
 
             {/* Order Summary */}
@@ -249,6 +235,21 @@ const CheckoutPage = () => {
                 <span>Total</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
+
+              <button
+                type="submit"
+                className="checkout-submit-btn"
+                disabled={isSubmitting || isLoading}
+              >
+                {isSubmitting ? (
+                  <Loader2 size={20} className="animate-spin" />
+                ) : (
+                  <>
+                    <ExternalLink size={18} />
+                    Continue to Payment
+                  </>
+                )}
+              </button>
 
               <div className="checkout-secure-badge">
                 <ShieldCheck size={20} />
