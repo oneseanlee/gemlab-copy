@@ -1,99 +1,50 @@
 
 
-# Create Best 365 Labs Project Reference Document
+# Add Discount Pricing to Homepage Product Cards
 
-## Overview
-Create a comprehensive Markdown file (`BEST365LABS-REFERENCE.md`) at the project root that documents the entire Best 365 Labs platform -- company info, all products, pages, technology, ingredients, pricing, FAQs, and more. This will serve as a complete context document for Claude or any AI assistant.
+## What Changes
 
-## Document Structure
+Update three product cards on the homepage to display the original price with a strikethrough next to the current discounted price, so visitors immediately see the savings.
 
-The file will contain the following sections:
+## Products to Update
 
-### 1. Company Overview
-- **Company**: Best 365 Labs
-- **Website**: cell365power.lovable.app
-- **Community**: community.cell365power.com
-- **Support**: info@best365labs.com / (385) 421-5651
-- **Co-Founders**: Dan Schmidt and Darren Lopez
-- **Core Technology**: MODS Max (patent-pending sublingual delivery with 10x absorption)
-- **Manufacturing**: FDA-registered, cGMP-certified facilities in the USA (503A compounding for Rx products)
-- **Telehealth Partner**: happyMD (licensed physician consultations)
+| Product | Current Price Shown | Original Price | Savings |
+|---|---|---|---|
+| Ultimate Cellular Optimization System | $175 | $459 | Save $284 |
+| GLP-1 Cellular Bundle | $175 | $655 | Save $480 |
+| Non-Hormonal Testosterone Bundle | $250 | $459 | Save $209 |
 
-### 2. Product Catalog (5 Products)
+Note: The original prices are pulled from each product's dedicated sales page. If any of these original prices are incorrect, let me know before I implement.
 
-**Product 1: TPrime365** ($149/mo)
-- Route: `/tprime365`
-- Category: Testosterone Optimization (Flagship)
-- Formula: Enclomiphene 25mg + Spermidine 10mg + Boron 10mg + Vitamin C 10mg
-- Requires prescription (physician consultation included)
-- Key claims: 60-664% testosterone increase in 2-4 weeks, fertility-friendly, no hormonal shutdown
-- Delivery: Sublingual via MODS Max Gold
-- Competitor comparison data (vs Hims, Maximus, Strut, TRT clinics)
-- Full ingredient breakdown with clinical data
-- Target demographics, dosing instructions, safety info, and FAQ
+## Visual Treatment
 
-**Product 2: GLP-1 Optimization Protocol** ($39.95)
-- Route: `/glp1-protocol`
-- Category: Weight Loss / Mitochondrial Support
-- Contains: Triple Power Methylene Blue (MB 150mg + NAD+ 600mg + Spermidine 300mg) + Metabolism+ tablets
-- No prescription required
-- Daily protocol: Morning sublingual + breakfast tablets + lunch tablets
-- Clinical results, three longevity pathways (AMPK, Sirtuin, Autophagy)
-- Full FAQ
+Each discounted card's price area will show:
+- The original price in a smaller, strikethrough style (e.g., ~~$459~~)
+- The current price in the existing bold green/large style
+- The existing `priceNote` will remain below
 
-**Product 3: Ultimate Cellular Optimization System (UCOS)** ($175)
-- Route: `/ucos`
-- Category: Cellular Longevity (3-Product Stack)
-- Activate365 (Morning): Spermidine 10mg, NAD+ 20mg, Boron 10mg
-- Mito365 (Mid-Day): Methylene Blue 10mg, PQQ 20mg, NAD+ 150mg, GHK-Cu Peptide 10mg
-- Restore365 (Evening): Melatonin 600mcg, GABA 50mg, Boron 10mg
-- Gender-specific benefits, cumulative system stats, full FAQ
-
-**Product 4: GLP-1 Cellular Bundle** ($175)
-- Route: `/glp1-ucos`
-- Category: Complete Systems (Bundle with Physician)
-- 4-Product System: Activate365 + Mito365 + Metabolism Plus + Restore365
-- Includes physician consultation + GLP-1 medication (if approved)
-- Pricing: $139 supplements (non-refundable) + $140 consultation (refundable if not approved)
-- Total value: $655
-- Has hero video, Lottie animation, Early Testers carousel
-- Full FAQ
-
-**Product 5: Non-Hormonal Testosterone Bundle (NHTO)** ($250)
-- Route: `/nhto`
-- Category: Complete Systems (Rx + UCOS)
-- Includes: NHTO Rx formula ($140 refundable) + UCOS 3-product stack ($160 non-refundable, but listed as $160 on the page)
-- Clinical results with patient testimonials (Alex T., Marcus L., David R., Mark)
-- Doctor testimonials (Dr. Steven Warren, etc.)
-- Comparison table: MODS Max + TRT vs TRT Alone vs No Treatment
-- Full FAQ
-
-### 3. Site Architecture
-- All routes with page descriptions
-- Intake forms (/nhto-intake, /glp1-intake)
-- Legal pages (/privacy, /terms, /returns)
-- Editorial (/article)
-
-### 4. Technology Stack
-- React + Vite + TypeScript + Tailwind CSS
-- Shopify integration (Storefront API)
-- Zustand cart store
-- Embla Carousel + Lottie animations
-
-### 5. Brand & Design
-- Serif font: Playfair Display
-- Sans font: Plus Jakarta Sans
-- Medical-grade "Maximus" aesthetic
-- Animated CTA buttons
-- Shared navigation and footer patterns
-
-### 6. Key Messaging & Copy
-- Hero tagline, guarantee language, MODS Max technology description
-- FAQ content from all pages
-- Testimonial data
+This matches the pattern already used on the GLP-1 Protocol card which shows "Launch Offer (Reg. $90.00)".
 
 ## Technical Details
-- Single new file: `BEST365LABS-REFERENCE.md` in the project root
-- Approximately 800-1000 lines of Markdown
-- No code changes needed
+
+### Data Changes (OceanRaysPage.tsx)
+Add an `originalPrice` field to the three product objects in the `products` array:
+- UCOS (id 3): `originalPrice: '$459'`
+- GLP-1 Bundle (id 4): `originalPrice: '$655'`
+- NHTO Bundle (id 5): `originalPrice: '$459'`
+
+### Render Changes (OceanRaysPage.tsx)
+Update the price display in the product card template (around line 317) to conditionally render the original price with strikethrough styling when `originalPrice` exists:
+
+```
+{product.originalPrice && (
+  <span style={{ textDecoration: 'line-through', color: '#999', fontSize: 16, marginRight: 8 }}>
+    {product.originalPrice}
+  </span>
+)}
+{product.price}
+```
+
+### No CSS file changes needed
+Inline styles will keep it simple and consistent with patterns already used elsewhere in the codebase (e.g., the GLP-1 Bundle page already uses inline `textDecoration: 'line-through'`).
 
