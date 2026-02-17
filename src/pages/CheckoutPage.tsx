@@ -98,13 +98,11 @@ const CheckoutPage = () => {
 
   return (
     <div className="checkout-page">
-      <div className="checkout-logo">
-        <Link to="/">
-          <img src="/images/best365labs-logo.png" alt="Cell365 Power" />
-        </Link>
-      </div>
       <div className="checkout-container">
         <div className="checkout-header">
+          <Link to="/" className="checkout-header-logo">
+            <img src="/images/best365labs-logo.png" alt="Cell365 Power" />
+          </Link>
           <h1>Checkout</h1>
           <button className="checkout-back-link" onClick={() => navigate(-1)}>
             <ArrowLeft size={16} />
