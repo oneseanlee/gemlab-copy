@@ -195,3 +195,52 @@ export async function removeLineFromShopifyCart(cartId: string, lineId: string):
   if (userErrors.length > 0) { console.error('Remove line failed:', userErrors); return { success: false }; }
   return { success: true };
 }
+
+// Buyer Identity
+
+const CART_BUYER_IDENTITY_UPDATE_MUTATION = `
+  mutation cartBuyerIdentityUpdate($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!) {
+    cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) {
+      cart { id checkoutUrl }
+      userErrors { field message }
+    }
+  }
+`;
+
+export interface BuyerIdentity {
+  email: string;
+  phone?: string;
+  deliveryAddressPreferences: Array<{
+    deliveryAddress: {
+      firstName: string;
+      lastName: string;
+      address1: string;
+      address2?: string;
+      city: string;
+      provinceCode: string;
+      zip: string;
+      countryCode: string;
+    };
+  }>;
+}
+
+export async function updateCartBuyerIdentity(
+  cartId: string,
+  buyerIdentity: BuyerIdentity
+): Promise<{ success: boolean; checkoutUrl?: string; cartNotFound?: boolean }> {
+  const data = await storefrontApiRequest(CART_BUYER_IDENTITY_UPDATE_MUTATION, {
+    cartId,
+    buyerIdentity,
+  });
+
+  const userErrors = data?.data?.cartBuyerIdentityUpdate?.userErrors || [];
+  if (isCartNotFoundError(userErrors)) return { success: false, cartNotFound: true };
+  if (userErrors.length > 0) {
+    console.error('Buyer identity update failed:', userErrors);
+    return { success: false };
+  }
+
+  const cart = data?.data?.cartBuyerIdentityUpdate?.cart;
+  const checkoutUrl = cart?.checkoutUrl ? formatCheckoutUrl(cart.checkoutUrl) : undefined;
+  return { success: true, checkoutUrl };
+}
