@@ -116,7 +116,7 @@
   font-size: 0.95rem;
   font-family: 'Plus Jakarta Sans', sans-serif;
   transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
+  outline: none !important;
   box-sizing: border-box;
 }
 
@@ -130,7 +130,7 @@
 .checkout-field select:focus-visible {
   border-color: var(--b365-blue, #3376b0);
   box-shadow: 0 0 0 3px rgba(51, 118, 176, 0.1);
-  outline: none;
+  outline: none !important;
 }
 
 .checkout-field-row {
