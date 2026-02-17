@@ -201,6 +201,7 @@
 }
 
 .checkout-summary-item-details h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--b365-text, #0F1724);
@@ -211,9 +212,18 @@
 }
 
 .checkout-summary-item-details p {
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.75rem;
   color: var(--b365-text-secondary, #5A6578);
   margin: 0.125rem 0 0;
+}
+
+.checkout-summary-item-price {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--b365-text, #0F1724);
+  flex-shrink: 0;
 }
 
 .checkout-summary-item-price {
