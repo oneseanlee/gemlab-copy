@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, ExternalLink, Loader2, ShoppingCart, ShieldCheck, Minus, Plus } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2, ShoppingCart, ShieldCheck, Minus, Plus } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import "./CheckoutPage.css";
@@ -245,8 +245,7 @@ const CheckoutPage = () => {
                   <Loader2 size={20} className="animate-spin" />
                 ) : (
                   <>
-                    <ExternalLink size={18} />
-                    Continue to Payment
+                    Continue to Payment <ArrowRight size={18} />
                   </>
                 )}
               </button>
