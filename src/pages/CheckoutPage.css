@@ -8,13 +8,8 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.checkout-logo {
-  text-align: center;
-  padding: 1.5rem 1rem 0;
-}
-
-.checkout-logo img {
-  height: 40px;
+.checkout-header-logo img {
+  height: 36px;
   object-fit: contain;
 }
 
@@ -25,9 +20,9 @@
 }
 
 .checkout-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--b365-border, #E5E9F0);
@@ -38,11 +33,13 @@
   font-size: 2rem;
   font-weight: 700;
   color: var(--b365-text, #0F1724);
+  text-align: center;
 }
 
 .checkout-back-link {
   display: inline-flex;
   align-items: center;
+  justify-self: end;
   gap: 0.5rem;
   color: var(--b365-text-secondary, #5A6578);
   text-decoration: none;
