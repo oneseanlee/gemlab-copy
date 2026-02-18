@@ -32,9 +32,9 @@ const GLP1_BUNDLE_PRODUCT = {
     title: 'Complete GLP-1 Cellular Optimization System',
     description: '4-Product System + Licensed Physician Consultation + GLP-1 Medication (if approved)',
     handle: 'glp1-cellular-optimization-system',
-    priceRange: { minVariantPrice: { amount: '279.00', currencyCode: 'USD' } },
+    priceRange: { minVariantPrice: { amount: '175.00', currencyCode: 'USD' } },
     images: { edges: [{ node: { url: '/placeholder.svg', altText: 'GLP-1 Bundle' } }] },
-    variants: { edges: [{ node: { id: GLP1_BUNDLE_VARIANT_ID, title: 'Complete Bundle', price: { amount: '279.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Bundle', value: 'Complete System + Consultation' }] } }] },
+    variants: { edges: [{ node: { id: GLP1_BUNDLE_VARIANT_ID, title: 'Complete Bundle', price: { amount: '175.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Bundle', value: 'Complete System + Consultation' }] } }] },
     options: [{ name: 'Bundle', values: ['Complete System + Consultation'] }]
   }
 };
@@ -61,7 +61,7 @@ const GLP1BundlePage = () => {
       product: GLP1_BUNDLE_PRODUCT,
       variantId: GLP1_BUNDLE_VARIANT_ID,
       variantTitle: 'Complete Bundle',
-      price: { amount: '279.00', currencyCode: 'USD' },
+      price: { amount: '175.00', currencyCode: 'USD' },
       quantity: 1,
       selectedOptions: [{ name: 'Bundle', value: 'Complete System + Consultation' }]
     });
@@ -69,14 +69,14 @@ const GLP1BundlePage = () => {
 
   const faqItems = [
   { question: "What happens if I'm not medically approved for GLP-1?", answer: "If the independent provider determines you're not a candidate, your $140 consultation fee is fully refunded—and you keep the supplements ($139 value) regardless of approval. No hidden fees, no risk." },
-  { question: "What's included in the $279 package?", answer: "Your package includes 4 premium supplement products (Activate365, Mito365, Metabolism Plus, Restore365) valued at $205, plus a licensed physician consultation and GLP-1 medication (if approved) valued at $450. Total value: $655." },
+  { question: "What's included in the $175 package?", answer: "Your package includes 4 premium supplement products (Activate365, Mito365, Metabolism Plus, Restore365) valued at $205, plus a licensed physician consultation and GLP-1 medication (if approved) valued at $450. Total value: $655." },
   { question: "Is this safe to take with GLP-1 medications like Ozempic or Wegovy?", answer: "Yes. This system is specifically designed to complement GLP-1 therapy. The supplements support lean mass preservation, energy, and recovery during weight management. Always inform your healthcare provider about all supplements you take." },
   { question: "What makes Metabolism Plus different from regular supplements?", answer: "Metabolism Plus is specifically formulated for GLP-1 users. It targets the unique metabolic changes that occur during GLP-1 therapy, supporting healthy metabolic function while preserving muscle mass during weight loss." },
   { question: "How do I take the 4-product system throughout the day?", answer: "Morning: Activate365 (30 min after waking) for muscle protection. Mid-Day: Mito365 (with lunch) for energy support. Afternoon: Metabolism Plus for metabolic support. Evening: Restore365 (30-60 min before bed) for sleep and recovery." },
   { question: "Will this help support muscle preservation while losing weight on GLP-1s?", answer: "Yes. The system is designed specifically to support lean mass during weight-management routines. Activate365 provides muscle protection and hormone support, while Restore365 enhances overnight muscle recovery." },
   { question: "How quickly will I notice results?", answer: "Many users report noticeable improvements in energy within the first 1-2 weeks. Sleep quality improvements are often noticed within the first few nights. Full systemic benefits typically develop over 4-8 weeks of consistent use." },
   { question: "What is the dosing for Metabolism Plus?", answer: "Metabolism Plus is taken as 2 tablets daily in the afternoon. It contains a precision blend of ingredients designed specifically for GLP-1 users to support healthy metabolic function." },
-  { question: "How does the happyMD consultation work?", answer: "After purchase, you'll receive a secure HIPAA-compliant intake form from happyMD. A licensed provider reviews your information to determine GLP-1 eligibility. If approved, your medication is shipped directly to you—included in your $279 package." },
+  { question: "How does the happyMD consultation work?", answer: "After purchase, you'll receive a secure HIPAA-compliant intake form from happyMD. A licensed provider reviews your information to determine GLP-1 eligibility. If approved, your medication is shipped directly to you—included in your $175 package." },
   { question: "How do I contact support if I have questions?", answer: "You can reach our support team by phone at (385) 421-5651 or by email at info@best365labs.com. Our team is available to answer any questions about the system, ingredients, or your order." }];
 
 
@@ -180,7 +180,7 @@ const GLP1BundlePage = () => {
                         <h1>GLP-1 Cellular<br />Optimization System<br /><em>for Daily Energy + Recovery</em></h1>
                         <p className="subhead">The complete 4-product system designed to support lean mass, daily energy, and metabolic health during GLP-1 routines.</p>
                         <div className="price-row">
-                            <span className="price-big">$279</span>
+                            <span className="price-big">$175</span>
                             <span className="price-note" style={{ textDecoration: 'line-through', marginRight: 8 }}>$655</span>
                         </div>
                         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
