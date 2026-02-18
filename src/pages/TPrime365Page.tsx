@@ -6,6 +6,67 @@ import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { Menu, ArrowRight, X, Check, ChevronRight, Syringe, Pill, FlaskConical, Dna, Zap, Dumbbell, Shield, Brain, Flame, Heart, Target, Moon, Bone, Clock, ShieldCheck, Lightbulb, Calendar, AlertCircle, Building2, BadgeCheck, Microscope, Flag, Stethoscope, Lock, Package, Headphones } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '../components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+
+const tprimeTestimonials = [
+  { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', using: 'TPrime365™' },
+  { img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes', using: 'TPrime365™' },
+  { img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke', using: 'TPrime365™' },
+  { img: '/images/testimonial-sean-lee.png', name: 'Sean Lee', using: 'TPrime365™' },
+  { img: '/images/testimonial-ernesto-cruz.png', name: 'Ernesto Cruz', using: 'TPrime365™' },
+  { img: '/images/testimonial-jay-atkins.png', name: 'Jay Atkins', using: 'TPrime365™' },
+];
+
+const TPrimeTestimonialsCarousel = () => {
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) return;
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
+    api.on('select', () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
+
+  return (
+    <Carousel
+      opts={{ align: 'start', loop: true }}
+      plugins={[Autoplay({ delay: 4000, stopOnInteraction: true })]}
+      setApi={setApi}
+      className="b365-testimonials-carousel"
+    >
+      <CarouselContent className="-ml-4">
+        {tprimeTestimonials.map((t, i) => (
+          <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+            <div className="b365-testimonial-card">
+              <img src={t.img} alt={t.name} />
+              <div className="card-body">
+                <div className="name">{t.name}</div>
+                <div className="product-using">Using: {t.using}</div>
+                <div className="verified">
+                  <BadgeCheck size={14} />
+                  Verified buyer
+                </div>
+              </div>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <div className="b365-carousel-dots">
+        {Array.from({ length: count }).map((_, i) => (
+          <button
+            key={i}
+            className={`b365-dot ${i === current ? 'active' : ''}`}
+            onClick={() => api?.scrollTo(i)}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </Carousel>
+  );
+};
 
 const TPrime365Page = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -109,6 +170,12 @@ const TPrime365Page = () => {
                         </AnimatedCTA>
                     </div>
                 </div>
+            </section>
+
+            {/* Real Clients Testimonial Carousel */}
+            <section className="b365-section">
+              <h2 className="b365-section-heading b365-serif">Real Clients. <em>Real Results.</em></h2>
+              <TPrimeTestimonialsCarousel />
             </section>
 
             {/* 4. How It Works (moved up for conversion) */}
