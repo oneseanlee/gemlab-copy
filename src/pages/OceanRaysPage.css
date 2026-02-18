@@ -95,8 +95,12 @@
 }
 
 /* ──── Parallax Hero ──── */
+.b365-parallax-hero {
+  will-change: transform;
+}
 .b365-parallax-hero img {
-  transition: transform 0.1s linear;
+  transition: transform 0.05s linear;
+  will-change: transform;
 }
 
 /* ──── Product Card Ribbon ──── */

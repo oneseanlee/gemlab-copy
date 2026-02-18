@@ -9,6 +9,25 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 import Autoplay from 'embla-carousel-autoplay';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
+/* ──── Parallax hook ──── */
+const useParallax = (speed = 0.3) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onScroll = () => {
+      const rect = el.getBoundingClientRect();
+      const offset = rect.top * speed;
+      const img = el.querySelector('img') as HTMLElement | null;
+      if (img) img.style.transform = `translateY(${offset}px) scale(1.08)`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [speed]);
+  return ref;
+};
+
 /* ──── Scroll-reveal wrapper ──── */
 const RevealSection = ({ children, className = '', ...props }) => {
   const ref = useScrollReveal<HTMLElement>();
@@ -264,6 +283,7 @@ const OceanRaysPage = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const parallaxRef = useParallax(0.25);
 
   const mobileLinks = [
     { label: 'Solutions', href: '#products' },
@@ -305,7 +325,7 @@ const OceanRaysPage = () => {
       {/* 3. Hero Section with entrance animations */}
       <section className="b365-hero">
         <div className="b365-hero-container">
-          <div className="b365-hero-image b365-parallax-hero">
+          <div className="b365-hero-image b365-parallax-hero" ref={parallaxRef}>
             <img src="/images/hero-couple.png" alt="Athletic couple with Best 365 Labs products" />
           </div>
           <div className="b365-hero-text">
