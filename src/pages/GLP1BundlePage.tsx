@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Lottie from 'lottie-react';
 import './GLP1BundlePage.css';
-import '../pages/OceanRaysPage.css';
+import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState } from 'react';
 import './NHTOPage.css';
-import '../pages/OceanRaysPage.css';
+import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
