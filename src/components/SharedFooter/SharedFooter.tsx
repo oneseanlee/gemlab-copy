@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './SharedFooter.css';
 
 const SharedFooter = () => {
@@ -24,9 +25,9 @@ const SharedFooter = () => {
           <div className="shared-footer-legal">
             <h4>Legal</h4>
             <ul>
-              <li><a href="/privacy">Privacy Policy</a></li>
-              <li><a href="/terms">Terms and Conditions</a></li>
-              <li><a href="/returns">Return Policy</a></li>
+              <li><Link to="/privacy">Privacy Policy</Link></li>
+              <li><Link to="/terms">Terms and Conditions</Link></li>
+              <li><Link to="/returns">Return Policy</Link></li>
             </ul>
           </div>
 

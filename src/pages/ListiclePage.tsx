@@ -153,7 +153,7 @@ const ListiclePage = () => {
                             <span className="time-label">Min</span>
                         </div>
                     </div>
-                    <button className="cta-button">START YOUR OPTIMIZATION</button>
+                    <a href="/tprime365" className="cta-button" style={{ display: 'inline-block', textDecoration: 'none', textAlign: 'center' }}>START YOUR OPTIMIZATION</a>
                 </div>
                 <div className="offer-image">
                     <img src="/images/tprime-risk-free.png" alt="TPrime365 Risk Free Guarantee" />
@@ -273,7 +273,7 @@ const ListiclePage = () => {
                             <span className="time-label">Min</span>
                         </div>
                     </div>
-                    <button className="cta-button">START YOUR OPTIMIZATION</button>
+                    <a href="/tprime365" className="cta-button" style={{ display: 'inline-block', textDecoration: 'none', textAlign: 'center' }}>START YOUR OPTIMIZATION</a>
                 </div>
                 <div className="offer-image">
                     <img src="/images/tprime-whats-included.png" alt="TPrime365 What's Included Bundle" />

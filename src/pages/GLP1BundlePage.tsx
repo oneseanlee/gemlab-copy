@@ -6,6 +6,7 @@ import '../pages/OceanRaysPage.css';
 import '../pages/TPrime365Page.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
+import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import EarlyTestersCarousel from '../components/EarlyTestersCarousel/EarlyTestersCarousel';
@@ -41,10 +42,18 @@ const GLP1_BUNDLE_PRODUCT = {
 const GLP1BundlePage = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
+
+  const mobileLinks = [
+    { label: 'Benefits', href: '#benefits' },
+    { label: 'System', href: '#system' },
+    { label: 'Pricing', href: '#pricing' },
+    { label: 'FAQ', href: '#faq' },
+  ];
 
   const handleOrderNow = async (e?: React.MouseEvent) => {
     e?.preventDefault();
@@ -73,6 +82,7 @@ const GLP1BundlePage = () => {
 
   return (
     <div className="glp1b-page">
+            <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}
             {showBanner &&
@@ -85,7 +95,7 @@ const GLP1BundlePage = () => {
             {/* 2. Navigation */}
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
                 <div className="b365-nav-inner">
-                    <button className="b365-hamburger" aria-label="Menu">
+                    <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
                         <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
                     </button>
                     <a href="/">

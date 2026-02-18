@@ -5,6 +5,7 @@ import '../pages/OceanRaysPage.css';
 import '../pages/TPrime365Page.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
+import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 
@@ -16,9 +17,9 @@ const UCOS_PRODUCT = {
     title: 'Ultimate Cellular Optimization System',
     description: 'Complete 24-Hour Cellular Optimization System — Activate365, Mito365, Restore365',
     handle: 'ucos-complete-system',
-    priceRange: { minVariantPrice: { amount: '258.00', currencyCode: 'USD' } },
-    images: { edges: [{ node: { url: '/placeholder.svg', altText: 'UCOS System' } }] },
-    variants: { edges: [{ node: { id: UCOS_VARIANT_ID, title: 'Complete System', price: { amount: '258.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Bundle', value: 'Complete System' }] } }] },
+    priceRange: { minVariantPrice: { amount: '175.00', currencyCode: 'USD' } },
+    images: { edges: [{ node: { url: '/images/product-ucos.png', altText: 'UCOS System' } }] },
+    variants: { edges: [{ node: { id: UCOS_VARIANT_ID, title: 'Complete System', price: { amount: '175.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Bundle', value: 'Complete System' }] } }] },
     options: [{ name: 'Bundle', values: ['Complete System'] }]
   }
 };
@@ -26,8 +27,16 @@ const UCOS_PRODUCT = {
 const UCOSPage = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
+
+  const mobileLinks = [
+    { label: 'Benefits', href: '#benefits' },
+    { label: 'Results', href: '#results' },
+    { label: 'Compare', href: '#compare' },
+    { label: 'Bundle', href: '#bundle' },
+  ];
 
   const handleOrderNow = async (e?: React.MouseEvent) => {
     e?.preventDefault();
@@ -35,7 +44,7 @@ const UCOSPage = () => {
       product: UCOS_PRODUCT,
       variantId: UCOS_VARIANT_ID,
       variantTitle: 'Complete System',
-      price: { amount: '258.00', currencyCode: 'USD' },
+      price: { amount: '175.00', currencyCode: 'USD' },
       quantity: 1,
       selectedOptions: [{ name: 'Bundle', value: 'Complete System' }]
     });
@@ -52,11 +61,12 @@ const UCOSPage = () => {
 
   return (
     <div className="ucos-page">
+            <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}
             {showBanner &&
       <div className="b365-promo-banner">
-                    🔥 SAVE $201 — Ultimate Cellular Optimization System — Today Only
+                    🔥 SAVE $83 — Ultimate Cellular Optimization System — Today Only
                     <button onClick={() => setShowBanner(false)} aria-label="Close banner">✕</button>
                 </div>
       }
@@ -64,7 +74,7 @@ const UCOSPage = () => {
             {/* 2. Navigation */}
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
                 <div className="b365-nav-inner">
-                    <button className="b365-hamburger" aria-label="Menu">
+                    <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
                         <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
                     </button>
                     <a href="/">
@@ -109,10 +119,10 @@ const UCOSPage = () => {
                                 Evening — Restore365
                             </span>
                         </div>
-                        <div className="ucos-save-banner">🔥 Save $201 Today Only</div>
+                        <div className="ucos-save-banner">🔥 Save $83 Today Only</div>
                         <div className="price-row">
-                            <span className="price-big">$258</span>
-                            <span className="price-note" style={{ textDecoration: 'line-through', marginRight: 8 }}>$459</span>
+                        <span className="price-big">$175</span>
+                            <span className="price-note" style={{ textDecoration: 'line-through', marginRight: 8 }}>$258</span>
                         </div>
                         <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
                             {isLoading ? 'Adding to Cart...' : 'Claim Your System Now'}
@@ -229,7 +239,7 @@ const UCOSPage = () => {
 
             {/* Mid CTA */}
             <div className="ucos-mid-cta">
-                <h3>Save $201 Today Only</h3>
+                <h3>Save $83 Today Only</h3>
                 <p>Start your complete cellular optimization journey now</p>
                 <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
                     {isLoading ? 'Adding...' : 'Get Your System Now'}
@@ -308,7 +318,7 @@ const UCOSPage = () => {
 
                 <div style={{ textAlign: 'center', marginTop: 32 }}>
                     <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
-                        {isLoading ? 'Adding...' : 'Get Your System Now — Save $201 Today'}
+                        {isLoading ? 'Adding...' : 'Get Your System Now — Save $83 Today'}
                     </AnimatedCTA>
                 </div>
             </section>
@@ -319,7 +329,7 @@ const UCOSPage = () => {
                 <h2 className="b365-section-heading b365-serif">Ultimate Cellular Optimization <em>System</em></h2>
                 <div className="ucos-bundle-card">
                     <div className="ucos-bundle-header">
-                        <h3>🔥 LIMITED TIME: SAVE $201 TODAY ONLY</h3>
+                        <h3>🔥 LIMITED TIME: SAVE $83 TODAY ONLY</h3>
                         <p>Complete 24-Hour Cellular Optimization System</p>
                     </div>
                     <div className="ucos-bundle-body">
@@ -328,11 +338,11 @@ const UCOSPage = () => {
                             <img src="/images/product-ucos.png" alt="UCOS Complete Bundle" />
                         </div>
                         <div className="ucos-bundle-price-row">
-                            <span className="old-price">$459</span>
-                            <span className="new-price">$258</span>
-                            <span className="save-badge">SAVE $201</span>
+                            <span className="old-price">$258</span>
+                            <span className="new-price">$175</span>
+                            <span className="save-badge">SAVE $83</span>
                         </div>
-                        <p style={{ textAlign: 'center', fontSize: 14, color: 'var(--b365-text-secondary)', marginBottom: 8 }}>That's 44% OFF Regular Price!</p>
+                        <p style={{ textAlign: 'center', fontSize: 14, color: 'var(--b365-text-secondary)', marginBottom: 8 }}>That's 32% OFF Regular Price!</p>
 
                         <h4 style={{ textAlign: 'center', fontSize: 15, fontWeight: 700, color: 'var(--b365-text)', marginBottom: 16 }}>What You Get:</h4>
                         <div className="ucos-bundle-products">
@@ -379,7 +389,7 @@ const UCOSPage = () => {
 
                 <div style={{ textAlign: 'center', marginTop: 32 }}>
                     <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
-                        {isLoading ? 'Adding...' : 'Order Complete 24-Hour System — Save $201'}
+                        {isLoading ? 'Adding...' : 'Order Complete 24-Hour System — Save $83'}
                     </AnimatedCTA>
                 </div>
             </section>
@@ -442,7 +452,7 @@ const UCOSPage = () => {
                 </div>
                 <div style={{ textAlign: 'center', marginTop: 32 }}>
                     <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
-                        {isLoading ? 'Adding...' : 'Get Complete System — Save $201 Today'}
+                        {isLoading ? 'Adding...' : 'Get Complete System — Save $83 Today'}
                     </AnimatedCTA>
                     <p style={{ fontSize: 13, color: 'var(--b365-text-secondary)', marginTop: 12 }}>✅ Free Shipping • ✅ Made in USA</p>
                 </div>
@@ -460,7 +470,7 @@ const UCOSPage = () => {
                     <div className="ucos-order-summary">
                         <div className="order-row">
                             <span>Complete Cellular System</span>
-                            <span>$258.00 <span className="old">$459</span></span>
+                            <span>$175.00 <span className="old">$258</span></span>
                         </div>
                         <div className="order-row">
                             <span>Shipping</span>
@@ -468,7 +478,7 @@ const UCOSPage = () => {
                         </div>
                         <div className="order-row">
                             <span>Total</span>
-                            <span>$258.00</span>
+                            <span>$175.00</span>
                         </div>
                     </div>
 
@@ -494,7 +504,7 @@ const UCOSPage = () => {
                 <div className="b365-faq-layout">
                     <div className="b365-faq-left">
                         <h2>Frequently Asked <em>Questions</em></h2>
-                        <AnimatedCTA href="#" style={{ marginTop: 8 }}>
+                        <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
                             <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
                             Contact Support
                         </AnimatedCTA>
