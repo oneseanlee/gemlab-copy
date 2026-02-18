@@ -8,6 +8,7 @@ import TrustBadges from '../components/TrustBadges/TrustBadges';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from '../components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { Menu, ArrowRight, Brain, Flame, Zap, Dumbbell, Check, Truck, CheckCircle, Headphones, BadgeCheck } from 'lucide-react';
 
 /* ──── Parallax hook ──── */
 const useParallax = (speed = 0.3) => {
@@ -214,7 +215,7 @@ const TestimonialsCarousel = () => {
                 <div className="name">{t.name}</div>
                 <div className="product-using">Using: {['TPrime365™', 'UCOS System', 'GLP-1 Protocol', 'TPrime365™', 'UCOS System', 'GLP-1 Protocol'][i]}</div>
                 <div className="verified">
-                  <iconify-icon icon="lucide:badge-check" width="14"></iconify-icon>
+                  <BadgeCheck size={14} />
                   Verified buyer
                 </div>
               </div>
@@ -305,7 +306,7 @@ const OceanRaysPage = () => {
       <nav className="b365-nav with-banner">
         <div className="b365-nav-inner">
           <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
-            <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
+            <Menu size={24} />
           </button>
           <a href="/">
             <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
@@ -338,7 +339,7 @@ const OceanRaysPage = () => {
             <div className="hero-entrance hero-entrance-4" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <AnimatedCTA href="#products">
                 Get Started
-                <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
+                <ArrowRight size={16} />
               </AnimatedCTA>
             </div>
             {/* Trusted-by micro-badge */}
@@ -356,10 +357,10 @@ const OceanRaysPage = () => {
         {/* Benefits Row */}
         <div className="b365-benefits-row">
           {[
-            { icon: 'lucide:brain', label: 'Sharper Focus', image: '/images/benefit-focus.png' },
-            { icon: 'lucide:flame', label: 'Increased Drive', image: '/images/benefit-drive-new.png' },
-            { icon: 'lucide:zap', label: 'Elevated Energy', image: '/images/benefit-energy.png' },
-            { icon: 'lucide:dumbbell', label: 'Stronger Body', image: '/images/benefit-body.png' },
+            { Icon: Brain, label: 'Sharper Focus', image: '/images/benefit-focus.png' },
+            { Icon: Flame, label: 'Increased Drive', image: '/images/benefit-drive-new.png' },
+            { Icon: Zap, label: 'Elevated Energy', image: '/images/benefit-energy.png' },
+            { Icon: Dumbbell, label: 'Stronger Body', image: '/images/benefit-body.png' },
           ].map((b, i) => (
             <div className="b365-benefit-card" key={i}>
               <div className="benefit-card-img">
@@ -367,7 +368,7 @@ const OceanRaysPage = () => {
               </div>
               <div className="benefit-card-content">
                 <div className="icon-wrap">
-                  <iconify-icon icon={b.icon} width="22"></iconify-icon>
+                  <b.Icon size={22} />
                 </div>
                 <h4>{b.label}</h4>
               </div>
@@ -419,7 +420,7 @@ const OceanRaysPage = () => {
               <ul className="benefits-list">
                 {product.benefits.map((b, i) => (
                   <li key={i}>
-                    <iconify-icon icon="lucide:check" width="16" class="check"></iconify-icon>
+                    <Check size={16} className="check" />
                     {b}
                   </li>
                 ))}
@@ -435,7 +436,7 @@ const OceanRaysPage = () => {
               <p className="price-note">{product.priceNote}</p>
               {product.shippingBadge && (
                 <div className="shipping-badge">
-                  <iconify-icon icon="lucide:truck" width="14"></iconify-icon>
+                  <Truck size={14} />
                   {product.shippingBadge}
                 </div>
               )}
@@ -482,7 +483,7 @@ const OceanRaysPage = () => {
             </p>
             <AnimatedCTA href="#products" style={{ marginTop: 8 }}>
               Get Started
-              <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
+              <ArrowRight size={16} />
             </AnimatedCTA>
           </div>
           <div className="b365-guarantee-image">
@@ -544,15 +545,15 @@ const OceanRaysPage = () => {
             </p>
             <ul className="power-benefits">
               <li>
-                <iconify-icon icon="lucide:check-circle" width="20"></iconify-icon>
+                <CheckCircle size={20} />
                 Bypasses digestive degradation entirely
               </li>
               <li>
-                <iconify-icon icon="lucide:check-circle" width="20"></iconify-icon>
+                <CheckCircle size={20} />
                 Rapid onset — absorbs in under 60 seconds
               </li>
               <li>
-                <iconify-icon icon="lucide:check-circle" width="20"></iconify-icon>
+                <CheckCircle size={20} />
                 No pills, no injections, no gut disruption
               </li>
             </ul>
@@ -618,7 +619,7 @@ const OceanRaysPage = () => {
         <div style={{ textAlign: 'center', marginTop: 48 }}>
           <AnimatedCTA href="#products">
             Get Started
-            <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
+            <ArrowRight size={16} />
           </AnimatedCTA>
         </div>
       </RevealSection>
@@ -629,7 +630,7 @@ const OceanRaysPage = () => {
           <div className="b365-faq-left">
             <h2>You have questions, <em>we have answers.</em></h2>
             <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
-              <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
+              <Headphones size={16} />
               Contact Support
             </AnimatedCTA>
           </div>

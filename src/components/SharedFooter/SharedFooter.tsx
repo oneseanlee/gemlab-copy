@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Facebook, Instagram, Youtube } from 'lucide-react';
 import './SharedFooter.css';
 
 const SharedFooter = () => {
@@ -36,13 +37,13 @@ const SharedFooter = () => {
             <h4>Follow Us</h4>
             <div className="shared-footer-social">
               <a href="https://www.facebook.com/Best365Labs" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <iconify-icon icon="lucide:facebook" width="18"></iconify-icon>
+                <Facebook size={18} />
               </a>
               <a href="https://www.instagram.com/best365labs/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <iconify-icon icon="lucide:instagram" width="18"></iconify-icon>
+                <Instagram size={18} />
               </a>
               <a href="https://www.youtube.com/channel/UCZpFZ__arXCIsboHoRAMQWw" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                <iconify-icon icon="lucide:youtube" width="18"></iconify-icon>
+                <Youtube size={18} />
               </a>
             </div>
           </div>

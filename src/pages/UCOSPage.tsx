@@ -8,6 +8,7 @@ import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
+import { Menu, ArrowRight, Sunrise, Sun, Moon, BadgeCheck, Clock, Flag, ShieldCheck, Zap, Brain, Dumbbell, Activity, Sparkles, Heart, RefreshCw, Bed, Dna, Shield, Gem, Flame, ChevronRight, Check, Truck, Package, Award, Lock, Headphones, AlertCircle } from 'lucide-react';
 
 // TODO: Replace with real Shopify variant ID once the UCOS product is created
 const UCOS_VARIANT_ID = 'gid://shopify/ProductVariant/PLACEHOLDER_UCOS';
@@ -75,7 +76,7 @@ const UCOSPage = () => {
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
                 <div className="b365-nav-inner">
                     <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
-                        <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
+                        <Menu size={24} />
                     </button>
                     <a href="/">
                         <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
@@ -107,15 +108,15 @@ const UCOSPage = () => {
                         <p className="subhead">A Complete 24-Hour Nutritional System: Three Precision Supplements for Energy, Wellness, and Recovery.</p>
                         <div className="ucos-hero-badges">
                             <span className="ucos-hero-badge morning">
-                                <iconify-icon icon="lucide:sunrise" width="14"></iconify-icon>
+                                <Sunrise size={14} />
                                 Morning — Activate365
                             </span>
                             <span className="ucos-hero-badge midday">
-                                <iconify-icon icon="lucide:sun" width="14"></iconify-icon>
+                                <Sun size={14} />
                                 Mid-Day — Mito365
                             </span>
                             <span className="ucos-hero-badge evening">
-                                <iconify-icon icon="lucide:moon" width="14"></iconify-icon>
+                                <Moon size={14} />
                                 Evening — Restore365
                             </span>
                         </div>
@@ -126,7 +127,7 @@ const UCOSPage = () => {
                         </div>
                         <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
                             {isLoading ? 'Adding to Cart...' : 'Claim Your System Now'}
-                            <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
+                            <ArrowRight size={16} />
                         </AnimatedCTA>
                     </div>
                 </div>
@@ -135,14 +136,14 @@ const UCOSPage = () => {
             {/* 4. Trust Badges */}
             <div className="ucos-trust-strip">
                 {[
-        { icon: 'lucide:badge-check', value: '10X', title: 'Faster Absorption', desc: 'MODS Max™' },
-        { icon: 'lucide:clock', value: '24 Hr', title: 'Sustained Support', desc: 'Time-Release System' },
-        { icon: 'lucide:flag', value: 'USA Made', title: 'cGMP Certified', desc: 'Quality Controlled' },
-        { icon: 'lucide:shield-check', value: 'Quality Tested', title: 'Third-Party Verified', desc: 'Lab Assured' }].
+        { Icon: BadgeCheck, value: '10X', title: 'Faster Absorption', desc: 'MODS Max™' },
+        { Icon: Clock, value: '24 Hr', title: 'Sustained Support', desc: 'Time-Release System' },
+        { Icon: Flag, value: 'USA Made', title: 'cGMP Certified', desc: 'Quality Controlled' },
+        { Icon: ShieldCheck, value: 'Quality Tested', title: 'Third-Party Verified', desc: 'Lab Assured' }].
         map((badge, i) =>
         <div className="ucos-trust-badge" key={i}>
                         <div className="icon-wrap">
-                            <iconify-icon icon={badge.icon} width="22"></iconify-icon>
+                            <badge.Icon size={22} />
                         </div>
                         <div className={`trust-value${badge.value.length > 4 ? ' text-long' : ''}`}>{badge.value}</div>
                         <h4>{badge.title}</h4>
@@ -195,14 +196,13 @@ const UCOSPage = () => {
           map((product, i) =>
           <div className="ucos-product-detail-card" key={i}>
                             <div className="product-img-wrap">
-                                {/* PLACEHOLDER IMAGE — Needs: Product bottle shot */}
                                 <img src={product.img} alt={product.title} />
                             </div>
                             <div className="product-detail-body">
                                 <h3>{product.title}</h3>
                                 <ul>
                                     {product.items.map((item, j) =>
-                <li key={j}><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>{item}</li>
+                <li key={j}><ChevronRight size={14} />{item}</li>
                 )}
                                 </ul>
                             </div>
@@ -216,19 +216,19 @@ const UCOSPage = () => {
                 <h2 className="b365-section-heading b365-serif">Experience Targeted Benefits <em>Throughout Your Day</em></h2>
                 <div className="tprime-benefits-grid">
                     {[
-          { icon: 'lucide:zap', title: 'Sustained Daily Energy', desc: 'No more crashes — steady energy from morning to evening.' },
-          { icon: 'lucide:brain', title: 'Enhanced Mental Clarity', desc: 'Sharper focus and cognitive performance all day long.' },
-          { icon: 'lucide:dumbbell', title: 'Improved Physical Performance', desc: 'Better workouts, faster recovery, and increased endurance.' },
-          { icon: 'lucide:activity', title: 'All-Day Sustained Energy', desc: 'Mitochondrial power keeps you performing at your peak.' },
-          { icon: 'lucide:sparkles', title: 'Enhanced Cognitive Function', desc: 'Methylene Blue and NAD+ work together for mental clarity.' },
-          { icon: 'lucide:heart', title: 'Better Cellular Health', desc: 'PQQ creates new mitochondria while NAD+ powers existing ones.' },
-          { icon: 'lucide:moon', title: 'Deeper Restorative Sleep', desc: 'Optimized melatonin and GABA for quality deep sleep.' },
-          { icon: 'lucide:refresh-cw', title: 'Faster Muscle Recovery', desc: 'Overnight cellular repair with growth hormone support.' },
-          { icon: 'lucide:bed', title: 'Improved Sleep Patterns', desc: 'Fall asleep faster and wake refreshed with consistent quality.' }].
+          { Icon: Zap, title: 'Sustained Daily Energy', desc: 'No more crashes — steady energy from morning to evening.' },
+          { Icon: Brain, title: 'Enhanced Mental Clarity', desc: 'Sharper focus and cognitive performance all day long.' },
+          { Icon: Dumbbell, title: 'Improved Physical Performance', desc: 'Better workouts, faster recovery, and increased endurance.' },
+          { Icon: Activity, title: 'All-Day Sustained Energy', desc: 'Mitochondrial power keeps you performing at your peak.' },
+          { Icon: Sparkles, title: 'Enhanced Cognitive Function', desc: 'Methylene Blue and NAD+ work together for mental clarity.' },
+          { Icon: Heart, title: 'Better Cellular Health', desc: 'PQQ creates new mitochondria while NAD+ powers existing ones.' },
+          { Icon: Moon, title: 'Deeper Restorative Sleep', desc: 'Optimized melatonin and GABA for quality deep sleep.' },
+          { Icon: RefreshCw, title: 'Faster Muscle Recovery', desc: 'Overnight cellular repair with growth hormone support.' },
+          { Icon: Bed, title: 'Improved Sleep Patterns', desc: 'Fall asleep faster and wake refreshed with consistent quality.' }].
           map((b, i) =>
           <div className="tprime-benefit-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={b.icon} width="22"></iconify-icon>
+                                <b.Icon size={22} />
                             </div>
                             <h4>{b.title}</h4>
                             <p>{b.desc}</p>
@@ -255,16 +255,16 @@ const UCOSPage = () => {
                 </p>
                 <div className="ucos-stats-grid">
                     {[
-          { icon: 'lucide:dna', value: '170mg', label: 'TOTAL DAILY NAD+', desc: 'Maximum cellular energy production and longevity pathway activation throughout entire 24-hour cycle' },
-          { icon: 'lucide:shield', value: '160mg', label: 'TOTAL DAILY VITAMIN C', desc: 'Complete antioxidant protection during enhanced cellular activity and overnight recovery processes' },
-          { icon: 'lucide:gem', value: '20mg', label: 'TOTAL DAILY BORON', desc: 'Full hormone optimization cycle with morning priming and evening restoration support' },
-          { icon: 'lucide:zap', value: '10x', label: 'ENHANCED ABSORPTION', desc: 'MODS Max technology maximizes bioavailability of all nutrients for exponential benefit enhancement' },
-          { icon: 'lucide:refresh-cw', value: '24/7', label: 'COMPLETE AUTOPHAGY CYCLE', desc: 'Morning activation with spermidine, sustained throughout day, enhanced during sleep recovery' },
-          { icon: 'lucide:flame', value: '3x', label: 'TRIPLE MITOCHONDRIAL SUPPORT', desc: 'Methylene Blue optimization + PQQ biogenesis + NAD+ power for maximum cellular energy' }].
+          { Icon: Dna, value: '170mg', label: 'TOTAL DAILY NAD+', desc: 'Maximum cellular energy production and longevity pathway activation throughout entire 24-hour cycle' },
+          { Icon: Shield, value: '160mg', label: 'TOTAL DAILY VITAMIN C', desc: 'Complete antioxidant protection during enhanced cellular activity and overnight recovery processes' },
+          { Icon: Gem, value: '20mg', label: 'TOTAL DAILY BORON', desc: 'Full hormone optimization cycle with morning priming and evening restoration support' },
+          { Icon: Zap, value: '10x', label: 'ENHANCED ABSORPTION', desc: 'MODS Max technology maximizes bioavailability of all nutrients for exponential benefit enhancement' },
+          { Icon: RefreshCw, value: '24/7', label: 'COMPLETE AUTOPHAGY CYCLE', desc: 'Morning activation with spermidine, sustained throughout day, enhanced during sleep recovery' },
+          { Icon: Flame, value: '3x', label: 'TRIPLE MITOCHONDRIAL SUPPORT', desc: 'Methylene Blue optimization + PQQ biogenesis + NAD+ power for maximum cellular energy' }].
           map((stat, i) =>
           <div className="ucos-stat-card" key={i}>
                             <div className="stat-icon">
-                                <iconify-icon icon={stat.icon} width="22"></iconify-icon>
+                                <stat.Icon size={22} />
                             </div>
                             <div className="stat-value">{stat.value}</div>
                             <div className="stat-label">{stat.label}</div>
@@ -334,7 +334,6 @@ const UCOSPage = () => {
                     </div>
                     <div className="ucos-bundle-body">
                         <div className="ucos-bundle-hero-img">
-                            {/* PLACEHOLDER IMAGE — Needs: All 3 products together in bundle shot */}
                             <img src="/images/product-ucos.png" alt="UCOS Complete Bundle" />
                         </div>
                         <div className="ucos-bundle-price-row">
@@ -350,39 +349,39 @@ const UCOSPage = () => {
                                 <h4>Activate365</h4>
                                 <div className="product-timing">MORNING — 30 MIN AFTER WAKING</div>
                                 <ul>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>Spermidine 10mg</li>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>NAD+ 20mg</li>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>Boron 10mg</li>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>MODS Max™ Delivery</li>
+                                    <li><Check size={12} />Spermidine 10mg</li>
+                                    <li><Check size={12} />NAD+ 20mg</li>
+                                    <li><Check size={12} />Boron 10mg</li>
+                                    <li><Check size={12} />MODS Max™ Delivery</li>
                                 </ul>
                             </div>
                             <div className="ucos-bundle-product">
                                 <h4>Mito365</h4>
                                 <div className="product-timing">MID-DAY — WITH LUNCH</div>
                                 <ul>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>Methylene Blue 10mg</li>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>PQQ 20mg</li>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>NAD+ 150mg</li>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>GHK-Cu Peptide 10mg</li>
+                                    <li><Check size={12} />Methylene Blue 10mg</li>
+                                    <li><Check size={12} />PQQ 20mg</li>
+                                    <li><Check size={12} />NAD+ 150mg</li>
+                                    <li><Check size={12} />GHK-Cu Peptide 10mg</li>
                                 </ul>
                             </div>
                             <div className="ucos-bundle-product">
                                 <h4>Restore365</h4>
                                 <div className="product-timing">EVENING — 30-60 MIN BEFORE BED</div>
                                 <ul>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>Boron 10mg</li>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>Melatonin 600mcg</li>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>GABA 50mg</li>
-                                    <li><iconify-icon icon="lucide:check" width="12"></iconify-icon>MODS Max™ Sleep Matrix</li>
+                                    <li><Check size={12} />Boron 10mg</li>
+                                    <li><Check size={12} />Melatonin 600mcg</li>
+                                    <li><Check size={12} />GABA 50mg</li>
+                                    <li><Check size={12} />MODS Max™ Sleep Matrix</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div className="ucos-bundle-trust">
-                            <span><iconify-icon icon="lucide:truck" width="16"></iconify-icon> Free Shipping</span>
-                            <span><iconify-icon icon="lucide:package" width="16"></iconify-icon> Discreet Packaging</span>
-                            <span><iconify-icon icon="lucide:shield-check" width="16"></iconify-icon> Satisfaction Guaranteed</span>
-                            <span><iconify-icon icon="lucide:award" width="16"></iconify-icon> CGMP Standards</span>
+                            <span><Truck size={16} /> Free Shipping</span>
+                            <span><Package size={16} /> Discreet Packaging</span>
+                            <span><ShieldCheck size={16} /> Satisfaction Guaranteed</span>
+                            <span><Award size={16} /> CGMP Standards</span>
                         </div>
                     </div>
                 </div>
@@ -431,22 +430,22 @@ const UCOSPage = () => {
                         <div className="gender-icon">👩</div>
                         <h3>For Women</h3>
                         <ul>
-                            <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Supports hormonal balance during menstrual cycles</li>
-                            <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Helps maintain energy during pregnancy and postpartum</li>
-                            <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Supports bone health and calcium absorption</li>
-                            <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Aids in managing stress from multitasking demands</li>
-                            <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Promotes healthy aging and skin vitality</li>
+                            <li><Check size={16} />Supports hormonal balance during menstrual cycles</li>
+                            <li><Check size={16} />Helps maintain energy during pregnancy and postpartum</li>
+                            <li><Check size={16} />Supports bone health and calcium absorption</li>
+                            <li><Check size={16} />Aids in managing stress from multitasking demands</li>
+                            <li><Check size={16} />Promotes healthy aging and skin vitality</li>
                         </ul>
                     </div>
                     <div className="ucos-gender-card">
                         <div className="gender-icon">👨</div>
                         <h3>For Men</h3>
                         <ul>
-                            <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Supports testosterone production and vitality</li>
-                            <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Enhances muscle recovery and performance</li>
-                            <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Promotes cardiovascular health and circulation</li>
-                            <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Helps maintain mental focus under work stress</li>
-                            <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Supports healthy metabolic function</li>
+                            <li><Check size={16} />Supports testosterone production and vitality</li>
+                            <li><Check size={16} />Enhances muscle recovery and performance</li>
+                            <li><Check size={16} />Promotes cardiovascular health and circulation</li>
+                            <li><Check size={16} />Helps maintain mental focus under work stress</li>
+                            <li><Check size={16} />Supports healthy metabolic function</li>
                         </ul>
                     </div>
                 </div>
@@ -486,14 +485,14 @@ const UCOSPage = () => {
                         {isLoading ? 'Adding to Cart...' : 'Get the System →'}
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Satisfaction Guaranteed</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> FREE Fast Shipping</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> PayPal Secure Checkout</span>
+                        <span><Check size={14} /> Satisfaction Guaranteed</span>
+                        <span><Check size={14} /> FREE Fast Shipping</span>
+                        <span><Check size={14} /> PayPal Secure Checkout</span>
                     </div>
                     <div className="tprime-cta-trust-strip">
-                        <span><iconify-icon icon="lucide:lock" width="14"></iconify-icon> SSL Encrypted</span>
-                        <span><iconify-icon icon="lucide:shield-check" width="14"></iconify-icon> PayPal Secure</span>
-                        <span><iconify-icon icon="lucide:package" width="14"></iconify-icon> FREE Shipping</span>
+                        <span><Lock size={14} /> SSL Encrypted</span>
+                        <span><ShieldCheck size={14} /> PayPal Secure</span>
+                        <span><Package size={14} /> FREE Shipping</span>
                     </div>
                 </div>
             </section>
@@ -505,7 +504,7 @@ const UCOSPage = () => {
                     <div className="b365-faq-left">
                         <h2>Frequently Asked <em>Questions</em></h2>
                         <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
-                            <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
+                            <Headphones size={16} />
                             Contact Support
                         </AnimatedCTA>
                     </div>

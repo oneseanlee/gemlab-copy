@@ -10,6 +10,7 @@ import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import EarlyTestersCarousel from '../components/EarlyTestersCarousel/EarlyTestersCarousel';
+import { Menu, Shield, Zap, Activity, Moon, Stethoscope, ShieldCheck, Truck, Award, Flag, Check, Lock, Calendar, Package, Headphones } from 'lucide-react';
 
 const CertificateLottie = () => {
   const [data, setData] = useState(null);
@@ -96,7 +97,7 @@ const GLP1BundlePage = () => {
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
                 <div className="b365-nav-inner">
                     <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
-                        <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
+                        <Menu size={24} />
                     </button>
                     <a href="/">
                         <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
@@ -163,15 +164,15 @@ const GLP1BundlePage = () => {
                         </div>
                         <div className="glp1b-hero-badges" style={{ marginTop: 16 }}>
                             <span className="glp1b-hero-badge">
-                                <iconify-icon icon="lucide:shield" width="14"></iconify-icon>
+                                <Shield size={14} />
                                 Supports lean mass
                             </span>
                             <span className="glp1b-hero-badge">
-                                <iconify-icon icon="lucide:zap" width="14"></iconify-icon>
+                                <Zap size={14} />
                                 Supports daily energy
                             </span>
                             <span className="glp1b-hero-badge">
-                                <iconify-icon icon="lucide:activity" width="14"></iconify-icon>
+                                <Activity size={14} />
                                 Supports metabolic health
                             </span>
                         </div>
@@ -198,15 +199,15 @@ const GLP1BundlePage = () => {
             {/* 4. Trust Strip */}
             <div className="glp1b-trust-strip">
                 {[
-        { icon: 'lucide:stethoscope', title: 'GLP-1 Program', desc: 'via happyMD' },
-        { icon: 'lucide:shield-check', title: 'Consultation', desc: 'Refund if not approved' },
-        { icon: 'lucide:truck', title: 'Free Shipping', desc: 'Free on all orders' },
-        { icon: 'lucide:award', title: 'Professional Grade', desc: 'Premium quality' },
-        { icon: 'lucide:flag', title: 'Made in USA', desc: 'Made in the USA' }].
+        { Icon: Stethoscope, title: 'GLP-1 Program', desc: 'via happyMD' },
+        { Icon: ShieldCheck, title: 'Consultation', desc: 'Refund if not approved' },
+        { Icon: Truck, title: 'Free Shipping', desc: 'Free on all orders' },
+        { Icon: Award, title: 'Professional Grade', desc: 'Premium quality' },
+        { Icon: Flag, title: 'Made in USA', desc: 'Made in the USA' }].
         map((badge, i) =>
         <div className="glp1b-trust-badge" key={i}>
                         <div className="icon-wrap">
-                            <iconify-icon icon={badge.icon} width="20"></iconify-icon>
+                            <badge.Icon size={20} />
                         </div>
                         <h4>{badge.title}</h4>
                         <p>{badge.desc}</p>
@@ -240,14 +241,13 @@ const GLP1BundlePage = () => {
           { img: '/images/glp1-restore365.png', time: 'Evening', timeClass: 'evening', title: 'Restore365', subtitle: 'Sleep & Muscle Recovery', items: ['Improve sleep quality disrupted by weight loss', 'Enhance overnight muscle recovery & repair', 'Reduce stress from body composition changes'] }].
           map((product, i) =>
           <div className="glp1b-flow-card" key={i}>
-                            {/* PLACEHOLDER IMAGE — Needs: Individual product bottle */}
                             <img className="flow-img" src={product.img} alt={product.title} />
                             <span className={`flow-time ${product.timeClass}`}>{product.time}</span>
                             <h3>{product.title}</h3>
                             <p className="flow-subtitle">{product.subtitle}</p>
                             <ul>
                                 {product.items.map((item, j) =>
-              <li key={j}><iconify-icon icon="lucide:check" width="14"></iconify-icon>{item}</li>
+              <li key={j}><Check size={14} />{item}</li>
               )}
                             </ul>
                         </div>
@@ -260,14 +260,14 @@ const GLP1BundlePage = () => {
                 <h2 className="b365-section-heading b365-serif">How This System Supports <em>Your GLP-1 Routine</em></h2>
                 <div className="tprime-benefits-grid" style={{ maxWidth: 1000, gridTemplateColumns: 'repeat(4, 1fr)' }}>
                     {[
-          { icon: 'lucide:shield', title: 'Supports Lean Mass', desc: 'Helps support muscle during weight-management routines' },
-          { icon: 'lucide:activity', title: 'Supports Metabolism', desc: 'Supports metabolic health during and after your routine' },
-          { icon: 'lucide:zap', title: 'Supports Daily Energy', desc: 'Supports cellular energy for your daily activities' },
-          { icon: 'lucide:moon', title: 'Supports Recovery', desc: 'Deep sleep supports better recovery during your routine' }].
+          { Icon: Shield, title: 'Supports Lean Mass', desc: 'Helps support muscle during weight-management routines' },
+          { Icon: Activity, title: 'Supports Metabolism', desc: 'Supports metabolic health during and after your routine' },
+          { Icon: Zap, title: 'Supports Daily Energy', desc: 'Supports cellular energy for your daily activities' },
+          { Icon: Moon, title: 'Supports Recovery', desc: 'Deep sleep supports better recovery during your routine' }].
           map((b, i) =>
           <div className="tprime-benefit-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={b.icon} width="22"></iconify-icon>
+                                <b.Icon size={22} />
                             </div>
                             <h4>{b.title}</h4>
                             <p>{b.desc}</p>
@@ -370,19 +370,19 @@ const GLP1BundlePage = () => {
                     <div className="glp1b-refund-card approved">
                         <h3>✅ If Approved for GLP-1</h3>
                         <ul>
-                            <li><iconify-icon icon="lucide:check" width="16" style={{ color: 'var(--b365-green)' }}></iconify-icon>Keep all 4 supplement products ($139)</li>
-                            <li><iconify-icon icon="lucide:check" width="16" style={{ color: 'var(--b365-green)' }}></iconify-icon>Get consultation + GLP-1 medication ($140 included)</li>
-                            <li><iconify-icon icon="lucide:check" width="16" style={{ color: 'var(--b365-green)' }}></iconify-icon>Medication is INCLUDED in your package (first vial/supply)</li>
-                            <li><iconify-icon icon="lucide:check" width="16" style={{ color: 'var(--b365-green)' }}></iconify-icon>Full support for your optimization journey</li>
+                            <li><Check size={16} style={{ color: 'var(--b365-green)' }} />Keep all 4 supplement products ($139)</li>
+                            <li><Check size={16} style={{ color: 'var(--b365-green)' }} />Get consultation + GLP-1 medication ($140 included)</li>
+                            <li><Check size={16} style={{ color: 'var(--b365-green)' }} />Medication is INCLUDED in your package (first vial/supply)</li>
+                            <li><Check size={16} style={{ color: 'var(--b365-green)' }} />Full support for your optimization journey</li>
                         </ul>
                     </div>
                     <div className="glp1b-refund-card not-approved">
                         <h3>💚 If NOT Approved</h3>
                         <ul>
-                            <li><iconify-icon icon="lucide:check" width="16" style={{ color: 'var(--b365-green)' }}></iconify-icon>Keep all 4 supplement products ($139)</li>
-                            <li><iconify-icon icon="lucide:check" width="16" style={{ color: 'var(--b365-green)' }}></iconify-icon>Get full $140 refund (consultation + medication fee)</li>
-                            <li><iconify-icon icon="lucide:check" width="16" style={{ color: 'var(--b365-green)' }}></iconify-icon>No questions asked</li>
-                            <li><iconify-icon icon="lucide:check" width="16" style={{ color: 'var(--b365-green)' }}></iconify-icon>Optimize your health with premium supplements</li>
+                            <li><Check size={16} style={{ color: 'var(--b365-green)' }} />Keep all 4 supplement products ($139)</li>
+                            <li><Check size={16} style={{ color: 'var(--b365-green)' }} />Get full $140 refund (consultation + medication fee)</li>
+                            <li><Check size={16} style={{ color: 'var(--b365-green)' }} />No questions asked</li>
+                            <li><Check size={16} style={{ color: 'var(--b365-green)' }} />Optimize your health with premium supplements</li>
                         </ul>
                     </div>
                 </div>
@@ -434,9 +434,9 @@ const GLP1BundlePage = () => {
                         </div>
 
                         <div className="ucos-bundle-trust">
-                            <span><iconify-icon icon="lucide:truck" width="16"></iconify-icon> Free Shipping</span>
-                            <span><iconify-icon icon="lucide:calendar" width="16"></iconify-icon> 60-Day Guarantee</span>
-                            <span><iconify-icon icon="lucide:award" width="16"></iconify-icon> GMP Certified</span>
+                            <span><Truck size={16} /> Free Shipping</span>
+                            <span><Calendar size={16} /> 60-Day Guarantee</span>
+                            <span><Award size={16} /> GMP Certified</span>
                         </div>
                     </div>
                 </div>
@@ -563,9 +563,9 @@ const GLP1BundlePage = () => {
                         {isLoading ? 'Adding to Cart...' : 'Get The System — Secure checkout next'}
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-strip">
-                        <span><iconify-icon icon="lucide:lock" width="14"></iconify-icon> 256-bit SSL Encrypted</span>
-                        <span><iconify-icon icon="lucide:truck" width="14"></iconify-icon> Free Shipping</span>
-                        <span><iconify-icon icon="lucide:shield-check" width="14"></iconify-icon> 60-Day Guarantee</span>
+                        <span><Lock size={14} /> 256-bit SSL Encrypted</span>
+                        <span><Truck size={14} /> Free Shipping</span>
+                        <span><ShieldCheck size={14} /> 60-Day Guarantee</span>
                     </div>
                 </div>
             </section>
@@ -576,8 +576,8 @@ const GLP1BundlePage = () => {
                 <div className="b365-faq-layout">
                     <div className="b365-faq-left">
                         <h2>Frequently Asked <em>Questions</em></h2>
-                        <AnimatedCTA href="#" style={{ marginTop: 8 }}>
-                            <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
+                        <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
+                            <Headphones size={16} />
                             Contact Support
                         </AnimatedCTA>
                     </div>

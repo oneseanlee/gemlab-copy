@@ -8,6 +8,7 @@ import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
+import { Menu, CheckCircle, ShieldCheck, Gift, Shrink, Baby, Link2, AlertTriangle, X, Check, Shield, Activity, SlidersHorizontal, ChevronRight, Truck, Award, Stethoscope, ArrowRight, Flame, User, Sunrise, Clock, Moon, Pill, Headphones, AlertCircle, Lock, Package } from 'lucide-react';
 
 // TODO: Replace with real Shopify variant ID once the NHTO bundle product is created
 const NHTO_VARIANT_ID = 'gid://shopify/ProductVariant/PLACEHOLDER_NHTO';
@@ -79,7 +80,7 @@ const NHTOPage = () => {
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
                 <div className="b365-nav-inner">
                     <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
-                        <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
+                        <Menu size={24} />
                     </button>
                     <a href="/">
                         <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
@@ -103,19 +104,18 @@ const NHTOPage = () => {
             <section className={`nhto-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        {/* PLACEHOLDER IMAGE — Needs: NHTO bottle + UCOS system products together */}
                         <img src="/images/product-nhto.png" alt="Non-Hormonal Testosterone Optimizer — Complete System" />
                     </div>
                     <div className="tprime-hero-text">
                         <h1>Revolutionary Non-Hormonal <em>Testosterone Optimizer</em></h1>
                         <p className="subhead">Restore your testosterone naturally. No injections, no hormones, no fertility risks.</p>
                         <ul className="nhto-hero-benefits">
-                            <li><iconify-icon icon="lucide:check-circle" width="18"></iconify-icon><span><strong>Maintains Testicular Function</strong> — Preserves natural size and health</span></li>
-                            <li><iconify-icon icon="lucide:check-circle" width="18"></iconify-icon><span><strong>Protects Fertility</strong> — Maintains sperm production capacity</span></li>
-                            <li><iconify-icon icon="lucide:check-circle" width="18"></iconify-icon><span><strong>Stimulates Natural LH/FSH</strong> — Keeps hormone system active</span></li>
+                            <li><CheckCircle size={18} /><span><strong>Maintains Testicular Function</strong> — Preserves natural size and health</span></li>
+                            <li><CheckCircle size={18} /><span><strong>Protects Fertility</strong> — Maintains sperm production capacity</span></li>
+                            <li><CheckCircle size={18} /><span><strong>Stimulates Natural LH/FSH</strong> — Keeps hormone system active</span></li>
                         </ul>
                         <p className="nhto-consult-note">
-                            <iconify-icon icon="lucide:shield-check" width="14"></iconify-icon>
+                            <ShieldCheck size={14} />
                             Get medical consultation with refund protection
                         </p>
                         <div className="price-row">
@@ -127,7 +127,7 @@ const NHTOPage = () => {
                             {isLoading ? 'Adding to Cart...' : 'YES! I Want My System + Consultation'}
                         </AnimatedCTA>
                         <div className="nhto-happymd-badge">
-                            <iconify-icon icon="lucide:gift" width="18"></iconify-icon>
+                            <Gift size={18} />
                             <div>
                                 <strong>Consultation Facilitated by happyMD</strong><br />
                                 <span>$200 Value — Includes Licensed Physician Evaluation</span>
@@ -140,14 +140,14 @@ const NHTOPage = () => {
             {/* 4. Trust Strip */}
             <div className="nhto-trust-strip">
                 {[
-                    { icon: 'lucide:truck', title: 'Free Shipping', desc: 'Nationwide delivery' },
-                    { icon: 'lucide:shield-check', title: '60-Day Guarantee', desc: 'Money-back promise' },
-                    { icon: 'lucide:award', title: 'Premium Quality', desc: 'Made in USA' },
-                    { icon: 'lucide:stethoscope', title: 'Doctor Consultation', desc: 'Included with order' },
+                    { Icon: Truck, title: 'Free Shipping', desc: 'Nationwide delivery' },
+                    { Icon: ShieldCheck, title: '60-Day Guarantee', desc: 'Money-back promise' },
+                    { Icon: Award, title: 'Premium Quality', desc: 'Made in USA' },
+                    { Icon: Stethoscope, title: 'Doctor Consultation', desc: 'Included with order' },
                 ].map((badge, i) => (
                     <div className="nhto-trust-badge" key={i}>
                         <div className="icon-wrap">
-                            <iconify-icon icon={badge.icon} width="22"></iconify-icon>
+                            <badge.Icon size={22} />
                         </div>
                         <h4>{badge.title}</h4>
                         <p>{badge.desc}</p>
@@ -161,14 +161,14 @@ const NHTOPage = () => {
                 <h2 className="b365-section-heading b365-serif">If You're Considering TRT,<br /> <em>You Need to Know This</em></h2>
                 <div className="nhto-problem-grid">
                     {[
-                        { icon: 'lucide:shrink', title: 'Testicular Atrophy', desc: 'Up to 17% volume decrease in studies' },
-                        { icon: 'lucide:baby', title: 'Fertility Impact', desc: 'Significant sperm production suppression' },
-                        { icon: 'lucide:link', title: 'Hormonal Dependency', desc: 'Natural production shutdown' },
-                        { icon: 'lucide:alert-triangle', title: 'Estrogen Issues', desc: 'Increased aromatization and side effects' },
+                        { Icon: Shrink, title: 'Testicular Atrophy', desc: 'Up to 17% volume decrease in studies' },
+                        { Icon: Baby, title: 'Fertility Impact', desc: 'Significant sperm production suppression' },
+                        { Icon: Link2, title: 'Hormonal Dependency', desc: 'Natural production shutdown' },
+                        { Icon: AlertTriangle, title: 'Estrogen Issues', desc: 'Increased aromatization and side effects' },
                     ].map((card, i) => (
                         <div className="nhto-problem-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={card.icon} width="22"></iconify-icon>
+                                <card.Icon size={22} />
                             </div>
                             <h3>{card.title}</h3>
                             <p>{card.desc}</p>
@@ -185,7 +185,7 @@ const NHTOPage = () => {
                         <h3>TRT Alone</h3>
                         <ul>
                             {['Shuts down natural testosterone production', 'Causes testicular atrophy (up to 17%)', 'Destroys fertility and sperm production', 'Creates lifetime hormonal dependency', 'Increases estrogen conversion'].map((item, i) => (
-                                <li key={i}><iconify-icon icon="lucide:x" width="16" class="icon-x"></iconify-icon>{item}</li>
+                                <li key={i}><X size={16} className="icon-x" />{item}</li>
                             ))}
                         </ul>
                     </div>
@@ -193,7 +193,7 @@ const NHTOPage = () => {
                         <h3>MODS Max + TRT</h3>
                         <ul>
                             {['Maintains natural testosterone production', 'Preserves testicular size and function', 'Protects fertility and sperm count', 'Easy to discontinue — no dependency', 'Optimal estrogen management'].map((item, i) => (
-                                <li key={i}><iconify-icon icon="lucide:check" width="16" class="icon-check"></iconify-icon>{item}</li>
+                                <li key={i}><Check size={16} className="icon-check" />{item}</li>
                             ))}
                         </ul>
                     </div>
@@ -201,14 +201,14 @@ const NHTOPage = () => {
                 <div style={{ height: 40 }}></div>
                 <div className="nhto-benefit-grid">
                     {[
-                        { icon: 'lucide:shield', title: 'Maintains Testicular Function', desc: 'Preserves natural size and health while optimizing testosterone production' },
-                        { icon: 'lucide:baby', title: 'Protects Fertility', desc: 'Maintains sperm production capacity unlike traditional TRT' },
-                        { icon: 'lucide:activity', title: 'Stimulates Natural LH/FSH', desc: 'Keeps your hormone system active and functioning properly' },
-                        { icon: 'lucide:sliders', title: 'Optimizes Hormone Balance', desc: 'Better overall hormone management without dependency' },
+                        { Icon: Shield, title: 'Maintains Testicular Function', desc: 'Preserves natural size and health while optimizing testosterone production' },
+                        { Icon: Baby, title: 'Protects Fertility', desc: 'Maintains sperm production capacity unlike traditional TRT' },
+                        { Icon: Activity, title: 'Stimulates Natural LH/FSH', desc: 'Keeps your hormone system active and functioning properly' },
+                        { Icon: SlidersHorizontal, title: 'Optimizes Hormone Balance', desc: 'Better overall hormone management without dependency' },
                     ].map((card, i) => (
                         <div className="nhto-benefit-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={card.icon} width="22"></iconify-icon>
+                                <card.Icon size={22} />
                             </div>
                             <h3>{card.title}</h3>
                             <p>{card.desc}</p>
@@ -249,7 +249,7 @@ const NHTOPage = () => {
                     Men across all ages are experiencing dramatic improvements in energy, vitality, and overall wellness.
                 </p>
                 <div className="nhto-safety-badge">
-                    <span><iconify-icon icon="lucide:shield-check" width="16"></iconify-icon> ZERO Adverse Events Across ALL Patients</span>
+                    <span><ShieldCheck size={16} /> ZERO Adverse Events Across ALL Patients</span>
                 </div>
                 <div className="nhto-stats-strip">
                     {[
@@ -272,14 +272,13 @@ const NHTOPage = () => {
                         { name: 'Mark', age: 'Age 60', increase: 'Up to 400%+', time: 'in 4 weeks', before: 'Low 200s', after: '1,000+ ng/dL', quote: '"I feel 20 years younger. My energy is through the roof."' },
                     ].map((t, i) => (
                         <div className="nhto-result-card" key={i}>
-                            {/* PLACEHOLDER IMAGE — Needs: Testimonial profile photo */}
                             <img className="result-avatar" src="/placeholder.svg" alt={t.name} />
                             <div className="result-name">{t.name}</div>
                             <div className="result-age">{t.age}</div>
                             <div className="result-increase">{t.increase}<br /><span style={{ fontSize: 12, fontWeight: 400, fontFamily: 'Plus Jakarta Sans, sans-serif', color: 'var(--b365-text-secondary)' }}>{t.time}</span></div>
                             <div className="result-levels">
                                 <span className="level-before">{t.before}</span>
-                                <iconify-icon icon="lucide:arrow-right" width="14" style={{ color: 'var(--b365-text-secondary)' }}></iconify-icon>
+                                <ArrowRight size={14} style={{ color: 'var(--b365-text-secondary)' }} />
                                 <span className="level-after">{t.after}</span>
                             </div>
                             <div className="result-quote">{t.quote}</div>
@@ -314,7 +313,6 @@ const NHTOPage = () => {
                     ].map((product, i) => (
                         <div className="nhto-product-card" key={i}>
                             <div className="nhto-product-img">
-                                {/* PLACEHOLDER IMAGE — Needs: Individual product bottle shot */}
                                 <img src={product.img} alt={product.title} />
                             </div>
                             <div className="nhto-product-info">
@@ -323,7 +321,7 @@ const NHTOPage = () => {
                                 {product.subtitle && <p style={{ fontSize: 13, color: 'var(--b365-blue)', fontWeight: 600, marginBottom: 12 }}>{product.subtitle}</p>}
                                 <ul>
                                     {product.items.map((item, j) => (
-                                        <li key={j}><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>{item}</li>
+                                        <li key={j}><ChevronRight size={14} />{item}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -332,15 +330,15 @@ const NHTOPage = () => {
                     {/* Consultation card */}
                     <div className="nhto-product-card full-width">
                         <div className="icon-wrap" style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--b365-light-blue)', color: 'var(--b365-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <iconify-icon icon="lucide:stethoscope" width="24"></iconify-icon>
+                            <Stethoscope size={24} />
                         </div>
                         <div className="nhto-product-info">
                             <h3>Licensed Physician Consultation via happyMD</h3>
                             <span className="product-tag tag-rx">$200 VALUE</span>
                             <ul>
-                                <li><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>Board-certified physician review</li>
-                                <li><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>Personalized optimization protocol</li>
-                                <li><iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>Prescription issued if medically approved</li>
+                                <li><ChevronRight size={14} />Board-certified physician review</li>
+                                <li><ChevronRight size={14} />Personalized optimization protocol</li>
+                                <li><ChevronRight size={14} />Prescription issued if medically approved</li>
                             </ul>
                         </div>
                     </div>
@@ -350,7 +348,7 @@ const NHTOPage = () => {
             {/* 10. Order Summary / Value Stack */}
             <section className="b365-section b365-section-alt">
                 <div className="nhto-save-callout">
-                    <span className="save-amount"><iconify-icon icon="lucide:flame" width="16"></iconify-icon> SAVE $50 TODAY ONLY</span>
+                    <span className="save-amount"><Flame size={16} /> SAVE $50 TODAY ONLY</span>
                     <span className="regular-price">Regular Price: $300</span>
                 </div>
                 <div className="nhto-order-summary">
@@ -394,7 +392,7 @@ const NHTOPage = () => {
             {/* 11. Risk-Free Promise */}
             <section className="b365-section">
                 <div className="nhto-promise-card">
-                    <h3><iconify-icon icon="lucide:shield-check" width="24" style={{ verticalAlign: 'middle', marginRight: 8 }}></iconify-icon>Our Risk-Free Promise</h3>
+                    <h3><ShieldCheck size={24} style={{ verticalAlign: 'middle', marginRight: 8 }} />Our Risk-Free Promise</h3>
                     <p>If the independent physician determines you're not a candidate for prescription treatment, your <strong>$140 consultation + optimizer fee is fully refunded</strong>. You keep the UCOS supplements ($160 value) regardless of approval — so you still get incredible cellular optimization benefits.</p>
                     <p className="promise-bold">You have NOTHING to lose... except the opportunity to optimize your hormones naturally!</p>
                 </div>
@@ -406,13 +404,13 @@ const NHTOPage = () => {
                 <h2 className="b365-section-heading b365-serif">What Medical Professionals <em>Say</em></h2>
                 <div className="nhto-doctor-grid">
                     {[
-                        { icon: 'lucide:user', name: 'Dr. Steven Warren, MD, PhD', credential: '35+ years experience, Triple Board-Certified', quote: '"The clinical results with Testosterone Optimizer powered by MODS Max are unprecedented. Men are getting their lives back without compromising their natural hormone production."' },
-                        { icon: 'lucide:user', name: 'Board-Certified Urologist', credential: '15+ years TRT experience', quote: '"I\'ve been prescribing TRT for 15 years. Adding this to my protocols has eliminated most of the side effects I used to see. Testicular atrophy is virtually non-existent now."' },
-                        { icon: 'lucide:user', name: 'Dr. K, Cardiologist', credential: 'Participant & Medical Professional', quote: '"As a cardiologist who experienced the benefits firsthand, the cardiovascular safety profile is excellent. The patent-pending delivery system is revolutionary."' },
+                        { Icon: User, name: 'Dr. Steven Warren, MD, PhD', credential: '35+ years experience, Triple Board-Certified', quote: '"The clinical results with Testosterone Optimizer powered by MODS Max are unprecedented. Men are getting their lives back without compromising their natural hormone production."' },
+                        { Icon: User, name: 'Board-Certified Urologist', credential: '15+ years TRT experience', quote: '"I\'ve been prescribing TRT for 15 years. Adding this to my protocols has eliminated most of the side effects I used to see. Testicular atrophy is virtually non-existent now."' },
+                        { Icon: User, name: 'Dr. K, Cardiologist', credential: 'Participant & Medical Professional', quote: '"As a cardiologist who experienced the benefits firsthand, the cardiovascular safety profile is excellent. The patent-pending delivery system is revolutionary."' },
                     ].map((doc, i) => (
                         <div className="nhto-doctor-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={doc.icon} width="24"></iconify-icon>
+                                <doc.Icon size={24} />
                             </div>
                             <h4>{doc.name}</h4>
                             <div className="credential">{doc.credential}</div>
@@ -480,15 +478,15 @@ const NHTOPage = () => {
                         {isLoading ? 'Adding to Cart...' : 'Get the System →'}
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Licensed physician reviews every order</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Refund protection if not approved</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> FDA-registered compounding pharmacy</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Free shipping — discreet packaging</span>
+                        <span><Check size={14} /> Licensed physician reviews every order</span>
+                        <span><Check size={14} /> Refund protection if not approved</span>
+                        <span><Check size={14} /> FDA-registered compounding pharmacy</span>
+                        <span><Check size={14} /> Free shipping — discreet packaging</span>
                     </div>
                     <div className="tprime-cta-trust-strip">
-                        <span><iconify-icon icon="lucide:lock" width="14"></iconify-icon> Secure Checkout</span>
-                        <span><iconify-icon icon="lucide:shield-check" width="14"></iconify-icon> Satisfaction Guaranteed</span>
-                        <span><iconify-icon icon="lucide:package" width="14"></iconify-icon> FREE Fast Shipping</span>
+                        <span><Lock size={14} /> Secure Checkout</span>
+                        <span><ShieldCheck size={14} /> Satisfaction Guaranteed</span>
+                        <span><Package size={14} /> FREE Fast Shipping</span>
                     </div>
                 </div>
             </section>
@@ -498,14 +496,14 @@ const NHTOPage = () => {
                 <h2 className="b365-section-heading b365-serif">Your Daily <em>Optimization Schedule</em></h2>
                 <div className="nhto-timing-grid">
                     {[
-                        { icon: 'lucide:sunrise', when: 'Morning', title: 'Activate365', desc: 'First thing after waking' },
-                        { icon: 'lucide:clock', when: '15 Min Later', title: 'Mito365', desc: '15 minutes after Activate365' },
-                        { icon: 'lucide:moon', when: 'Evening', title: 'Restore365', desc: '30-60 min before bed' },
-                        { icon: 'lucide:pill', when: 'As Prescribed', title: 'NHTO', desc: 'Per physician instructions' },
+                        { Icon: Sunrise, when: 'Morning', title: 'Activate365', desc: 'First thing after waking' },
+                        { Icon: Clock, when: '15 Min Later', title: 'Mito365', desc: '15 minutes after Activate365' },
+                        { Icon: Moon, when: 'Evening', title: 'Restore365', desc: '30-60 min before bed' },
+                        { Icon: Pill, when: 'As Prescribed', title: 'NHTO', desc: 'Per physician instructions' },
                     ].map((t, i) => (
                         <div className="nhto-timing-card" key={i}>
                             <div className="timing-icon">
-                                <iconify-icon icon={t.icon} width="22"></iconify-icon>
+                                <t.Icon size={22} />
                             </div>
                             <span className="timing-when">{t.when}</span>
                             <h4>{t.title}</h4>
@@ -522,7 +520,7 @@ const NHTOPage = () => {
                     <div className="b365-faq-left">
                         <h2>Frequently Asked <em>Questions</em></h2>
                         <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
-                            <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
+                            <Headphones size={16} />
                             Contact Support
                         </AnimatedCTA>
                     </div>
@@ -553,7 +551,7 @@ const NHTOPage = () => {
                             'Consult with a healthcare professional before use',
                         ].map((item, i) => (
                             <li key={i}>
-                                <iconify-icon icon="lucide:alert-circle" width="14"></iconify-icon>
+                                <AlertCircle size={14} />
                                 {item}
                             </li>
                         ))}
