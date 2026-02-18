@@ -480,14 +480,14 @@ const OceanRaysPage = () => {
             { img: '/images/guide-testosterone-fertility.png', title: 'Testosterone Optimization Without Sacrificing Fertility' },
             { img: '/images/guide-before-trt.png', title: 'Before You Commit to TRT — Answer These Questions' },
           ].map((guide, i) => (
-            <a href="/article" className="b365-guide-card" key={i}>
+            <a href="/guides" className="b365-guide-card" key={i}>
               <img src={guide.img} alt={guide.title} />
               <h4>{guide.title}</h4>
             </a>
           ))}
         </div>
         <div style={{ textAlign: 'center', marginTop: 40 }}>
-          <AnimatedCTA href="/article">See All Guides</AnimatedCTA>
+          <AnimatedCTA href="/guides">See All Guides</AnimatedCTA>
         </div>
       </section>
 
