@@ -4,10 +4,19 @@ import './TPrime365Page.css';
 import '../pages/OceanRaysPage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
+import MobileMenu from '../components/MobileMenu/MobileMenu';
 
 const TPrime365Page = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const mobileLinks = [
+    { label: 'Ingredients', href: '#ingredients' },
+    { label: 'The Science', href: '#science' },
+    { label: 'Compare', href: '#compare' },
+    { label: 'FAQ', href: '#faq' },
+  ];
 
   const faqItems = [
   {
@@ -46,6 +55,7 @@ const TPrime365Page = () => {
 
   return (
     <div className="tprime-page">
+            <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}
             {showBanner &&
@@ -58,7 +68,7 @@ const TPrime365Page = () => {
             {/* 2. Navigation */}
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
                 <div className="b365-nav-inner">
-                    <button className="b365-hamburger" aria-label="Menu">
+                    <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
                         <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
                     </button>
                     <a href="/">
@@ -71,8 +81,7 @@ const TPrime365Page = () => {
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
                     <div className="b365-nav-right">
-                        <a href="#" className="b365-login-link">Log In</a>
-                        <AnimatedCTA href="#" small>Start Evaluation</AnimatedCTA>
+                        <AnimatedCTA href="/tprime365#process" small>Start Evaluation</AnimatedCTA>
                     </div>
                 </div>
             </nav>
@@ -93,7 +102,7 @@ const TPrime365Page = () => {
                             <span className="price-note">/month — Includes Physician Consultation via HappyMD</span>
                         </div>
                         <p className="guarantee-text">If not approved by physician, fully refunded</p>
-                        <AnimatedCTA href="#">
+                        <AnimatedCTA href="#process">
                             Start Your Optimization
                             <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
                         </AnimatedCTA>
@@ -472,7 +481,7 @@ const TPrime365Page = () => {
                 <div className="b365-faq-layout">
                     <div className="b365-faq-left">
                         <h2>Your questions, <em>answered.</em></h2>
-                        <AnimatedCTA href="#" style={{ marginTop: 8 }}>
+                        <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
                             <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
                             Contact Support
                         </AnimatedCTA>
@@ -501,7 +510,7 @@ const TPrime365Page = () => {
                         <span className="note">Includes everything: Formula + Physician Consultation + Free Shipping</span>
                         <span className="guarantee-text">100% refunded if physician does not approve</span>
                     </div>
-                    <AnimatedCTA href="#" className="btn-white-cta">
+                    <AnimatedCTA href="#process" className="btn-white-cta">
                         Order Now — Risk Free
                         <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
                     </AnimatedCTA>

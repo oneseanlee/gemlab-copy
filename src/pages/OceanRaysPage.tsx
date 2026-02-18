@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './OceanRaysPage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
+import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from '../components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 
@@ -166,9 +167,9 @@ const TestimonialsCarousel = () => {
           <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
             <div className="b365-testimonial-card">
               <img src={t.img} alt={t.name} />
-              <div className="card-body">
+                <div className="card-body">
                 <div className="name">{t.name}</div>
-                <div className="product-using">Using: TPrime365™</div>
+                <div className="product-using">Using: {['TPrime365™', 'UCOS System', 'GLP-1 Protocol', 'TPrime365™', 'UCOS System', 'GLP-1 Protocol'][i]}</div>
                 <div className="verified">
                   <iconify-icon icon="lucide:badge-check" width="14"></iconify-icon>
                   Verified buyer
@@ -196,11 +197,20 @@ const OceanRaysPage = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [activeTab, setActiveTab] = useState('all');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const mobileLinks = [
+    { label: 'Solutions', href: '#products' },
+    { label: 'The Science', href: '#science' },
+    { label: 'Process', href: '#process' },
+    { label: 'FAQ', href: '#faq' },
+  ];
 
   const filteredProducts = activeTab === 'all' ? products : products.filter(p => p.category === activeTab);
 
   return (
     <div className="b365-page">
+      <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
       {/* 1. Promo Banner */}
       {showBanner && (
@@ -213,7 +223,7 @@ const OceanRaysPage = () => {
       {/* 2. Navigation */}
       <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
         <div className="b365-nav-inner">
-          <button className="b365-hamburger" aria-label="Menu">
+          <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
             <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
           </button>
           <a href="/">
@@ -226,7 +236,6 @@ const OceanRaysPage = () => {
             <li><a href="#faq">FAQ</a></li>
           </ul>
           <div className="b365-nav-right">
-            <a href="#" className="b365-login-link">Log In</a>
             <AnimatedCTA href="https://community.cell365power.com/" small target="_blank" rel="noopener noreferrer">Join the Community</AnimatedCTA>
           </div>
         </div>

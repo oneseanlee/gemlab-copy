@@ -5,6 +5,7 @@ import '../pages/OceanRaysPage.css';
 import '../pages/TPrime365Page.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
+import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 
@@ -16,9 +17,9 @@ const NHTO_PRODUCT = {
         title: 'Non-Hormonal Testosterone Optimizer — Complete System',
         description: 'Complete Non-Hormonal Testosterone Optimizer system with UCOS bundle and physician consultation.',
         handle: 'nhto-complete-system',
-        priceRange: { minVariantPrice: { amount: '300.00', currencyCode: 'USD' } },
-        images: { edges: [{ node: { url: '/placeholder.svg', altText: 'NHTO System' } }] },
-        variants: { edges: [{ node: { id: NHTO_VARIANT_ID, title: 'Complete System', price: { amount: '300.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Bundle', value: 'Complete System' }] } }] },
+        priceRange: { minVariantPrice: { amount: '250.00', currencyCode: 'USD' } },
+        images: { edges: [{ node: { url: '/images/product-nhto.png', altText: 'NHTO System' } }] },
+        variants: { edges: [{ node: { id: NHTO_VARIANT_ID, title: 'Complete System', price: { amount: '250.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Bundle', value: 'Complete System' }] } }] },
         options: [{ name: 'Bundle', values: ['Complete System'] }],
     }
 };
@@ -26,8 +27,16 @@ const NHTO_PRODUCT = {
 const NHTOPage = () => {
     const [showBanner, setShowBanner] = useState(true);
     const [openFaq, setOpenFaq] = useState<number | null>(0);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const addItem = useCartStore(state => state.addItem);
     const isLoading = useCartStore(state => state.isLoading);
+
+    const mobileLinks = [
+      { label: 'Benefits', href: '#benefits' },
+      { label: 'Results', href: '#results' },
+      { label: 'Compare', href: '#compare' },
+      { label: 'Bundle', href: '#bundle' },
+    ];
 
     const handleOrderNow = async (e?: React.MouseEvent) => {
         e?.preventDefault();
@@ -35,7 +44,7 @@ const NHTOPage = () => {
             product: NHTO_PRODUCT,
             variantId: NHTO_VARIANT_ID,
             variantTitle: 'Complete System',
-            price: { amount: '300.00', currencyCode: 'USD' },
+            price: { amount: '250.00', currencyCode: 'USD' },
             quantity: 1,
             selectedOptions: [{ name: 'Bundle', value: 'Complete System' }],
         });
@@ -56,6 +65,7 @@ const NHTOPage = () => {
 
     return (
         <div className="nhto-page">
+            <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}
             {showBanner && (
@@ -68,7 +78,7 @@ const NHTOPage = () => {
             {/* 2. Navigation */}
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
                 <div className="b365-nav-inner">
-                    <button className="b365-hamburger" aria-label="Menu">
+                    <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
                         <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
                     </button>
                     <a href="/">
@@ -109,7 +119,8 @@ const NHTOPage = () => {
                             Get medical consultation with refund protection
                         </p>
                         <div className="price-row">
-                            <span className="price-big">$300</span>
+                            <span className="price-big">$250</span>
+                            <span className="price-note" style={{ textDecoration: 'line-through', marginRight: 8 }}>$300</span>
                             <span className="price-note">Complete System + Medical Consultation Included</span>
                         </div>
                         <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
@@ -339,8 +350,8 @@ const NHTOPage = () => {
             {/* 10. Order Summary / Value Stack */}
             <section className="b365-section b365-section-alt">
                 <div className="nhto-save-callout">
-                    <span className="save-amount"><iconify-icon icon="lucide:flame" width="16"></iconify-icon> SAVE $159 TODAY ONLY</span>
-                    <span className="regular-price">Regular Price: $459</span>
+                    <span className="save-amount"><iconify-icon icon="lucide:flame" width="16"></iconify-icon> SAVE $50 TODAY ONLY</span>
+                    <span className="regular-price">Regular Price: $300</span>
                 </div>
                 <div className="nhto-order-summary">
                     <div className="nhto-order-header">
@@ -353,7 +364,7 @@ const NHTOPage = () => {
                                 <span>Yours to keep regardless of medical approval</span>
                                 <div><span className="nhto-refund-badge non-refundable">NON-REFUNDABLE</span></div>
                             </div>
-                            <div className="order-price">$160</div>
+                            <div className="order-price">$110</div>
                         </div>
                         <div className="nhto-order-row">
                             <div className="order-label">
@@ -370,7 +381,7 @@ const NHTOPage = () => {
                     </div>
                     <div className="nhto-order-total">
                         <span>Total Package Price</span>
-                        <span>$300</span>
+                        <span>$250</span>
                     </div>
                 </div>
                 <div style={{ textAlign: 'center', marginTop: 32 }}>
@@ -443,14 +454,14 @@ const NHTOPage = () => {
                     <h2>Get Your Complete System <em>Now!</em></h2>
                     <p className="subtitle">🔥 Transform Your Energy in 24 Hours — Ships Today!</p>
                     <div className="tprime-final-price-box">
-                        <span className="big-price">$300</span>
-                        <span className="note">Complete System — SAVE $159</span>
+                        <span className="big-price">$250</span>
+                        <span className="note">Complete System — SAVE $50</span>
                         <span className="guarantee-text">✅ Testosterone Optimizer + UCOS + Consultation with Refund Protection</span>
                     </div>
                     <div className="nhto-payment-breakdown">
                         <div className="nhto-payment-row">
                             <span>UCOS System (3 Products)<span className="refund-note">NON-REFUNDABLE</span></span>
-                            <span>$160</span>
+                            <span>$110</span>
                         </div>
                         <div className="nhto-payment-row">
                             <span>NHTO + Consultation<span className="refund-note">REFUNDABLE IF NOT APPROVED</span></span>
@@ -462,7 +473,7 @@ const NHTOPage = () => {
                         </div>
                         <div className="nhto-payment-row">
                             <span>Total</span>
-                            <span>$300</span>
+                            <span>$250</span>
                         </div>
                     </div>
                     <AnimatedCTA href="#" className="btn-white-cta" onClick={handleOrderNow} disabled={isLoading}>
@@ -510,7 +521,7 @@ const NHTOPage = () => {
                 <div className="b365-faq-layout">
                     <div className="b365-faq-left">
                         <h2>Frequently Asked <em>Questions</em></h2>
-                        <AnimatedCTA href="#" style={{ marginTop: 8 }}>
+                        <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
                             <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
                             Contact Support
                         </AnimatedCTA>

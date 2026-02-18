@@ -5,6 +5,7 @@ import '../pages/OceanRaysPage.css';
 import '../pages/TPrime365Page.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
+import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { GLP1_VARIANT_ID } from '../lib/shopify';
@@ -26,8 +27,16 @@ const GLP1_PRODUCT = {
 const GLP1Page = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
+
+  const mobileLinks = [
+    { label: 'Protocol', href: '#protocol' },
+    { label: 'Results', href: '#results' },
+    { label: 'The Science', href: '#science' },
+    { label: 'FAQ', href: '#faq' },
+  ];
 
   const handleOrderNow = async (e?: React.MouseEvent) => {
     e?.preventDefault();
@@ -78,6 +87,7 @@ const GLP1Page = () => {
 
   return (
     <div className="glp1-page">
+            <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}
             {showBanner &&
@@ -90,7 +100,7 @@ const GLP1Page = () => {
             {/* 2. Navigation */}
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
                 <div className="b365-nav-inner">
-                    <button className="b365-hamburger" aria-label="Menu">
+                    <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
                         <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
                     </button>
                     <a href="/">
@@ -480,7 +490,7 @@ const GLP1Page = () => {
                 <div className="b365-faq-layout">
                     <div className="b365-faq-left">
                         <h2>Your questions, <em>answered.</em></h2>
-                        <AnimatedCTA href="#" style={{ marginTop: 8 }}>
+                        <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
                             <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
                             Contact Support
                         </AnimatedCTA>
