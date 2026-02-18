@@ -1,33 +1,26 @@
 import React from 'react';
 import './LogoCarousel.css';
 
-const LogoCarousel = () => {
-    // Using text placeholders styled to look like logos for now
-    const logos = [
-        'marie claire',
-        'Esquire',
-        'BuzzFeed',
-        'Forbes',
-        'VOGUE'
-    ];
+const logos = [
+  { name: 'Men\'s Health', src: '/images/Men_s_Health.avif' },
+  { name: 'Esquire', src: '/images/Esquire_logo__2017__svg.avif' },
+  { name: 'BuzzFeed', src: '/images/BuzzFeed_9341afbe-6571-4255-aa76-6460b9611a57.avif' },
+  { name: 'Men\'s Journal', src: '/images/MJ.avif' },
+];
 
-    return (
-        <section className="logo-carousel-section">
-            <div className="logo-track">
-                {logos.map((logo, i) => (
-                    <div key={i} className={`press-logo logo-${i}`}>
-                        {logo}
-                    </div>
-                ))}
-                {/* Duplicate for infinite scroll illusion if needed, strictly text here */}
-                {logos.map((logo, i) => (
-                    <div key={`dup-${i}`} className={`press-logo logo-${i}`}>
-                        {logo}
-                    </div>
-                ))}
-            </div>
-        </section>
-    );
+const LogoCarousel = () => {
+  return (
+    <section className="logo-carousel-section">
+      <p className="logo-carousel-label">As Seen In</p>
+      <div className="logo-track">
+        {[...logos, ...logos].map((logo, i) => (
+          <div key={i} className="press-logo">
+            <img src={logo.src} alt={logo.name} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 };
 
 export default LogoCarousel;

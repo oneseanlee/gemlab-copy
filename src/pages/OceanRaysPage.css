@@ -13,6 +13,231 @@
   --b365-green: #22C55E;
 }
 
+/* ──── Social Proof Ticker Banner ──── */
+.b365-social-proof-banner {
+  background: var(--b365-navy);
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 101;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.social-proof-msg {
+  animation: proofFade 3.5s ease-in-out;
+}
+@keyframes proofFade {
+  0% { opacity: 0; transform: translateY(8px); }
+  12% { opacity: 1; transform: translateY(0); }
+  88% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+@media (max-width: 640px) {
+  .b365-social-proof-banner {
+    font-size: 11px;
+    height: 56px;
+    padding: 8px 16px;
+    line-height: 1.4;
+  }
+}
+
+/* ──── Hero Entrance Animations ──── */
+.hero-entrance {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroFadeUp 0.7s ease-out forwards;
+}
+.hero-entrance-1 { animation-delay: 0.1s; }
+.hero-entrance-2 { animation-delay: 0.25s; }
+.hero-entrance-3 { animation-delay: 0.4s; }
+.hero-entrance-4 { animation-delay: 0.55s; }
+.hero-entrance-5 { animation-delay: 0.7s; }
+@keyframes heroFadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ──── Trusted-by Micro-Badge ──── */
+.hero-trusted-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+}
+.trusted-avatars {
+  display: flex;
+}
+.trusted-avatars img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--b365-white);
+  object-fit: cover;
+  margin-left: -8px;
+}
+.trusted-avatars img:first-child {
+  margin-left: 0;
+}
+.hero-trusted-badge strong {
+  font-weight: 700;
+  color: var(--b365-text);
+}
+
+/* ──── Parallax Hero ──── */
+.b365-parallax-hero img {
+  transition: transform 0.1s linear;
+}
+
+/* ──── Product Card Ribbon ──── */
+.b365-product-card.has-ribbon {
+  position: relative;
+  border-color: var(--b365-blue);
+  box-shadow: 0 0 0 1px var(--b365-blue), 0 4px 20px rgba(51,118,176,0.12);
+}
+.product-ribbon {
+  position: absolute;
+  top: 16px;
+  right: -8px;
+  background: var(--b365-blue);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 6px 16px 6px 12px;
+  border-radius: 4px 0 0 4px;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(51,118,176,0.3);
+}
+.product-ribbon::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -8px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: var(--b365-blue-dark) var(--b365-blue-dark) transparent transparent;
+}
+.product-ribbon.ribbon-value {
+  background: var(--b365-green);
+  box-shadow: 0 2px 8px rgba(34,197,94,0.3);
+}
+.product-ribbon.ribbon-value::after {
+  border-color: #16a34a #16a34a transparent transparent;
+}
+
+/* ──── Product Card Hover Glow ──── */
+.b365-product-card:hover {
+  box-shadow: 0 8px 32px rgba(51,118,176,0.12);
+  border-color: var(--b365-blue);
+  transform: translateY(-4px);
+}
+
+/* ──── Shipping Badge ──── */
+.shipping-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--b365-green);
+  padding: 0 32px;
+  margin-bottom: 16px;
+}
+
+/* ──── Scroll Reveal ──── */
+.b365-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.b365-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ──── Step Number Polish ──── */
+.b365-step-card .step-number {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--b365-blue);
+  line-height: 1;
+  margin: 0 auto 16px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--b365-light-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: stepPulse 3s ease-in-out infinite;
+}
+@keyframes stepPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(51,118,176,0.15); }
+  50% { box-shadow: 0 0 0 12px rgba(51,118,176,0); }
+}
+
+/* ──── Sticky Mobile CTA ──── */
+.b365-sticky-mobile-cta {
+  display: none;
+}
+@media (max-width: 640px) {
+  .b365-sticky-mobile-cta {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: var(--b365-white);
+    border-top: 1px solid var(--b365-border);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    padding: 12px 16px;
+    transform: translateY(100%);
+    transition: transform 0.35s ease;
+  }
+  .b365-sticky-mobile-cta.visible {
+    transform: translateY(0);
+  }
+  .sticky-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .sticky-cta-text {
+    display: flex;
+    flex-direction: column;
+  }
+  .sticky-cta-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--b365-text);
+  }
+  .sticky-cta-price {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--b365-blue);
+  }
+  .sticky-cta-price small {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--b365-text-secondary);
+  }
+}
+
 .b365-page {
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--b365-text);
@@ -741,14 +966,7 @@
   text-align: center;
   padding: 32px;
 }
-.b365-step-card .step-number {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 64px;
-  font-weight: 700;
-  color: var(--b365-light-blue);
-  line-height: 1;
-  margin-bottom: 16px;
-}
+/* step-number is styled in the top of this file with circular border + pulse */
 .b365-step-card h3 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 22px;
