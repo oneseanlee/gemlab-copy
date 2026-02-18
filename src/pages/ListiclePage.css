@@ -2,9 +2,8 @@
     background-color: #ddeafa;
     min-height: 100vh;
     font-family: 'Rethink Sans', sans-serif;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
 }
-
 
 /* Article Metadata - Editorial Style */
 .article-meta {
@@ -14,14 +13,14 @@
     gap: 0.5rem;
     margin-bottom: 1.5rem;
     font-size: 0.875rem;
-    color: #64748B;
+    color: var(--b365-gray-500);
 }
 
 .category-badge {
-    background-color: #1a1a1a;
+    background-color: var(--b365-gray-900);
     color: white;
     padding: 0.25rem 0.75rem;
-    border-radius: 2rem;
+    border-radius: var(--radius-lg);
     font-weight: 700;
     font-size: 0.75rem;
     letter-spacing: 0.05em;
@@ -29,7 +28,7 @@
 }
 
 .meta-separator {
-    color: #CBD5E1;
+    color: var(--b365-gray-200);
 }
 
 .publish-date,
@@ -49,9 +48,9 @@
 .author-avatar {
     width: 2.5rem;
     height: 2.5rem;
-    background-color: #1E293B;
+    background-color: var(--b365-navy);
     color: white;
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,31 +66,28 @@
 
 .author-name {
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
     font-size: 0.9rem;
 }
 
 .author-title {
     font-size: 0.8rem;
-    color: #64748B;
+    color: var(--b365-gray-500);
 }
 
 .hero-card {
     background: white;
-    border-radius: 2rem;
+    border-radius: var(--radius-lg);
     max-width: 1200px;
-    /* Updated from 800px */
     width: 100%;
     aspect-ratio: 1200 / 480;
-    /* Enforce 5:2 ratio */
     margin: 0 auto 3rem;
     padding: 3rem;
     text-align: center;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-md);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Center content vertically in the fixed height */
 }
 
 @media (max-width: 1024px) {
@@ -106,23 +102,22 @@
     font-size: 3.5rem;
     line-height: 1.1;
     margin-bottom: 2rem;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
     letter-spacing: -0.02em;
 }
 
 .hero-divider {
     height: 1px;
-    background-color: #E2E8F0;
+    background-color: var(--b365-gray-200);
     margin: 2.5rem auto;
     width: 100%;
-    /* Full width of content area effectively */
     max-width: 90%;
 }
 
 .hero-subtitle {
     font-size: 1.125rem;
     line-height: 1.6;
-    color: #4A5568;
+    color: var(--b365-gray-500);
     margin-bottom: 2.5rem;
     max-width: 700px;
     margin-left: auto;
@@ -136,7 +131,7 @@
     gap: 0.75rem;
     margin-bottom: 2.5rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
     font-size: 1.1rem;
 }
 
@@ -152,7 +147,7 @@
 
 .brand-intro-text {
     font-size: 0.875rem;
-    color: #64748B;
+    color: var(--b365-gray-500);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -169,14 +164,11 @@
     justify-content: center;
     gap: 3rem;
     align-items: center;
-    /* Align vertically center for images */
     flex-wrap: wrap;
     opacity: 1;
     margin-top: 3rem;
     filter: grayscale(100%);
-    /* Make logos black/grey */
     opacity: 0.7;
-    /* Slight fade for elegance */
 }
 
 .press-logo {
@@ -186,28 +178,15 @@
 }
 
 /* Logo Simulations */
-.press-logo.esquire {
-    height: 2rem;
-}
-
-.press-logo.buzzfeed {
-    height: 2rem;
-}
-
-/* Optional: Add the red dot? */
-
-.press-logo.mens-journal {
-    height: 2rem;
-}
-
-.press-logo.mens-health {
-    height: 2rem;
-}
+.press-logo.esquire { height: 2rem; }
+.press-logo.buzzfeed { height: 2rem; }
+.press-logo.mens-journal { height: 2rem; }
+.press-logo.mens-health { height: 2rem; }
 
 /* Product Shot Section */
 .product-showcase {
     background: white;
-    border-radius: 2rem;
+    border-radius: var(--radius-lg);
     max-width: 800px;
     width: 100%;
     margin: 0 auto 3rem;
@@ -217,7 +196,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
     overflow: hidden;
 }
 
@@ -228,32 +207,30 @@
     width: 100%;
 }
 
-/* ... existing code ... */
-
 .bottles-image {
     width: 100%;
     height: auto;
     object-fit: contain;
     display: block;
-    border-radius: 1.5rem;
+    border-radius: var(--radius-lg);
 }
 
 /* List Items */
 .reason-card {
     background: white;
-    border-radius: 2rem;
+    border-radius: var(--radius-lg);
     max-width: 800px;
     margin: 0 auto 3rem;
     padding: 4rem 3rem 3rem;
     position: relative;
     text-align: center;
-    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.08), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--duration-normal), box-shadow var(--duration-normal);
 }
 
 .reason-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px -8px rgba(0, 0, 0, 0.12), 0 4px 16px -4px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-lg);
 }
 
 .list-number {
@@ -263,9 +240,9 @@
     transform: translateX(-50%);
     width: 3rem;
     height: 3rem;
-    background-color: #29ABE2;
+    background-color: var(--b365-blue);
     color: white;
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -273,19 +250,18 @@
     font-weight: 800;
     font-size: 1.25rem;
     top: 2rem;
-    /* Adjusted based on screenshot layout (inside card) */
 }
 
 .list-title {
     font-family: 'Zalando Sans Expanded', sans-serif;
     font-size: 1.75rem;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
     margin-bottom: 1.5rem;
     margin-top: 1rem;
 }
 
 .list-description {
-    color: #4A5568;
+    color: var(--b365-gray-500);
     line-height: 1.6;
     margin-bottom: 2rem;
     max-width: 600px;
@@ -308,22 +284,22 @@
 
 .image-card {
     background: white;
-    border-radius: 2rem;
+    border-radius: var(--radius-lg);
     max-width: 800px;
     width: 100%;
     margin: 0 auto 3rem;
     padding: 1.5rem;
     position: relative;
-    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.1), 0 2px 8px -2px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-md);
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--duration-normal), box-shadow var(--duration-normal);
 }
 
 .image-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.15), 0 4px 16px -4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-xl);
 }
 
 .image-card img {
@@ -331,7 +307,7 @@
     height: auto;
     object-fit: contain;
     display: block;
-    border-radius: 1.5rem;
+    border-radius: var(--radius-lg);
 }
 
 /* Testimonial cards - ensure full image visibility */
@@ -339,19 +315,18 @@
     padding: 0;
     overflow: visible;
     background: transparent;
-    box-shadow: 0 8px 30px -8px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-lg);
 }
 
 .image-card.testimonial-card img {
     width: 100%;
     height: auto;
     object-fit: contain;
-    border-radius: 2rem;
+    border-radius: var(--radius-lg);
     display: block;
 }
 
 .step-overlay {
-    /* For the arm steps image */
     position: relative;
 }
 
@@ -363,7 +338,7 @@
 }
 
 .step-badge {
-    background-color: #29ABE2;
+    background-color: var(--b365-blue);
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
     font-weight: 700;
@@ -435,14 +410,14 @@
 .founders-title {
     font-family: 'Zalando Sans Expanded', sans-serif;
     font-size: 2.25rem;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
     margin-bottom: 0.75rem;
     letter-spacing: -0.02em;
 }
 
 .founders-subtitle {
     font-size: 1.125rem;
-    color: #64748B;
+    color: var(--b365-gray-500);
     margin-bottom: 2.5rem;
     font-weight: 500;
 }
@@ -454,15 +429,15 @@
 }
 
 .founder-card {
-    border-radius: 2rem;
+    border-radius: var(--radius-lg);
     overflow: visible;
-    box-shadow: 0 8px 30px -8px rgba(0, 0, 0, 0.12);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--duration-normal), box-shadow var(--duration-normal);
 }
 
 .founder-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 50px -12px rgba(0, 0, 0, 0.18);
+    box-shadow: var(--shadow-xl);
 }
 
 .founder-card img {
@@ -470,7 +445,7 @@
     height: auto;
     object-fit: contain;
     display: block;
-    border-radius: 2rem;
+    border-radius: var(--radius-lg);
 }
 
 @media (max-width: 768px) {
@@ -496,7 +471,7 @@
     font-size: 2rem;
     text-align: center;
     margin-bottom: 3rem;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
     letter-spacing: -0.02em;
 }
 
@@ -511,14 +486,13 @@
     display: flex;
     flex-direction: column;
     padding-top: 250px;
-    /* Space for the product images in other cols */
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
 }
 
 .comparison-header-row {
     padding: 1.5rem 0;
-    border-bottom: 1px solid #E2E8F0;
+    border-bottom: 1px solid var(--b365-gray-200);
     display: flex;
     align-items: center;
     min-height: 80px;
@@ -527,24 +501,24 @@
 .comparison-col {
     flex: 1;
     background: white;
-    border-radius: 1.5rem;
+    border-radius: var(--radius-lg);
     padding: 2rem;
     display: flex;
     flex-direction: column;
     position: relative;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
 }
 
 .comparison-col.gemlab {
     background: linear-gradient(135deg, #E8F7FC 0%, #D0EFFA 100%);
-    border: 2px solid #29ABE2;
+    border: 2px solid var(--b365-blue);
     transform: scale(1.02);
     z-index: 10;
 }
 
 .comparison-col.competitor {
-    background-color: #F8FAFC;
-    color: #64748B;
+    background-color: var(--b365-gray-50);
+    color: var(--b365-gray-500);
 }
 
 .col-image {
@@ -566,7 +540,7 @@
     font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
 }
 
 .comparison-row {
@@ -603,45 +577,34 @@
 }
 
 .gemlab .check-icon {
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
 }
 
 .competitor .check-icon.good {
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
 }
 
 .competitor .check-icon.bad {
-    color: #EF4444;
+    color: var(--b365-red);
 }
 
 /* Travel Kit Offer */
 .travel-kit-banner {
-    background: linear-gradient(135deg, #E2E8F0 0%, #475569 50%, #1E293B 100%);
-    border-radius: 2rem;
+    background: linear-gradient(135deg, var(--b365-gray-200) 0%, #475569 50%, var(--b365-navy) 100%);
+    border-radius: var(--radius-lg);
     max-width: 1200px;
-    /* Updated from 1000px */
     width: 100%;
     aspect-ratio: 1200 / 480;
-    /* Enforce 5:2 ratio */
     margin: 4rem auto;
     padding: 3rem 4rem;
-    /* Adjusted padding to fit content in height */
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-lg);
     position: relative;
     overflow: hidden;
 }
-
-/* Ensure content scales/fits if needed, though flexbox usually handles it.
-   On very small screens, aspect-ratio might squeeze content too much. 
-   User asked for "maintain this with every device", but strict ratio on mobile text is impossible without scaling.
-   I will use a media query to relax it on mobile to avoid broken layout, OR use container queries if needed.
-   For now, I'll let standard responsive CSS handle the mobile stack (defined below in media query) 
-   which naturally overrides the aspect-ratio constraint if flex-direction changes or height becomes auto.
-*/
 
 .offer-content {
     flex: 1;
@@ -659,7 +622,7 @@
 
 .offer-description {
     font-size: 1rem;
-    color: #E2E8F0;
+    color: var(--b365-gray-200);
     margin-bottom: 2rem;
     line-height: 1.6;
 }
@@ -671,10 +634,10 @@
 }
 
 .time-box {
-    background: #29ABE2;
+    background: var(--b365-blue);
     color: white;
     padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-sm);
     text-align: center;
     min-width: 70px;
 }
@@ -694,16 +657,16 @@
 
 .cta-button {
     background: #CBD5E1;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
     border: none;
     padding: 1rem 2rem;
-    border-radius: 2rem;
+    border-radius: var(--radius-lg);
     font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    transition: all 0.2s;
+    transition: all var(--duration-fast);
 }
 
 .cta-button:hover {
@@ -731,7 +694,7 @@
 
 /* Legal Footer */
 .legal-footer {
-    background-color: #1E293B;
+    background-color: var(--b365-navy);
     color: #94A3B8;
     text-align: center;
     padding: 3rem 1rem;
@@ -745,7 +708,7 @@
 }
 
 .copyright {
-    color: #64748B;
+    color: var(--b365-gray-500);
 }
 
 @media (max-width: 768px) {
@@ -762,7 +725,6 @@
         padding: 2rem;
         text-align: center;
         aspect-ratio: auto;
-        /* Reset ratio on mobile to fit stacked content naturally */
         min-height: auto;
     }
 

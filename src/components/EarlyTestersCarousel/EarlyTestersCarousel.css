@@ -14,7 +14,7 @@
 .early-testers-slide {
   flex: 0 0 50%;
   min-width: 0;
-  padding: 0 8px;
+  padding: 0 var(--space-2);
 }
 
 .early-testers-slide .ucos-testimonial-card {
@@ -24,27 +24,27 @@
 .early-testers-dots {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-2);
   margin-top: 20px;
 }
 
 .early-testers-dot {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   border: none;
-  background: var(--b365-border, #d1d5db);
+  background: var(--b365-border);
   cursor: pointer;
   padding: 0;
-  transition: background 0.2s, transform 0.2s;
+  transition: background var(--duration-fast), transform var(--duration-fast);
 }
 
 .early-testers-dot.active {
-  background: var(--b365-blue, #3376b0);
+  background: var(--b365-blue);
   transform: scale(1.2);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .early-testers-slide {
     flex: 0 0 100%;
   }

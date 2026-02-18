@@ -11,9 +11,8 @@
 }
 
 .testimonial-card {
-    background-color: #dbe4ef;
-    /* Light blue-grey */
-    border-radius: 20px;
+    background-color: var(--b365-blue-light);
+    border-radius: var(--radius-md);
     overflow: hidden;
     text-align: left;
     display: flex;
@@ -30,17 +29,16 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* Show full split image */
 }
 
 .test-img {
     flex: 1;
-    background-color: #ccc;
+    background-color: var(--b365-gray-200);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    color: #555;
+    color: var(--b365-gray-500);
     font-size: 0.8rem;
 }
 
@@ -51,7 +49,6 @@
 
 .test-img.after {
     background-image: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-    /* Slight color variation */
 }
 
 .testimonial-content {
@@ -62,7 +59,7 @@
     margin: 0;
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
 }
 
 .customer-info {
@@ -75,14 +72,14 @@
 
 .customer-name {
     font-weight: 600;
-    color: #333;
+    color: var(--b365-gray-900);
 }
 
 .verified-badge {
-    background-color: #1a1a1a;
+    background-color: var(--b365-gray-900);
     color: #ccff00;
     padding: 0.2rem 0.5rem;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -99,7 +96,7 @@
 
 .testimonial-features li {
     font-size: 0.85rem;
-    color: #444;
+    color: var(--b365-gray-500);
     margin-bottom: 0.3rem;
     position: relative;
     padding-left: 1.2rem;
@@ -109,14 +106,13 @@
     content: '✔';
     position: absolute;
     left: 0;
-    color: #4CAF50;
-    /* Green check */
+    color: var(--b365-green);
     font-size: 0.8rem;
 }
 
 .testimonial-quote {
     font-style: italic;
-    color: #555;
+    color: var(--b365-gray-500);
     font-size: 0.9rem;
     line-height: 1.5;
 }

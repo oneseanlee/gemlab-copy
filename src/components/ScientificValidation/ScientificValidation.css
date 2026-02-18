@@ -5,9 +5,8 @@
 }
 
 .science-card {
-    background-color: #f0f4f8;
-    /* Light blue/grey card bg */
-    border-radius: 30px;
+    background-color: var(--b365-gray-100);
+    border-radius: var(--radius-lg);
     padding: 3rem;
     display: flex;
     justify-content: space-between;
@@ -24,12 +23,11 @@
     flex-direction: column;
     justify-content: space-between;
     height: 400px;
-    /* Approximate height match */
 }
 
 .science-text h2 {
     font-size: 2.2rem;
-    color: #1a1a1a;
+    color: var(--b365-gray-900);
     margin-bottom: 2rem;
     line-height: 1.2;
 }
@@ -45,19 +43,18 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
-    color: #555;
+    color: var(--b365-gray-500);
 }
 
 .dot {
     width: 12px;
     height: 12px;
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     display: inline-block;
 }
 
 .dot.regular {
     background-color: #e6e6a0;
-    /* Pale yellow */
     background: repeating-linear-gradient(45deg,
             #e6e6a0,
             #e6e6a0 2px,
@@ -67,12 +64,11 @@
 
 .dot.gemlab {
     background: linear-gradient(180deg, #b0c4de 0%, #4682b4 100%);
-    /* Blue gradient */
 }
 
 .footnote {
     font-size: 0.75rem;
-    color: #444;
+    color: var(--b365-gray-500);
     font-style: italic;
     line-height: 1.4;
     margin-top: 2rem;
@@ -88,18 +84,17 @@
     text-align: left;
     font-size: 1rem;
     margin-bottom: 2rem;
-    color: #333;
+    color: var(--b365-gray-900);
 }
 
 .save-btn {
     position: absolute;
     top: 0;
     left: 200px;
-    /* approximate */
     background-color: #e60023;
     color: white;
     border: none;
-    border-radius: 20px;
+    border-radius: var(--radius-md);
     padding: 0.3rem 0.8rem;
     font-weight: 700;
     font-size: 0.8rem;
@@ -120,14 +115,12 @@
     flex-direction: column;
     justify-content: space-between;
     padding-right: 1rem;
-    color: #888;
+    color: var(--b365-gray-400);
     font-size: 0.7rem;
     text-align: right;
-    border-right: 1px dashed #ddd;
-    /* Grid line */
+    border-right: 1px dashed var(--b365-gray-200);
     height: 100%;
     padding-bottom: 2rem;
-    /* space for labels */
 }
 
 .chart-bars-container {
@@ -144,7 +137,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    /* Align bars to bottom */
     height: 100%;
     width: 25%;
     position: relative;
@@ -155,7 +147,6 @@
     border-radius: 5px 5px 0 0;
     position: absolute;
     bottom: 2.5rem;
-    /* Space for label */
 }
 
 .bar.regular {
@@ -165,13 +156,13 @@
             #e6e6a0 2px,
             #fff 2px,
             #fff 4px);
-    border: 1px solid #dcdcdc;
+    border: 1px solid var(--b365-gray-200);
 }
 
 .bar.gemlab {
     right: 5%;
     background: linear-gradient(180deg, #b0c4de 0%, #4682b4 100%);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 .bar-label {
@@ -179,6 +170,6 @@
     bottom: 0;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #333;
+    color: var(--b365-gray-900);
     text-align: center;
 }
