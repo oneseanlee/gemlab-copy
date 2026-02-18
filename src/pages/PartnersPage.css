@@ -1,16 +1,16 @@
 /* Partners / Affiliate Page — TPrime365-Matching Design */
 
 .partners-page {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   color: var(--b365-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--b365-white);
 }
 
-/* ─── Hero (Matching TPrime365 Hero) ─── */
+/* ─── Hero ─── */
 .partners-hero-section {
-  padding: 150px 24px 0;
+  padding: 150px var(--space-6) 0;
   background-color: var(--b365-white);
 }
 .partners-hero-section.no-banner {
@@ -19,8 +19,8 @@
 .partners-hero-container {
   max-width: 1280px;
   margin: 0 auto;
-  background: var(--b365-light-blue);
-  border-radius: 24px;
+  background: var(--b365-blue-light);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -30,93 +30,93 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: var(--space-4);
 }
 .partners-hero-img img {
   max-height: 600px;
   max-width: 110%;
   object-fit: contain;
-  filter: drop-shadow(0 16px 40px rgba(0,0,0,0.15));
+  filter: drop-shadow(var(--shadow-xl));
 }
 .partners-hero-text {
-  padding: 64px 56px;
+  padding: var(--space-16) 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .partners-hero-badge {
   display: inline-block;
-  font-size: 12px;
+  font-size: var(--text-caption);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   background: rgba(51,118,176,0.15);
   border: 1px solid rgba(51,118,176,0.3);
   color: var(--b365-blue);
-  padding: 6px 18px;
-  border-radius: 999px;
-  margin-bottom: 24px;
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-6);
   width: fit-content;
 }
 .partners-hero-text h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 48px;
+  font-family: var(--font-title);
+  font-size: var(--text-display);
   font-weight: 700;
   line-height: 1.15;
   color: var(--b365-text);
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-6);
 }
 .partners-hero-text h1 em {
   font-style: italic;
   font-weight: 500;
 }
 .partners-hero-text .subhead {
-  font-size: 17px;
+  font-size: var(--text-body);
   line-height: 1.7;
   color: var(--b365-text-secondary);
-  margin-bottom: 28px;
+  margin-bottom: var(--space-6);
 }
 
 /* ─── Value Props ─── */
 .partners-value-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
+  gap: var(--space-6);
   max-width: 1100px;
   margin: 0 auto;
 }
 .partners-value-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 16px;
-  padding: 36px 28px;
+  border-radius: var(--radius-md);
+  padding: var(--space-8) var(--space-6);
   text-align: center;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition: box-shadow var(--duration-normal), transform var(--duration-normal);
 }
 .partners-value-card:hover {
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
 }
 .partners-value-icon {
   width: 56px;
   height: 56px;
-  margin: 0 auto 18px;
+  margin: 0 auto var(--space-4);
   background: var(--b365-gray);
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--b365-blue);
 }
 .partners-value-card h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-title);
   font-size: 20px;
   font-weight: 700;
-  margin: 0 0 10px;
+  margin: 0 0 var(--space-3);
   color: var(--b365-text);
 }
 .partners-value-card p {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   line-height: 1.65;
   color: var(--b365-text-secondary);
   margin: 0;
@@ -126,33 +126,33 @@
 .partners-products-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
+  gap: var(--space-6);
   max-width: 1100px;
   margin: 0 auto;
 }
 .partners-product-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 14px;
-  padding: 28px 20px;
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-6);
   text-align: center;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow var(--duration-normal);
 }
 .partners-product-card:hover {
-  box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+  box-shadow: var(--shadow-md);
 }
 .partners-product-card h4 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 17px;
+  font-family: var(--font-title);
+  font-size: var(--text-body);
   font-weight: 700;
-  margin: 0 0 6px;
+  margin: 0 0 var(--space-1);
   color: var(--b365-text);
 }
 .partners-product-price {
   font-size: 22px;
   font-weight: 800;
   color: var(--b365-blue);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 .partners-product-hook {
   font-size: 13px;
@@ -161,25 +161,25 @@
 }
 .partners-product-commission {
   display: inline-block;
-  font-size: 12px;
+  font-size: var(--text-caption);
   font-weight: 700;
-  color: #16a34a;
+  color: var(--b365-green-dark);
   background: rgba(22,163,74,0.08);
-  padding: 4px 12px;
-  border-radius: 999px;
-  margin-top: 10px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin-top: var(--space-3);
 }
 
 /* ─── UGC Video Grid ─── */
 .partners-ugc-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: var(--space-6);
   max-width: 1100px;
   margin: 0 auto;
 }
 .partners-ugc-card {
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   aspect-ratio: 9 / 16;
   background: #000;
@@ -195,29 +195,29 @@
 .partners-audience-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--space-6);
   max-width: 960px;
   margin: 0 auto;
 }
 .partners-audience-card {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-4);
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 14px;
-  padding: 24px;
-  transition: box-shadow 0.3s ease;
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: box-shadow var(--duration-normal);
 }
 .partners-audience-card:hover {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-md);
 }
 .partners-audience-icon {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
+  width: var(--space-12);
+  height: var(--space-12);
+  min-width: var(--space-12);
   background: var(--b365-gray);
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -233,7 +233,7 @@
 /* ─── How It Works ─── */
 .partners-steps {
   display: flex;
-  gap: 48px;
+  gap: var(--space-12);
   max-width: 900px;
   margin: 0 auto;
   align-items: flex-start;
@@ -248,24 +248,24 @@
   width: 56px;
   height: 56px;
   background: var(--b365-blue);
-  color: #fff;
-  border-radius: 50%;
+  color: var(--b365-white);
+  border-radius: var(--radius-circle);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
   font-weight: 800;
-  margin: 0 auto 18px;
+  margin: 0 auto var(--space-4);
 }
 .partners-step h4 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-title);
   font-size: 20px;
   font-weight: 700;
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-2);
   color: var(--b365-text);
 }
 .partners-step p {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: var(--b365-text-secondary);
   line-height: 1.6;
   margin: 0;
@@ -282,7 +282,7 @@
 .partners-commission-table {
   max-width: 800px;
   margin: 0 auto;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--b365-border);
   background: var(--b365-white);
@@ -293,10 +293,10 @@
 }
 .partners-commission-table thead {
   background: var(--b365-blue);
-  color: #fff;
+  color: var(--b365-white);
 }
 .partners-commission-table th {
-  padding: 16px 20px;
+  padding: var(--space-4) var(--space-6);
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
@@ -304,7 +304,7 @@
   text-align: left;
 }
 .partners-commission-table td {
-  padding: 16px 20px;
+  padding: var(--space-4) var(--space-6);
   font-size: 15px;
   border-bottom: 1px solid var(--b365-border);
   color: var(--b365-text);
@@ -314,29 +314,29 @@
 }
 .partners-commission-table .earning-highlight {
   font-weight: 800;
-  color: #16a34a;
+  color: var(--b365-green-dark);
 }
 .partners-commission-note {
   text-align: center;
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: var(--b365-text-secondary);
-  margin-top: 20px;
+  margin-top: var(--space-6);
 }
 
 /* ─── Trust Signals ─── */
 .partners-trust-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: var(--space-12);
   justify-content: center;
   align-items: center;
   max-width: 900px;
-  margin: 0 auto 40px;
+  margin: 0 auto var(--space-12);
 }
 .partners-trust-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
   font-size: 15px;
   font-weight: 600;
   color: var(--b365-text);
@@ -346,24 +346,24 @@
   display: flex;
 }
 
-/* ─── Application CTA (Light Blue Card) ─── */
+/* ─── Application CTA ─── */
 .partners-apply-section {
-  padding: 80px 24px;
+  padding: 80px var(--space-6);
   background: var(--b365-white);
 }
 .partners-apply-card {
   max-width: 900px;
   margin: 0 auto;
-  background: var(--b365-light-blue);
-  border-radius: 24px;
+  background: var(--b365-blue-light);
+  border-radius: var(--radius-lg);
   padding: 80px 56px;
   text-align: center;
 }
 .partners-apply-card h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-title);
   font-size: 38px;
   font-weight: 700;
-  margin: 0 0 16px;
+  margin: 0 0 var(--space-4);
   color: var(--b365-text);
 }
 .partners-apply-card h2 em {
@@ -371,10 +371,10 @@
   font-weight: 500;
 }
 .partners-apply-card p {
-  font-size: 17px;
+  font-size: var(--text-body);
   color: var(--b365-text-secondary);
   line-height: 1.7;
-  margin-bottom: 36px;
+  margin-bottom: var(--space-8);
   max-width: 560px;
   margin-left: auto;
   margin-right: auto;
@@ -382,11 +382,11 @@
 
 /* ─── Sub-heading ─── */
 .partners-sub {
-  font-size: 16px;
+  font-size: var(--text-body);
   color: var(--b365-text-secondary);
   text-align: center;
   max-width: 600px;
-  margin: -20px auto 48px;
+  margin: -20px auto var(--space-12);
   line-height: 1.6;
 }
 
@@ -395,31 +395,31 @@
   .partners-value-grid { grid-template-columns: repeat(2, 1fr); }
   .partners-products-grid { grid-template-columns: repeat(3, 1fr); }
   .partners-hero-container { grid-template-columns: 1fr; min-height: auto; }
-  .partners-hero-img { padding: 40px 40px 0; }
-  .partners-hero-text { padding: 40px; text-align: center; }
+  .partners-hero-img { padding: var(--space-12) var(--space-12) 0; }
+  .partners-hero-text { padding: var(--space-12); text-align: center; }
   .partners-hero-badge { margin-left: auto; margin-right: auto; }
   .partners-ugc-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-  .partners-hero-section { padding: 110px 16px 0; }
+  .partners-hero-section { padding: 110px var(--space-4) 0; }
   .partners-hero-section.no-banner { padding-top: 80px; }
   .partners-hero-text h1 { font-size: 34px; }
   .partners-hero-text .subhead { font-size: 15px; }
-  .partners-hero-text { padding: 32px 24px; }
-  .partners-hero-img { padding: 32px 32px 0; }
+  .partners-hero-text { padding: var(--space-8) var(--space-6); }
+  .partners-hero-img { padding: var(--space-8) var(--space-8) 0; }
 
-  .partners-value-grid { grid-template-columns: 1fr; gap: 16px; }
-  .partners-products-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-  .partners-audience-grid { grid-template-columns: 1fr; gap: 14px; }
-  .partners-steps { flex-direction: column; gap: 32px; align-items: center; }
+  .partners-value-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .partners-products-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .partners-audience-grid { grid-template-columns: 1fr; gap: var(--space-3); }
+  .partners-steps { flex-direction: column; gap: var(--space-8); align-items: center; }
   .partners-step-connector { display: none; }
 
-  .partners-commission-table { border-radius: 12px; }
+  .partners-commission-table { border-radius: var(--radius-sm); }
   .partners-commission-table th,
-  .partners-commission-table td { padding: 12px 14px; font-size: 13px; }
+  .partners-commission-table td { padding: var(--space-3) var(--space-3); font-size: 13px; }
 
-  .partners-apply-card { padding: 48px 24px; }
+  .partners-apply-card { padding: var(--space-12) var(--space-6); }
   .partners-apply-card h2 { font-size: 30px; }
 
   .partners-ugc-grid { grid-template-columns: 1fr; max-width: 320px; }
