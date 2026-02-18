@@ -1,11 +1,28 @@
 // @ts-nocheck
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './OceanRaysPage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
+import TrustBadges from '../components/TrustBadges/TrustBadges';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from '../components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+
+/* ──── Scroll-reveal wrapper ──── */
+const RevealSection = ({ children, className = '', ...props }) => {
+  const ref = useScrollReveal<HTMLElement>();
+  return <section ref={ref} className={className} {...props}>{children}</section>;
+};
+
+/* ──── Social proof banner messages ──── */
+const socialProofMessages = [
+  '🔬 2,847 protocols shipped this month',
+  '⭐ Rated 4.9/5 from 50,000+ clients',
+  '🚀 James from Dallas just started his protocol',
+  '💪 12 new clients activated today',
+  '🏆 Trusted by 50,000+ men nationwide',
+];
 
 const products = [
   {
@@ -13,6 +30,7 @@ const products = [
     name: 'TPrime365™',
     tags: [{ label: 'Flagship', flagship: true }, { label: 'Fertility-Friendly' }],
     category: 'testosterone',
+    ribbon: 'MOST POPULAR',
     bestFor: '4-in-1 Testosterone Optimizer — Enclomiphene (25mg) + Spermidine (10mg) + Boron (10mg) + Vitamin C (10mg)',
     benefits: [
       'Increases testosterone 60–664% in 2–4 weeks',
@@ -22,6 +40,7 @@ const products = [
     price: '$149',
     priceSuffix: '/mo',
     priceNote: 'Includes Physician Consultation',
+    shippingBadge: 'Ships in 48hrs',
     image: '/images/product-tprime.png',
     mobileImage: '/images/mobile-tprime.png',
     href: '/tprime365',
@@ -40,6 +59,7 @@ const products = [
     price: '$39.95',
     priceSuffix: '',
     priceNote: 'Launch Offer (Reg. $90.00)',
+    shippingBadge: 'Free Shipping',
     image: '/images/product-glp-protocol.png',
     mobileImage: '/images/mobile-glp-protocol.png',
     href: '/glp1-protocol',
@@ -59,6 +79,7 @@ const products = [
     price: '$175',
     priceSuffix: '',
     priceNote: '3-Product Synergistic Stack',
+    shippingBadge: 'Free Shipping',
     image: '/images/product-ucos.png',
     mobileImage: '/images/mobile-ucos.png',
     href: '/ucos',
@@ -68,6 +89,7 @@ const products = [
     name: 'GLP-1 Cellular Bundle',
     tags: [{ label: 'Bundle' }, { label: 'Physician Included' }],
     category: 'systems',
+    ribbon: 'BEST VALUE',
     bestFor: 'Full weight loss system — 4-Product Stack + Licensed Physician Consultation + GLP-1 Medication (if approved).',
     benefits: [
       'Activate365, Mito365, Restore365 & Metabolism+ included',
@@ -78,6 +100,7 @@ const products = [
     price: '$175',
     priceSuffix: '',
     priceNote: 'Total Value: $655',
+    shippingBadge: 'Free Shipping',
     image: '/images/product-glp1-ucos.png',
     mobileImage: '/images/mobile-glp1-ucos.png',
     href: '/glp1-ucos',
@@ -97,6 +120,7 @@ const products = [
     price: '$250',
     priceSuffix: '',
     priceNote: 'Physician Review via happyMD Included',
+    shippingBadge: 'Ships in 48hrs',
     image: '/images/product-nhto.png',
     mobileImage: '/images/mobile-nhto.png',
     href: '/nhto',
@@ -193,8 +217,50 @@ const TestimonialsCarousel = () => {
   );
 };
 
+/* ──── Social Proof Ticker ──── */
+const SocialProofBanner = () => {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIdx(prev => (prev + 1) % socialProofMessages.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="b365-social-proof-banner">
+      <span key={idx} className="social-proof-msg">{socialProofMessages[idx]}</span>
+    </div>
+  );
+};
+
+/* ──── Sticky Mobile CTA ──── */
+const StickyMobileCTA = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setVisible(window.scrollY > 700);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className={`b365-sticky-mobile-cta ${visible ? 'visible' : ''}`}>
+      <div className="sticky-cta-inner">
+        <div className="sticky-cta-text">
+          <span className="sticky-cta-label">TPrime365™</span>
+          <span className="sticky-cta-price">$149<small>/mo</small></span>
+        </div>
+        <AnimatedCTA href="#products" small>Get Started</AnimatedCTA>
+      </div>
+    </div>
+  );
+};
+
 const OceanRaysPage = () => {
-  const [showBanner, setShowBanner] = useState(true);
   const [activeTab, setActiveTab] = useState('all');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -212,16 +278,11 @@ const OceanRaysPage = () => {
     <div className="b365-page">
       <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
-      {/* 1. Promo Banner */}
-      {showBanner && (
-        <div className="b365-promo-banner">
-          MODS Max™ 10x Absorption Technology — Now Available in All Products
-          <button onClick={() => setShowBanner(false)} aria-label="Close banner">✕</button>
-        </div>
-      )}
+      {/* 1. Social Proof Ticker Banner */}
+      <SocialProofBanner />
 
       {/* 2. Navigation */}
-      <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
+      <nav className="b365-nav with-banner">
         <div className="b365-nav-inner">
           <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
             <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
@@ -241,24 +302,33 @@ const OceanRaysPage = () => {
         </div>
       </nav>
 
-      {/* 3. Hero Section */}
-      <section className={`b365-hero ${!showBanner ? 'no-banner' : ''}`}>
+      {/* 3. Hero Section with entrance animations */}
+      <section className="b365-hero">
         <div className="b365-hero-container">
-          <div className="b365-hero-image">
+          <div className="b365-hero-image b365-parallax-hero">
             <img src="/images/hero-couple.png" alt="Athletic couple with Best 365 Labs products" />
           </div>
           <div className="b365-hero-text">
-            <h1 className="b365-serif">Your Hormones, <em>Optimized.</em></h1>
-            <p className="subhead">
+            <h1 className="b365-serif hero-entrance hero-entrance-1">Your Hormones, <em>Optimized.</em></h1>
+            <p className="subhead hero-entrance hero-entrance-2">
               Precision-grade testosterone and metabolic support delivered to your door.
               No needles. No hormonal shutdown. Just science-backed results.
             </p>
-            <p className="tertiary">Powered by MODS Max™ 10x Absorption Technology.</p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            <p className="tertiary hero-entrance hero-entrance-3">Powered by MODS Max™ 10x Absorption Technology.</p>
+            <div className="hero-entrance hero-entrance-4" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <AnimatedCTA href="#products">
                 Get Started
                 <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
               </AnimatedCTA>
+            </div>
+            {/* Trusted-by micro-badge */}
+            <div className="hero-trusted-badge hero-entrance hero-entrance-5">
+              <div className="trusted-avatars">
+                <img src="/images/testimonial-brett-earnshaw.png" alt="" />
+                <img src="/images/testimonial-sean-lee.png" alt="" />
+                <img src="/images/testimonial-ernesto-cruz.png" alt="" />
+              </div>
+              <span>Trusted by <strong>50,000+</strong> men</span>
             </div>
           </div>
         </div>
@@ -286,8 +356,11 @@ const OceanRaysPage = () => {
         </div>
       </section>
 
+      {/* Trust Badges */}
+      <TrustBadges />
+
       {/* 4. Product Section */}
-      <section className="b365-section" id="products">
+      <RevealSection className="b365-section" id="products">
         <h2 className="b365-section-heading b365-serif">Precision Protocols for <em>Every Goal</em></h2>
 
         <div className="b365-tabs">
@@ -304,7 +377,12 @@ const OceanRaysPage = () => {
 
         <div className="b365-product-grid">
           {filteredProducts.map(product => (
-            <div className="b365-product-card" key={product.id}>
+            <div className={`b365-product-card ${product.ribbon ? 'has-ribbon' : ''}`} key={product.id}>
+              {product.ribbon && (
+                <div className={`product-ribbon ${product.ribbon === 'BEST VALUE' ? 'ribbon-value' : ''}`}>
+                  {product.ribbon}
+                </div>
+              )}
               <div className="product-card-image">
                 <picture>
                   <source media="(max-width: 640px)" srcSet={product.mobileImage} />
@@ -335,16 +413,22 @@ const OceanRaysPage = () => {
                 {product.price}<span>{product.priceSuffix}</span>
               </div>
               <p className="price-note">{product.priceNote}</p>
+              {product.shippingBadge && (
+                <div className="shipping-badge">
+                  <iconify-icon icon="lucide:truck" width="14"></iconify-icon>
+                  {product.shippingBadge}
+                </div>
+              )}
               <div className="card-actions" style={{ justifyContent: 'center' }}>
                 <AnimatedCTA href={product.href} className="card-cta">Get Started</AnimatedCTA>
               </div>
             </div>
           ))}
         </div>
-      </section>
+      </RevealSection>
 
       {/* 5. Stats / Trust Section */}
-      <section className="b365-section b365-section-alt" id="science">
+      <RevealSection className="b365-section b365-section-alt" id="science">
         <h2 className="b365-section-heading b365-serif">Max performance. <em>Max support.</em></h2>
         <div className="b365-stats-grid">
           <div className="b365-stat-card">
@@ -363,10 +447,10 @@ const OceanRaysPage = () => {
             <div className="stat-desc">Clients optimizing their hormones, energy, and longevity with Best 365 Labs protocols.</div>
           </div>
         </div>
-      </section>
+      </RevealSection>
 
       {/* 6. Guarantee Section */}
-      <section className="b365-section">
+      <RevealSection className="b365-section">
         <div className="b365-guarantee">
           <div>
             <h2>Improved testosterone <em>or you don't pay.</em></h2>
@@ -385,10 +469,10 @@ const OceanRaysPage = () => {
             <img src="/images/tprime-guarantee-hero.png" alt="TPrime365 product with athlete" />
           </div>
         </div>
-      </section>
+      </RevealSection>
 
       {/* 7. Clinical Comparison Table */}
-      <section className="b365-section b365-section-alt">
+      <RevealSection className="b365-section b365-section-alt">
         <h2 className="b365-section-heading b365-serif">The <em>TPrime365™</em> Advantage</h2>
         <div className="b365-table-wrap">
           <table className="b365-table">
@@ -428,10 +512,10 @@ const OceanRaysPage = () => {
             </tbody>
           </table>
         </div>
-      </section>
+      </RevealSection>
 
       {/* 8. Power Up Section */}
-      <section className="b365-section b365-power-up">
+      <RevealSection className="b365-section b365-power-up">
         <div className="b365-power-up-inner">
           <div>
             <h2>Power up your optimization with <em>MODS Max™</em></h2>
@@ -458,16 +542,16 @@ const OceanRaysPage = () => {
             <img src="/images/tprime-sublingual-delivery.jpg" alt="MODS Max sublingual delivery technology" />
           </div>
         </div>
-      </section>
+      </RevealSection>
 
       {/* 9. Testimonials */}
-      <section className="b365-section">
+      <RevealSection className="b365-section">
         <h2 className="b365-section-heading b365-serif">Real Clients. <em>Real Results.</em></h2>
         <TestimonialsCarousel />
-      </section>
+      </RevealSection>
 
       {/* 10. Digital Guides & Resources */}
-      <section className="b365-section b365-guides-section">
+      <RevealSection className="b365-section b365-guides-section">
         <h2 className="b365-serif" style={{ textAlign: 'center', marginBottom: 12 }}>
           Digital Guides & <em>Resources</em>
         </h2>
@@ -489,10 +573,10 @@ const OceanRaysPage = () => {
         <div style={{ textAlign: 'center', marginTop: 40 }}>
           <AnimatedCTA href="/guides">See All Guides</AnimatedCTA>
         </div>
-      </section>
+      </RevealSection>
 
       {/* 11. 3-Step Process */}
-      <section className="b365-section b365-section-alt" id="process">
+      <RevealSection className="b365-section b365-section-alt" id="process">
         <h2 className="b365-section-heading b365-serif">It's easy to <em>get started.</em></h2>
         <div className="b365-steps-grid">
           <div className="b365-step-card">
@@ -517,10 +601,10 @@ const OceanRaysPage = () => {
             <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
           </AnimatedCTA>
         </div>
-      </section>
+      </RevealSection>
 
       {/* 12. FAQ */}
-      <section className="b365-section" id="faq">
+      <RevealSection className="b365-section" id="faq">
         <div className="b365-faq-layout">
           <div className="b365-faq-left">
             <h2>You have questions, <em>we have answers.</em></h2>
@@ -541,10 +625,13 @@ const OceanRaysPage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </RevealSection>
 
       {/* 13. Footer */}
       <SharedFooter />
+
+      {/* Sticky Mobile CTA */}
+      <StickyMobileCTA />
     </div>
   );
 };

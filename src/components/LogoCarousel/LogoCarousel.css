@@ -1,76 +1,56 @@
 .logo-carousel-section {
-    background-color: #0d3b5e;
-    /* Marine Blue background */
-    padding: 3rem 0;
-    overflow: hidden;
-    white-space: nowrap;
+  background-color: var(--b365-gray, #F5F7FA);
+  padding: 40px 0 36px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  text-align: center;
+}
 
-    /* Break out of container */
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+.logo-carousel-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--b365-text-secondary, #5A6578);
+  margin: 0 0 24px;
 }
 
 .logo-track {
-    display: inline-flex;
-    gap: 5rem;
-    animation: scroll 20s linear infinite;
-    align-items: center;
+  display: inline-flex;
+  gap: 5rem;
+  animation: scroll 25s linear infinite;
+  align-items: center;
 }
 
 @keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .press-logo {
-    font-family: 'Times New Roman', serif;
-    font-size: 2.5rem;
-    color: #fff;
-    opacity: 0.9;
-    letter-spacing: 0.05em;
-    font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  opacity: 0.55;
+  filter: grayscale(100%);
+  transition: opacity 0.3s, filter 0.3s;
 }
 
-/* Specific styling to mimic logos */
-.logo-0 {
-    font-family: 'Arial', sans-serif;
-    font-weight: 900;
-    letter-spacing: -1px;
+.press-logo:hover {
+  opacity: 0.85;
+  filter: grayscale(0%);
 }
 
-/* Marie Claireish */
-.logo-1 {
-    font-family: 'Georgia', serif;
-    font-style: italic;
+.press-logo img {
+  height: 100%;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
 }
-
-/* Esquireish */
-.logo-2 {
-    font-family: 'Verdana', sans-serif;
-    font-weight: 700;
-    letter-spacing: -1px;
-}
-
-/* BuzzFeedish */
-.logo-3 {
-    font-family: 'Times New Roman', serif;
-    font-weight: 400;
-    text-transform: capitalize;
-}
-
-/* Forbesish */
-.logo-4 {
-    font-family: 'Didot', serif;
-    font-size: 3rem;
-}
-
-/* Vogueish */
