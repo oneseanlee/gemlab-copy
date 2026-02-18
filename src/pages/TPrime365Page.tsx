@@ -94,9 +94,9 @@ const TPrime365Page = () => {
                         <img src="/images/tprime-hero-composite.png" alt="TPrime365 bottle with athlete" />
                     </div>
                     <div className="tprime-hero-text">
-                        <h1>The Only 4-in-1 Testosterone <em>Optimizer</em></h1>
+                        <h1>More Energy. More Muscle. More Drive.<br /><em>Without Shutting Down Your Natural Testosterone.</em></h1>
                         <p className="subhead">
-                            <strong>Enclomiphene + Spermidine + Boron + Vitamin C</strong> — Prescription-grade testosterone optimization with sublingual delivery for men who demand more.
+                            Enclomiphene + Spermidine + Boron + Vitamin C — compounded into one sublingual formula. Physician-reviewed. FDA-registered 503A facility. Delivered to your door.
                         </p>
                         <div className="price-row">
                             <span className="price-big">$149</span>
@@ -104,7 +104,7 @@ const TPrime365Page = () => {
                         </div>
                         <p className="guarantee-text">If not approved by physician, fully refunded</p>
                         <AnimatedCTA href="#process">
-                            Start Your Optimization
+                            See If You Qualify
                             <ArrowRight size={16} />
                         </AnimatedCTA>
                     </div>
@@ -334,7 +334,10 @@ const TPrime365Page = () => {
 
             {/* UGC Video Testimonials */}
             <section className="b365-section b365-section-alt">
-              <h2 className="b365-section-heading b365-serif">Real Men. Real <em>Results.</em></h2>
+              <h2 className="b365-section-heading b365-serif">Real Men. Measurable <em>Results.</em></h2>
+              <p style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto var(--space-8)', fontSize: 'var(--text-body)', color: 'var(--b365-text-secondary)', lineHeight: 1.7 }}>
+                These aren't influencers. They're guys who were tired of feeling tired — and decided to do something about it.
+              </p>
               <div className="tprime-ugc-grid">
                 {[
                   'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec46bac245857f16caa.mp4',
@@ -347,6 +350,41 @@ const TPrime365Page = () => {
                   </div>
                 ))}
               </div>
+              <div style={{ textAlign: 'center', marginTop: 'var(--space-8)' }}>
+                <AnimatedCTA href="#process">
+                  See If You Qualify
+                  <ArrowRight size={16} />
+                </AnimatedCTA>
+              </div>
+            </section>
+
+            {/* Final CTA (moved here, before comparison table) */}
+            <section className="b365-section">
+                <div className="tprime-final-cta">
+                    <h2>Ready to Reclaim Your <em>Prime?</em></h2>
+                    <p className="subtitle text-primary-foreground">Join thousands of men optimizing their testosterone naturally with TPrime365™</p>
+                    <div className="tprime-final-price-box">
+                        <span className="big-price">$149/month</span>
+                        <span className="note">Includes everything: Formula + Physician Consultation + Free Shipping</span>
+                        <span className="guarantee-text">100% refunded if physician does not approve</span>
+                    </div>
+                    <AnimatedCTA href="#process" className="btn-white-cta">
+                        Order Now — Risk Free
+                        <ArrowRight size={16} />
+                    </AnimatedCTA>
+                    <div className="tprime-cta-trust-points">
+                        <span><Check size={14} /> Licensed physician reviews every order</span>
+                        <span><Check size={14} /> Full refund if not approved</span>
+                        <span><Check size={14} /> FDA-registered compounding pharmacy</span>
+                        <span><Check size={14} /> Free shipping — discreet packaging</span>
+                        <span><Check size={14} /> Cancel subscription anytime</span>
+                    </div>
+                    <div className="tprime-cta-trust-strip">
+                        <span><Lock size={14} /> Secure Checkout</span>
+                        <span><ShieldCheck size={14} /> Money-Back Guarantee</span>
+                        <span><Package size={14} /> Fast Shipping</span>
+                    </div>
+                </div>
             </section>
 
             {/* 10. Comparison Table */}
@@ -455,26 +493,6 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* 15. Contraindications */}
-            <section className="b365-section b365-section-alt">
-                <div className="tprime-safety">
-                    <h3>Important Safety Information</h3>
-                    <p style={{ fontSize: 14, color: 'var(--b365-text-secondary)' }}>TPrime365 May Not Be Appropriate If You:</p>
-                    <ul>
-                        {['Have prostate cancer or breast cancer', 'Have severe liver or kidney disease', 'Are under 18 years of age', 'Are allergic to any ingredients', 'Are taking certain medications (physician will review)'].map((item, i) =>
-            <li key={i}>
-                                <AlertCircle size={14} />
-                                {item}
-                            </li>
-            )}
-                    </ul>
-                    <p className="report">Report adverse events: 1-385-421-5651</p>
-                    <p className="disclaimer">
-                        This is a compounded drug for Rx ONLY. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.
-                    </p>
-                </div>
-            </section>
-
             {/* 16. FAQ */}
             <section className="b365-section" id="faq">
                 <div className="b365-faq-layout">
@@ -495,35 +513,6 @@ const TPrime365Page = () => {
                                 {openFaq === index && <div className="b365-faq-answer">{item.answer}</div>}
                             </div>
             )}
-                    </div>
-                </div>
-            </section>
-
-            {/* 17. Final CTA */}
-            <section className="b365-section">
-                <div className="tprime-final-cta">
-                    <h2>Ready to Reclaim Your <em>Prime?</em></h2>
-                    <p className="subtitle text-primary-foreground">Join thousands of men optimizing their testosterone naturally with TPrime365™</p>
-                    <div className="tprime-final-price-box">
-                        <span className="big-price">$149/month</span>
-                        <span className="note">Includes everything: Formula + Physician Consultation + Free Shipping</span>
-                        <span className="guarantee-text">100% refunded if physician does not approve</span>
-                    </div>
-                    <AnimatedCTA href="#process" className="btn-white-cta">
-                        Order Now — Risk Free
-                        <ArrowRight size={16} />
-                    </AnimatedCTA>
-                    <div className="tprime-cta-trust-points">
-                        <span><Check size={14} /> Licensed physician reviews every order</span>
-                        <span><Check size={14} /> Full refund if not approved</span>
-                        <span><Check size={14} /> FDA-registered compounding pharmacy</span>
-                        <span><Check size={14} /> Free shipping — discreet packaging</span>
-                        <span><Check size={14} /> Cancel subscription anytime</span>
-                    </div>
-                    <div className="tprime-cta-trust-strip">
-                        <span><Lock size={14} /> Secure Checkout</span>
-                        <span><ShieldCheck size={14} /> Money-Back Guarantee</span>
-                        <span><Package size={14} /> Fast Shipping</span>
                     </div>
                 </div>
             </section>
