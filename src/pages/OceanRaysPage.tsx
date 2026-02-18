@@ -256,7 +256,7 @@ const OceanRaysPage = () => {
             <p className="tertiary">Powered by MODS Max™ 10x Absorption Technology.</p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <AnimatedCTA href="#products">
-                Start my evaluation
+                Get Started
                 <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
               </AnimatedCTA>
             </div>
@@ -377,7 +377,7 @@ const OceanRaysPage = () => {
               For approved clients, clinical data shows testosterone increases of 60–664% within 2–4 weeks — with no testicular atrophy, no fertility suppression, and no hormonal dependency.
             </p>
             <AnimatedCTA href="#products" style={{ marginTop: 8 }}>
-              Start my evaluation
+              Get Started
               <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
             </AnimatedCTA>
           </div>
@@ -513,7 +513,7 @@ const OceanRaysPage = () => {
         </div>
         <div style={{ textAlign: 'center', marginTop: 48 }}>
           <AnimatedCTA href="#products">
-            Start my evaluation
+            Get Started
             <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
           </AnimatedCTA>
         </div>
