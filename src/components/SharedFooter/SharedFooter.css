@@ -1,7 +1,7 @@
 .shared-footer {
-  background-color: #0e87be;
+  background-color: var(--b365-blue);
   color: #fff;
-  padding: 60px 24px 32px;
+  padding: 60px var(--space-6) var(--space-8);
   width: 100vw;
   position: relative;
   left: 50%;
@@ -26,27 +26,27 @@
 
 .shared-footer-brand img {
   height: 36px;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
   display: block;
 }
 
 .shared-footer-brand p {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: rgba(255, 255, 255, 0.85);
   margin: 0;
   line-height: 1.5;
 }
 
 .shared-footer h4 {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 .shared-footer-contact p {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: rgba(255, 255, 255, 0.9);
   margin: 0 0 6px;
   line-height: 1.6;
@@ -74,7 +74,7 @@
 .shared-footer-legal ul a {
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  font-size: 14px;
+  font-size: var(--text-body-sm);
 }
 
 .shared-footer-legal ul a:hover {
@@ -83,21 +83,21 @@
 
 .shared-footer-social {
   display: flex;
-  gap: 14px;
+  gap: var(--space-3);
 }
 
 .shared-footer-social a {
   width: 36px;
   height: 36px;
   border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   text-decoration: none;
-  font-size: 16px;
-  transition: background 0.2s, border-color 0.2s;
+  font-size: var(--text-body);
+  transition: background var(--duration-fast), border-color var(--duration-fast);
 }
 
 .shared-footer-social a:hover {
@@ -109,19 +109,19 @@
 .shared-footer-divider {
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.25);
-  margin: 0 0 32px;
+  margin: 0 0 var(--space-8);
 }
 
 /* Disclaimers */
 .shared-footer-disclaimers {
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
 }
 
 .shared-footer-disclaimers p {
-  font-size: 11px;
+  font-size: var(--text-micro);
   color: rgba(255, 255, 255, 0.65);
   line-height: 1.65;
-  margin: 0 0 16px;
+  margin: 0 0 var(--space-4);
   text-align: center;
 }
 
@@ -132,7 +132,7 @@
 /* Copyright */
 .shared-footer-copyright {
   text-align: center;
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: rgba(255, 255, 255, 0.55);
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -141,11 +141,11 @@
 /* Responsive */
 @media (max-width: 768px) {
   .shared-footer {
-    padding: 40px 20px 24px;
+    padding: 40px 20px var(--space-6);
   }
   .shared-footer-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: var(--space-8);
   }
 }
 

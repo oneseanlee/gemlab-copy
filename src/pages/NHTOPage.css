@@ -3,12 +3,12 @@
 
 .nhto-step-link {
   display: inline-block;
-  margin-top: 12px;
+  margin-top: var(--space-3);
   font-size: 13px;
   font-weight: 600;
-  color: #b8860b;
+  color: var(--b365-gold);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color var(--duration-fast);
 }
 .nhto-step-link:hover {
   color: #8b6914;
@@ -41,7 +41,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 15px;
+  font-size: var(--text-body);
   color: var(--b365-text-secondary);
   margin-bottom: 10px;
   line-height: 1.5;
@@ -58,7 +58,7 @@
 .nhto-consult-note {
   font-size: 13px;
   color: var(--b365-text-secondary);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -67,25 +67,25 @@
 .nhto-happymd-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   background: rgba(51, 118, 176, 0.08);
   border: 1px solid rgba(51, 118, 176, 0.2);
-  border-radius: 12px;
-  padding: 12px 20px;
-  margin-top: 16px;
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) 20px;
+  margin-top: var(--space-4);
   font-size: 13px;
   color: var(--b365-text-secondary);
 }
 .nhto-happymd-badge strong {
   color: var(--b365-blue);
-  font-size: 14px;
+  font-size: var(--text-body-sm);
 }
 
 /* ─── Trust Strip ─── */
 .nhto-trust-strip {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 48px 24px 64px;
+  padding: var(--space-12) var(--space-6) var(--space-16);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
@@ -93,29 +93,29 @@
 .nhto-trust-badge {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 16px;
-  padding: 24px;
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
   text-align: center;
 }
 .nhto-trust-badge .icon-wrap {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: var(--b365-light-blue);
   color: var(--b365-blue);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 12px;
+  margin: 0 auto var(--space-3);
 }
 .nhto-trust-badge h4 {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 600;
   color: var(--b365-text);
   margin: 0 0 4px;
 }
 .nhto-trust-badge p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--b365-text-secondary);
   margin: 0;
 }
@@ -131,27 +131,27 @@
 .nhto-problem-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 20px;
-  padding: 28px 24px;
+  border-radius: var(--radius-md);
+  padding: 28px var(--space-6);
   text-align: center;
 }
 .nhto-problem-card .icon-wrap {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: #FEE2E2;
-  color: #EF4444;
+  color: var(--b365-red);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 14px;
+  margin: 0 auto var(--space-3);
 }
 .nhto-problem-card h3 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 18px;
+  font-size: var(--text-h4);
   font-weight: 600;
-  color: #EF4444;
-  margin: 0 0 8px;
+  color: var(--b365-red);
+  margin: 0 0 var(--space-2);
 }
 .nhto-problem-card p {
   font-size: 13px;
@@ -162,13 +162,13 @@
 
 /* ─── Section Label ─── */
 .nhto-section-label {
-  font-size: 12px;
+  font-size: var(--text-caption);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--b365-blue);
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 
 /* ─── Benefit Cards (4 col) ─── */
@@ -182,26 +182,26 @@
 .nhto-benefit-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 20px;
-  padding: 28px 24px;
+  border-radius: var(--radius-md);
+  padding: 28px var(--space-6);
   text-align: center;
 }
 .nhto-benefit-card .icon-wrap {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: var(--b365-light-blue);
   color: var(--b365-blue);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 14px;
+  margin: 0 auto var(--space-3);
 }
 .nhto-benefit-card h3 {
-  font-size: 15px;
+  font-size: var(--text-body);
   font-weight: 600;
   color: var(--b365-text);
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-2);
 }
 .nhto-benefit-card p {
   font-size: 13px;
@@ -216,7 +216,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: var(--space-6);
 }
 
 /* ─── Stats Strip ─── */
@@ -246,18 +246,18 @@
 
 .nhto-safety-badge {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: var(--space-12);
 }
 .nhto-safety-badge span {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   background: rgba(34, 197, 94, 0.1);
   color: var(--b365-green);
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 700;
-  padding: 10px 24px;
-  border-radius: 9999px;
+  padding: 10px var(--space-6);
+  border-radius: var(--radius-full);
 }
 
 /* ─── Testimonial Result Cards ─── */
@@ -271,46 +271,46 @@
 .nhto-result-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 20px;
-  padding: 28px 24px;
+  border-radius: var(--radius-md);
+  padding: 28px var(--space-6);
   text-align: center;
 }
 .nhto-result-card .result-avatar {
   width: 64px;
   height: 64px;
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   object-fit: cover;
-  margin: 0 auto 12px;
+  margin: 0 auto var(--space-3);
   display: block;
   background: var(--b365-light-blue);
 }
 .nhto-result-card .result-name {
   font-weight: 700;
-  font-size: 15px;
+  font-size: var(--text-body);
   color: var(--b365-text);
   margin-bottom: 2px;
 }
 .nhto-result-card .result-age {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--b365-text-secondary);
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 .nhto-result-card .result-increase {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 20px;
   font-weight: 700;
   color: var(--b365-green);
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 .nhto-result-card .result-levels {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 14px;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
   font-size: 13px;
 }
 .nhto-result-card .level-before {
-  color: #EF4444;
+  color: var(--b365-red);
   font-weight: 600;
   text-decoration: line-through;
 }
@@ -331,16 +331,16 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-bottom: 32px;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
 }
 .nhto-product-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 20px;
-  padding: 32px;
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
   display: flex;
-  gap: 24px;
+  gap: var(--space-6);
 }
 .nhto-product-card.full-width {
   grid-column: 1 / -1;
@@ -353,7 +353,7 @@
 .nhto-product-img {
   width: 100px;
   height: 140px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   flex-shrink: 0;
   background: var(--b365-gray);
@@ -367,18 +367,18 @@
   object-fit: contain;
 }
 .nhto-product-info h3 {
-  font-size: 15px;
+  font-size: var(--text-body);
   font-weight: 700;
   color: var(--b365-text);
   margin: 0 0 4px;
 }
 .nhto-product-info .product-tag {
   display: inline-block;
-  font-size: 11px;
+  font-size: var(--text-micro);
   font-weight: 700;
   padding: 3px 10px;
-  border-radius: 9999px;
-  margin-bottom: 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-3);
 }
 .nhto-product-info .tag-rx {
   background: rgba(51, 118, 176, 0.1);
@@ -396,7 +396,7 @@
 .nhto-product-info li {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: var(--space-2);
   font-size: 13px;
   color: var(--b365-text-secondary);
   margin-bottom: 6px;
@@ -412,7 +412,7 @@
 .nhto-order-summary {
   background: var(--b365-white);
   border: 2px solid var(--b365-blue);
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   max-width: 700px;
   margin: 0 auto;
   overflow: hidden;
@@ -430,7 +430,7 @@
   margin: 0 0 4px;
 }
 .nhto-order-header p {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   opacity: 0.9;
   margin: 0;
 }
@@ -441,7 +441,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 18px 28px;
+  padding: var(--space-4) 28px;
   border-bottom: 1px solid var(--b365-border);
 }
 .nhto-order-row:last-child {
@@ -452,12 +452,12 @@
 }
 .nhto-order-row .order-label strong {
   display: block;
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: var(--b365-text);
   margin-bottom: 4px;
 }
 .nhto-order-row .order-label span {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--b365-text-secondary);
 }
 .nhto-order-row .order-price {
@@ -470,8 +470,8 @@
   display: inline-block;
   font-size: 10px;
   font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 6px;
+  padding: 3px var(--space-2);
+  border-radius: var(--radius-sm);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   margin-top: 4px;
@@ -493,7 +493,7 @@
   padding: 20px 28px;
 }
 .nhto-order-total span:first-child {
-  font-size: 16px;
+  font-size: var(--text-body);
   font-weight: 600;
 }
 .nhto-order-total span:last-child {
@@ -513,10 +513,10 @@
   gap: 6px;
   background: rgba(34, 197, 94, 0.1);
   color: var(--b365-green);
-  font-size: 15px;
+  font-size: var(--text-body);
   font-weight: 700;
-  padding: 8px 20px;
-  border-radius: 9999px;
+  padding: var(--space-2) 20px;
+  border-radius: var(--radius-full);
 }
 .nhto-save-callout .regular-price {
   display: block;
@@ -529,8 +529,8 @@
 .nhto-promise-card {
   background: #F0FDF4;
   border: 2px solid #86EFAC;
-  border-radius: 20px;
-  padding: 32px;
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
@@ -540,18 +540,18 @@
   font-size: 22px;
   font-weight: 600;
   color: var(--b365-text);
-  margin: 0 0 16px;
+  margin: 0 0 var(--space-4);
 }
 .nhto-promise-card p {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: var(--b365-text-secondary);
   line-height: 1.7;
-  margin: 0 0 12px;
+  margin: 0 0 var(--space-3);
 }
 .nhto-promise-card .promise-bold {
   font-weight: 700;
   color: var(--b365-green);
-  font-size: 15px;
+  font-size: var(--text-body);
 }
 
 /* ─── Doctor Testimonials ─── */
@@ -560,37 +560,37 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--space-6);
 }
 .nhto-doctor-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 20px;
-  padding: 32px;
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
   text-align: center;
 }
 .nhto-doctor-card .icon-wrap {
   width: 56px;
   height: 56px;
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   background: var(--b365-light-blue);
   color: var(--b365-blue);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
+  margin: 0 auto var(--space-4);
 }
 .nhto-doctor-card h4 {
-  font-size: 15px;
+  font-size: var(--text-body);
   font-weight: 700;
   color: var(--b365-text);
   margin: 0 0 4px;
 }
 .nhto-doctor-card .credential {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--b365-blue);
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 .nhto-doctor-card blockquote {
   font-size: 13px;
@@ -613,39 +613,39 @@
 .nhto-timing-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 20px;
-  padding: 24px 20px;
+  border-radius: var(--radius-md);
+  padding: var(--space-6) 20px;
   text-align: center;
 }
 .nhto-timing-card .timing-icon {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: var(--b365-light-blue);
   color: var(--b365-blue);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 12px;
+  margin: 0 auto var(--space-3);
 }
 .nhto-timing-card .timing-when {
   display: inline-block;
   background: var(--b365-light-blue);
   color: var(--b365-blue);
-  font-size: 11px;
+  font-size: var(--text-micro);
   font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 9999px;
+  padding: 4px var(--space-3);
+  border-radius: var(--radius-full);
   margin-bottom: 10px;
 }
 .nhto-timing-card h4 {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 600;
   color: var(--b365-text);
   margin: 0 0 6px;
 }
 .nhto-timing-card p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--b365-text-secondary);
   margin: 0;
   line-height: 1.5;
@@ -654,23 +654,23 @@
 /* ─── Final CTA Payment Breakdown ─── */
 .nhto-payment-breakdown {
   background: rgba(255,255,255,0.1);
-  border-radius: 12px;
-  padding: 20px 24px;
-  margin: 24px auto;
+  border-radius: var(--radius-sm);
+  padding: 20px var(--space-6);
+  margin: var(--space-6) auto;
   max-width: 500px;
   text-align: left;
 }
 .nhto-payment-row {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
-  font-size: 14px;
+  padding: var(--space-2) 0;
+  font-size: var(--text-body-sm);
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .nhto-payment-row:last-child {
   border-bottom: none;
   font-weight: 700;
-  font-size: 16px;
+  font-size: var(--text-body);
 }
 .nhto-payment-row .refund-note {
   font-size: 10px;
@@ -699,9 +699,9 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .nhto-hero-section {
-    padding: 120px 16px 0;
+    padding: 120px var(--space-4) 0;
   }
   .nhto-trust-strip,
   .nhto-problem-grid,
@@ -717,9 +717,9 @@
   }
   .nhto-order-row {
     flex-direction: column;
-    gap: 8px;
+    gap: var(--space-2);
   }
   .nhto-order-row .order-price {
-    font-size: 18px;
+    font-size: var(--text-h4);
   }
 }

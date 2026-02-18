@@ -12,16 +12,15 @@
     padding: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    border-radius: 20px;
+    border-radius: var(--radius-md);
     width: fit-content;
     margin: 1rem auto;
     padding-left: 2rem;
     padding-right: 2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
 }
 
 .logo {
-    /* font-family: 'Inter', sans-serif; Removed to use global font */
     font-size: 3rem;
     font-weight: 800;
     letter-spacing: 0.1em;

@@ -7,7 +7,7 @@
 .benefits-section h2 {
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #000;
+    color: var(--b365-gray-900);
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -28,13 +28,12 @@
     max-width: 590px;
     aspect-ratio: 590 / 660;
     height: auto;
-    background-color: #333;
-    border-radius: 20px;
+    background-color: var(--b365-gray-900);
+    border-radius: var(--radius-md);
     position: relative;
     overflow: hidden;
     background-image: radial-gradient(circle, #555, #222);
     margin: 0 auto;
-    /* Center it */
 }
 
 .benefits-image img {
@@ -48,14 +47,13 @@
     top: 2rem;
     right: 2rem;
     color: #ccff00;
-    /* Neon green type color */
     font-size: 0.8rem;
     font-weight: 600;
     font-weight: 300;
     font-size: 1.5rem;
     border: 1px solid #ccff00;
     padding: 0.5rem 1rem;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     text-transform: uppercase;
 }
 
@@ -69,7 +67,7 @@
     position: relative;
     padding-left: 2rem;
     padding-bottom: 3rem;
-    border-left: 2px dashed #ccc;
+    border-left: 2px dashed var(--b365-gray-200);
 }
 
 .timeline-item:last-child {
@@ -82,11 +80,10 @@
     top: 0;
     width: 16px;
     height: 16px;
-    background-color: #ff6b6b;
-    /* Salmon/Red color */
-    border-radius: 50%;
+    background-color: var(--b365-red);
+    border-radius: var(--radius-circle);
     border: 2px solid white;
-    box-shadow: 0 0 0 2px #ff6b6b;
+    box-shadow: 0 0 0 2px var(--b365-red);
 }
 
 .timeline-tag {
@@ -104,11 +101,11 @@
 .timeline-content h3 {
     font-size: 1.2rem;
     margin: 0.5rem 0;
-    color: #000;
+    color: var(--b365-gray-900);
 }
 
 .timeline-content p {
-    color: #444;
+    color: var(--b365-gray-500);
     line-height: 1.6;
     font-size: 0.95rem;
 }

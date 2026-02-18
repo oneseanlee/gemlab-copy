@@ -1,7 +1,7 @@
 .intake-page {
   min-height: 100vh;
   background: #ffffff;
-  color: #1a1a1a;
+  color: var(--b365-gray-900);
 }
 
 /* Reuse privacy-nav pattern */
@@ -12,34 +12,34 @@
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  padding: 16px 0;
+  padding: var(--space-4) 0;
 }
 
 .intake-nav-inner {
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--space-6);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .intake-back-link {
-  font-size: 14px;
-  color: #555;
+  font-size: var(--text-body-sm);
+  color: var(--b365-gray-500);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s;
+  transition: color var(--duration-fast);
 }
 .intake-back-link:hover {
-  color: #1a1a1a;
+  color: var(--b365-gray-900);
 }
 
 /* Header */
 .intake-header {
   max-width: 960px;
   margin: 0 auto;
-  padding: 56px 24px 0;
+  padding: 56px var(--space-6) 0;
   text-align: center;
 }
 
@@ -47,13 +47,13 @@
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(28px, 4.5vw, 40px);
   font-weight: 700;
-  color: #0d0d0d;
-  margin-bottom: 12px;
+  color: var(--b365-gray-900);
+  margin-bottom: var(--space-3);
 }
 
 .intake-header-desc {
-  font-size: 15px;
-  color: #555;
+  font-size: var(--text-body);
+  color: var(--b365-gray-500);
   max-width: 620px;
   margin: 0 auto 40px;
   line-height: 1.7;
@@ -65,7 +65,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   max-width: 720px;
-  margin: 0 auto 48px;
+  margin: 0 auto var(--space-12);
 }
 
 .intake-badge {
@@ -73,18 +73,18 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 8px;
-  padding: 20px 12px;
-  background: #f8f9fa;
-  border-radius: 12px;
+  gap: var(--space-2);
+  padding: 20px var(--space-3);
+  background: var(--b365-gray-50);
+  border-radius: var(--radius-sm);
   border: 1px solid rgba(51, 118, 176, 0.1);
 }
 
 .intake-badge-icon {
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  background: #3376b0;
+  border-radius: var(--radius-circle);
+  background: var(--b365-blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,15 +93,15 @@
 }
 
 .intake-badge h4 {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--b365-gray-900);
   margin: 0;
 }
 
 .intake-badge p {
-  font-size: 12px;
-  color: #777;
+  font-size: var(--text-caption);
+  color: var(--b365-gray-500);
   margin: 0;
   line-height: 1.4;
 }
@@ -110,14 +110,14 @@
 .intake-iframe-container {
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 24px 40px;
+  padding: 0 var(--space-6) 40px;
 }
 
 .intake-iframe-wrapper {
   background: #fff;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -131,41 +131,41 @@
 /* Bottom CTA */
 .intake-bottom-cta {
   text-align: center;
-  padding: 0 24px 64px;
+  padding: 0 var(--space-6) var(--space-16);
 }
 
 .intake-bottom-cta a {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: var(--space-2);
+  font-size: var(--text-body-sm);
   font-weight: 600;
-  color: #555;
+  color: var(--b365-gray-500);
   text-decoration: none;
-  padding: 12px 28px;
+  padding: var(--space-3) 28px;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 12px;
-  transition: all 0.2s;
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast);
 }
 .intake-bottom-cta a:hover {
-  color: #1a1a1a;
+  color: var(--b365-gray-900);
   border-color: rgba(0, 0, 0, 0.25);
   background: rgba(0, 0, 0, 0.02);
 }
 
 /* Mobile */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .intake-trust-badges {
     grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 0 8px;
+    gap: var(--space-3);
+    padding: 0 var(--space-2);
   }
 
   .intake-badge {
     flex-direction: row;
     text-align: left;
-    gap: 14px;
-    padding: 16px;
+    gap: var(--space-3);
+    padding: var(--space-4);
   }
 
   .intake-header {
