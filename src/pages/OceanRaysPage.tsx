@@ -236,7 +236,7 @@ const OceanRaysPage = () => {
             <li><a href="#faq">FAQ</a></li>
           </ul>
           <div className="b365-nav-right">
-            <AnimatedCTA href="https://community.cell365power.com/" small target="_blank" rel="noopener noreferrer">Join the Community</AnimatedCTA>
+            <AnimatedCTA href="https://www.skool.com/best365labs/about" small target="_blank" rel="noopener noreferrer">Join the Community</AnimatedCTA>
           </div>
         </div>
       </nav>
