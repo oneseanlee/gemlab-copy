@@ -1,52 +1,73 @@
 
 
-# Digital Guides Store Page (`/guides`)
+# Homepage Premium Upgrades for Higher Conversions
 
-## Overview
-Create a dedicated Digital Guides store page that serves as the central hub for all health optimization guides. Free guides will have direct download links; paid guides will link to an external payment/checkout page. The homepage "See All Guides" button and guide cards will be updated to point to this new page.
+## 1. Animated Social Proof Banner (Top of Page)
+Replace the static promo banner with a rotating trust ticker showing real-time-style social proof:
+- "John from Austin just started his protocol" (anonymized)
+- "2,847 protocols shipped this month"
+- "Rated 4.9/5 from 50,000+ clients"
 
-## Page Structure
+This creates urgency and builds instant credibility.
 
-The page will follow the existing Maximus-style medical aesthetic used across the site, matching the same design system (Playfair Display headings, Plus Jakarta Sans body, `--b365-blue` accent color).
+## 2. Hero Section Upgrade
+- Add a subtle gradient overlay with a soft animated particle/shimmer effect behind the hero image to create depth
+- Add a "Trusted by 50,000+ men" micro-badge directly under the CTA button with small avatar circles (like Stripe/Linear do)
+- Add a subtle entrance animation (fade-up) for the headline, subhead, and CTA so they stagger in smoothly on page load
 
-### Sections (top to bottom):
+## 3. "As Seen In" Logo Bar with Real Logos
+The current logo carousel uses plain text ("marie claire", "Esquire", etc.). Replace these with actual brand logo images or properly styled SVGs. Real logos dramatically increase perceived legitimacy. If official logos aren't available, use a cleaner typographic treatment with proper opacity and spacing.
 
-1. **Header/Nav** -- Reuse the standard Best365 nav bar with hamburger mobile menu (same pattern as OceanRaysPage)
+## 4. Product Card Enhancements
+- Add a subtle "MOST POPULAR" or "BEST VALUE" ribbon/badge to the top of the TPrime365 and GLP-1 Bundle cards to guide purchase decisions
+- Add a hover glow/border-color transition in the brand blue to make cards feel more interactive
+- Add a small "Ships in 48hrs" or "Free Shipping" micro-badge below the price to reduce friction
 
-2. **Hero Banner** -- Clean centered hero with:
-   - Headline: "Digital Guides & Resources"
-   - Subtitle: "Expert-backed guides to help you make informed decisions about your health optimization journey."
-   - Optional category filter pills (All, Testosterone, GLP-1, Longevity)
+## 5. Video Testimonials Section
+Add a short video testimonial embed (or a video thumbnail with a play button overlay) above or alongside the existing testimonial carousel. Video social proof converts significantly better than text-only.
 
-3. **Guides Grid** -- Responsive card grid showing all guides:
-   - Each card: cover image, title, short description, price badge ("FREE" or "$X.XX")
-   - Free guides: "Download Free" button (links to PDF or external URL)
-   - Paid guides: "Get Guide - $X.XX" button (links to external payment page)
-   - Cards styled identically to the existing `.b365-guide-card` pattern
+## 6. Sticky Bottom CTA Bar (Mobile)
+Add a fixed bottom bar on mobile that appears after scrolling past the hero:
+- Shows "Get Started" with the flagship product price
+- Smooth slide-up animation on scroll
+- Disappears when the user scrolls back to the top
 
-4. **Footer** -- SharedFooter component (already used across the site)
+## 7. Trust Badges Strip
+Add a horizontal strip of trust/certification badges between the benefits row and the product section:
+- "Physician-Supervised"
+- "cGMP Certified"
+- "Made in USA"
+- "30-Day Guarantee"
+Each with a small icon, styled in muted gray with subtle borders to feel clinical and trustworthy.
 
-### Initial Guide Content:
-- The 3 existing guides (Renting Testosterone, Testosterone & Fertility, Before You Commit to TRT) will be the starting content, marked as FREE
-- Additional placeholder slots with "Coming Soon" state for future guides
+## 8. Micro-Animations and Polish
+- Add smooth scroll-triggered fade-in animations to each section (stats, guarantee, testimonials) so content reveals as the user scrolls
+- Add a subtle parallax effect on the hero image
+- Upgrade the step numbers (01, 02, 03) with a thin circular border and a subtle pulse animation
 
-## File Changes
+---
 
-### New Files:
-- `src/pages/GuidesPage.tsx` -- Main page component with nav, hero, filterable grid, and footer
-- `src/pages/GuidesPage.css` -- Styles following the `b365-` naming convention
+## Implementation Priority (by conversion impact)
 
-### Modified Files:
-- `src/App.tsx` -- Add `/guides` route
-- `src/pages/OceanRaysPage.tsx` -- Update "See All Guides" `AnimatedCTA` href from `/article` to `/guides`, and update individual guide card links from `/article` to `/guides`
+| Priority | Enhancement | Impact |
+|----------|-------------|--------|
+| 1 | Trust badges strip | High -- reduces purchase anxiety |
+| 2 | "As Seen In" real logos | High -- instant credibility |
+| 3 | Social proof avatar badge under hero CTA | High -- peer validation |
+| 4 | Product card "MOST POPULAR" badges | High -- guides decisions |
+| 5 | Sticky mobile bottom CTA | Medium -- captures mobile intent |
+| 6 | Scroll-triggered fade-in animations | Medium -- premium feel |
+| 7 | Hero entrance animations | Medium -- first impression polish |
+| 8 | Video testimonial section | Medium -- requires video assets |
 
-## Technical Details
+---
 
-- Guide data will be a simple array of objects in the component (title, image, description, price, downloadUrl, category)
-- Category filtering will use local `useState` -- no backend needed
-- Free guides: `<a href={guide.downloadUrl} target="_blank">` direct link
-- Paid guides: `<a href={guide.paymentUrl} target="_blank">` external link (placeholder URLs for now until you provide real ones)
-- Responsive grid: 3 columns desktop, 2 tablet, 1 mobile (matching existing `.b365-guides-grid` breakpoints)
-- Price badge: green "FREE" chip or blue "$X.XX" chip on each card
-- Mobile menu integrated using the existing `MobileMenu` component
+## Technical Approach
+- All animations will use CSS transitions and `IntersectionObserver` for scroll-triggered reveals (no heavy animation libraries needed)
+- Trust badges and "Most Popular" ribbons are pure CSS with the existing design tokens
+- Sticky mobile CTA uses `position: fixed` with a scroll listener
+- No new dependencies required -- everything builds on the existing CSS + React patterns
+- Changes are isolated to `OceanRaysPage.tsx`, `OceanRaysPage.css`, and potentially a small new `TrustBadges` component
+
+Would you like me to implement all of these, or would you prefer to pick specific ones to start with?
 
