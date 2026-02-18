@@ -111,7 +111,39 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* 4. The Problem */}
+            {/* 4. How It Works (moved up for conversion) */}
+            <section className="b365-section" id="process">
+                <h2 className="b365-section-heading b365-serif">Get Started in <em>3 Simple Steps</em></h2>
+                <div className="b365-steps-grid">
+                    <div className="b365-step-card">
+                        <div className="step-number">01</div>
+                        <h3 className="b365-serif">Complete Your Order & Health Assessment</h3>
+                        <p>Complete payment on our HIPAA-compliant platform. Fill out a secure online form (5 minutes) with your health information and symptoms.</p>
+                    </div>
+                    <div className="b365-step-card">
+                        <div className="step-number">02</div>
+                        <h3 className="b365-serif">Physician Review via HappyMD</h3>
+                        <p>An independent licensed physician evaluates your case and determines if TPrime365 is right for you. If NOT approved: full refund processed immediately.</p>
+                    </div>
+                    <div className="b365-step-card">
+                        <div className="step-number">03</div>
+                        <h3 className="b365-serif">Receive & Start Optimizing</h3>
+                        <p>Compounded at an FDA-registered 503A facility and shipped directly to your door in discreet packaging. Begin your transformation.</p>
+                    </div>
+                </div>
+                <div className="tprime-timeline-callout">
+                    <span>
+                        <Clock size={16} />
+                        Order to delivery: 7-10 days (if approved)
+                    </span>
+                    <span>
+                        <ShieldCheck size={16} />
+                        100% Money-Back Guarantee if physician does not approve
+                    </span>
+                </div>
+            </section>
+
+            {/* 5. The Problem */}
             <section className="b365-section">
                 <h2 className="b365-section-heading b365-serif">Traditional Solutions Are <em>Broken</em></h2>
                 <div className="tprime-problem-grid">
@@ -367,37 +399,7 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* 12. How It Works */}
-            <section className="b365-section">
-                <h2 className="b365-section-heading b365-serif">Get Started in <em>3 Simple Steps</em></h2>
-                <div className="b365-steps-grid">
-                    <div className="b365-step-card">
-                        <div className="step-number">01</div>
-                        <h3 className="b365-serif">Complete Your Order & Health Assessment</h3>
-                        <p>Complete payment on our HIPAA-compliant platform. Fill out a secure online form (5 minutes) with your health information and symptoms.</p>
-                    </div>
-                    <div className="b365-step-card">
-                        <div className="step-number">02</div>
-                        <h3 className="b365-serif">Physician Review via HappyMD</h3>
-                        <p>An independent licensed physician evaluates your case and determines if TPrime365 is right for you. If NOT approved: full refund processed immediately.</p>
-                    </div>
-                    <div className="b365-step-card">
-                        <div className="step-number">03</div>
-                        <h3 className="b365-serif">Receive & Start Optimizing</h3>
-                        <p>Compounded at an FDA-registered 503A facility and shipped directly to your door in discreet packaging. Begin your transformation.</p>
-                    </div>
-                </div>
-                <div className="tprime-timeline-callout">
-                    <span>
-                        <Clock size={16} />
-                        Order to delivery: 7-10 days (if approved)
-                    </span>
-                    <span>
-                        <ShieldCheck size={16} />
-                        100% Money-Back Guarantee if physician does not approve
-                    </span>
-                </div>
-            </section>
+            {/* (How It Works moved to after hero) */}
 
             {/* 13. Dosing Instructions */}
             <section className="b365-section b365-section-alt">
@@ -525,6 +527,20 @@ const TPrime365Page = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Sticky Bottom CTA Bar */}
+            <div className="tprime-sticky-cta">
+                <div className="tprime-sticky-cta-inner">
+                    <div className="tprime-sticky-cta-info">
+                        <span className="tprime-sticky-cta-price">$149<span>/mo</span></span>
+                        <span className="tprime-sticky-cta-note">Physician consultation included</span>
+                    </div>
+                    <AnimatedCTA href="#process" small>
+                        Order Now
+                        <ArrowRight size={14} />
+                    </AnimatedCTA>
+                </div>
+            </div>
 
             {/* Footer */}
             <SharedFooter />
