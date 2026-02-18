@@ -9,6 +9,7 @@ import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { GLP1_VARIANT_ID } from '../lib/shopify';
+import { Menu, Tag, ArrowRight, ClipboardList, Sunrise, Coffee, Utensils, ChevronRight, X, Check, Zap, Flame, Brain, Target, Footprints, Trophy, Dna, Recycle, AlertCircle, Lock, ShieldCheck, Package, Headphones } from 'lucide-react';
 
 // Minimal product shape for cart
 const GLP1_PRODUCT = {
@@ -101,7 +102,7 @@ const GLP1Page = () => {
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
                 <div className="b365-nav-inner">
                     <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
-                        <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
+                        <Menu size={24} />
                     </button>
                     <a href="/">
                         <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
@@ -129,7 +130,7 @@ const GLP1Page = () => {
                     </div>
                     <div className="tprime-hero-text">
                         <div className="glp1-save-badge text-primary">
-                            <iconify-icon icon="lucide:tag" width="14"></iconify-icon>
+                            <Tag size={14} />
                             Save $50 + FREE Shipping
                         </div>
                         <h1>Transform Your Weight Loss Journey with <em>Cellular-Level Support</em></h1>
@@ -142,12 +143,12 @@ const GLP1Page = () => {
                         </div>
                         <p className="guarantee-text text-primary">Complete 30-Day Protocol + FREE Shipping</p>
                         <a href="/glp1-intake" className="glp1-intake-link">
-                            <iconify-icon icon="lucide:clipboard-list" width="16"></iconify-icon>
+                            <ClipboardList size={16} />
                             Start GLP-1 Intake Form →
                         </a>
                         <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
                             {isLoading ? 'Adding to Cart...' : 'Order Now — $39.95'}
-                            <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
+                            <ArrowRight size={16} />
                         </AnimatedCTA>
                     </div>
                 </div>
@@ -185,19 +186,19 @@ const GLP1Page = () => {
                 <div className="glp1-protocol-grid">
                     {[
           {
-            icon: 'lucide:sunrise', timing: 'Upon Waking', title: 'Morning Activation',
+            Icon: Sunrise, timing: 'Upon Waking', title: 'Morning Activation',
             product: '1 mL Triple Power Methylene Blue',
             image: '/images/triple-power-methylene-blue.png',
             items: ['Activates AMPK (fat burning), Sirtuins (cellular repair), and Autophagy (cellular cleanup)', 'Contains USP Methylene Blue, NAD+, Spermidine, Vitamin C, and MODS Max™']
           },
           {
-            icon: 'lucide:coffee', timing: 'With Breakfast', title: 'Metabolic Ignition',
+            Icon: Coffee, timing: 'With Breakfast', title: 'Metabolic Ignition',
             product: '2 Tablets Metabolism+',
             image: '/images/metabolism-plus.png',
             items: ['Ignites metabolism with USP Methylene Blue, L-Theanine, Caffeine, Guarana, and Green Tea', 'Enhances energy production and fat oxidation']
           },
           {
-            icon: 'lucide:utensils', timing: 'With Lunch', title: 'Sustained Activation',
+            Icon: Utensils, timing: 'With Lunch', title: 'Sustained Activation',
             product: '2 Tablets Metabolism+',
             image: '/images/metabolism-plus.png',
             items: ['Sustains metabolic activation throughout eating window', 'Maintains energy levels and supports lean muscle preservation']
@@ -208,7 +209,7 @@ const GLP1Page = () => {
                                 <img src={card.image} alt={card.product} className="protocol-product-img" />
                             </div>
                             <div className="protocol-icon-badge">
-                                <iconify-icon icon={card.icon} width="18"></iconify-icon>
+                                <card.Icon size={18} />
                                 <span>{card.timing}</span>
                             </div>
                             <h3>{card.title}</h3>
@@ -216,7 +217,7 @@ const GLP1Page = () => {
                             <ul>
                                 {card.items.map((item, j) =>
               <li key={j}>
-                                        <iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>
+                                        <ChevronRight size={14} />
                                         {item}
                                     </li>
               )}
@@ -281,7 +282,7 @@ const GLP1Page = () => {
               'Weight regain after stopping'].
               map((item, i) =>
               <li key={i}>
-                                    <iconify-icon icon="lucide:x" width="16" class="icon-x"></iconify-icon>
+                                    <X size={16} className="icon-x" />
                                     {item}
                                 </li>
               )}
@@ -299,7 +300,7 @@ const GLP1Page = () => {
               'KEEP your results long-term'].
               map((item, i) =>
               <li key={i}>
-                                    <iconify-icon icon="lucide:check" width="16" class="icon-check"></iconify-icon>
+                                    <Check size={16} className="icon-check" />
                                     {item}
                                 </li>
               )}
@@ -313,16 +314,16 @@ const GLP1Page = () => {
                 <h2 className="b365-section-heading b365-serif">Six Powerful Benefits You'll Feel <em>Within Days</em></h2>
                 <div className="tprime-benefits-grid">
                     {[
-          { icon: 'lucide:zap', title: 'Wake Up with ACTUAL Energy', desc: 'Real, cellular ATP production that lasts all day. 38% increase means you can finally exercise, work, and live your life during weight loss.' },
-          { icon: 'lucide:flame', title: 'Burn Fat, Not Muscle', desc: '72% more lean tissue retention means you lose fat from your belly, hips, and thighs — NOT from your arms, legs, and butt.' },
-          { icon: 'lucide:brain', title: 'Think Clearly Again', desc: 'Methylene Blue crosses into your brain, powering neurons and eliminating the fog that makes GLP-1 feel like functioning at 50%.' },
-          { icon: 'lucide:target', title: 'Stop Fighting Hunger', desc: '42% reduction in leptin resistance means your body FINALLY responds to fullness signals. No more white-knuckling through cravings.' },
-          { icon: 'lucide:footprints', title: 'Actually WANT to Move', desc: 'When your mitochondria work properly, exercise stops feeling like torture. Suddenly you have the energy for those 8,000 steps.' },
-          { icon: 'lucide:trophy', title: 'Keep Your Results FOREVER', desc: 'Metabolic optimization means when you finish GLP-1, your metabolism doesn\'t crash. You maintain your weight loss long-term.' }].
+          { Icon: Zap, title: 'Wake Up with ACTUAL Energy', desc: 'Real, cellular ATP production that lasts all day. 38% increase means you can finally exercise, work, and live your life during weight loss.' },
+          { Icon: Flame, title: 'Burn Fat, Not Muscle', desc: '72% more lean tissue retention means you lose fat from your belly, hips, and thighs — NOT from your arms, legs, and butt.' },
+          { Icon: Brain, title: 'Think Clearly Again', desc: 'Methylene Blue crosses into your brain, powering neurons and eliminating the fog that makes GLP-1 feel like functioning at 50%.' },
+          { Icon: Target, title: 'Stop Fighting Hunger', desc: '42% reduction in leptin resistance means your body FINALLY responds to fullness signals. No more white-knuckling through cravings.' },
+          { Icon: Footprints, title: 'Actually WANT to Move', desc: 'When your mitochondria work properly, exercise stops feeling like torture. Suddenly you have the energy for those 8,000 steps.' },
+          { Icon: Trophy, title: 'Keep Your Results FOREVER', desc: 'Metabolic optimization means when you finish GLP-1, your metabolism doesn\'t crash. You maintain your weight loss long-term.' }].
           map((b, i) =>
           <div className="tprime-benefit-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={b.icon} width="22"></iconify-icon>
+                                <b.Icon size={22} />
                             </div>
                             <h4>{b.title}</h4>
                             <p>{b.desc}</p>
@@ -337,27 +338,24 @@ const GLP1Page = () => {
                 <div className="tprime-ingredient-grid">
                     {[
           {
-            icon: 'lucide:zap', title: 'AMPK Activation', subtitle: 'The Metabolic Master Switch',
+            Icon: Zap, title: 'AMPK Activation', subtitle: 'The Metabolic Master Switch',
             sections: [
             { heading: 'What It Does:', items: ['Increases fat burning and improves insulin sensitivity', 'Methylene Blue enhances mitochondrial electron flow and ATP output', 'Complements GLP-1\'s metabolic effects for superior fat oxidation'] }]
-
           },
           {
-            icon: 'lucide:dna', title: 'Sirtuin Support', subtitle: 'Longevity & Repair Enzymes',
+            Icon: Dna, title: 'Sirtuin Support', subtitle: 'Longevity & Repair Enzymes',
             sections: [
             { heading: 'What It Does:', items: ['NAD+ fuels enzymes that control DNA repair, inflammation, and mitochondrial health', 'Enhances tissue repair, resilience, and recovery during weight loss', 'Maintains cellular function even under caloric restriction'] }]
-
           },
           {
-            icon: 'lucide:recycle', title: 'Autophagy Balance', subtitle: 'Cellular Cleanup',
+            Icon: Recycle, title: 'Autophagy Balance', subtitle: 'Cellular Cleanup',
             sections: [
             { heading: 'What It Does:', items: ['Spermidine induces cellular cleanup and protein quality control', 'Removes damaged mitochondria and proteins', 'Creates space for healthy, functional tissue regeneration'] }]
-
           }].
           map((card, i) =>
           <div className="tprime-ingredient-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={card.icon} width="22"></iconify-icon>
+                                <card.Icon size={22} />
                             </div>
                             <h3>{card.title}</h3>
                             <p className="ingredient-subtitle">{card.subtitle}</p>
@@ -367,7 +365,7 @@ const GLP1Page = () => {
                                     <ul>
                                         {sec.items.map((item, k) =>
                 <li key={k}>
-                                                <iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>
+                                                <ChevronRight size={14} />
                                                 {item}
                                             </li>
                 )}
@@ -403,14 +401,14 @@ const GLP1Page = () => {
                 <p style={{ textAlign: 'center', color: 'var(--b365-text-secondary)', marginBottom: 32, fontSize: 15 }}>At $1.33 per day, this costs LESS than:</p>
                 <div className="glp1-perspective-grid">
                     {[
-          { icon: 'lucide:coffee', label: '2 trips to Starbucks per week' },
-          { icon: 'lucide:pill', label: 'Your monthly GLP-1 copay' },
-          { icon: 'lucide:dumbbell', label: 'A single personal training session' },
-          { icon: 'lucide:package', label: 'One month of a basic multivitamin' }].
+          { Icon: Coffee, label: '2 trips to Starbucks per week' },
+          { Icon: Target, label: 'Your monthly GLP-1 copay' },
+          { Icon: Dumbbell, label: 'A single personal training session' },
+          { Icon: Package, label: 'One month of a basic multivitamin' }].
           map((item, i) =>
           <div className="glp1-perspective-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={item.icon} width="18"></iconify-icon>
+                                <item.Icon size={18} />
                             </div>
                             <span>{item.label}</span>
                         </div>
@@ -419,9 +417,9 @@ const GLP1Page = () => {
                 <div className="glp1-perspective-outcome">
                     <h4>But it could be the difference between:</h4>
                     <ul>
-                        <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Losing 28 lbs of FAT (keeping muscle) vs. losing fat + muscle ("skinny fat")</li>
-                        <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Having energy to live your life vs. being exhausted for months</li>
-                        <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Keeping your results forever vs. regaining everything within a year</li>
+                        <li><Check size={16} />Losing 28 lbs of FAT (keeping muscle) vs. losing fat + muscle ("skinny fat")</li>
+                        <li><Check size={16} />Having energy to live your life vs. being exhausted for months</li>
+                        <li><Check size={16} />Keeping your results forever vs. regaining everything within a year</li>
                     </ul>
                     <p className="glp1-daily-cost">$1.33/day — The cheapest insurance policy for your GLP-1 investment.</p>
                 </div>
@@ -447,10 +445,10 @@ const GLP1Page = () => {
                 <div className="glp1-solution-callout">
                     <h4>Triple Power + Metabolism+ Changes EVERYTHING</h4>
                     <ul>
-                        <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Protects your cellular engines from GLP-1 stress</li>
-                        <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Forces fat burning instead of muscle breakdown</li>
-                        <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Maintains energy production even with fewer calories</li>
-                        <li><iconify-icon icon="lucide:check" width="16"></iconify-icon>Prevents metabolic slowdown so results last forever</li>
+                        <li><Check size={16} />Protects your cellular engines from GLP-1 stress</li>
+                        <li><Check size={16} />Forces fat burning instead of muscle breakdown</li>
+                        <li><Check size={16} />Maintains energy production even with fewer calories</li>
+                        <li><Check size={16} />Prevents metabolic slowdown so results last forever</li>
                     </ul>
                     <p className="bottom-line">This turns GLP-1 from a temporary weight loss drug into a permanent body transformation.</p>
                 </div>
@@ -468,19 +466,19 @@ const GLP1Page = () => {
                     </div>
                     <AnimatedCTA href="#" className="btn-white-cta" onClick={handleOrderNow} disabled={isLoading}>
                         {isLoading ? 'Adding to Cart...' : 'Order Now — $39.95'}
-                        <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
+                        <ArrowRight size={16} />
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> No prescription required</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Ships within 24-48 hours</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> FDA-registered facility</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> FREE shipping — discreet packaging</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Third-party tested for purity</span>
+                        <span><Check size={14} /> No prescription required</span>
+                        <span><Check size={14} /> Ships within 24-48 hours</span>
+                        <span><Check size={14} /> FDA-registered facility</span>
+                        <span><Check size={14} /> FREE shipping — discreet packaging</span>
+                        <span><Check size={14} /> Third-party tested for purity</span>
                     </div>
                     <div className="tprime-cta-trust-strip">
-                        <span><iconify-icon icon="lucide:lock" width="14"></iconify-icon> Secure Checkout</span>
-                        <span><iconify-icon icon="lucide:shield-check" width="14"></iconify-icon> Quality Guaranteed</span>
-                        <span><iconify-icon icon="lucide:package" width="14"></iconify-icon> Fast Shipping</span>
+                        <span><Lock size={14} /> Secure Checkout</span>
+                        <span><ShieldCheck size={14} /> Quality Guaranteed</span>
+                        <span><Package size={14} /> Fast Shipping</span>
                     </div>
                 </div>
             </section>
@@ -491,7 +489,7 @@ const GLP1Page = () => {
                     <div className="b365-faq-left">
                         <h2>Your questions, <em>answered.</em></h2>
                         <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
-                            <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
+                            <Headphones size={16} />
                             Contact Support
                         </AnimatedCTA>
                     </div>
@@ -522,7 +520,7 @@ const GLP1Page = () => {
             'Always inform your healthcare provider of all supplements you are taking'].
             map((item, i) =>
             <li key={i}>
-                                <iconify-icon icon="lucide:alert-circle" width="14"></iconify-icon>
+                                <AlertCircle size={14} />
                                 {item}
                             </li>
             )}

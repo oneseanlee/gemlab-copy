@@ -5,6 +5,7 @@ import '../pages/OceanRaysPage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
+import { Menu, ArrowRight, X, Check, ChevronRight, Syringe, Pill, FlaskConical, Dna, Zap, Dumbbell, Shield, Brain, Flame, Heart, Target, Moon, Bone, Clock, ShieldCheck, Lightbulb, Calendar, AlertCircle, Building2, BadgeCheck, Microscope, Flag, Stethoscope, Lock, Package, Headphones } from 'lucide-react';
 
 const TPrime365Page = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -69,7 +70,7 @@ const TPrime365Page = () => {
             <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
                 <div className="b365-nav-inner">
                     <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
-                        <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
+                        <Menu size={24} />
                     </button>
                     <a href="/">
                         <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
@@ -104,7 +105,7 @@ const TPrime365Page = () => {
                         <p className="guarantee-text">If not approved by physician, fully refunded</p>
                         <AnimatedCTA href="#process">
                             Start Your Optimization
-                            <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
+                            <ArrowRight size={16} />
                         </AnimatedCTA>
                     </div>
                 </div>
@@ -115,19 +116,19 @@ const TPrime365Page = () => {
                 <h2 className="b365-section-heading b365-serif">Traditional Solutions Are <em>Broken</em></h2>
                 <div className="tprime-problem-grid">
                     {[
-          { title: 'Injectable TRT', icon: 'lucide:syringe', items: ['Shuts down natural production', 'Testicular atrophy guaranteed', 'Fertility destroyed', 'Lifetime dependency'] },
-          { title: 'Oral Pills', icon: 'lucide:pill', items: ['Poor absorption (first-pass liver metabolism)', 'Inconsistent results', 'Half the dose wasted', 'Daily capsule hassle'] },
-          { title: 'Single-Ingredient Solutions', icon: 'lucide:flask-conical', items: ['One-dimensional approach', 'Missing synergistic compounds', 'Expensive to stack separately', 'No longevity benefits'] }].
+          { title: 'Injectable TRT', Icon: Syringe, items: ['Shuts down natural production', 'Testicular atrophy guaranteed', 'Fertility destroyed', 'Lifetime dependency'] },
+          { title: 'Oral Pills', Icon: Pill, items: ['Poor absorption (first-pass liver metabolism)', 'Inconsistent results', 'Half the dose wasted', 'Daily capsule hassle'] },
+          { title: 'Single-Ingredient Solutions', Icon: FlaskConical, items: ['One-dimensional approach', 'Missing synergistic compounds', 'Expensive to stack separately', 'No longevity benefits'] }].
           map((card, i) =>
           <div className="tprime-problem-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={card.icon} width="22"></iconify-icon>
+                                <card.Icon size={22} />
                             </div>
                             <h3>{card.title}</h3>
                             <ul>
                                 {card.items.map((item, j) =>
               <li key={j}>
-                                        <iconify-icon icon="lucide:x" width="14"></iconify-icon>
+                                        <X size={14} />
                                         {item}
                                     </li>
               )}
@@ -165,37 +166,33 @@ const TPrime365Page = () => {
                 <div className="tprime-ingredient-grid">
                     {[
           {
-            icon: 'lucide:dna', title: 'Pillar 1: Enclomiphene 25mg', subtitle: 'The Foundation — Hormone Optimization',
+            Icon: Dna, title: 'Pillar 1: Enclomiphene 25mg', subtitle: 'The Foundation — Hormone Optimization',
             sections: [
             { heading: 'What It Does:', items: ['Blocks estrogen receptors at the pituitary', 'Signals your body to produce MORE testosterone naturally', 'Increases LH & FSH (the hormones that make testosterone)', 'Preserves fertility & testicular function'] },
             { heading: 'The Science:', items: ['60-664% testosterone increase in 2-4 weeks', 'Non-hormonal: Won\'t shut down your natural production', 'Fertility-safe: Keeps sperm production active'] }]
-
           },
           {
-            icon: 'lucide:zap', title: 'Pillar 2: Spermidine 10mg', subtitle: 'The Longevity Amplifier — Testosterone + Longevity',
+            Icon: Zap, title: 'Pillar 2: Spermidine 10mg', subtitle: 'The Longevity Amplifier — Testosterone + Longevity',
             sections: [
             { heading: 'What It Does:', items: ['Boosts testosterone production directly (+48.9% in men under 50)', 'Slashes cortisol by 58% (the testosterone killer)', 'Reduces estradiol by 55.9% in 83% of men', 'Activates autophagy (cellular renewal & anti-aging)'] },
             { heading: 'The Science:', items: ['5-year survival benefit in epidemiological studies', '40% reduction in fatal heart failure risk', 'Supports Leydig cell function (where testosterone is made)'] }]
-
           },
           {
-            icon: 'lucide:dumbbell', title: 'Pillar 3: Boron 10mg', subtitle: 'The Free Testosterone Liberator — Strength & Vitality',
+            Icon: Dumbbell, title: 'Pillar 3: Boron 10mg', subtitle: 'The Free Testosterone Liberator — Strength & Vitality',
             sections: [
             { heading: 'What It Does:', items: ['Increases FREE testosterone (the usable form)', 'Reduces SHBG (the protein that binds testosterone)', 'Supports bone density & strength', 'Reduces inflammation'] },
             { heading: 'The Science:', items: ['28% increase in free testosterone in 1 week', 'Decreases estradiol levels', 'Improves vitamin D utilization'] }]
-
           },
           {
-            icon: 'lucide:shield', title: 'Pillar 4: Vitamin C 10mg', subtitle: 'The Cellular Protector — Protection & Support',
+            Icon: Shield, title: 'Pillar 4: Vitamin C 10mg', subtitle: 'The Cellular Protector — Protection & Support',
             sections: [
             { heading: 'What It Does:', items: ['Powerful antioxidant protection', 'Supports Leydig cell health', 'Enhances absorption of other nutrients', 'Reduces oxidative stress'] },
             { heading: 'The Science:', items: ['Protects testosterone-producing cells', 'Supports immune function', 'Essential for cellular repair'] }]
-
           }].
           map((card, i) =>
           <div className="tprime-ingredient-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={card.icon} width="22"></iconify-icon>
+                                <card.Icon size={22} />
                             </div>
                             <h3>{card.title}</h3>
                             <p className="ingredient-subtitle">{card.subtitle}</p>
@@ -205,7 +202,7 @@ const TPrime365Page = () => {
                                     <ul>
                                         {sec.items.map((item, k) =>
                 <li key={k}>
-                                                <iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>
+                                                <ChevronRight size={14} />
                                                 {item}
                                             </li>
                 )}
@@ -226,7 +223,7 @@ const TPrime365Page = () => {
                         <ul>
                             {['First-pass liver metabolism', '40-60% lost before absorption', 'Slow, inconsistent results', 'Digestive breakdown', 'Takes 1-2 hours to absorb'].map((item, i) =>
               <li key={i}>
-                                    <iconify-icon icon="lucide:x" width="16" class="icon-x"></iconify-icon>
+                                    <X size={16} className="icon-x" />
                                     {item}
                                 </li>
               )}
@@ -238,7 +235,7 @@ const TPrime365Page = () => {
                         <ul>
                             {['Direct bloodstream delivery', 'Bypasses digestive system', 'Enhanced bioavailability', 'Rapid absorption (30-60 seconds)', 'Patent-pending MODS Max Gold™ technology'].map((item, i) =>
               <li key={i}>
-                                    <iconify-icon icon="lucide:check" width="16" class="icon-check"></iconify-icon>
+                                    <Check size={16} className="icon-check" />
                                     {item}
                                 </li>
               )}
@@ -267,7 +264,7 @@ const TPrime365Page = () => {
                             <ul>
                                 {persona.items.map((item, j) =>
               <li key={j}>
-                                        <iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>
+                                        <ChevronRight size={14} />
                                         {item}
                                     </li>
               )}
@@ -282,19 +279,19 @@ const TPrime365Page = () => {
                 <h2 className="b365-section-heading b365-serif">What You'll <em>Experience</em></h2>
                 <div className="tprime-benefits-grid">
                     {[
-          { icon: 'lucide:flame', title: 'Energy & Drive', desc: 'Wake up ready to conquer. No more afternoon crashes.' },
-          { icon: 'lucide:dumbbell', title: 'Lean Muscle Growth', desc: 'Build and maintain muscle more easily. Faster recovery.' },
-          { icon: 'lucide:brain', title: 'Mental Clarity', desc: 'Sharp focus. Better decision-making. Confidence restored.' },
-          { icon: 'lucide:heart', title: 'Libido & Performance', desc: 'Reignite desire. Perform like your younger self.' },
-          { icon: 'lucide:zap', title: 'Faster Recovery', desc: 'Bounce back from workouts. Less soreness, more gains.' },
-          { icon: 'lucide:target', title: 'Fat Loss', desc: 'Shed stubborn fat, especially around the midsection.' },
-          { icon: 'lucide:moon', title: 'Better Sleep', desc: 'Deeper, more restorative rest. Wake refreshed.' },
-          { icon: 'lucide:bone', title: 'Bone Density', desc: 'Stronger bones. Reduced fracture risk.' },
-          { icon: 'lucide:dna', title: 'Longevity', desc: 'Cellular renewal. Healthspan extension. Age better.' }].
+          { Icon: Flame, title: 'Energy & Drive', desc: 'Wake up ready to conquer. No more afternoon crashes.' },
+          { Icon: Dumbbell, title: 'Lean Muscle Growth', desc: 'Build and maintain muscle more easily. Faster recovery.' },
+          { Icon: Brain, title: 'Mental Clarity', desc: 'Sharp focus. Better decision-making. Confidence restored.' },
+          { Icon: Heart, title: 'Libido & Performance', desc: 'Reignite desire. Perform like your younger self.' },
+          { Icon: Zap, title: 'Faster Recovery', desc: 'Bounce back from workouts. Less soreness, more gains.' },
+          { Icon: Target, title: 'Fat Loss', desc: 'Shed stubborn fat, especially around the midsection.' },
+          { Icon: Moon, title: 'Better Sleep', desc: 'Deeper, more restorative rest. Wake refreshed.' },
+          { Icon: Bone, title: 'Bone Density', desc: 'Stronger bones. Reduced fracture risk.' },
+          { Icon: Dna, title: 'Longevity', desc: 'Cellular renewal. Healthspan extension. Age better.' }].
           map((b, i) =>
           <div className="tprime-benefit-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={b.icon} width="22"></iconify-icon>
+                                <b.Icon size={22} />
                             </div>
                             <h4>{b.title}</h4>
                             <p>{b.desc}</p>
@@ -392,11 +389,11 @@ const TPrime365Page = () => {
                 </div>
                 <div className="tprime-timeline-callout">
                     <span>
-                        <iconify-icon icon="lucide:clock" width="16"></iconify-icon>
+                        <Clock size={16} />
                         Order to delivery: 7-10 days (if approved)
                     </span>
                     <span>
-                        <iconify-icon icon="lucide:shield-check" width="16"></iconify-icon>
+                        <ShieldCheck size={16} />
                         100% Money-Back Guarantee if physician does not approve
                     </span>
                 </div>
@@ -412,19 +409,19 @@ const TPrime365Page = () => {
                         <div className="tprime-dosing-item"><span className="label">HOLD:</span><span>30 seconds for optimal absorption</span></div>
                         <div className="tprime-dosing-item"><span className="label">SWALLOW:</span><span>Then swallow remaining liquid</span></div>
                         <p className="tprime-dosing-supply">
-                            <iconify-icon icon="lucide:calendar" width="16" style={{ marginRight: 6 }}></iconify-icon>
+                            <Calendar size={16} style={{ marginRight: 6 }} />
                             Supply: 30-day supply per bottle
                         </p>
                     </div>
                     <div className="tprime-pro-tip">
                         <h4>
-                            <iconify-icon icon="lucide:lightbulb" width="16"></iconify-icon>
+                            <Lightbulb size={16} />
                             For Best Results:
                         </h4>
                         <ul>
                             {['Take on an empty stomach', 'Avoid eating/drinking 15 minutes before and after', 'Store at room temperature (do not freeze)', 'Track your progress weekly'].map((item, i) =>
               <li key={i}>
-                                    <iconify-icon icon="lucide:check" width="14"></iconify-icon>
+                                    <Check size={14} />
                                     {item}
                                 </li>
               )}
@@ -438,16 +435,16 @@ const TPrime365Page = () => {
                 <h2 className="b365-section-heading b365-serif">Pharmaceutical-Grade <em>Standards</em></h2>
                 <div className="tprime-trust-grid">
                     {[
-          { icon: 'lucide:building-2', title: 'FDA-Registered 503A Compounding Facility', desc: 'Manufactured in Salt Lake City, UT under strict quality controls' },
-          { icon: 'lucide:badge-check', title: '100% Money-Back Guarantee', desc: 'Full refund if prescription not approved by independent physician' },
-          { icon: 'lucide:microscope', title: 'Third-Party Tested', desc: 'Every batch verified for purity and potency' },
-          { icon: 'lucide:flag', title: 'Made in the USA', desc: 'American-made, American quality' },
-          { icon: 'lucide:stethoscope', title: 'Licensed Physician Oversight', desc: 'Real doctors reviewing every case' },
-          { icon: 'lucide:lock', title: 'HIPAA Compliant', desc: 'Your health data stays private and secure' }].
+          { Icon: Building2, title: 'FDA-Registered 503A Compounding Facility', desc: 'Manufactured in Salt Lake City, UT under strict quality controls' },
+          { Icon: BadgeCheck, title: '100% Money-Back Guarantee', desc: 'Full refund if prescription not approved by independent physician' },
+          { Icon: Microscope, title: 'Third-Party Tested', desc: 'Every batch verified for purity and potency' },
+          { Icon: Flag, title: 'Made in the USA', desc: 'American-made, American quality' },
+          { Icon: Stethoscope, title: 'Licensed Physician Oversight', desc: 'Real doctors reviewing every case' },
+          { Icon: Lock, title: 'HIPAA Compliant', desc: 'Your health data stays private and secure' }].
           map((badge, i) =>
           <div className="tprime-trust-card" key={i}>
                             <div className="icon-wrap">
-                                <iconify-icon icon={badge.icon} width="22"></iconify-icon>
+                                <badge.Icon size={22} />
                             </div>
                             <h4>{badge.title}</h4>
                             <p>{badge.desc}</p>
@@ -464,7 +461,7 @@ const TPrime365Page = () => {
                     <ul>
                         {['Have prostate cancer or breast cancer', 'Have severe liver or kidney disease', 'Are under 18 years of age', 'Are allergic to any ingredients', 'Are taking certain medications (physician will review)'].map((item, i) =>
             <li key={i}>
-                                <iconify-icon icon="lucide:alert-circle" width="14"></iconify-icon>
+                                <AlertCircle size={14} />
                                 {item}
                             </li>
             )}
@@ -482,7 +479,7 @@ const TPrime365Page = () => {
                     <div className="b365-faq-left">
                         <h2>Your questions, <em>answered.</em></h2>
                         <AnimatedCTA href="mailto:info@best365labs.com" style={{ marginTop: 8 }}>
-                            <iconify-icon icon="lucide:headphones" width="16"></iconify-icon>
+                            <Headphones size={16} />
                             Contact Support
                         </AnimatedCTA>
                     </div>
@@ -512,19 +509,19 @@ const TPrime365Page = () => {
                     </div>
                     <AnimatedCTA href="#process" className="btn-white-cta">
                         Order Now — Risk Free
-                        <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
+                        <ArrowRight size={16} />
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Licensed physician reviews every order</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Full refund if not approved</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> FDA-registered compounding pharmacy</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Free shipping — discreet packaging</span>
-                        <span><iconify-icon icon="lucide:check" width="14"></iconify-icon> Cancel subscription anytime</span>
+                        <span><Check size={14} /> Licensed physician reviews every order</span>
+                        <span><Check size={14} /> Full refund if not approved</span>
+                        <span><Check size={14} /> FDA-registered compounding pharmacy</span>
+                        <span><Check size={14} /> Free shipping — discreet packaging</span>
+                        <span><Check size={14} /> Cancel subscription anytime</span>
                     </div>
                     <div className="tprime-cta-trust-strip">
-                        <span><iconify-icon icon="lucide:lock" width="14"></iconify-icon> Secure Checkout</span>
-                        <span><iconify-icon icon="lucide:shield-check" width="14"></iconify-icon> Money-Back Guarantee</span>
-                        <span><iconify-icon icon="lucide:package" width="14"></iconify-icon> Fast Shipping</span>
+                        <span><Lock size={14} /> Secure Checkout</span>
+                        <span><ShieldCheck size={14} /> Money-Back Guarantee</span>
+                        <span><Package size={14} /> Fast Shipping</span>
                     </div>
                 </div>
             </section>
