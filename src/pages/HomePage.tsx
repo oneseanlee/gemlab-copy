@@ -39,9 +39,9 @@ const RevealSection = ({ children, className = '', ...props }) => {
 const socialProofMessages = [
   '🔬 2,847 protocols shipped this month',
   '⭐ Rated 4.9/5 from 50,000+ clients',
-  '🚀 James from Dallas just started his protocol',
+  '🚀 A new client in Dallas just started their protocol',
   '💪 12 new clients activated today',
-  '🏆 Trusted by 50,000+ men nationwide',
+  '🏆 Trusted by 50,000+ clients nationwide',
 ];
 
 const products = [
@@ -271,8 +271,8 @@ const StickyMobileCTA = () => {
     <div className={`b365-sticky-mobile-cta ${visible ? 'visible' : ''}`}>
       <div className="sticky-cta-inner">
         <div className="sticky-cta-text">
-          <span className="sticky-cta-label">TPrime365™</span>
-          <span className="sticky-cta-price">$149<small>/mo</small></span>
+          <span className="sticky-cta-label">Best 365 Labs</span>
+          <span className="sticky-cta-price">From $39.95</span>
         </div>
         <AnimatedCTA href="#products" small>Get Started</AnimatedCTA>
       </div>
@@ -332,7 +332,7 @@ const HomePage = () => {
           <div className="b365-hero-text">
             <h1 className="b365-serif hero-entrance hero-entrance-1">Your Hormones, <em>Optimized.</em></h1>
             <p className="subhead hero-entrance hero-entrance-2">
-              Precision-grade testosterone and metabolic support delivered to your door.
+              Precision-grade hormonal and metabolic optimization delivered to your door.
               No needles. No hormonal shutdown. Just science-backed results.
             </p>
             <p className="tertiary hero-entrance hero-entrance-3">Powered by MODS Max™ 10x Absorption Technology.</p>
@@ -349,7 +349,7 @@ const HomePage = () => {
                 <img src="/images/testimonial-sean-lee.png" alt="" />
                 <img src="/images/testimonial-ernesto-cruz.png" alt="" />
               </div>
-              <span>Trusted by <strong>50,000+</strong> men</span>
+              <span>Trusted by <strong>50,000+</strong> clients</span>
             </div>
           </div>
         </div>
