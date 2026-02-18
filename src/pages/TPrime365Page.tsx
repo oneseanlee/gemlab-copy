@@ -528,20 +528,6 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* Sticky Bottom CTA Bar */}
-            <div className="tprime-sticky-cta">
-                <div className="tprime-sticky-cta-inner">
-                    <div className="tprime-sticky-cta-info">
-                        <span className="tprime-sticky-cta-price">$149<span>/mo</span></span>
-                        <span className="tprime-sticky-cta-note">Physician consultation included</span>
-                    </div>
-                    <AnimatedCTA href="#process" small>
-                        Order Now
-                        <ArrowRight size={14} />
-                    </AnimatedCTA>
-                </div>
-            </div>
-
             {/* Footer */}
             <SharedFooter />
         </div>);
