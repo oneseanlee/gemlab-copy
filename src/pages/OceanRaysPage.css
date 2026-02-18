@@ -1,24 +1,12 @@
-/* Best 365 Labs — Maximus-Style Medical-Grade Homepage */
-
-:root {
-  --b365-blue: #3376b0;
-  --b365-blue-dark: #2a6191;
-  --b365-navy: #0A1628;
-  --b365-light-blue: #b8ccde;
-  --b365-white: #FFFFFF;
-  --b365-gray: #F5F7FA;
-  --b365-border: #E5E9F0;
-  --b365-text: #0F1724;
-  --b365-text-secondary: #5A6578;
-  --b365-green: #22C55E;
-}
+/* Best 365 Labs — Maximus-Style Medical-Grade Homepage
+   Uses design tokens from index.css */
 
 /* ──── Social Proof Ticker Banner ──── */
 .b365-social-proof-banner {
   background: var(--b365-navy);
   color: rgba(255,255,255,0.9);
   text-align: center;
-  padding: 10px 16px;
+  padding: var(--space-2) var(--space-4);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -37,16 +25,16 @@
   animation: proofFade 3.5s ease-in-out;
 }
 @keyframes proofFade {
-  0% { opacity: 0; transform: translateY(8px); }
+  0% { opacity: 0; transform: translateY(var(--space-2)); }
   12% { opacity: 1; transform: translateY(0); }
   88% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 0; transform: translateY(calc(-1 * var(--space-2))); }
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .b365-social-proof-banner {
-    font-size: 11px;
+    font-size: var(--text-micro);
     height: 56px;
-    padding: 8px 16px;
+    padding: var(--space-2) var(--space-4);
     line-height: 1.4;
   }
 }
@@ -54,8 +42,8 @@
 /* ──── Hero Entrance Animations ──── */
 .hero-entrance {
   opacity: 0;
-  transform: translateY(24px);
-  animation: heroFadeUp 0.7s ease-out forwards;
+  transform: translateY(var(--space-6));
+  animation: heroFadeUp 0.7s var(--ease-out) forwards;
 }
 .hero-entrance-1 { animation-delay: 0.1s; }
 .hero-entrance-2 { animation-delay: 0.25s; }
@@ -70,8 +58,8 @@
 .hero-trusted-badge {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 20px;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
   font-size: 13px;
   color: var(--b365-text-secondary);
 }
@@ -79,12 +67,12 @@
   display: flex;
 }
 .trusted-avatars img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  width: var(--space-8);
+  height: var(--space-8);
+  border-radius: var(--radius-circle);
   border: 2px solid var(--b365-white);
   object-fit: cover;
-  margin-left: -8px;
+  margin-left: calc(-1 * var(--space-2));
 }
 .trusted-avatars img:first-child {
   margin-left: 0;
@@ -111,17 +99,17 @@
 }
 .product-ribbon {
   position: absolute;
-  top: 16px;
+  top: var(--space-4);
   right: -8px;
   background: var(--b365-blue);
-  color: #fff;
-  font-size: 11px;
+  color: var(--b365-white);
+  font-size: var(--text-micro);
   font-weight: 700;
   letter-spacing: 0.06em;
-  padding: 6px 16px 6px 12px;
-  border-radius: 4px 0 0 4px;
+  padding: var(--space-1) var(--space-4) var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
   z-index: 2;
-  box-shadow: 0 2px 8px rgba(51,118,176,0.3);
+  box-shadow: var(--shadow-sm);
 }
 .product-ribbon::after {
   content: '';
@@ -137,33 +125,33 @@
   box-shadow: 0 2px 8px rgba(34,197,94,0.3);
 }
 .product-ribbon.ribbon-value::after {
-  border-color: #16a34a #16a34a transparent transparent;
+  border-color: var(--b365-green-dark) var(--b365-green-dark) transparent transparent;
 }
 
 /* ──── Product Card Hover Glow ──── */
 .b365-product-card:hover {
-  box-shadow: 0 8px 32px rgba(51,118,176,0.12);
+  box-shadow: var(--shadow-lg);
   border-color: var(--b365-blue);
-  transform: translateY(-4px);
+  transform: translateY(-3px);
 }
 
 /* ──── Shipping Badge ──── */
 .shipping-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  gap: var(--space-2);
+  font-size: var(--text-caption);
   font-weight: 600;
   color: var(--b365-green);
-  padding: 0 32px;
-  margin-bottom: 16px;
+  padding: 0 var(--space-8);
+  margin-bottom: var(--space-4);
 }
 
 /* ──── Scroll Reveal ──── */
 .b365-reveal {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transform: translateY(var(--space-8));
+  transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
 }
 .b365-revealed {
   opacity: 1;
@@ -172,16 +160,16 @@
 
 /* ──── Step Number Polish ──── */
 .b365-step-card .step-number {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 48px;
+  font-family: var(--font-title);
+  font-size: var(--text-display);
   font-weight: 700;
   color: var(--b365-blue);
   line-height: 1;
-  margin: 0 auto 16px;
+  margin: 0 auto var(--space-4);
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  border: 2px solid var(--b365-light-blue);
+  border-radius: var(--radius-circle);
+  border: 2px solid var(--b365-blue-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,7 +184,7 @@
 .b365-sticky-mobile-cta {
   display: none;
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .b365-sticky-mobile-cta {
     display: block;
     position: fixed;
@@ -207,9 +195,9 @@
     background: var(--b365-white);
     border-top: 1px solid var(--b365-border);
     box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-    padding: 12px 16px;
+    padding: var(--space-3) var(--space-4);
     transform: translateY(100%);
-    transition: transform 0.35s ease;
+    transition: transform 350ms var(--ease-default);
   }
   .b365-sticky-mobile-cta.visible {
     transform: translateY(0);
@@ -226,24 +214,24 @@
     flex-direction: column;
   }
   .sticky-cta-label {
-    font-size: 14px;
+    font-size: var(--text-body-sm);
     font-weight: 700;
     color: var(--b365-text);
   }
   .sticky-cta-price {
-    font-size: 18px;
+    font-size: var(--text-h4);
     font-weight: 800;
     color: var(--b365-blue);
   }
   .sticky-cta-price small {
-    font-size: 12px;
+    font-size: var(--text-caption);
     font-weight: 500;
     color: var(--b365-text-secondary);
   }
 }
 
 .b365-page {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   color: var(--b365-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -251,15 +239,15 @@
 
 /* Serif Headlines */
 .b365-serif {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-title);
 }
 
 /* Promo Banner */
 .b365-promo-banner {
   background-color: var(--b365-blue);
-  color: #fff;
+  color: var(--b365-white);
   text-align: center;
-  padding: 10px 40px 10px 16px;
+  padding: var(--space-2) 40px var(--space-2) var(--space-4);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -272,16 +260,16 @@
 }
 .b365-promo-banner button {
   position: absolute;
-  right: 12px;
+  right: var(--space-3);
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   color: rgba(255,255,255,0.8);
   cursor: pointer;
-  font-size: 18px;
+  font-size: var(--text-h4);
   line-height: 1;
-  padding: 4px;
+  padding: var(--space-1);
 }
 
 /* Navigation */
@@ -292,12 +280,12 @@
   z-index: 100;
   background: var(--b365-white);
   border-bottom: 1px solid var(--b365-border);
-  transition: top 0.3s;
+  transition: top var(--duration-normal);
 }
 .b365-nav.with-banner {
   top: 37px;
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .b365-nav.with-banner {
     top: 56px;
   }
@@ -308,12 +296,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 var(--space-6);
   height: 72px;
 }
 .b365-nav-links {
   display: flex;
-  gap: 32px;
+  gap: var(--space-8);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -321,9 +309,9 @@
 .b365-nav-links a {
   color: var(--b365-text-secondary);
   text-decoration: none;
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 500;
-  transition: color 0.2s;
+  transition: color var(--duration-fast);
 }
 .b365-nav-links a:hover {
   color: var(--b365-text);
@@ -331,23 +319,23 @@
 .b365-nav-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-4);
   flex-shrink: 0;
 }
 .b365-btn-primary {
   background-color: var(--b365-blue);
-  color: #fff;
+  color: var(--b365-white);
   border: none;
-  border-radius: 9999px;
-  padding: 10px 28px;
-  font-size: 14px;
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-body-sm);
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.15s;
+  transition: background-color var(--duration-fast), transform var(--duration-fast);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 .b365-btn-primary:hover {
   background-color: var(--b365-blue-dark);
@@ -357,25 +345,25 @@
   background: transparent;
   color: var(--b365-blue);
   border: 1.5px solid var(--b365-blue);
-  border-radius: 9999px;
-  padding: 10px 28px;
-  font-size: 14px;
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-body-sm);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all var(--duration-fast);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 .b365-btn-outline:hover {
   background-color: var(--b365-blue);
-  color: #fff;
+  color: var(--b365-white);
 }
 .b365-login-link {
   color: var(--b365-text-secondary);
   text-decoration: none;
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 500;
 }
 .b365-login-link:hover {
@@ -384,7 +372,7 @@
 
 /* Hero */
 .b365-hero {
-  padding: 150px 24px 0;
+  padding: 150px var(--space-6) 0;
   background-color: var(--b365-white);
 }
 .b365-hero.no-banner {
@@ -393,8 +381,8 @@
 .b365-hero-container {
   max-width: 1280px;
   margin: 0 auto;
-  background: #b8ccde;
-  border-radius: 24px;
+  background: var(--b365-blue-light);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -405,7 +393,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 0 24px;
+  padding: 0 var(--space-6);
 }
 .b365-hero-image img {
   width: 100%;
@@ -414,50 +402,50 @@
   object-position: bottom;
 }
 .b365-hero-text {
-  padding: 64px 56px;
+  padding: var(--space-16) 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .b365-hero-text h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 52px;
+  font-family: var(--font-title);
+  font-size: var(--text-display);
   font-weight: 700;
   line-height: 1.15;
   color: var(--b365-text);
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-6);
 }
 .b365-hero-text h1 em {
   font-style: italic;
   font-weight: 500;
 }
 .b365-hero-text .subhead {
-  font-size: 17px;
+  font-size: var(--text-body);
   line-height: 1.7;
   color: var(--b365-text-secondary);
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 .b365-hero-text .tertiary {
   font-size: 13px;
   font-weight: 600;
   color: var(--b365-blue);
   letter-spacing: 0.02em;
-  margin-bottom: 32px;
+  margin-bottom: var(--space-8);
 }
 
 /* Benefits Row */
 .b365-benefits-row {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 48px 24px 64px;
+  padding: var(--space-12) var(--space-6) var(--space-16);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: var(--space-6);
 }
 .b365-benefit-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   padding: 0;
   display: flex;
   align-items: stretch;
@@ -486,23 +474,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: var(--space-4);
   flex: 1;
   text-align: center;
 }
 .b365-benefit-card .icon-wrap {
   width: 40px;
   height: 40px;
-  border-radius: 12px;
-  background: var(--b365-light-blue);
+  border-radius: var(--radius-sm);
+  background: var(--b365-blue-light);
   color: var(--b365-blue);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-2);
 }
 .b365-benefit-card h4 {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 600;
   color: var(--b365-text);
   margin: 0;
@@ -511,18 +499,18 @@
 
 /* Section Headings */
 .b365-section {
-  padding: 96px 24px;
+  padding: var(--space-24) var(--space-6);
 }
 .b365-section-alt {
   background-color: var(--b365-gray);
 }
 .b365-section-heading {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 42px;
+  font-family: var(--font-title);
+  font-size: var(--text-h1);
   font-weight: 700;
   line-height: 1.2;
   color: var(--b365-text);
-  margin-bottom: 48px;
+  margin-bottom: var(--space-12);
   text-align: center;
 }
 .b365-section-heading em {
@@ -534,20 +522,20 @@
 .b365-tabs {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 48px;
+  gap: var(--space-2);
+  margin-bottom: var(--space-12);
   flex-wrap: wrap;
 }
 .b365-tab {
-  padding: 10px 24px;
-  border-radius: 9999px;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
   border: 1px solid var(--b365-border);
   background: var(--b365-white);
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 500;
   color: var(--b365-text-secondary);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all var(--duration-fast);
 }
 .b365-tab:hover {
   border-color: var(--b365-blue);
@@ -555,7 +543,7 @@
 }
 .b365-tab.active {
   background: var(--b365-blue);
-  color: #fff;
+  color: var(--b365-white);
   border-color: var(--b365-blue);
 }
 
@@ -565,16 +553,16 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--space-6);
 }
 .b365-product-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   padding: 0;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.3s, transform 0.2s;
+  transition: box-shadow var(--duration-normal), transform var(--duration-fast);
   overflow: hidden;
 }
 .b365-product-card .product-card-image {
@@ -582,7 +570,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 24px 24px 0;
+  padding: var(--space-6) var(--space-6) 0;
   height: 220px;
   overflow: hidden;
 }
@@ -600,64 +588,64 @@
 .b365-product-card .price,
 .b365-product-card .price-note,
 .b365-product-card .card-actions {
-  padding-left: 32px;
-  padding-right: 32px;
+  padding-left: var(--space-8);
+  padding-right: var(--space-8);
 }
 .b365-product-card .tags {
-  padding-top: 24px;
+  padding-top: var(--space-6);
 }
 .b365-product-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
 }
 .b365-product-card .tags {
   display: flex;
-  gap: 6px;
-  margin-bottom: 16px;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
   flex-wrap: wrap;
 }
 .b365-product-card .tag {
-  font-size: 11px;
+  font-size: var(--text-micro);
   font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 9999px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
   border: 1px solid var(--b365-border);
   color: var(--b365-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 .b365-product-card .tag.flagship {
-  background: var(--b365-light-blue);
+  background: var(--b365-blue-light);
   border-color: var(--b365-blue);
   color: var(--b365-blue);
 }
 .b365-product-card h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-title);
   font-size: 22px;
   font-weight: 600;
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-2);
   color: var(--b365-text);
 }
 .b365-product-card .best-for {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: var(--b365-text-secondary);
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
   line-height: 1.5;
 }
 .b365-product-card .benefits-list {
   list-style: none;
-  padding-left: 32px;
-  padding-right: 32px;
-  margin: 0 0 24px;
+  padding-left: var(--space-8);
+  padding-right: var(--space-8);
+  margin: 0 0 var(--space-6);
   flex: 1;
 }
 .b365-product-card .benefits-list li {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: var(--space-2);
   font-size: 13px;
   color: var(--b365-text-secondary);
-  margin-bottom: 10px;
+  margin-bottom: var(--space-3);
   line-height: 1.5;
 }
 .b365-product-card .benefits-list .check {
@@ -669,7 +657,7 @@
   font-size: 28px;
   font-weight: 700;
   color: var(--b365-text);
-  margin-bottom: 4px;
+  margin-bottom: var(--space-1);
 }
 .b365-product-card .price span {
   font-size: 15px;
@@ -677,21 +665,21 @@
   color: var(--b365-text-secondary);
 }
 .b365-product-card .price-note {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--b365-text-secondary);
-  margin-bottom: 20px;
+  margin-bottom: var(--space-6);
 }
 .b365-product-card .card-actions {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding-bottom: 32px;
+  gap: var(--space-3);
+  padding-bottom: var(--space-8);
 }
 .b365-product-card .card-actions .b365-btn-primary,
 .b365-product-card .card-actions .b365-btn-outline,
 .b365-product-card .card-actions .card-cta {
   justify-content: center;
-  padding: 12px 32px;
+  padding: var(--space-3) var(--space-8);
   font-size: 13px;
 }
 
@@ -701,32 +689,32 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--space-6);
 }
 .b365-stat-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 20px;
-  padding: 40px 32px;
+  border-radius: var(--radius-md);
+  padding: var(--space-12) var(--space-8);
   text-align: center;
 }
 .b365-stat-card .stat-label {
-  font-size: 11px;
+  font-size: var(--text-micro);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--b365-blue);
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 .b365-stat-card .stat-value {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-title);
   font-size: 36px;
   font-weight: 700;
   color: var(--b365-text);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 .b365-stat-card .stat-desc {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: var(--b365-text-secondary);
   line-height: 1.6;
 }
@@ -737,26 +725,26 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 64px;
+  gap: var(--space-16);
   align-items: center;
 }
 .b365-guarantee h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 42px;
+  font-family: var(--font-title);
+  font-size: var(--text-h1);
   font-weight: 700;
   line-height: 1.2;
   color: var(--b365-text);
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-6);
 }
 .b365-guarantee h2 em {
   font-style: italic;
   font-weight: 500;
 }
 .b365-guarantee p {
-  font-size: 16px;
+  font-size: var(--text-body);
   line-height: 1.7;
   color: var(--b365-text-secondary);
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 .b365-guarantee-image {
   display: flex;
@@ -772,7 +760,7 @@
 .b365-table-wrap {
   max-width: 900px;
   margin: 0 auto;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--b365-border);
 }
@@ -782,15 +770,15 @@
 }
 .b365-table th {
   background-color: var(--b365-blue);
-  color: #fff;
-  font-size: 14px;
+  color: var(--b365-white);
+  font-size: var(--text-body-sm);
   font-weight: 600;
-  padding: 16px 24px;
+  padding: var(--space-4) var(--space-6);
   text-align: left;
 }
 .b365-table td {
-  padding: 16px 24px;
-  font-size: 14px;
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--text-body-sm);
   border-bottom: 1px solid var(--b365-border);
   color: var(--b365-text);
 }
@@ -806,14 +794,14 @@
   font-weight: 600;
 }
 .b365-table .negative {
-  color: #EF4444;
+  color: var(--b365-red);
   font-weight: 500;
 }
 
 /* Power Up Section */
 .b365-power-up {
   background: linear-gradient(135deg, var(--b365-blue) 0%, #1E8FBF 100%);
-  color: #fff;
+  color: var(--b365-white);
   overflow: hidden;
 }
 .b365-power-up-inner {
@@ -821,49 +809,49 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  gap: var(--space-16);
   align-items: center;
 }
 .b365-power-up h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 42px;
+  font-family: var(--font-title);
+  font-size: var(--text-h1);
   font-weight: 700;
   line-height: 1.2;
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-6);
 }
 .b365-power-up h2 em {
   font-style: italic;
   font-weight: 500;
 }
 .b365-power-up p {
-  font-size: 16px;
+  font-size: var(--text-body);
   line-height: 1.7;
   opacity: 0.9;
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
 }
 .b365-power-up .power-benefits {
   list-style: none;
   padding: 0;
-  margin: 0 0 32px;
+  margin: 0 0 var(--space-8);
 }
 .b365-power-up .power-benefits li {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
   font-size: 15px;
   font-weight: 500;
-  margin-bottom: 14px;
+  margin-bottom: var(--space-3);
 }
 .b365-power-up .btn-white {
-  background: #fff;
+  background: var(--b365-white);
   color: var(--b365-blue);
   border: none;
-  border-radius: 9999px;
-  padding: 12px 32px;
-  font-size: 14px;
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-8);
+  font-size: var(--text-body-sm);
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.15s;
+  transition: transform var(--duration-fast);
 }
 .b365-power-up .btn-white:hover {
   transform: translateY(-1px);
@@ -887,50 +875,50 @@
 .b365-testimonials-carousel {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 var(--space-12);
 }
 .b365-testimonial-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  transition: transform 0.2s;
+  transition: transform var(--duration-fast);
   height: 100%;
 }
 .b365-testimonial-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
 }
 .b365-testimonial-card img {
   width: 100%;
   object-fit: contain;
 }
 .b365-testimonial-card .card-body {
-  padding: 20px;
+  padding: var(--space-6);
 }
 .b365-testimonial-card .name {
   font-weight: 600;
   font-size: 15px;
   color: var(--b365-text);
-  margin-bottom: 4px;
+  margin-bottom: var(--space-1);
 }
 .b365-testimonial-card .product-using {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--b365-text-secondary);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 .b365-testimonial-card .verified {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 11px;
+  gap: var(--space-1);
+  font-size: var(--text-micro);
   font-weight: 600;
   color: var(--b365-green);
 }
 .b365-carousel-nav {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-top: 24px;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
 }
 .b365-carousel-nav button {
   position: static;
@@ -940,18 +928,18 @@
 .b365-carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
 }
 .b365-dot {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   border: none;
   background: var(--b365-border);
   cursor: pointer;
   padding: 0;
-  transition: background 0.2s, transform 0.2s;
+  transition: background var(--duration-fast), transform var(--duration-fast);
 }
 .b365-dot.active {
   background: var(--b365-blue);
@@ -964,22 +952,21 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  gap: var(--space-8);
 }
 .b365-step-card {
   text-align: center;
-  padding: 32px;
+  padding: var(--space-8);
 }
-/* step-number is styled in the top of this file with circular border + pulse */
 .b365-step-card h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-title);
   font-size: 22px;
   font-weight: 600;
   color: var(--b365-text);
-  margin: 0 0 12px;
+  margin: 0 0 var(--space-3);
 }
 .b365-step-card p {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: var(--b365-text-secondary);
   line-height: 1.7;
 }
@@ -990,16 +977,16 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 64px;
+  gap: var(--space-16);
   align-items: start;
 }
 .b365-faq-left h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 42px;
+  font-family: var(--font-title);
+  font-size: var(--text-h1);
   font-weight: 700;
   line-height: 1.2;
   color: var(--b365-text);
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-6);
 }
 .b365-faq-left h2 em {
   font-style: italic;
@@ -1013,11 +1000,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 0;
+  padding: var(--space-6) 0;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: var(--text-body);
   font-weight: 600;
   color: var(--b365-text);
   text-align: left;
@@ -1028,12 +1015,12 @@
 .b365-faq-trigger .faq-icon {
   font-size: 22px;
   color: var(--b365-text-secondary);
-  transition: transform 0.2s;
+  transition: transform var(--duration-fast);
   flex-shrink: 0;
 }
 .b365-faq-answer {
-  padding: 0 0 20px;
-  font-size: 14px;
+  padding: 0 0 var(--space-6);
+  font-size: var(--text-body-sm);
   line-height: 1.7;
   color: var(--b365-text-secondary);
 }
@@ -1041,8 +1028,8 @@
 /* Footer */
 .b365-footer {
   background-color: var(--b365-navy);
-  color: #fff;
-  padding: 80px 24px 40px;
+  color: var(--b365-white);
+  padding: 80px var(--space-6) 40px;
 }
 .b365-footer-inner {
   max-width: 1280px;
@@ -1051,29 +1038,29 @@
 .b365-footer-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 48px;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
 }
 .b365-footer-brand p {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: rgba(255,255,255,0.6);
   line-height: 1.6;
-  margin: 16px 0 20px;
+  margin: var(--space-4) 0 var(--space-6);
 }
 .b365-footer-social {
   display: flex;
-  gap: 12px;
+  gap: var(--space-3);
 }
 .b365-footer-social a {
   width: 36px;
   height: 36px;
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   border: 1px solid rgba(255,255,255,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(255,255,255,0.7);
-  transition: all 0.2s;
+  transition: all var(--duration-fast);
 }
 .b365-footer-social a:hover {
   border-color: var(--b365-blue);
@@ -1084,8 +1071,8 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin: 0 0 20px;
-  color: #fff;
+  margin: 0 0 var(--space-6);
+  color: var(--b365-white);
 }
 .b365-footer ul {
   list-style: none;
@@ -1093,16 +1080,16 @@
   padding: 0;
 }
 .b365-footer ul li {
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 .b365-footer ul a {
   color: rgba(255,255,255,0.6);
   text-decoration: none;
-  font-size: 14px;
-  transition: color 0.2s;
+  font-size: var(--text-body-sm);
+  transition: color var(--duration-fast);
 }
 .b365-footer ul a:hover {
-  color: #fff;
+  color: var(--b365-white);
 }
 .b365-footer-newsletter {
   border-top: 1px solid rgba(255,255,255,0.1);
@@ -1110,23 +1097,23 @@
   margin-bottom: 40px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-4);
   flex-wrap: wrap;
 }
 .b365-footer-newsletter span {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 600;
   white-space: nowrap;
 }
 .b365-footer-newsletter input {
   flex: 1;
   min-width: 200px;
-  padding: 12px 16px;
-  border-radius: 9999px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-full);
   border: 1px solid rgba(255,255,255,0.2);
   background: rgba(255,255,255,0.05);
-  color: #fff;
-  font-size: 14px;
+  color: var(--b365-white);
+  font-size: var(--text-body-sm);
   outline: none;
 }
 .b365-footer-newsletter input::placeholder {
@@ -1134,22 +1121,22 @@
 }
 .b365-footer-compliance {
   border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 32px;
+  padding-top: var(--space-8);
 }
 .b365-footer-compliance p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: rgba(255,255,255,0.4);
   line-height: 1.7;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 .b365-footer-copyright {
   text-align: center;
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: rgba(255,255,255,0.3);
-  margin-top: 32px;
+  margin-top: var(--space-8);
 }
 
-/* Mobile Responsive */
+/* ──── Responsive: Tablet ──── */
 @media (max-width: 1024px) {
   .b365-hero-container {
     grid-template-columns: 1fr;
@@ -1158,7 +1145,7 @@
     height: 300px;
   }
   .b365-hero-text {
-    padding: 40px 32px;
+    padding: var(--space-12) var(--space-8);
   }
   .b365-hero-text h1 {
     font-size: 38px;
@@ -1174,7 +1161,7 @@
   }
   .b365-guarantee {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: var(--space-12);
     text-align: center;
   }
   .b365-guarantee div:first-child {
@@ -1187,25 +1174,26 @@
     text-align: center;
   }
   .b365-testimonials-carousel {
-    padding: 0 40px;
+    padding: 0 var(--space-12);
   }
   .b365-steps-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: var(--space-4);
   }
   .b365-faq-layout {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: var(--space-12);
   }
   .b365-footer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 640px) {
+/* ──── Responsive: Mobile ──── */
+@media (max-width: 768px) {
   .b365-promo-banner {
-    font-size: 11px;
-    padding: 14px 36px 14px 16px;
+    font-size: var(--text-micro);
+    padding: var(--space-3) 36px var(--space-3) var(--space-4);
     letter-spacing: 0.02em;
     line-height: 1.5;
   }
@@ -1213,15 +1201,15 @@
     display: none;
   }
   .b365-nav-inner {
-    padding: 4px 16px;
+    padding: var(--space-1) var(--space-4);
     height: 64px;
-    gap: 12px;
+    gap: var(--space-3);
   }
   .b365-nav-inner img {
     height: 30px !important;
   }
   .b365-nav-right {
-    gap: 10px;
+    gap: var(--space-3);
   }
   .b365-nav-right .b365-login-link {
     display: none;
@@ -1229,33 +1217,33 @@
   .b365-nav-right .animated-cta.cta-sm {
     min-width: unset;
     height: 40px;
-    padding: 8px 20px;
+    padding: var(--space-2) var(--space-6);
     font-size: 13px;
   }
   .b365-hero {
-    padding: 140px 16px 0;
+    padding: 140px var(--space-4) 0;
   }
   .b365-hero-text {
-    padding: 32px 24px;
+    padding: var(--space-8) var(--space-6);
     text-align: center;
     align-items: center;
   }
   .b365-hero-text h1 {
-    font-size: 32px;
+    font-size: var(--text-h2);
   }
   .b365-hero-text div[style] {
     justify-content: center !important;
   }
   .b365-section {
-    padding: 64px 16px;
+    padding: var(--space-16) var(--space-4);
   }
   .b365-section-heading {
     font-size: 30px;
   }
   .b365-benefits-row {
     grid-template-columns: 1fr;
-    padding: 32px 16px 48px;
-    gap: 12px;
+    padding: var(--space-8) var(--space-4) var(--space-12);
+    gap: var(--space-3);
   }
   .b365-benefit-card {
     height: 110px;
@@ -1268,15 +1256,15 @@
     height: 110px;
   }
   .benefit-card-content {
-    padding: 12px 8px;
+    padding: var(--space-3) var(--space-2);
   }
   .b365-benefit-card .icon-wrap {
     width: 36px;
     height: 36px;
-    margin: 0 0 6px;
+    margin: 0 0 var(--space-1);
   }
   .b365-benefit-card h4 {
-    font-size: 12px;
+    font-size: var(--text-caption);
     line-height: 1.3;
   }
   .b365-faq-left {
@@ -1285,8 +1273,8 @@
   }
   .b365-tabs {
     flex-direction: column;
-    gap: 8px;
-    padding: 0 16px;
+    gap: var(--space-2);
+    padding: 0 var(--space-4);
   }
   .b365-tab {
     width: 100%;
@@ -1298,7 +1286,7 @@
   .b365-product-card .product-card-image {
     height: auto;
     aspect-ratio: 1 / 1;
-    padding: 16px;
+    padding: var(--space-4);
     align-items: center;
   }
   .b365-product-card .product-card-image img {
@@ -1308,21 +1296,21 @@
     width: 100%;
   }
   .b365-testimonials-carousel {
-    padding: 0 24px;
+    padding: 0 var(--space-6);
   }
   .b365-footer-grid {
     grid-template-columns: 1fr;
   }
   .b365-table-wrap {
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
   }
   .b365-table th {
-    font-size: 11px;
-    padding: 10px 8px;
+    font-size: var(--text-micro);
+    padding: var(--space-3) var(--space-2);
   }
   .b365-table td {
-    font-size: 12px;
-    padding: 10px 8px;
+    font-size: var(--text-caption);
+    padding: var(--space-3) var(--space-2);
     line-height: 1.4;
   }
   .b365-guarantee h2,
@@ -1340,7 +1328,7 @@
   color: var(--b365-text);
   cursor: pointer;
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .b365-hamburger {
     display: block;
   }
@@ -1354,24 +1342,24 @@
 .b365-guides-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: var(--space-6);
   max-width: 1100px;
   margin: 0 auto;
 }
 
 .b365-guide-card {
-  background: #fff;
-  border-radius: 14px;
+  background: var(--b365-white);
+  border-radius: var(--radius-md);
   overflow: hidden;
   text-decoration: none;
   color: var(--b365-text);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-normal) var(--ease-default), box-shadow var(--duration-normal) var(--ease-default);
 }
 
 .b365-guide-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
 .b365-guide-card img {
@@ -1382,7 +1370,7 @@
 }
 
 .b365-guide-card h4 {
-  padding: 18px 20px 20px;
+  padding: var(--space-4) var(--space-6) var(--space-6);
   font-size: 15px;
   font-weight: 700;
   line-height: 1.4;
@@ -1392,7 +1380,7 @@
 @media (max-width: 768px) {
   .b365-guides-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: var(--space-6);
   }
 }
 

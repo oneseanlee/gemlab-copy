@@ -1,43 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ══════════════════════════════════════════════
+   BEST 365 LABS — DESIGN SYSTEM TOKENS
+   ══════════════════════════════════════════════ */
 
 @layer base {
   :root {
+    /* ── Tailwind/shadcn tokens (HSL) ── */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
@@ -48,33 +40,100 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* ── Brand Colors ── */
+    --b365-blue: #3376b0;
+    --b365-blue-dark: #2a6191;
+    --b365-blue-light: #b8ccde;
+    --b365-navy: #0A1628;
+
+    /* ── Neutrals ── */
+    --b365-white: #FFFFFF;
+    --b365-gray-50: #F9FAFB;
+    --b365-gray-100: #F5F7FA;
+    --b365-gray-200: #E5E9F0;
+    --b365-gray-400: #9CA3AF;
+    --b365-gray-500: #5A6578;
+    --b365-gray-900: #0F1724;
+
+    /* Aliases for backward compat */
+    --b365-gray: var(--b365-gray-100);
+    --b365-border: var(--b365-gray-200);
+    --b365-text: var(--b365-gray-900);
+    --b365-text-secondary: var(--b365-gray-500);
+    --b365-light-blue: var(--b365-blue-light);
+
+    /* ── Semantic ── */
+    --b365-green: #22C55E;
+    --b365-green-dark: #16a34a;
+    --b365-red: #EF4444;
+    --b365-gold: #b8860b;
+
+    /* ── Spacing Scale (4px base) ── */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-24: 96px;
+
+    /* ── Typography Scale ── */
+    --text-display: 48px;
+    --text-h1: 42px;
+    --text-h2: 32px;
+    --text-h3: 24px;
+    --text-h4: 18px;
+    --text-body: 16px;
+    --text-body-sm: 14px;
+    --text-caption: 12px;
+    --text-micro: 11px;
+
+    /* ── Border Radius ── */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+    --radius-circle: 50%;
+
+    /* ── Shadows ── */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.14);
+
+    /* ── Animation ── */
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 500ms;
+    --ease-default: ease;
+    --ease-out: ease-out;
+    --ease-spring: cubic-bezier(0.15, 0.83, 0.66, 1);
+
+    /* ── Font Families ── */
+    --font-title: 'Playfair Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -99,18 +158,13 @@ All colors MUST be HSL.
 }
 
 :root {
-  --font-title: 'Zalando Sans Expanded', 'Arial Black', sans-serif;
-  --font-body: 'Rethink Sans', 'Open Sans', sans-serif;
-
   font-family: var(--font-body);
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light;
-  color: #213547;
-  /* Keeping the custom background gradient but ensuring it works with Tailwind's layer system if possible, 
-     or acts as an override. */
-  background-color: #ffffff;
+  color: var(--b365-gray-900);
+  background-color: var(--b365-white);
   background-image: linear-gradient(180deg, #FFFFFF 0%, #BFD5E6 40%, #5D8AA8 100%);
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -125,19 +179,13 @@ All colors MUST be HSL.
 body {
   margin: 0;
   display: flex;
-  /* place-items: center;  <-- Removing this because it centers vertically */
   align-items: flex-start;
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+h1, h2, h3, h4, h5, h6,
 .refill-title,
 .stat-number,
 .stat-label-large,
@@ -146,13 +194,6 @@ h6,
   font-weight: 700;
 }
 
-p,
-span,
-a,
-li,
-button,
-input,
-select,
-textarea {
+p, span, a, li, button, input, select, textarea {
   font-family: var(--font-body);
 }

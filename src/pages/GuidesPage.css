@@ -2,7 +2,7 @@
 
 /* Hero */
 .guides-hero {
-  padding: 150px 24px 0;
+  padding: 150px var(--space-6) 0;
   background: var(--b365-gray);
 }
 .guides-hero.no-banner {
@@ -12,48 +12,48 @@
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
-  padding-bottom: 56px;
+  padding-bottom: var(--space-16);
 }
 .guides-hero-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  background: var(--b365-light-blue);
+  width: var(--space-16);
+  height: var(--space-16);
+  border-radius: var(--radius-md);
+  background: var(--b365-blue-light);
   color: var(--b365-blue);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
 }
 .guides-hero-inner h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 48px;
+  font-family: var(--font-title);
+  font-size: var(--text-display);
   font-weight: 700;
   line-height: 1.15;
   color: var(--b365-text);
-  margin: 0 0 16px;
+  margin: 0 0 var(--space-4);
 }
 .guides-hero-inner h1 em {
   font-style: italic;
   font-weight: 500;
 }
 .guides-hero-sub {
-  font-size: 17px;
+  font-size: var(--text-body);
   line-height: 1.7;
   color: var(--b365-text-secondary);
   max-width: 560px;
-  margin: 0 auto 36px;
+  margin: 0 auto var(--space-8);
 }
 .guides-filters {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-2);
   flex-wrap: wrap;
 }
 
 /* Grid */
 .guides-grid-section {
-  padding: 64px 24px 96px;
+  padding: var(--space-16) var(--space-6) var(--space-24);
   background: var(--b365-white);
 }
 .guides-grid {
@@ -61,21 +61,21 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: var(--space-6);
 }
 
 /* Card */
 .guide-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.3s, transform 0.2s;
+  transition: box-shadow var(--duration-normal), transform var(--duration-fast);
 }
 .guide-card:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow-lg);
   transform: translateY(-3px);
 }
 .guide-card.coming-soon {
@@ -104,70 +104,70 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: var(--space-3);
   color: var(--b365-text-secondary);
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   font-weight: 600;
 }
 
 /* Price Badge */
 .guide-price-badge {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: var(--space-3);
+  right: var(--space-3);
 }
 .badge-free {
   display: inline-block;
-  padding: 5px 14px;
-  border-radius: 9999px;
-  font-size: 12px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-caption);
   font-weight: 700;
   letter-spacing: 0.04em;
-  background: #16a34a;
-  color: #fff;
+  background: var(--b365-green-dark);
+  color: var(--b365-white);
 }
 .badge-paid {
   display: inline-block;
-  padding: 5px 14px;
-  border-radius: 9999px;
-  font-size: 12px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-caption);
   font-weight: 700;
   letter-spacing: 0.04em;
   background: var(--b365-blue);
-  color: #fff;
+  color: var(--b365-white);
 }
 .badge-coming-soon {
   display: inline-block;
-  padding: 5px 14px;
-  border-radius: 9999px;
-  font-size: 11px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-micro);
   font-weight: 700;
   letter-spacing: 0.06em;
   background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: var(--b365-white);
   text-transform: uppercase;
 }
 
 /* Card Body */
 .guide-card-body {
-  padding: 24px 24px 28px;
+  padding: var(--space-6);
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 .guide-card-body h3 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 19px;
+  font-family: var(--font-title);
+  font-size: 20px;
   font-weight: 600;
   color: var(--b365-text);
-  margin: 0 0 10px;
+  margin: 0 0 var(--space-3);
   line-height: 1.35;
 }
 .guide-card-body p {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: var(--b365-text-secondary);
   line-height: 1.65;
-  margin: 0 0 20px;
+  margin: 0 0 var(--space-6);
   flex: 1;
 }
 
@@ -178,15 +178,15 @@
 .guide-btn-free {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 11px 24px;
-  border-radius: 9999px;
-  background: #16a34a;
-  color: #fff;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  background: var(--b365-green-dark);
+  color: var(--b365-white);
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
-  transition: background 0.2s, transform 0.15s;
+  transition: background var(--duration-fast), transform var(--duration-fast);
 }
 .guide-btn-free:hover {
   background: #15803d;
@@ -195,15 +195,15 @@
 .guide-btn-paid {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 11px 24px;
-  border-radius: 9999px;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
   background: var(--b365-blue);
-  color: #fff;
+  color: var(--b365-white);
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
-  transition: background 0.2s, transform 0.15s;
+  transition: background var(--duration-fast), transform var(--duration-fast);
 }
 .guide-btn-paid:hover {
   background: var(--b365-blue-dark);
@@ -212,9 +212,9 @@
 .guide-btn-disabled {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 11px 24px;
-  border-radius: 9999px;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
   background: var(--b365-border);
   color: var(--b365-text-secondary);
   font-size: 13px;
@@ -224,7 +224,7 @@
 
 /* CTA Section */
 .guides-cta-section {
-  padding: 80px 24px;
+  padding: 80px var(--space-6);
   background: var(--b365-gray);
 }
 .guides-cta-inner {
@@ -233,22 +233,22 @@
   text-align: center;
 }
 .guides-cta-inner h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 36px;
+  font-family: var(--font-title);
+  font-size: var(--text-h2);
   font-weight: 700;
   line-height: 1.2;
   color: var(--b365-text);
-  margin: 0 0 12px;
+  margin: 0 0 var(--space-3);
 }
 .guides-cta-inner h2 em {
   font-style: italic;
   font-weight: 500;
 }
 .guides-cta-inner p {
-  font-size: 16px;
+  font-size: var(--text-body);
   color: var(--b365-text-secondary);
   line-height: 1.6;
-  margin-bottom: 28px;
+  margin-bottom: var(--space-6);
 }
 
 /* Responsive */
@@ -259,7 +259,7 @@
 }
 @media (max-width: 768px) {
   .guides-hero {
-    padding: 140px 20px 0;
+    padding: 140px var(--space-6) 0;
   }
   .guides-hero.no-banner {
     padding-top: 100px;
@@ -272,7 +272,7 @@
   }
   .guides-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: var(--space-6);
   }
 }
 @media (max-width: 480px) {
@@ -285,10 +285,10 @@
     font-size: 28px;
   }
   .guides-filters {
-    gap: 6px;
+    gap: var(--space-2);
   }
   .guides-filters .b365-tab {
-    padding: 8px 16px;
+    padding: var(--space-2) var(--space-4);
     font-size: 13px;
   }
 }

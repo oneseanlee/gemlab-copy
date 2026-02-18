@@ -1,56 +1,53 @@
 .refill-banner {
-    width: 100%;
-    margin: 4rem auto;
-    max-width: 1200px;
-    border-radius: 15px;
-    overflow: hidden;
-    background: linear-gradient(90deg, #4a3b32 0%, #6d5848 100%);
-    /* Placeholder for silk texture */
-    position: relative;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: 4rem auto;
+  max-width: 1200px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: linear-gradient(90deg, #4a3b32 0%, #6d5848 100%);
+  position: relative;
+  box-shadow: var(--shadow-md);
 }
 
 .refill-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 3rem 4rem;
-    color: #fff;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+');
-    /* Subtle texture overlay */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-12) var(--space-16);
+  color: var(--b365-white);
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+');
 }
 
 .refill-title {
-    color: #ccff00;
-    /* Neon green */
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0;
+  color: #ccff00;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
 }
 
 .refill-text-center {
-    text-align: left;
-    font-size: 1rem;
-    line-height: 1.5;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .refill-text-center strong {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .shop-refill-btn {
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #1a1a1a;
-    border: none;
-    border-radius: 25px;
-    padding: 0.8rem 2rem;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.2s;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: var(--b365-gray-900);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-8);
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all var(--duration-fast);
 }
 
 .shop-refill-btn:hover {
-    background-color: #fff;
-    transform: scale(1.05);
+  background-color: var(--b365-white);
+  transform: scale(1.05);
 }
