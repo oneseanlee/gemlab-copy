@@ -408,8 +408,8 @@ const TPrime365Page = () => {
               <div className="tprime-ugc-grid full-width">
                 {[
                   'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec46bac245857f16caa.mp4',
-                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec4b08e8f47e31bb668.mp4',
-                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec41d5e04501a7a9db8.mp4',
+                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec4a9efde243ace875b.mp4',
+                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec43b3cc9f4a7114cf0.mp4',
                   'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec41d5e04501a7a9db9.mp4',
                 ].map((src, i) => (
                   <div className="tprime-ugc-card" key={i}>
