@@ -81,7 +81,7 @@ const TPrime365Page = () => {
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
                     <div className="b365-nav-right">
-                        <AnimatedCTA href="/tprime365#process" small>Start Evaluation</AnimatedCTA>
+                        <AnimatedCTA href="/tprime365#process" small>Get Started</AnimatedCTA>
                     </div>
                 </div>
             </nav>
