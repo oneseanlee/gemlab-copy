@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import './OceanRaysPage.css';
+import './HomePage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
@@ -280,7 +280,7 @@ const StickyMobileCTA = () => {
   );
 };
 
-const OceanRaysPage = () => {
+const HomePage = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -657,4 +657,4 @@ const OceanRaysPage = () => {
   );
 };
 
-export default OceanRaysPage;
+export default HomePage;
