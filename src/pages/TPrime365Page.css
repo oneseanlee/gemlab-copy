@@ -146,15 +146,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-12);
-  align-items: flex-end;
-  overflow: hidden;
+  align-items: center;
 }
 .tprime-solution-img {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  align-self: flex-end;
-  margin-bottom: -80px;
 }
 .tprime-solution-img img {
   width: 100%;
@@ -166,7 +163,6 @@
 .tprime-solution-content {
   display: flex;
   flex-direction: column;
-  padding-bottom: var(--space-12);
 }
 
 /* ─── Solution Pillars ─── */
