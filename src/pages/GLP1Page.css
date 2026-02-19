@@ -524,15 +524,15 @@
 .glp1-lifestyle-section {
   padding-top: var(--space-8) !important;
   padding-bottom: 0 !important;
-  max-width: 100% !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  max-width: 1280px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 .glp1-lifestyle-layout {
   display: flex;
   align-items: flex-end;
   gap: var(--space-8);
-  max-width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
 }
 .glp1-lifestyle-image {
