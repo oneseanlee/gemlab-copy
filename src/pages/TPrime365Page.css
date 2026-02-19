@@ -152,13 +152,14 @@
 .tprime-solution-img {
   display: flex;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: flex-start;
   align-self: flex-end;
   margin-bottom: -80px;
+  margin-left: -40px;
 }
 .tprime-solution-img img {
-  width: 100%;
-  max-width: 640px;
+  width: 120%;
+  max-width: none;
   object-fit: contain;
   filter: drop-shadow(0 16px 40px rgba(0,0,0,0.1));
   display: block;
