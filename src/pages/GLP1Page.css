@@ -510,34 +510,53 @@
 }
 
 /* ─── Lifestyle Optimization Layout ─── */
+.glp1-lifestyle-section {
+  padding-bottom: 0 !important;
+}
 .glp1-lifestyle-layout {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: var(--space-8);
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 .glp1-lifestyle-image {
-  flex: 0 0 280px;
-  max-width: 280px;
+  flex: 0 0 380px;
+  max-width: 380px;
+  align-self: flex-end;
 }
 .glp1-lifestyle-image img {
   width: 100%;
   height: auto;
+  display: block;
   object-fit: contain;
   filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.1));
 }
-.glp1-lifestyle-layout .tprime-pillars-grid {
+.glp1-lifestyle-content {
   flex: 1;
+  padding-bottom: var(--space-8);
+}
+.glp1-lifestyle-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
 }
 
 @media (max-width: 768px) {
   .glp1-lifestyle-layout {
     flex-direction: column;
+    align-items: center;
     gap: var(--space-4);
   }
   .glp1-lifestyle-image {
     flex: none;
-    max-width: 200px;
+    max-width: 240px;
+  }
+  .glp1-lifestyle-content {
+    padding-bottom: var(--space-4);
+    width: 100%;
+  }
+  .glp1-lifestyle-content .b365-section-heading {
+    text-align: center !important;
   }
 }

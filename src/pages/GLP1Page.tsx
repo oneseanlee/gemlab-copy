@@ -228,24 +228,26 @@ const GLP1Page = () => {
             </section>
 
             {/* 6. Lifestyle Optimization */}
-            <section className="b365-section">
-                <h2 className="b365-section-heading b365-serif">Lifestyle Optimization <em>Formula</em></h2>
+            <section className="b365-section glp1-lifestyle-section">
                 <div className="glp1-lifestyle-layout">
                     <div className="glp1-lifestyle-image">
                         <img src="/images/glp1-lifestyle-hero.png" alt="Active woman representing lifestyle optimization" />
                     </div>
-                    <div className="tprime-pillars-grid">
-                        {[
-              { name: '9-Hour Eating Window', dose: '↓1.5% HbA1c' },
-              { name: '2 Meals + 1 Snack', dose: 'Max Absorption' },
-              { name: '7 Hours Sleep', dose: 'NAD+ Recycling' },
-              { name: '8,000 Steps Daily', dose: '300-400 cal' }].
-              map((p, i) =>
-              <div className="tprime-pillar" key={i}>
-                                <span className="pillar-name">{p.name}</span>
-                                <span className="pillar-dose">{p.dose}</span>
-                            </div>
-              )}
+                    <div className="glp1-lifestyle-content">
+                        <h2 className="b365-section-heading b365-serif" style={{textAlign:'left', marginBottom: 'var(--space-6)'}}>Lifestyle Optimization <em>Formula</em></h2>
+                        <div className="glp1-lifestyle-pillars-grid">
+                            {[
+                  { name: '9-Hour Eating Window', dose: '↓1.5% HbA1c' },
+                  { name: '2 Meals + 1 Snack', dose: 'Max Absorption' },
+                  { name: '7 Hours Sleep', dose: 'NAD+ Recycling' },
+                  { name: '8,000 Steps Daily', dose: '300-400 cal' }].
+                  map((p, i) =>
+                  <div className="tprime-pillar" key={i}>
+                                    <span className="pillar-name">{p.name}</span>
+                                    <span className="pillar-dose">{p.dose}</span>
+                                </div>
+                  )}
+                        </div>
                     </div>
                 </div>
             </section>
