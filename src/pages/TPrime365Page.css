@@ -819,6 +819,11 @@
 .tprime-steps-content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  padding-bottom: var(--space-12);
+}
+.tprime-steps-content .b365-section-heading {
+  margin-bottom: var(--space-10) !important;
 }
 .tprime-steps-stacked {
   display: flex;
