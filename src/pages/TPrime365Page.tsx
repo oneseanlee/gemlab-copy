@@ -26,13 +26,13 @@ const TPRIME_PRODUCT = {
 };
 
 const tprimeTestimonials = [
-  { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', using: 'TPrime365™' },
-  { img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes', using: 'TPrime365™' },
-  { img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke', using: 'TPrime365™' },
-  { img: '/images/testimonial-sean-lee.png', name: 'Sean Lee', using: 'TPrime365™' },
-  { img: '/images/testimonial-ernesto-cruz.png', name: 'Ernesto Cruz', using: 'TPrime365™' },
-  { img: '/images/testimonial-jay-atkins.png', name: 'Jay Atkins', using: 'TPrime365™' },
-];
+{ img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', using: 'TPrime365™' },
+{ img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes', using: 'TPrime365™' },
+{ img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke', using: 'TPrime365™' },
+{ img: '/images/testimonial-sean-lee.png', name: 'Sean Lee', using: 'TPrime365™' },
+{ img: '/images/testimonial-ernesto-cruz.png', name: 'Ernesto Cruz', using: 'TPrime365™' },
+{ img: '/images/testimonial-jay-atkins.png', name: 'Jay Atkins', using: 'TPrime365™' }];
+
 
 const TPrimeTestimonialsCarousel = () => {
   const [api, setApi] = React.useState<CarouselApi>();
@@ -51,11 +51,11 @@ const TPrimeTestimonialsCarousel = () => {
       opts={{ align: 'start', loop: true }}
       plugins={[Autoplay({ delay: 4000, stopOnInteraction: true })]}
       setApi={setApi}
-      className="b365-testimonials-carousel"
-    >
+      className="b365-testimonials-carousel">
+
       <CarouselContent className="-ml-4">
-        {tprimeTestimonials.map((t, i) => (
-          <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+        {tprimeTestimonials.map((t, i) =>
+        <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
             <div className="b365-testimonial-card">
               <img src={t.img} alt={t.name} />
               <div className="card-body">
@@ -68,20 +68,20 @@ const TPrimeTestimonialsCarousel = () => {
               </div>
             </div>
           </CarouselItem>
-        ))}
+        )}
       </CarouselContent>
       <div className="b365-carousel-dots">
-        {Array.from({ length: count }).map((_, i) => (
-          <button
-            key={i}
-            className={`b365-dot ${i === current ? 'active' : ''}`}
-            onClick={() => api?.scrollTo(i)}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
+        {Array.from({ length: count }).map((_, i) =>
+        <button
+          key={i}
+          className={`b365-dot ${i === current ? 'active' : ''}`}
+          onClick={() => api?.scrollTo(i)}
+          aria-label={`Go to slide ${i + 1}`} />
+
+        )}
       </div>
-    </Carousel>
-  );
+    </Carousel>);
+
 };
 
 const TPrime365Page = () => {
@@ -104,11 +104,11 @@ const TPrime365Page = () => {
   };
 
   const mobileLinks = [
-    { label: 'Ingredients', href: '#ingredients' },
-    { label: 'The Science', href: '#science' },
-    { label: 'Compare', href: '#compare' },
-    { label: 'FAQ', href: '#faq' },
-  ];
+  { label: 'Ingredients', href: '#ingredients' },
+  { label: 'The Science', href: '#science' },
+  { label: 'Compare', href: '#compare' },
+  { label: 'FAQ', href: '#faq' }];
+
 
   const faqItems = [
   {
@@ -210,47 +210,34 @@ const TPrime365Page = () => {
             </section>
 
             {/* 4. How It Works (moved up for conversion) */}
-            <section className="b365-section tprime-steps-section" id="process">
-                <div className="tprime-steps-layout">
-                    <div className="tprime-steps-content">
-                        <h2 className="b365-section-heading b365-serif" style={{ textAlign: 'left', marginBottom: 'var(--space-8)' }}>Get Started in <em>3 Simple Steps</em></h2>
-                        <div className="tprime-steps-stacked">
-                            <div className="tprime-step-row">
-                                <div className="tprime-step-num">01</div>
-                                <div>
-                                    <h3 className="b365-serif">Complete Your Order & Health Assessment</h3>
-                                    <p>Complete payment on our HIPAA-compliant platform. Fill out a secure online form (5 minutes) with your health information and symptoms.</p>
-                                </div>
-                            </div>
-                            <div className="tprime-step-row">
-                                <div className="tprime-step-num">02</div>
-                                <div>
-                                    <h3 className="b365-serif">Physician Review via HappyMD</h3>
-                                    <p>An independent licensed physician evaluates your case and determines if TPrime365 is right for you. If NOT approved: full refund processed immediately.</p>
-                                </div>
-                            </div>
-                            <div className="tprime-step-row">
-                                <div className="tprime-step-num">03</div>
-                                <div>
-                                    <h3 className="b365-serif">Receive & Start Optimizing</h3>
-                                    <p>Compounded at an FDA-registered 503A facility and shipped directly to your door in discreet packaging. Begin your transformation.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="tprime-timeline-callout" style={{ margin: 'var(--space-6) 0 0' }}>
-                            <span>
-                                <Clock size={16} />
-                                Order to delivery: 7-10 days (if approved)
-                            </span>
-                            <span>
-                                <ShieldCheck size={16} />
-                                100% Money-Back Guarantee if physician does not approve
-                            </span>
-                        </div>
+            <section className="b365-section bg-accent" id="process">
+                <h2 className="b365-section-heading b365-serif">Get Started in <em>3 Simple Steps</em></h2>
+                <div className="b365-steps-grid">
+                    <div className="b365-step-card">
+                        <div className="step-number">01</div>
+                        <h3 className="b365-serif">Complete Your Order & Health Assessment</h3>
+                        <p>Complete payment on our HIPAA-compliant platform. Fill out a secure online form (5 minutes) with your health information and symptoms.</p>
                     </div>
-                    <div className="tprime-steps-hero-img">
-                        <img src="/images/tprime-model.png" alt="TPrime365 results" />
+                    <div className="b365-step-card">
+                        <div className="step-number">02</div>
+                        <h3 className="b365-serif">Physician Review via HappyMD</h3>
+                        <p>An independent licensed physician evaluates your case and determines if TPrime365 is right for you. If NOT approved: full refund processed immediately.</p>
                     </div>
+                    <div className="b365-step-card">
+                        <div className="step-number">03</div>
+                        <h3 className="b365-serif">Receive & Start Optimizing</h3>
+                        <p>Compounded at an FDA-registered 503A facility and shipped directly to your door in discreet packaging. Begin your transformation.</p>
+                    </div>
+                </div>
+                <div className="tprime-timeline-callout">
+                    <span>
+                        <Clock size={16} />
+                        Order to delivery: 7-10 days (if approved)
+                    </span>
+                    <span>
+                        <ShieldCheck size={16} />
+                        100% Money-Back Guarantee if physician does not approve
+                    </span>
                 </div>
             </section>
 
@@ -451,15 +438,15 @@ const TPrime365Page = () => {
               </p>
               <div className="tprime-ugc-grid full-width">
                 {[
-                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec46bac245857f16caa.mp4',
-                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec4a9efde243ace875b.mp4',
-                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec43b3cc9f4a7114cf0.mp4',
-                  'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec41d5e04501a7a9db9.mp4',
-                ].map((src, i) => (
-                  <div className="tprime-ugc-card" key={i}>
+          'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec46bac245857f16caa.mp4',
+          'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec4a9efde243ace875b.mp4',
+          'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec43b3cc9f4a7114cf0.mp4',
+          'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec41d5e04501a7a9db9.mp4'].
+          map((src, i) =>
+          <div className="tprime-ugc-card" key={i}>
                     <video autoPlay muted loop playsInline preload="metadata" src={src} />
                   </div>
-                ))}
+          )}
               </div>
               <div style={{ textAlign: 'center', marginTop: 'var(--space-8)' }}>
                 <AnimatedCTA onClick={handleOrderNow}>
