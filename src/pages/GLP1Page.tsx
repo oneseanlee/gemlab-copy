@@ -230,9 +230,6 @@ const GLP1Page = () => {
             {/* 6. Lifestyle Optimization */}
             <section className="b365-section glp1-lifestyle-section">
                 <div className="glp1-lifestyle-layout">
-                    <div className="glp1-lifestyle-image">
-                        <img src="/images/glp1-lifestyle-hero.png" alt="Active woman representing lifestyle optimization" />
-                    </div>
                     <div className="glp1-lifestyle-content">
                         <h2 className="b365-section-heading b365-serif" style={{textAlign:'left', marginBottom: 'var(--space-6)'}}>Lifestyle Optimization <em>Formula</em></h2>
                         <div className="glp1-lifestyle-pillars-grid">
@@ -248,6 +245,9 @@ const GLP1Page = () => {
                                 </div>
                   )}
                         </div>
+                    </div>
+                    <div className="glp1-lifestyle-image">
+                        <img src="/images/glp1-lifestyle-hero.png" alt="Active woman representing lifestyle optimization" />
                     </div>
                 </div>
             </section>
