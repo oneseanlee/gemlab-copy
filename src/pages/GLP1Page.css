@@ -378,6 +378,17 @@
   color: var(--b365-blue);
 }
 
+/* ─── Three Longevity Pathways — always 3 columns ─── */
+.glp1-pathways-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+@media (max-width: 768px) {
+  .glp1-pathways-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
   .glp1-protocol-grid {
