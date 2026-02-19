@@ -98,19 +98,31 @@
 }
 
 /* Callout with hero image */
+/* Callout with overlapping text card */
 .glp1-callout-with-image {
+  position: relative;
   display: flex;
   align-items: flex-end;
-  gap: var(--space-8);
+  justify-content: flex-end;
+  min-height: 320px;
   text-align: left;
-  position: relative;
   overflow: visible;
-  padding-bottom: 0;
+  padding: 0;
 }
 .glp1-callout-text {
-  flex: 1;
-  padding-bottom: var(--space-8);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: inline-block;
+  width: fit-content;
+  max-width: 520px;
+  background: var(--b365-white);
+  border: 2px solid var(--b365-blue);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
   text-align: left;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 .glp1-callout-text h4 {
   text-align: left;
@@ -119,9 +131,9 @@
   text-align: left;
 }
 .glp1-callout-image {
-  flex: 0 0 260px;
-  max-width: 260px;
-  margin-bottom: -2px;
+  flex: 0 0 340px;
+  max-width: 340px;
+  margin-left: auto;
   align-self: flex-end;
 }
 .glp1-callout-image img {
@@ -136,15 +148,20 @@
   .glp1-callout-with-image {
     flex-direction: column;
     align-items: center;
-    padding-bottom: 0;
+    min-height: auto;
+    padding: 0;
   }
   .glp1-callout-text {
-    padding-bottom: 0;
+    position: static;
+    max-width: 100%;
+    width: 100%;
+    box-shadow: none;
   }
   .glp1-callout-image {
     flex: none;
-    max-width: 200px;
-    margin-bottom: -2px;
+    max-width: 240px;
+    order: -1;
+    margin-bottom: var(--space-4);
   }
 }
 
