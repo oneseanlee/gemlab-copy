@@ -282,7 +282,7 @@ const TPrime365Page = () => {
             </section>
 
             {/* 5. The Solution */}
-            <section className="b365-section b365-section-alt tprime-solution-section" id="science">
+            <section className="b365-section b365-section-alt tprime-solution-section" id="science" style={{ overflow: 'hidden', paddingBottom: 0 }}>
                 <div className="tprime-solution-layout">
                     {/* Left: Hero Image */}
                     <div className="tprime-solution-img">
