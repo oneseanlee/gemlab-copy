@@ -389,17 +389,18 @@
   min-height: 520px;
 }
 .b365-hero-image {
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 0 var(--space-6);
+  padding: 0;
 }
 .b365-hero-image img {
-  width: 100%;
-  max-height: 110%;
+  width: 105%;
+  max-width: 105%;
+  height: auto;
   object-fit: contain;
-  object-position: bottom;
+  object-position: bottom center;
 }
 .b365-hero-text {
   padding: var(--space-16) 56px;
@@ -1155,7 +1156,8 @@
     grid-template-columns: 1fr;
   }
   .b365-hero-image {
-    height: 300px;
+    height: auto;
+    max-height: 400px;
   }
   .b365-hero-text {
     padding: var(--space-12) var(--space-8);
