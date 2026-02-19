@@ -508,3 +508,36 @@
   background: none;
   position: relative;
 }
+
+/* ─── Lifestyle Optimization Layout ─── */
+.glp1-lifestyle-layout {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.glp1-lifestyle-image {
+  flex: 0 0 280px;
+  max-width: 280px;
+}
+.glp1-lifestyle-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.1));
+}
+.glp1-lifestyle-layout .tprime-pillars-grid {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .glp1-lifestyle-layout {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .glp1-lifestyle-image {
+    flex: none;
+    max-width: 200px;
+  }
+}
