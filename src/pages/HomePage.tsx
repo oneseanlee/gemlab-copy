@@ -337,7 +337,7 @@ const HomePage = () => {
       <section className="b365-hero">
         <div className="b365-hero-container">
           <div className="b365-hero-image b365-parallax-hero" ref={parallaxRef}>
-            <img src="/images/Best365_hero.png" alt="Athletic couple with Best 365 Labs products" />
+            <img src="/images/Best365_hero.png" alt="Athletic couple with Best 365 Labs products" fetchPriority="high" />
           </div>
           <div className="b365-hero-text">
             <h1 className="b365-serif hero-entrance hero-entrance-1">More Energy. More Drive. <em>No Needles.</em></h1>
