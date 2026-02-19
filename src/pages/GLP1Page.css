@@ -549,7 +549,8 @@
 }
 .glp1-lifestyle-content {
   flex: 1;
-  padding-bottom: var(--space-8);
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
   padding-right: var(--space-10);
 }
 .glp1-lifestyle-pillars-grid {
