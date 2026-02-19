@@ -5,10 +5,11 @@ import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import TrustBadges from '../components/TrustBadges/TrustBadges';
+import { CartDrawer } from '../components/CartDrawer';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from '../components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Menu, ArrowRight, Brain, Flame, Zap, Dumbbell, Check, Truck, CheckCircle, Headphones, BadgeCheck } from 'lucide-react';
+import { Menu, ArrowRight, Brain, Flame, Zap, Dumbbell, Check, Truck, CheckCircle, Headphones, BadgeCheck, Shield } from 'lucide-react';
 
 /* ──── Parallax hook ──── */
 const useParallax = (speed = 0.3) => {
@@ -39,9 +40,9 @@ const RevealSection = ({ children, className = '', ...props }) => {
 const socialProofMessages = [
   '🔬 2,847 protocols shipped this month',
   '⭐ Rated 4.9/5 from 50,000+ clients',
-  '🚀 A new client in Dallas just started their protocol',
-  '💪 12 new clients activated today',
   '🏆 Trusted by 50,000+ clients nationwide',
+  '💪 New clients activating protocols daily',
+  '🚀 Physician-supervised optimization delivered to your door',
 ];
 
 const products = [
@@ -51,7 +52,7 @@ const products = [
     tags: [{ label: 'Flagship', flagship: true }, { label: 'Fertility-Friendly' }],
     category: 'testosterone',
     ribbon: 'MOST POPULAR',
-    bestFor: '4-in-1 Testosterone Optimizer — Enclomiphene (25mg) + Spermidine (10mg) + Boron (10mg) + Vitamin C (10mg)',
+    bestFor: '4-in-1 sublingual testosterone optimizer. Boosts T-levels 60–664% without injections or shutdown.',
     benefits: [
       'Increases testosterone 60–664% in 2–4 weeks',
       'Maintains natural testicular size & fertility',
@@ -70,7 +71,7 @@ const products = [
     name: 'GLP-1 Optimization Protocol',
     tags: [{ label: 'Weight Loss' }, { label: 'Mitochondrial' }],
     category: 'weight-loss',
-    bestFor: 'Mitochondrial support to prevent muscle loss and metabolic crash during active GLP-1 therapy.',
+    bestFor: 'Preserve muscle and energy during GLP-1 weight loss therapy.',
     benefits: [
       '72% more lean mass preserved vs GLP-1 alone',
       '38% boost in ATP production',
@@ -89,7 +90,7 @@ const products = [
     name: 'Ultimate Cellular Optimization System',
     tags: [{ label: 'Longevity' }, { label: '3-Product Stack' }],
     category: 'longevity',
-    bestFor: '24-hour total energy, focus, and longevity optimization — Activate365 + Mito365 + Restore365.',
+    bestFor: '24-hour energy, focus, and longevity optimization — morning to night.',
     benefits: [
       '170mg NAD+ daily for cellular repair',
       'GHK-Cu Peptide + PQQ for mitochondrial biogenesis',
@@ -110,7 +111,7 @@ const products = [
     tags: [{ label: 'Bundle' }, { label: 'Physician Included' }],
     category: 'systems',
     ribbon: 'BEST VALUE',
-    bestFor: 'Full weight loss system — 4-Product Stack + Licensed Physician Consultation + GLP-1 Medication (if approved).',
+    bestFor: 'Complete weight loss system — 4 products + physician consultation + GLP-1 medication (if approved).',
     benefits: [
       'Activate365, Mito365, Restore365 & Metabolism+ included',
       'GLP-1 medication prescribed if medically appropriate',
@@ -130,7 +131,7 @@ const products = [
     name: 'Non-Hormonal Testosterone Bundle',
     tags: [{ label: 'Maximum Optimization' }, { label: 'Rx + System' }],
     category: 'systems',
-    bestFor: 'Maximum cellular and hormonal synergy — Rx Enclomiphene Optimizer + Complete UCOS System.',
+    bestFor: 'Maximum cellular and hormonal synergy — Rx optimizer + complete UCOS stack.',
     benefits: [
       'Prescription-grade sublingual Enclomiphene formula',
       'Complete 3-product cellular optimization stack',
@@ -149,10 +150,10 @@ const products = [
 
 const tabs = [
   { key: 'all', label: 'All Products' },
-  { key: 'testosterone', label: 'Testosterone Optimization' },
-  { key: 'weight-loss', label: 'Weight Loss Support' },
-  { key: 'longevity', label: 'Cellular Longevity' },
-  { key: 'systems', label: 'Complete Systems' },
+  { key: 'testosterone', label: 'Testosterone' },
+  { key: 'weight-loss', label: 'Weight Loss' },
+  { key: 'longevity', label: 'Longevity' },
+  { key: 'systems', label: 'Systems' },
 ];
 
 const faqData = [
@@ -161,8 +162,16 @@ const faqData = [
     a: 'MODS Max™ is our patent-pending sublingual delivery system that uses microdose reactive oxygen species (ROS) to briefly open mucosal barriers, delivering up to 10x enhanced absorption directly into the bloodstream — bypassing the digestive system entirely.',
   },
   {
+    q: 'What if I\'m not approved?',
+    a: 'If the physician determines you are not a candidate for the prescription component, the $140 consultation fee is fully refunded. You keep any supplement products included in your bundle regardless of approval status.',
+  },
+  {
     q: 'Do I need a prescription?',
     a: 'Products containing Enclomiphene (TPrime365™ and the Non-Hormonal Testosterone Bundle) require a prescription. A licensed physician consultation via the happyMD network is included with your purchase. Our supplement-only products (UCOS, GLP-1 Optimization Protocol) do not require a prescription.',
+  },
+  {
+    q: 'What\'s included in my subscription?',
+    a: 'Your monthly subscription includes the complete sublingual formula, physician consultation access, and free shipping. No hidden fees, no contracts — cancel anytime. For example, TPrime365™ at $149/mo includes the 4-in-1 Enclomiphene + Spermidine + Boron + Vitamin C formula plus ongoing physician support.',
   },
   {
     q: 'Will this affect my fertility?',
@@ -173,18 +182,18 @@ const faqData = [
     a: 'Most clients report noticeable improvements in energy and drive within 1–2 weeks. Clinical data shows testosterone increases of 60–664% within 2–4 weeks of consistent use. Individual results vary based on baseline levels and overall health.',
   },
   {
-    q: 'What if I\'m not approved?',
-    a: 'If the physician determines you are not a candidate for the prescription component, the $140 consultation fee is fully refunded. You keep any supplement products included in your bundle regardless of approval status.',
+    q: 'How long does shipping take?',
+    a: 'Most orders ship within 48 hours of physician approval. Standard delivery takes 7–10 business days. All shipments arrive in discreet packaging. We currently ship within the United States.',
   },
 ];
 
 const testimonials = [
-  { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw' },
-  { img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes' },
-  { img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke' },
-  { img: '/images/testimonial-sean-lee.png', name: 'Sean Lee' },
-  { img: '/images/testimonial-ernesto-cruz.png', name: 'Ernesto Cruz' },
-  { img: '/images/testimonial-jay-atkins.png', name: 'Jay Atkins' },
+  { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', quote: 'My T-levels went from 658 to 749 in two months. More energy, sharper focus, better performance.' },
+  { img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes', quote: 'I felt the difference in the first week. No crash, no mood swings — just steady energy all day.' },
+  { img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke', quote: 'Rapid improvements in energy and cellular performance. It\'s a game-changer for anyone serious about health.' },
+  { img: '/images/testimonial-sean-lee.png', name: 'Sean Lee', quote: 'The sublingual delivery is incredible — absorbs in seconds. I\'m sleeping better and recovering faster.' },
+  { img: '/images/testimonial-ernesto-cruz.png', name: 'Ernesto Cruz', quote: 'T-levels from 280 to 680 in 6 weeks. My wife noticed the difference before I did.' },
+  { img: '/images/testimonial-jay-atkins.png', name: 'Jay Atkins', quote: 'Finally a protocol that works without needles. I\'ve got my drive back and I feel 10 years younger.' },
 ];
 
 const TestimonialsCarousel = () => {
@@ -210,10 +219,11 @@ const TestimonialsCarousel = () => {
         {testimonials.map((t, i) => (
           <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
             <div className="b365-testimonial-card">
-              <img src={t.img} alt={t.name} />
+              <img src={t.img} alt={t.name} loading="lazy" />
                 <div className="card-body">
                 <div className="name">{t.name}</div>
-                <div className="product-using">Using: {['TPrime365™', 'UCOS System', 'GLP-1 Protocol', 'TPrime365™', 'UCOS System', 'GLP-1 Protocol'][i]}</div>
+                <div className="product-using">Using: {['TPrime365™', 'UCOS System', 'UCOS System', 'TPrime365™', 'TPrime365™', 'TPrime365™'][i]}</div>
+                <blockquote className="testimonial-quote">"{t.quote}"</blockquote>
                 <div className="verified">
                   <BadgeCheck size={14} />
                   Verified buyer
@@ -272,9 +282,9 @@ const StickyMobileCTA = () => {
       <div className="sticky-cta-inner">
         <div className="sticky-cta-text">
           <span className="sticky-cta-label">Best 365 Labs</span>
-          <span className="sticky-cta-price">From $39.95</span>
+          <span className="sticky-cta-price">Explore Protocols</span>
         </div>
-        <AnimatedCTA href="#products" small>Get Started</AnimatedCTA>
+        <AnimatedCTA href="#products" small>Find Your Protocol</AnimatedCTA>
       </div>
     </div>
   );
@@ -302,7 +312,7 @@ const HomePage = () => {
       {/* 1. Social Proof Ticker Banner */}
       <SocialProofBanner />
 
-      {/* 2. Navigation */}
+      {/* 2. Navigation — CartDrawer replaces external community CTA */}
       <nav className="b365-nav with-banner">
         <div className="b365-nav-inner">
           <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
@@ -318,27 +328,27 @@ const HomePage = () => {
             <li><a href="#faq">FAQ</a></li>
           </ul>
           <div className="b365-nav-right">
-            <AnimatedCTA href="https://www.skool.com/best365labs/about" small target="_blank" rel="noopener noreferrer">Join the Community</AnimatedCTA>
+            <CartDrawer />
           </div>
         </div>
       </nav>
 
-      {/* 3. Hero Section with entrance animations */}
+      {/* 3. Hero Section — benefit-driven copy, Grade 5-7 reading level */}
       <section className="b365-hero">
         <div className="b365-hero-container">
           <div className="b365-hero-image b365-parallax-hero" ref={parallaxRef}>
             <img src="/images/hero-couple.png" alt="Athletic couple with Best 365 Labs products" />
           </div>
           <div className="b365-hero-text">
-            <h1 className="b365-serif hero-entrance hero-entrance-1">Your Hormones, <em>Optimized.</em></h1>
+            <h1 className="b365-serif hero-entrance hero-entrance-1">More Energy. More Drive. <em>No Needles.</em></h1>
             <p className="subhead hero-entrance hero-entrance-2">
-              Precision-grade hormonal and metabolic optimization delivered to your door.
-              No needles. No hormonal shutdown. Just science-backed results.
+              Get your energy, drive, and strength back. No injections. No hormonal crash.
+              Delivered to your door.
             </p>
-            <p className="tertiary hero-entrance hero-entrance-3">Powered by MODS Max™ 10x Absorption Technology.</p>
+            <p className="tertiary hero-entrance hero-entrance-3">Absorbs 10x faster than pills — works in under 60 seconds.</p>
             <div className="hero-entrance hero-entrance-4" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <AnimatedCTA href="#products">
-                Get Started
+                Find Your Protocol
                 <ArrowRight size={16} />
               </AnimatedCTA>
             </div>
@@ -364,7 +374,7 @@ const HomePage = () => {
           ].map((b, i) => (
             <div className="b365-benefit-card" key={i}>
               <div className="benefit-card-img">
-                <img src={b.image} alt={b.label} />
+                <img src={b.image} alt={b.label} loading="lazy" />
               </div>
               <div className="benefit-card-content">
                 <div className="icon-wrap">
@@ -380,7 +390,7 @@ const HomePage = () => {
       {/* Trust Badges */}
       <TrustBadges />
 
-      {/* 4. Product Section */}
+      {/* 4. Product Section — shortened tab labels for mobile horizontal scroll */}
       <RevealSection className="b365-section" id="products">
         <h2 className="b365-section-heading b365-serif">Precision Protocols for <em>Every Goal</em></h2>
 
@@ -407,7 +417,7 @@ const HomePage = () => {
               <div className="product-card-image">
                 <picture>
                   <source media="(max-width: 640px)" srcSet={product.mobileImage} />
-                  <img src={product.image} alt={product.name} />
+                  <img src={product.image} alt={product.name} loading="lazy" />
                 </picture>
               </div>
               <div className="tags">
@@ -441,14 +451,55 @@ const HomePage = () => {
                 </div>
               )}
               <div className="card-actions" style={{ justifyContent: 'center' }}>
-                <AnimatedCTA href={product.href} className="card-cta">Get Started</AnimatedCTA>
+                <AnimatedCTA href={product.href} className="card-cta">View Details</AnimatedCTA>
               </div>
             </div>
           ))}
         </div>
       </RevealSection>
 
-      {/* 5. Stats / Trust Section */}
+      {/* 5. 3-Step Process — moved up for better visual hierarchy */}
+      <RevealSection className="b365-section b365-section-alt" id="process">
+        <h2 className="b365-section-heading b365-serif">It's easy to <em>get started.</em></h2>
+        <div className="b365-steps-grid">
+          <div className="b365-step-card">
+            <div className="step-number">01</div>
+            <h3 className="b365-serif">Complete Your Health Intake</h3>
+            <p>A quick 5-minute online health questionnaire to understand your goals and medical history.</p>
+          </div>
+          <div className="b365-step-card">
+            <div className="step-number">02</div>
+            <h3 className="b365-serif">Physician Review</h3>
+            <p>A licensed healthcare provider via the happyMD network reviews your intake and determines the best protocol.</p>
+          </div>
+          <div className="b365-step-card">
+            <div className="step-number">03</div>
+            <h3 className="b365-serif">Discreet Delivery</h3>
+            <p>Your personalized optimization protocol arrives at your door in 7–10 business days. Discreet packaging guaranteed.</p>
+          </div>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: 48 }}>
+          <AnimatedCTA href="#products">
+            Take the Health Intake
+            <ArrowRight size={16} />
+          </AnimatedCTA>
+        </div>
+      </RevealSection>
+
+      {/* 6. Testimonials — moved up, now includes quotes */}
+      <RevealSection className="b365-section">
+        <h2 className="b365-section-heading b365-serif">Real Clients. <em>Real Results.</em></h2>
+        <TestimonialsCarousel />
+        {/* Post-testimonial CTA — conversion capture at peak social proof */}
+        <div style={{ textAlign: 'center', marginTop: 48 }}>
+          <AnimatedCTA href="#products">
+            See What Protocol Is Right for You
+            <ArrowRight size={16} />
+          </AnimatedCTA>
+        </div>
+      </RevealSection>
+
+      {/* 7. Stats / Trust Section */}
       <RevealSection className="b365-section b365-section-alt" id="science">
         <h2 className="b365-section-heading b365-serif">Max performance. <em>Max support.</em></h2>
         <div className="b365-stats-grid">
@@ -470,7 +521,7 @@ const HomePage = () => {
         </div>
       </RevealSection>
 
-      {/* 6. Guarantee Section */}
+      {/* 8. Guarantee Section */}
       <RevealSection className="b365-section">
         <div className="b365-guarantee">
           <div>
@@ -482,17 +533,17 @@ const HomePage = () => {
               For approved clients, clinical data shows testosterone increases of 60–664% within 2–4 weeks — with no testicular atrophy, no fertility suppression, and no hormonal dependency.
             </p>
             <AnimatedCTA href="#products" style={{ marginTop: 8 }}>
-              Get Started
+              Start Risk-Free
               <ArrowRight size={16} />
             </AnimatedCTA>
           </div>
           <div className="b365-guarantee-image">
-            <img src="/images/tprime-guarantee-hero.png" alt="TPrime365 product with athlete" />
+            <img src="/images/tprime-guarantee-hero.png" alt="TPrime365 product with athlete" loading="lazy" />
           </div>
         </div>
       </RevealSection>
 
-      {/* 7. Clinical Comparison Table */}
+      {/* 9. Clinical Comparison Table */}
       <RevealSection className="b365-section b365-section-alt">
         <h2 className="b365-section-heading b365-serif">The <em>TPrime365™</em> Advantage</h2>
         <div className="b365-table-wrap">
@@ -535,7 +586,7 @@ const HomePage = () => {
         </div>
       </RevealSection>
 
-      {/* 8. Power Up Section */}
+      {/* 10. Power Up Section — CTA now links to products instead of dead-end */}
       <RevealSection className="b365-section b365-power-up">
         <div className="b365-power-up-inner">
           <div>
@@ -557,74 +608,15 @@ const HomePage = () => {
                 No pills, no injections, no gut disruption
               </li>
             </ul>
-            <AnimatedCTA href="#science" className="btn-white-cta">Learn More</AnimatedCTA>
+            <AnimatedCTA href="#products" className="btn-white-cta">Shop Protocols</AnimatedCTA>
           </div>
           <div className="b365-power-up-visual">
-            <img src="/images/tprime-sublingual-delivery.jpg" alt="MODS Max sublingual delivery technology" />
+            <img src="/images/tprime-sublingual-delivery.jpg" alt="MODS Max sublingual delivery technology" loading="lazy" />
           </div>
         </div>
       </RevealSection>
 
-      {/* 9. Testimonials */}
-      <RevealSection className="b365-section">
-        <h2 className="b365-section-heading b365-serif">Real Clients. <em>Real Results.</em></h2>
-        <TestimonialsCarousel />
-      </RevealSection>
-
-      {/* 10. Digital Guides & Resources */}
-      <RevealSection className="b365-section b365-guides-section">
-        <h2 className="b365-serif" style={{ textAlign: 'center', marginBottom: 12 }}>
-          Digital Guides & <em>Resources</em>
-        </h2>
-        <p style={{ textAlign: 'center', color: 'var(--b365-text-secondary)', maxWidth: 560, margin: '0 auto 48px', fontSize: 15 }}>
-          Expert-backed guides to help you make informed decisions about your health optimization journey.
-        </p>
-        <div className="b365-guides-grid">
-          {[
-            { img: '/images/guide-renting-testosterone.png', title: 'The Difference Between Renting Testosterone and Owning It' },
-            { img: '/images/guide-testosterone-fertility.png', title: 'Testosterone Optimization Without Sacrificing Fertility' },
-            { img: '/images/guide-before-trt.png', title: 'Before You Commit to TRT — Answer These Questions' },
-          ].map((guide, i) => (
-            <a href="/guides" className="b365-guide-card" key={i}>
-              <img src={guide.img} alt={guide.title} />
-              <h4>{guide.title}</h4>
-            </a>
-          ))}
-        </div>
-        <div style={{ textAlign: 'center', marginTop: 40 }}>
-          <AnimatedCTA href="/guides">See All Guides</AnimatedCTA>
-        </div>
-      </RevealSection>
-
-      {/* 11. 3-Step Process */}
-      <RevealSection className="b365-section b365-section-alt" id="process">
-        <h2 className="b365-section-heading b365-serif">It's easy to <em>get started.</em></h2>
-        <div className="b365-steps-grid">
-          <div className="b365-step-card">
-            <div className="step-number">01</div>
-            <h3 className="b365-serif">Complete Your Health Intake</h3>
-            <p>A quick 5-minute online health questionnaire to understand your goals and medical history.</p>
-          </div>
-          <div className="b365-step-card">
-            <div className="step-number">02</div>
-            <h3 className="b365-serif">Physician Review</h3>
-            <p>A licensed healthcare provider via the happyMD network reviews your intake and determines the best protocol.</p>
-          </div>
-          <div className="b365-step-card">
-            <div className="step-number">03</div>
-            <h3 className="b365-serif">Discreet Delivery</h3>
-            <p>Your personalized optimization protocol arrives at your door in 7–10 business days. Discreet packaging guaranteed.</p>
-          </div>
-        </div>
-        <div style={{ textAlign: 'center', marginTop: 48 }}>
-          <AnimatedCTA href="#products">
-            Get Started
-            <ArrowRight size={16} />
-          </AnimatedCTA>
-        </div>
-      </RevealSection>
-
-      {/* 12. FAQ */}
+      {/* 11. FAQ — reordered with price/shipping questions added */}
       <RevealSection className="b365-section" id="faq">
         <div className="b365-faq-layout">
           <div className="b365-faq-left">
@@ -645,6 +637,31 @@ const HomePage = () => {
               </div>
             ))}
           </div>
+        </div>
+      </RevealSection>
+
+      {/* 12. Digital Guides & Resources — moved to bottom, de-emphasized */}
+      <RevealSection className="b365-section b365-guides-section">
+        <h2 className="b365-serif" style={{ textAlign: 'center', marginBottom: 12 }}>
+          Digital Guides & <em>Resources</em>
+        </h2>
+        <p style={{ textAlign: 'center', color: 'var(--b365-text-secondary)', maxWidth: 560, margin: '0 auto 48px', fontSize: 15 }}>
+          Expert-backed guides to help you make informed decisions about your health optimization journey.
+        </p>
+        <div className="b365-guides-grid">
+          {[
+            { img: '/images/guide-renting-testosterone.png', title: 'The Difference Between Renting Testosterone and Owning It' },
+            { img: '/images/guide-testosterone-fertility.png', title: 'Testosterone Optimization Without Sacrificing Fertility' },
+            { img: '/images/guide-before-trt.png', title: 'Before You Commit to TRT — Answer These Questions' },
+          ].map((guide, i) => (
+            <a href="/guides" className="b365-guide-card" key={i}>
+              <img src={guide.img} alt={guide.title} loading="lazy" />
+              <h4>{guide.title}</h4>
+            </a>
+          ))}
+        </div>
+        <div style={{ textAlign: 'center', marginTop: 40 }}>
+          <AnimatedCTA href="/guides">See All Guides</AnimatedCTA>
         </div>
       </RevealSection>
 

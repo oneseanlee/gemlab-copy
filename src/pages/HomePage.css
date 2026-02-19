@@ -525,6 +525,12 @@
   gap: var(--space-2);
   margin-bottom: var(--space-12);
   flex-wrap: wrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.b365-tabs::-webkit-scrollbar {
+  display: none;
 }
 .b365-tab {
   padding: var(--space-3) var(--space-6);
@@ -906,6 +912,13 @@
   color: var(--b365-text-secondary);
   margin-bottom: var(--space-2);
 }
+.b365-testimonial-card .testimonial-quote {
+  font-size: var(--text-body-sm);
+  color: var(--b365-text-secondary);
+  line-height: 1.6;
+  font-style: italic;
+  margin: var(--space-3) 0;
+}
 .b365-testimonial-card .verified {
   display: inline-flex;
   align-items: center;
@@ -1272,12 +1285,16 @@
     align-items: center;
   }
   .b365-tabs {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: var(--space-2);
     padding: 0 var(--space-4);
+    justify-content: flex-start;
+    overflow-x: auto;
   }
   .b365-tab {
-    width: 100%;
+    white-space: nowrap;
+    flex-shrink: 0;
     text-align: center;
   }
   .b365-product-grid {
