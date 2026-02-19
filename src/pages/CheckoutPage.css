@@ -79,6 +79,37 @@
   gap: 1.5rem;
 }
 
+.checkout-section-note {
+  font-size: 0.85rem;
+  color: var(--b365-text-secondary);
+  margin: -0.5rem 0 1.25rem;
+  line-height: 1.6;
+}
+
+.checkout-handoff-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 1rem 1.25rem;
+  background: var(--b365-light-blue);
+  border: 1px solid rgba(51, 118, 176, 0.2);
+  border-radius: var(--radius-sm);
+  color: var(--b365-blue);
+}
+
+.checkout-handoff-notice svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checkout-handoff-notice p {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--b365-text-secondary);
+}
+
+
 .checkout-section {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
