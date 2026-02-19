@@ -1,11 +1,12 @@
 import React from 'react';
 import './AnimatedCTA.css';
 
-const AnimatedCTA = ({ children, href = '#', className = '', small = false, ...props }) => {
-  const Tag = href ? 'a' : 'button';
+const AnimatedCTA = ({ children, href, onClick, className = '', small = false, ...props }) => {
+  const Tag = onClick && !href ? 'button' : 'a';
   return (
     <Tag
-      href={href || undefined}
+      href={Tag === 'a' ? (href || '#') : undefined}
+      onClick={onClick}
       className={`animated-cta${small ? ' cta-sm' : ''} ${className}`}
       {...props}
     >
