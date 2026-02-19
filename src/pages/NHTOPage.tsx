@@ -10,11 +10,10 @@ import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { Menu, CheckCircle, ShieldCheck, Gift, Shrink, Baby, Link2, AlertTriangle, X, Check, Shield, Activity, SlidersHorizontal, ChevronRight, Truck, Award, Stethoscope, ArrowRight, Flame, User, Sunrise, Clock, Moon, Pill, Headphones, AlertCircle, Lock, Package } from 'lucide-react';
 
-// TODO: Replace with real Shopify variant ID once the NHTO bundle product is created
-const NHTO_VARIANT_ID = 'gid://shopify/ProductVariant/PLACEHOLDER_NHTO';
+const NHTO_VARIANT_ID = 'gid://shopify/ProductVariant/46309998133388';
 const NHTO_PRODUCT = {
     node: {
-        id: 'gid://shopify/Product/PLACEHOLDER_NHTO',
+        id: 'gid://shopify/Product/NHTO',
         title: 'Non-Hormonal Testosterone Optimizer — Complete System',
         description: 'Complete Non-Hormonal Testosterone Optimizer system with UCOS bundle and physician consultation.',
         handle: 'nhto-complete-system',

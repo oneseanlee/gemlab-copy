@@ -10,11 +10,10 @@ import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { Menu, ArrowRight, Sunrise, Sun, Moon, BadgeCheck, Clock, Flag, ShieldCheck, Zap, Brain, Dumbbell, Activity, Sparkles, Heart, RefreshCw, Bed, Dna, Shield, Gem, Flame, ChevronRight, Check, Truck, Package, Award, Lock, Headphones, AlertCircle } from 'lucide-react';
 
-// TODO: Replace with real Shopify variant ID once the UCOS product is created
-const UCOS_VARIANT_ID = 'gid://shopify/ProductVariant/PLACEHOLDER_UCOS';
+const UCOS_VARIANT_ID = 'gid://shopify/ProductVariant/46309998067852';
 const UCOS_PRODUCT = {
   node: {
-    id: 'gid://shopify/Product/PLACEHOLDER_UCOS',
+    id: 'gid://shopify/Product/UCOS',
     title: 'Ultimate Cellular Optimization System',
     description: 'Complete 24-Hour Cellular Optimization System — Activate365, Mito365, Restore365',
     handle: 'ucos-complete-system',

@@ -25,11 +25,10 @@ const CertificateLottie = () => {
   );
 };
 
-// TODO: Replace with real Shopify variant ID once the GLP-1 Bundle product is created
-const GLP1_BUNDLE_VARIANT_ID = 'gid://shopify/ProductVariant/PLACEHOLDER_GLP1_BUNDLE';
+const GLP1_BUNDLE_VARIANT_ID = 'gid://shopify/ProductVariant/46309998100620';
 const GLP1_BUNDLE_PRODUCT = {
   node: {
-    id: 'gid://shopify/Product/PLACEHOLDER_GLP1_BUNDLE',
+    id: 'gid://shopify/Product/GLP1_BUNDLE',
     title: 'Complete GLP-1 Cellular Optimization System',
     description: '4-Product System + Licensed Physician Consultation + GLP-1 Medication (if approved)',
     handle: 'glp1-cellular-optimization-system',
