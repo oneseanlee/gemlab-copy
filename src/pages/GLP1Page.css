@@ -546,6 +546,7 @@
   display: block;
   object-fit: contain;
   filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.1));
+  transform: scaleX(-1);
 }
 .glp1-lifestyle-content {
   flex: 1;
