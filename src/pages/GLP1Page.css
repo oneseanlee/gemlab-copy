@@ -567,9 +567,13 @@
   .glp1-lifestyle-image {
     flex: none;
     max-width: 240px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
   }
   .glp1-lifestyle-content {
     padding-bottom: var(--space-4);
+    padding-right: 0;
     width: 100%;
   }
   .glp1-lifestyle-content .b365-section-heading {
