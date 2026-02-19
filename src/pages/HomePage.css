@@ -733,7 +733,7 @@
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: var(--space-16);
-  align-items: center;
+  align-items: flex-end;
 }
 .b365-guarantee h2 {
   font-family: var(--font-title);
@@ -753,14 +753,22 @@
   color: var(--b365-text-secondary);
   margin-bottom: var(--space-4);
 }
+.b365-guarantee > div:first-child {
+  padding-bottom: var(--space-12);
+}
 .b365-guarantee-image {
   display: flex;
   justify-content: center;
+  align-items: flex-end;
+  align-self: flex-end;
 }
 .b365-guarantee-image img {
-  max-height: 500px;
+  max-height: 700px;
   width: 100%;
+  max-width: 100%;
   object-fit: contain;
+  display: block;
+  vertical-align: bottom;
 }
 
 /* Comparison Table */
