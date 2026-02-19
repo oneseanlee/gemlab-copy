@@ -342,7 +342,7 @@ const GLP1Page = () => {
             {/* 10. Three Longevity Pathways */}
             <section className="b365-section" id="science">
                 <h2 className="b365-section-heading b365-serif">Three Longevity Pathways <em>Working Together</em></h2>
-                <div className="tprime-ingredient-grid">
+                <div className="tprime-ingredient-grid glp1-pathways-grid">
                     {[
           {
             Icon: Zap, title: 'AMPK Activation', subtitle: 'The Metabolic Master Switch',
