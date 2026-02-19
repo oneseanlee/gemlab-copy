@@ -805,7 +805,7 @@
 /* ─── Steps Section Layout ─── */
 .tprime-steps-section {
   overflow: hidden;
-  background: var(--b365-white);
+  background: var(--b365-gray);
 }
 .tprime-steps-layout {
   display: grid;
