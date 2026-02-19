@@ -832,7 +832,7 @@
 }
 .tprime-step-row {
   display: flex;
-  gap: var(--space-5);
+  gap: var(--space-8);
   align-items: flex-start;
 }
 .tprime-step-num {

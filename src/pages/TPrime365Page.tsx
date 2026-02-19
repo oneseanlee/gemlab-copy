@@ -213,7 +213,7 @@ const TPrime365Page = () => {
             <section className="tprime-steps-section" id="process">
                 <div className="tprime-steps-layout b365-section">
                     <div className="tprime-steps-content">
-                        <h2 className="b365-section-heading b365-serif" style={{textAlign:'left',marginBottom:'var(--space-10)'}}>Get Started in <em>3 Simple Steps</em></h2>
+                        <h2 className="b365-serif" style={{textAlign:'left',fontSize:'var(--text-h1)',fontWeight:700,lineHeight:1.2,marginBottom:'var(--space-10)',color:'var(--b365-text)'}}>Get Started in <em>3 Simple Steps</em></h2>
                         <div className="tprime-steps-stacked">
                             <div className="tprime-step-row">
                                 <span className="tprime-step-num">01</span>
