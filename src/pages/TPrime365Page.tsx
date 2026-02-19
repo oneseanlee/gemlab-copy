@@ -210,34 +210,47 @@ const TPrime365Page = () => {
             </section>
 
             {/* 4. How It Works (moved up for conversion) */}
-            <section className="b365-section bg-accent" id="process">
-                <h2 className="b365-section-heading b365-serif">Get Started in <em>3 Simple Steps</em></h2>
-                <div className="b365-steps-grid">
-                    <div className="b365-step-card">
-                        <div className="step-number">01</div>
-                        <h3 className="b365-serif">Complete Your Order & Health Assessment</h3>
-                        <p>Complete payment on our HIPAA-compliant platform. Fill out a secure online form (5 minutes) with your health information and symptoms.</p>
+            <section className="tprime-steps-section" id="process">
+                <div className="tprime-steps-layout b365-section">
+                    <div className="tprime-steps-content">
+                        <h2 className="b365-section-heading b365-serif" style={{textAlign:'left',marginBottom:'var(--space-10)'}}>Get Started in <em>3 Simple Steps</em></h2>
+                        <div className="tprime-steps-stacked">
+                            <div className="tprime-step-row">
+                                <span className="tprime-step-num">01</span>
+                                <div>
+                                    <h3>Complete Your Order & Health Assessment</h3>
+                                    <p>Complete payment on our HIPAA-compliant platform. Fill out a secure online form (5 minutes) with your health information and symptoms.</p>
+                                </div>
+                            </div>
+                            <div className="tprime-step-row">
+                                <span className="tprime-step-num">02</span>
+                                <div>
+                                    <h3>Physician Review via HappyMD</h3>
+                                    <p>An independent licensed physician evaluates your case and determines if TPrime365 is right for you. If NOT approved: full refund processed immediately.</p>
+                                </div>
+                            </div>
+                            <div className="tprime-step-row">
+                                <span className="tprime-step-num">03</span>
+                                <div>
+                                    <h3>Receive & Start Optimizing</h3>
+                                    <p>Compounded at an FDA-registered 503A facility and shipped directly to your door in discreet packaging. Begin your transformation.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="tprime-timeline-callout">
+                            <span>
+                                <Clock size={16} />
+                                Order to delivery: 7-10 days (if approved)
+                            </span>
+                            <span>
+                                <ShieldCheck size={16} />
+                                100% Money-Back Guarantee if physician does not approve
+                            </span>
+                        </div>
                     </div>
-                    <div className="b365-step-card">
-                        <div className="step-number">02</div>
-                        <h3 className="b365-serif">Physician Review via HappyMD</h3>
-                        <p>An independent licensed physician evaluates your case and determines if TPrime365 is right for you. If NOT approved: full refund processed immediately.</p>
+                    <div className="tprime-steps-hero-img">
+                        <img src="/images/tprime-model.png" alt="TPrime365 lifestyle" />
                     </div>
-                    <div className="b365-step-card">
-                        <div className="step-number">03</div>
-                        <h3 className="b365-serif">Receive & Start Optimizing</h3>
-                        <p>Compounded at an FDA-registered 503A facility and shipped directly to your door in discreet packaging. Begin your transformation.</p>
-                    </div>
-                </div>
-                <div className="tprime-timeline-callout">
-                    <span>
-                        <Clock size={16} />
-                        Order to delivery: 7-10 days (if approved)
-                    </span>
-                    <span>
-                        <ShieldCheck size={16} />
-                        100% Money-Back Guarantee if physician does not approve
-                    </span>
                 </div>
             </section>
 
