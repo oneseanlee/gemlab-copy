@@ -524,12 +524,15 @@
 .glp1-lifestyle-section {
   padding-top: var(--space-8) !important;
   padding-bottom: 0 !important;
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 .glp1-lifestyle-layout {
   display: flex;
   align-items: flex-end;
   gap: var(--space-8);
-  max-width: 1100px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .glp1-lifestyle-image {
@@ -547,6 +550,7 @@
 .glp1-lifestyle-content {
   flex: 1;
   padding-bottom: var(--space-8);
+  padding-right: var(--space-10);
 }
 .glp1-lifestyle-pillars-grid {
   display: grid;
