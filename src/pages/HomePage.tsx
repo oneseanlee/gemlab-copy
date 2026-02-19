@@ -668,8 +668,6 @@ const HomePage = () => {
       {/* 13. Footer */}
       <SharedFooter />
 
-      {/* Sticky Mobile CTA */}
-      <StickyMobileCTA />
     </div>
   );
 };
