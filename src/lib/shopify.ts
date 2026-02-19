@@ -201,7 +201,10 @@ export async function removeLineFromShopifyCart(cartId: string, lineId: string):
 const CART_BUYER_IDENTITY_UPDATE_MUTATION = `
   mutation cartBuyerIdentityUpdate($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!) {
     cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) {
-      cart { id checkoutUrl }
+      cart {
+        id
+        checkoutUrl
+      }
       userErrors { field message }
     }
   }
@@ -228,16 +231,38 @@ export async function updateCartBuyerIdentity(
   cartId: string,
   buyerIdentity: BuyerIdentity
 ): Promise<{ success: boolean; checkoutUrl?: string; cartNotFound?: boolean }> {
+  // Build the buyer identity payload — send email/phone + address preferences
+  const apiPayload: Record<string, unknown> = {
+    email: buyerIdentity.email,
+  };
+  if (buyerIdentity.phone) {
+    apiPayload.phone = buyerIdentity.phone;
+  }
+  if (buyerIdentity.deliveryAddressPreferences?.length) {
+    apiPayload.deliveryAddressPreferences = buyerIdentity.deliveryAddressPreferences.map(pref => ({
+      deliveryAddress: {
+        firstName: pref.deliveryAddress.firstName,
+        lastName: pref.deliveryAddress.lastName,
+        address1: pref.deliveryAddress.address1,
+        address2: pref.deliveryAddress.address2 || '',
+        city: pref.deliveryAddress.city,
+        province: pref.deliveryAddress.province,
+        zip: pref.deliveryAddress.zip,
+        country: pref.deliveryAddress.country,
+      },
+    }));
+  }
+
   const data = await storefrontApiRequest(CART_BUYER_IDENTITY_UPDATE_MUTATION, {
     cartId,
-    buyerIdentity,
+    buyerIdentity: apiPayload,
   });
 
   const userErrors = data?.data?.cartBuyerIdentityUpdate?.userErrors || [];
   if (isCartNotFoundError(userErrors)) return { success: false, cartNotFound: true };
   if (userErrors.length > 0) {
-    console.error('Buyer identity update failed:', userErrors);
-    return { success: false };
+    // Log but don't block checkout — buyer identity is best-effort pre-fill
+    console.warn('Buyer identity update had errors (proceeding to checkout):', userErrors);
   }
 
   const cart = data?.data?.cartBuyerIdentityUpdate?.cart;

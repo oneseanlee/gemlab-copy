@@ -43,6 +43,12 @@ const CheckoutPage = () => {
   });
 
   const onSubmit = async (data: CheckoutFormData) => {
+    const existingCheckoutUrl = getCheckoutUrl();
+    if (!existingCheckoutUrl) {
+      toast.error("No active cart found. Please add items and try again.");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const result = await updateBuyerIdentity({
@@ -64,18 +70,17 @@ const CheckoutPage = () => {
         ],
       });
 
-      if (result.success) {
-        const checkoutUrl = result.checkoutUrl || getCheckoutUrl();
-        if (checkoutUrl) {
-          window.open(checkoutUrl, "_blank");
-        } else {
-          toast.error("Could not generate checkout link. Please try again.");
-        }
-      } else {
-        toast.error("Failed to save your info. Please try again.");
-      }
+      // Use the fresh checkout URL from the buyer identity update if available,
+      // otherwise fall back to the stored checkout URL — always proceed
+      const checkoutUrl = result.checkoutUrl || existingCheckoutUrl;
+      window.open(checkoutUrl, "_blank");
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      // Even on error, try to redirect using the existing checkout URL
+      if (existingCheckoutUrl) {
+        window.open(existingCheckoutUrl, "_blank");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
