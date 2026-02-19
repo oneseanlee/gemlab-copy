@@ -822,6 +822,10 @@
   justify-content: center;
   padding-bottom: var(--space-12);
 }
+.tprime-steps-content h2 em {
+  font-style: italic;
+  font-weight: 500;
+}
 .tprime-steps-content .b365-section-heading {
   margin-bottom: var(--space-10) !important;
 }
