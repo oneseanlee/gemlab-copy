@@ -139,12 +139,43 @@
   margin-top: 2px;
 }
 
+/* ─── Solution Layout (two-column: image left, content right) ─── */
+.tprime-solution-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+.tprime-solution-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tprime-solution-img img {
+  width: 100%;
+  max-width: 520px;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 40px rgba(0,0,0,0.1));
+}
+.tprime-solution-content {
+  display: flex;
+  flex-direction: column;
+}
+
 /* ─── Solution Pillars ─── */
 .tprime-pillars-grid {
   max-width: 1000px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+.tprime-pillars-grid-2x2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-4);
   margin-bottom: var(--space-8);
 }
@@ -914,6 +945,19 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
+  .tprime-solution-layout {
+    grid-template-columns: 1fr;
+  }
+  .tprime-solution-img {
+    display: none;
+  }
+  .tprime-solution-content h2 {
+    text-align: center !important;
+  }
+  .tprime-delivery-badge,
+  .tprime-formula-tagline {
+    text-align: center !important;
+  }
   .tprime-hero-container {
     grid-template-columns: 1fr;
   }

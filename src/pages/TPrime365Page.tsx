@@ -283,24 +283,33 @@ const TPrime365Page = () => {
 
             {/* 5. The Solution */}
             <section className="b365-section b365-section-alt" id="science">
-                <h2 className="b365-section-heading b365-serif">TPrime365™: Your Natural Testosterone, <em>Amplified</em></h2>
-                <div className="tprime-pillars-grid">
-                    {[
-          { name: 'Enclomiphene', dose: '25mg' },
-          { name: 'Spermidine', dose: '10mg' },
-          { name: 'Boron', dose: '10mg' },
-          { name: 'Vitamin C', dose: '10mg' }].
-          map((p, i) =>
-          <div className="tprime-pillar" key={i}>
-                            <span className="pillar-name">{p.name}</span>
-                            <span className="pillar-dose">{p.dose}</span>
+                <div className="tprime-solution-layout">
+                    {/* Left: Hero Image */}
+                    <div className="tprime-solution-img">
+                        <img src="/images/tprime-model-2.png" alt="TPrime365 model" />
+                    </div>
+                    {/* Right: Title + 2x2 Grid */}
+                    <div className="tprime-solution-content">
+                        <h2 className="b365-section-heading b365-serif" style={{ textAlign: 'left', marginBottom: 'var(--space-8)' }}>TPrime365™: Your Natural Testosterone, <em>Amplified</em></h2>
+                        <div className="tprime-pillars-grid-2x2">
+                            {[
+                              { name: 'Enclomiphene', dose: '25mg' },
+                              { name: 'Spermidine', dose: '10mg' },
+                              { name: 'Boron', dose: '10mg' },
+                              { name: 'Vitamin C', dose: '10mg' }].
+                              map((p, i) =>
+                              <div className="tprime-pillar" key={i}>
+                                  <span className="pillar-name">{p.name}</span>
+                                  <span className="pillar-dose">{p.dose}</span>
+                              </div>
+                            )}
                         </div>
-          )}
+                        <div className="tprime-delivery-badge" style={{ textAlign: 'left' }}>
+                            <span>Sublingual Delivery via MODS Max Gold™</span>
+                        </div>
+                        <p className="tprime-formula-tagline" style={{ textAlign: 'left' }}>4 Clinically-Proven Ingredients. 1 Powerful Formula.</p>
+                    </div>
                 </div>
-                <div className="tprime-delivery-badge">
-                    <span>Sublingual Delivery via MODS Max Gold™</span>
-                </div>
-                <p className="tprime-formula-tagline">4 Clinically-Proven Ingredients. 1 Powerful Formula.</p>
             </section>
 
             {/* 6. Ingredient Breakdown */}
