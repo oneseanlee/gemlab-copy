@@ -234,7 +234,7 @@ const GLP1Page = () => {
                         <img src="/images/glp1-lifestyle-hero.png" alt="Active woman representing lifestyle optimization" />
                     </div>
                     <div className="glp1-lifestyle-content">
-                        <h2 className="b365-section-heading b365-serif" style={{textAlign:'left', marginBottom: 'var(--space-6)'}}>Lifestyle Optimization <em>Formula</em></h2>
+                        <h2 className="b365-section-heading b365-serif" style={{textAlign:'center', marginBottom: 'var(--space-6)'}}>Lifestyle Optimization <em>Formula</em></h2>
                         <div className="glp1-lifestyle-pillars-grid">
                             {[
                   { name: '9-Hour Eating Window', dose: '↓1.5% HbA1c' },
