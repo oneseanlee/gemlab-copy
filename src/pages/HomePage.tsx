@@ -587,9 +587,9 @@ const HomePage = () => {
       </RevealSection>
 
       {/* 10. Power Up Section — CTA now links to products instead of dead-end */}
-      <RevealSection className="b365-section b365-power-up">
+      <RevealSection className="b365-section b365-power-up" style={{ paddingBottom: 0 }}>
         <div className="b365-power-up-inner">
-          <div>
+          <div style={{ paddingBottom: 'var(--space-12)' }}>
             <h2>Power up your optimization with <em>MODS Max™</em></h2>
             <p>
               Our patent-pending sublingual delivery system uses microdose reactive oxygen species (ROS) to briefly open mucosal barriers — delivering ingredients directly into your bloodstream with up to 10x enhanced absorption.

@@ -825,7 +825,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-16);
-  align-items: center;
+  align-items: flex-end;
 }
 .b365-power-up h2 {
   font-family: var(--font-title);
@@ -875,15 +875,16 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  align-self: stretch;
-  margin-bottom: -80px;
+  align-self: flex-end;
   margin-top: -40px;
 }
 .b365-power-up-visual img {
-  max-height: 560px;
+  max-height: 620px;
   width: 100%;
   object-fit: contain;
   filter: drop-shadow(0 30px 60px rgba(0,0,0,0.25));
+  display: block;
+  vertical-align: bottom;
 }
 
 /* Testimonials */
