@@ -79,7 +79,7 @@
   border: 2px solid var(--b365-blue);
   border-radius: var(--radius-md);
   padding: var(--space-8);
-  max-width: 800px;
+  max-width: 100%;
   margin: 40px auto 0;
   text-align: center;
 }
@@ -100,35 +100,44 @@
 /* Callout with hero image */
 .glp1-callout-with-image {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: var(--space-8);
   text-align: left;
   position: relative;
   overflow: visible;
+  padding-bottom: 0;
 }
 .glp1-callout-text {
   flex: 1;
+  padding-bottom: var(--space-8);
 }
 .glp1-callout-image {
   flex: 0 0 260px;
   max-width: 260px;
-  margin: -60px -20px -60px 0;
+  margin-bottom: -2px;
+  align-self: flex-end;
 }
 .glp1-callout-image img {
   width: 100%;
   height: auto;
   object-fit: cover;
+  display: block;
   filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.12));
 }
 
 @media (max-width: 768px) {
   .glp1-callout-with-image {
     flex-direction: column;
+    align-items: center;
+    padding-bottom: 0;
+  }
+  .glp1-callout-text {
+    padding-bottom: 0;
   }
   .glp1-callout-image {
     flex: none;
     max-width: 200px;
-    margin: -20px 0 -40px;
+    margin-bottom: -2px;
   }
 }
 
