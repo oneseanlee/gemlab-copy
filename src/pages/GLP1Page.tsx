@@ -230,18 +230,23 @@ const GLP1Page = () => {
             {/* 6. Lifestyle Optimization */}
             <section className="b365-section">
                 <h2 className="b365-section-heading b365-serif">Lifestyle Optimization <em>Formula</em></h2>
-                <div className="tprime-pillars-grid">
-                    {[
-          { name: '9-Hour Eating Window', dose: '↓1.5% HbA1c' },
-          { name: '2 Meals + 1 Snack', dose: 'Max Absorption' },
-          { name: '7 Hours Sleep', dose: 'NAD+ Recycling' },
-          { name: '8,000 Steps Daily', dose: '300-400 cal' }].
-          map((p, i) =>
-          <div className="tprime-pillar" key={i}>
-                            <span className="pillar-name">{p.name}</span>
-                            <span className="pillar-dose">{p.dose}</span>
-                        </div>
-          )}
+                <div className="glp1-lifestyle-layout">
+                    <div className="glp1-lifestyle-image">
+                        <img src="/images/glp1-lifestyle-hero.png" alt="Active woman representing lifestyle optimization" />
+                    </div>
+                    <div className="tprime-pillars-grid">
+                        {[
+              { name: '9-Hour Eating Window', dose: '↓1.5% HbA1c' },
+              { name: '2 Meals + 1 Snack', dose: 'Max Absorption' },
+              { name: '7 Hours Sleep', dose: 'NAD+ Recycling' },
+              { name: '8,000 Steps Daily', dose: '300-400 cal' }].
+              map((p, i) =>
+              <div className="tprime-pillar" key={i}>
+                                <span className="pillar-name">{p.name}</span>
+                                <span className="pillar-dose">{p.dose}</span>
+                            </div>
+              )}
+                    </div>
                 </div>
             </section>
 
