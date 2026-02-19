@@ -1269,7 +1269,11 @@
   .benefit-card-img {
     width: 100%;
     min-width: unset;
-    height: 90px;
+    height: 80px;
+  }
+  .benefit-card-img img {
+    object-fit: contain;
+    padding: 4px;
   }
   .benefit-card-content {
     padding: var(--space-3);
