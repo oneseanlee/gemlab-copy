@@ -174,9 +174,14 @@ const GLP1Page = () => {
                         </tbody>
                     </table>
                 </div>
-                <div className="glp1-callout-card">
-                    <h4>Are You Losing FAT or Destroying Your METABOLISM?</h4>
-                    <p>Your mitochondria — the cellular powerhouses — determine whether you burn fat for fuel or cannibalize your own muscle tissue. Without mitochondrial support, GLP-1 is like putting regular gas in a Ferrari. It'll run... but not the way it should.</p>
+                <div className="glp1-callout-card glp1-callout-with-image">
+                    <div className="glp1-callout-text">
+                        <h4>Are You Losing FAT or Destroying Your METABOLISM?</h4>
+                        <p>Your mitochondria — the cellular powerhouses — determine whether you burn fat for fuel or cannibalize your own muscle tissue. Without mitochondrial support, GLP-1 is like putting regular gas in a Ferrari. It'll run... but not the way it should.</p>
+                    </div>
+                    <div className="glp1-callout-image">
+                        <img src="/images/glp1-protocol-hero.png" alt="Woman measuring waist showing GLP-1 fat loss results" />
+                    </div>
                 </div>
             </section>
 

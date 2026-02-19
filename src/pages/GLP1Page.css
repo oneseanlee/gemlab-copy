@@ -97,6 +97,37 @@
   margin: 0;
 }
 
+/* Callout with hero image */
+.glp1-callout-with-image {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  text-align: left;
+}
+.glp1-callout-text {
+  flex: 1;
+}
+.glp1-callout-image {
+  flex: 0 0 280px;
+  max-width: 280px;
+}
+.glp1-callout-image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .glp1-callout-with-image {
+    flex-direction: column;
+  }
+  .glp1-callout-image {
+    flex: none;
+    max-width: 220px;
+  }
+}
+
 /* ─── Protocol Cards (blue icons instead of red) ─── */
 .glp1-protocol-grid {
   max-width: 1280px;
