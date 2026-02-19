@@ -551,10 +551,6 @@
   flex: 1;
   padding-bottom: var(--space-8);
   padding-right: var(--space-10);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
 .glp1-lifestyle-pillars-grid {
   display: grid;
