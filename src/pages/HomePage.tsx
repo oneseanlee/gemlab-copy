@@ -522,7 +522,7 @@ const HomePage = () => {
       </RevealSection>
 
       {/* 8. Guarantee Section */}
-      <RevealSection className="b365-section">
+      <RevealSection className="b365-section" style={{ paddingBottom: 0, overflow: 'hidden' }}>
         <div className="b365-guarantee">
           <div>
             <h2>Improved testosterone <em>or you don't pay.</em></h2>
