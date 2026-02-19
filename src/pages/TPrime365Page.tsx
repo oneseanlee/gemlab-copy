@@ -8,6 +8,22 @@ import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { Menu, ArrowRight, X, Check, ChevronRight, Syringe, Pill, FlaskConical, Dna, Zap, Dumbbell, Shield, Brain, Flame, Heart, Target, Moon, Bone, Clock, ShieldCheck, Lightbulb, Calendar, AlertCircle, Building2, BadgeCheck, Microscope, Flag, Stethoscope, Lock, Package, Headphones } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '../components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
+import { CartDrawer } from '../components/CartDrawer';
+import { useCartStore } from '../stores/cartStore';
+
+const TPRIME_VARIANT_ID = 'gid://shopify/ProductVariant/46309997936780';
+const TPRIME_PRODUCT = {
+  node: {
+    id: 'gid://shopify/Product/TPrime365',
+    title: 'TPrime365™',
+    description: 'Physician-prescribed natural testosterone optimization. Monthly subscription includes formula + consultation + free shipping.',
+    handle: 'tprime365',
+    priceRange: { minVariantPrice: { amount: '149.00', currencyCode: 'USD' } },
+    images: { edges: [{ node: { url: '/images/tprime-bottle.png', altText: 'TPrime365' } }] },
+    variants: { edges: [{ node: { id: TPRIME_VARIANT_ID, title: 'Monthly Subscription', price: { amount: '149.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Plan', value: 'Monthly Subscription' }] } }] },
+    options: [{ name: 'Plan', values: ['Monthly Subscription'] }]
+  }
+};
 
 const tprimeTestimonials = [
   { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', using: 'TPrime365™' },
@@ -72,6 +88,20 @@ const TPrime365Page = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const addItem = useCartStore((state) => state.addItem);
+  const isLoading = useCartStore((state) => state.isLoading);
+
+  const handleOrderNow = async (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    await addItem({
+      product: TPRIME_PRODUCT,
+      variantId: TPRIME_VARIANT_ID,
+      variantTitle: 'Monthly Subscription',
+      price: { amount: '149.00', currencyCode: 'USD' },
+      quantity: 1,
+      selectedOptions: [{ name: 'Plan', value: 'Monthly Subscription' }]
+    });
+  };
 
   const mobileLinks = [
     { label: 'Ingredients', href: '#ingredients' },
@@ -143,7 +173,8 @@ const TPrime365Page = () => {
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
                     <div className="b365-nav-right">
-                        <AnimatedCTA href="/tprime365#process" small>Get Started</AnimatedCTA>
+                        <CartDrawer />
+                        <AnimatedCTA onClick={handleOrderNow} small>Get Started</AnimatedCTA>
                     </div>
                 </div>
             </nav>
@@ -164,7 +195,7 @@ const TPrime365Page = () => {
                             <span className="price-note">/month — Includes Physician Consultation via HappyMD</span>
                         </div>
                         <p className="guarantee-text">If not approved by physician, fully refunded</p>
-                        <AnimatedCTA href="#process">
+                        <AnimatedCTA onClick={handleOrderNow}>
                             See If You Qualify
                             <ArrowRight size={16} />
                         </AnimatedCTA>
@@ -418,7 +449,7 @@ const TPrime365Page = () => {
                 ))}
               </div>
               <div style={{ textAlign: 'center', marginTop: 'var(--space-8)' }}>
-                <AnimatedCTA href="#process">
+                <AnimatedCTA onClick={handleOrderNow}>
                   See If You Qualify
                   <ArrowRight size={16} />
                 </AnimatedCTA>
@@ -435,7 +466,7 @@ const TPrime365Page = () => {
                         <span className="note">Includes everything: Formula + Physician Consultation + Free Shipping</span>
                         <span className="guarantee-text">100% refunded if physician does not approve</span>
                     </div>
-                    <AnimatedCTA href="#process" className="btn-white-cta">
+                    <AnimatedCTA onClick={handleOrderNow} className="btn-white-cta">
                         Order Now — Risk Free
                         <ArrowRight size={16} />
                     </AnimatedCTA>
