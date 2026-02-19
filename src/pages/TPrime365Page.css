@@ -811,9 +811,10 @@
   display: grid;
   grid-template-columns: 1fr 480px;
   gap: var(--space-12);
-  align-items: center;
+  align-items: flex-end;
   max-width: 1280px;
   margin: 0 auto;
+  padding-bottom: 0 !important;
 }
 .tprime-steps-content {
   display: flex;
@@ -854,12 +855,15 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  align-self: flex-end;
+  margin-top: -40px;
 }
 .tprime-steps-hero-img img {
   width: 100%;
   max-width: 480px;
   object-fit: contain;
   filter: drop-shadow(0 20px 60px rgba(0,0,0,0.1));
+  display: block;
 }
 
 @media (max-width: 1024px) {
