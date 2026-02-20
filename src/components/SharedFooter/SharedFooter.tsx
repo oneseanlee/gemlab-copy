@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 import './SharedFooter.css';
 
-const SharedFooter = React.forwardRef<HTMLElement>((props, ref) => {
+const SharedFooter = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(function SharedFooter(_props, ref) {
   return (
-    <footer ref={ref} className="shared-footer">
+    <footer ref={ref as React.Ref<HTMLDivElement>} className="shared-footer">
       <div className="shared-footer-inner">
         <div className="shared-footer-grid">
           {/* Brand */}
@@ -70,7 +70,5 @@ const SharedFooter = React.forwardRef<HTMLElement>((props, ref) => {
     </footer>
   );
 });
-
-SharedFooter.displayName = 'SharedFooter';
 
 export default SharedFooter;
