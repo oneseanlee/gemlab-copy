@@ -1,10 +1,11 @@
 import React from 'react';
 import './AnimatedCTA.css';
 
-const AnimatedCTA = ({ children, href, onClick, className = '', small = false, ...props }) => {
+const AnimatedCTA = React.forwardRef(({ children, href, onClick, className = '', small = false, ...props }, ref) => {
   const Tag = onClick && !href ? 'button' : 'a';
   return (
     <Tag
+      ref={ref}
       href={Tag === 'a' ? (href || '#') : undefined}
       onClick={onClick}
       className={`animated-cta${small ? ' cta-sm' : ''} ${className}`}
@@ -15,6 +16,8 @@ const AnimatedCTA = ({ children, href, onClick, className = '', small = false, .
       <span className="cta-glow" aria-hidden="true" />
     </Tag>
   );
-};
+});
+
+AnimatedCTA.displayName = 'AnimatedCTA';
 
 export default AnimatedCTA;
