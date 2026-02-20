@@ -1,41 +1,40 @@
 
-## Update All 5 Shopify Product Descriptions
+## Fix: React ref warnings on AnimatedCTA and SharedFooter
 
-This is a Shopify data update — no code changes are needed. I will update the description (body HTML) for each of the 5 products directly in Shopify using the product IDs retrieved.
+### What's Happening
 
-### Products to Update
+The console shows two warnings:
+- "Function components cannot be given refs" for `AnimatedCTA`
+- "Function components cannot be given refs" for `SharedFooter`
 
-| Product | Shopify ID |
-|---|---|
-| TPrime365™ | 8988427911308 |
-| GLP-1 Optimization Protocol | 8977141104780 |
-| Ultimate Cellular Optimization System (UCOS) | 8988427976844 |
-| Complete GLP-1 Cellular Bundle | 8988428009612 |
-| Non-Hormonal Testosterone Bundle | 8988428075148 |
+Both are caused by the `RevealSection` wrapper, which uses `useScrollReveal` to attach a ref to a `<section>` element. When `AnimatedCTA` (a `.jsx` function component) is rendered inside `RevealSection`, React's dev mode warns that function components can't receive refs unless they use `React.forwardRef`. The same applies to `SharedFooter`.
 
-### What Will Change
+These warnings do not break any functionality — all buttons and links work correctly. However, they pollute the console and can mask real errors.
 
-Each product's description field in Shopify will be replaced with the full formatted copy you provided, including:
-- Headline and subheadline
-- Benefit bullet points
-- Ingredients/formula breakdown
-- Usage instructions
-- Results/timeline
-- Pricing callout
-- Legal disclaimers
+### Root Cause
 
-### Important Notes
+`AnimatedCTA/AnimatedCTA.jsx` is a plain function component — it does not use `React.forwardRef`, so React warns when anything tries to pass it a ref. The same is true for `SharedFooter`.
 
-- These changes go **live in your Shopify store immediately** — they will affect the product descriptions visible on any active Shopify storefront or checkout
-- The descriptions will be written as plain text (Shopify renders line breaks natively). If you later want bold, bullet formatting, or headers in the Shopify admin, I can re-apply them as HTML
-- The prices shown in the descriptions ($149/mo, $39.95, $175, etc.) are informational text only — the actual Shopify variant prices (currently $1 for TPrime and GLP-1) remain unchanged
+The actual ref in `RevealSection` is attached to the `<section>` DOM element, not to `AnimatedCTA` or `SharedFooter` directly. The warning appears because React traces the render tree and flags any function component in the chain that doesn't forward refs.
 
-### Execution Order
+The cleanest fix: wrap `AnimatedCTA` with `React.forwardRef` so refs can safely pass through it. This also future-proofs the component for any animation libraries that may need to attach refs.
 
-1. Update TPrime365™
-2. Update GLP-1 Optimization Protocol
-3. Update Ultimate Cellular Optimization System (UCOS)
-4. Update Complete GLP-1 Cellular Bundle
-5. Update Non-Hormonal Testosterone Bundle
+For `SharedFooter`, the fix is the same — wrap the export with `React.forwardRef`.
 
-All 5 updates will be made in sequence. This is purely a Shopify data operation — no code files are modified.
+### Files to Change
+
+1. `src/components/AnimatedCTA/AnimatedCTA.jsx`
+   - Wrap the component with `React.forwardRef`
+   - Pass the `ref` to the underlying `<Tag>` element
+
+2. `src/components/SharedFooter/SharedFooter.tsx`
+   - Wrap the component with `React.forwardRef`
+   - Pass the `ref` to the underlying `<footer>` element
+
+### No Functional Changes
+
+- All button destinations remain unchanged
+- All animations and hover effects remain unchanged
+- No CSS changes
+- No routing changes
+- This is a pure React correctness fix
