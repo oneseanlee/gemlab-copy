@@ -31,10 +31,13 @@ const useParallax = (speed = 0.3) => {
 };
 
 /* ──── Scroll-reveal wrapper ──── */
-const RevealSection = ({ children, className = '', ...props }) => {
-  const ref = useScrollReveal<HTMLElement>();
-  return <section ref={ref} className={className} {...props}>{children}</section>;
-};
+const RevealSection = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
+  ({ children, className = '', ...props }, _forwardedRef) => {
+    const ref = useScrollReveal<HTMLElement>();
+    return <section ref={ref} className={className} {...props}>{children}</section>;
+  }
+);
+RevealSection.displayName = 'RevealSection';
 
 /* ──── Social proof banner messages ──── */
 const socialProofMessages = [
