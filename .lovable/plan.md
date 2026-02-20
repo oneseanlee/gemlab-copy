@@ -1,40 +1,42 @@
 
-## Fix: React ref warnings on AnimatedCTA and SharedFooter
-
-### What's Happening
-
-The console shows two warnings:
-- "Function components cannot be given refs" for `AnimatedCTA`
-- "Function components cannot be given refs" for `SharedFooter`
-
-Both are caused by the `RevealSection` wrapper, which uses `useScrollReveal` to attach a ref to a `<section>` element. When `AnimatedCTA` (a `.jsx` function component) is rendered inside `RevealSection`, React's dev mode warns that function components can't receive refs unless they use `React.forwardRef`. The same applies to `SharedFooter`.
-
-These warnings do not break any functionality — all buttons and links work correctly. However, they pollute the console and can mask real errors.
+## Fix: "Component is not a function" Crash
 
 ### Root Cause
 
-`AnimatedCTA/AnimatedCTA.jsx` is a plain function component — it does not use `React.forwardRef`, so React warns when anything tries to pass it a ref. The same is true for `SharedFooter`.
+The error is caused by `src/pages/Home.tsx` — a dead legacy file that is never used by the router but is still parsed by Vite during the build. It imports several old scaffold components:
 
-The actual ref in `RevealSection` is attached to the `<section>` DOM element, not to `AnimatedCTA` or `SharedFooter` directly. The warning appears because React traces the render tree and flags any function component in the chain that doesn't forward refs.
+- `Header/Header.jsx`
+- `ProductHero/ProductHero.jsx`
+- `AccordionSection/AccordionSection.jsx`
+- `BenefitsTimeline/BenefitsTimeline.jsx`
+- `ScientificValidation/ScientificValidation.jsx`
+- `RitualSection/RitualSection.jsx`
+- `RefillBanner/RefillBanner.jsx`
+- `StatsSection/StatsSection.jsx`
+- `Testimonials/Testimonials.jsx`
+- `LogoCarousel/LogoCarousel.jsx`
+- `ScrollToTop/ScrollToTop.jsx`
 
-The cleanest fix: wrap `AnimatedCTA` with `React.forwardRef` so refs can safely pass through it. This also future-proofs the component for any animation libraries that may need to attach refs.
+One or more of these old components exports something that is not a valid React component (not a function), causing React to throw `"Component is not a function"` when the Vite module graph evaluates the file.
 
-For `SharedFooter`, the fix is the same — wrap the export with `React.forwardRef`.
+**`App.tsx` routes `/` to `HomePage.tsx`, not `Home.tsx`.** `Home.tsx` is completely unreachable — it is dead code.
 
-### Files to Change
+### Evidence
 
-1. `src/components/AnimatedCTA/AnimatedCTA.jsx`
-   - Wrap the component with `React.forwardRef`
-   - Pass the `ref` to the underlying `<Tag>` element
+- `App.tsx` has no import of `Home.tsx` anywhere
+- `App.tsx` routes `<Route path="/" element={<HomePage />} />` — pointing to `HomePage.tsx`
+- `Home.tsx` imports legacy components (e.g. `Header` shows a "GEMLAB" placeholder, `ProductHero` shows old perfume-store scaffold code) that have no relationship to the current Best 365 Labs site
+- The crash occurs at the module evaluation level, which is why it produces a blank screen
 
-2. `src/components/SharedFooter/SharedFooter.tsx`
-   - Wrap the component with `React.forwardRef`
-   - Pass the `ref` to the underlying `<footer>` element
+### Fix
+
+Delete `src/pages/Home.tsx`.
+
+This is the only change needed. No other files are modified. All currently working pages (`HomePage.tsx`, `TPrime365Page.tsx`, etc.) are unaffected because they never imported `Home.tsx`.
 
 ### No Functional Changes
 
-- All button destinations remain unchanged
-- All animations and hover effects remain unchanged
-- No CSS changes
-- No routing changes
-- This is a pure React correctness fix
+- The home page (`/`) continues to work via `HomePage.tsx`
+- All other routes are unaffected
+- `AnimatedCTA` and `SharedFooter` remain as they are (the `forwardRef` changes are correct)
+- No CSS, routing, or component logic is changed
