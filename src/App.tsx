@@ -7,6 +7,7 @@ import GLP1Page from "./pages/GLP1Page";
 import NHTOPage from "./pages/NHTOPage";
 import NHTOIntakePage from "./pages/NHTOIntakePage";
 import GLP1IntakePage from "./pages/GLP1IntakePage";
+import TPrime365IntakePage from "./pages/TPrime365IntakePage";
 import UCOSPage from "./pages/UCOSPage";
 import GLP1BundlePage from "./pages/GLP1BundlePage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
@@ -32,6 +33,7 @@ const AppRoutes = () => {
       <Route path="/nhto" element={<NHTOPage />} />
       <Route path="/nhto-intake" element={<NHTOIntakePage />} />
       <Route path="/glp1-intake" element={<GLP1IntakePage />} />
+      <Route path="/tprime365-intake" element={<TPrime365IntakePage />} />
       <Route path="/ucos" element={<UCOSPage />} />
       <Route path="/glp1-ucos" element={<GLP1BundlePage />} />
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
