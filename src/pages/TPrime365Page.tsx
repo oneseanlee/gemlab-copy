@@ -197,7 +197,7 @@ const TPrime365Page = () => {
                         </div>
                         <p className="guarantee-text">If not approved by physician, fully refunded</p>
                         <AnimatedCTA onClick={handleOrderNow}>
-                            Buy Now
+                            Start My Protocol
                             <ArrowRight size={16} />
                         </AnimatedCTA>
                     </div>
