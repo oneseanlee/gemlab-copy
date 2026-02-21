@@ -1,74 +1,46 @@
 
-# Redesign Free Testosterone Guide Page
 
-## Problem
-The current page uses a dark background (#0a0f1e) with gold/amber accents (#D4A843) that doesn't match the rest of the site. The site uses a white-to-blue gradient background, brand blue (#3376b0), white cards with subtle borders, and the standard blue AnimatedCTA buttons.
+# Fix: Free Testosterone Guide Page -- Content Missing & Layout Broken
 
-## Changes
+## Root Cause
 
-### 1. Remove Dark Theme -- Match Site Background
-- Remove the dark `background` override on `.ftg-page`
-- Let the page inherit the global gradient background (`#FFFFFF` to `#BFD5E6` to `#5D8AA8`) from `index.css`
-- All text switches from white to the site's standard dark text (`--b365-text` / `--b365-gray-900`)
-- Secondary text uses `--b365-text-secondary` (`#5A6578`)
+Two interrelated issues are causing the page to appear broken:
 
-### 2. Restyle All Sections to White Card Aesthetic
-- **Trust strip cards**: White background, `--shadow-sm` box shadow, `--b365-border` border, blue icons instead of gold
-- **Discover grid items**: White card background with border and shadow, numbered items use `--b365-blue` instead of gold
-- **Testimonial cards**: White background with border/shadow, standard blue star ratings instead of gold
-- **Form inputs**: Light gray border, white background, standard focus ring in blue
-- **Success state**: Green border with light green background (matches `--b365-green`)
+1. **Video background stacking context conflict**: The hero video element (`.ftg-hero-video-bg`) uses `position: fixed` but is placed as a child of `.ftg-hero`, which is a grid container with `position: relative` and `z-index: 1`. This creates a broken stacking context -- the fixed-position video with `z-index: -2` gets trapped behind the page background, and the grid layout miscalculates because it has an extra child element it tries to place in the grid.
 
-### 3. Replace Gold CTA Buttons with Standard AnimatedCTA
-- Remove the custom `.ftg-submit` gold gradient button entirely
-- Use the site's `AnimatedCTA` component (blue gradient, pill shape, hover animation) as the form submit button via its `onClick` prop
-- This ensures visual consistency with every other CTA on the site
+2. **Unbounded parallax transform**: The `useParallax` hook applies `translateY(offset)` on every scroll tick with no clamping. As the user scrolls, the ebook image gets translated hundreds of pixels off-screen, making it (and potentially other content) disappear.
 
-### 4. Restyle the 3D Ebook Mockup
-- Change the ebook gradient from dark navy to the brand blue palette (`--b365-blue` to `--b365-blue-dark`)
-- Keep the 3D perspective effect but adjust shadow colors to work on a light background
-- Badge text uses white on blue instead of gold
+## Fixes
 
-### 5. Update Hero Tag and Heading Colors
-- "Free Guide" tag: Blue (`--b365-blue`) instead of gold
-- Headlines: `--b365-text` (dark navy) instead of white
-- Subheadline: `--b365-text-secondary` instead of gray-400
+### 1. Move Hero Video Background Outside the Grid
+Move the `<div className="ftg-hero-video-bg">` out of the `<section className="ftg-hero">` grid and place it as a direct child of the page wrapper (`.ftg-page`), right at the top. This way the fixed video sits behind everything without interfering with the hero grid layout.
 
-### 6. Footer Styling
-- Border top uses `--b365-border` instead of rgba white
-- Text uses `--b365-gray-400`
-- Links hover to `--b365-blue` instead of gold
+**File:** `src/pages/FreeTestosteroneGuidePage.tsx`
+- Move the video background `div` from inside `<section className="ftg-hero">` to just before it, as a sibling inside `.ftg-page`
 
-### 7. Scroll Reveal
-- Keep the existing `useScrollReveal` hook and `.b365-reveal` / `.b365-revealed` classes (they work on any background)
+### 2. Clamp the Parallax Effect
+Add bounds to the parallax hook so the ebook image never translates more than +/-30px, keeping it visible at all scroll positions.
+
+**File:** `src/pages/FreeTestosteroneGuidePage.tsx`
+- Change line in `useParallax`: `const offset = rect.top * speed;` to `const offset = Math.max(-30, Math.min(30, rect.top * speed));`
+
+### 3. Fix Console Ref Warnings
+The console shows warnings about refs being passed to `FaqItem` and `OptInForm` function components. Wrap both with `React.forwardRef` to eliminate these warnings cleanly.
+
+**File:** `src/pages/FreeTestosteroneGuidePage.tsx`
+- Wrap `OptInForm` and `FaqItem` with `React.forwardRef`
 
 ---
 
 ## Technical Details
 
 ### Files Modified
-1. **`src/pages/FreeTestosteroneGuidePage.tsx`** -- Import and use `AnimatedCTA` for submit buttons, replace the custom button element, adjust ebook badge/star colors
-2. **`src/pages/FreeTestosteroneGuidePage.css`** -- Complete restyle of all color values, backgrounds, borders, and shadows to match the homepage design system
+- `src/pages/FreeTestosteroneGuidePage.tsx` -- 3 targeted edits (move video div, clamp parallax, forwardRef wrappers)
+- No CSS changes needed -- the existing styles are correct once the HTML structure is fixed
 
-### Key CSS Token Swaps
+### Why This Fixes It
+- The hero video at `position: fixed; z-index: -2` will now live outside the grid's stacking context, rendering correctly behind all page content
+- The grid will only contain its intended 2 columns (hero-left and hero-right) without the video div disrupting the layout
+- The parallax clamping prevents the ebook from ever scrolling out of view
+- The final CTA video (position: absolute, inside its own section with `isolation: isolate`) is already correctly structured and needs no changes
 
-| Element | Current (Dark/Gold) | New (Light/Blue) |
-|---------|-------------------|-----------------|
-| Page background | `#0a0f1e to #111827` | Inherit global gradient |
-| Headlines | `#fff` | `var(--b365-text)` |
-| Body text | `#9CA3AF` | `var(--b365-text-secondary)` |
-| Accent color | `#D4A843` (gold) | `var(--b365-blue)` |
-| Card backgrounds | `rgba(255,255,255,0.04)` | `var(--b365-white)` |
-| Card borders | `rgba(255,255,255,0.06)` | `1px solid var(--b365-border)` |
-| Card shadows | None | `var(--shadow-sm)` |
-| CTA button | Gold gradient | `AnimatedCTA` component (blue) |
-| Input borders | `rgba(255,255,255,0.12)` | `var(--b365-border)` |
-| Input focus | `#D4A843` border | `var(--b365-blue)` border |
-| Stars | `#D4A843` fill | `var(--b365-blue)` fill |
-| Ebook mockup | Dark navy gradient | `--b365-blue` gradient |
-
-### Form Handling
-The `AnimatedCTA` component supports `onClick` without `href`, rendering as a `<button>`. We wrap the form's submit logic so that clicking the AnimatedCTA triggers form validation and submission. The form element itself handles validation via HTML5 `required` attributes -- we attach an `id` to the form and use `form.requestSubmit()` from the button click, or restructure to keep the button inside the `<form>` tag.
-
-### No New Dependencies
-All changes use existing design tokens, components, and patterns already in the codebase.
