@@ -53,16 +53,6 @@ const valueItems = [
   { name: 'BONUS: Priority Access to Best 365 Labs Community', value: 49 },
 ];
 
-const gradients = [
-  'linear-gradient(135deg, #1a3a5c, #2a6191)',
-  'linear-gradient(135deg, #2a4a3a, #3a7a5a)',
-  'linear-gradient(135deg, #3a2a5c, #5a4a8a)',
-  'linear-gradient(135deg, #4a2a2a, #7a4a4a)',
-  'linear-gradient(135deg, #1a4a4a, #2a7a7a)',
-  'linear-gradient(135deg, #3a3a1a, #6a6a3a)',
-  'linear-gradient(135deg, #2a2a4a, #4a4a7a)',
-  'linear-gradient(135deg, #4a3a2a, #7a5a3a)',
-];
 
 const UpsellPage: React.FC = () => {
   const headlineRef = useScrollReveal<HTMLDivElement>();
@@ -114,7 +104,7 @@ const UpsellPage: React.FC = () => {
         <div className="upsell-grid">
           {guides.map((g, i) => (
             <div className="upsell-card" key={i}>
-              <div className="upsell-card-cover" style={{ background: gradients[i] }}>
+              <div className="upsell-card-cover">
                 <span className="upsell-card-num">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="upsell-card-title">{g.title}</h3>
               </div>

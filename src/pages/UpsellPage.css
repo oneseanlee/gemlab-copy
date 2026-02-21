@@ -13,7 +13,10 @@
 
 /* ── Confirmation Bar ── */
 .upsell-confirm-bar {
-  background: linear-gradient(135deg, #166534, #15803d);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--b365-border);
   text-align: center;
   padding: var(--space-4) var(--space-6);
   position: relative;
@@ -23,13 +26,13 @@
 .upsell-confirm-main {
   font-weight: 700;
   font-size: var(--text-body-sm);
-  color: var(--b365-white);
+  color: var(--b365-text);
   margin: 0 0 var(--space-1);
 }
 
 .upsell-confirm-sub {
   font-size: var(--text-caption);
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--b365-text-secondary);
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -169,6 +172,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  background: linear-gradient(135deg, var(--b365-blue-dark), var(--b365-blue));
 }
 
 .upsell-card-num {
@@ -177,7 +181,7 @@
   right: 12px;
   font-size: var(--text-micro);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.4);
   letter-spacing: 0.06em;
 }
 
