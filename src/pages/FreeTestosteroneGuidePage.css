@@ -6,7 +6,6 @@
   min-height: 100vh;
   color: var(--b365-text);
   font-family: var(--font-body);
-  position: relative;
 }
 
 /* ═══════════════════════════
@@ -112,6 +111,11 @@
   align-items: stretch;
 }
 
+.ftg-form .animated-cta {
+  width: 100%;
+  justify-content: center;
+}
+
 .ftg-input-wrap {
   flex: 1;
   position: relative;
@@ -149,6 +153,10 @@
 .ftg-input-row .animated-cta {
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+.ftg-form > .animated-cta {
+  white-space: nowrap;
 }
 
 .ftg-privacy-note {
