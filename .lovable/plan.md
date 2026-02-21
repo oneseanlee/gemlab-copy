@@ -1,42 +1,53 @@
 
-## Fix: "Component is not a function" Crash
 
-### Root Cause
+# Auto-Open Cart Drawer After "Add to Cart"
 
-The error is caused by `src/pages/Home.tsx` — a dead legacy file that is never used by the router but is still parsed by Vite during the build. It imports several old scaffold components:
+## The Problem
+Right now, when a customer clicks "Order Now" / "See If You Qualify" / "Get Started", the item silently gets added to the cart. The customer then has to manually find and click the tiny cart icon in the top-right corner to see their cart and proceed to checkout. That's a terrible conversion flow.
 
-- `Header/Header.jsx`
-- `ProductHero/ProductHero.jsx`
-- `AccordionSection/AccordionSection.jsx`
-- `BenefitsTimeline/BenefitsTimeline.jsx`
-- `ScientificValidation/ScientificValidation.jsx`
-- `RitualSection/RitualSection.jsx`
-- `RefillBanner/RefillBanner.jsx`
-- `StatsSection/StatsSection.jsx`
-- `Testimonials/Testimonials.jsx`
-- `LogoCarousel/LogoCarousel.jsx`
-- `ScrollToTop/ScrollToTop.jsx`
+## The Solution
+After a product is added to the cart, the cart drawer will automatically slide open, showing the customer exactly what they just added along with a clear "Proceed to Checkout" button. One click to add, instant visual confirmation, one more click to check out.
 
-One or more of these old components exports something that is not a valid React component (not a function), causing React to throw `"Component is not a function"` when the Vite module graph evaluates the file.
+## How It Works
 
-**`App.tsx` routes `/` to `HomePage.tsx`, not `Home.tsx`.** `Home.tsx` is completely unreachable — it is dead code.
+1. **Add a global `isCartOpen` state to the Zustand cart store** -- this lets any component (product pages, nav buttons, etc.) programmatically open the cart drawer.
 
-### Evidence
+2. **Update the CartDrawer component** to use this shared open/close state instead of its own local `useState`.
 
-- `App.tsx` has no import of `Home.tsx` anywhere
-- `App.tsx` routes `<Route path="/" element={<HomePage />} />` — pointing to `HomePage.tsx`
-- `Home.tsx` imports legacy components (e.g. `Header` shows a "GEMLAB" placeholder, `ProductHero` shows old perfume-store scaffold code) that have no relationship to the current Best 365 Labs site
-- The crash occurs at the module evaluation level, which is why it produces a blank screen
+3. **Update all 5 product page `handleOrderNow` functions** to open the cart drawer automatically after `addItem` completes successfully.
 
-### Fix
+## Pages Affected
+- `src/stores/cartStore.ts` -- add `isCartOpen` / `setCartOpen` state
+- `src/components/CartDrawer.tsx` -- use store state instead of local state
+- `src/pages/TPrime365Page.tsx` -- auto-open cart after add
+- `src/pages/GLP1Page.tsx` -- auto-open cart after add
+- `src/pages/NHTOPage.tsx` -- auto-open cart after add
+- `src/pages/UCOSPage.tsx` -- auto-open cart after add
+- `src/pages/GLP1BundlePage.tsx` -- auto-open cart after add
 
-Delete `src/pages/Home.tsx`.
+---
 
-This is the only change needed. No other files are modified. All currently working pages (`HomePage.tsx`, `TPrime365Page.tsx`, etc.) are unaffected because they never imported `Home.tsx`.
+## Technical Details
 
-### No Functional Changes
+### 1. Cart Store (cartStore.ts)
+Add two new properties:
+- `isCartOpen: boolean` (default `false`)
+- `setCartOpen: (open: boolean) => void`
 
-- The home page (`/`) continues to work via `HomePage.tsx`
-- All other routes are unaffected
-- `AnimatedCTA` and `SharedFooter` remain as they are (the `forwardRef` changes are correct)
-- No CSS, routing, or component logic is changed
+These are NOT persisted to localStorage (excluded via `partialize`).
+
+### 2. CartDrawer Component
+Replace the local `const [isOpen, setIsOpen] = useState(false)` with:
+```
+const isCartOpen = useCartStore(state => state.isCartOpen);
+const setCartOpen = useCartStore(state => state.setCartOpen);
+```
+Wire `Sheet` to use `open={isCartOpen}` and `onOpenChange={setCartOpen}`.
+
+### 3. All Product Pages (5 files)
+After `await addItem(...)`, add:
+```
+useCartStore.getState().setCartOpen(true);
+```
+This opens the drawer immediately after the item is added.
+
