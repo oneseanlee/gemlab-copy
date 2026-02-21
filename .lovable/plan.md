@@ -1,60 +1,50 @@
 
 
-# Free Testosterone Guide Page Updates
+## One-Time Offer Upsell Page
 
-## Changes
+**Route:** `/free-testosterone-guide/upgrade`
 
-### 1. Replace Hero Background Video
-Swap the current `ftg-bg-running.mp4` with the newly uploaded video file. Copy `user-uploads://2505952_Running_Music_1280x720-2.mp4` to `public/images/ftg-bg-running.mp4` (replacing the existing one) and update the source reference.
+### What Gets Built
 
-### 2. Redesign the Bottom CTA Section
-The current final CTA section has issues with the video overlay contrast, spacing, and form layout against the dark background. The fix:
-- Increase padding for more breathing room (top/bottom `var(--space-32)`)
-- Improve the overlay gradient for better legibility (darker, with a subtle blue tint)
-- Add a decorative top border glow effect for visual separation
-- Style the form inputs for dark backgrounds (semi-transparent white backgrounds, light borders, white placeholder text)
-- Center and constrain the form width to 480px
-- Add subtle backdrop blur to the form area for a frosted-glass premium feel
-- Ensure the `ftg-cta-micro` text has proper opacity and spacing
+A standalone, no-nav upsell page that appears after the free guide opt-in. Dark theme, mobile-first, with a 15-minute countdown timer creating urgency. The page sells "The Complete Testosterone Optimization Vault" (8 guides for $29 vs $197).
 
-### 3. Add First Name Field to All Opt-In Forms
-Re-introduce a "First Name" input field to the `OptInForm` component:
-- Add `firstName` and `onFirstNameChange` props to the component
-- Add state for `firstName` in the parent component
-- Place the first name input above the email row (stacked layout: first name, then email + CTA button)
-- Use a `User` icon for the first name field (from lucide-react)
-- The input row becomes two rows: name field on top, email + button below
+### Page Sections (top to bottom)
 
-## Technical Details
+1. **Green confirmation bar** -- "Your Free Guide Is On Its Way!" + one-time offer teaser
+2. **Headline block** -- Gold "ONE-TIME OFFER" badge, Playfair Display headline, subheadline, countdown timer (15:00 functional JS countdown with gold digits)
+3. **Product grid** -- 8 ebook mockups in 2x4 desktop / 1-col mobile grid (styled div cards with gradient backgrounds and white title text), each with a 1-line description
+4. **Value stack** -- Dark card with gold checkmarks listing all 8 guides + bonus community access, individual values, ~~$197~~ strikethrough, large gold $29
+5. **Primary CTA** -- Gold/amber gradient button ("YES -- GIVE ME THE COMPLETE VAULT FOR $29"), secure checkout note below
+6. **Skip link** -- Subtle gray "No thanks, I just want my free guide" linking to `/free-testosterone-guide/thank-you`
+7. **Dr. Steven Warren authority section** -- Dark card with left gold accent border
+8. **60-Day Guarantee** -- Shield icon + guarantee copy
+9. **Minimal footer** -- FDA disclaimer, copyright, privacy/terms links
 
-### Files Modified
-- `public/images/ftg-bg-running.mp4` -- replaced with new uploaded video
-- `src/pages/FreeTestosteroneGuidePage.tsx` -- add `firstName` state, update `OptInForm` props and JSX to include first name input
-- `src/pages/FreeTestosteroneGuidePage.css` -- restyle `.ftg-final-cta` section (padding, overlay, form inputs on dark bg), add `.ftg-name-row` styles
+### Technical Details
 
-### Form Layout (All 3 Forms)
-```text
-+-------------------------------+
-| [User icon] First Name        |
-+-------------------------------+
-| [Mail icon] Email  | GET FREE |
-+-------------------------------+
-  Lock icon  100% Free...
-```
+**New files:**
+- `src/pages/UpsellPage.tsx` -- Full page component with countdown timer using `useState`/`useEffect`, scroll-reveal animations via existing `useScrollReveal` hook
+- `src/pages/UpsellPage.css` -- All styles using existing design tokens (`--b365-*`, `--space-*`, `--font-title`, `--font-body`, etc.)
 
-### Bottom CTA Visual Hierarchy
-```text
-+--[blue glow top border]------+
-|                               |
-|   Stop Renting.               |
-|   Start Owning.               |
-|                               |
-|   Get the Free Guide Now.     |
-|                               |
-|   [ First Name             ]  |
-|   [ Email       ] [GET FREE]  |
-|   Lock 100% Free...           |
-|                               |
-|   Join 50,000+ men...         |
-+-------------------------------+
-```
+**Modified files:**
+- `src/App.tsx` -- Add route: `<Route path="/free-testosterone-guide/upgrade" element={<UpsellPage />} />`
+
+**New route needed:**
+- `/free-testosterone-guide/thank-you` -- Simple thank-you page (minimal, just confirms the free guide is coming). Added as a basic component in the same pass.
+
+**Countdown timer:**
+- Functional component using `useState(900)` (15 min in seconds) and `useEffect` with `setInterval`
+- Displays as `MM:SS` in large gold/amber styled digits
+- Stops at `00:00`
+
+**CTA button:**
+- Gold gradient (`#D4A843` to `#B8922E`), logs click to console (payment integration later)
+
+**Styling approach:**
+- Dark theme background (`--b365-navy` / `--b365-gray-900`)
+- All text in white/light variants
+- Gold accent color for badge, timer, checkmarks, CTA, and Dr. Warren card border
+- Uses existing design tokens, font families, spacing scale, and animation system
+- Scroll-reveal animations on sections using existing `useScrollReveal` hook
+- Mobile-first with breakpoints at 480px, 768px, 1024px per site standard
+
