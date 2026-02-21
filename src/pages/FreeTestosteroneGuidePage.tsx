@@ -1,14 +1,32 @@
-import React, { useState, FormEvent, useRef } from 'react';
+import React, { useState, FormEvent, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Star } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import AnimatedCTA from '@/components/AnimatedCTA/AnimatedCTA';
 import './FreeTestosteroneGuidePage.css';
 
+/* ── Parallax hook for ebook image ── */
+const useParallax = (speed = 0.08) => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onScroll = () => {
+      const rect = el.getBoundingClientRect();
+      const offset = rect.top * speed;
+      el.style.transform = `translateY(${offset}px)`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [speed]);
+  return ref;
+};
+
 const trustItems = [
   { icon: Users, label: '50,000+ Men Served' },
   { icon: Building2, label: 'FDA-Registered Facility' },
-  { icon: Stethoscope, label: 'Physician-Backed Protocols' },
+  { icon: Stethoscope, label: 'Physician-Backed' },
   { icon: FlaskConical, label: 'Patent-Pending Science' },
 ];
 
@@ -74,14 +92,12 @@ const OptInForm = ({
         value={email}
         onChange={(e) => onEmailChange(e.target.value)}
       />
-      <AnimatedCTA
-        onClick={() => formRef.current?.requestSubmit()}
-      >
+      <AnimatedCTA onClick={() => formRef.current?.requestSubmit()}>
         GET YOUR FREE GUIDE <ArrowRight size={18} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 6 }} />
       </AnimatedCTA>
       <p className="ftg-privacy-note">
         <Lock size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
-        100% Free. No spam. Unsubscribe anytime.
+        100% Free · No spam · Unsubscribe anytime
       </p>
     </form>
   );
@@ -96,6 +112,7 @@ const FreeTestosteroneGuidePage: React.FC = () => {
   const discoverRef = useScrollReveal<HTMLDivElement>();
   const proofRef = useScrollReveal<HTMLDivElement>();
   const ctaRef = useScrollReveal<HTMLDivElement>();
+  const ebookParallax = useParallax(0.06);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -105,15 +122,15 @@ const FreeTestosteroneGuidePage: React.FC = () => {
 
   return (
     <div className="ftg-page">
-      {/* Hero */}
+      {/* ── Hero ── */}
       <section className="ftg-hero">
         <div className="ftg-hero-left">
           <span className="ftg-hero-tag">Free Guide</span>
           <h1 className="ftg-hero-headline">
-            The Difference Between Renting Testosterone and Owning It
+            The Difference Between <em>Renting</em> Testosterone and <em>Owning</em> It
           </h1>
           <p className="ftg-hero-sub">
-            Most men don't realize they're signing up for a lifetime lease on their own hormones. This guide shows you the difference between replacing your testosterone and actually optimizing your body to produce it — and why it matters more than you think.
+            Most men don't realize they're signing up for a lifetime lease on their own hormones. This guide shows you the difference — and why it matters more than you think.
           </p>
           <OptInForm
             formId="ftg-hero-form"
@@ -125,63 +142,84 @@ const FreeTestosteroneGuidePage: React.FC = () => {
             onSubmit={handleSubmit}
           />
         </div>
-        <div className="ftg-hero-right">
-          <div className="ftg-ebook">
-            <span className="ftg-ebook-badge">Free Guide</span>
-            <div className="ftg-ebook-title">
-              The Difference Between Renting Testosterone and Owning It
-            </div>
-            <span className="ftg-ebook-brand">Best 365 Labs</span>
+        <div className="ftg-hero-right" ref={ebookParallax}>
+          <div className="ftg-ebook-wrapper">
+            <img
+              src="/images/ftg-ebook-cover.png"
+              alt="Free Guide: The Difference Between Renting Testosterone and Owning It"
+              className="ftg-ebook-img"
+              loading="eager"
+              fetchPriority="high"
+            />
+            <div className="ftg-ebook-shadow" aria-hidden="true" />
           </div>
         </div>
       </section>
 
-      {/* Trust Strip */}
+      {/* ── Trust Strip ── */}
       <div className="ftg-trust" ref={trustRef}>
-        {trustItems.map((item, i) => (
-          <div className="ftg-trust-card" key={i}>
-            <item.icon size={20} className="ftg-trust-icon" />
-            <span className="ftg-trust-label">{item.label}</span>
-          </div>
-        ))}
+        <div className="ftg-trust-bar">
+          {trustItems.map((item, i) => (
+            <React.Fragment key={i}>
+              {i > 0 && <span className="ftg-trust-divider" aria-hidden="true" />}
+              <div className="ftg-trust-item">
+                <item.icon size={18} className="ftg-trust-icon" />
+                <span className="ftg-trust-label">{item.label}</span>
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
       </div>
 
-      {/* Discover Section */}
+      {/* ── Discover Section ── */}
       <section className="ftg-discover" ref={discoverRef}>
-        <h2 className="ftg-section-heading">Inside This Free Guide, You'll Discover:</h2>
-        <div className="ftg-discover-grid">
+        <div className="ftg-section-header">
+          <span className="ftg-section-rule" aria-hidden="true" />
+          <h2 className="ftg-section-heading">Inside This Free Guide</h2>
+          <span className="ftg-section-rule" aria-hidden="true" />
+        </div>
+        <div className="ftg-discover-list">
           {discoverItems.map((text, i) => (
-            <div className="ftg-discover-item" key={i}>
-              <span className="ftg-discover-num">{i + 1}</span>
+            <div
+              className="ftg-discover-item"
+              key={i}
+              style={{ animationDelay: `${i * 80}ms` }}
+            >
+              <span className="ftg-discover-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div className="ftg-discover-accent" aria-hidden="true" />
               <p className="ftg-discover-text">{text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Social Proof */}
+      {/* ── Social Proof ── */}
       <section className="ftg-proof" ref={proofRef}>
+        <div className="ftg-proof-badge">
+          <Star size={14} fill="var(--b365-blue)" stroke="var(--b365-blue)" />
+          <span>4.9/5 from 50,000+ clients</span>
+        </div>
         <h2 className="ftg-section-heading">Real Results From Real Men</h2>
-        <div className="ftg-proof-grid">
+        <div className="ftg-proof-stack">
           {testimonials.map((t, i) => (
-            <div className="ftg-proof-card" key={i}>
-              <div className="ftg-proof-stars">
-                {Array.from({ length: 5 }).map((_, si) => (
-                  <Star key={si} size={16} fill="var(--b365-blue)" stroke="var(--b365-blue)" style={{ display: 'inline' }} />
-                ))}
-              </div>
-              <p className="ftg-proof-quote">"{t.quote}"</p>
-              <p className="ftg-proof-name">— {t.name}</p>
-            </div>
+            <blockquote className="ftg-quote-block" key={i}>
+              <span className="ftg-quote-mark" aria-hidden="true">"</span>
+              <p className="ftg-quote-text">{t.quote}</p>
+              <footer className="ftg-quote-footer">
+                <span className="ftg-quote-dash" aria-hidden="true" />
+                <cite className="ftg-quote-name">{t.name}</cite>
+              </footer>
+            </blockquote>
           ))}
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* ── Final CTA ── */}
       <section className="ftg-final-cta" ref={ctaRef}>
-        <h2 className="ftg-section-heading">
-          Stop Renting. Start Owning.<br />Get the Free Guide Now.
+        <h2 className="ftg-cta-headline">
+          Stop Renting.<br />Start Owning.
         </h2>
+        <p className="ftg-cta-sub">Get the Free Guide Now.</p>
         <OptInForm
           formId="ftg-cta-form"
           firstName={firstName}
@@ -191,15 +229,18 @@ const FreeTestosteroneGuidePage: React.FC = () => {
           onEmailChange={setEmail}
           onSubmit={handleSubmit}
         />
+        <p className="ftg-cta-micro">Join 50,000+ men optimizing naturally</p>
       </section>
 
-      {/* Footer */}
+      {/* ── Footer ── */}
       <footer className="ftg-footer">
         <p>
-          © 2026 Best 365 Labs, Inc. | These statements have not been evaluated by the FDA. This guide is for educational purposes only and is not intended to diagnose, treat, cure, or prevent any disease.
+          © 2026 Best 365 Labs, Inc. · These statements have not been evaluated by the FDA. This guide is for educational purposes only.
         </p>
         <p>
-          <Link to="/privacy">Privacy Policy</Link> | <Link to="/terms">Terms &amp; Conditions</Link>
+          <Link to="/privacy">Privacy Policy</Link>
+          <span className="ftg-footer-dot">·</span>
+          <Link to="/terms">Terms &amp; Conditions</Link>
         </p>
       </footer>
     </div>
