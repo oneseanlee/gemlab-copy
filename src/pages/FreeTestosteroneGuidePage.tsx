@@ -165,16 +165,15 @@ const FreeTestosteroneGuidePage: React.FC = () => {
 
   return (
     <div className="ftg-page">
-      {/* ── Hero Video Background (outside grid to avoid stacking context issues) ── */}
-      <div className="ftg-hero-video-bg" aria-hidden="true">
-        <video autoPlay muted loop playsInline className="ftg-hero-video">
-          <source src="/images/ftg-bg-running.mp4" type="video/mp4" />
-        </video>
-        <div className="ftg-hero-video-overlay" />
-      </div>
-
       {/* ── Hero ── */}
       <section className="ftg-hero">
+        {/* ── Hero Video Background ── */}
+        <div className="ftg-hero-video-bg" aria-hidden="true">
+          <video autoPlay muted loop playsInline className="ftg-hero-video">
+            <source src="/images/ftg-bg-running.mp4" type="video/mp4" />
+          </video>
+          <div className="ftg-hero-video-overlay" />
+        </div>
         {/* P0: On mobile, CTA-side renders first via CSS order */}
         <div className="ftg-hero-left">
           <span className="ftg-hero-tag">Free Guide</span>
