@@ -16,6 +16,7 @@ import ReturnPolicyPage from "./pages/ReturnPolicyPage";
 import PartnersPage from "./pages/PartnersPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import GuidesPage from "./pages/GuidesPage";
+import FreeTestosteroneGuidePage from "./pages/FreeTestosteroneGuidePage";
 import NotFound from "./pages/NotFound";
 import { useCartSync } from "./hooks/useCartSync";
 import './App.css';
@@ -41,6 +42,7 @@ const AppRoutes = () => {
       <Route path="/returns" element={<ReturnPolicyPage />} />
       <Route path="/partners" element={<PartnersPage />} />
       <Route path="/guides" element={<GuidesPage />} />
+      <Route path="/free-testosterone-guide" element={<FreeTestosteroneGuidePage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
