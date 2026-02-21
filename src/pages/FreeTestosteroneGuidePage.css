@@ -94,12 +94,16 @@
   max-width: 480px;
 }
 
-/* ── Opt-in Form (P2: inline email + CTA) ── */
+/* ── Opt-in Form ── */
 .ftg-form {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   max-width: 460px;
+}
+
+.ftg-name-row {
+  display: flex;
 }
 
 .ftg-input-row {
@@ -568,10 +572,21 @@
   position: relative;
   max-width: 100%;
   margin: 0;
-  padding: var(--space-24) var(--space-6);
+  padding: var(--space-32, 128px) var(--space-6);
   text-align: center;
   overflow: hidden;
   isolation: isolate;
+}
+
+.ftg-final-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(210 55% 45% / 0.6), transparent);
+  border-radius: 2px;
 }
 
 /* ── Final CTA Video Background ── */
@@ -593,8 +608,8 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(10, 22, 40, 0.78) 0%,
-    rgba(10, 22, 40, 0.88) 100%
+    rgba(8, 18, 35, 0.88) 0%,
+    rgba(6, 14, 28, 0.94) 100%
   );
 }
 
@@ -602,7 +617,7 @@
 .ftg-final-cta .ftg-cta-sub,
 .ftg-final-cta .ftg-cta-micro,
 .ftg-final-cta .ftg-privacy-note {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .ftg-final-cta .ftg-cta-headline {
@@ -610,8 +625,33 @@
 }
 
 .ftg-final-cta .ftg-form {
-  max-width: 460px;
+  max-width: 480px;
   margin: 0 auto;
+  padding: var(--space-6);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+}
+
+.ftg-final-cta .ftg-input {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--b365-white);
+}
+
+.ftg-final-cta .ftg-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.ftg-final-cta .ftg-input:focus {
+  border-color: rgba(51, 118, 176, 0.7);
+  box-shadow: 0 0 0 3px rgba(51, 118, 176, 0.15);
+}
+
+.ftg-final-cta .ftg-input-icon {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .ftg-cta-headline {
@@ -632,15 +672,10 @@
   font-weight: 400;
 }
 
-.ftg-final-cta .ftg-form {
-  max-width: 100%;
-  margin: 0 auto;
-}
-
 .ftg-cta-micro {
   font-size: var(--text-caption);
-  color: var(--b365-gray-400);
-  margin-top: var(--space-6);
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: var(--space-8);
   letter-spacing: 0.04em;
 }
 

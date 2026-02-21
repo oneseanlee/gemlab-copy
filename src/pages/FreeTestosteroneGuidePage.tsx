@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Star, ChevronDown, Mail } from 'lucide-react';
+import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Star, ChevronDown, Mail, User } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import AnimatedCTA from '@/components/AnimatedCTA/AnimatedCTA';
 import './FreeTestosteroneGuidePage.css';
@@ -60,17 +60,21 @@ const faqItems = [
   { q: 'Who is this guide for?', a: "Any man who wants to understand the difference between replacing testosterone (TRT) and optimizing it naturally. Whether you're 25 or 65, considering TRT or already on it — this guide gives you the full picture." },
 ];
 
-/* ── Email-only opt-in form (P2: removed first name) ── */
+/* ── Opt-in form with first name + email ── */
 const OptInForm = ({
   formId,
+  firstName,
   email,
   submitted,
+  onFirstNameChange,
   onEmailChange,
   onSubmit,
 }: {
   formId: string;
+  firstName: string;
   email: string;
   submitted: boolean;
+  onFirstNameChange: (v: string) => void;
   onEmailChange: (v: string) => void;
   onSubmit: (e: FormEvent) => void;
 }) => {
@@ -87,6 +91,19 @@ const OptInForm = ({
 
   return (
     <form id={formId} ref={formRef} className="ftg-form" onSubmit={onSubmit}>
+      <div className="ftg-name-row">
+        <div className="ftg-input-wrap">
+          <User size={16} className="ftg-input-icon" />
+          <input
+            type="text"
+            className="ftg-input"
+            placeholder="First name"
+            required
+            value={firstName}
+            onChange={(e) => onFirstNameChange(e.target.value)}
+          />
+        </div>
+      </div>
       <div className="ftg-input-row">
         <div className="ftg-input-wrap">
           <Mail size={16} className="ftg-input-icon" />
@@ -128,6 +145,7 @@ const FaqItem = ({ q, a }: { q: string; a: string }) => {
 };
 
 const FreeTestosteroneGuidePage: React.FC = () => {
+  const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
@@ -141,7 +159,7 @@ const FreeTestosteroneGuidePage: React.FC = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log({ email });
+    console.log({ firstName, email });
     setSubmitted(true);
   };
 
@@ -168,8 +186,10 @@ const FreeTestosteroneGuidePage: React.FC = () => {
           </p>
           <OptInForm
             formId="ftg-hero-form"
+            firstName={firstName}
             email={email}
             submitted={submitted}
+            onFirstNameChange={setFirstName}
             onEmailChange={setEmail}
             onSubmit={handleSubmit}
           />
@@ -238,8 +258,10 @@ const FreeTestosteroneGuidePage: React.FC = () => {
         <p className="ftg-mid-cta-text">Ready to learn the difference?</p>
         <OptInForm
           formId="ftg-mid-form"
+          firstName={firstName}
           email={email}
           submitted={submitted}
+          onFirstNameChange={setFirstName}
           onEmailChange={setEmail}
           onSubmit={handleSubmit}
         />
@@ -289,8 +311,10 @@ const FreeTestosteroneGuidePage: React.FC = () => {
         <p className="ftg-cta-sub">Get the Free Guide Now.</p>
         <OptInForm
           formId="ftg-cta-form"
+          firstName={firstName}
           email={email}
           submitted={submitted}
+          onFirstNameChange={setFirstName}
           onEmailChange={setEmail}
           onSubmit={handleSubmit}
         />
