@@ -5,7 +5,7 @@ import '../pages/HomePage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
-import { Menu, ArrowRight, X, Check, ChevronRight, Syringe, Pill, FlaskConical, Dna, Zap, Dumbbell, Shield, Brain, Flame, Heart, Target, Moon, Bone, Clock, ShieldCheck, Lightbulb, Calendar, AlertCircle, Building2, BadgeCheck, Microscope, Flag, Stethoscope, Lock, Package, Headphones } from 'lucide-react';
+import { Menu, ArrowRight, X, Check, ChevronRight, Syringe, Pill, FlaskConical, Dna, Zap, Dumbbell, Shield, Brain, Flame, Heart, Target, Moon, Bone, Clock, ShieldCheck, Lightbulb, Calendar, AlertCircle, Building2, BadgeCheck, Microscope, Flag, Stethoscope, Lock, Package, Headphones, Truck } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '../components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { CartDrawer } from '../components/CartDrawer';
@@ -26,13 +26,31 @@ const TPRIME_PRODUCT = {
 };
 
 const tprimeTestimonials = [
-{ img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', using: 'TPrime365™' },
-{ img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes', using: 'TPrime365™' },
-{ img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke', using: 'TPrime365™' },
-{ img: '/images/testimonial-sean-lee.png', name: 'Sean Lee', using: 'TPrime365™' },
-{ img: '/images/testimonial-ernesto-cruz.png', name: 'Ernesto Cruz', using: 'TPrime365™' },
-{ img: '/images/testimonial-jay-atkins.png', name: 'Jay Atkins', using: 'TPrime365™' }];
+  { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', using: 'TPrime365™', quote: 'Testosterone went from 658 to 749 in two months' },
+  { img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes', using: 'TPrime365™', quote: 'More energy within the first two weeks' },
+  { img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke', using: 'TPrime365™', quote: 'Rapid improvements in energy and cellular performance' },
+  { img: '/images/testimonial-sean-lee.png', name: 'Sean Lee', using: 'TPrime365™', quote: 'Finally found something that actually works' },
+  { img: '/images/testimonial-ernesto-cruz.png', name: 'Ernesto Cruz', using: 'TPrime365™', quote: 'Better focus, better sleep, better everything' },
+  { img: '/images/testimonial-jay-atkins.png', name: 'Jay Atkins', using: 'TPrime365™', quote: 'Wish I started this years ago' },
+];
 
+// Reusable mid-page CTA block
+const MidPageCTA = ({ onClick }: { onClick: (e?: React.MouseEvent) => void }) => (
+  <div className="tprime-mid-cta">
+    <AnimatedCTA onClick={onClick}>
+      Start My Protocol
+      <ArrowRight size={16} />
+    </AnimatedCTA>
+  </div>
+);
+
+// Dynamic urgency helpers
+const getMonthName = () => new Date().toLocaleString('en-US', { month: 'long' });
+const getNextMonth = () => {
+  const d = new Date();
+  d.setMonth(d.getMonth() + 1);
+  return d.toLocaleString('en-US', { month: 'long' });
+};
 
 const TPrimeTestimonialsCarousel = () => {
   const [api, setApi] = React.useState<CarouselApi>();
@@ -61,6 +79,7 @@ const TPrimeTestimonialsCarousel = () => {
               <div className="card-body">
                 <div className="name">{t.name}</div>
                 <div className="product-using">Using: {t.using}</div>
+                {t.quote && <p className="testimonial-inline-quote">"{t.quote}"</p>}
                 <div className="verified">
                   <BadgeCheck size={14} />
                   Verified buyer
@@ -77,11 +96,9 @@ const TPrimeTestimonialsCarousel = () => {
           className={`b365-dot ${i === current ? 'active' : ''}`}
           onClick={() => api?.scrollTo(i)}
           aria-label={`Go to slide ${i + 1}`} />
-
         )}
       </div>
     </Carousel>);
-
 };
 
 const TPrime365Page = () => {
@@ -109,7 +126,6 @@ const TPrime365Page = () => {
   { label: 'The Science', href: '#science' },
   { label: 'Compare', href: '#compare' },
   { label: 'FAQ', href: '#faq' }];
-
 
   const faqItems = [
   {
@@ -145,7 +161,6 @@ const TPrime365Page = () => {
     answer: "TPrime365 is designed as a complete system. The reviewing physician will evaluate any other medications or supplements you're taking during the approval process."
   }];
 
-
   return (
     <div className="tprime-page">
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
@@ -175,7 +190,10 @@ const TPrime365Page = () => {
                     </ul>
                     <div className="b365-nav-right">
                         <CartDrawer />
-                        <AnimatedCTA onClick={handleOrderNow} small>Get Started</AnimatedCTA>
+                        <AnimatedCTA onClick={handleOrderNow} small>
+                          Start My Protocol
+                          <ArrowRight size={14} />
+                        </AnimatedCTA>
                     </div>
                 </div>
             </nav>
@@ -196,10 +214,25 @@ const TPrime365Page = () => {
                             <span className="price-note">/month — Includes Physician Consultation via HappyMD</span>
                         </div>
                         <p className="guarantee-text">If not approved by physician, fully refunded</p>
+
+                        {/* Urgency line */}
+                        <div className="tprime-urgency-line">
+                          <Clock size={14} />
+                          <span>{getMonthName()} pricing locked at $149/mo — Next price review: {getNextMonth()} 1</span>
+                        </div>
+
                         <AnimatedCTA onClick={handleOrderNow}>
                             Start My Protocol
                             <ArrowRight size={16} />
                         </AnimatedCTA>
+
+                        {/* Hero trust micro-badges */}
+                        <div className="tprime-hero-trust-row">
+                          <span><Check size={14} /> Physician-Reviewed</span>
+                          <span><Check size={14} /> FDA-Registered Pharmacy</span>
+                          <span><Check size={14} /> Money-Back Guarantee</span>
+                          <span><Truck size={14} /> Free Shipping</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -210,7 +243,7 @@ const TPrime365Page = () => {
               <TPrimeTestimonialsCarousel />
             </section>
 
-            {/* 4. How It Works (moved up for conversion) */}
+            {/* 4. How It Works */}
             <section className="tprime-steps-section" id="process">
                 <div className="tprime-steps-layout b365-section">
                     <div className="tprime-steps-content">
@@ -255,7 +288,7 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* 5. The Problem */}
+            {/* 5. The Problem + CTA */}
             <section className="b365-section">
                 <h2 className="b365-section-heading b365-serif">Traditional Solutions Are <em>Broken</em></h2>
                 <div className="tprime-problem-grid">
@@ -280,16 +313,15 @@ const TPrime365Page = () => {
                         </div>
           )}
                 </div>
+                <MidPageCTA onClick={handleOrderNow} />
             </section>
 
-            {/* 5. The Solution */}
+            {/* 6. The Solution + CTA */}
             <section className="b365-section b365-section-alt tprime-solution-section" id="science" style={{ overflow: 'hidden', paddingBottom: 0 }}>
                 <div className="tprime-solution-layout">
-                    {/* Left: Hero Image */}
                     <div className="tprime-solution-img">
                         <img src="/images/tprime-model-2.png" alt="TPrime365 model" />
                     </div>
-                    {/* Right: Title + 2x2 Grid */}
                     <div className="tprime-solution-content">
                         <h2 className="b365-section-heading b365-serif" style={{ textAlign: 'left', marginBottom: 'var(--space-8)' }}>TPrime365™: Your Natural Testosterone, <em>Amplified</em></h2>
                         <div className="tprime-pillars-grid-2x2">
@@ -309,11 +341,12 @@ const TPrime365Page = () => {
                             <span>Sublingual Delivery via MODS Max Gold™</span>
                         </div>
                         <p className="tprime-formula-tagline" style={{ textAlign: 'left' }}>4 Clinically-Proven Ingredients. 1 Powerful Formula.</p>
+                        <MidPageCTA onClick={handleOrderNow} />
                     </div>
                 </div>
             </section>
 
-            {/* 6. Ingredient Breakdown */}
+            {/* 7. Ingredient Breakdown + CTA */}
             <section className="b365-section" id="ingredients">
                 <h2 className="b365-section-heading b365-serif">The Science Behind <em>Each Pillar</em></h2>
                 <div className="tprime-ingredient-grid">
@@ -365,9 +398,10 @@ const TPrime365Page = () => {
                         </div>
           )}
                 </div>
+                <MidPageCTA onClick={handleOrderNow} />
             </section>
 
-            {/* 7. Delivery Advantage */}
+            {/* 8. Delivery Advantage */}
             <section className="b365-section b365-section-alt">
                 <h2 className="b365-section-heading b365-serif">Why Sublingual Changes <em>Everything</em></h2>
                 <div className="tprime-delivery-grid">
@@ -402,7 +436,7 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* 8. Who Is This For */}
+            {/* 9. Who Is This For */}
             <section className="b365-section">
                 <h2 className="b365-section-heading b365-serif">Built For Men Who <em>Want More</em></h2>
                 <div className="tprime-persona-grid">
@@ -427,7 +461,7 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* 9. Benefits */}
+            {/* 10. Benefits */}
             <section className="b365-section b365-section-alt">
                 <h2 className="b365-section-heading b365-serif">What You'll <em>Experience</em></h2>
                 <div className="tprime-benefits-grid">
@@ -453,7 +487,7 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* UGC Video Testimonials */}
+            {/* 11. UGC Video Testimonials + CTA */}
             <section className="b365-section b365-section-alt">
               <h2 className="b365-section-heading b365-serif">Real Men. Measurable <em>Results.</em></h2>
               <p style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto var(--space-8)', fontSize: 'var(--text-body)', color: 'var(--b365-text-secondary)', lineHeight: 1.7 }}>
@@ -471,44 +505,10 @@ const TPrime365Page = () => {
                   </div>
           )}
               </div>
-              <div style={{ textAlign: 'center', marginTop: 'var(--space-8)' }}>
-                <AnimatedCTA onClick={handleOrderNow}>
-                  See If You Qualify
-                  <ArrowRight size={16} />
-                </AnimatedCTA>
-              </div>
+              <MidPageCTA onClick={handleOrderNow} />
             </section>
 
-            {/* Final CTA (moved here, before comparison table) */}
-            <section className="b365-section">
-                <div className="tprime-final-cta">
-                    <h2>Ready to Reclaim Your <em>Prime?</em></h2>
-                    <p className="subtitle text-primary-foreground">Join thousands of men optimizing their testosterone naturally with TPrime365™</p>
-                    <div className="tprime-final-price-box">
-                        <span className="big-price">$149/month</span>
-                        <span className="note">Includes everything: Formula + Physician Consultation + Free Shipping</span>
-                        <span className="guarantee-text">100% refunded if physician does not approve</span>
-                    </div>
-                    <AnimatedCTA onClick={handleOrderNow} className="btn-white-cta">
-                        Order Now — Risk Free
-                        <ArrowRight size={16} />
-                    </AnimatedCTA>
-                    <div className="tprime-cta-trust-points">
-                        <span><Check size={14} /> Licensed physician reviews every order</span>
-                        <span><Check size={14} /> Full refund if not approved</span>
-                        <span><Check size={14} /> FDA-registered compounding pharmacy</span>
-                        <span><Check size={14} /> Free shipping — discreet packaging</span>
-                        <span><Check size={14} /> Cancel subscription anytime</span>
-                    </div>
-                    <div className="tprime-cta-trust-strip">
-                        <span><Lock size={14} /> Secure Checkout</span>
-                        <span><ShieldCheck size={14} /> Money-Back Guarantee</span>
-                        <span><Package size={14} /> Fast Shipping</span>
-                    </div>
-                </div>
-            </section>
-
-            {/* 10. Comparison Table */}
+            {/* 12. Comparison Table (moved up) + CTA */}
             <section className="b365-section" id="compare">
                 <h2 className="b365-section-heading b365-serif">The Only Formula That <em>Does It All</em></h2>
                 <div className="tprime-table-wrap">
@@ -538,9 +538,10 @@ const TPrime365Page = () => {
                         </tbody>
                     </table>
                 </div>
+                <MidPageCTA onClick={handleOrderNow} />
             </section>
 
-            {/* 11. Value Breakdown */}
+            {/* 13. Value Breakdown (moved up) */}
             <section className="b365-section b365-section-alt">
                 <h2 className="b365-section-heading b365-serif">$149 = Premium Formula + <em>Expert Care</em></h2>
                 <div className="tprime-value-card">
@@ -558,9 +559,36 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* (How It Works moved to after hero) */}
+            {/* 14. Final CTA */}
+            <section className="b365-section">
+                <div className="tprime-final-cta">
+                    <h2>Ready to Reclaim Your <em>Prime?</em></h2>
+                    <p className="subtitle text-primary-foreground">Join thousands of men optimizing their testosterone naturally with TPrime365™</p>
+                    <div className="tprime-final-price-box">
+                        <span className="big-price">$149/month</span>
+                        <span className="note">Includes everything: Formula + Physician Consultation + Free Shipping</span>
+                        <span className="guarantee-text">100% refunded if physician does not approve</span>
+                    </div>
+                    <AnimatedCTA onClick={handleOrderNow} className="btn-white-cta">
+                        Start My Protocol
+                        <ArrowRight size={16} />
+                    </AnimatedCTA>
+                    <div className="tprime-cta-trust-points">
+                        <span><Check size={14} /> Licensed physician reviews every order</span>
+                        <span><Check size={14} /> Full refund if not approved</span>
+                        <span><Check size={14} /> FDA-registered compounding pharmacy</span>
+                        <span><Check size={14} /> Free shipping — discreet packaging</span>
+                        <span><Check size={14} /> Cancel subscription anytime</span>
+                    </div>
+                    <div className="tprime-cta-trust-strip">
+                        <span><Lock size={14} /> Secure Checkout</span>
+                        <span><ShieldCheck size={14} /> Money-Back Guarantee</span>
+                        <span><Package size={14} /> Fast Shipping</span>
+                    </div>
+                </div>
+            </section>
 
-            {/* 13. Dosing Instructions */}
+            {/* 15. Dosing Instructions */}
             <section className="b365-section b365-section-alt">
                 <h2 className="b365-section-heading b365-serif">Simple <em>Daily Routine</em></h2>
                 <div className="tprime-dosing-card">
@@ -591,7 +619,7 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* 14. Safety & Quality */}
+            {/* 16. Safety & Quality */}
             <section className="b365-section">
                 <h2 className="b365-section-heading b365-serif">Pharmaceutical-Grade <em>Standards</em></h2>
                 <div className="tprime-trust-grid">
@@ -614,7 +642,7 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
-            {/* 16. FAQ */}
+            {/* 17. FAQ */}
             <section className="b365-section" id="faq">
                 <div className="b365-faq-layout">
                     <div className="b365-faq-left">
@@ -638,8 +666,22 @@ const TPrime365Page = () => {
                 </div>
             </section>
 
+            {/* Post-FAQ CTA */}
+            <section className="b365-section">
+              <MidPageCTA onClick={handleOrderNow} />
+            </section>
+
             {/* Footer */}
             <SharedFooter />
+
+            {/* Sticky Mobile CTA Bar */}
+            <div className="tprime-sticky-mobile-cta">
+              <span className="sticky-price">$149<span>/mo</span></span>
+              <button className="sticky-cta-btn" onClick={handleOrderNow}>
+                Start My Protocol
+                <ArrowRight size={14} />
+              </button>
+            </div>
         </div>);
 
 };

@@ -947,6 +947,105 @@
   display: block;
 }
 
+/* ─── Mid-Page CTA Block ─── */
+.tprime-mid-cta {
+  text-align: center;
+  margin-top: var(--space-10);
+}
+
+/* ─── Hero Urgency Line ─── */
+.tprime-urgency-line {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-body-sm);
+  color: var(--b365-text-secondary);
+  margin-bottom: var(--space-6);
+  padding: var(--space-2) var(--space-4);
+  background: var(--b365-gray);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--b365-border);
+}
+
+/* ─── Hero Trust Micro-Badges ─── */
+.tprime-hero-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.tprime-hero-trust-row span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--b365-text-secondary);
+  font-weight: 500;
+}
+
+/* ─── Testimonial Inline Quote ─── */
+.testimonial-inline-quote {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--b365-text-secondary);
+  line-height: 1.5;
+  margin: var(--space-2) 0;
+}
+
+/* ─── Sticky Mobile CTA Bar ─── */
+.tprime-sticky-mobile-cta {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .tprime-sticky-mobile-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: var(--b365-white);
+    border-top: 1px solid var(--b365-border);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    padding: var(--space-3) var(--space-4);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .sticky-price {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--b365-text);
+    white-space: nowrap;
+  }
+  .sticky-price span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--b365-text-secondary);
+  }
+  .sticky-cta-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: linear-gradient(135deg, var(--b365-blue) 0%, var(--b365-blue-dark) 100%);
+    color: var(--b365-white);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: var(--space-3) var(--space-6);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(51, 118, 176, 0.35);
+  }
+
+  /* Add bottom padding to page so sticky bar doesn't cover content */
+  .tprime-page {
+    padding-bottom: 72px;
+  }
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
   .tprime-solution-layout {
