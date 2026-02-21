@@ -4,8 +4,7 @@
 
 .ftg-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0f1e 0%, #111827 100%);
-  color: #fff;
+  color: var(--b365-text);
   font-family: var(--font-body);
   overflow-x: hidden;
 }
@@ -33,7 +32,7 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #D4A843;
+  color: var(--b365-blue);
   margin-bottom: var(--space-4);
 }
 
@@ -43,13 +42,13 @@
   font-weight: 700;
   line-height: 1.15;
   margin: 0 0 var(--space-6);
-  color: #fff;
+  color: var(--b365-text);
 }
 
 .ftg-hero-sub {
   font-size: var(--text-body);
   line-height: 1.7;
-  color: #9CA3AF;
+  color: var(--b365-text-secondary);
   margin: 0 0 var(--space-8);
   max-width: 520px;
 }
@@ -66,60 +65,41 @@
   width: 100%;
   padding: 14px 16px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
+  border: 1px solid var(--b365-border);
+  background: var(--b365-white);
+  color: var(--b365-text);
   font-family: var(--font-body);
   font-size: var(--text-body);
   outline: none;
-  transition: border-color var(--duration-fast) var(--ease-default);
+  transition: border-color var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default);
 }
 
 .ftg-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--b365-gray-400);
 }
 
 .ftg-input:focus {
-  border-color: #D4A843;
-}
-
-.ftg-submit {
-  width: 100%;
-  padding: 16px 24px;
-  border: none;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, #D4A843 0%, #B8922E 100%);
-  color: #fff;
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  cursor: pointer;
-  transition: transform var(--duration-fast) var(--ease-spring),
-              box-shadow var(--duration-normal) var(--ease-default);
-  margin-top: var(--space-2);
-}
-
-.ftg-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(212, 168, 67, 0.35);
-}
-
-.ftg-submit:active {
-  transform: translateY(0);
+  border-color: var(--b365-blue);
+  box-shadow: 0 0 0 3px rgba(51, 118, 176, 0.12);
 }
 
 .ftg-privacy-note {
   font-size: var(--text-caption);
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--b365-gray-400);
+  margin-top: var(--space-2);
+}
+
+.ftg-form .animated-cta {
+  width: 100%;
   margin-top: var(--space-2);
 }
 
 .ftg-success {
   padding: var(--space-6);
   border-radius: var(--radius-sm);
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.25);
   text-align: center;
 }
 
@@ -127,11 +107,11 @@
   font-family: var(--font-title);
   font-size: var(--text-h3);
   margin: 0 0 var(--space-2);
-  color: #22C55E;
+  color: #16a34a;
 }
 
 .ftg-success p {
-  color: #9CA3AF;
+  color: var(--b365-text-secondary);
   margin: 0;
 }
 
@@ -147,7 +127,7 @@
 .ftg-ebook {
   width: 280px;
   min-height: 380px;
-  background: linear-gradient(145deg, #0f1b3d 0%, #1a3a6b 50%, #0d1a3a 100%);
+  background: linear-gradient(145deg, var(--b365-blue-dark) 0%, var(--b365-blue) 50%, var(--b365-blue-dark) 100%);
   border-radius: 4px 16px 16px 4px;
   padding: var(--space-8) var(--space-6);
   display: flex;
@@ -155,8 +135,8 @@
   justify-content: space-between;
   position: relative;
   transform: perspective(800px) rotateY(-8deg);
-  box-shadow: 20px 12px 40px rgba(0, 0, 0, 0.5),
-              -2px 0 8px rgba(255, 255, 255, 0.05) inset;
+  box-shadow: 20px 12px 40px rgba(0, 0, 0, 0.2),
+              -2px 0 8px rgba(255, 255, 255, 0.1) inset;
   transition: transform var(--duration-slow) var(--ease-spring);
 }
 
@@ -171,7 +151,7 @@
   top: 0;
   bottom: 0;
   width: 20px;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.4), transparent);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.3), transparent);
   border-radius: 4px 0 0 4px;
 }
 
@@ -181,7 +161,7 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #D4A843;
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: var(--space-4);
 }
 
@@ -196,7 +176,7 @@
 .ftg-ebook-brand {
   font-family: var(--font-body);
   font-size: var(--text-caption);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-top: auto;
@@ -217,21 +197,22 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-4) var(--space-4);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: var(--space-4);
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
   border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
 }
 
 .ftg-trust-icon {
   flex-shrink: 0;
-  color: #D4A843;
+  color: var(--b365-blue);
 }
 
 .ftg-trust-label {
   font-size: var(--text-body-sm);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--b365-text);
 }
 
 /* ── Discover Section ── */
@@ -247,7 +228,7 @@
   font-weight: 700;
   text-align: center;
   margin: 0 0 var(--space-12);
-  color: #fff;
+  color: var(--b365-text);
 }
 
 .ftg-discover-grid {
@@ -260,21 +241,22 @@
   display: flex;
   gap: var(--space-4);
   padding: var(--space-6);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
   border-radius: var(--radius-sm);
-  transition: background var(--duration-fast) var(--ease-default);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-fast) var(--ease-default);
 }
 
 .ftg-discover-item:hover {
-  background: rgba(255, 255, 255, 0.06);
+  box-shadow: var(--shadow-md);
 }
 
 .ftg-discover-num {
   font-family: var(--font-title);
   font-size: var(--text-h2);
   font-weight: 700;
-  color: #D4A843;
+  color: var(--b365-blue);
   line-height: 1;
   flex-shrink: 0;
   min-width: 36px;
@@ -283,7 +265,7 @@
 .ftg-discover-text {
   font-size: var(--text-body-sm);
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--b365-text-secondary);
 }
 
 /* ── Social Proof ── */
@@ -301,22 +283,20 @@
 
 .ftg-proof-card {
   padding: var(--space-6);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
   border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .ftg-proof-stars {
-  color: #D4A843;
-  font-size: 18px;
-  letter-spacing: 2px;
   margin-bottom: var(--space-4);
 }
 
 .ftg-proof-quote {
   font-size: var(--text-body-sm);
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--b365-text-secondary);
   margin: 0 0 var(--space-4);
   font-style: italic;
 }
@@ -324,7 +304,7 @@
 .ftg-proof-name {
   font-size: var(--text-body-sm);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--b365-text);
 }
 
 /* ── Final CTA ── */
@@ -345,25 +325,25 @@
   margin: 0 auto;
   padding: var(--space-8) var(--space-6);
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--b365-border);
 }
 
 .ftg-footer p {
   font-size: var(--text-caption);
-  color: #9CA3AF;
+  color: var(--b365-gray-400);
   line-height: 1.6;
   margin: 0 0 var(--space-3);
 }
 
 .ftg-footer a {
-  color: #9CA3AF;
+  color: var(--b365-gray-400);
   text-decoration: underline;
   text-underline-offset: 2px;
   transition: color var(--duration-fast);
 }
 
 .ftg-footer a:hover {
-  color: #D4A843;
+  color: var(--b365-blue);
 }
 
 /* ── Scroll reveal ── */

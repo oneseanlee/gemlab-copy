@@ -1,7 +1,8 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Star } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import AnimatedCTA from '@/components/AnimatedCTA/AnimatedCTA';
 import './FreeTestosteroneGuidePage.css';
 
 const trustItems = [
@@ -28,6 +29,7 @@ const testimonials = [
 ];
 
 const OptInForm = ({
+  formId,
   firstName,
   email,
   submitted,
@@ -35,6 +37,7 @@ const OptInForm = ({
   onEmailChange,
   onSubmit,
 }: {
+  formId: string;
   firstName: string;
   email: string;
   submitted: boolean;
@@ -42,6 +45,8 @@ const OptInForm = ({
   onEmailChange: (v: string) => void;
   onSubmit: (e: FormEvent) => void;
 }) => {
+  const formRef = useRef<HTMLFormElement>(null);
+
   if (submitted) {
     return (
       <div className="ftg-success">
@@ -52,7 +57,7 @@ const OptInForm = ({
   }
 
   return (
-    <form className="ftg-form" onSubmit={onSubmit}>
+    <form id={formId} ref={formRef} className="ftg-form" onSubmit={onSubmit}>
       <input
         type="text"
         className="ftg-input"
@@ -69,9 +74,11 @@ const OptInForm = ({
         value={email}
         onChange={(e) => onEmailChange(e.target.value)}
       />
-      <button type="submit" className="ftg-submit">
+      <AnimatedCTA
+        onClick={() => formRef.current?.requestSubmit()}
+      >
         GET YOUR FREE GUIDE <ArrowRight size={18} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 6 }} />
-      </button>
+      </AnimatedCTA>
       <p className="ftg-privacy-note">
         <Lock size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
         100% Free. No spam. Unsubscribe anytime.
@@ -109,6 +116,7 @@ const FreeTestosteroneGuidePage: React.FC = () => {
             Most men don't realize they're signing up for a lifetime lease on their own hormones. This guide shows you the difference between replacing your testosterone and actually optimizing your body to produce it — and why it matters more than you think.
           </p>
           <OptInForm
+            formId="ftg-hero-form"
             firstName={firstName}
             email={email}
             submitted={submitted}
@@ -159,7 +167,7 @@ const FreeTestosteroneGuidePage: React.FC = () => {
             <div className="ftg-proof-card" key={i}>
               <div className="ftg-proof-stars">
                 {Array.from({ length: 5 }).map((_, si) => (
-                  <Star key={si} size={16} fill="#D4A843" stroke="#D4A843" style={{ display: 'inline' }} />
+                  <Star key={si} size={16} fill="var(--b365-blue)" stroke="var(--b365-blue)" style={{ display: 'inline' }} />
                 ))}
               </div>
               <p className="ftg-proof-quote">"{t.quote}"</p>
@@ -175,6 +183,7 @@ const FreeTestosteroneGuidePage: React.FC = () => {
           Stop Renting. Start Owning.<br />Get the Free Guide Now.
         </h2>
         <OptInForm
+          formId="ftg-cta-form"
           firstName={firstName}
           email={email}
           submitted={submitted}
