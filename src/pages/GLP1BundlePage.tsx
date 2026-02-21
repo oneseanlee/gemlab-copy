@@ -65,6 +65,7 @@ const GLP1BundlePage = () => {
       quantity: 1,
       selectedOptions: [{ name: 'Bundle', value: 'Complete System + Consultation' }]
     });
+    useCartStore.getState().setCartOpen(true);
   };
 
   const faqItems = [

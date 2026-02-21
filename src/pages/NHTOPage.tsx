@@ -48,6 +48,7 @@ const NHTOPage = () => {
             quantity: 1,
             selectedOptions: [{ name: 'Bundle', value: 'Complete System' }],
         });
+        useCartStore.getState().setCartOpen(true);
     };
 
     const faqItems = [

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,21 +9,20 @@ import { ShoppingCart, Minus, Plus, Trash2, ArrowRight, Loader2 } from "lucide-r
 import { useCartStore } from "@/stores/cartStore";
 
 export const CartDrawer = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { items, isLoading, isSyncing, updateQuantity, removeItem, syncCart } = useCartStore();
+  const { items, isLoading, isSyncing, updateQuantity, removeItem, syncCart, isCartOpen, setCartOpen } = useCartStore();
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
 
-  useEffect(() => { if (isOpen) syncCart(); }, [isOpen, syncCart]);
+  useEffect(() => { if (isCartOpen) syncCart(); }, [isCartOpen, syncCart]);
 
   const handleCheckout = () => {
-    setIsOpen(false);
+    setCartOpen(false);
     navigate('/checkout');
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet open={isCartOpen} onOpenChange={setCartOpen}>
       <SheetTrigger asChild>
         <button className="glp1-cart-trigger" aria-label="Shopping cart">
           <ShoppingCart className="h-5 w-5" />
