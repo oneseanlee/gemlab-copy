@@ -1,68 +1,95 @@
 
 
-# Create Master Reference Document
+# Lead Magnet Landing Page: `/free-testosterone-guide`
 
-## What This Is
-A single comprehensive markdown file (`SITE-MASTER-REFERENCE.md`) that documents the entire Best 365 Labs platform in a format optimized for feeding to Claude or other AI assistants. It will consolidate and expand on the existing `BEST365LABS-REFERENCE.md` with additional sections covering:
+## Overview
 
-## Document Structure
+A distraction-free, high-converting lead capture page designed to collect name and email in exchange for the free guide "The Difference Between Renting Testosterone and Owning It." No navigation bar, no footer links beyond legal -- pure conversion focus.
 
-### 1. Company Overview
-Company details, social media, team, partners (happyMD, ShipStation), manufacturing.
+---
 
-### 2. Core Technology -- MODS Max
-Patent-pending sublingual delivery system details, variants, key claims.
+## New Files
 
-### 3. Complete Product Catalog (5 products)
-Each product with: Shopify IDs, variant IDs, pricing, ingredients, dosing, FAQs, competitor comparisons, value stacks, clinical claims, and target demographics.
+### 1. `src/pages/FreeTestosteroneGuidePage.tsx`
+React component with all sections, form state management via `useState`, and scroll-reveal animations using the existing `useScrollReveal` hook.
 
-### 4. Site Architecture and Routes
-All 17 active routes with their page components, purposes, and relationships (intake forms linked to product pages, etc.).
+### 2. `src/pages/FreeTestosteroneGuidePage.css`
+All styling for the page, using existing design tokens (`--font-title`, `--font-body`, `--space-*`, `--radius-*`, `--shadow-*`, `--duration-*`).
 
-### 5. Checkout Flow (NEW -- not in existing reference)
-Full documentation of the custom on-site checkout:
-- Cart Drawer (Zustand store with Shopify Storefront API sync)
-- Intermediate checkout page (email/phone capture only)
-- Redirect to Shopify native checkout with buyer identity pre-fill
-- Cart synchronization on tab visibility change
-- Variant ID mapping for each product
+### 3. Route Registration
+Add `/free-testosterone-guide` to `src/App.tsx` routes.
 
-### 6. Technology Stack
-React 18, Vite, TypeScript, Tailwind CSS, Shopify Storefront API (2025-07), Zustand, Embla Carousel, shadcn/ui, React Router v6, TanStack React Query, Lottie React.
+---
 
-### 7. Design System Audit (NEW -- not in existing reference)
-Full token documentation from `src/index.css`:
-- Color palette (brand blues, neutrals, semantics)
-- Typography scale (Display 48px down to Micro 11px) with font families
-- Spacing scale (4px base, 4px to 96px)
-- Border radius tokens (8px, 14px, 24px)
-- Shadow system (4-tier)
-- Animation tokens (durations, easing)
-- Breakpoints (480px, 768px, 1024px)
-- Common UI patterns across pages
+## Page Sections (top to bottom)
 
-### 8. Conversion Architecture (NEW)
-- CTA strategy per page (TPrime365 has 10+ "Start My Protocol" CTAs)
-- Urgency elements (dynamic monthly pricing lock)
-- Trust micro-badges pattern
-- Sticky mobile CTA bars
-- Social proof placement strategy
-- Section ordering philosophy (objection handling before conversion)
+### Hero Section (above the fold)
+- Full-width dark gradient background (`#0a0f1e` to `#111827`)
+- Two-column layout on desktop (stacked on mobile):
+  - **Left column**: Headline in Playfair Display ("FREE GUIDE: The Difference Between Renting Testosterone and Owning It"), subheadline in Plus Jakarta Sans, then the opt-in form (First Name + Email inputs, amber/gold gradient submit button "GET YOUR FREE GUIDE" with arrow icon, privacy note below)
+  - **Right column**: Styled div simulating a 3D ebook mockup with perspective transform, gradient background, white text showing the guide title and "Best 365 Labs" branding
+- Form uses React `useState` for `firstName` and `email`, with basic validation and `console.log` on submit
 
-### 9. Shared Components
-CartDrawer, AnimatedCTA, SharedFooter, MobileMenu, TrustBadges, EarlyTestersCarousel, ScrollToTop -- what each does and where it's used.
+### Trust Strip
+- Horizontal row of 4 semi-transparent cards on dark background
+- Icons from Lucide: Users, Building2, Stethoscope, FlaskConical
+- Items: "50,000+ Men Served", "FDA-Registered Facility", "Physician-Backed Protocols", "Patent-Pending Science"
 
-### 10. Key Messaging and Copy
-Hero taglines, guarantee language, MODS Max description, GLP-1 crisis messaging.
+### What You'll Discover Section
+- Dark background continues
+- Section heading: "Inside This Free Guide, You'll Discover:"
+- 7 numbered items in a 2-column grid (1 column on mobile)
+- Each item: gold-colored number on left, white text on right, subtle card styling
+- Fade-in animation on scroll via `useScrollReveal`
 
-### 11. Testimonials and Social Proof
-All testimonial data with quotes, clinical results, and co-founder statements.
+### Social Proof Section
+- Heading: "Real Results From Real Men"
+- 3 testimonial cards in a row (stacked on mobile)
+- Dark cards with subtle border, gold star ratings (5 stars), white quote text, name/details below
+- Three testimonials as specified (Brett Earnshaw, Alex T., David R.)
 
-### 12. Legal and Compliance
-Disclaimers, Methylene Blue caution, HIPAA, manufacturing standards.
+### Final CTA Section
+- Repeat of the opt-in form with heading "Stop Renting. Start Owning. Get the Free Guide Now."
+- Same form fields, same amber/gold button
+- Both forms share state so filling one fills the other
 
-## File Location
-`SITE-MASTER-REFERENCE.md` in the project root.
+### Minimal Footer
+- Copyright line, FDA disclaimer
+- Links to /privacy and /terms using React Router `Link`
+- Gray-400 text on dark background
 
-## Approach
-This is a single new file creation. No existing files will be modified. The content will be sourced from the existing `BEST365LABS-REFERENCE.md` (which remains untouched), the codebase, and design tokens from `src/index.css`.
+---
+
+## Technical Details
+
+### Form Implementation
+- `useState` for `firstName`, `email`, and `submitted` state
+- Basic HTML5 validation (`required`, `type="email"`)
+- On submit: `console.log({ firstName, email })`, show a brief success message
+- No backend connection yet (as specified)
+
+### Animations
+- Each section wrapped with `useScrollReveal` for fade-in on scroll
+- Hero has staggered CSS entrance animations (headline, then subtext, then form, then ebook mockup)
+- Submit button has hover scale + glow effect
+
+### Responsive Breakpoints
+- Desktop (1024px+): two-column hero, 2-column discover grid, 3-column testimonials
+- Tablet (768px): single-column hero, 2-column discover grid, stacked testimonials
+- Mobile (480px): everything single-column, reduced font sizes, full-width form
+
+### Ebook Mockup
+- Pure CSS implementation: a styled div with `perspective` and `rotateY` transform to create a 3D book appearance
+- Gradient background (dark navy to blue), white text, "Best 365 Labs" at bottom
+- No external images required
+
+### CTA Button Styling
+- Custom amber/gold gradient (`#D4A843` to `#B8922E`) -- distinct from the site's blue CTAs to signal "free" vs "buy"
+- White bold text, rounded corners, hover animation (translateY + shadow increase)
+- Not using AnimatedCTA component since this needs a unique gold style and is a form submit button
+
+### Page Isolation
+- Page sets its own `background` on the wrapper div, overriding the global gradient from `index.css`
+- No nav bar, no shared header components
+- Minimal footer is self-contained within this page (not SharedFooter)
+
