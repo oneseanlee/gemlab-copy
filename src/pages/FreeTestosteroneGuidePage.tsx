@@ -149,6 +149,12 @@ const FreeTestosteroneGuidePage: React.FC = () => {
     <div className="ftg-page">
       {/* ── Hero ── */}
       <section className="ftg-hero">
+        <div className="ftg-hero-video-bg" aria-hidden="true">
+          <video autoPlay muted loop playsInline className="ftg-hero-video">
+            <source src="/images/ftg-bg-running.mp4" type="video/mp4" />
+          </video>
+          <div className="ftg-hero-video-overlay" />
+        </div>
         {/* P0: On mobile, CTA-side renders first via CSS order */}
         <div className="ftg-hero-left">
           <span className="ftg-hero-tag">Free Guide</span>
@@ -269,6 +275,12 @@ const FreeTestosteroneGuidePage: React.FC = () => {
 
       {/* ── Final CTA ── */}
       <section className="ftg-final-cta" ref={ctaRef}>
+        <div className="ftg-cta-video-bg" aria-hidden="true">
+          <video autoPlay muted loop playsInline className="ftg-cta-video">
+            <source src="/images/ftg-bg-blue.mp4" type="video/mp4" />
+          </video>
+          <div className="ftg-cta-video-overlay" />
+        </div>
         <h2 className="ftg-cta-headline">
           Stop Renting.<br />Start Owning.
         </h2>
