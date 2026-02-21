@@ -17,6 +17,8 @@ import PartnersPage from "./pages/PartnersPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import GuidesPage from "./pages/GuidesPage";
 import FreeTestosteroneGuidePage from "./pages/FreeTestosteroneGuidePage";
+import UpsellPage from "./pages/UpsellPage";
+import ThankYouPage from "./pages/ThankYouPage";
 import NotFound from "./pages/NotFound";
 import { useCartSync } from "./hooks/useCartSync";
 import './App.css';
@@ -43,6 +45,8 @@ const AppRoutes = () => {
       <Route path="/partners" element={<PartnersPage />} />
       <Route path="/guides" element={<GuidesPage />} />
       <Route path="/free-testosterone-guide" element={<FreeTestosteroneGuidePage />} />
+      <Route path="/free-testosterone-guide/upgrade" element={<UpsellPage />} />
+      <Route path="/free-testosterone-guide/thank-you" element={<ThankYouPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

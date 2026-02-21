@@ -1,0 +1,428 @@
+/* ══════════════════════════════════════════════
+   UPSELL PAGE — ONE-TIME OFFER
+   ══════════════════════════════════════════════ */
+
+/* Root override while page is active */
+html.upsell-active,
+html.upsell-active body {
+  background: var(--b365-navy) !important;
+}
+
+.upsell-page {
+  min-height: 100vh;
+  background: var(--b365-navy);
+  color: var(--b365-white);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── Confirmation Bar ── */
+.upsell-confirm-bar {
+  background: linear-gradient(135deg, #166534, #15803d);
+  text-align: center;
+  padding: var(--space-4) var(--space-6);
+}
+
+.upsell-confirm-main {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--b365-white);
+  margin: 0 0 var(--space-1);
+}
+
+.upsell-confirm-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Headline ── */
+.upsell-headline {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-6) var(--space-8);
+}
+
+.upsell-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #D4A843, #B8922E);
+  color: var(--b365-navy);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 4px;
+  margin-bottom: var(--space-6);
+}
+
+.upsell-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 5vw, 42px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 var(--space-6);
+  color: var(--b365-white);
+}
+
+.upsell-gold {
+  color: #D4A843;
+}
+
+.upsell-sub {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--b365-gray-200);
+  margin: 0 0 var(--space-8);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Timer ── */
+.upsell-timer {
+  text-align: center;
+}
+
+.upsell-timer-label {
+  display: block;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--b365-gray-400);
+  margin-bottom: var(--space-2);
+}
+
+.upsell-timer-digits {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.upsell-digit {
+  display: inline-block;
+  background: rgba(212, 168, 67, 0.15);
+  border: 1px solid rgba(212, 168, 67, 0.3);
+  color: #D4A843;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(36px, 6vw, 52px);
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 8px;
+  min-width: 60px;
+  text-align: center;
+  line-height: 1;
+}
+
+.upsell-timer-sep {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  color: #D4A843;
+}
+
+/* ── Product Grid ── */
+.upsell-grid-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6);
+}
+
+.upsell-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 480px) {
+  .upsell-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .upsell-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.upsell-card {
+  border-radius: var(--radius-md, 14px);
+  overflow: hidden;
+  background: var(--b365-gray-900);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.upsell-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.upsell-card-cover {
+  position: relative;
+  padding: var(--space-6) var(--space-4);
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.upsell-card-num {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.06em;
+}
+
+.upsell-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--b365-white);
+  margin: 0;
+}
+
+.upsell-card-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--b365-gray-400);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  margin: 0;
+}
+
+/* ── Value Stack ── */
+.upsell-value {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6) var(--space-12);
+  text-align: center;
+}
+
+.upsell-value-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: 700;
+  margin: 0 0 var(--space-8);
+  color: var(--b365-white);
+}
+
+.upsell-value-card {
+  background: var(--b365-gray-900);
+  border: 1px solid rgba(212, 168, 67, 0.2);
+  border-radius: var(--radius-md, 14px);
+  padding: var(--space-6);
+  text-align: left;
+  margin-bottom: var(--space-8);
+}
+
+.upsell-value-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.upsell-value-row:last-child {
+  border-bottom: none;
+}
+
+.upsell-check {
+  color: #D4A843;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.upsell-value-name {
+  flex: 1;
+  font-size: 14px;
+  color: var(--b365-gray-200);
+}
+
+.upsell-value-price {
+  font-size: 13px;
+  color: var(--b365-gray-400);
+  white-space: nowrap;
+}
+
+.upsell-value-total {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(212, 168, 67, 0.2);
+}
+
+.upsell-value-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  padding: var(--space-2) 0;
+  color: var(--b365-gray-200);
+}
+
+.upsell-strikethrough span {
+  text-decoration: line-through;
+  color: var(--b365-gray-400);
+}
+
+.upsell-final-price {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--b365-white);
+}
+
+.upsell-gold-big {
+  color: #D4A843;
+  font-size: 32px;
+  font-weight: 800;
+}
+
+/* ── CTA ── */
+.upsell-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #D4A843, #B8922E);
+  color: var(--b365-white);
+  font-weight: 800;
+  font-size: clamp(15px, 2.5vw, 18px);
+  padding: 18px 36px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 560px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+
+.upsell-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 168, 67, 0.35);
+}
+
+.upsell-secure {
+  font-size: 13px;
+  color: var(--b365-gray-400);
+  margin: var(--space-4) 0 var(--space-6);
+}
+
+.upsell-skip {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--b365-gray-400);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.upsell-skip:hover {
+  color: var(--b365-gray-200);
+}
+
+/* ── Dr. Warren ── */
+.upsell-warren {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 var(--space-6) var(--space-12);
+}
+
+.upsell-warren-card {
+  background: var(--b365-gray-900);
+  border-left: 4px solid #D4A843;
+  border-radius: var(--radius-md, 14px);
+  padding: var(--space-8);
+}
+
+.upsell-warren-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: 700;
+  margin: 0 0 var(--space-4);
+  color: var(--b365-white);
+}
+
+.upsell-warren-text {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--b365-gray-200);
+  margin: 0;
+}
+
+/* ── Guarantee ── */
+.upsell-guarantee {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 var(--space-6) var(--space-12);
+}
+
+.upsell-shield {
+  color: #D4A843;
+  margin: 0 auto var(--space-4);
+}
+
+.upsell-guarantee-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 700;
+  margin: 0 0 var(--space-4);
+  color: var(--b365-white);
+}
+
+.upsell-guarantee-text {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--b365-gray-200);
+  margin: 0;
+}
+
+/* ── Footer ── */
+.upsell-footer {
+  text-align: center;
+  padding: var(--space-8) var(--space-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.upsell-footer p {
+  font-size: 12px;
+  color: var(--b365-gray-400);
+  line-height: 1.6;
+  margin: 0 0 var(--space-2);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upsell-footer a {
+  color: var(--b365-gray-400);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.upsell-footer a:hover {
+  color: var(--b365-white);
+}
+
+.upsell-footer-dot {
+  margin: 0 8px;
+  color: var(--b365-gray-400);
+}
+
+/* ── Scroll Reveal (uses existing system) ── */
+.upsell-page .b365-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.upsell-page .b365-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
