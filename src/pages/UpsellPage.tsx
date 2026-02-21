@@ -31,14 +31,14 @@ const CountdownTimer = () => {
 
 /* ── Data ── */
 const guides = [
-  { title: 'The Ultimate Cellular Optimization System: Enhancing Testosterone Therapy Results', desc: 'Maximize every aspect of your testosterone protocol with cellular-level strategies.' },
-  { title: "The Simple, Powerful Roadmap to Faster Progress: Dr. Steven Warren's Inside Secrets", desc: 'Physician-insider shortcuts that accelerate hormonal optimization.' },
-  { title: "Dr. Warren's Ultimate Cellular Optimization & Testosterone Protocol", desc: "The complete clinical protocol used in Dr. Warren's practice." },
-  { title: 'What Happens After You Start TRT (That No One Explains)', desc: 'The hidden side effects, timelines, and decisions most doctors skip.' },
-  { title: 'Testosterone Optimization Without Sacrificing Fertility', desc: 'Protect your fertility while optimizing testosterone naturally.' },
-  { title: 'Testosterone Starts in the Brain — Not the Syringe', desc: 'How the HPG axis controls everything — and how to leverage it.' },
-  { title: 'How Physicians Restore Testosterone Without Hormone Shutdown', desc: 'The clinical alternatives to traditional TRT that preserve natural production.' },
-  { title: 'Before You Commit to TRT, Answer These Questions', desc: 'The 12 critical questions every man should ask before starting TRT.' },
+  { title: 'The Ultimate Cellular Optimization System: Enhancing Testosterone Therapy Results', desc: 'Maximize every aspect of your testosterone protocol with cellular-level strategies.', img: '/images/guide-maximize-results.png' },
+  { title: "The Simple, Powerful Roadmap to Faster Progress: Dr. Steven Warren's Inside Secrets", desc: 'Physician-insider shortcuts that accelerate hormonal optimization.', img: '/images/guide-dr-warren-protocol.png' },
+  { title: "Dr. Warren's Ultimate Cellular Optimization & Testosterone Protocol", desc: "The complete clinical protocol used in Dr. Warren's practice.", img: '/images/guide-dr-warren-protocol.png' },
+  { title: 'What Happens After You Start TRT (That No One Explains)', desc: 'The hidden side effects, timelines, and decisions most doctors skip.', img: '/images/guide-what-happens-trt.png' },
+  { title: 'Testosterone Optimization Without Sacrificing Fertility', desc: 'Protect your fertility while optimizing testosterone naturally.', img: '/images/guide-testosterone-fertility.png' },
+  { title: 'Testosterone Starts in the Brain — Not the Syringe', desc: 'How the HPG axis controls everything — and how to leverage it.', img: '/images/guide-testosterone-brain.png' },
+  { title: 'How Physicians Restore Testosterone Without Hormone Shutdown', desc: 'The clinical alternatives to traditional TRT that preserve natural production.', img: '/images/guide-physicians-restore.png' },
+  { title: 'Before You Commit to TRT, Answer These Questions', desc: 'The 12 critical questions every man should ask before starting TRT.', img: '/images/guide-before-trt.png' },
 ];
 
 const valueItems = [
@@ -105,8 +105,7 @@ const UpsellPage: React.FC = () => {
           {guides.map((g, i) => (
             <div className="upsell-card" key={i}>
               <div className="upsell-card-cover">
-                <span className="upsell-card-num">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="upsell-card-title">{g.title}</h3>
+                <img src={g.img} alt={g.title} className="upsell-card-img" loading="lazy" />
               </div>
               <p className="upsell-card-desc">{g.desc}</p>
             </div>
