@@ -45,14 +45,14 @@
 
 .upsell-badge {
   display: inline-block;
-  background: linear-gradient(135deg, #D4A843, #B8922E);
-  color: var(--b365-white);
+  background: rgba(51, 118, 176, 0.08);
+  color: var(--b365-blue);
   font-family: var(--font-body);
-  font-weight: 800;
+  font-weight: 700;
   font-size: var(--text-micro);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  padding: 6px 18px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
   margin-bottom: var(--space-6);
 }
@@ -68,7 +68,7 @@
 }
 
 .upsell-gold {
-  color: #D4A843;
+  color: var(--b365-blue);
 }
 
 .upsell-sub {
@@ -109,7 +109,7 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--b365-border);
-  color: #D4A843;
+  color: var(--b365-blue);
   font-family: var(--font-body);
   font-size: clamp(36px, 6vw, 52px);
   font-weight: 800;
@@ -123,7 +123,7 @@
 .upsell-timer-sep {
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 800;
-  color: #D4A843;
+  color: var(--b365-blue);
 }
 
 /* ── Product Grid ── */
@@ -239,7 +239,7 @@
 }
 
 .upsell-check {
-  color: #D4A843;
+  color: var(--b365-blue);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -285,7 +285,7 @@
 }
 
 .upsell-gold-big {
-  color: #D4A843;
+  color: var(--b365-blue);
   font-size: var(--text-h2);
   font-weight: 800;
 }
@@ -296,7 +296,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(135deg, #D4A843, #B8922E);
+  background: var(--b365-blue);
   color: var(--b365-white);
   font-family: var(--font-body);
   font-weight: 800;
@@ -315,7 +315,7 @@
 
 .upsell-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(212, 168, 67, 0.35);
+  box-shadow: 0 8px 24px rgba(51, 118, 176, 0.35);
 }
 
 .upsell-secure {
@@ -351,7 +351,7 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--b365-border);
-  border-left: 4px solid #D4A843;
+  border-left: 4px solid var(--b365-blue);
   border-radius: var(--radius-md);
   padding: var(--space-8);
 }
@@ -381,7 +381,7 @@
 }
 
 .upsell-shield {
-  color: #D4A843;
+  color: var(--b365-blue);
   margin: 0 auto var(--space-4);
 }
 
