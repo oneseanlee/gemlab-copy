@@ -1,50 +1,49 @@
 
 
-## One-Time Offer Upsell Page
+## Restyle Upsell Page to Match Free Testosterone Guide Page
 
-**Route:** `/free-testosterone-guide/upgrade`
+The current upsell page uses a dark navy theme with white text, while the free guide page uses a light theme with a full-page fixed video background, semi-transparent white/blue overlay, and navy body text. This plan brings the upsell page into full visual alignment with the free guide page.
 
-### What Gets Built
+### What Changes
 
-A standalone, no-nav upsell page that appears after the free guide opt-in. Dark theme, mobile-first, with a 15-minute countdown timer creating urgency. The page sells "The Complete Testosterone Optimization Vault" (8 guides for $29 vs $197).
+**Visual theme flip:**
+- Remove the dark navy background
+- Add the same full-page fixed video background (`ftg-bg-running.mp4`) with the white-to-blue gradient overlay
+- Switch all text to dark (`--b365-text`, `--b365-text-secondary`) instead of white
+- Use `ftg-active` class approach (transparent root background) so the video shows through
 
-### Page Sections (top to bottom)
+**Typography tokens:**
+- Replace all hardcoded font families with `var(--font-title)` and `var(--font-body)`
+- Replace hardcoded font sizes with `var(--text-*)` scale tokens
+- Match heading styles, line heights, and letter spacing to the FTG page
 
-1. **Green confirmation bar** -- "Your Free Guide Is On Its Way!" + one-time offer teaser
-2. **Headline block** -- Gold "ONE-TIME OFFER" badge, Playfair Display headline, subheadline, countdown timer (15:00 functional JS countdown with gold digits)
-3. **Product grid** -- 8 ebook mockups in 2x4 desktop / 1-col mobile grid (styled div cards with gradient backgrounds and white title text), each with a 1-line description
-4. **Value stack** -- Dark card with gold checkmarks listing all 8 guides + bonus community access, individual values, ~~$197~~ strikethrough, large gold $29
-5. **Primary CTA** -- Gold/amber gradient button ("YES -- GIVE ME THE COMPLETE VAULT FOR $29"), secure checkout note below
-6. **Skip link** -- Subtle gray "No thanks, I just want my free guide" linking to `/free-testosterone-guide/thank-you`
-7. **Dr. Steven Warren authority section** -- Dark card with left gold accent border
-8. **60-Day Guarantee** -- Shield icon + guarantee copy
-9. **Minimal footer** -- FDA disclaimer, copyright, privacy/terms links
+**Component styling updates:**
+- Green confirmation bar: keep green but refine to match overall lighter feel
+- Gold badge, timer, CTA button: keep gold accent color (this is the upsell-specific urgency element)
+- Product grid cards: update to use frosted-glass/light cards with borders matching FTG quote blocks (`background: var(--b365-gray-50)`, `border: 1px solid var(--b365-border)`)
+- Value stack card: same frosted-glass treatment
+- Dr. Warren card: light background with gold left border
+- Guarantee section: dark text on transparent background
+- Footer: match FTG footer styling with `var(--b365-gray-400)` text and `var(--b365-border)` top border
+- Skip link and secure text: use `var(--b365-gray-400)` / `var(--b365-text-secondary)`
+
+**Responsive behavior:**
+- Maintain the same breakpoints (480px, 768px, 1024px) already in use on both pages
 
 ### Technical Details
 
-**New files:**
-- `src/pages/UpsellPage.tsx` -- Full page component with countdown timer using `useState`/`useEffect`, scroll-reveal animations via existing `useScrollReveal` hook
-- `src/pages/UpsellPage.css` -- All styles using existing design tokens (`--b365-*`, `--space-*`, `--font-title`, `--font-body`, etc.)
+**Files modified:**
+- `src/pages/UpsellPage.tsx` -- Add the fixed video background markup (same as FTG: video element + overlay div), switch root class from `upsell-active` to `ftg-active` (reuse the same transparent-root mechanism), update text color classes where needed
+- `src/pages/UpsellPage.css` -- Complete restyle: remove dark theme rules, apply light theme with design tokens, add frosted-glass card styles, update all color references from white-on-dark to dark-on-light, keep gold accents for urgency elements (badge, timer, CTA, checkmarks)
 
-**Modified files:**
-- `src/App.tsx` -- Add route: `<Route path="/free-testosterone-guide/upgrade" element={<UpsellPage />} />`
+**No new files created. No routes changed.**
 
-**New route needed:**
-- `/free-testosterone-guide/thank-you` -- Simple thank-you page (minimal, just confirms the free guide is coming). Added as a basic component in the same pass.
-
-**Countdown timer:**
-- Functional component using `useState(900)` (15 min in seconds) and `useEffect` with `setInterval`
-- Displays as `MM:SS` in large gold/amber styled digits
-- Stops at `00:00`
-
-**CTA button:**
-- Gold gradient (`#D4A843` to `#B8922E`), logs click to console (payment integration later)
-
-**Styling approach:**
-- Dark theme background (`--b365-navy` / `--b365-gray-900`)
-- All text in white/light variants
-- Gold accent color for badge, timer, checkmarks, CTA, and Dr. Warren card border
-- Uses existing design tokens, font families, spacing scale, and animation system
-- Scroll-reveal animations on sections using existing `useScrollReveal` hook
-- Mobile-first with breakpoints at 480px, 768px, 1024px per site standard
-
+**Key style mappings:**
+- `.upsell-page` background: transparent (video shows through)
+- `.upsell-page` color: `var(--b365-text)` instead of white
+- Cards: `background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border: 1px solid var(--b365-border)`
+- Headings: `font-family: var(--font-title)` with `color: var(--b365-text)`
+- Body text: `font-family: var(--font-body)` with `color: var(--b365-text-secondary)`
+- Gold elements remain `#D4A843` for urgency contrast
+- Timer digits: gold on light frosted background
+- CTA button: keep gold gradient (stands out well against light background too)
