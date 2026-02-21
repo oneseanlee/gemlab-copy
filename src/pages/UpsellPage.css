@@ -1,19 +1,14 @@
 /* ══════════════════════════════════════════════
    UPSELL PAGE — ONE-TIME OFFER
+   Matches FTG light theme with video background
    ══════════════════════════════════════════════ */
-
-/* Root override while page is active */
-html.upsell-active,
-html.upsell-active body {
-  background: var(--b365-navy) !important;
-}
 
 .upsell-page {
   min-height: 100vh;
-  background: var(--b365-navy);
-  color: var(--b365-white);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  overflow-x: hidden;
+  color: var(--b365-text);
+  font-family: var(--font-body);
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Confirmation Bar ── */
@@ -21,17 +16,19 @@ html.upsell-active body {
   background: linear-gradient(135deg, #166534, #15803d);
   text-align: center;
   padding: var(--space-4) var(--space-6);
+  position: relative;
+  z-index: 2;
 }
 
 .upsell-confirm-main {
   font-weight: 700;
-  font-size: 15px;
+  font-size: var(--text-body-sm);
   color: var(--b365-white);
   margin: 0 0 var(--space-1);
 }
 
 .upsell-confirm-sub {
-  font-size: 13px;
+  font-size: var(--text-caption);
   color: rgba(255, 255, 255, 0.85);
   margin: 0;
   text-transform: uppercase;
@@ -49,23 +46,25 @@ html.upsell-active body {
 .upsell-badge {
   display: inline-block;
   background: linear-gradient(135deg, #D4A843, #B8922E);
-  color: var(--b365-navy);
+  color: var(--b365-white);
+  font-family: var(--font-body);
   font-weight: 800;
-  font-size: 12px;
+  font-size: var(--text-micro);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 6px 18px;
-  border-radius: 4px;
+  border-radius: var(--radius-full);
   margin-bottom: var(--space-6);
 }
 
 .upsell-h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-title);
   font-size: clamp(26px, 5vw, 42px);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
   margin: 0 0 var(--space-6);
-  color: var(--b365-white);
+  color: var(--b365-text);
 }
 
 .upsell-gold {
@@ -73,9 +72,10 @@ html.upsell-active body {
 }
 
 .upsell-sub {
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--b365-gray-200);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.75;
+  color: var(--b365-text-secondary);
   margin: 0 0 var(--space-8);
   max-width: 640px;
   margin-left: auto;
@@ -89,10 +89,11 @@ html.upsell-active body {
 
 .upsell-timer-label {
   display: block;
-  font-size: 13px;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--b365-gray-400);
+  color: var(--b365-text-secondary);
   margin-bottom: var(--space-2);
 }
 
@@ -104,14 +105,16 @@ html.upsell-active body {
 
 .upsell-digit {
   display: inline-block;
-  background: rgba(212, 168, 67, 0.15);
-  border: 1px solid rgba(212, 168, 67, 0.3);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--b365-border);
   color: #D4A843;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(36px, 6vw, 52px);
   font-weight: 800;
   padding: 6px 14px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   min-width: 60px;
   text-align: center;
   line-height: 1;
@@ -145,16 +148,18 @@ html.upsell-active body {
 }
 
 .upsell-card {
-  border-radius: var(--radius-md, 14px);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--b365-gray-900);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--b365-border);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .upsell-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-lg);
 }
 
 .upsell-card-cover {
@@ -170,15 +175,15 @@ html.upsell-active body {
   position: absolute;
   top: 10px;
   right: 12px;
-  font-size: 11px;
+  font-size: var(--text-micro);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.5);
   letter-spacing: 0.06em;
 }
 
 .upsell-card-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 15px;
+  font-family: var(--font-title);
+  font-size: var(--text-body-sm);
   font-weight: 600;
   line-height: 1.35;
   color: var(--b365-white);
@@ -186,9 +191,10 @@ html.upsell-active body {
 }
 
 .upsell-card-desc {
-  font-size: 13px;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
   line-height: 1.5;
-  color: var(--b365-gray-400);
+  color: var(--b365-text-secondary);
   padding: var(--space-3) var(--space-4) var(--space-4);
   margin: 0;
 }
@@ -202,17 +208,19 @@ html.upsell-active body {
 }
 
 .upsell-value-heading {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-title);
   font-size: clamp(22px, 4vw, 30px);
   font-weight: 700;
   margin: 0 0 var(--space-8);
-  color: var(--b365-white);
+  color: var(--b365-text);
 }
 
 .upsell-value-card {
-  background: var(--b365-gray-900);
-  border: 1px solid rgba(212, 168, 67, 0.2);
-  border-radius: var(--radius-md, 14px);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--b365-border);
+  border-radius: var(--radius-md);
   padding: var(--space-6);
   text-align: left;
   margin-bottom: var(--space-8);
@@ -223,7 +231,7 @@ html.upsell-active body {
   align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-3) 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--b365-border);
 }
 
 .upsell-value-row:last-child {
@@ -238,44 +246,47 @@ html.upsell-active body {
 
 .upsell-value-name {
   flex: 1;
-  font-size: 14px;
-  color: var(--b365-gray-200);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: var(--b365-text);
 }
 
 .upsell-value-price {
-  font-size: 13px;
-  color: var(--b365-gray-400);
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--b365-text-secondary);
   white-space: nowrap;
 }
 
 .upsell-value-total {
   margin-top: var(--space-6);
   padding-top: var(--space-4);
-  border-top: 1px solid rgba(212, 168, 67, 0.2);
+  border-top: 1px solid var(--b365-border);
 }
 
 .upsell-value-line {
   display: flex;
   justify-content: space-between;
-  font-size: 15px;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
   padding: var(--space-2) 0;
-  color: var(--b365-gray-200);
+  color: var(--b365-text);
 }
 
 .upsell-strikethrough span {
   text-decoration: line-through;
-  color: var(--b365-gray-400);
+  color: var(--b365-text-secondary);
 }
 
 .upsell-final-price {
   font-weight: 700;
-  font-size: 18px;
-  color: var(--b365-white);
+  font-size: var(--text-h4);
+  color: var(--b365-text);
 }
 
 .upsell-gold-big {
   color: #D4A843;
-  font-size: 32px;
+  font-size: var(--text-h2);
   font-weight: 800;
 }
 
@@ -287,11 +298,12 @@ html.upsell-active body {
   gap: 8px;
   background: linear-gradient(135deg, #D4A843, #B8922E);
   color: var(--b365-white);
+  font-family: var(--font-body);
   font-weight: 800;
   font-size: clamp(15px, 2.5vw, 18px);
   padding: 18px 36px;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   width: 100%;
   max-width: 560px;
@@ -307,22 +319,24 @@ html.upsell-active body {
 }
 
 .upsell-secure {
-  font-size: 13px;
-  color: var(--b365-gray-400);
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--b365-text-secondary);
   margin: var(--space-4) 0 var(--space-6);
 }
 
 .upsell-skip {
   display: inline-block;
-  font-size: 14px;
-  color: var(--b365-gray-400);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: var(--b365-text-secondary);
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color 0.2s;
 }
 
 .upsell-skip:hover {
-  color: var(--b365-gray-200);
+  color: var(--b365-text);
 }
 
 /* ── Dr. Warren ── */
@@ -333,24 +347,28 @@ html.upsell-active body {
 }
 
 .upsell-warren-card {
-  background: var(--b365-gray-900);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--b365-border);
   border-left: 4px solid #D4A843;
-  border-radius: var(--radius-md, 14px);
+  border-radius: var(--radius-md);
   padding: var(--space-8);
 }
 
 .upsell-warren-heading {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-title);
   font-size: clamp(18px, 3vw, 22px);
   font-weight: 700;
   margin: 0 0 var(--space-4);
-  color: var(--b365-white);
+  color: var(--b365-text);
 }
 
 .upsell-warren-text {
-  font-size: 15px;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
   line-height: 1.65;
-  color: var(--b365-gray-200);
+  color: var(--b365-text-secondary);
   margin: 0;
 }
 
@@ -368,17 +386,18 @@ html.upsell-active body {
 }
 
 .upsell-guarantee-heading {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-title);
   font-size: clamp(20px, 3vw, 26px);
   font-weight: 700;
   margin: 0 0 var(--space-4);
-  color: var(--b365-white);
+  color: var(--b365-text);
 }
 
 .upsell-guarantee-text {
-  font-size: 15px;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
   line-height: 1.65;
-  color: var(--b365-gray-200);
+  color: var(--b365-text-secondary);
   margin: 0;
 }
 
@@ -386,12 +405,13 @@ html.upsell-active body {
 .upsell-footer {
   text-align: center;
   padding: var(--space-8) var(--space-6);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--b365-border);
 }
 
 .upsell-footer p {
-  font-size: 12px;
-  color: var(--b365-gray-400);
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--b365-text-secondary);
   line-height: 1.6;
   margin: 0 0 var(--space-2);
   max-width: 640px;
@@ -400,22 +420,22 @@ html.upsell-active body {
 }
 
 .upsell-footer a {
-  color: var(--b365-gray-400);
+  color: var(--b365-text-secondary);
   text-decoration: underline;
   text-underline-offset: 2px;
   transition: color 0.2s;
 }
 
 .upsell-footer a:hover {
-  color: var(--b365-white);
+  color: var(--b365-text);
 }
 
 .upsell-footer-dot {
   margin: 0 8px;
-  color: var(--b365-gray-400);
+  color: var(--b365-text-secondary);
 }
 
-/* ── Scroll Reveal (uses existing system) ── */
+/* ── Scroll Reveal ── */
 .upsell-page .b365-reveal {
   opacity: 0;
   transform: translateY(24px);

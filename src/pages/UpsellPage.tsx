@@ -72,9 +72,9 @@ const UpsellPage: React.FC = () => {
   const guaranteeRef = useScrollReveal<HTMLDivElement>();
 
   useEffect(() => {
-    document.documentElement.classList.add('upsell-active');
+    document.documentElement.classList.add('ftg-active');
     window.scrollTo(0, 0);
-    return () => document.documentElement.classList.remove('upsell-active');
+    return () => document.documentElement.classList.remove('ftg-active');
   }, []);
 
   const handleCTA = () => {
@@ -83,6 +83,14 @@ const UpsellPage: React.FC = () => {
 
   return (
     <div className="upsell-page">
+      {/* ── Full-page Fixed Video Background (same as FTG) ── */}
+      <div className="ftg-hero-video-bg" aria-hidden="true">
+        <video autoPlay muted loop playsInline className="ftg-hero-video">
+          <source src="/images/ftg-bg-running.mp4" type="video/mp4" />
+        </video>
+        <div className="ftg-hero-video-overlay" />
+      </div>
+
       {/* ── Green Confirmation Bar ── */}
       <div className="upsell-confirm-bar">
         <p className="upsell-confirm-main">✅ Your Free Guide Is On Its Way! Check your email in a few minutes.</p>
