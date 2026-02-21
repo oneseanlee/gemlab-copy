@@ -1,95 +1,74 @@
 
+# Redesign Free Testosterone Guide Page
 
-# Lead Magnet Landing Page: `/free-testosterone-guide`
+## Problem
+The current page uses a dark background (#0a0f1e) with gold/amber accents (#D4A843) that doesn't match the rest of the site. The site uses a white-to-blue gradient background, brand blue (#3376b0), white cards with subtle borders, and the standard blue AnimatedCTA buttons.
 
-## Overview
+## Changes
 
-A distraction-free, high-converting lead capture page designed to collect name and email in exchange for the free guide "The Difference Between Renting Testosterone and Owning It." No navigation bar, no footer links beyond legal -- pure conversion focus.
+### 1. Remove Dark Theme -- Match Site Background
+- Remove the dark `background` override on `.ftg-page`
+- Let the page inherit the global gradient background (`#FFFFFF` to `#BFD5E6` to `#5D8AA8`) from `index.css`
+- All text switches from white to the site's standard dark text (`--b365-text` / `--b365-gray-900`)
+- Secondary text uses `--b365-text-secondary` (`#5A6578`)
 
----
+### 2. Restyle All Sections to White Card Aesthetic
+- **Trust strip cards**: White background, `--shadow-sm` box shadow, `--b365-border` border, blue icons instead of gold
+- **Discover grid items**: White card background with border and shadow, numbered items use `--b365-blue` instead of gold
+- **Testimonial cards**: White background with border/shadow, standard blue star ratings instead of gold
+- **Form inputs**: Light gray border, white background, standard focus ring in blue
+- **Success state**: Green border with light green background (matches `--b365-green`)
 
-## New Files
+### 3. Replace Gold CTA Buttons with Standard AnimatedCTA
+- Remove the custom `.ftg-submit` gold gradient button entirely
+- Use the site's `AnimatedCTA` component (blue gradient, pill shape, hover animation) as the form submit button via its `onClick` prop
+- This ensures visual consistency with every other CTA on the site
 
-### 1. `src/pages/FreeTestosteroneGuidePage.tsx`
-React component with all sections, form state management via `useState`, and scroll-reveal animations using the existing `useScrollReveal` hook.
+### 4. Restyle the 3D Ebook Mockup
+- Change the ebook gradient from dark navy to the brand blue palette (`--b365-blue` to `--b365-blue-dark`)
+- Keep the 3D perspective effect but adjust shadow colors to work on a light background
+- Badge text uses white on blue instead of gold
 
-### 2. `src/pages/FreeTestosteroneGuidePage.css`
-All styling for the page, using existing design tokens (`--font-title`, `--font-body`, `--space-*`, `--radius-*`, `--shadow-*`, `--duration-*`).
+### 5. Update Hero Tag and Heading Colors
+- "Free Guide" tag: Blue (`--b365-blue`) instead of gold
+- Headlines: `--b365-text` (dark navy) instead of white
+- Subheadline: `--b365-text-secondary` instead of gray-400
 
-### 3. Route Registration
-Add `/free-testosterone-guide` to `src/App.tsx` routes.
+### 6. Footer Styling
+- Border top uses `--b365-border` instead of rgba white
+- Text uses `--b365-gray-400`
+- Links hover to `--b365-blue` instead of gold
 
----
-
-## Page Sections (top to bottom)
-
-### Hero Section (above the fold)
-- Full-width dark gradient background (`#0a0f1e` to `#111827`)
-- Two-column layout on desktop (stacked on mobile):
-  - **Left column**: Headline in Playfair Display ("FREE GUIDE: The Difference Between Renting Testosterone and Owning It"), subheadline in Plus Jakarta Sans, then the opt-in form (First Name + Email inputs, amber/gold gradient submit button "GET YOUR FREE GUIDE" with arrow icon, privacy note below)
-  - **Right column**: Styled div simulating a 3D ebook mockup with perspective transform, gradient background, white text showing the guide title and "Best 365 Labs" branding
-- Form uses React `useState` for `firstName` and `email`, with basic validation and `console.log` on submit
-
-### Trust Strip
-- Horizontal row of 4 semi-transparent cards on dark background
-- Icons from Lucide: Users, Building2, Stethoscope, FlaskConical
-- Items: "50,000+ Men Served", "FDA-Registered Facility", "Physician-Backed Protocols", "Patent-Pending Science"
-
-### What You'll Discover Section
-- Dark background continues
-- Section heading: "Inside This Free Guide, You'll Discover:"
-- 7 numbered items in a 2-column grid (1 column on mobile)
-- Each item: gold-colored number on left, white text on right, subtle card styling
-- Fade-in animation on scroll via `useScrollReveal`
-
-### Social Proof Section
-- Heading: "Real Results From Real Men"
-- 3 testimonial cards in a row (stacked on mobile)
-- Dark cards with subtle border, gold star ratings (5 stars), white quote text, name/details below
-- Three testimonials as specified (Brett Earnshaw, Alex T., David R.)
-
-### Final CTA Section
-- Repeat of the opt-in form with heading "Stop Renting. Start Owning. Get the Free Guide Now."
-- Same form fields, same amber/gold button
-- Both forms share state so filling one fills the other
-
-### Minimal Footer
-- Copyright line, FDA disclaimer
-- Links to /privacy and /terms using React Router `Link`
-- Gray-400 text on dark background
+### 7. Scroll Reveal
+- Keep the existing `useScrollReveal` hook and `.b365-reveal` / `.b365-revealed` classes (they work on any background)
 
 ---
 
 ## Technical Details
 
-### Form Implementation
-- `useState` for `firstName`, `email`, and `submitted` state
-- Basic HTML5 validation (`required`, `type="email"`)
-- On submit: `console.log({ firstName, email })`, show a brief success message
-- No backend connection yet (as specified)
+### Files Modified
+1. **`src/pages/FreeTestosteroneGuidePage.tsx`** -- Import and use `AnimatedCTA` for submit buttons, replace the custom button element, adjust ebook badge/star colors
+2. **`src/pages/FreeTestosteroneGuidePage.css`** -- Complete restyle of all color values, backgrounds, borders, and shadows to match the homepage design system
 
-### Animations
-- Each section wrapped with `useScrollReveal` for fade-in on scroll
-- Hero has staggered CSS entrance animations (headline, then subtext, then form, then ebook mockup)
-- Submit button has hover scale + glow effect
+### Key CSS Token Swaps
 
-### Responsive Breakpoints
-- Desktop (1024px+): two-column hero, 2-column discover grid, 3-column testimonials
-- Tablet (768px): single-column hero, 2-column discover grid, stacked testimonials
-- Mobile (480px): everything single-column, reduced font sizes, full-width form
+| Element | Current (Dark/Gold) | New (Light/Blue) |
+|---------|-------------------|-----------------|
+| Page background | `#0a0f1e to #111827` | Inherit global gradient |
+| Headlines | `#fff` | `var(--b365-text)` |
+| Body text | `#9CA3AF` | `var(--b365-text-secondary)` |
+| Accent color | `#D4A843` (gold) | `var(--b365-blue)` |
+| Card backgrounds | `rgba(255,255,255,0.04)` | `var(--b365-white)` |
+| Card borders | `rgba(255,255,255,0.06)` | `1px solid var(--b365-border)` |
+| Card shadows | None | `var(--shadow-sm)` |
+| CTA button | Gold gradient | `AnimatedCTA` component (blue) |
+| Input borders | `rgba(255,255,255,0.12)` | `var(--b365-border)` |
+| Input focus | `#D4A843` border | `var(--b365-blue)` border |
+| Stars | `#D4A843` fill | `var(--b365-blue)` fill |
+| Ebook mockup | Dark navy gradient | `--b365-blue` gradient |
 
-### Ebook Mockup
-- Pure CSS implementation: a styled div with `perspective` and `rotateY` transform to create a 3D book appearance
-- Gradient background (dark navy to blue), white text, "Best 365 Labs" at bottom
-- No external images required
+### Form Handling
+The `AnimatedCTA` component supports `onClick` without `href`, rendering as a `<button>`. We wrap the form's submit logic so that clicking the AnimatedCTA triggers form validation and submission. The form element itself handles validation via HTML5 `required` attributes -- we attach an `id` to the form and use `form.requestSubmit()` from the button click, or restructure to keep the button inside the `<form>` tag.
 
-### CTA Button Styling
-- Custom amber/gold gradient (`#D4A843` to `#B8922E`) -- distinct from the site's blue CTAs to signal "free" vs "buy"
-- White bold text, rounded corners, hover animation (translateY + shadow increase)
-- Not using AnimatedCTA component since this needs a unique gold style and is a form submit button
-
-### Page Isolation
-- Page sets its own `background` on the wrapper div, overriding the global gradient from `index.css`
-- No nav bar, no shared header components
-- Minimal footer is self-contained within this page (not SharedFooter)
-
+### No New Dependencies
+All changes use existing design tokens, components, and patterns already in the codebase.
