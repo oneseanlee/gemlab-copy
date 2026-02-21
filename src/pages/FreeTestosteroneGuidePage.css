@@ -43,12 +43,7 @@
 .ftg-hero-video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.78) 0%,
-    rgba(220, 232, 243, 0.82) 50%,
-    rgba(180, 210, 230, 0.85) 100%
-  );
+  background: transparent;
 }
 
 .ftg-hero-left {

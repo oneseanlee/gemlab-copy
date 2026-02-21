@@ -91,29 +91,27 @@ const OptInForm = ({
 
   return (
     <form id={formId} ref={formRef} className="ftg-form" onSubmit={onSubmit}>
-      <div className="ftg-input-row">
-        <div className="ftg-input-wrap">
-          <User size={16} className="ftg-input-icon" />
-          <input
-            type="text"
-            className="ftg-input"
-            placeholder="First name"
-            required
-            value={firstName}
-            onChange={(e) => onFirstNameChange(e.target.value)}
-          />
-        </div>
-        <div className="ftg-input-wrap">
-          <Mail size={16} className="ftg-input-icon" />
-          <input
-            type="email"
-            className="ftg-input"
-            placeholder="Email address"
-            required
-            value={email}
-            onChange={(e) => onEmailChange(e.target.value)}
-          />
-        </div>
+      <div className="ftg-input-wrap">
+        <User size={16} className="ftg-input-icon" />
+        <input
+          type="text"
+          className="ftg-input"
+          placeholder="First name"
+          required
+          value={firstName}
+          onChange={(e) => onFirstNameChange(e.target.value)}
+        />
+      </div>
+      <div className="ftg-input-wrap">
+        <Mail size={16} className="ftg-input-icon" />
+        <input
+          type="email"
+          className="ftg-input"
+          placeholder="Email address"
+          required
+          value={email}
+          onChange={(e) => onEmailChange(e.target.value)}
+        />
       </div>
       <AnimatedCTA onClick={() => formRef.current?.requestSubmit()}>
         GET FREE GUIDE <ArrowRight size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 4 }} />
