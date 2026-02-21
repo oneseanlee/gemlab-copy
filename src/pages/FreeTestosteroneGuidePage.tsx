@@ -145,6 +145,12 @@ const FreeTestosteroneGuidePage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
+  // Remove root background so fixed video shows through
+  useEffect(() => {
+    document.documentElement.classList.add('ftg-active');
+    return () => document.documentElement.classList.remove('ftg-active');
+  }, []);
+
   const trustRef = useScrollReveal<HTMLDivElement>();
   const discoverRef = useScrollReveal<HTMLDivElement>();
   const midCtaRef = useScrollReveal<HTMLDivElement>();

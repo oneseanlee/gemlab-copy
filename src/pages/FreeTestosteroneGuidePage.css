@@ -2,6 +2,14 @@
    FREE TESTOSTERONE GUIDE — CONVERSION-OPTIMIZED
    ══════════════════════════════════════════════ */
 
+/* Override root background when this page is active */
+:root.ftg-active,
+:root.ftg-active body {
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
 .ftg-page {
   min-height: 100vh;
   color: var(--b365-text);
