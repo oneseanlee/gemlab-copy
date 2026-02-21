@@ -49,6 +49,7 @@ const GLP1Page = () => {
       quantity: 1,
       selectedOptions: [{ name: 'Size', value: '30-Day Protocol' }]
     });
+    useCartStore.getState().setCartOpen(true);
   };
 
   const faqItems = [

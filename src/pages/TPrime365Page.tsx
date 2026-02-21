@@ -101,6 +101,7 @@ const TPrime365Page = () => {
       quantity: 1,
       selectedOptions: [{ name: 'Plan', value: 'Monthly Subscription' }]
     });
+    useCartStore.getState().setCartOpen(true);
   };
 
   const mobileLinks = [
