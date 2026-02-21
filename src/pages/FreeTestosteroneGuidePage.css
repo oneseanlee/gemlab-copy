@@ -22,16 +22,15 @@
   gap: var(--space-16);
   align-items: center;
   z-index: 1;
-  overflow: hidden;
 }
 
-/* ── Hero Video Background ── */
+/* ── Full-page Fixed Video Background ── */
 .ftg-hero-video-bg {
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: -50vw;
-  right: -50vw;
-  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
   z-index: -1;
   overflow: hidden;
 }
@@ -47,9 +46,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.82) 0%,
-    rgba(191, 213, 230, 0.88) 50%,
-    rgba(93, 138, 168, 0.92) 100%
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(220, 232, 243, 0.82) 50%,
+    rgba(180, 210, 230, 0.85) 100%
   );
 }
 
