@@ -41,9 +41,12 @@ const discoverItems = [
 ];
 
 const testimonials = [
-  { name: 'Brett Earnshaw', quote: 'My testosterone went from 658 to 749 in two months — more energy, sharper focus, better performance.', img: '/images/testimonial-brett-earnshaw.png' },
-  { name: 'Sean Lee', quote: 'From 120 to 917 ng/dL in 3 weeks. This changed everything.', img: '/images/testimonial-sean-lee.png' },
-  { name: 'Darren Lopez', quote: '380 to 1,150 ng/dL in 4 weeks. I feel like I\'m 30 again.', img: '/images/testimonial-darren-lopez.png' },
+  { name: 'Brett Earnshaw', quote: 'My T-levels went from 658 to 749 in two months. More energy, sharper focus, better performance.', img: '/images/testimonial-brett-earnshaw.png' },
+  { name: 'Kerry Reyes', quote: 'I felt the difference in the first week. No crash, no mood swings — just steady energy all day.', img: '/images/testimonial-kerry-reyes-bg.png' },
+  { name: 'Mike VanDyke', quote: 'Rapid improvements in energy and cellular performance. It\'s a game-changer for anyone serious about health.', img: '/images/testimonial-mike-vandyke-bg.png' },
+  { name: 'Sean Lee', quote: 'The sublingual delivery is incredible — absorbs in seconds. I\'m sleeping better and recovering faster.', img: '/images/testimonial-sean-lee.png' },
+  { name: 'Ernesto Cruz', quote: 'T-levels from 280 to 680 in 6 weeks. My wife noticed the difference before I did.', img: '/images/testimonial-ernesto-cruz.png' },
+  { name: 'Jay Atkins', quote: 'Finally a protocol that works without needles. I\'ve got my drive back and I feel 10 years younger.', img: '/images/testimonial-jay-atkins.png' },
 ];
 
 const pressLogos = [
