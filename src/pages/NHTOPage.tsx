@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './NHTOPage.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
@@ -9,6 +10,8 @@ import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { Menu, CheckCircle, ShieldCheck, Gift, Shrink, Baby, Link2, AlertTriangle, X, Check, Shield, Activity, SlidersHorizontal, ChevronRight, Truck, Award, Stethoscope, ArrowRight, Flame, User, Sunrise, Clock, Moon, Pill, Headphones, AlertCircle, Lock, Package } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 const NHTO_VARIANT_ID = 'gid://shopify/ProductVariant/46309998133388';
 const NHTO_PRODUCT = {
@@ -28,6 +31,11 @@ const NHTOPage = () => {
     const [showBanner, setShowBanner] = useState(true);
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [showLeadModal, setShowLeadModal] = useState(false);
+    const [leadForm, setLeadForm] = useState({ firstName: '', email: '' });
+    const [leadSubmitting, setLeadSubmitting] = useState(false);
+    const [leadError, setLeadError] = useState('');
+    const navigate = useNavigate();
     const addItem = useCartStore(state => state.addItem);
     const isLoading = useCartStore(state => state.isLoading);
 
@@ -38,17 +46,32 @@ const NHTOPage = () => {
       { label: 'Bundle', href: '#bundle' },
     ];
 
-    const handleOrderNow = async (e?: React.MouseEvent) => {
+    const handleStartProtocol = (e?: React.MouseEvent) => {
         e?.preventDefault();
-        await addItem({
-            product: NHTO_PRODUCT,
-            variantId: NHTO_VARIANT_ID,
-            variantTitle: 'Complete System',
-            price: { amount: '250.00', currencyCode: 'USD' },
-            quantity: 1,
-            selectedOptions: [{ name: 'Bundle', value: 'Complete System' }],
-        });
-        useCartStore.getState().setCartOpen(true);
+        setShowLeadModal(true);
+    };
+
+    const handleLeadSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLeadError('');
+        if (!leadForm.firstName.trim() || !leadForm.email.trim()) {
+            setLeadError('Please fill out both fields.');
+            return;
+        }
+        setLeadSubmitting(true);
+        try {
+            await supabase.from('leads').insert({
+                first_name: leadForm.firstName.trim(),
+                email: leadForm.email.trim(),
+                source: 'nhto',
+            });
+            setShowLeadModal(false);
+            navigate('/nhto-intake');
+        } catch {
+            setLeadError('Something went wrong. Please try again.');
+        } finally {
+            setLeadSubmitting(false);
+        }
     };
 
     const faqItems = [
@@ -93,8 +116,8 @@ const NHTOPage = () => {
                     </ul>
                     <div className="b365-nav-right">
                         <CartDrawer />
-                        <AnimatedCTA href="#" small onClick={handleOrderNow} disabled={isLoading}>
-                            {isLoading ? 'Adding...' : 'Get The System'}
+                        <AnimatedCTA href="#" small onClick={handleStartProtocol}>
+                            Get The System
                         </AnimatedCTA>
                     </div>
                 </div>
@@ -123,8 +146,8 @@ const NHTOPage = () => {
                             <span className="price-note" style={{ textDecoration: 'line-through', marginRight: 8 }}>$300</span>
                             <span className="price-note">Complete System + Medical Consultation Included</span>
                         </div>
-                        <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
-                            {isLoading ? 'Adding to Cart...' : 'YES! I Want My System + Consultation'}
+                        <AnimatedCTA href="#" onClick={handleStartProtocol}>
+                            YES! I Want My System + Consultation
                         </AnimatedCTA>
                         <div className="nhto-happymd-badge">
                             <Gift size={18} />
@@ -383,8 +406,8 @@ const NHTOPage = () => {
                     </div>
                 </div>
                 <div style={{ textAlign: 'center', marginTop: 32 }}>
-                    <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
-                        {isLoading ? 'Adding to Cart...' : 'YES! I Want My System + Consultation →'}
+                    <AnimatedCTA href="#" onClick={handleStartProtocol}>
+                        YES! I Want My System + Consultation →
                     </AnimatedCTA>
                 </div>
             </section>
@@ -474,8 +497,8 @@ const NHTOPage = () => {
                             <span>$250</span>
                         </div>
                     </div>
-                    <AnimatedCTA href="#" className="btn-white-cta" onClick={handleOrderNow} disabled={isLoading}>
-                        {isLoading ? 'Adding to Cart...' : 'Get the System →'}
+                    <AnimatedCTA href="#" className="btn-white-cta" onClick={handleStartProtocol}>
+                        Get the System →
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
                         <span><Check size={14} /> Licensed physician reviews every order</span>
@@ -565,6 +588,65 @@ const NHTOPage = () => {
 
             {/* 18. Footer */}
             <SharedFooter />
+
+            {/* Lead Capture Modal */}
+            <Dialog open={showLeadModal} onOpenChange={setShowLeadModal}>
+              <DialogContent className="sm:max-w-md" style={{ background: '#fff', borderRadius: 16, padding: '2rem' }}>
+                <DialogHeader>
+                  <DialogTitle className="b365-serif" style={{ fontSize: '1.5rem', color: 'var(--b365-text)', textAlign: 'center' }}>
+                    Start Your NHTO Protocol
+                  </DialogTitle>
+                  <DialogDescription style={{ textAlign: 'center', color: '#666', marginTop: 8 }}>
+                    Enter your info below and we'll take you to the physician intake form.
+                  </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleLeadSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    value={leadForm.firstName}
+                    onChange={(e) => setLeadForm(prev => ({ ...prev, firstName: e.target.value }))}
+                    required
+                    style={{ padding: '14px 16px', borderRadius: 10, border: '1.5px solid #d0d5dd', fontSize: '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    value={leadForm.email}
+                    onChange={(e) => setLeadForm(prev => ({ ...prev, email: e.target.value }))}
+                    required
+                    style={{ padding: '14px 16px', borderRadius: 10, border: '1.5px solid #d0d5dd', fontSize: '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
+                  />
+                  {leadError && <p style={{ color: '#dc2626', fontSize: '0.875rem', margin: 0 }}>{leadError}</p>}
+                  <button
+                    type="submit"
+                    disabled={leadSubmitting}
+                    style={{
+                      padding: '16px',
+                      borderRadius: 10,
+                      border: 'none',
+                      background: 'var(--b365-blue)',
+                      color: '#fff',
+                      fontSize: '1.05rem',
+                      fontWeight: 700,
+                      cursor: leadSubmitting ? 'wait' : 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 8,
+                      opacity: leadSubmitting ? 0.7 : 1,
+                      transition: 'opacity 0.2s'
+                    }}
+                  >
+                    {leadSubmitting ? 'Submitting...' : 'Continue to Intake Form'}
+                    {!leadSubmitting && <ArrowRight size={16} />}
+                  </button>
+                  <p style={{ fontSize: '0.75rem', color: '#999', textAlign: 'center', margin: 0 }}>
+                    🔒 Your information is secure and HIPAA-compliant.
+                  </p>
+                </form>
+              </DialogContent>
+            </Dialog>
         </div>
     );
 };
