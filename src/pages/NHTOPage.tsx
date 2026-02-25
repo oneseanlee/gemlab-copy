@@ -498,7 +498,7 @@ const NHTOPage = () => {
                     </div>
                     <div className="tprime-cta-trust-strip">
                         <span><Lock size={14} /> Secure Checkout</span>
-                        <span><ShieldCheck size={14} /> Satisfaction Guaranteed</span>
+                        <span><ShieldCheck size={14} /> Physician-Reviewed</span>
                         <span><Package size={14} /> FREE Fast Shipping</span>
                     </div>
                 </div>
