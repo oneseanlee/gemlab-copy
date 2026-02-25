@@ -157,11 +157,7 @@ const TPrime365Page = () => {
   },
   {
     question: "What happens if I'm not approved?",
-    answer: "You receive a 100% refund. An independent licensed physician reviews every order. If they determine TPrime365 isn't right for you based on your health assessment, your payment is fully refunded — no questions asked."
-  },
-  {
-    question: "When do I pay?",
-    answer: "Payment is processed when you complete your order and health assessment. If the physician does not approve your prescription, you are immediately refunded."
+    answer: "If the independent physician determines TPrime365 isn't right for you based on your health assessment, you'll be notified promptly. The intake process is free — you only move forward if you qualify."
   },
   {
     question: "Will I lose my gains if I stop?",
@@ -236,7 +232,7 @@ const TPrime365Page = () => {
                             <span className="price-big">$149</span>
                             <span className="price-note">/month — Includes Physician Consultation via HappyMD</span>
                         </div>
-                        <p className="guarantee-text">If not approved by physician, fully refunded</p>
+                        <p className="guarantee-text">Complete your intake to see if you qualify</p>
 
                         {/* Urgency line */}
                         <div className="tprime-urgency-line">
@@ -253,7 +249,7 @@ const TPrime365Page = () => {
                         <div className="tprime-hero-trust-row">
                           <span><Check size={14} /> Physician-Reviewed</span>
                           <span><Check size={14} /> FDA-Registered Pharmacy</span>
-                          <span><Check size={14} /> Money-Back Guarantee</span>
+                          <span><Check size={14} /> HIPAA Compliant</span>
                           <span><Truck size={14} /> Free Shipping</span>
                         </div>
                     </div>
@@ -283,7 +279,7 @@ const TPrime365Page = () => {
                                 <span className="tprime-step-num">02</span>
                                 <div>
                                     <h3>Physician Review via HappyMD</h3>
-                                    <p>An independent licensed physician evaluates your case and determines if TPrime365 is right for you. If NOT approved: full refund processed immediately.</p>
+                                    <p>An independent licensed physician evaluates your case and determines if TPrime365 is right for you.</p>
                                 </div>
                             </div>
                             <div className="tprime-step-row">
@@ -301,7 +297,7 @@ const TPrime365Page = () => {
                             </span>
                             <span>
                                 <ShieldCheck size={16} />
-                                100% Money-Back Guarantee if physician does not approve
+                                Complete your intake to see if you qualify
                             </span>
                         </div>
                     </div>
@@ -557,7 +553,7 @@ const TPrime365Page = () => {
                             <tr><td>Shuts Down Natural T</td><td className="highlight-col positive">✗</td><td>✗</td><td>✗</td><td>✗</td><td className="negative">✓</td></tr>
                             <tr><td>Longevity Benefits</td><td className="highlight-col positive">✓</td><td className="negative">✗</td><td className="negative">✗</td><td className="negative">✗</td><td className="negative">✗</td></tr>
                             <tr><td>FDA-Registered Pharmacy</td><td className="highlight-col positive">✓ 503A</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
-                            <tr><td>Money-Back Guarantee</td><td className="highlight-col positive">✓ Full refund</td><td>Varies</td><td>Varies</td><td>Varies</td><td className="negative">✗</td></tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -590,7 +586,7 @@ const TPrime365Page = () => {
                     <div className="tprime-final-price-box">
                         <span className="big-price">$149/month</span>
                         <span className="note">Includes everything: Formula + Physician Consultation + Free Shipping</span>
-                        <span className="guarantee-text">100% refunded if physician does not approve</span>
+                        <span className="guarantee-text">Complete your intake to see if you qualify</span>
                     </div>
                     <AnimatedCTA onClick={handleStartProtocol} className="btn-white-cta">
                         Start My Protocol
@@ -598,14 +594,14 @@ const TPrime365Page = () => {
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
                         <span><Check size={14} /> Licensed physician reviews every order</span>
-                        <span><Check size={14} /> Full refund if not approved</span>
+                        <span><Check size={14} /> See if you qualify in minutes</span>
                         <span><Check size={14} /> FDA-registered compounding pharmacy</span>
                         <span><Check size={14} /> Free shipping — discreet packaging</span>
                         <span><Check size={14} /> Cancel subscription anytime</span>
                     </div>
                     <div className="tprime-cta-trust-strip">
                         <span><Lock size={14} /> Secure Checkout</span>
-                        <span><ShieldCheck size={14} /> Money-Back Guarantee</span>
+                        <span><ShieldCheck size={14} /> HIPAA Compliant</span>
                         <span><Package size={14} /> Fast Shipping</span>
                     </div>
                 </div>
@@ -648,7 +644,7 @@ const TPrime365Page = () => {
                 <div className="tprime-trust-grid">
                     {[
           { Icon: Building2, title: 'FDA-Registered 503A Compounding Facility', desc: 'Manufactured in Salt Lake City, UT under strict quality controls' },
-          { Icon: BadgeCheck, title: '100% Money-Back Guarantee', desc: 'Full refund if prescription not approved by independent physician' },
+          { Icon: BadgeCheck, title: 'Patent-Pending Delivery', desc: 'MODS Max Gold™ sublingual technology for 10x absorption' },
           { Icon: Microscope, title: 'Third-Party Tested', desc: 'Every batch verified for purity and potency' },
           { Icon: Flag, title: 'Made in the USA', desc: 'American-made, American quality' },
           { Icon: Stethoscope, title: 'Licensed Physician Oversight', desc: 'Real doctors reviewing every case' },

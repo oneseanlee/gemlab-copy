@@ -76,7 +76,7 @@ const NHTOPage = () => {
 
     const faqItems = [
         { question: "How is the consultation facilitated?", answer: "Your consultation is facilitated through happyMD, a licensed telehealth platform. After you complete your health intake, an independent licensed physician reviews your information and determines eligibility for the Non-Hormonal Testosterone Optimizer prescription." },
-        { question: "What happens if I'm not approved?", answer: "If the independent physician determines you're not a candidate for prescription treatment, your $140 consultation + optimizer fee is fully refunded. You keep the UCOS supplements ($160 value) regardless of approval." },
+        { question: "What happens if I'm not approved?", answer: "If the independent physician determines you're not a candidate for prescription treatment, you'll be notified promptly. The intake process is free — you only move forward if you qualify." },
         { question: "Can I use this with my current TRT?", answer: "Yes! The Non-Hormonal Testosterone Optimizer powered by MODS Max is specifically designed to work alongside TRT. It helps maintain testicular function, preserve fertility, and optimize hormone balance that TRT alone can compromise." },
         { question: "Does this preserve fertility?", answer: "Yes. Unlike traditional TRT which suppresses sperm production, the Non-Hormonal Testosterone Optimizer stimulates natural LH/FSH production, maintaining your body's natural reproductive function." },
         { question: "How quickly will I see results?", answer: "Most men notice improvements in energy and mood within 2-3 weeks. Testosterone levels typically increase significantly within 3-6 weeks. The UCOS supplements provide additional cellular optimization benefits from day one." },
@@ -139,7 +139,7 @@ const NHTOPage = () => {
                         </ul>
                         <p className="nhto-consult-note">
                             <ShieldCheck size={14} />
-                            Get medical consultation with refund protection
+                            Complete your intake to see if you qualify
                         </p>
                         <div className="price-row">
                             <span className="price-big">$250</span>
@@ -164,7 +164,7 @@ const NHTOPage = () => {
             <div className="nhto-trust-strip">
                 {[
                     { Icon: Truck, title: 'Free Shipping', desc: 'Nationwide delivery' },
-                    { Icon: ShieldCheck, title: '60-Day Guarantee', desc: 'Money-back promise' },
+                    { Icon: ShieldCheck, title: 'Physician-Reviewed', desc: 'Licensed provider network' },
                     { Icon: Award, title: 'Premium Quality', desc: 'Made in USA' },
                     { Icon: Stethoscope, title: 'Doctor Consultation', desc: 'Included with order' },
                 ].map((badge, i) => (
@@ -382,8 +382,7 @@ const NHTOPage = () => {
                         <div className="nhto-order-row">
                             <div className="order-label">
                                 <strong>Ultimate Cellular Optimization System (3 Products)</strong>
-                                <span>Yours to keep regardless of medical approval</span>
-                                <div><span className="nhto-refund-badge non-refundable">NON-REFUNDABLE</span></div>
+                                <span>Activate365 + Mito365 + Restore365</span>
                             </div>
                             <div className="order-price">$110</div>
                         </div>
@@ -391,7 +390,6 @@ const NHTOPage = () => {
                             <div className="order-label">
                                 <strong>Non-Hormonal Testosterone Optimizer + Physician Consultation</strong>
                                 <span>Licensed physician (via happyMD) reviews eligibility — prescription issued if approved</span>
-                                <div><span className="nhto-refund-badge refundable">REFUNDABLE IF NOT APPROVED</span></div>
                             </div>
                             <div className="order-price">$140</div>
                         </div>
@@ -412,14 +410,6 @@ const NHTOPage = () => {
                 </div>
             </section>
 
-            {/* 11. Risk-Free Promise */}
-            <section className="b365-section">
-                <div className="nhto-promise-card">
-                    <h3><ShieldCheck size={24} style={{ verticalAlign: 'middle', marginRight: 8 }} />Our Risk-Free Promise</h3>
-                    <p>If the independent physician determines you're not a candidate for prescription treatment, your <strong>$140 consultation + optimizer fee is fully refunded</strong>. You keep the UCOS supplements ($160 value) regardless of approval — so you still get incredible cellular optimization benefits.</p>
-                    <p className="promise-bold">You have NOTHING to lose... except the opportunity to optimize your hormones naturally!</p>
-                </div>
-            </section>
 
             {/* 12. Doctor Testimonials */}
             <section className="b365-section b365-section-alt">
@@ -477,15 +467,15 @@ const NHTOPage = () => {
                     <div className="tprime-final-price-box">
                         <span className="big-price">$250</span>
                         <span className="note">Complete System — SAVE $50</span>
-                        <span className="guarantee-text">✅ Testosterone Optimizer + UCOS + Consultation with Refund Protection</span>
+                        <span className="guarantee-text">✅ Testosterone Optimizer + UCOS + Physician Consultation Included</span>
                     </div>
                     <div className="nhto-payment-breakdown">
                         <div className="nhto-payment-row">
-                            <span>UCOS System (3 Products)<span className="refund-note">NON-REFUNDABLE</span></span>
+                            <span>UCOS System (3 Products)</span>
                             <span>$110</span>
                         </div>
                         <div className="nhto-payment-row">
-                            <span>NHTO + Consultation<span className="refund-note">REFUNDABLE IF NOT APPROVED</span></span>
+                            <span>NHTO + Consultation</span>
                             <span>$140</span>
                         </div>
                         <div className="nhto-payment-row">
@@ -502,7 +492,7 @@ const NHTOPage = () => {
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
                         <span><Check size={14} /> Licensed physician reviews every order</span>
-                        <span><Check size={14} /> Refund protection if not approved</span>
+                        <span><Check size={14} /> See if you qualify in minutes</span>
                         <span><Check size={14} /> FDA-registered compounding pharmacy</span>
                         <span><Check size={14} /> Free shipping — discreet packaging</span>
                     </div>
