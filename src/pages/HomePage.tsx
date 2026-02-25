@@ -123,7 +123,7 @@ const products = [
     originalPrice: '$279',
     price: '$175',
     priceSuffix: '',
-    priceNote: 'Total Value: $205',
+    priceNote: 'Total Value: $340',
     shippingBadge: 'Free Shipping',
     image: '/images/product-glp1-ucos.png',
     mobileImage: '/images/mobile-glp1-ucos.png',
