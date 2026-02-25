@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './TPrime365Page.css';
 import '../pages/HomePage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
@@ -10,6 +11,8 @@ import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '../co
 import Autoplay from 'embla-carousel-autoplay';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
+import { supabase } from '@/integrations/supabase/client';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 const TPRIME_VARIANT_ID = 'gid://shopify/ProductVariant/46309997936780';
 const TPRIME_PRODUCT = {
@@ -105,20 +108,40 @@ const TPrime365Page = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showLeadModal, setShowLeadModal] = useState(false);
+  const [leadForm, setLeadForm] = useState({ firstName: '', email: '' });
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
+  const [leadError, setLeadError] = useState('');
+  const navigate = useNavigate();
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
-  const handleOrderNow = async (e?: React.MouseEvent) => {
+  const handleStartProtocol = (e?: React.MouseEvent) => {
     e?.preventDefault();
-    await addItem({
-      product: TPRIME_PRODUCT,
-      variantId: TPRIME_VARIANT_ID,
-      variantTitle: 'Monthly Subscription',
-      price: { amount: '149.00', currencyCode: 'USD' },
-      quantity: 1,
-      selectedOptions: [{ name: 'Plan', value: 'Monthly Subscription' }]
-    });
-    useCartStore.getState().setCartOpen(true);
+    setShowLeadModal(true);
+  };
+
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLeadError('');
+    if (!leadForm.firstName.trim() || !leadForm.email.trim()) {
+      setLeadError('Please fill out both fields.');
+      return;
+    }
+    setLeadSubmitting(true);
+    try {
+      await supabase.from('leads').insert({
+        first_name: leadForm.firstName.trim(),
+        email: leadForm.email.trim(),
+        source: 'tprime365',
+      });
+      setShowLeadModal(false);
+      navigate('/tprime365-intake');
+    } catch {
+      setLeadError('Something went wrong. Please try again.');
+    } finally {
+      setLeadSubmitting(false);
+    }
   };
 
   const mobileLinks = [
@@ -190,7 +213,7 @@ const TPrime365Page = () => {
                     </ul>
                     <div className="b365-nav-right">
                         <CartDrawer />
-                        <AnimatedCTA onClick={handleOrderNow} small>
+                        <AnimatedCTA onClick={handleStartProtocol} small>
                           Start My Protocol
                           <ArrowRight size={14} />
                         </AnimatedCTA>
@@ -221,7 +244,7 @@ const TPrime365Page = () => {
                           <span>{getMonthName()} pricing locked at $149/mo — Next price review: {getNextMonth()} 1</span>
                         </div>
 
-                        <AnimatedCTA onClick={handleOrderNow}>
+                        <AnimatedCTA onClick={handleStartProtocol}>
                             Start My Protocol
                             <ArrowRight size={16} />
                         </AnimatedCTA>
@@ -313,7 +336,7 @@ const TPrime365Page = () => {
                         </div>
           )}
                 </div>
-                <MidPageCTA onClick={handleOrderNow} />
+                <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
             {/* 6. The Solution + CTA */}
@@ -341,7 +364,7 @@ const TPrime365Page = () => {
                             <span>Sublingual Delivery via MODS Max Gold™</span>
                         </div>
                         <p className="tprime-formula-tagline" style={{ textAlign: 'left' }}>4 Clinically-Proven Ingredients. 1 Powerful Formula.</p>
-                        <MidPageCTA onClick={handleOrderNow} />
+                        <MidPageCTA onClick={handleStartProtocol} />
                     </div>
                 </div>
             </section>
@@ -398,7 +421,7 @@ const TPrime365Page = () => {
                         </div>
           )}
                 </div>
-                <MidPageCTA onClick={handleOrderNow} />
+                <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
             {/* 8. Delivery Advantage */}
@@ -505,7 +528,7 @@ const TPrime365Page = () => {
                   </div>
           )}
               </div>
-              <MidPageCTA onClick={handleOrderNow} />
+              <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
             {/* 12. Comparison Table (moved up) + CTA */}
@@ -538,7 +561,7 @@ const TPrime365Page = () => {
                         </tbody>
                     </table>
                 </div>
-                <MidPageCTA onClick={handleOrderNow} />
+                <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
             {/* 13. Value Breakdown (moved up) */}
@@ -569,7 +592,7 @@ const TPrime365Page = () => {
                         <span className="note">Includes everything: Formula + Physician Consultation + Free Shipping</span>
                         <span className="guarantee-text">100% refunded if physician does not approve</span>
                     </div>
-                    <AnimatedCTA onClick={handleOrderNow} className="btn-white-cta">
+                    <AnimatedCTA onClick={handleStartProtocol} className="btn-white-cta">
                         Start My Protocol
                         <ArrowRight size={16} />
                     </AnimatedCTA>
@@ -668,7 +691,7 @@ const TPrime365Page = () => {
 
             {/* Post-FAQ CTA */}
             <section className="b365-section">
-              <MidPageCTA onClick={handleOrderNow} />
+              <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
             {/* Footer */}
@@ -677,11 +700,70 @@ const TPrime365Page = () => {
             {/* Sticky Mobile CTA Bar */}
             <div className="tprime-sticky-mobile-cta">
               <span className="sticky-price">$149<span>/mo</span></span>
-              <button className="sticky-cta-btn" onClick={handleOrderNow}>
+              <button className="sticky-cta-btn" onClick={handleStartProtocol}>
                 Start My Protocol
                 <ArrowRight size={14} />
               </button>
             </div>
+
+            {/* Lead Capture Modal */}
+            <Dialog open={showLeadModal} onOpenChange={setShowLeadModal}>
+              <DialogContent className="sm:max-w-md" style={{ background: '#fff', borderRadius: 16, padding: '2rem' }}>
+                <DialogHeader>
+                  <DialogTitle className="b365-serif" style={{ fontSize: '1.5rem', color: 'var(--b365-text)', textAlign: 'center' }}>
+                    Start Your TPrime365™ Protocol
+                  </DialogTitle>
+                  <DialogDescription style={{ textAlign: 'center', color: '#666', marginTop: 8 }}>
+                    Enter your info below and we'll take you to the physician intake form.
+                  </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleLeadSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    value={leadForm.firstName}
+                    onChange={(e) => setLeadForm(prev => ({ ...prev, firstName: e.target.value }))}
+                    required
+                    style={{ padding: '14px 16px', borderRadius: 10, border: '1.5px solid #d0d5dd', fontSize: '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    value={leadForm.email}
+                    onChange={(e) => setLeadForm(prev => ({ ...prev, email: e.target.value }))}
+                    required
+                    style={{ padding: '14px 16px', borderRadius: 10, border: '1.5px solid #d0d5dd', fontSize: '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
+                  />
+                  {leadError && <p style={{ color: '#dc2626', fontSize: '0.875rem', margin: 0 }}>{leadError}</p>}
+                  <button
+                    type="submit"
+                    disabled={leadSubmitting}
+                    style={{
+                      padding: '16px',
+                      borderRadius: 10,
+                      border: 'none',
+                      background: 'var(--b365-blue)',
+                      color: '#fff',
+                      fontSize: '1.05rem',
+                      fontWeight: 700,
+                      cursor: leadSubmitting ? 'wait' : 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 8,
+                      opacity: leadSubmitting ? 0.7 : 1,
+                      transition: 'opacity 0.2s'
+                    }}
+                  >
+                    {leadSubmitting ? 'Submitting...' : 'Continue to Intake Form'}
+                    {!leadSubmitting && <ArrowRight size={16} />}
+                  </button>
+                  <p style={{ fontSize: '0.75rem', color: '#999', textAlign: 'center', margin: 0 }}>
+                    🔒 Your information is secure and HIPAA-compliant.
+                  </p>
+                </form>
+              </DialogContent>
+            </Dialog>
         </div>);
 
 };
