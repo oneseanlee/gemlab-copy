@@ -609,31 +609,36 @@ const TPrime365Page = () => {
 
             {/* 15. Dosing Instructions */}
             <section className="b365-section b365-section-alt">
-                <h2 className="b365-section-heading b365-serif">Simple <em>Daily Routine</em></h2>
-                <div className="tprime-dosing-card">
-                    <div>
-                        <div className="tprime-dosing-item"><span className="label">WHEN:</span><span>30-60 minutes before bedtime</span></div>
-                        <div className="tprime-dosing-item"><span className="label">HOW:</span><span>Place 1 dropper (1mL) under tongue</span></div>
-                        <div className="tprime-dosing-item"><span className="label">HOLD:</span><span>30 seconds for optimal absorption</span></div>
-                        <div className="tprime-dosing-item"><span className="label">SWALLOW:</span><span>Then swallow remaining liquid</span></div>
-                        <p className="tprime-dosing-supply">
-                            <Calendar size={16} style={{ marginRight: 6 }} />
-                            Supply: 30-day supply per bottle
-                        </p>
+                <h2 className="b365-section-heading b365-serif">Your Nightly <em>Protocol</em></h2>
+                <div className="tprime-dosing-split">
+                    <div className="tprime-dosing-image">
+                        <img src="/images/tprime-bottle.png" alt="TPrime365 bottle" />
                     </div>
-                    <div className="tprime-pro-tip">
-                        <h4>
-                            <Lightbulb size={16} />
-                            For Best Results:
-                        </h4>
-                        <ul>
-                            {['Take on an empty stomach', 'Avoid eating/drinking 15 minutes before and after', 'Store at room temperature (do not freeze)', 'Track your progress weekly'].map((item, i) =>
-              <li key={i}>
-                                    <Check size={14} />
-                                    {item}
-                                </li>
-              )}
-                        </ul>
+                    <div className="tprime-dosing-steps">
+                        <div className="tprime-dosing-card">
+                            <div className="tprime-dosing-item"><span className="tprime-step-number">1</span><span className="label">WHEN</span><span>30–60 minutes before bedtime</span></div>
+                            <div className="tprime-dosing-item"><span className="tprime-step-number">2</span><span className="label">PLACE</span><span>1 dropper (1 mL) under tongue</span></div>
+                            <div className="tprime-dosing-item"><span className="tprime-step-number">3</span><span className="label">HOLD</span><span>30 seconds for optimal absorption</span></div>
+                            <div className="tprime-dosing-item"><span className="tprime-step-number">4</span><span className="label">SWALLOW</span><span>Then swallow remaining liquid</span></div>
+                            <p className="tprime-dosing-supply">
+                                <Calendar size={16} style={{ marginRight: 6 }} />
+                                Supply: 30-day supply per bottle
+                            </p>
+                        </div>
+                        <div className="tprime-pro-tip">
+                            <h4>
+                                <Lightbulb size={16} />
+                                For Best Results:
+                            </h4>
+                            <ul>
+                                {['Take on an empty stomach', 'Avoid eating/drinking 15 minutes before and after', 'Store at room temperature (do not freeze)', 'Track your progress weekly'].map((item, i) =>
+                                    <li key={i}>
+                                        <Check size={14} />
+                                        {item}
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
