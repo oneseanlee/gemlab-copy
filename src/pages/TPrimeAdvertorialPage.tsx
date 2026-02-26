@@ -172,6 +172,30 @@ const TPrimeAdvertorialPage: React.FC = () => {
         </div>
       </section>
 
+      {/* ─── Inline Product Image ─── */}
+      <div className="adv-container" style={{ textAlign: 'center', padding: '48px 24px' }}>
+        <img
+          src="/images/tprime-bottle.png"
+          alt="TPrime365 sublingual testosterone optimization formula by Best 365 Labs"
+          style={{
+            maxWidth: '340px',
+            width: '100%',
+            height: 'auto',
+            filter: 'drop-shadow(0 16px 40px rgba(0, 0, 0, 0.15))',
+          }}
+          loading="lazy"
+        />
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 'var(--text-caption)',
+          color: 'var(--b365-text-secondary)',
+          marginTop: '16px',
+          fontStyle: 'italic',
+        }}>
+          TPrime365 — 4-in-1 sublingual formula. Physician-supervised.
+        </p>
+      </div>
+
       {/* ─── 5. Sublingual Delivery ─── */}
       <section className="adv-editorial">
         <div className="adv-container">
