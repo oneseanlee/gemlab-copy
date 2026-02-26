@@ -950,7 +950,8 @@
 /* ─── Mid-Page CTA Block ─── */
 .tprime-mid-cta {
   text-align: center;
-  margin-top: var(--space-10);
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-4);
 }
 
 /* ─── Hero Urgency Line ─── */
