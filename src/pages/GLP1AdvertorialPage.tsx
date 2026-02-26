@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '@/stores/cartStore';
-import { GLP1_VARIANT_ID } from '@/lib/shopify';
+import {
+  Zap, Dna, Recycle, Users, ShieldCheck, Pill, Truck,
+  ShoppingCart, Tag, CheckCircle, ArrowRight, ChevronDown,
+  Star, Circle
+} from 'lucide-react';
 import './GLP1AdvertorialPage.css';
 import '../pages/TPrimeAdvertorialPage.css';
 
@@ -63,12 +67,10 @@ const faqs = [
 const GLP1AdvertorialPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const addItem = useCartStore((s) => s.addItem);
-  const getCheckoutUrl = useCartStore((s) => s.getCheckoutUrl);
   const isLoading = useCartStore((s) => s.isLoading);
 
   const handleBuyNow = async () => {
     await addItem(GLP1_VARIANT);
-    // Small delay to allow cart creation to complete
     await new Promise(r => setTimeout(r, 300));
     const url = useCartStore.getState().checkoutUrl;
     if (url) {
@@ -77,7 +79,7 @@ const GLP1AdvertorialPage: React.FC = () => {
   };
 
   return (
-    <div className="adv-page" style={{ paddingBottom: '72px' }}>
+    <div className="adv-page glp1-adv-page">
       {/* ─── 1. Headline ─── */}
       <section className="adv-headline-section">
         <div className="adv-container">
@@ -101,28 +103,28 @@ const GLP1AdvertorialPage: React.FC = () => {
       {/* ─── Social Proof Strip ─── */}
       <div className="adv-proof-strip adv-container-wide">
         <span className="adv-proof-item">
-          <iconify-icon icon="mdi:account-group" />
+          <Users size={16} />
           50,000+ clients served
         </span>
         <span className="adv-proof-divider" />
         <span className="adv-proof-item">
-          <iconify-icon icon="mdi:shield-check" />
+          <ShieldCheck size={16} />
           FDA-registered facility
         </span>
         <span className="adv-proof-divider" />
         <span className="adv-proof-item">
-          <iconify-icon icon="mdi:prescription" />
+          <Pill size={16} />
           No prescription required
         </span>
         <span className="adv-proof-divider" />
         <span className="adv-proof-item">
-          <iconify-icon icon="mdi:truck-fast" />
+          <Truck size={16} />
           Free shipping
         </span>
       </div>
 
       {/* ─── 2. Opening Editorial ─── */}
-      <section className="adv-editorial">
+      <section className="adv-editorial glp1-editorial-tight">
         <div className="adv-container">
           <p className="adv-drop-cap">
             Let's start with the truth: GLP-1 medications work. Ozempic, Wegovy, Mounjaro, Zepbound — they represent a genuine breakthrough in weight management. Millions of people are losing significant weight, often for the first time in their lives.
@@ -142,9 +144,9 @@ const GLP1AdvertorialPage: React.FC = () => {
       </section>
 
       {/* ─── 3. The Number on the Scale ─── */}
-      <section className="adv-editorial">
+      <section className="adv-editorial glp1-editorial-tight">
         <div className="adv-container">
-          <h2 className="adv-section-heading">The Number on the Scale Isn't Telling You the Full Story</h2>
+          <h2 className="adv-section-heading glp1-section-heading">The Number on the Scale Isn't Telling You the Full Story</h2>
           <p>
             Here's the problem with losing muscle: <strong>muscle is your metabolic engine.</strong> Every pound of lean tissue you carry burns calories around the clock — even while you sleep. Lose it, and your resting metabolic rate drops. Some studies show a decline of <strong>up to 25%.</strong>
           </p>
@@ -171,15 +173,15 @@ const GLP1AdvertorialPage: React.FC = () => {
           <p>Protect your muscle while maximizing your GLP-1 results.</p>
           <button onClick={handleBuyNow} disabled={isLoading} className="adv-cta-btn">
             {isLoading ? 'Processing...' : 'Get the Protocol — $39.95'}
-            <iconify-icon icon="mdi:arrow-right" />
+            <ArrowRight size={18} />
           </button>
         </div>
       </div>
 
       {/* ─── 4. Burn Fat and Keep Your Muscle ─── */}
-      <section className="adv-editorial">
+      <section className="adv-editorial glp1-editorial-tight">
         <div className="adv-container">
-          <h2 className="adv-section-heading">What If You Could Burn Fat and Keep Your Muscle?</h2>
+          <h2 className="adv-section-heading glp1-section-heading">What If You Could Burn Fat and Keep Your Muscle?</h2>
           <p>
             The GLP-1 Optimization Protocol was built around one premise: <strong>the medication handles appetite and fat loss — you need something that handles everything else.</strong>
           </p>
@@ -192,7 +194,7 @@ const GLP1AdvertorialPage: React.FC = () => {
           <div className="adv-pathway-grid">
             <div className="adv-pathway-card">
               <div className="adv-pathway-icon">
-                <iconify-icon icon="mdi:lightning-bolt" />
+                <Zap size={22} />
               </div>
               <span className="adv-pathway-name">AMPK Activation</span>
               <span className="adv-pathway-subtitle">Metabolic Master Switch</span>
@@ -200,7 +202,7 @@ const GLP1AdvertorialPage: React.FC = () => {
             </div>
             <div className="adv-pathway-card">
               <div className="adv-pathway-icon">
-                <iconify-icon icon="mdi:dna" />
+                <Dna size={22} />
               </div>
               <span className="adv-pathway-name">Sirtuin Support</span>
               <span className="adv-pathway-subtitle">Longevity &amp; Repair Enzymes</span>
@@ -208,7 +210,7 @@ const GLP1AdvertorialPage: React.FC = () => {
             </div>
             <div className="adv-pathway-card">
               <div className="adv-pathway-icon">
-                <iconify-icon icon="mdi:recycle" />
+                <Recycle size={22} />
               </div>
               <span className="adv-pathway-name">Autophagy Balance</span>
               <span className="adv-pathway-subtitle">Cellular Cleanup</span>
@@ -219,9 +221,9 @@ const GLP1AdvertorialPage: React.FC = () => {
       </section>
 
       {/* ─── 5. What's in the Protocol ─── */}
-      <section className="adv-editorial">
+      <section className="adv-editorial glp1-editorial-tight">
         <div className="adv-container">
-          <h2 className="adv-section-heading">What's in the Protocol</h2>
+          <h2 className="adv-section-heading glp1-section-heading">What's in the Protocol</h2>
         </div>
 
         <div className="adv-container-wide">
@@ -231,9 +233,9 @@ const GLP1AdvertorialPage: React.FC = () => {
               <h3 className="adv-product-name">Triple Power Methylene Blue</h3>
               <p className="adv-product-form">1mL sublingual liquid — taken upon waking</p>
               <ul className="adv-product-ingredients">
-                <li><iconify-icon icon="mdi:circle-small" /> USP Methylene Blue — 150mg</li>
-                <li><iconify-icon icon="mdi:circle-small" /> NAD+ — 600mg</li>
-                <li><iconify-icon icon="mdi:circle-small" /> Spermidine — 300mg</li>
+                <li><Circle size={6} fill="currentColor" /> USP Methylene Blue — 150mg</li>
+                <li><Circle size={6} fill="currentColor" /> NAD+ — 600mg</li>
+                <li><Circle size={6} fill="currentColor" /> Spermidine — 300mg</li>
               </ul>
               <p className="adv-product-usage">"Fires up your mitochondria first thing in the morning."</p>
             </div>
@@ -242,11 +244,11 @@ const GLP1AdvertorialPage: React.FC = () => {
               <h3 className="adv-product-name">Metabolism+</h3>
               <p className="adv-product-form">2 tablets with breakfast, 2 with lunch</p>
               <ul className="adv-product-ingredients">
-                <li><iconify-icon icon="mdi:circle-small" /> USP Methylene Blue</li>
-                <li><iconify-icon icon="mdi:circle-small" /> L-Theanine</li>
-                <li><iconify-icon icon="mdi:circle-small" /> Caffeine</li>
-                <li><iconify-icon icon="mdi:circle-small" /> Guarana</li>
-                <li><iconify-icon icon="mdi:circle-small" /> Green Tea Extract</li>
+                <li><Circle size={6} fill="currentColor" /> USP Methylene Blue</li>
+                <li><Circle size={6} fill="currentColor" /> L-Theanine</li>
+                <li><Circle size={6} fill="currentColor" /> Caffeine</li>
+                <li><Circle size={6} fill="currentColor" /> Guarana</li>
+                <li><Circle size={6} fill="currentColor" /> Green Tea Extract</li>
               </ul>
               <p className="adv-product-usage">"Keeps your metabolic engine running all day."</p>
             </div>
@@ -273,9 +275,9 @@ const GLP1AdvertorialPage: React.FC = () => {
       </section>
 
       {/* ─── 6. Clinical Results ─── */}
-      <section className="adv-editorial">
+      <section className="adv-editorial glp1-editorial-tight">
         <div className="adv-container-wide">
-          <h2 className="adv-section-heading" style={{ textAlign: 'center' }}>The Results Speak for Themselves</h2>
+          <h2 className="adv-section-heading glp1-section-heading glp1-text-center">The Results Speak for Themselves</h2>
           <div className="adv-stat-grid">
             <div className="adv-stat-card">
               <span className="adv-stat-number">72%</span>
@@ -302,16 +304,16 @@ const GLP1AdvertorialPage: React.FC = () => {
               <span className="adv-stat-label">More muscle retained vs standard GLP-1</span>
             </div>
           </div>
-          <p style={{ textAlign: 'center', fontSize: 'var(--text-caption)', color: 'var(--b365-gray-400)', marginTop: 'var(--space-4)' }}>
+          <p className="glp1-disclaimer-text">
             Based on company-reported data from protocol users.
           </p>
         </div>
       </section>
 
       {/* ─── 7. What People Are Feeling ─── */}
-      <section className="adv-editorial">
+      <section className="adv-editorial glp1-editorial-tight">
         <div className="adv-container">
-          <h2 className="adv-section-heading">What People Are Actually Feeling</h2>
+          <h2 className="adv-section-heading glp1-section-heading">What People Are Actually Feeling</h2>
           <div className="adv-timeline">
             <div className="adv-timeline-item">
               <div className="adv-timeline-dot" />
@@ -342,9 +344,9 @@ const GLP1AdvertorialPage: React.FC = () => {
       </section>
 
       {/* ─── 8. The Bottom Line ─── */}
-      <section className="adv-editorial">
+      <section className="adv-editorial glp1-editorial-tight">
         <div className="adv-container">
-          <h2 className="adv-section-heading">The Bottom Line</h2>
+          <h2 className="adv-section-heading glp1-section-heading">The Bottom Line</h2>
           <p>
             GLP-1 medications are powerful. They work. But they weren't designed to protect your muscle, support your metabolism, or build the foundation you'll need when you eventually stop taking them.
           </p>
@@ -363,7 +365,7 @@ const GLP1AdvertorialPage: React.FC = () => {
           <p>Build the foundation your GLP-1 medication can't provide on its own.</p>
           <button onClick={handleBuyNow} disabled={isLoading} className="adv-cta-btn">
             {isLoading ? 'Processing...' : 'Get the Protocol — $39.95 + Free Shipping'}
-            <iconify-icon icon="mdi:arrow-right" />
+            <ArrowRight size={18} />
           </button>
         </div>
       </div>
@@ -376,30 +378,30 @@ const GLP1AdvertorialPage: React.FC = () => {
               <h3>GLP-1 Optimization Protocol</h3>
             </div>
             <div className="adv-pricing-body">
-              <div style={{ textAlign: 'center', marginBottom: 'var(--space-4)' }}>
+              <div className="glp1-launch-badge-wrap">
                 <span className="adv-launch-badge">
-                  <iconify-icon icon="mdi:star-four-points" /> Launch Pricing — Limited Introductory Offer
+                  <Star size={14} /> Launch Pricing — Limited Introductory Offer
                 </span>
               </div>
               <div className="adv-pricing-line">
                 <span className="label">Triple Power Methylene Blue (30-day)</span>
-                <span className="value">Included</span>
+                <span className="value glp1-value-included">Included</span>
               </div>
               <div className="adv-pricing-line">
                 <span className="label">Metabolism+ Tablets (60 count)</span>
-                <span className="value">Included</span>
+                <span className="value glp1-value-included">Included</span>
               </div>
               <div className="adv-pricing-line">
                 <span className="label">Free Shipping</span>
-                <span className="value">$12 value</span>
+                <span className="value glp1-value-strike">$12 value</span>
               </div>
               <div className="adv-pricing-line">
                 <span className="label">Complete Protocol Guide</span>
-                <span className="value">$29 value</span>
+                <span className="value glp1-value-strike">$29 value</span>
               </div>
-              <div className="adv-pricing-line">
+              <div className="adv-pricing-line glp1-pricing-total-value">
                 <span className="label">Total Value</span>
-                <span className="value" style={{ textDecoration: 'none', opacity: 1, fontWeight: 700 }}>$131.00</span>
+                <span className="value glp1-value-bold">$131.00</span>
               </div>
               <div className="adv-pricing-total">
                 <span className="label">Your Price</span>
@@ -408,22 +410,22 @@ const GLP1AdvertorialPage: React.FC = () => {
                   $39.95
                 </span>
               </div>
-              <div style={{ textAlign: 'center', marginTop: 'var(--space-2)' }}>
+              <div className="glp1-save-badge-wrap">
                 <span className="adv-save-badge">
-                  <iconify-icon icon="mdi:tag" />
+                  <Tag size={14} />
                   You Save $91.05 (70% OFF)
                 </span>
               </div>
               <ul className="adv-pricing-includes">
-                <li><iconify-icon icon="mdi:check-circle" /> Complete 30-day protocol</li>
-                <li><iconify-icon icon="mdi:check-circle" /> No prescription required</li>
-                <li><iconify-icon icon="mdi:check-circle" /> Free shipping</li>
-                <li><iconify-icon icon="mdi:check-circle" /> No subscription — one-time purchase</li>
-                <li><iconify-icon icon="mdi:check-circle" /> 60-day satisfaction guarantee</li>
+                <li><CheckCircle size={18} /> Complete 30-day protocol</li>
+                <li><CheckCircle size={18} /> No prescription required</li>
+                <li><CheckCircle size={18} /> Free shipping</li>
+                <li><CheckCircle size={18} /> No subscription — one-time purchase</li>
+                <li><CheckCircle size={18} /> 60-day satisfaction guarantee</li>
               </ul>
               <button onClick={handleBuyNow} disabled={isLoading} className="adv-cta-btn full-width">
                 {isLoading ? 'Processing...' : 'Get the Protocol — $39.95 + Free Shipping'}
-                <iconify-icon icon="mdi:arrow-right" />
+                <ArrowRight size={18} />
               </button>
             </div>
           </div>
@@ -431,23 +433,23 @@ const GLP1AdvertorialPage: React.FC = () => {
       </section>
 
       {/* ─── 10. Trust & Guarantee Strip ─── */}
-      <section className="adv-editorial">
+      <section className="adv-editorial glp1-editorial-tight">
         <div className="adv-container-wide">
           <div className="adv-trust-strip">
             <div className="adv-trust-badge">
-              <iconify-icon icon="mdi:prescription" />
+              <Pill size={32} />
               <span>No Prescription Required</span>
             </div>
             <div className="adv-trust-badge">
-              <iconify-icon icon="mdi:cart-check" />
+              <ShoppingCart size={32} />
               <span>No Subscription — One-Time Purchase</span>
             </div>
             <div className="adv-trust-badge">
-              <iconify-icon icon="mdi:shield-check" />
+              <ShieldCheck size={32} />
               <span>FDA-Registered Facility</span>
             </div>
             <div className="adv-trust-badge">
-              <iconify-icon icon="mdi:truck-fast" />
+              <Truck size={32} />
               <span>Free Shipping Always</span>
             </div>
           </div>
@@ -457,7 +459,7 @@ const GLP1AdvertorialPage: React.FC = () => {
           <div className="adv-container">
             <div className="adv-guarantee-badge">
               <div className="adv-guarantee-icon">
-                <iconify-icon icon="mdi:shield-check" />
+                <ShieldCheck size={28} />
               </div>
               <h3 className="adv-guarantee-title">60-Day Satisfaction Guarantee</h3>
               <p className="adv-guarantee-text">
@@ -469,16 +471,16 @@ const GLP1AdvertorialPage: React.FC = () => {
       </section>
 
       {/* ─── 11. Who Is This For ─── */}
-      <section className="adv-editorial">
+      <section className="adv-editorial glp1-editorial-tight">
         <div className="adv-container">
-          <h2 className="adv-section-heading" style={{ textAlign: 'center' }}>Who Is This For?</h2>
+          <h2 className="adv-section-heading glp1-section-heading glp1-text-center">Who Is This For?</h2>
           <div className="adv-callout-block">
             <p>
               If you're on <strong>Ozempic, Wegovy, Mounjaro, Zepbound</strong>, or any GLP-1 medication — or if you're planning to start — this is the missing piece your provider probably hasn't told you about.
             </p>
             <button onClick={handleBuyNow} disabled={isLoading} className="adv-cta-btn">
               {isLoading ? 'Processing...' : 'Get the Protocol — $39.95'}
-              <iconify-icon icon="mdi:arrow-right" />
+              <ArrowRight size={18} />
             </button>
           </div>
         </div>
@@ -487,7 +489,7 @@ const GLP1AdvertorialPage: React.FC = () => {
       {/* ─── 12. FAQ ─── */}
       <section className="adv-faq-section">
         <div className="adv-container">
-          <h2 className="adv-section-heading" style={{ textAlign: 'center', marginTop: 0 }}>
+          <h2 className="adv-section-heading glp1-text-center glp1-mt-0">
             Frequently Asked Questions
           </h2>
           {faqs.map((faq, i) => (
@@ -497,7 +499,7 @@ const GLP1AdvertorialPage: React.FC = () => {
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
               >
                 {faq.q}
-                <iconify-icon icon="mdi:chevron-down" />
+                <ChevronDown size={20} />
               </button>
               <div className={`adv-faq-answer ${openFaq === i ? 'open' : ''}`}>
                 {faq.a}
@@ -514,26 +516,26 @@ const GLP1AdvertorialPage: React.FC = () => {
           <p className="adv-final-subtitle">
             30 days of cellular optimization designed to protect everything your GLP-1 medication is helping you achieve.
           </p>
-          <div style={{ marginBottom: 'var(--space-6)', textAlign: 'center' }}>
-            <span style={{ fontFamily: 'var(--font-title)', fontSize: 'var(--text-h2)', fontWeight: 700, color: 'var(--b365-white)' }}>
-              <span style={{ textDecoration: 'line-through', opacity: 0.5, fontSize: 'var(--text-h4)', marginRight: '12px' }}>$90.00</span>
+          <div className="glp1-final-price-block">
+            <span className="glp1-final-price-display">
+              <span className="glp1-final-price-strike">$90.00</span>
               $39.95
             </span>
-            <span style={{ display: 'block', fontSize: 'var(--text-body-sm)', color: 'rgba(255,255,255,0.6)', marginTop: '4px' }}>
+            <span className="glp1-final-price-sub">
               Free Shipping — No Subscription
             </span>
           </div>
           <div className="adv-final-trust">
-            <span><iconify-icon icon="mdi:check-circle" /> One-time purchase</span>
-            <span><iconify-icon icon="mdi:check-circle" /> No auto-renewals</span>
-            <span><iconify-icon icon="mdi:check-circle" /> 60-day guarantee</span>
-            <span><iconify-icon icon="mdi:check-circle" /> Free shipping</span>
+            <span><CheckCircle size={18} /> One-time purchase</span>
+            <span><CheckCircle size={18} /> No auto-renewals</span>
+            <span><CheckCircle size={18} /> 60-day guarantee</span>
+            <span><CheckCircle size={18} /> Free shipping</span>
           </div>
           <button onClick={handleBuyNow} disabled={isLoading} className="adv-cta-btn">
             {isLoading ? 'Processing...' : 'Get the Protocol Now'}
-            <iconify-icon icon="mdi:arrow-right" />
+            <ArrowRight size={18} />
           </button>
-          <p style={{ marginTop: 'var(--space-4)', fontSize: 'var(--text-caption)', color: 'rgba(255,255,255,0.5)' }}>
+          <p className="glp1-final-disclaimer">
             One-time purchase. No auto-renewals. Reorder when you're ready.
           </p>
         </div>
@@ -552,10 +554,10 @@ const GLP1AdvertorialPage: React.FC = () => {
             <p>
               These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary.
             </p>
-            <p style={{ marginTop: '12px' }}>
+            <p className="glp1-footer-spacer">
               Best 365 Labs is an e-commerce platform. Medical services, evaluations, and prescriptions are provided by independent licensed healthcare professionals through the happyMD telehealth network.
             </p>
-            <p style={{ marginTop: '12px', fontWeight: 600 }}>
+            <p className="glp1-footer-spacer glp1-footer-caution">
               ⚠️ Methylene Blue should NOT be used by patients with G6PD deficiency. May interact with MAOIs/SSRIs. Consult your healthcare provider before use.
             </p>
           </div>
