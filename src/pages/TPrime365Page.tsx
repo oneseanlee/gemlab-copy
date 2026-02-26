@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './TPrime365Page.css';
 import '../pages/HomePage.css';
@@ -107,6 +107,19 @@ const TPrimeTestimonialsCarousel = () => {
 const TPrime365Page = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [dosingVisible, setDosingVisible] = useState(false);
+  const dosingRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = dosingRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setDosingVisible(true); observer.unobserve(el); } },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [leadForm, setLeadForm] = useState({ firstName: '', email: '' });
@@ -608,7 +621,7 @@ const TPrime365Page = () => {
             </section>
 
             {/* 15. Dosing Instructions */}
-            <section className="b365-section b365-section-alt">
+            <section className="b365-section b365-section-alt" ref={dosingRef}>
                 <h2 className="b365-section-heading b365-serif">Your Nightly <em>Protocol</em></h2>
                 <div className="tprime-dosing-split">
                     <div className="tprime-dosing-image">
@@ -616,10 +629,10 @@ const TPrime365Page = () => {
                     </div>
                     <div className="tprime-dosing-steps">
                         <div className="tprime-dosing-card">
-                            <div className="tprime-dosing-item"><span className="tprime-step-number">1</span><span className="label">WHEN</span><span>30–60 minutes before bedtime</span></div>
-                            <div className="tprime-dosing-item"><span className="tprime-step-number">2</span><span className="label">PLACE</span><span>1 dropper (1 mL) under tongue</span></div>
-                            <div className="tprime-dosing-item"><span className="tprime-step-number">3</span><span className="label">HOLD</span><span>30 seconds for optimal absorption</span></div>
-                            <div className="tprime-dosing-item"><span className="tprime-step-number">4</span><span className="label">SWALLOW</span><span>Then swallow remaining liquid</span></div>
+                            <div className={`tprime-dosing-item ${dosingVisible ? 'step-visible' : ''}`}><span className="tprime-step-number">1</span><span className="label">WHEN</span><span>30–60 minutes before bedtime</span></div>
+                            <div className={`tprime-dosing-item ${dosingVisible ? 'step-visible' : ''}`}><span className="tprime-step-number">2</span><span className="label">PLACE</span><span>1 dropper (1 mL) under tongue</span></div>
+                            <div className={`tprime-dosing-item ${dosingVisible ? 'step-visible' : ''}`}><span className="tprime-step-number">3</span><span className="label">HOLD</span><span>30 seconds for optimal absorption</span></div>
+                            <div className={`tprime-dosing-item ${dosingVisible ? 'step-visible' : ''}`}><span className="tprime-step-number">4</span><span className="label">SWALLOW</span><span>Then swallow remaining liquid</span></div>
                             <p className="tprime-dosing-supply">
                                 <Calendar size={16} style={{ marginRight: 6 }} />
                                 Supply: 30-day supply per bottle
