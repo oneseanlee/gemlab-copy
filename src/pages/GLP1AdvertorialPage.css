@@ -1,0 +1,517 @@
+/* ══════════════════════════════════════════════
+   GLP-1 ADVERTORIAL — Editorial Landing Page
+   Extends the adv-* pattern from TPrimeAdvertorialPage.css
+   ══════════════════════════════════════════════ */
+
+/* ─── Pull Quotes ─── */
+.adv-pullquote {
+  border-left: 4px solid var(--b365-blue);
+  padding: var(--space-6) var(--space-8);
+  margin: var(--space-8) 0;
+  background: var(--b365-gray-50);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.adv-pullquote p {
+  font-family: var(--font-title);
+  font-size: var(--text-h4);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--b365-text);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ─── Stat Highlight Box ─── */
+.adv-stat-highlight {
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-8);
+  margin: var(--space-8) 0;
+  text-align: center;
+}
+
+.adv-stat-highlight p {
+  font-family: var(--font-title);
+  font-size: var(--text-h3);
+  font-weight: 700;
+  color: var(--b365-red);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ─── Pathway Cards (3-col) ─── */
+.adv-pathway-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin: var(--space-8) 0;
+}
+
+.adv-pathway-card {
+  background: var(--b365-gray-50);
+  border: 1px solid var(--b365-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.adv-pathway-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.adv-pathway-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-circle);
+  background: rgba(51, 118, 176, 0.1);
+  color: var(--b365-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: var(--space-4);
+}
+
+.adv-pathway-name {
+  font-family: var(--font-title);
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--b365-blue);
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.adv-pathway-subtitle {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--b365-text);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.adv-pathway-desc {
+  font-size: var(--text-body-sm);
+  color: var(--b365-text-secondary);
+  line-height: 1.6;
+}
+
+/* ─── Product Cards ─── */
+.adv-product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin: var(--space-8) 0;
+}
+
+.adv-product-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.adv-product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.adv-product-tag {
+  display: inline-block;
+  font-size: var(--text-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px var(--space-3);
+  border-radius: var(--radius-full);
+  background: rgba(51, 118, 176, 0.1);
+  color: var(--b365-blue);
+  margin-bottom: var(--space-3);
+}
+
+.adv-product-name {
+  font-family: var(--font-title);
+  font-size: var(--text-h4);
+  font-weight: 700;
+  color: var(--b365-text);
+  margin-bottom: var(--space-2);
+}
+
+.adv-product-form {
+  font-size: var(--text-caption);
+  color: var(--b365-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.adv-product-ingredients {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+}
+
+.adv-product-ingredients li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-body-sm);
+  color: var(--b365-text-secondary);
+  padding: var(--space-1) 0;
+}
+
+.adv-product-ingredients li iconify-icon {
+  color: var(--b365-blue);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.adv-product-usage {
+  font-size: var(--text-caption);
+  font-style: italic;
+  color: var(--b365-text-secondary);
+  background: var(--b365-gray-50);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  line-height: 1.5;
+}
+
+/* ─── Schedule Strip ─── */
+.adv-schedule-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin: var(--space-6) 0 var(--space-8);
+  padding: var(--space-6);
+  background: var(--b365-gray-50);
+  border: 1px solid var(--b365-border);
+  border-radius: var(--radius-md);
+}
+
+.adv-schedule-item {
+  text-align: center;
+}
+
+.adv-schedule-time {
+  font-size: var(--text-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--b365-blue);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.adv-schedule-action {
+  font-size: var(--text-body-sm);
+  color: var(--b365-text);
+  font-weight: 600;
+}
+
+.adv-schedule-detail {
+  font-size: var(--text-caption);
+  color: var(--b365-text-secondary);
+  display: block;
+  margin-top: 2px;
+}
+
+/* ─── Stat Cards (6-grid) ─── */
+.adv-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin: var(--space-8) 0;
+}
+
+.adv-stat-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  text-align: center;
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.adv-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.adv-stat-number {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--b365-green);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.adv-stat-label {
+  font-size: var(--text-body-sm);
+  color: var(--b365-text-secondary);
+  line-height: 1.5;
+}
+
+/* ─── Timeline ─── */
+.adv-timeline {
+  position: relative;
+  padding-left: 32px;
+  margin: var(--space-8) 0;
+}
+
+.adv-timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--b365-border);
+}
+
+.adv-timeline-item {
+  position: relative;
+  padding-bottom: var(--space-8);
+}
+
+.adv-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.adv-timeline-dot {
+  position: absolute;
+  left: -32px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-circle);
+  background: var(--b365-blue);
+  border: 3px solid var(--b365-white);
+  box-shadow: 0 0 0 2px var(--b365-blue);
+}
+
+.adv-timeline-period {
+  font-size: var(--text-caption);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--b365-blue);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.adv-timeline-title {
+  font-family: var(--font-title);
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--b365-text);
+  margin-bottom: var(--space-1);
+}
+
+.adv-timeline-desc {
+  font-size: var(--text-body-sm);
+  color: var(--b365-text-secondary);
+  line-height: 1.6;
+}
+
+/* ─── Trust Strip ─── */
+.adv-trust-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin: var(--space-8) 0;
+}
+
+.adv-trust-badge {
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+  background: var(--b365-gray-50);
+  border: 1px solid var(--b365-border);
+  border-radius: var(--radius-md);
+}
+
+.adv-trust-badge iconify-icon {
+  font-size: 28px;
+  color: var(--b365-blue);
+  display: block;
+  margin: 0 auto var(--space-3);
+}
+
+.adv-trust-badge span {
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--b365-text);
+  line-height: 1.4;
+}
+
+/* ─── Save Badge ─── */
+.adv-save-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-body-sm);
+  font-weight: 700;
+  color: var(--b365-green);
+  background: rgba(34, 197, 94, 0.08);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  margin-top: var(--space-3);
+}
+
+/* ─── GLP-1 Pricing Overrides ─── */
+.adv-pricing-card .adv-launch-badge {
+  display: inline-block;
+  font-size: var(--text-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: var(--space-2) var(--space-4);
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--b365-green);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+}
+
+.adv-pricing-total .price-strike {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--b365-text-secondary);
+  text-decoration: line-through;
+  margin-right: var(--space-3);
+}
+
+/* ─── Who Is This For (callout variant) ─── */
+.adv-callout-block {
+  background: var(--b365-gray-50);
+  border: 1px solid var(--b365-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
+  margin: var(--space-8) 0;
+  text-align: center;
+}
+
+.adv-callout-block p {
+  font-size: var(--text-body);
+  color: var(--b365-text-secondary);
+  line-height: 1.8;
+  margin: 0 0 var(--space-6);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.adv-callout-block p:last-of-type {
+  margin-bottom: var(--space-6);
+}
+
+/* ─── GLP-1 Sticky Mobile CTA Override ─── */
+.glp1-sticky-cta {
+  display: none;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .adv-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .adv-pathway-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adv-product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adv-schedule-strip {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .adv-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .adv-trust-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .adv-pullquote {
+    padding: var(--space-4) var(--space-6);
+  }
+
+  .adv-pullquote p {
+    font-size: var(--text-body);
+  }
+
+  .glp1-sticky-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: var(--b365-white);
+    border-top: 1px solid var(--b365-border);
+    padding: var(--space-3) var(--space-4);
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .glp1-sticky-price {
+    font-family: var(--font-title);
+    font-size: var(--text-h4);
+    font-weight: 700;
+    color: var(--b365-green);
+  }
+
+  .glp1-sticky-price .strike {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    font-weight: 400;
+    color: var(--b365-text-secondary);
+    text-decoration: line-through;
+    margin-right: var(--space-2);
+  }
+
+  .glp1-sticky-price .save {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    font-weight: 600;
+    color: var(--b365-green);
+    display: block;
+  }
+
+  .glp1-sticky-btn {
+    padding: var(--space-3) var(--space-6);
+    background: var(--b365-blue);
+    color: var(--b365-white);
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .adv-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adv-trust-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .adv-stat-highlight p {
+    font-size: var(--text-h4);
+  }
+}
