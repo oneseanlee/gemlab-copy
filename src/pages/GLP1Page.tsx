@@ -19,7 +19,7 @@ const GLP1_PRODUCT = {
     description: 'Complete 30-Day GLP-1 optimization protocol with Triple Power Methylene Blue and Metabolism+.',
     handle: 'glp-1-optimization-protocol',
     priceRange: { minVariantPrice: { amount: '39.95', currencyCode: 'USD' } },
-    images: { edges: [{ node: { url: '/placeholder.svg', altText: 'GLP-1 Optimization Protocol' } }] },
+    images: { edges: [{ node: { url: '/images/glp1-protocol-hero.png', altText: 'GLP-1 Optimization Protocol' } }] },
     variants: { edges: [{ node: { id: GLP1_VARIANT_ID, title: '30-Day Protocol', price: { amount: '39.95', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Size', value: '30-Day Protocol' }] } }] },
     options: [{ name: 'Size', values: ['30-Day Protocol'] }]
   }
@@ -127,7 +127,7 @@ const GLP1Page = () => {
             <section className={`glp1-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        <img src="/images/glp1-hero.png" alt="GLP-1 Optimization Protocol — Triple Power Methylene Blue and Metabolism+ product bundle" />
+                        <img src="/images/glp1-hero.png" alt="GLP-1 Optimization Protocol — Triple Power Methylene Blue and Metabolism+ product bundle" fetchPriority="high" width="600" height="600" />
                     </div>
                     <div className="tprime-hero-text">
                         <div className="glp1-save-badge text-primary">
