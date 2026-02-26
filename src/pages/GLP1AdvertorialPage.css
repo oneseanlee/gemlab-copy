@@ -3,6 +3,36 @@
    Extends the adv-* pattern from TPrimeAdvertorialPage.css
    ══════════════════════════════════════════════ */
 
+/* ─── Page Entrance Animation ─── */
+@keyframes glp1FadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.glp1-adv-page {
+  animation: glp1FadeIn var(--duration-slow) var(--ease-out) both;
+  scroll-behavior: smooth;
+  padding-bottom: 72px;
+}
+
+/* ─── Tighter Section Spacing (override base adv-editorial) ─── */
+.glp1-editorial-tight {
+  padding: var(--space-8) 0;
+}
+
+.glp1-section-heading {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-6);
+}
+
+.glp1-text-center {
+  text-align: center;
+}
+
+.glp1-mt-0 {
+  margin-top: 0;
+}
+
 /* ─── Pull Quotes ─── */
 .adv-pullquote {
   border-left: 4px solid var(--b365-blue);
@@ -46,7 +76,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-4);
-  margin: var(--space-8) 0;
+  margin: var(--space-6) 0;
 }
 
 .adv-pathway-card {
@@ -54,11 +84,10 @@
   border: 1px solid var(--b365-border);
   border-radius: var(--radius-md);
   padding: var(--space-6);
-  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+  transition: box-shadow var(--duration-normal) var(--ease-default);
 }
 
 .adv-pathway-card:hover {
-  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
@@ -71,7 +100,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
   margin-bottom: var(--space-4);
 }
 
@@ -103,7 +131,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-6);
-  margin: var(--space-8) 0;
+  margin: var(--space-6) 0;
 }
 
 .adv-product-card {
@@ -111,11 +139,10 @@
   border: 1px solid var(--b365-border);
   border-radius: var(--radius-md);
   padding: var(--space-6);
-  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+  transition: box-shadow var(--duration-normal) var(--ease-default);
 }
 
 .adv-product-card:hover {
-  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
@@ -161,9 +188,8 @@
   padding: var(--space-1) 0;
 }
 
-.adv-product-ingredients li iconify-icon {
+.adv-product-ingredients li svg {
   color: var(--b365-blue);
-  font-size: 14px;
   flex-shrink: 0;
 }
 
@@ -182,7 +208,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-4);
-  margin: var(--space-6) 0 var(--space-8);
+  margin: var(--space-4) 0 var(--space-6);
   padding: var(--space-6);
   background: var(--b365-gray-50);
   border: 1px solid var(--b365-border);
@@ -216,31 +242,31 @@
   margin-top: 2px;
 }
 
-/* ─── Stat Cards (6-grid) ─── */
+/* ─── Stat Cards (6-grid) — Blue Top Border ─── */
 .adv-stat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-4);
-  margin: var(--space-8) 0;
+  margin: var(--space-6) 0;
 }
 
 .adv-stat-card {
   background: var(--b365-white);
   border: 1px solid var(--b365-border);
+  border-top: 3px solid var(--b365-blue);
   border-radius: var(--radius-md);
   padding: var(--space-6);
   text-align: center;
-  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+  transition: box-shadow var(--duration-normal) var(--ease-default);
 }
 
 .adv-stat-card:hover {
-  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
 .adv-stat-number {
   font-family: var(--font-title);
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--b365-green);
   display: block;
@@ -253,11 +279,18 @@
   line-height: 1.5;
 }
 
+.glp1-disclaimer-text {
+  text-align: center;
+  font-size: var(--text-caption);
+  color: var(--b365-gray-400);
+  margin-top: var(--space-4);
+}
+
 /* ─── Timeline ─── */
 .adv-timeline {
   position: relative;
   padding-left: 32px;
-  margin: var(--space-8) 0;
+  margin: var(--space-6) 0;
 }
 
 .adv-timeline::before {
@@ -320,19 +353,18 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
-  margin: var(--space-8) 0;
+  margin: var(--space-6) 0;
 }
 
 .adv-trust-badge {
   text-align: center;
-  padding: var(--space-6) var(--space-4);
+  padding: var(--space-8) var(--space-4);
   background: var(--b365-gray-50);
   border: 1px solid var(--b365-border);
   border-radius: var(--radius-md);
 }
 
-.adv-trust-badge iconify-icon {
-  font-size: 28px;
+.adv-trust-badge svg {
   color: var(--b365-blue);
   display: block;
   margin: 0 auto var(--space-3);
@@ -360,8 +392,15 @@
 }
 
 /* ─── GLP-1 Pricing Overrides ─── */
+.glp1-launch-badge-wrap {
+  text-align: center;
+  margin-bottom: var(--space-4);
+}
+
 .adv-pricing-card .adv-launch-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   font-size: var(--text-micro);
   font-weight: 700;
   text-transform: uppercase;
@@ -370,7 +409,34 @@
   background: rgba(34, 197, 94, 0.12);
   color: var(--b365-green);
   border-radius: var(--radius-full);
-  margin-bottom: var(--space-4);
+}
+
+/* Fix: "Included" values should NOT be struck through */
+.glp1-value-included {
+  text-decoration: none !important;
+  opacity: 1 !important;
+  color: var(--b365-green) !important;
+  font-weight: 700 !important;
+}
+
+.glp1-value-strike {
+  text-decoration: line-through !important;
+  opacity: 0.5 !important;
+}
+
+.glp1-value-bold {
+  text-decoration: none !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+}
+
+.glp1-pricing-total-value {
+  border-bottom-width: 2px;
+}
+
+.glp1-save-badge-wrap {
+  text-align: center;
+  margin-top: var(--space-2);
 }
 
 .adv-pricing-total .price-strike {
@@ -388,7 +454,7 @@
   border: 1px solid var(--b365-border);
   border-radius: var(--radius-md);
   padding: var(--space-8);
-  margin: var(--space-8) 0;
+  margin: var(--space-6) 0;
   text-align: center;
 }
 
@@ -402,11 +468,64 @@
   margin-right: auto;
 }
 
-.adv-callout-block p:last-of-type {
+/* ─── Final CTA — Inline Style Replacements ─── */
+.glp1-final-price-block {
   margin-bottom: var(--space-6);
+  text-align: center;
 }
 
-/* ─── GLP-1 Sticky Mobile CTA Override ─── */
+.glp1-final-price-display {
+  font-family: var(--font-title);
+  font-size: var(--text-h2);
+  font-weight: 700;
+  color: var(--b365-white);
+}
+
+.glp1-final-price-strike {
+  text-decoration: line-through;
+  opacity: 0.5;
+  font-size: var(--text-h4);
+  margin-right: var(--space-3);
+}
+
+.glp1-final-price-sub {
+  display: block;
+  font-size: var(--text-body-sm);
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: var(--space-1);
+}
+
+.glp1-final-disclaimer {
+  margin-top: var(--space-4);
+  font-size: var(--text-caption);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ─── Footer Inline Style Replacements ─── */
+.glp1-footer-spacer {
+  margin-top: var(--space-3);
+}
+
+.glp1-footer-caution {
+  font-weight: 600;
+}
+
+/* ─── Focus States (Accessibility) ─── */
+.adv-cta-btn:focus-visible,
+.adv-faq-trigger:focus-visible,
+.glp1-sticky-btn:focus-visible {
+  outline: 2px solid var(--b365-blue);
+  outline-offset: 2px;
+}
+
+.adv-footer-links a:focus-visible,
+.adv-footer-contact a:focus-visible {
+  outline: 2px solid var(--b365-blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ─── GLP-1 Sticky Mobile CTA ─── */
 .glp1-sticky-cta {
   display: none;
 }
@@ -499,6 +618,11 @@
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
+    transition: background var(--duration-fast);
+  }
+
+  .glp1-sticky-btn:hover {
+    background: var(--b365-blue-dark);
   }
 }
 
@@ -513,5 +637,9 @@
 
   .adv-stat-highlight p {
     font-size: var(--text-h4);
+  }
+
+  .adv-stat-number {
+    font-size: 28px;
   }
 }
