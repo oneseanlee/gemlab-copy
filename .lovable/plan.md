@@ -1,28 +1,28 @@
 
 
-# Optimize NHTO Page: Remove Safety Section and Add Product Bottle Images
+# Make Product Bottles Bigger with Row-by-Row Layout
 
 ## Overview
-Remove the "Important Safety Information" section, replace placeholder images with actual bottle product images, and ensure visual consistency with the TPrime365 page styling.
+Restructure the product breakdown section from a 2-column side-by-side layout (small image + text) to a full-width row-per-product layout with much larger bottle images, giving the products significantly more visual emphasis.
 
 ## Changes
 
-### 1. Remove Safety Information Section (lines 554-577 in NHTOPage.tsx)
-- Delete the entire section 17 ("Important Safety Information") block containing the FDA disclaimers and medication warnings
-- The FDA disclaimer text is already present in the SharedFooter, so no critical content is lost
+### 1. Restructure Layout (NHTOPage.tsx)
+- Change each product card from a horizontal card (small image + text beside it) to a **two-column row layout** where:
+  - Left column: Large product bottle image (takes ~40% width)
+  - Right column: Product name, tag, and benefit list
+- Each product gets its own full-width row, stacking vertically
+- On mobile, image stacks on top of text
 
-### 2. Replace Placeholder Images with Actual Bottle Images (lines 318-352)
-Update the product breakdown cards to use real bottle images instead of `/placeholder.svg`:
-- Non-Hormonal Testosterone Optimizer: `/images/product-nhto.png`
-- Activate365: `/images/activate365.png`
-- Mito365: `/images/mito365.png`
-- Restore365: `/images/restore365.png`
+### 2. CSS Updates (NHTOPage.css)
+- Change `.nhto-product-grid` from `grid-template-columns: repeat(2, 1fr)` to `grid-template-columns: 1fr` (one product per row)
+- Change `.nhto-product-card` to a two-column internal grid: `grid-template-columns: 280px 1fr` with centered alignment
+- Increase `.nhto-product-img` from 120x160px to **280x320px** -- dramatically larger bottles
+- Remove `max-width/max-height` constraints on the image itself so bottles fill the space
+- Add stronger drop-shadow for visual pop
+- On tablet (1024px): image column shrinks to 220px
+- On mobile (768px): single column stack, image centered at ~200px wide
 
-### 3. Visual Polish for Product Cards (NHTOPage.css)
-- Add subtle drop-shadow to `.nhto-product-img img` for depth (matching TPrime's `filter: drop-shadow()` pattern)
-- Increase `.nhto-product-img` dimensions slightly (120px wide, 160px tall) to better showcase the bottles
-- Add hover lift effect on `.nhto-product-card` consistent with `.trust-badge:hover` pattern used elsewhere
-
-### 4. Result Card Avatars (lines 290-310)
-- Replace `/placeholder.svg` on the 4 result cards with the existing diverse avatar images (`avatar-man-1.jpg`, `avatar-woman-1.jpg`, `avatar-woman-2.jpg`, `avatar-man-1.jpg`) to match the social proof pattern from other pages
-
+### Files Modified
+- `src/pages/NHTOPage.tsx` -- minor layout restructure of product cards
+- `src/pages/NHTOPage.css` -- grid and sizing changes for bigger bottles
