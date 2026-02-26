@@ -705,7 +705,7 @@
 }
 
 .adv-faq-answer {
-  padding: 0 0 var(--space-6);
+  padding: 0;
   font-size: var(--text-body-sm);
   color: var(--b365-text-secondary);
   line-height: 1.7;
@@ -716,6 +716,7 @@
 
 .adv-faq-answer.open {
   max-height: 500px;
+  padding: 0 0 var(--space-6);
 }
 
 /* ─── Final CTA ─── */
