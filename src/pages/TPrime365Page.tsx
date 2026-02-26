@@ -234,7 +234,7 @@ const TPrime365Page = () => {
             <section className={`tprime-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        <img src="/images/tprime-hero-composite.png" alt="TPrime365 bottle with athlete" />
+                        <img src="/images/tprime-hero-composite.png" alt="TPrime365 bottle with athlete" fetchPriority="high" width="600" height="600" />
                     </div>
                     <div className="tprime-hero-text">
                         <h1>More Energy. More Muscle. More Drive.<br /><em>Without Shutting Down Your Natural Testosterone.</em></h1>
