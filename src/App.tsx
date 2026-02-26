@@ -20,6 +20,7 @@ import FreeTestosteroneGuidePage from "./pages/FreeTestosteroneGuidePage";
 import UpsellPage from "./pages/UpsellPage";
 import ThankYouPage from "./pages/ThankYouPage";
 import TPrimeAdvertorialPage from "./pages/TPrimeAdvertorialPage";
+import GLP1AdvertorialPage from "./pages/GLP1AdvertorialPage";
 import NotFound from "./pages/NotFound";
 import { useCartSync } from "./hooks/useCartSync";
 import './App.css';
@@ -34,6 +35,7 @@ const AppRoutes = () => {
       <Route path="/article" element={<ListiclePage />} />
       <Route path="/tprime365" element={<TPrime365Page />} />
       <Route path="/tprime365-article" element={<TPrimeAdvertorialPage />} />
+      <Route path="/glp1-article" element={<GLP1AdvertorialPage />} />
       <Route path="/glp1-protocol" element={<GLP1Page />} />
       <Route path="/nhto" element={<NHTOPage />} />
       <Route path="/nhto-intake" element={<NHTOIntakePage />} />
