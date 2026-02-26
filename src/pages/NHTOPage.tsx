@@ -391,7 +391,7 @@ const NHTOPage = () => {
                 <div className="nhto-product-grid">
                     {[
                         {
-                            img: '/images/product-nhto.png', title: 'Non-Hormonal Testosterone Optimizer', tag: 'Rx Formula', tagClass: 'tag-rx',
+                            img: '/images/nhto-bottle.png', title: 'Non-Hormonal Testosterone Optimizer', tag: 'Rx Formula', tagClass: 'tag-rx',
                             subtitle: 'Powered by MODS Max',
                             items: ['Clinical-grade Enclomiphene', 'Boron 10mg for free testosterone', 'Vitamin C for cellular protection', 'Patent-pending 10X absorption delivery']
                         },
