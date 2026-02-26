@@ -9,7 +9,7 @@ import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
-import { Menu, CheckCircle, ShieldCheck, Gift, Shrink, Baby, Link2, AlertTriangle, X, Check, Shield, Activity, SlidersHorizontal, ChevronRight, Truck, Award, Stethoscope, ArrowRight, Flame, User, Sunrise, Clock, Moon, Pill, Headphones, AlertCircle, Lock, Package } from 'lucide-react';
+import { Menu, CheckCircle, ShieldCheck, Gift, Shrink, Baby, Link2, AlertTriangle, X, Check, Shield, Activity, SlidersHorizontal, ChevronRight, Truck, Award, Stethoscope, ArrowRight, Flame, User, Sunrise, Clock, Moon, Pill, Headphones, Lock, Package } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
@@ -26,6 +26,24 @@ const NHTO_PRODUCT = {
         options: [{ name: 'Bundle', values: ['Complete System'] }],
     }
 };
+
+// Dynamic urgency helpers (matching TPrime365)
+const getMonthName = () => new Date().toLocaleString('en-US', { month: 'long' });
+const getNextMonth = () => {
+    const d = new Date();
+    d.setMonth(d.getMonth() + 1);
+    return d.toLocaleString('en-US', { month: 'long' });
+};
+
+// Mid-page CTA block (matching TPrime365)
+const MidPageCTA = ({ onClick }: { onClick: (e?: React.MouseEvent) => void }) => (
+    <div className="tprime-mid-cta">
+        <AnimatedCTA onClick={onClick}>
+            See If I Qualify
+            <ArrowRight size={16} />
+        </AnimatedCTA>
+    </div>
+);
 
 const NHTOPage = () => {
     const [showBanner, setShowBanner] = useState(true);
@@ -116,8 +134,9 @@ const NHTOPage = () => {
                     </ul>
                     <div className="b365-nav-right">
                         <CartDrawer />
-                        <AnimatedCTA href="#" small onClick={handleStartProtocol}>
-                            Get The System
+                        <AnimatedCTA onClick={handleStartProtocol} small>
+                            See If I Qualify
+                            <ArrowRight size={14} />
                         </AnimatedCTA>
                     </div>
                 </div>
@@ -131,30 +150,31 @@ const NHTOPage = () => {
                     </div>
                     <div className="tprime-hero-text">
                         <h1>Revolutionary Non-Hormonal <em>Testosterone Optimizer</em></h1>
-                        <p className="subhead">Restore your testosterone naturally. No injections, no hormones, no fertility risks.</p>
-                        <ul className="nhto-hero-benefits">
-                            <li><CheckCircle size={18} /><span><strong>Maintains Testicular Function</strong> — Preserves natural size and health</span></li>
-                            <li><CheckCircle size={18} /><span><strong>Protects Fertility</strong> — Maintains sperm production capacity</span></li>
-                            <li><CheckCircle size={18} /><span><strong>Stimulates Natural LH/FSH</strong> — Keeps hormone system active</span></li>
-                        </ul>
-                        <p className="nhto-consult-note">
-                            <ShieldCheck size={14} />
-                            Complete your intake to see if you qualify
-                        </p>
+                        <p className="subhead">Restore your testosterone naturally. No injections, no hormones, no fertility risks. Physician-reviewed. FDA-registered 503A facility.</p>
                         <div className="price-row">
                             <span className="price-big">$250</span>
                             <span className="price-note" style={{ textDecoration: 'line-through', marginRight: 8 }}>$300</span>
-                            <span className="price-note">Complete System + Medical Consultation Included</span>
+                            <span className="price-note">Complete System + Physician Consultation</span>
                         </div>
-                        <AnimatedCTA href="#" onClick={handleStartProtocol}>
-                            YES! I Want My System + Consultation
+                        <p className="guarantee-text">Complete your intake to see if you qualify</p>
+
+                        {/* Urgency line */}
+                        <div className="tprime-urgency-line">
+                            <Clock size={14} />
+                            <span>{getMonthName()} pricing locked at $250 — Next price review: {getNextMonth()} 1</span>
+                        </div>
+
+                        <AnimatedCTA onClick={handleStartProtocol}>
+                            See If I Qualify
+                            <ArrowRight size={16} />
                         </AnimatedCTA>
-                        <div className="nhto-happymd-badge">
-                            <Gift size={18} />
-                            <div>
-                                <strong>Consultation Facilitated by happyMD</strong><br />
-                                <span>$200 Value — Includes Licensed Physician Evaluation</span>
-                            </div>
+
+                        {/* Hero trust micro-badges */}
+                        <div className="tprime-hero-trust-row">
+                            <span><Check size={14} /> Physician-Reviewed</span>
+                            <span><Check size={14} /> FDA-Registered Pharmacy</span>
+                            <span><Check size={14} /> HIPAA Compliant</span>
+                            <span><Truck size={14} /> Free Shipping</span>
                         </div>
                     </div>
                 </div>
@@ -198,6 +218,7 @@ const NHTOPage = () => {
                         </div>
                     ))}
                 </div>
+                <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
             {/* 6. The Non-Hormonal Alternative */}
@@ -238,6 +259,7 @@ const NHTOPage = () => {
                         </div>
                     ))}
                 </div>
+                <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
             {/* 7. How It Works (4 Steps) */}
@@ -261,6 +283,16 @@ const NHTOPage = () => {
                             )}
                         </div>
                     ))}
+                </div>
+                <div className="tprime-timeline-callout">
+                    <span>
+                        <Clock size={16} />
+                        Order to delivery: 7-10 days (if approved)
+                    </span>
+                    <span>
+                        <ShieldCheck size={16} />
+                        Complete your intake to see if you qualify
+                    </span>
                 </div>
             </section>
 
@@ -308,6 +340,7 @@ const NHTOPage = () => {
                         </div>
                     ))}
                 </div>
+                <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
             {/* 9. Complete Product Breakdown */}
@@ -368,51 +401,27 @@ const NHTOPage = () => {
                 </div>
             </section>
 
-            {/* 10. Order Summary / Value Stack */}
+            {/* 10. Value Breakdown */}
             <section className="b365-section b365-section-alt">
-                <div className="nhto-save-callout">
-                    <span className="save-amount"><Flame size={16} /> SAVE $50 TODAY ONLY</span>
-                    <span className="regular-price">Regular Price: $300</span>
-                </div>
-                <div className="nhto-order-summary">
-                    <div className="nhto-order-header">
-                        <h3>📦 Order Summary</h3>
-                    </div>
-                    <div className="nhto-order-body">
-                        <div className="nhto-order-row">
-                            <div className="order-label">
-                                <strong>Ultimate Cellular Optimization System (3 Products)</strong>
-                                <span>Activate365 + Mito365 + Restore365</span>
-                            </div>
-                            <div className="order-price">$110</div>
-                        </div>
-                        <div className="nhto-order-row">
-                            <div className="order-label">
-                                <strong>Non-Hormonal Testosterone Optimizer + Physician Consultation</strong>
-                                <span>Licensed physician (via happyMD) reviews eligibility — prescription issued if approved</span>
-                            </div>
-                            <div className="order-price">$140</div>
-                        </div>
-                        <div className="nhto-order-row">
-                            <div className="order-label"><strong>Shipping</strong></div>
-                            <div className="order-price" style={{ color: 'var(--b365-green)' }}>FREE</div>
-                        </div>
-                    </div>
-                    <div className="nhto-order-total">
-                        <span>Total Package Price</span>
-                        <span>$250</span>
+                <h2 className="b365-section-heading b365-serif">$250 = Complete System + <em>Expert Care</em></h2>
+                <div className="tprime-value-card">
+                    <h3>What You Get with the NHTO System</h3>
+                    <div className="tprime-value-item"><span className="name">Non-Hormonal Testosterone Optimizer (Rx, 30-day)</span><span className="price">Retail Value: $140</span></div>
+                    <div className="tprime-value-item"><span className="name">Activate365 — Morning Cellular Activation</span><span className="price">Retail Value: $49</span></div>
+                    <div className="tprime-value-item"><span className="name">Mito365 — Peak Performance Enhancement</span><span className="price">Retail Value: $49</span></div>
+                    <div className="tprime-value-item"><span className="name">Restore365 — Overnight Recovery</span><span className="price">Retail Value: $49</span></div>
+                    <div className="tprime-value-item special"><span className="name">Licensed Physician Consultation (via happyMD)</span><span className="price">Retail Value: $200</span></div>
+                    <div className="tprime-value-total">
+                        <div className="row"><span>TOTAL VALUE:</span><span>$487+</span></div>
+                        <div className="row"><span>YOUR PRICE:</span><span className="highlight-price">$250</span></div>
+                        <div className="row"><span>YOU SAVE:</span><span>$237+</span></div>
                     </div>
                 </div>
-                <div style={{ textAlign: 'center', marginTop: 32 }}>
-                    <AnimatedCTA href="#" onClick={handleStartProtocol}>
-                        YES! I Want My System + Consultation →
-                    </AnimatedCTA>
-                </div>
+                <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
-
             {/* 12. Doctor Testimonials */}
-            <section className="b365-section b365-section-alt">
+            <section className="b365-section">
                 <p className="nhto-section-label">DOCTOR TESTIMONIALS</p>
                 <h2 className="b365-section-heading b365-serif">What Medical Professionals <em>Say</em></h2>
                 <div className="nhto-doctor-grid">
@@ -434,7 +443,7 @@ const NHTOPage = () => {
             </section>
 
             {/* 13. Scientific Comparison Table */}
-            <section className="b365-section" id="compare">
+            <section className="b365-section b365-section-alt" id="compare">
                 <p className="nhto-section-label">SCIENTIFIC COMPARISON</p>
                 <h2 className="b365-section-heading b365-serif">MODS Max vs. <em>Traditional TRT</em></h2>
                 <div className="tprime-table-wrap">
@@ -457,38 +466,22 @@ const NHTOPage = () => {
                         </tbody>
                     </table>
                 </div>
+                <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
             {/* 14. Final CTA */}
             <section className="b365-section">
                 <div className="tprime-final-cta">
-                    <h2>Get Your Complete System <em>Now!</em></h2>
-                    <p className="subtitle">🔥 Transform Your Energy in 24 Hours — Ships Today!</p>
+                    <h2>Ready to Optimize Your <em>Testosterone?</em></h2>
+                    <p className="subtitle">Join men who are restoring their testosterone naturally — without shutting down their body's own production.</p>
                     <div className="tprime-final-price-box">
                         <span className="big-price">$250</span>
-                        <span className="note">Complete System — SAVE $50</span>
-                        <span className="guarantee-text">✅ Testosterone Optimizer + UCOS + Physician Consultation Included</span>
+                        <span className="note">Complete System — NHTO + UCOS + Physician Consultation</span>
+                        <span className="guarantee-text">Complete your intake to see if you qualify</span>
                     </div>
-                    <div className="nhto-payment-breakdown">
-                        <div className="nhto-payment-row">
-                            <span>UCOS System (3 Products)</span>
-                            <span>$110</span>
-                        </div>
-                        <div className="nhto-payment-row">
-                            <span>NHTO + Consultation</span>
-                            <span>$140</span>
-                        </div>
-                        <div className="nhto-payment-row">
-                            <span>Shipping</span>
-                            <span>FREE</span>
-                        </div>
-                        <div className="nhto-payment-row">
-                            <span>Total</span>
-                            <span>$250</span>
-                        </div>
-                    </div>
-                    <AnimatedCTA href="#" className="btn-white-cta" onClick={handleStartProtocol}>
-                        Get the System →
+                    <AnimatedCTA onClick={handleStartProtocol} className="btn-white-cta">
+                        See If I Qualify
+                        <ArrowRight size={16} />
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
                         <span><Check size={14} /> Licensed physician reviews every order</span>
@@ -498,8 +491,8 @@ const NHTOPage = () => {
                     </div>
                     <div className="tprime-cta-trust-strip">
                         <span><Lock size={14} /> Secure Checkout</span>
-                        <span><ShieldCheck size={14} /> Physician-Reviewed</span>
-                        <span><Package size={14} /> FREE Fast Shipping</span>
+                        <span><ShieldCheck size={14} /> HIPAA Compliant</span>
+                        <span><Package size={14} /> Fast Shipping</span>
                     </div>
                 </div>
             </section>
@@ -551,15 +544,23 @@ const NHTOPage = () => {
                 </div>
             </section>
 
-            {/* 18. Footer */}
+            {/* Footer */}
             <SharedFooter />
+
+            {/* Sticky Mobile CTA Bar */}
+            <div className="tprime-sticky-mobile-cta">
+                <div className="sticky-price">$250 <span>/system</span></div>
+                <button className="sticky-cta-btn" onClick={handleStartProtocol}>
+                    See If I Qualify <ArrowRight size={14} />
+                </button>
+            </div>
 
             {/* Lead Capture Modal */}
             <Dialog open={showLeadModal} onOpenChange={setShowLeadModal}>
               <DialogContent className="sm:max-w-md" style={{ background: '#fff', borderRadius: 16, padding: '2rem' }}>
                 <DialogHeader>
                   <DialogTitle className="b365-serif" style={{ fontSize: '1.5rem', color: 'var(--b365-text)', textAlign: 'center' }}>
-                    Start Your NHTO Protocol
+                    See If You Qualify
                   </DialogTitle>
                   <DialogDescription style={{ textAlign: 'center', color: '#666', marginTop: 8 }}>
                     Enter your info below and we'll take you to the physician intake form.
