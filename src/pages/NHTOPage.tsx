@@ -207,7 +207,7 @@ const NHTOPage = () => {
             <section className={`nhto-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        <img src="/images/product-nhto.png" alt="Non-Hormonal Testosterone Optimizer — Complete System" />
+                        <img src="/images/nhto-hero-2.png" alt="Non-Hormonal Testosterone Optimizer — Complete System" />
                     </div>
                     <div className="tprime-hero-text">
                         <h1>Revolutionary Non-Hormonal <em>Testosterone Optimizer</em></h1>
