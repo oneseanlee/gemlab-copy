@@ -22,7 +22,7 @@ const GLP1_VARIANT = {
       description: '',
       handle: 'glp-1-optimization-protocol',
       priceRange: { minVariantPrice: { amount: '39.95', currencyCode: 'USD' } },
-      images: { edges: [] },
+      images: { edges: [{ node: { url: '/images/glp1-protocol-hero.png', altText: 'GLP-1 Optimization Protocol' } }] },
       variants: { edges: [] },
       options: [],
     },
