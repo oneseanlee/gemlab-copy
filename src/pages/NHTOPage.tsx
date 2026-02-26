@@ -9,7 +9,9 @@ import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
-import { Menu, CheckCircle, ShieldCheck, Gift, Shrink, Baby, Link2, AlertTriangle, X, Check, Shield, Activity, SlidersHorizontal, ChevronRight, Truck, Award, Stethoscope, ArrowRight, Flame, User, Sunrise, Clock, Moon, Pill, Headphones, Lock, Package } from 'lucide-react';
+import { Menu, CheckCircle, ShieldCheck, Gift, Shrink, Baby, Link2, AlertTriangle, X, Check, Shield, Activity, SlidersHorizontal, ChevronRight, Truck, Award, Stethoscope, ArrowRight, Flame, User, Sunrise, Clock, Moon, Pill, Headphones, Lock, Package, BadgeCheck } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 import { supabase } from '@/integrations/supabase/client';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
@@ -25,6 +27,65 @@ const NHTO_PRODUCT = {
         variants: { edges: [{ node: { id: NHTO_VARIANT_ID, title: 'Complete System', price: { amount: '250.00', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Bundle', value: 'Complete System' }] } }] },
         options: [{ name: 'Bundle', values: ['Complete System'] }],
     }
+};
+
+const nhtoTestimonials = [
+  { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', using: 'NHTO System', quote: 'Testosterone went from 658 to 749 in two months' },
+  { img: '/images/testimonial-kerry-reyes-bg.png', name: 'Kerry Reyes', using: 'NHTO System', quote: 'More energy within the first two weeks' },
+  { img: '/images/testimonial-mike-vandyke-bg.png', name: 'Mike VanDyke', using: 'NHTO System', quote: 'Rapid improvements in energy and cellular performance' },
+  { img: '/images/testimonial-sean-lee.png', name: 'Sean Lee', using: 'NHTO System', quote: 'Finally found something that actually works' },
+  { img: '/images/testimonial-ernesto-cruz.png', name: 'Ernesto Cruz', using: 'NHTO System', quote: 'Better focus, better sleep, better everything' },
+  { img: '/images/testimonial-jay-atkins.png', name: 'Jay Atkins', using: 'NHTO System', quote: 'Wish I started this years ago' },
+];
+
+const NHTOTestimonialsCarousel = () => {
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) return;
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
+    api.on('select', () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
+
+  return (
+    <Carousel
+      opts={{ align: 'start', loop: true }}
+      plugins={[Autoplay({ delay: 4000, stopOnInteraction: true })]}
+      setApi={setApi}
+      className="b365-testimonials-carousel">
+      <CarouselContent className="-ml-4">
+        {nhtoTestimonials.map((t, i) =>
+        <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+            <div className="b365-testimonial-card">
+              <img src={t.img} alt={t.name} />
+              <div className="card-body">
+                <div className="name">{t.name}</div>
+                <div className="product-using">Using: {t.using}</div>
+                {t.quote && <p className="testimonial-inline-quote">"{t.quote}"</p>}
+                <div className="verified">
+                  <BadgeCheck size={14} />
+                  Verified buyer
+                </div>
+              </div>
+            </div>
+          </CarouselItem>
+        )}
+      </CarouselContent>
+      <div className="b365-carousel-dots">
+        {Array.from({ length: count }).map((_, i) =>
+        <button
+          key={i}
+          className={`b365-dot ${i === current ? 'active' : ''}`}
+          onClick={() => api?.scrollTo(i)}
+          aria-label={`Go to slide ${i + 1}`}
+        />
+        )}
+      </div>
+    </Carousel>
+  );
 };
 
 // Dynamic urgency helpers (matching TPrime365)
@@ -319,27 +380,7 @@ const NHTOPage = () => {
                         </div>
                     ))}
                 </div>
-                <div className="nhto-results-grid">
-                    {[
-                        { name: 'Alex T.', age: 'Age 32', increase: 'Up to 664%', time: 'in 3 weeks', before: '120 ng/dL', after: '917 ng/dL', quote: '"I went from feeling like an old man to having the energy of a teenager."' },
-                        { name: 'Marcus L.', age: 'Age 30', increase: 'Up to 130%', time: 'in 6 weeks', before: '566 ng/dL', after: '1,305 ng/dL', quote: '"Brain fog lifted, workouts exploded, confidence skyrocketed."' },
-                        { name: 'David R.', age: 'Age 45', increase: 'Up to 202%', time: 'in 4 weeks', before: '380 ng/dL', after: '1,150 ng/dL', quote: '"My productivity is through the roof. Best investment I\'ve made in myself."' },
-                        { name: 'Mark', age: 'Age 60', increase: 'Up to 400%+', time: 'in 4 weeks', before: 'Low 200s', after: '1,000+ ng/dL', quote: '"I feel 20 years younger. My energy is through the roof."' },
-                    ].map((t, i) => (
-                        <div className="nhto-result-card" key={i}>
-                            <img className="result-avatar" src={['/images/avatar-man-1.jpg', '/images/avatar-woman-1.jpg', '/images/avatar-woman-2.jpg', '/images/avatar-man-1.jpg'][i]} alt={t.name} />
-                            <div className="result-name">{t.name}</div>
-                            <div className="result-age">{t.age}</div>
-                            <div className="result-increase">{t.increase}<br /><span style={{ fontSize: 12, fontWeight: 400, fontFamily: 'Plus Jakarta Sans, sans-serif', color: 'var(--b365-text-secondary)' }}>{t.time}</span></div>
-                            <div className="result-levels">
-                                <span className="level-before">{t.before}</span>
-                                <ArrowRight size={14} style={{ color: 'var(--b365-text-secondary)' }} />
-                                <span className="level-after">{t.after}</span>
-                            </div>
-                            <div className="result-quote">{t.quote}</div>
-                        </div>
-                    ))}
-                </div>
+                <NHTOTestimonialsCarousel />
                 <MidPageCTA onClick={handleStartProtocol} />
             </section>
 
