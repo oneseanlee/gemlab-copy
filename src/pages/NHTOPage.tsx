@@ -295,7 +295,7 @@ const NHTOPage = () => {
                         { name: 'Mark', age: 'Age 60', increase: 'Up to 400%+', time: 'in 4 weeks', before: 'Low 200s', after: '1,000+ ng/dL', quote: '"I feel 20 years younger. My energy is through the roof."' },
                     ].map((t, i) => (
                         <div className="nhto-result-card" key={i}>
-                            <img className="result-avatar" src="/placeholder.svg" alt={t.name} />
+                            <img className="result-avatar" src={['/images/avatar-man-1.jpg', '/images/avatar-woman-1.jpg', '/images/avatar-woman-2.jpg', '/images/avatar-man-1.jpg'][i]} alt={t.name} />
                             <div className="result-name">{t.name}</div>
                             <div className="result-age">{t.age}</div>
                             <div className="result-increase">{t.increase}<br /><span style={{ fontSize: 12, fontWeight: 400, fontFamily: 'Plus Jakarta Sans, sans-serif', color: 'var(--b365-text-secondary)' }}>{t.time}</span></div>
@@ -317,20 +317,20 @@ const NHTOPage = () => {
                 <div className="nhto-product-grid">
                     {[
                         {
-                            img: '/placeholder.svg', title: 'Non-Hormonal Testosterone Optimizer', tag: 'Rx Formula', tagClass: 'tag-rx',
+                            img: '/images/product-nhto.png', title: 'Non-Hormonal Testosterone Optimizer', tag: 'Rx Formula', tagClass: 'tag-rx',
                             subtitle: 'Powered by MODS Max',
                             items: ['Clinical-grade Enclomiphene', 'Boron 10mg for free testosterone', 'Vitamin C for cellular protection', 'Patent-pending 10X absorption delivery']
                         },
                         {
-                            img: '/placeholder.svg', title: 'Activate365 — Morning Cellular Activation', tag: 'UCOS', tagClass: 'tag-supp',
+                            img: '/images/activate365.png', title: 'Activate365 — Morning Cellular Activation', tag: 'UCOS', tagClass: 'tag-supp',
                             items: ['Spermidine 10mg: Activates autophagy', 'NAD+ 20mg: Immediate cellular energy', 'Boron 10mg: Hormone optimization', 'MODS Max Technology: 10x absorption']
                         },
                         {
-                            img: '/placeholder.svg', title: 'Mito365 — Peak Performance Enhancement', tag: 'UCOS', tagClass: 'tag-supp',
+                            img: '/images/mito365.png', title: 'Mito365 — Peak Performance Enhancement', tag: 'UCOS', tagClass: 'tag-supp',
                             items: ['Methylene Blue 10mg: 30-40% ATP increase', 'GHK-Cu Peptide 10mg: Faster tissue repair', 'PQQ 20mg: Creates new mitochondria', 'NAD+ 150mg + B12 + Vitamin C']
                         },
                         {
-                            img: '/placeholder.svg', title: 'Restore365 — Overnight Recovery', tag: 'UCOS', tagClass: 'tag-supp',
+                            img: '/images/restore365.png', title: 'Restore365 — Overnight Recovery', tag: 'UCOS', tagClass: 'tag-supp',
                             items: ['Enhanced Melatonin: 50-70% faster sleep onset', 'GABA 50mg: Deep sleep support', 'Boron 10mg: Growth hormone release', 'Zinc: Immune and tissue repair']
                         },
                     ].map((product, i) => (
@@ -548,31 +548,6 @@ const NHTOPage = () => {
                             </div>
                         ))}
                     </div>
-                </div>
-            </section>
-
-            {/* 17. Safety Information */}
-            <section className="b365-section b365-section-alt">
-                <div className="tprime-safety">
-                    <h3>Important Safety Information</h3>
-                    <ul>
-                        {[
-                            'These statements have not been evaluated by the Food and Drug Administration',
-                            'This product is not intended to diagnose, treat, cure, or prevent any disease',
-                            'Methylene Blue should NOT be used by patients with glucose-6-phosphate dehydrogenase (G6PD) deficiency',
-                            'Methylene Blue may interact with MAO inhibitors, SSRIs, and other psychiatric medications',
-                            'Consult with a healthcare professional before use',
-                        ].map((item, i) => (
-                            <li key={i}>
-                                <AlertCircle size={14} />
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                    <p className="report">Questions? Call us: (385) 421-5651 | info@best365labs.com</p>
-                    <p className="disclaimer">
-                        *These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. The Non-Hormonal Testosterone Optimizer is a compounded drug for Rx ONLY.
-                    </p>
                 </div>
             </section>
 
