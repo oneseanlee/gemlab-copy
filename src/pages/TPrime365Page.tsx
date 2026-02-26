@@ -41,7 +41,7 @@ const tprimeTestimonials = [
 const MidPageCTA = ({ onClick }: { onClick: (e?: React.MouseEvent) => void }) => (
   <div className="tprime-mid-cta">
     <AnimatedCTA onClick={onClick}>
-      Start My Protocol
+      See If I Qualify
       <ArrowRight size={16} />
     </AnimatedCTA>
   </div>
@@ -210,7 +210,7 @@ const TPrime365Page = () => {
                     <div className="b365-nav-right">
                         <CartDrawer />
                         <AnimatedCTA onClick={handleStartProtocol} small>
-                          Start My Protocol
+                          See If I Qualify
                           <ArrowRight size={14} />
                         </AnimatedCTA>
                     </div>
@@ -241,7 +241,7 @@ const TPrime365Page = () => {
                         </div>
 
                         <AnimatedCTA onClick={handleStartProtocol}>
-                            Start My Protocol
+                             See If I Qualify
                             <ArrowRight size={16} />
                         </AnimatedCTA>
 
@@ -589,7 +589,7 @@ const TPrime365Page = () => {
                         <span className="guarantee-text">Complete your intake to see if you qualify</span>
                     </div>
                     <AnimatedCTA onClick={handleStartProtocol} className="btn-white-cta">
-                        Start My Protocol
+                         See If I Qualify
                         <ArrowRight size={16} />
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
@@ -697,7 +697,7 @@ const TPrime365Page = () => {
             <div className="tprime-sticky-mobile-cta">
               <span className="sticky-price">$149<span>/mo</span></span>
               <button className="sticky-cta-btn" onClick={handleStartProtocol}>
-                Start My Protocol
+                See If I Qualify
                 <ArrowRight size={14} />
               </button>
             </div>
