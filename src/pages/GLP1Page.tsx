@@ -690,7 +690,6 @@ const GLP1Page = () => {
                         </button>
 
                         <div className="glp1-trust-images">
-                            <img src="/images/trust-badges-gold.webp" alt="Secure Ordering, Satisfaction Guaranteed, Premium Quality, Great Customer Service" loading="lazy" />
                             <img src="/images/payment-methods.webp" alt="PayPal, Visa, Mastercard, American Express, Discover accepted" loading="lazy" />
                         </div>
 
