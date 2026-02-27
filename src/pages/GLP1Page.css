@@ -1314,15 +1314,21 @@
 /* — Checkout Responsive — */
 @media (max-width: 768px) {
   .glp1-checkout-section {
-    padding: 32px var(--space-4) 24px;
+    padding: 32px 0 24px;
+    overflow: hidden;
   }
   .glp1-checkout-grid {
     grid-template-columns: 1fr;
     gap: var(--space-5);
+    padding: 0 var(--space-4);
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .glp1-checkout-left,
   .glp1-checkout-right {
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
   .glp1-checkout-right {
     text-align: center;
@@ -1333,6 +1339,18 @@
   }
   .glp1-checkout-desc {
     font-size: 13px;
+  }
+  .glp1-promo-strip {
+    font-size: 13px;
+    padding: 10px var(--space-3);
+  }
+  .glp1-product-display {
+    width: 100%;
+  }
+  .glp1-product-display > img {
+    max-height: 340px;
+    width: 100%;
+    object-fit: contain;
   }
   .glp1-check-list {
     text-align: left;
@@ -1364,8 +1382,15 @@
     height: 52px;
     border-radius: var(--radius-full);
   }
-  .glp1-product-display > img {
-    max-height: 340px;
+  .glp1-thumb-carousel {
+    max-width: 100%;
+  }
+  .thumb-track {
+    max-width: calc(100% - 68px);
+  }
+  .glp1-benefit-callouts .benefit-item {
+    font-size: 13px;
+    padding: 10px 12px;
   }
   .glp1-guarantee-badge,
   .glp1-fda-disclaimer {
