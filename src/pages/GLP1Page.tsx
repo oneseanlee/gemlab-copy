@@ -52,6 +52,8 @@ const GLP1Page = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const thumbImages = ['/images/product-glp-protocol.png', '/images/triple-power-methylene-blue.png', '/images/metabolism-plus.png', '/images/glp1-whats-included.png', '/images/glp1-risk-free.png', '/images/glp1-many-users-report.png'];
+  const [activeThumb, setActiveThumb] = useState(0);
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
@@ -614,12 +616,7 @@ const GLP1Page = () => {
                         <div className="glp1-promo-strip">🔥 SAVE $50 + FREE SHIPPING 🔥</div>
 
                         <div className="glp1-product-display">
-                            <img src="/images/glp1-whats-included.png" alt="GLP-1 Optimization Protocol — Triple Power Methylene Blue and Metabolism+" loading="lazy" />
-                            <div className="glp1-stat-overlay">
-                                <span className="stat-number">91%</span>
-                                <span className="stat-text">of Users Reported Higher Energy Within 90 Days*</span>
-                                <span className="stat-disclaimer">*Results may vary</span>
-                            </div>
+                            <img src={thumbImages[activeThumb]} alt="GLP-1 Optimization Protocol" loading="lazy" />
                         </div>
 
                         <div className="glp1-benefit-callouts">
@@ -632,8 +629,8 @@ const GLP1Page = () => {
                         <div className="glp1-thumb-carousel">
                             <button className="thumb-arrow thumb-arrow-left" onClick={() => { const el = document.querySelector('.thumb-track'); if (el) el.scrollBy({ left: -80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails left"><ChevronLeft size={16} /></button>
                             <div className="thumb-track">
-                                {['/images/product-glp-protocol.png', '/images/triple-power-methylene-blue.png', '/images/metabolism-plus.png', '/images/glp1-whats-included.png', '/images/glp1-risk-free.png', '/images/glp1-many-users-report.png'].map((src, i) => (
-                                    <img key={i} src={src} alt={`Product view ${i + 1}`} className={`thumb-img ${i === 0 ? 'active' : ''}`} loading="lazy" />
+                                {thumbImages.map((src, i) => (
+                                    <img key={i} src={src} alt={`Product view ${i + 1}`} className={`thumb-img ${i === activeThumb ? 'active' : ''}`} loading="lazy" onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer' }} />
                                 ))}
                             </div>
                             <button className="thumb-arrow thumb-arrow-right" onClick={() => { const el = document.querySelector('.thumb-track'); if (el) el.scrollBy({ left: 80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails right"><ChevronRight size={16} /></button>
