@@ -689,6 +689,11 @@ const GLP1Page = () => {
                             <ArrowRight size={18} />
                         </button>
 
+                        <div className="glp1-trust-images">
+                            <img src="/images/trust-badges-gold.webp" alt="Secure Ordering, Satisfaction Guaranteed, Premium Quality, Great Customer Service" loading="lazy" />
+                            <img src="/images/payment-methods.webp" alt="PayPal, Visa, Mastercard, American Express, Discover accepted" loading="lazy" />
+                        </div>
+
                         <p className="glp1-fda-disclaimer">*These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
                     </div>
                 </div>
