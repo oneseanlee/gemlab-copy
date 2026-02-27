@@ -536,7 +536,13 @@
 }
 
 .early-testers-slide:has(.glp1-testimonial-composite) {
-  flex: 0 0 50%;
+  flex: 0 0 33.333%;
+}
+
+@media (max-width: 1024px) {
+  .early-testers-slide:has(.glp1-testimonial-composite) {
+    flex: 0 0 50%;
+  }
 }
 
 @media (max-width: 768px) {
