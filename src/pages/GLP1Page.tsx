@@ -425,11 +425,11 @@ const GLP1Page = () => {
             </section>
 
             {/* Community Collage Bridge */}
-            <section className="b365-section">
-                <div className="glp1-community-bridge">
+            <section className="b365-section" style={{ paddingTop: 0 }}>
+                <div className="glp1-enhancement-img">
                     <img src="/images/glp1-community-collage-2.webp" alt="Community of optimized GLP-1 users achieving real results" loading="lazy" />
-                    <p className="glp1-community-bridge-caption">Join Our Growing Community of Optimized GLP-1 Users</p>
                 </div>
+                <p className="glp1-community-bridge-caption">Join Our Growing Community of Optimized GLP-1 Users</p>
             </section>
 
             {/* 9. Six Powerful Benefits */}
