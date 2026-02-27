@@ -9,6 +9,9 @@
   background: var(--b365-white);
   overflow-x: hidden;
 }
+.glp1-page .promo-mobile { display: none; }
+.glp1-page .promo-desktop { display: inline; }
+
 
 /* ─── Hero ─── */
 .glp1-hero-section {
@@ -556,10 +559,13 @@
 
   /* Promo banner text */
   .glp1-page .b365-promo-banner {
-    font-size: 12px;
-    padding: 8px var(--space-6) 8px var(--space-3);
-    line-height: 1.4;
+    font-size: 11px;
+    padding: 6px 32px 6px var(--space-3);
+    line-height: 1.2;
+    white-space: nowrap;
   }
+  .glp1-page .promo-desktop { display: none; }
+  .glp1-page .promo-mobile { display: inline; }
 }
 
 /* ─── Cart trigger button ─── */
