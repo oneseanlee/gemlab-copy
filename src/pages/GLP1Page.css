@@ -1132,6 +1132,18 @@
   height: auto;
 }
 
+/* Payment strip below checkout grid */
+.glp1-checkout-payment-strip {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+.glp1-checkout-payment-strip img {
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+}
+
 /* FDA Disclaimer */
 .glp1-fda-disclaimer {
   font-size: 11px;
