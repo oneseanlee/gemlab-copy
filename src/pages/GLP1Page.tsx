@@ -278,6 +278,13 @@ const GLP1Page = () => {
                 </div>
             </section>
 
+            {/* 5b. "Many Users Report" enhancement image */}
+            <section className="b365-section">
+                <div className="glp1-enhancement-img">
+                    <img src="/images/glp1-many-users-report.png" alt="Many users report improved energy, focus, and body composition within the first 30 days" loading="lazy" />
+                </div>
+            </section>
+
             {/* 6. Lifestyle Optimization */}
             <section className="b365-section glp1-lifestyle-section">
                 <div className="glp1-lifestyle-layout">
@@ -355,6 +362,10 @@ const GLP1Page = () => {
                         <ArrowRight size={16} />
                     </AnimatedCTA>
                     <p className="glp1-mid-cta-sub"><Check size={14} /> Join hundreds of optimized GLP-1 users</p>
+                </div>
+                {/* Community Collage — social proof extension */}
+                <div className="glp1-enhancement-img" style={{ marginTop: 'var(--space-8)' }}>
+                    <img src="/images/glp1-community-collage.png" alt="Best365 Labs community — real users, real results" loading="lazy" />
                 </div>
             </section>
 
@@ -494,20 +505,10 @@ const GLP1Page = () => {
                 </div>
             </section>
 
-            {/* 11. Value Stack */}
+            {/* 11. Value Stack — "What's Included" visual */}
             <section className="b365-section b365-section-alt">
-                <h2 className="b365-section-heading b365-serif">Your Complete GLP-1 <em>Success Package</em></h2>
-                <div className="tprime-value-card">
-                    <h3>Everything You Need for 30 Days of Transformation</h3>
-                    <div className="tprime-value-item"><span className="name">Triple Power Methylene Blue (30-day supply)</span><span className="price">USP MB 150mg + NAD+ 600mg + Spermidine 300mg</span></div>
-                    <div className="tprime-value-item"><span className="name">Metabolism+ Tablets (60 tablets)</span><span className="price">Morning & lunch metabolic activation</span></div>
-                    <div className="tprime-value-item special"><span className="name">FREE Shipping</span><span className="price">$12 value</span></div>
-                    <div className="tprime-value-item special"><span className="name">Complete Protocol Guide</span><span className="price">$29 value</span></div>
-                    <div className="tprime-value-total">
-                        <div className="row"><span>TOTAL VALUE:</span><span>$131.00</span></div>
-                        <div className="row text-primary-foreground"><span>YOUR PRICE:</span><span className="highlight-price">$39.95</span></div>
-                        <div className="row"><span>YOU SAVE:</span><span>$91.05 (70% OFF)</span></div>
-                    </div>
+                <div className="glp1-enhancement-img">
+                    <img src="/images/glp1-whats-included.png" alt="What's included — Triple Power Methylene Blue, Metabolism+, Protocol Guide, Community Access, and FREE Shipping" loading="lazy" />
                 </div>
             </section>
 
@@ -575,6 +576,10 @@ const GLP1Page = () => {
                 <div className="tprime-final-cta">
                     <h2>Start Your GLP-1 <em>Optimization Today</em></h2>
                     <p className="subtitle text-primary-foreground">Every day on GLP-1 without mitochondrial support is another day of muscle loss and metabolic stress.</p>
+                    {/* "Risk Free" reassurance image */}
+                    <div className="glp1-enhancement-img glp1-risk-free-img">
+                        <img src="/images/glp1-risk-free.png" alt="Risk-free GLP-1 Optimization Protocol — quality guaranteed" loading="lazy" />
+                    </div>
                     <div className="tprime-final-price-box">
                         <span className="big-price">$39.95</span>
                         <span className="note">Complete 30-Day Protocol — Total Value: $131.00</span>
