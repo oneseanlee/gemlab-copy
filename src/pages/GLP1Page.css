@@ -527,12 +527,22 @@
   font-weight: 700;
 }
 
-/* ─── Testimonial Stars ─── */
-.glp1-testimonial-stars {
-  display: flex;
-  gap: 2px;
-  color: #f59e0b;
-  margin: 4px 0 8px;
+/* ─── Testimonial Composite Images ─── */
+.glp1-testimonial-composite {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+.early-testers-slide:has(.glp1-testimonial-composite) {
+  flex: 0 0 50%;
+}
+
+@media (max-width: 768px) {
+  .early-testers-slide:has(.glp1-testimonial-composite) {
+    flex: 0 0 100%;
+  }
 }
 
 /* ─── Transformation Section Background ─── */
