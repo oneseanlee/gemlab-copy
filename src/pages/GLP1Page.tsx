@@ -432,24 +432,6 @@ const GLP1Page = () => {
                 <p className="glp1-community-bridge-caption">Join Our Growing Community of Optimized GLP-1 Users</p>
             </section>
 
-            {/* UGC Video Testimonials */}
-            <section className="glp1-ugc-section">
-                <h2 className="b365-section-heading b365-serif">Hear From Real Users</h2>
-                <div className="glp1-ugc-scroll">
-                    {[
-                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9753f1581bca8281d.mp4',
-                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf99a0c1813a448e210.mp4',
-                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9848f6445769e1e17.mp4',
-                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9c4df65977964bd7d.mp4',
-                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9753f1558e8a8281e.mp4',
-                    ].map((src, i) => (
-                        <div className="glp1-ugc-card" key={i}>
-                            <video src={src} controls preload="none" playsInline />
-                        </div>
-                    ))}
-                </div>
-            </section>
-
             {/* 9. Six Powerful Benefits */}
             <section className="b365-section b365-section-alt">
                 <h2 className="b365-section-heading b365-serif">Six Powerful Benefits You'll Feel <em>Within Days</em></h2>
@@ -532,6 +514,24 @@ const GLP1Page = () => {
                         <ArrowRight size={16} />
                     </AnimatedCTA>
                     <p className="glp1-mid-cta-sub"><Check size={14} /> 70% OFF &bull; Limited Launch Pricing</p>
+                </div>
+            </section>
+
+            {/* UGC Video Testimonials */}
+            <section className="glp1-ugc-section">
+                <h2 className="b365-section-heading b365-serif">Hear From Real Users</h2>
+                <div className="glp1-ugc-scroll">
+                    {[
+                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9753f1581bca8281d.mp4',
+                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf99a0c1813a448e210.mp4',
+                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9848f6445769e1e17.mp4',
+                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9c4df65977964bd7d.mp4',
+                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9753f1558e8a8281e.mp4',
+                    ].map((src, i) => (
+                        <div className="glp1-ugc-card" key={i}>
+                            <video src={src} autoPlay muted loop playsInline preload="metadata" />
+                        </div>
+                    ))}
                 </div>
             </section>
 
