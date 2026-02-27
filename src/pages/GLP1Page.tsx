@@ -510,11 +510,6 @@ const GLP1Page = () => {
             </section>
 
             {/* 11. Value Stack — "What's Included" visual */}
-            <section className="b365-section b365-section-alt">
-                <div className="glp1-enhancement-img">
-                    <img src="/images/glp1-whats-included.png" alt="What's included — Triple Power Methylene Blue, Metabolism+, Protocol Guide, Community Access, and FREE Shipping" loading="lazy" />
-                </div>
-            </section>
 
             {/* 12. Price Perspective */}
             <section className="b365-section">
@@ -580,10 +575,6 @@ const GLP1Page = () => {
                 <div className="tprime-final-cta">
                     <h2>Start Your GLP-1 <em>Optimization Today</em></h2>
                     <p className="subtitle text-primary-foreground">Every day on GLP-1 without mitochondrial support is another day of muscle loss and metabolic stress.</p>
-                    {/* "Risk Free" reassurance image */}
-                    <div className="glp1-enhancement-img glp1-risk-free-img">
-                        <img src="/images/glp1-risk-free.png" alt="Risk-free GLP-1 Optimization Protocol — quality guaranteed" loading="lazy" />
-                    </div>
                     <div className="tprime-final-price-box">
                         <span className="big-price">$39.95</span>
                         <span className="note">Complete 30-Day Protocol — Total Value: $131.00</span>
