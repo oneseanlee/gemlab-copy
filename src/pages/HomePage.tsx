@@ -331,6 +331,9 @@ const HomePage = () => {
             <li><a href="#faq">FAQ</a></li>
           </ul>
           <div className="b365-nav-right">
+            <AnimatedCTA href="#products" className="cta-sm nav-cta">
+              Get Started
+            </AnimatedCTA>
             <CartDrawer />
           </div>
         </div>
