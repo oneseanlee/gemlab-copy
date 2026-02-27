@@ -1,14 +1,22 @@
 
 
-## Fix: CTA Button and Sub-text on Separate Lines
+## Replace "Many Users Report" Image and Make It Wider
 
-The "Join Them -- Order Now $39.95" button and the "Join hundreds of optimized GLP-1 users" sub-text are appearing side-by-side instead of stacked vertically. This affects all mid-page CTA blocks on the GLP-1 Protocol page.
+### What Changes
 
-### Root Cause
+1. **Replace image asset**: Copy the new uploaded image to `public/images/glp1-many-users-report.png`, overwriting the current file.
 
-The `.glp1-mid-cta` container uses `text-align: center` for centering, but both the button (`inline-flex`) and the sub-text (`inline-flex`) sit on the same line when the viewport is wide enough.
+2. **Widen the image container**: Update `.glp1-enhancement-img` in `src/pages/GLP1Page.css`:
+   - Increase `max-width` from `900px` to `1280px` (matching the page content width)
+   - Add a subtle background gradient (light blue, matching the image's own background) so it blends seamlessly
+   - Add vertical padding for breathing room
+   - Add a soft box-shadow for a polished, premium feel
 
-### Fix
+3. **Enhance the section wrapper** in `src/pages/GLP1Page.tsx`:
+   - Add scroll-reveal animation using the existing `useScrollReveal` hook for a smooth entrance effect
 
-Update `.glp1-mid-cta` in `src/pages/GLP1Page.css` to use `display: flex; flex-direction: column; align-items: center;` so the button and sub-text always stack vertically. This one CSS change fixes all 4 mid-page CTA instances across the page.
+### Files Modified
+- `public/images/glp1-many-users-report.png` -- replaced with new image
+- `src/pages/GLP1Page.css` -- widen `.glp1-enhancement-img` to 1280px, add shadow and background polish
+- `src/pages/GLP1Page.tsx` -- add scroll-reveal ref to the "Many Users Report" section
 
