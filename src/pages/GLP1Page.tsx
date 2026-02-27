@@ -188,7 +188,8 @@ const GLP1Page = () => {
             {/* 1. Promo Banner */}
             {showBanner &&
       <div className="b365-promo-banner">
-                    🔥 SPECIAL LAUNCH OFFER: Complete 30-Day Protocol — Save $50 + FREE Shipping
+                    <span className="promo-desktop">🔥 SPECIAL LAUNCH OFFER: Complete 30-Day Protocol — Save $50 + FREE Shipping</span>
+                    <span className="promo-mobile">🔥 LAUNCH OFFER: Save $50 + FREE Shipping</span>
                     <button onClick={() => setShowBanner(false)} aria-label="Close banner">✕</button>
                 </div>
       }
