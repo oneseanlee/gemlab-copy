@@ -1,38 +1,21 @@
 
 
-## Make "Many Users Report" Image Full-Width, Borderless, with Rounded Corners
+## Remove Community Collage Image
 
-### Changes
+### Change
 
-**File: `src/pages/GLP1Page.css`** (lines 632-655)
+**File: `src/pages/GLP1Page.tsx`** (lines 374-377)
 
-1. **Remove the container's border/background/shadow**: Strip the `background`, `box-shadow`, and `padding` from `.glp1-enhancement-img` so there's no visible card wrapper around the image.
+Delete the community collage image block:
 
-2. **Make it full-width**: Set `max-width: 100%` so the image extends edge-to-edge within the section.
-
-3. **Round the image corners**: Apply `border-radius: var(--radius-md)` (14px, matching the hero section's card-level rounding) to the `img` element instead of `--radius-sm`.
-
-### Resulting CSS
-
-```css
-.glp1-enhancement-img {
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  padding: 0;
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-}
-.glp1-enhancement-img img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-md);
-  display: block;
-}
+```tsx
+// REMOVE these lines:
+{/* Community Collage — social proof extension */}
+<div className="glp1-enhancement-img" style={{ marginTop: 'var(--space-8)' }}>
+    <img src="/images/glp1-community-collage.png" alt="Best365 Labs community — real users, real results" loading="lazy" />
+</div>
 ```
 
-The mobile override for `.glp1-enhancement-img` padding will also be updated to `padding: 0` for consistency.
-
 ### Files Modified
-- `src/pages/GLP1Page.css` -- remove wrapper styling, apply rounded corners to image
+- `src/pages/GLP1Page.tsx` -- remove community collage image block
+
