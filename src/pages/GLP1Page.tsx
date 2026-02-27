@@ -371,10 +371,6 @@ const GLP1Page = () => {
                     </AnimatedCTA>
                     <p className="glp1-mid-cta-sub"><Check size={14} /> Join hundreds of optimized GLP-1 users</p>
                 </div>
-                {/* Community Collage — social proof extension */}
-                <div className="glp1-enhancement-img" style={{ marginTop: 'var(--space-8)' }}>
-                    <img src="/images/glp1-community-collage.png" alt="Best365 Labs community — real users, real results" loading="lazy" />
-                </div>
             </section>
 
             {/* 9. The Transformation */}
