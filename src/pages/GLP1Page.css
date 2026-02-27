@@ -1118,6 +1118,20 @@
   pointer-events: none;
 }
 
+/* Trust Images */
+.glp1-trust-images {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+.glp1-trust-images img {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+}
+
 /* FDA Disclaimer */
 .glp1-fda-disclaimer {
   font-size: 11px;
