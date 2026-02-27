@@ -315,6 +315,14 @@ const GLP1Page = () => {
                         </ul>
                     </div>
                 </div>
+                {/* Mid-page CTA #1 — after Transformation comparison */}
+                <div className="glp1-mid-cta">
+                    <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
+                        {isLoading ? 'Adding to Cart...' : 'Order Now — $39.95'}
+                        <ArrowRight size={16} />
+                    </AnimatedCTA>
+                    <p className="glp1-mid-cta-sub"><Check size={14} /> 30-Day Protocol + FREE Shipping</p>
+                </div>
             </section>
 
             {/* 9. Six Powerful Benefits */}
@@ -337,6 +345,14 @@ const GLP1Page = () => {
                             <p>{b.desc}</p>
                         </div>
           )}
+                </div>
+                {/* Mid-page CTA #2 — after Six Benefits */}
+                <div className="glp1-mid-cta">
+                    <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
+                        {isLoading ? 'Adding to Cart...' : 'Start Your Protocol — $39.95'}
+                        <ArrowRight size={16} />
+                    </AnimatedCTA>
+                    <p className="glp1-mid-cta-sub"><Check size={14} /> No prescription required &bull; Ships in 24-48 hours</p>
                 </div>
             </section>
 
@@ -384,6 +400,14 @@ const GLP1Page = () => {
           )}
                 </div>
                 {/* PLACEHOLDER IMAGE — Needs: Visual diagram showing AMPK + Sirtuin + Autophagy pathways working together */}
+                {/* Mid-page CTA #3 — after Science section */}
+                <div className="glp1-mid-cta">
+                    <AnimatedCTA href="#" onClick={handleOrderNow} disabled={isLoading}>
+                        {isLoading ? 'Adding to Cart...' : 'Protect Your Metabolism — $39.95'}
+                        <ArrowRight size={16} />
+                    </AnimatedCTA>
+                    <p className="glp1-mid-cta-sub"><Check size={14} /> 70% OFF &bull; Limited Launch Pricing</p>
+                </div>
             </section>
 
             {/* 11. Value Stack */}
@@ -539,6 +563,15 @@ const GLP1Page = () => {
                     </p>
                 </div>
             </section>
+
+            {/* Sticky Mobile CTA Bar */}
+            <div className="glp1-sticky-mobile-cta">
+                <span className="sticky-price">$39.95 <span className="sticky-strike">$90</span></span>
+                <button className="sticky-cta-btn" onClick={handleOrderNow} disabled={isLoading}>
+                    {isLoading ? 'Adding...' : 'Order Now'}
+                    <ArrowRight size={14} />
+                </button>
+            </div>
 
             {/* 17. Footer */}
             <SharedFooter />

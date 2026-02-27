@@ -520,6 +520,81 @@
   position: relative;
 }
 
+/* ─── Mid-Page CTA Blocks ─── */
+.glp1-mid-cta {
+  text-align: center;
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--b365-border);
+}
+.glp1-mid-cta .animated-cta {
+  margin: 0 auto;
+}
+.glp1-mid-cta-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-3);
+  font-size: var(--text-body-sm);
+  color: var(--b365-text-secondary);
+  font-weight: 500;
+}
+.glp1-mid-cta-sub svg {
+  color: var(--b365-green);
+  flex-shrink: 0;
+}
+
+/* ─── Sticky Mobile CTA Bar ─── */
+.glp1-sticky-mobile-cta {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .glp1-sticky-mobile-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: var(--b365-white);
+    border-top: 1px solid var(--b365-border);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    padding: var(--space-3) var(--space-4);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .glp1-sticky-mobile-cta .sticky-price {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--b365-text);
+    white-space: nowrap;
+  }
+  .glp1-sticky-mobile-cta .sticky-strike {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--b365-text-secondary);
+    text-decoration: line-through;
+    margin-left: 4px;
+  }
+  .glp1-sticky-mobile-cta .sticky-cta-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: linear-gradient(135deg, var(--b365-blue) 0%, var(--b365-blue-dark) 100%);
+    color: var(--b365-white);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: var(--space-3) var(--space-6);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(51, 118, 176, 0.35);
+  }
+}
+
 /* ─── Lifestyle Optimization Layout ─── */
 .glp1-lifestyle-section {
   padding-top: var(--space-8) !important;
