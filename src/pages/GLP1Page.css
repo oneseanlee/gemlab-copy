@@ -1127,7 +1127,7 @@
   margin-top: 20px;
 }
 .glp1-trust-images img {
-  max-width: 320px;
+  max-width: 100%;
   width: 100%;
   height: auto;
 }
