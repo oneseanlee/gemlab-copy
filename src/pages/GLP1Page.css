@@ -567,6 +567,9 @@
   }
   .glp1-page .promo-desktop { display: none; }
   .glp1-page .promo-mobile { display: inline; }
+  .glp1-page .b365-nav.with-banner {
+    top: 28px;
+  }
 }
 
 /* ─── Cart trigger button ─── */
