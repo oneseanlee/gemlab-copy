@@ -74,7 +74,8 @@ const ManyUsersReportSection = () => {
   return (
     <section className="b365-section" ref={revealRef}>
       <div className="glp1-enhancement-img">
-        <img src="/images/glp1-many-users-report.png" alt="Many users report improved energy, focus, and body composition within the first 30 days" loading="lazy" />
+        <img className="desktop-only-img" src="/images/glp1-many-users-report.png" alt="Many users report improved energy, focus, and body composition within the first 30 days" loading="lazy" />
+        <img className="mobile-only-img" src="/images/mobile-glp1-many-users-report.png" alt="Many users report improved energy during GLP-1 use" loading="lazy" />
       </div>
     </section>
   );
@@ -461,7 +462,8 @@ const GLP1Page = () => {
             {/* Community Collage Bridge */}
             <section className="b365-section" style={{ paddingTop: 0 }}>
                 <div className="glp1-enhancement-img">
-                    <img src="/images/glp1-community-collage-2.webp" alt="Community of optimized GLP-1 users achieving real results" loading="lazy" />
+                    <img className="desktop-only-img" src="/images/glp1-community-collage-2.webp" alt="Community of optimized GLP-1 users achieving real results" loading="lazy" />
+                    <img className="mobile-only-img" src="/images/mobile-glp1-community-collage.png" alt="Community of optimized GLP-1 users" loading="lazy" />
                 </div>
                 <p className="glp1-community-bridge-caption">Join Our Growing Community of Optimized GLP-1 Users</p>
             </section>
