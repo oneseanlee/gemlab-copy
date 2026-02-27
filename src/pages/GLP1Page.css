@@ -679,7 +679,7 @@
 }
 .glp1-ugc-scroll {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-3);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -689,7 +689,7 @@
   display: none;
 }
 .glp1-ugc-card {
-  flex: 0 0 180px;
+  flex: 1 1 0;
   aspect-ratio: 9 / 16;
   border-radius: var(--radius-md);
   border: 1px solid var(--b365-border);
@@ -712,13 +712,7 @@
 
 @media (min-width: 769px) {
   .glp1-ugc-scroll {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 1024px) {
-  .glp1-ugc-card {
-    flex: 0 0 160px;
+    overflow-x: visible;
   }
 }
 
