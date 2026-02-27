@@ -675,7 +675,7 @@
 .glp1-ugc-section {
   max-width: 1280px;
   margin: 0 auto;
-  padding: var(--space-6) var(--space-6) var(--space-8);
+  padding: var(--space-6) 24px var(--space-8);
 }
 .glp1-ugc-scroll {
   display: flex;
