@@ -1,59 +1,18 @@
 
 
-## Conversion Optimization: P0 and P1 Fixes for GLP-1 Protocol Page
+## Replace UGC Videos on GLP-1 Protocol Page
 
-### 1. Update Star Rating with Specific Review Count
-Replace the vague "Based on early tester feedback" text with a specific count like "4.9 (127 reviews)" to add concrete social proof.
+Swap the five video URLs in `src/pages/GLP1Page.tsx` (lines 566-570) with the new URLs provided.
 
-**File:** `src/pages/GLP1Page.tsx` (line 646)
+### Changes
 
-### 2. Add Visual Guarantee Badge Near Checkout CTA
-Insert a styled guarantee card with a ShieldCheck icon, "60-Day Money-Back Guarantee" heading, and reassurance copy between the checkout CTA button and the payment methods image.
+**File: `src/pages/GLP1Page.tsx`** (lines 566-570)
 
-**File:** `src/pages/GLP1Page.tsx` (after line 690)
-**File:** `src/pages/GLP1Page.css` (new `.glp1-guarantee-badge` styles)
+Replace the current video URL array with:
+1. `https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a2122f524b719f5d73dfd7.mp4`
+2. `https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a2125ab617a76d5ed65501.mp4`
+3. `https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a2125a6e50d6073a32e686.mp4`
+4. `https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a2125a95735ca775c8cd30.mp4`
+5. `https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a2135795735c255fc900e6.mp4`
 
-### 3. Add Phone Number Near CTA
-Add a reassurance line with a phone icon and the existing support number (385) 421-5651 directly below the guarantee badge, before the payment image.
-
-**File:** `src/pages/GLP1Page.tsx` (after guarantee badge)
-
-### 4. Add LogoCarousel Press Bar
-Import the existing `LogoCarousel` component and place it between the Hero section and the Hidden Crisis section for immediate credibility.
-
-**File:** `src/pages/GLP1Page.tsx` (import + placement after hero around line 220)
-
-### 5. Lazy-Load UGC Videos with IntersectionObserver
-Replace `autoPlay` on the 5 UGC videos with an IntersectionObserver-based approach: videos only start playing when they scroll into view and pause when they leave. This will be a small `LazyVideo` sub-component using `useRef` and `useEffect`.
-
-**File:** `src/pages/GLP1Page.tsx` (new `LazyVideo` component, update video section lines 526-547)
-
----
-
-### Technical Details
-
-**New CSS classes:**
-- `.glp1-guarantee-badge` -- flexbox card with ShieldCheck icon, blue-accented left border, subtle background
-- `.glp1-phone-line` -- small centered text with phone icon
-
-**LazyVideo component pattern:**
-```text
-const LazyVideo = ({ src }) => {
-  const ref = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) el.play();
-      else el.pause();
-    }, { threshold: 0.3 });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-  return <video ref={ref} src={src} muted loop playsInline preload="metadata" ... />;
-};
-```
-
-**Files modified:**
-- `src/pages/GLP1Page.tsx` -- all 5 changes
-- `src/pages/GLP1Page.css` -- guarantee badge + phone line styles
-
+No other files or logic need to change -- just a direct URL swap.
