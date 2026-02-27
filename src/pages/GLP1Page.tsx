@@ -13,7 +13,7 @@ import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { GLP1_VARIANT_ID } from '../lib/shopify';
-import { Menu, Tag, ArrowRight, Sunrise, Coffee, Utensils, ChevronRight, X, Check, Zap, Flame, Brain, Target, Footprints, Trophy, Dna, Recycle, AlertCircle, Lock, ShieldCheck, Package, Headphones, Dumbbell, Clock, Star } from 'lucide-react';
+import { Menu, Tag, ArrowRight, Sunrise, Coffee, Utensils, ChevronLeft, ChevronRight, X, Check, Zap, Flame, Brain, Target, Footprints, Trophy, Dna, Recycle, AlertCircle, Lock, ShieldCheck, Package, Headphones, Dumbbell, Clock, Star } from 'lucide-react';
 
 // GLP-1 testimonial data — full-bleed composite images with embedded quote cards
 const glp1Testimonials = [
@@ -606,31 +606,93 @@ const GLP1Page = () => {
                 </div>
             </section>
 
-            {/* 14. Final CTA */}
-            <section className="b365-section">
-                <div className="tprime-final-cta">
-                    <h2>Start Your GLP-1 <em>Optimization Today</em></h2>
-                    <p className="subtitle text-primary-foreground">Every day on GLP-1 without mitochondrial support is another day of muscle loss and metabolic stress.</p>
-                    <div className="tprime-final-price-box">
-                        <span className="big-price">$39.95</span>
-                        <span className="note">Complete 30-Day Protocol — Total Value: $131.00</span>
-                        <span className="guarantee-text">Save $91.05 (70% OFF) + FREE Shipping</span>
+            {/* 14. Final CTA — Premium DTC Checkout */}
+            <section className="b365-section glp1-checkout-section">
+                <div className="glp1-checkout-grid">
+                    {/* LEFT COLUMN — Product Display */}
+                    <div className="glp1-checkout-left">
+                        <div className="glp1-promo-strip">🔥 SAVE $50 + FREE SHIPPING 🔥</div>
+
+                        <div className="glp1-product-display">
+                            <img src="/images/glp1-whats-included.png" alt="GLP-1 Optimization Protocol — Triple Power Methylene Blue and Metabolism+" loading="lazy" />
+                            <div className="glp1-stat-overlay">
+                                <span className="stat-number">91%</span>
+                                <span className="stat-text">of Users Reported Higher Energy Within 90 Days*</span>
+                                <span className="stat-disclaimer">*Results may vary</span>
+                            </div>
+                        </div>
+
+                        <div className="glp1-benefit-callouts">
+                            <div className="benefit-item"><Zap size={18} /><span>Activate Metabolism</span></div>
+                            <div className="benefit-item"><Dumbbell size={18} /><span>Preserve Lean Muscle</span></div>
+                            <div className="benefit-item"><Brain size={18} /><span>Restore Mental Clarity</span></div>
+                            <div className="benefit-item"><Flame size={18} /><span>Optimize Fat Burning</span></div>
+                        </div>
+
+                        <div className="glp1-thumb-carousel">
+                            <button className="thumb-arrow thumb-arrow-left" onClick={() => { const el = document.querySelector('.thumb-track'); if (el) el.scrollBy({ left: -80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails left"><ChevronLeft size={16} /></button>
+                            <div className="thumb-track">
+                                {['/images/product-glp-protocol.png', '/images/triple-power-methylene-blue.png', '/images/metabolism-plus.png', '/images/glp1-whats-included.png', '/images/glp1-risk-free.png', '/images/glp1-many-users-report.png'].map((src, i) => (
+                                    <img key={i} src={src} alt={`Product view ${i + 1}`} className={`thumb-img ${i === 0 ? 'active' : ''}`} loading="lazy" />
+                                ))}
+                            </div>
+                            <button className="thumb-arrow thumb-arrow-right" onClick={() => { const el = document.querySelector('.thumb-track'); if (el) el.scrollBy({ left: 80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails right"><ChevronRight size={16} /></button>
+                        </div>
                     </div>
-                    <AnimatedCTA href="#" className="btn-white-cta" onClick={handleOrderNow} disabled={isLoading}>
-                        {isLoading ? 'Adding to Cart...' : 'Order Now — $39.95'}
-                        <ArrowRight size={16} />
-                    </AnimatedCTA>
-                    <div className="tprime-cta-trust-points">
-                        <span><Check size={14} /> No prescription required</span>
-                        <span><Check size={14} /> Ships within 24-48 hours</span>
-                        <span><Check size={14} /> FDA-registered facility</span>
-                        <span><Check size={14} /> FREE shipping — discreet packaging</span>
-                        <span><Check size={14} /> Third-party tested for purity</span>
-                    </div>
-                    <div className="tprime-cta-trust-strip">
-                        <span><Lock size={14} /> Secure Checkout</span>
-                        <span><ShieldCheck size={14} /> Quality Guaranteed</span>
-                        <span><Package size={14} /> Fast Shipping</span>
+
+                    {/* RIGHT COLUMN — Offer & Checkout */}
+                    <div className="glp1-checkout-right">
+                        <h2 className="glp1-checkout-title">GLP-1 Optimization Protocol</h2>
+
+                        <div className="glp1-star-rating">
+                            {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="#f59e0b" color="#f59e0b" />)}
+                            <span className="star-subtext">Based on early tester feedback</span>
+                        </div>
+
+                        <p className="glp1-checkout-desc">The complete cellular optimization system designed to protect your metabolism, preserve lean muscle, and eliminate the energy crashes that sabotage your GLP-1 results. Two precision-formulated products working together through three longevity pathways.*</p>
+
+                        <ul className="glp1-check-list">
+                            <li><Check size={16} />Triple Power Methylene Blue + Metabolism+ Tablets — full 30-day protocol</li>
+                            <li><Check size={16} />Activates AMPK, Sirtuins &amp; Autophagy — three longevity pathways</li>
+                            <li><Check size={16} />72% more lean tissue retention vs GLP-1 alone*</li>
+                            <li><Check size={16} />Made in USA — FDA-registered, cGMP-certified facility</li>
+                            <li><Check size={16} />60-day 100% money-back guarantee, because it works*</li>
+                        </ul>
+
+                        <div className="glp1-checkout-price">
+                            <span className="checkout-big-price">$39.95</span>
+                            <span className="checkout-strike">$90.00</span>
+                            <span className="checkout-discount-badge">56% OFF TODAY</span>
+                        </div>
+                        <p className="checkout-shipping-note">FREE SHIPPING — NO CODE REQUIRED</p>
+
+                        <div className="glp1-bonuses-section">
+                            <h4 className="bonuses-title">YOUR FREE BONUSES</h4>
+                            <div className="glp1-bonuses-row">
+                                <div className="bonus-card">
+                                    <span className="bonus-free-tag">FREE</span>
+                                    <span className="bonus-name">Complete Protocol Guide</span>
+                                    <span className="bonus-value">$29 Value</span>
+                                </div>
+                                <div className="bonus-card">
+                                    <span className="bonus-free-tag">FREE</span>
+                                    <span className="bonus-name">Community Access</span>
+                                    <span className="bonus-value">$49 Value</span>
+                                </div>
+                                <div className="bonus-card">
+                                    <span className="bonus-free-tag">FREE</span>
+                                    <span className="bonus-name">Free Priority Shipping</span>
+                                    <span className="bonus-value">$12 Value</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button className="glp1-checkout-cta" onClick={handleOrderNow} disabled={isLoading}>
+                            {isLoading ? 'Adding to Cart...' : 'START YOUR PROTOCOL'}
+                            <ArrowRight size={18} />
+                        </button>
+
+                        <p className="glp1-fda-disclaimer">*These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
                     </div>
                 </div>
             </section>
