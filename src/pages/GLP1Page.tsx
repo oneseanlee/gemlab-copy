@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect, useCallback } from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import './GLP1Page.css';
@@ -34,6 +35,17 @@ const GLP1_PRODUCT = {
     variants: { edges: [{ node: { id: GLP1_VARIANT_ID, title: '30-Day Protocol', price: { amount: '39.95', currencyCode: 'USD' }, availableForSale: true, selectedOptions: [{ name: 'Size', value: '30-Day Protocol' }] } }] },
     options: [{ name: 'Size', values: ['30-Day Protocol'] }]
   }
+};
+
+const ManyUsersReportSection = () => {
+  const revealRef = useScrollReveal<HTMLElement>();
+  return (
+    <section className="b365-section" ref={revealRef}>
+      <div className="glp1-enhancement-img">
+        <img src="/images/glp1-many-users-report.png" alt="Many users report improved energy, focus, and body composition within the first 30 days" loading="lazy" />
+      </div>
+    </section>
+  );
 };
 
 const GLP1Page = () => {
@@ -279,11 +291,7 @@ const GLP1Page = () => {
             </section>
 
             {/* 5b. "Many Users Report" enhancement image */}
-            <section className="b365-section">
-                <div className="glp1-enhancement-img">
-                    <img src="/images/glp1-many-users-report.png" alt="Many users report improved energy, focus, and body composition within the first 30 days" loading="lazy" />
-                </div>
-            </section>
+            <ManyUsersReportSection />
 
             {/* 6. Lifestyle Optimization */}
             <section className="b365-section glp1-lifestyle-section">
