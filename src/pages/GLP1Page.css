@@ -1339,6 +1339,7 @@
   }
   .glp1-checkout-title {
     font-size: 22px;
+    margin-top: var(--space-4);
   }
   .glp1-checkout-desc {
     font-size: 13px;
