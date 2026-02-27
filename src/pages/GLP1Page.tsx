@@ -295,13 +295,13 @@ const GLP1Page = () => {
           {
             Icon: Coffee, timing: 'With Breakfast', title: 'Metabolic Ignition',
             product: '2 Tablets Metabolism+',
-            image: '/images/metabolism-plus.png',
+            image: '/images/metabolism-new.png',
             items: ['Ignites metabolism with USP Methylene Blue, L-Theanine, Caffeine, Guarana, and Green Tea', 'Enhances energy production and fat oxidation']
           },
           {
             Icon: Utensils, timing: 'With Lunch', title: 'Sustained Activation',
             product: '2 Tablets Metabolism+',
-            image: '/images/metabolism-plus.png',
+            image: '/images/metabolism-new.png',
             items: ['Sustains metabolic activation throughout eating window', 'Maintains energy levels and supports lean muscle preservation']
           }].
           map((card, i) =>
