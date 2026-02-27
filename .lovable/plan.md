@@ -1,55 +1,46 @@
 
 
-## P0 + P1 Conversion Fixes for GLP-1 Protocol Page
+## Add 4 Enhancement Images to GLP-1 Protocol Page
 
-### Status Check
-The P0 fixes (3 mid-page CTAs + mobile sticky CTA bar) are **already implemented**. This plan covers the remaining P1 fixes.
+### Image Placements
 
----
+**Image 1: "Many Users Report" (product benefits)** -- Place after the Daily Protocol section (section 5) and before Lifestyle Optimization (section 6). This reinforces the product value immediately after showing the daily routine.
 
-### Fix 1: Remove Intake Form Link from Hero
-**Problem:** The "Start GLP-1 Intake Form" link in the hero (lines 146-149) implies a prescription requirement and competes with the primary "Order Now" CTA.
-**Change:** Delete the intake link from `GLP1Page.tsx`.
+**Image 2: "Risk Free" (GLP-1 Optimization Protocol)** -- Place inside the Final CTA section (section 14), above the price box. This adds visual reassurance right at the moment of purchase decision.
 
-### Fix 2: Add Urgency Countdown Timer
-**What:** A countdown timer in the hero section showing a limited-time offer expiring soon, reinforcing the promo banner's urgency.
-**Implementation:**
-- Add a `useEffect`-based countdown timer (e.g., 2-hour rolling window) to `GLP1Page.tsx`
-- Display it between the price row and the CTA button in the hero
-- Style: inline-flex badges showing HH:MM:SS with a "Limited Batch" or "Offer Expires In" label
-- Add corresponding CSS to `GLP1Page.css`
+**Image 3: Community Collage (Best365 Labs / MODS Max)** -- Place after the Testimonials carousel (section 8), replacing or supplementing the mid-CTA sub-text. This extends social proof with diverse real-user imagery.
 
-### Fix 3: Add Testimonial Carousel Section
-**What:** Insert a testimonial section between Clinical Results (section 7) and Transformation (section 8) using existing assets.
-**Implementation:**
-- Create a GLP-1-specific testimonial data array using existing images (`testimonial-brett-earnshaw.png`, `testimonial-dan-schmidt.png`, `testimonial-darren-lopez.png`, `testimonial-ernesto-cruz.png`, `testimonial-jay-atkins.png`, `testimonial-sean-lee.png`)
-- Reuse the `EarlyTestersCarousel` component pattern (Embla carousel with autoplay and dots) but with GLP-1-specific quotes about energy, muscle preservation, and metabolism
-- Place it as a new section between Clinical Results and Transformation
-- Add a mid-page CTA after the testimonials for an additional conversion touchpoint
+**Image 4: "What's Included" (Bonuses + Community Access)** -- Replace the current text-based Value Stack section (section 11) content with this visual. The image communicates bonuses more effectively than a text list.
 
----
+### Technical Details
+
+**Files to copy:**
+- `user-uploads://1-3.png` to `public/images/glp1-many-users-report.png`
+- `user-uploads://2-4.png` to `public/images/glp1-risk-free.png`
+- `user-uploads://7-2.png` to `public/images/glp1-community-collage.png`
+- `user-uploads://8-3.png` to `public/images/glp1-whats-included.png`
+
+**File modified:**
+- `src/pages/GLP1Page.tsx` -- Insert 4 full-width image sections at the placements above
+- `src/pages/GLP1Page.css` -- Add responsive styles for the new image blocks (max-width containment, border-radius, mobile scaling)
 
 ### Section Order After Changes
 1. Promo Banner
 2. Nav
-3. Hero (no intake link, with countdown timer)
+3. Hero (with countdown timer)
 4. Hidden Crisis
 5. Daily Protocol
-6. Lifestyle Optimization
-7. Clinical Results
-8. **Testimonials (NEW)**
-9. Transformation + Mid-CTA
-10. Six Benefits + Mid-CTA
-11. Science + Mid-CTA
-12. Value Stack
-13. Price Perspective
-14. Cell Timeline
-15. Final CTA
-16. FAQ
-17. Safety
-18. Footer + Sticky Mobile CTA
-
-### Files Modified
-- `src/pages/GLP1Page.tsx` -- remove intake link, add timer state/logic, add testimonial section
-- `src/pages/GLP1Page.css` -- add timer styles, testimonial section styles
-
+6. **"Many Users Report" image (NEW)**
+7. Lifestyle Optimization
+8. Clinical Results
+9. Testimonials + **Community Collage image (NEW)**
+10. Transformation + Mid-CTA
+11. Six Benefits + Mid-CTA
+12. Science + Mid-CTA
+13. **"What's Included" image (replaces text Value Stack)**
+14. Price Perspective
+15. Cell Timeline
+16. Final CTA **with "Risk Free" image (NEW)**
+17. FAQ
+18. Safety
+19. Footer + Sticky Mobile CTA
