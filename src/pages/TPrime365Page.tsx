@@ -369,10 +369,10 @@ const TPrime365Page = () => {
                               </div>
                             )}
                         </div>
-                        <div className="tprime-delivery-badge" style={{ textAlign: 'left' }}>
+                        <div className="tprime-delivery-badge" style={{ textAlign: 'center' }}>
                             <span>Sublingual Delivery via MODS Max Gold™</span>
                         </div>
-                        <p className="tprime-formula-tagline" style={{ textAlign: 'left' }}>4 Clinically-Proven Ingredients. 1 Powerful Formula.</p>
+                        <p className="tprime-formula-tagline" style={{ textAlign: 'center' }}>4 Clinically-Proven Ingredients. 1 Powerful Formula.</p>
                         <MidPageCTA onClick={handleStartProtocol} />
                     </div>
                 </div>
