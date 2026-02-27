@@ -1,72 +1,55 @@
 
 
-# GLP-1 Optimization Protocol — Editorial Advertorial Page
+## P0 + P1 Conversion Fixes for GLP-1 Protocol Page
 
-## Overview
-Create a long-form editorial advertorial at `/glp1-article` for the GLP-1 Optimization Protocol ($39.95 impulse purchase). Reuses the proven `adv-*` CSS class system from the TPrime365 advertorial while adding new components specific to this page (pull quotes, timeline, product cards, trust badge strip).
+### Status Check
+The P0 fixes (3 mid-page CTAs + mobile sticky CTA bar) are **already implemented**. This plan covers the remaining P1 fixes.
 
-## Architecture
+---
 
-**New files:**
-- `src/pages/GLP1AdvertorialPage.tsx` — Full page component
-- `src/pages/GLP1AdvertorialPage.css` — Page-specific styles (imports/extends the `adv-*` pattern)
+### Fix 1: Remove Intake Form Link from Hero
+**Problem:** The "Start GLP-1 Intake Form" link in the hero (lines 146-149) implies a prescription requirement and competes with the primary "Order Now" CTA.
+**Change:** Delete the intake link from `GLP1Page.tsx`.
 
-**Modified files:**
-- `src/App.tsx` — Add route `/glp1-article`
+### Fix 2: Add Urgency Countdown Timer
+**What:** A countdown timer in the hero section showing a limited-time offer expiring soon, reinforcing the promo banner's urgency.
+**Implementation:**
+- Add a `useEffect`-based countdown timer (e.g., 2-hour rolling window) to `GLP1Page.tsx`
+- Display it between the price row and the CTA button in the hero
+- Style: inline-flex badges showing HH:MM:SS with a "Limited Batch" or "Offer Expires In" label
+- Add corresponding CSS to `GLP1Page.css`
 
-## Conversion Strategy
+### Fix 3: Add Testimonial Carousel Section
+**What:** Insert a testimonial section between Clinical Results (section 7) and Transformation (section 8) using existing assets.
+**Implementation:**
+- Create a GLP-1-specific testimonial data array using existing images (`testimonial-brett-earnshaw.png`, `testimonial-dan-schmidt.png`, `testimonial-darren-lopez.png`, `testimonial-ernesto-cruz.png`, `testimonial-jay-atkins.png`, `testimonial-sean-lee.png`)
+- Reuse the `EarlyTestersCarousel` component pattern (Embla carousel with autoplay and dots) but with GLP-1-specific quotes about energy, muscle preservation, and metabolism
+- Place it as a new section between Clinical Results and Transformation
+- Add a mid-page CTA after the testimonials for an additional conversion touchpoint
 
-This is fundamentally different from the TPrime advertorial:
-- **Low-ticket impulse buy** ($39.95 vs $149/mo) -- no consultation, no prescription
-- All CTAs trigger direct Shopify checkout via cart creation using Variant ID `gid://shopify/ProductVariant/46539809235068`
-- No lead capture modal -- straight to purchase
-- Urgency via "Launch Pricing" badge and "$50 savings" callout (green accent), not fake scarcity
-- Sticky mobile CTA: "Get the Protocol -- $39.95 (Save $50)"
+---
 
-## Page Sections (14 total)
+### Section Order After Changes
+1. Promo Banner
+2. Nav
+3. Hero (no intake link, with countdown timer)
+4. Hidden Crisis
+5. Daily Protocol
+6. Lifestyle Optimization
+7. Clinical Results
+8. **Testimonials (NEW)**
+9. Transformation + Mid-CTA
+10. Six Benefits + Mid-CTA
+11. Science + Mid-CTA
+12. Value Stack
+13. Price Perspective
+14. Cell Timeline
+15. Final CTA
+16. FAQ
+17. Safety
+18. Footer + Sticky Mobile CTA
 
-1. **Headline** -- Editorial headline with category tag "GLP-1 Research", byline, social proof strip (no prescription required, free shipping)
-2. **Opening Editorial** -- Journalistic acknowledgment of GLP-1 success, pivot to muscle loss concern, drop-cap opening
-3. **"The Number on the Scale"** -- Problem agitation with styled pull quotes (new `.adv-pullquote` component)
-4. **"Burn Fat and Keep Your Muscle"** -- Solution intro with 3-card pathway grid (AMPK, Sirtuin, Autophagy) reusing `.adv-ingredient-grid`
-5. **"What's in the Protocol"** -- Two product cards (Triple Power + Metabolism+) with daily schedule strip (new `.adv-product-card` and `.adv-schedule-strip`)
-6. **Clinical Results** -- 6 stat cards in 3x2 grid reusing `.adv-results-grid` pattern, adapted for percentage stats
-7. **"What People Are Feeling"** -- Vertical timeline component (new `.adv-timeline`) showing Days 3-5, Week 1, Weeks 2-4, Long-term
-8. **"The Bottom Line"** -- Short editorial summary section
-9. **Value Stack + Pricing** -- Reuse `.adv-pricing-card` with $39.95 price, $90 strikethrough, 70% savings badge (green)
-10. **Trust & Guarantee Strip** -- 4 trust badges in row (new `.adv-trust-strip`) + 60-day guarantee badge reusing `.adv-guarantee`
-11. **"Who Is This For"** -- Single text callout block (not persona cards)
-12. **FAQ Accordion** -- 8 questions, reusing `.adv-faq-*` pattern
-13. **Final CTA** -- Dark background, reusing `.adv-final-cta`
-14. **Footer** -- Reusing `.adv-footer` with added Methylene Blue safety caution
-
-## New CSS Components
-
-Beyond reusing existing `adv-*` classes, these new styles will be added in `GLP1AdvertorialPage.css`:
-
-- **`.adv-pullquote`** -- Styled editorial pull quote with left blue border, larger italic serif text
-- **`.adv-product-card`** -- Side-by-side product cards with ingredient lists
-- **`.adv-schedule-strip`** -- Horizontal daily schedule (3 time slots)
-- **`.adv-stat-card`** -- Variant of result card optimized for percentage stats with labels
-- **`.adv-timeline`** -- Vertical timeline with left-side dots/line
-- **`.adv-trust-strip`** -- Horizontal 4-badge trust bar
-- **`.adv-save-badge`** -- Green savings callout badge
-
-## Checkout Integration
-
-All CTA buttons will use an `onClick` handler that:
-1. Calls `addItem()` from `useCartStore` with the GLP-1 variant
-2. Immediately retrieves and opens `checkoutUrl` via `window.open(url, '_blank')`
-3. Falls back to creating a new cart if none exists
-
-This follows the mandatory Shopify cart-first checkout pattern.
-
-## Technical Details
-
-- Mobile-first responsive (480/768/1024 breakpoints matching design system)
-- Sticky bottom CTA bar on mobile (768px and below)
-- Bottom padding on `.adv-page` to accommodate sticky bar
-- All typography uses existing `--font-title` (Playfair Display) and `--font-body` (Plus Jakarta Sans) tokens
-- Green accent color for savings/results: `var(--b365-green)` 
-- No popups, no timers, no exit-intent
+### Files Modified
+- `src/pages/GLP1Page.tsx` -- remove intake link, add timer state/logic, add testimonial section
+- `src/pages/GLP1Page.css` -- add timer styles, testimonial section styles
 
