@@ -563,11 +563,11 @@ const GLP1Page = () => {
                 <h2 className="b365-section-heading b365-serif">Hear From Real Users</h2>
                 <div className="glp1-ugc-scroll">
                     {[
-                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9753f1581bca8281d.mp4',
-                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf99a0c1813a448e210.mp4',
-                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9848f6445769e1e17.mp4',
-                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9c4df65977964bd7d.mp4',
-                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9753f1558e8a8281e.mp4',
+                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a2122f524b719f5d73dfd7.mp4',
+                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a2125ab617a76d5ed65501.mp4',
+                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a2125a6e50d6073a32e686.mp4',
+                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a2125a95735ca775c8cd30.mp4',
+                        'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a2135795735c255fc900e6.mp4',
                     ].map((src, i) => (
                         <div className="glp1-ugc-card" key={i}>
                             <LazyVideo src={src} />
