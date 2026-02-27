@@ -323,8 +323,50 @@
 .b365-nav-right {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   flex-shrink: 0;
+}
+.b365-nav-right .nav-cta {
+  font-size: 13px;
+  padding: var(--space-2) var(--space-5);
+  height: 38px;
+  min-width: unset;
+}
+
+/* Cart trigger — homepage override */
+.b365-page .glp1-cart-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1.5px solid var(--b365-border);
+  border-radius: var(--radius-full);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  color: var(--b365-navy);
+  transition: background var(--duration-fast), border-color var(--duration-fast);
+}
+.b365-page .glp1-cart-trigger:hover {
+  background: rgba(51, 118, 176, 0.08);
+  border-color: var(--b365-blue);
+}
+.b365-page .glp1-cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--b365-blue);
+  color: var(--b365-white);
+  font-size: 10px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 .b365-btn-primary {
   background-color: var(--b365-blue);
