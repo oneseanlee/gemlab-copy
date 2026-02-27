@@ -6,6 +6,7 @@
   min-width: 200px;
   height: 50px;
   padding: var(--space-3) var(--space-8);
+  white-space: nowrap;
   border: none;
   border-radius: var(--radius-full);
   background: linear-gradient(135deg, var(--b365-blue) 0%, var(--b365-blue-dark) 50%, var(--b365-blue) 100%);
