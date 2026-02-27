@@ -76,7 +76,7 @@ const ManyUsersReportSection = () => {
       <div className="glp1-enhancement-img">
         <picture>
           <source media="(max-width: 768px)" srcSet="/images/mobile-glp1-many-users-report.png" />
-          <img src="/images/glp1-many-users-report.png" alt="Many users report improved energy during GLP-1 use" loading="lazy" />
+          <img src="/images/glp1-many-users-report-new.jpg" alt="Many users report improved energy during GLP-1 use" loading="lazy" />
         </picture>
       </div>
     </section>
