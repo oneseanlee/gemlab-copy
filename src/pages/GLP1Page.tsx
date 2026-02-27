@@ -52,7 +52,7 @@ const GLP1Page = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const thumbImages = ['/images/product-glp-protocol.png', '/images/triple-power-methylene-blue.png', '/images/metabolism-plus.png', '/images/glp1-whats-included.png', '/images/glp1-risk-free.png', '/images/glp1-many-users-report.png'];
+  const thumbImages = ['/images/glp1-whats-included.png', '/images/product-glp-protocol.png', '/images/triple-power-methylene-blue.png', '/images/metabolism-plus.png', '/images/glp1-risk-free.png', '/images/glp1-many-users-report.png'];
   const [activeThumb, setActiveThumb] = useState(0);
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
@@ -619,13 +619,6 @@ const GLP1Page = () => {
                             <img src={thumbImages[activeThumb]} alt="GLP-1 Optimization Protocol" loading="lazy" />
                         </div>
 
-                        <div className="glp1-benefit-callouts">
-                            <div className="benefit-item"><div className="benefit-icon"><Zap size={20} /></div><span>Activate Metabolism</span></div>
-                            <div className="benefit-item"><div className="benefit-icon"><Dumbbell size={20} /></div><span>Preserve Lean Muscle</span></div>
-                            <div className="benefit-item"><div className="benefit-icon"><Brain size={20} /></div><span>Restore Mental Clarity</span></div>
-                            <div className="benefit-item"><div className="benefit-icon"><Flame size={20} /></div><span>Optimize Fat Burning</span></div>
-                        </div>
-
                         <div className="glp1-thumb-carousel">
                             <button className="thumb-arrow thumb-arrow-left" onClick={() => { const el = document.querySelector('.thumb-track'); if (el) el.scrollBy({ left: -80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails left"><ChevronLeft size={16} /></button>
                             <div className="thumb-track">
@@ -634,6 +627,13 @@ const GLP1Page = () => {
                                 ))}
                             </div>
                             <button className="thumb-arrow thumb-arrow-right" onClick={() => { const el = document.querySelector('.thumb-track'); if (el) el.scrollBy({ left: 80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails right"><ChevronRight size={16} /></button>
+                        </div>
+
+                        <div className="glp1-benefit-callouts">
+                            <div className="benefit-item"><div className="benefit-icon"><Zap size={20} /></div><span>Activate Metabolism</span></div>
+                            <div className="benefit-item"><div className="benefit-icon"><Dumbbell size={20} /></div><span>Preserve Lean Muscle</span></div>
+                            <div className="benefit-item"><div className="benefit-icon"><Brain size={20} /></div><span>Restore Mental Clarity</span></div>
+                            <div className="benefit-item"><div className="benefit-icon"><Flame size={20} /></div><span>Optimize Fat Burning</span></div>
                         </div>
                     </div>
 
