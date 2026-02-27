@@ -84,8 +84,8 @@ const products = [
     priceSuffix: '',
     priceNote: 'Launch Offer (Reg. $90.00)',
     shippingBadge: 'Free Shipping',
-    image: '/images/product-glp-protocol.png',
-    mobileImage: '/images/mobile-glp-protocol.png',
+    image: '/images/product-glp-protocol-new.png',
+    mobileImage: '/images/product-glp-protocol-new.png',
     href: '/glp1-protocol',
   },
   {
