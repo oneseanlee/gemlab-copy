@@ -14,14 +14,12 @@ import { useCartStore } from '../stores/cartStore';
 import { GLP1_VARIANT_ID } from '../lib/shopify';
 import { Menu, Tag, ArrowRight, Sunrise, Coffee, Utensils, ChevronRight, X, Check, Zap, Flame, Brain, Target, Footprints, Trophy, Dna, Recycle, AlertCircle, Lock, ShieldCheck, Package, Headphones, Dumbbell, Clock, Star } from 'lucide-react';
 
-// GLP-1 testimonial data
+// GLP-1 testimonial data — full-bleed composite images with embedded quote cards
 const glp1Testimonials = [
-  { img: '/images/testimonial-brett-earnshaw.png', name: 'Brett Earnshaw', quote: "I started the protocol on day one of my GLP-1 therapy. My energy never dropped — I actually felt BETTER than before. Lost 22 lbs of pure fat in 8 weeks." },
-  { img: '/images/testimonial-dan-schmidt.png', name: 'Dan Schmidt', quote: "The muscle preservation is real. My trainer confirmed I kept almost all my lean mass while dropping 18 lbs. That never happened on GLP-1 alone." },
-  { img: '/images/testimonial-darren-lopez.png', name: 'Darren Lopez', quote: "Brain fog was killing me on semaglutide. Within 5 days of adding Triple Power, I had crystal-clear focus again. Game changer." },
-  { img: '/images/testimonial-ernesto-cruz.png', name: 'Ernesto Cruz', quote: "I was one of the 85% who regained weight after stopping GLP-1. This time, with the protocol, I've kept every pound off for 4 months and counting." },
-  { img: '/images/testimonial-jay-atkins.png', name: 'Jay Atkins', quote: "My metabolism didn't crash like last time. I'm eating normally, maintaining my weight loss, and actually have MORE energy than before I started." },
-  { img: '/images/testimonial-sean-lee.png', name: 'Sean Lee', quote: "The difference is night and day. First round of GLP-1 I was exhausted and lost muscle. This time I'm hitting the gym 5 days a week and feeling incredible." },
+  { img: '/images/glp1-testimonial-sarah.png', name: 'Sarah M.' },
+  { img: '/images/glp1-testimonial-derek.png', name: 'Derek L.' },
+  { img: '/images/glp1-testimonial-whitney.png', name: 'Whitney Lopez' },
+  { img: '/images/glp1-testimonial-maryanne.png', name: 'Maryanne Van Dyke' },
 ];
 
 // Minimal product shape for cart
@@ -334,17 +332,7 @@ const GLP1Page = () => {
                         <div className="early-testers-container">
                             {glp1Testimonials.map((t, i) => (
                                 <div className="early-testers-slide" key={i}>
-                                    <div className="ucos-testimonial-card">
-                                        <img className="testimonial-avatar" src={t.img} alt={t.name} />
-                                        <div className="testimonial-body">
-                                            <h4>{t.name}</h4>
-                                            <div className="role">Verified Buyer</div>
-                                            <div className="glp1-testimonial-stars">
-                                                {[...Array(5)].map((_, j) => <Star key={j} size={14} fill="currentColor" />)}
-                                            </div>
-                                            <blockquote>"{t.quote}"</blockquote>
-                                        </div>
-                                    </div>
+                                    <img className="glp1-testimonial-composite" src={t.img} alt={`${t.name} testimonial`} loading="lazy" />
                                 </div>
                             ))}
                         </div>
