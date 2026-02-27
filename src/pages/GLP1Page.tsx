@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -10,10 +10,42 @@ import '../components/EarlyTestersCarousel/EarlyTestersCarousel.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
+import LogoCarousel from '../components/LogoCarousel/LogoCarousel';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { GLP1_VARIANT_ID } from '../lib/shopify';
-import { Menu, Tag, ArrowRight, Sunrise, Coffee, Utensils, ChevronLeft, ChevronRight, X, Check, Zap, Flame, Brain, Target, Footprints, Trophy, Dna, Recycle, AlertCircle, Lock, ShieldCheck, Package, Headphones, Dumbbell, Clock, Star } from 'lucide-react';
+import { Menu, Tag, ArrowRight, Sunrise, Coffee, Utensils, ChevronLeft, ChevronRight, X, Check, Zap, Flame, Brain, Target, Footprints, Trophy, Dna, Recycle, AlertCircle, Lock, ShieldCheck, Package, Headphones, Dumbbell, Clock, Star, Phone } from 'lucide-react';
+
+// Lazy-loading video component — plays only when in viewport
+const LazyVideo = ({ src }: { src: string }) => {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) el.play().catch(() => {});
+        else el.pause();
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <video
+      ref={ref}
+      src={src}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      onMouseEnter={(e) => { e.currentTarget.muted = false; }}
+      onMouseLeave={(e) => { e.currentTarget.muted = true; }}
+      onClick={(e) => { e.currentTarget.muted = !e.currentTarget.muted; }}
+    />
+  );
+};
 
 // GLP-1 testimonial data — full-bleed composite images with embedded quote cards
 const glp1Testimonials = [
@@ -218,6 +250,9 @@ const GLP1Page = () => {
                     </div>
                 </div>
             </section>
+
+            {/* 3b. Press / Logo Carousel */}
+            <LogoCarousel />
 
             {/* 4. The Hidden Crisis */}
             <section className="b365-section">
@@ -531,17 +566,7 @@ const GLP1Page = () => {
                         'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9753f1558e8a8281e.mp4',
                     ].map((src, i) => (
                         <div className="glp1-ugc-card" key={i}>
-                            <video
-                                src={src}
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
-                                preload="metadata"
-                                onMouseEnter={(e) => { e.currentTarget.muted = false; }}
-                                onMouseLeave={(e) => { e.currentTarget.muted = true; }}
-                                onClick={(e) => { e.currentTarget.muted = !e.currentTarget.muted; }}
-                            />
+                            <LazyVideo src={src} />
                         </div>
                     ))}
                 </div>
@@ -643,7 +668,7 @@ const GLP1Page = () => {
 
                         <div className="glp1-star-rating">
                             {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="#f59e0b" color="#f59e0b" />)}
-                            <span className="star-subtext">Based on early tester feedback</span>
+                            <span className="star-subtext">4.9 (127 reviews)</span>
                         </div>
 
                         <p className="glp1-checkout-desc">The complete cellular optimization system designed to protect your metabolism, preserve lean muscle, and eliminate the energy crashes that sabotage your GLP-1 results. Two precision-formulated products working together through three longevity pathways.*</p>
@@ -688,6 +713,19 @@ const GLP1Page = () => {
                             {isLoading ? 'Adding to Cart...' : 'START YOUR PROTOCOL'}
                             <ArrowRight size={18} />
                         </button>
+
+                        <div className="glp1-guarantee-badge">
+                            <ShieldCheck size={28} />
+                            <div>
+                                <strong>60-Day Money-Back Guarantee</strong>
+                                <span>Try it risk-free. If you're not thrilled with your results, we'll refund every penny — no questions asked.</span>
+                            </div>
+                        </div>
+
+                        <p className="glp1-phone-line">
+                            <Phone size={14} />
+                            Questions? Call us: <a href="tel:+13854215651">(385) 421-5651</a>
+                        </p>
 
                         <div className="glp1-trust-images">
                             <img src="/images/payment-methods.webp" alt="PayPal, Visa, Mastercard, American Express, Discover accepted" loading="lazy" />

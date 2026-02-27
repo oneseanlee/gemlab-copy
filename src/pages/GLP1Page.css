@@ -1140,6 +1140,54 @@
   margin: 0;
 }
 
+/* Guarantee Badge */
+.glp1-guarantee-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  margin-top: 16px;
+  background: var(--b365-gray);
+  border-left: 3px solid var(--b365-blue);
+  border-radius: var(--radius-md);
+}
+.glp1-guarantee-badge svg {
+  flex-shrink: 0;
+  color: var(--b365-blue);
+  margin-top: 2px;
+}
+.glp1-guarantee-badge strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--b365-text);
+  margin-bottom: 4px;
+}
+.glp1-guarantee-badge span {
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+  line-height: 1.45;
+}
+
+/* Phone Reassurance */
+.glp1-phone-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--b365-text-secondary);
+  margin-top: 12px;
+}
+.glp1-phone-line a {
+  color: var(--b365-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+.glp1-phone-line a:hover {
+  text-decoration: underline;
+}
+
 /* — Responsive — */
 @media (max-width: 768px) {
   .glp1-checkout-grid {
