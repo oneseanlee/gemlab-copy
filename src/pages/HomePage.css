@@ -3,7 +3,7 @@
 
 /* ──── Social Proof Ticker Banner ──── */
 .b365-social-proof-banner {
-  background: var(--b365-navy);
+  background: var(--b365-blue);
   color: rgba(255,255,255,0.9);
   text-align: center;
   padding: var(--space-2) var(--space-4);
