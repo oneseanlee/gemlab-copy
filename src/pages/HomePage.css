@@ -1323,7 +1323,7 @@
   }
   .b365-product-card .product-card-image {
     height: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
     padding: var(--space-4);
     align-items: center;
   }
