@@ -497,21 +497,42 @@
   padding: 0 4px;
 }
 
-/* Intake Form Link */
-.glp1-intake-link {
+/* ─── Urgency Countdown Timer ─── */
+.glp1-countdown {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: var(--space-3);
-  font-size: var(--text-body-sm);
+  margin: var(--space-3) 0;
+  font-size: 14px;
   font-weight: 600;
-  color: var(--b365-blue);
-  text-decoration: none;
-  transition: color var(--duration-fast);
+  color: var(--b365-text);
 }
-.glp1-intake-link:hover {
-  color: var(--b365-blue-dark);
-  text-decoration: underline;
+.glp1-countdown .countdown-label {
+  color: var(--b365-text-secondary);
+  font-weight: 500;
+  margin-right: 2px;
+}
+.glp1-countdown .countdown-digit {
+  background: var(--b365-light-blue);
+  color: var(--b365-blue);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-variant-numeric: tabular-nums;
+  min-width: 32px;
+  text-align: center;
+  font-weight: 700;
+}
+.glp1-countdown .countdown-sep {
+  color: var(--b365-text-secondary);
+  font-weight: 700;
+}
+
+/* ─── Testimonial Stars ─── */
+.glp1-testimonial-stars {
+  display: flex;
+  gap: 2px;
+  color: #f59e0b;
+  margin: 4px 0 8px;
 }
 
 /* ─── Transformation Section Background ─── */
