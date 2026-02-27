@@ -671,6 +671,57 @@
   margin-top: var(--space-4);
 }
 
+/* ─── UGC Video Testimonials ─── */
+.glp1-ugc-section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-6) var(--space-8);
+}
+.glp1-ugc-scroll {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.glp1-ugc-scroll::-webkit-scrollbar {
+  display: none;
+}
+.glp1-ugc-card {
+  flex: 0 0 220px;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--b365-border);
+  overflow: hidden;
+  scroll-snap-align: start;
+  background: var(--b365-bg-alt, #f5f5f5);
+}
+.glp1-ugc-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (min-width: 769px) {
+  .glp1-ugc-scroll {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .glp1-ugc-card {
+    flex: 0 0 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .glp1-ugc-card {
+    flex: 0 0 65vw;
+  }
+}
+
 /* ─── Lifestyle Optimization Layout ─── */
 .glp1-lifestyle-section {
   padding-top: var(--space-8) !important;
