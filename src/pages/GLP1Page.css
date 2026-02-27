@@ -689,7 +689,7 @@
   display: none;
 }
 .glp1-ugc-card {
-  flex: 0 0 220px;
+  flex: 0 0 180px;
   aspect-ratio: 9 / 16;
   border-radius: var(--radius-md);
   border: 1px solid var(--b365-border);
@@ -712,13 +712,13 @@
 
 @media (max-width: 1024px) {
   .glp1-ugc-card {
-    flex: 0 0 200px;
+    flex: 0 0 160px;
   }
 }
 
 @media (max-width: 768px) {
   .glp1-ugc-card {
-    flex: 0 0 65vw;
+    flex: 0 0 55vw;
   }
 }
 
