@@ -626,6 +626,29 @@
   }
 }
 
+/* ─── Enhancement Images (full-width marketing visuals) ─── */
+.glp1-enhancement-img {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.glp1-enhancement-img img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  display: block;
+}
+.glp1-risk-free-img {
+  max-width: 700px;
+  margin-bottom: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .glp1-enhancement-img {
+    padding: 0 var(--space-2);
+  }
+}
+
 /* ─── Lifestyle Optimization Layout ─── */
 .glp1-lifestyle-section {
   padding-top: var(--space-8) !important;
