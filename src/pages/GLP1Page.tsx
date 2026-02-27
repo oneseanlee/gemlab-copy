@@ -729,7 +729,6 @@ const GLP1Page = () => {
                 </div>
                 <div className="glp1-checkout-payment-strip">
                     <img src="/images/payment-methods.webp" alt="PayPal, Visa, Mastercard, American Express, Discover accepted" loading="lazy" />
-                    <img src="/images/trust-badges-gold.webp" alt="Secure Ordering, Satisfaction Guaranteed, Premium Quality, Great Customer Service" loading="lazy" />
                 </div>
             </section>
 
