@@ -727,9 +727,6 @@ const GLP1Page = () => {
                         <p className="glp1-fda-disclaimer">*These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
                     </div>
                 </div>
-                <div className="glp1-checkout-payment-strip">
-                    <img src="/images/payment-methods.webp" alt="PayPal, Visa, Mastercard, American Express, Discover accepted" loading="lazy" />
-                </div>
             </section>
 
             {/* 15. FAQ */}
