@@ -406,16 +406,59 @@
 }
 
 @media (max-width: 768px) {
+  /* Page bottom padding for sticky CTA bar */
+  .glp1-page {
+    padding-bottom: 72px;
+  }
+
+  /* Hero */
   .glp1-hero-section {
     padding: 120px var(--space-4) 0;
+  }
+  .glp1-hero-section.no-banner {
+    padding-top: 80px;
   }
   .glp1-hero-section .tprime-hero-img {
     height: auto;
     padding: var(--space-4);
   }
   .glp1-hero-section .tprime-hero-img img {
-    max-height: 340px;
+    max-height: 300px;
   }
+  .glp1-page .tprime-hero-text h1 {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+  .glp1-page .tprime-hero-text .subhead {
+    font-size: 14px;
+  }
+  .glp1-price-row .price-big {
+    font-size: 28px;
+  }
+  .glp1-countdown {
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  /* Crisis Table */
+  .b365-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .glp1-crisis-intro {
+    font-size: var(--text-body);
+    margin-bottom: 24px;
+  }
+  .glp1-callout-card {
+    padding: var(--space-6) var(--space-4);
+    margin-top: 24px;
+  }
+  .glp1-callout-card h4 {
+    font-size: 18px;
+  }
+
+  /* Protocol + Grid sections */
   .glp1-protocol-grid {
     grid-template-columns: 1fr;
   }
@@ -428,6 +471,8 @@
   .glp1-page .tprime-ingredient-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Clinical stats */
   .glp1-clinical-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: var(--space-3) !important;
@@ -445,6 +490,8 @@
   .glp1-clinical-grid .stat-desc {
     font-size: var(--text-micro);
   }
+
+  /* Lifestyle pillars */
   .glp1-page .tprime-pillars-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -459,6 +506,58 @@
   .glp1-page .pillar-dose {
     font-size: 13px;
     font-weight: 700;
+  }
+
+  /* Lifestyle content */
+  .glp1-lifestyle-content {
+    padding-left: 0;
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-4);
+  }
+
+  /* Solution callout */
+  .glp1-solution-callout {
+    padding: var(--space-6) var(--space-4);
+  }
+  .glp1-solution-callout h4 {
+    font-size: 18px;
+  }
+  .glp1-solution-callout ul {
+    grid-template-columns: 1fr;
+  }
+
+  /* Perspective outcome */
+  .glp1-perspective-outcome {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  /* Section headings */
+  .glp1-page .b365-section-heading {
+    font-size: 24px;
+  }
+
+  /* Mid-page CTAs — full width */
+  .glp1-mid-cta .animated-cta {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Guarantee badge */
+  .glp1-guarantee-badge {
+    padding: 14px;
+    margin-top: 12px;
+  }
+
+  /* UGC section */
+  .glp1-ugc-section {
+    padding: var(--space-4) var(--space-4) var(--space-6);
+  }
+
+  /* Promo banner text */
+  .glp1-page .b365-promo-banner {
+    font-size: 12px;
+    padding: 8px var(--space-6) 8px var(--space-3);
+    line-height: 1.4;
   }
 }
 
