@@ -87,7 +87,7 @@ const GLP1Page = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const thumbImages = ['/images/glp1-whats-included.png', '/images/product-glp-protocol.png', '/images/triple-power-methylene-blue.png', '/images/metabolism-plus.png', '/images/glp1-risk-free.png', '/images/glp1-many-users-report.png'];
+  const thumbImages = ['/images/glp1-whats-included.png', '/images/product-glp-protocol.png', '/images/triple-power-methylene-blue.png', '/images/metabolism-plus.png', '/images/glp1-risk-free.png'];
   const [activeThumb, setActiveThumb] = useState(0);
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
