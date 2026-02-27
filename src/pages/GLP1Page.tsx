@@ -10,7 +10,7 @@ import '../components/EarlyTestersCarousel/EarlyTestersCarousel.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
-import LogoCarousel from '../components/LogoCarousel/LogoCarousel';
+
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { GLP1_VARIANT_ID } from '../lib/shopify';
@@ -74,8 +74,10 @@ const ManyUsersReportSection = () => {
   return (
     <section className="b365-section" ref={revealRef}>
       <div className="glp1-enhancement-img">
-        <img className="desktop-only-img" src="/images/glp1-many-users-report.png" alt="Many users report improved energy, focus, and body composition within the first 30 days" loading="lazy" />
-        <img className="mobile-only-img" src="/images/mobile-glp1-many-users-report.png" alt="Many users report improved energy during GLP-1 use" loading="lazy" />
+        <picture>
+          <source media="(max-width: 768px)" srcSet="/images/mobile-glp1-many-users-report.png" />
+          <img src="/images/glp1-many-users-report.png" alt="Many users report improved energy during GLP-1 use" loading="lazy" />
+        </picture>
       </div>
     </section>
   );
@@ -219,7 +221,7 @@ const GLP1Page = () => {
             <section className={`glp1-hero-section ${!showBanner ? 'no-banner' : ''}`}>
                 <div className="tprime-hero-container">
                     <div className="tprime-hero-img">
-                        <img src="/images/glp1-hero-1.png" alt="GLP-1 Optimization Protocol — Triple Power Methylene Blue and Metabolism+ product bundle" fetchPriority="high" width="600" height="600" />
+                        <img src="/images/glp1-hero-1.png" alt="GLP-1 Optimization Protocol — Triple Power Methylene Blue and Metabolism+ product bundle" width="600" height="600" />
                     </div>
                     <div className="tprime-hero-text">
                         <div className="glp1-save-badge text-primary">
@@ -462,8 +464,10 @@ const GLP1Page = () => {
             {/* Community Collage Bridge */}
             <section className="b365-section" style={{ paddingTop: 0 }}>
                 <div className="glp1-enhancement-img">
-                    <img className="desktop-only-img" src="/images/glp1-community-collage-2.webp" alt="Community of optimized GLP-1 users achieving real results" loading="lazy" />
-                    <img className="mobile-only-img" src="/images/mobile-glp1-community-collage.png" alt="Community of optimized GLP-1 users" loading="lazy" />
+                    <picture>
+                        <source media="(max-width: 768px)" srcSet="/images/mobile-glp1-community-collage.png" />
+                        <img src="/images/glp1-community-collage-2.webp" alt="Community of optimized GLP-1 users" loading="lazy" />
+                    </picture>
                 </div>
                 <p className="glp1-community-bridge-caption">Join Our Growing Community of Optimized GLP-1 Users</p>
             </section>
