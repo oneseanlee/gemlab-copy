@@ -661,6 +661,26 @@
   }
 }
 
+/* ─── Community Collage Bridge ─── */
+.glp1-community-bridge {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.glp1-community-bridge img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  display: block;
+}
+.glp1-community-bridge-caption {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--b365-text);
+  margin-top: var(--space-4);
+}
+
 /* ─── Lifestyle Optimization Layout ─── */
 .glp1-lifestyle-section {
   padding-top: var(--space-8) !important;
