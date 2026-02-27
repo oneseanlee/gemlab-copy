@@ -529,7 +529,17 @@ const GLP1Page = () => {
                         'https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a11cf9753f1558e8a8281e.mp4',
                     ].map((src, i) => (
                         <div className="glp1-ugc-card" key={i}>
-                            <video src={src} autoPlay muted loop playsInline preload="metadata" />
+                            <video
+                                src={src}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                preload="metadata"
+                                onMouseEnter={(e) => { e.currentTarget.muted = false; }}
+                                onMouseLeave={(e) => { e.currentTarget.muted = true; }}
+                                onClick={(e) => { e.currentTarget.muted = !e.currentTarget.muted; }}
+                            />
                         </div>
                     ))}
                 </div>
