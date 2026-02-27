@@ -623,10 +623,10 @@ const GLP1Page = () => {
                         </div>
 
                         <div className="glp1-benefit-callouts">
-                            <div className="benefit-item"><Zap size={18} /><span>Activate Metabolism</span></div>
-                            <div className="benefit-item"><Dumbbell size={18} /><span>Preserve Lean Muscle</span></div>
-                            <div className="benefit-item"><Brain size={18} /><span>Restore Mental Clarity</span></div>
-                            <div className="benefit-item"><Flame size={18} /><span>Optimize Fat Burning</span></div>
+                            <div className="benefit-item"><div className="benefit-icon"><Zap size={20} /></div><span>Activate Metabolism</span></div>
+                            <div className="benefit-item"><div className="benefit-icon"><Dumbbell size={20} /></div><span>Preserve Lean Muscle</span></div>
+                            <div className="benefit-item"><div className="benefit-icon"><Brain size={20} /></div><span>Restore Mental Clarity</span></div>
+                            <div className="benefit-item"><div className="benefit-icon"><Flame size={20} /></div><span>Optimize Fat Burning</span></div>
                         </div>
 
                         <div className="glp1-thumb-carousel">

@@ -862,21 +862,44 @@
 }
 
 .glp1-benefit-callouts {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 .glp1-benefit-callouts .benefit-item {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: 14px;
-  font-weight: 600;
+  gap: var(--space-3);
+  font-size: 15px;
+  font-weight: 700;
   color: var(--b365-text);
+  background: rgba(51, 118, 176, 0.08);
+  border-left: 3px solid var(--b365-blue);
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.glp1-benefit-callouts .benefit-item svg {
-  color: var(--b365-blue);
+.glp1-benefit-callouts .benefit-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(51, 118, 176, 0.12);
+}
+.glp1-benefit-callouts .benefit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--b365-blue);
   flex-shrink: 0;
+}
+.glp1-benefit-callouts .benefit-icon svg {
+  color: #fff;
+}
+@media (max-width: 768px) {
+  .glp1-benefit-callouts {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Thumbnail Carousel */
