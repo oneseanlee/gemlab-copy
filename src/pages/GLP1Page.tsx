@@ -251,9 +251,6 @@ const GLP1Page = () => {
                 </div>
             </section>
 
-            {/* 3b. Press / Logo Carousel */}
-            <LogoCarousel />
-
             {/* 4. The Hidden Crisis */}
             <section className="b365-section">
                 <h2 className="b365-section-heading b365-serif">The Hidden Crisis of <em>GLP-1 Therapy</em></h2>
