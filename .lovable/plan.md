@@ -1,32 +1,59 @@
 
 
-## Improve Benefit Callouts in Checkout Section
+## Conversion Optimization: P0 and P1 Fixes for GLP-1 Protocol Page
 
-The four benefit callouts (Activate Metabolism, Preserve Lean Muscle, Restore Mental Clarity, Optimize Fat Burning) currently appear as a plain vertical list with small 18px icons and 14px text. They look flat and underwhelming compared to the rest of the checkout section.
+### 1. Update Star Rating with Specific Review Count
+Replace the vague "Based on early tester feedback" text with a specific count like "4.9 (127 reviews)" to add concrete social proof.
 
-### Proposed Redesign
+**File:** `src/pages/GLP1Page.tsx` (line 646)
 
-Transform them from a plain text list into styled **pill/badge cards** arranged in a **2x2 grid** on desktop (stacked vertically on mobile). Each benefit gets:
+### 2. Add Visual Guarantee Badge Near Checkout CTA
+Insert a styled guarantee card with a ShieldCheck icon, "60-Day Money-Back Guarantee" heading, and reassurance copy between the checkout CTA button and the payment methods image.
 
-- A light blue-tinted background (`rgba(51, 118, 176, 0.08)`) with rounded corners
-- Slightly larger icons (20px) in a small circular brand-blue background
-- Bolder text (15px, font-weight 700) in dark color
-- Subtle left border accent in brand blue (3px solid)
-- Gentle hover lift effect for interactivity
+**File:** `src/pages/GLP1Page.tsx` (after line 690)
+**File:** `src/pages/GLP1Page.css` (new `.glp1-guarantee-badge` styles)
 
-### Layout Change
-- **Desktop**: 2 columns x 2 rows grid instead of a single vertical stack, making them more visually balanced next to the product image
-- **Mobile**: Stack into a single column
+### 3. Add Phone Number Near CTA
+Add a reassurance line with a phone icon and the existing support number (385) 421-5651 directly below the guarantee badge, before the payment image.
 
-### Files Modified
+**File:** `src/pages/GLP1Page.tsx` (after guarantee badge)
 
-**`src/pages/GLP1Page.tsx`** (lines 625-630)
-- Wrap each benefit item's icon in a small circular container div for the icon background treatment
-- Keep the same Lucide icons (Zap, Dumbbell, Brain, Flame)
+### 4. Add LogoCarousel Press Bar
+Import the existing `LogoCarousel` component and place it between the Hero section and the Hidden Crisis section for immediate credibility.
 
-**`src/pages/GLP1Page.css`** (lines 864-880)
-- Restyle `.glp1-benefit-callouts` from `flex-direction: column` to `display: grid; grid-template-columns: 1fr 1fr`
-- Restyle `.benefit-item` with background fill, left border accent, padding, and rounded corners
-- Add `.benefit-icon` wrapper with circular blue background
-- Add hover transform effect
-- Mobile responsive: single column grid at 768px breakpoint
+**File:** `src/pages/GLP1Page.tsx` (import + placement after hero around line 220)
+
+### 5. Lazy-Load UGC Videos with IntersectionObserver
+Replace `autoPlay` on the 5 UGC videos with an IntersectionObserver-based approach: videos only start playing when they scroll into view and pause when they leave. This will be a small `LazyVideo` sub-component using `useRef` and `useEffect`.
+
+**File:** `src/pages/GLP1Page.tsx` (new `LazyVideo` component, update video section lines 526-547)
+
+---
+
+### Technical Details
+
+**New CSS classes:**
+- `.glp1-guarantee-badge` -- flexbox card with ShieldCheck icon, blue-accented left border, subtle background
+- `.glp1-phone-line` -- small centered text with phone icon
+
+**LazyVideo component pattern:**
+```text
+const LazyVideo = ({ src }) => {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) el.play();
+      else el.pause();
+    }, { threshold: 0.3 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return <video ref={ref} src={src} muted loop playsInline preload="metadata" ... />;
+};
+```
+
+**Files modified:**
+- `src/pages/GLP1Page.tsx` -- all 5 changes
+- `src/pages/GLP1Page.css` -- guarantee badge + phone line styles
+
