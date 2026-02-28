@@ -33,9 +33,23 @@ const CheckoutPage = () => {
     (sum, item) => sum + parseFloat(item.price.amount) * item.quantity, 0
   );
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const comparePrice = totalPrice * 1.5;
+  // Calculate compare-at prices per item, with overrides for specific products
+  const compareAtOverrides: Record<string, number> = {
+    '8977141104780': 90, // GLP-1 Optimization Protocol
+  };
+
+  const getComparePrice = () => {
+    return items.reduce((sum, item) => {
+      const productId = item.product.node.id?.replace('gid://shopify/Product/', '') || '';
+      const override = compareAtOverrides[productId];
+      const itemCompare = override ? override * item.quantity : parseFloat(item.price.amount) * item.quantity * 1.5;
+      return sum + itemCompare;
+    }, 0);
+  };
+
+  const comparePrice = getComparePrice();
   const savings = comparePrice - totalPrice;
-  const savingsPercent = Math.round((savings / comparePrice) * 100);
+  const savingsPercent = savings > 0 ? Math.round((savings / comparePrice) * 100) : 0;
   const perDay = (totalPrice / 30).toFixed(2);
 
   useEffect(() => {
