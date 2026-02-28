@@ -1,0 +1,31 @@
+.checkout-trust-payments {
+  margin-top: 0.75rem;
+}
+
+.checkout-payment-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  flex-wrap: wrap;
+}
+
+.checkout-payment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0.25rem 0.5rem;
+  background: var(--b365-gray-50);
+  border: 1px solid var(--b365-border);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--b365-gray-500);
+  letter-spacing: 0.04em;
+}
+
+.checkout-ssl-badge {
+  color: #2B7A9E;
+  border-color: rgba(43, 122, 158, 0.3);
+}
