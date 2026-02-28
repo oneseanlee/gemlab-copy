@@ -142,15 +142,22 @@ const TPrime365Page = () => {
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLeadError('');
-    if (!leadForm.firstName.trim() || !leadForm.email.trim()) {
+    const firstName = leadForm.firstName.trim().slice(0, 100);
+    const email = leadForm.email.trim().toLowerCase().slice(0, 255);
+    if (!firstName || !email) {
       setLeadError('Please fill out both fields.');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setLeadError('Please enter a valid email address.');
       return;
     }
     setLeadSubmitting(true);
     try {
       await supabase.from('leads').insert({
-        first_name: leadForm.firstName.trim(),
-        email: leadForm.email.trim(),
+        first_name: firstName,
+        email: email,
         source: 'tprime365',
       });
       setShowLeadModal(false);
