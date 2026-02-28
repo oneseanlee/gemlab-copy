@@ -171,7 +171,7 @@ const CheckoutPage = () => {
 
   return (
     <div className="checkout-page">
-      <ExitIntentPopup />
+      {/* <ExitIntentPopup /> */}
       <div className="checkout-container">
         <div className="checkout-header">
           <Link to="/" className="checkout-header-logo">
