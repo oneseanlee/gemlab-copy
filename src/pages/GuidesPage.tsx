@@ -76,30 +76,84 @@ const guides: Guide[] = [
   },
   {
     id: 7,
-    title: 'The GLP-1 Muscle Loss Problem — And How to Solve It',
-    description: 'Why up to 40% of weight lost on GLP-1 medications can be lean muscle — and the mitochondrial protocol that prevents it.',
-    image: '',
-    category: 'glp1',
+    title: "Dr. Warren's Ultimate Cellular Optimization & Testosterone Protocol",
+    description: "A comprehensive digital manual by Steven E. Warren M.D., Ph.D. — the complete owner's guide for optimizing hormonal health at the cellular level.",
+    image: '/images/guide-dr-warren-protocol.jpeg',
+    category: 'testosterone',
     price: 0,
-    comingSoon: true,
+    downloadUrl: '/article',
   },
   {
     id: 8,
-    title: 'Cellular Longevity: The NAD+ & Mitochondria Guide',
-    description: 'A deep dive into how NAD+ precursors, PQQ, and peptide support work together to slow cellular aging and boost daily energy.',
-    image: '',
-    category: 'longevity',
+    title: 'The Ultimate Cellular Optimization System',
+    description: 'How Restore365, Mito365, and Activate365 work together to enhance testosterone therapy results through cellular regeneration and longevity support.',
+    image: '/images/guide-cellular-optimization.jpeg',
+    category: 'testosterone',
     price: 0,
-    comingSoon: true,
+    downloadUrl: '/article',
   },
   {
     id: 9,
-    title: 'The Complete MODS Max™ Science Breakdown',
-    description: 'How our patent-pending sublingual delivery system achieves 10x absorption — the clinical research behind microdose ROS technology.',
-    image: '',
+    title: "Dr. Steven Warren's Inside Secrets",
+    description: 'The simple, powerful roadmap to faster progress — insider strategies from Dr. Warren for accelerating your optimization results.',
+    image: '/images/guide-dr-warren-roadmap.jpeg',
+    category: 'testosterone',
+    price: 0,
+    downloadUrl: '/article',
+  },
+  {
+    id: 10,
+    title: 'Maximize Your Results',
+    description: 'The smart science of enhanced absorption — understand how MODS Max™ technology delivers 10x bioavailability for superior cellular performance.',
+    image: '/images/guide-maximize-results.jpeg',
     category: 'longevity',
     price: 0,
-    comingSoon: true,
+    downloadUrl: '/article',
+  },
+  {
+    id: 11,
+    title: "The Ultimate GLP-1 User's Master Guide",
+    description: 'Complete metabolic optimization system for successful weight loss with muscle preservation — everything GLP-1 users need to know.',
+    image: '/images/guide-glp1-master.jpeg',
+    category: 'glp1',
+    price: 0,
+    downloadUrl: '/article',
+  },
+  {
+    id: 12,
+    title: 'Guía Maestro del Usuario de GLP-1',
+    description: 'Sistema completo de optimización metabólica para una pérdida de peso exitosa con preservación muscular. Versión en español.',
+    image: '/images/guide-glp1-master-es.jpeg',
+    category: 'glp1',
+    price: 0,
+    downloadUrl: '/article',
+  },
+  {
+    id: 13,
+    title: 'The GLP-1 Energy Blueprint',
+    description: "Why you're exhausted on GLP-1 medications and how to fix it this week — the complete energy restoration protocol.",
+    image: '/images/guide-glp1-energy-blueprint.jpeg',
+    category: 'glp1',
+    price: 0,
+    downloadUrl: '/article',
+  },
+  {
+    id: 14,
+    title: 'The GLP-1 Muscle Shield',
+    description: 'How to lose fat without losing your strength — the evidence-based approach to preserving lean muscle mass during GLP-1 therapy.',
+    image: '/images/guide-glp1-muscle-shield.jpeg',
+    category: 'glp1',
+    price: 0,
+    downloadUrl: '/article',
+  },
+  {
+    id: 15,
+    title: '10 Minute Easy Lymphatic Morning Jumpstart System',
+    description: 'A simple daily morning routine to activate your lymphatic system, reduce inflammation, and boost natural detoxification in just 10 minutes.',
+    image: '/images/guide-lymphatic-jumpstart.jpeg',
+    category: 'longevity',
+    price: 0,
+    downloadUrl: '/article',
   },
 ];
 
@@ -162,8 +216,9 @@ const GuidesPage = () => {
       {/* Hero */}
       <section className={`guides-hero ${!showBanner ? 'no-banner' : ''}`}>
         <div className="guides-hero-inner">
-          <div className="guides-hero-icon">
-            <BookOpen size={32} />
+          <div className="guides-count-badge">
+            <BookOpen size={14} />
+            {filtered.length} Free Guides Available
           </div>
           <h1 className="b365-serif">Digital Guides & <em>Resources</em></h1>
           <p className="guides-hero-sub">
