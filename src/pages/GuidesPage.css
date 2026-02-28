@@ -1,5 +1,94 @@
 /* Guides Page — Follows b365 Maximus medical aesthetic */
 
+/* Promo Banner */
+.b365-promo-banner {
+  background-color: var(--b365-blue);
+  color: var(--b365-white);
+  text-align: center;
+  padding: 0 40px 0 var(--space-4);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 101;
+  box-sizing: border-box;
+  line-height: 1.4;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.b365-promo-banner button {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.8);
+  cursor: pointer;
+  font-size: var(--text-h4);
+  line-height: 1;
+  padding: var(--space-1);
+}
+
+/* Navigation */
+.b365-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background: var(--b365-white);
+  border-bottom: 1px solid var(--b365-border);
+  transition: top var(--duration-normal);
+}
+.b365-nav.with-banner {
+  top: 37px;
+}
+.b365-nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-6);
+  height: 72px;
+}
+.b365-nav-links {
+  display: flex;
+  gap: var(--space-8);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.b365-nav-links a {
+  color: var(--b365-text-secondary);
+  text-decoration: none;
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  transition: color var(--duration-fast);
+}
+.b365-nav-links a:hover {
+  color: var(--b365-text);
+}
+.b365-nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+/* Hamburger */
+.b365-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--b365-text);
+  cursor: pointer;
+}
+
 /* Hero */
 .guides-hero {
   padding: 150px var(--space-6) 0;
@@ -286,6 +375,30 @@
   }
 }
 @media (max-width: 768px) {
+  .b365-promo-banner {
+    font-size: var(--text-micro);
+    padding: 0 36px 0 var(--space-4);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    height: 56px;
+  }
+  .b365-nav.with-banner {
+    top: 56px;
+  }
+  .b365-nav-links {
+    display: none;
+  }
+  .b365-nav-inner {
+    padding: var(--space-1) var(--space-4);
+    height: 64px;
+    gap: var(--space-3);
+  }
+  .b365-nav-inner img {
+    height: 30px !important;
+  }
+  .b365-hamburger {
+    display: block;
+  }
   .guides-hero {
     padding: 140px var(--space-6) 0;
   }
