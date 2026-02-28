@@ -14,18 +14,26 @@ import { Menu, ArrowRight, Brain, Flame, Zap, Dumbbell, Check, Truck, CheckCircl
 /* ──── Parallax hook ──── */
 const useParallax = (speed = 0.3) => {
   const ref = React.useRef<HTMLDivElement>(null);
+  const rafId = React.useRef<number>(0);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const img = el.querySelector('img') as HTMLElement | null;
+    if (!img) return;
     const onScroll = () => {
-      const rect = el.getBoundingClientRect();
-      const offset = rect.top * speed;
-      const img = el.querySelector('img') as HTMLElement | null;
-      if (img) img.style.transform = `translateY(${offset}px) scale(1.08)`;
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      rafId.current = requestAnimationFrame(() => {
+        const rect = el.getBoundingClientRect();
+        const offset = rect.top * speed;
+        img.style.transform = `translateY(${offset}px) scale(1.08)`;
+      });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
   }, [speed]);
   return ref;
 };
