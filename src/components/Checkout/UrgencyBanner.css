@@ -1,0 +1,29 @@
+.checkout-urgency {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+  border: 1px solid #FFCC80;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+  color: #BF360C;
+  font-weight: 500;
+}
+
+.checkout-urgency-icon {
+  flex-shrink: 0;
+  animation: pulse-clock 2s ease-in-out infinite;
+}
+
+@keyframes pulse-clock {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.checkout-urgency strong {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
