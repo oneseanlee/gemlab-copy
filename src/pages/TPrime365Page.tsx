@@ -153,6 +153,13 @@ const TPrime365Page = () => {
       setLeadError('Please enter a valid email address.');
       return;
     }
+    const RATE_LIMIT_KEY = 'lead_submission_ts';
+    const COOLDOWN_MS = 60000;
+    const lastSub = localStorage.getItem(RATE_LIMIT_KEY);
+    if (lastSub && Date.now() - parseInt(lastSub) < COOLDOWN_MS) {
+      setLeadError('Please wait a moment before submitting again.');
+      return;
+    }
     setLeadSubmitting(true);
     try {
       await supabase.from('leads').insert({
@@ -160,6 +167,7 @@ const TPrime365Page = () => {
         email: email,
         source: 'tprime365',
       });
+      localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
       setShowLeadModal(false);
       navigate('/tprime365-intake');
     } catch {
