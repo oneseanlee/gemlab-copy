@@ -26,13 +26,8 @@ const GLP1IntakePage = () => {
       const iframe = document.getElementById('happymd-glp1-intake-embed') as HTMLIFrameElement;
       if (!iframe) return;
       if (e.data.type === 'resize' && typeof e.data.height === 'number') {
-        iframe.style.height = e.data.height + 'px';
-      }
-      if (e.data.type === 'submit') {
-        console.log('Form submitted successfully!', e.data);
-      }
-      if (e.data.type === 'error') {
-        console.error('Form error:', e.data.error);
+        const safeHeight = Math.min(Math.max(e.data.height, 400), 5000);
+        iframe.style.height = safeHeight + 'px';
       }
     };
     window.addEventListener('message', handleMessage);

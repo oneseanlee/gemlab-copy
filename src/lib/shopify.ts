@@ -3,7 +3,7 @@ import { toast } from "sonner";
 const SHOPIFY_API_VERSION = '2025-07';
 const SHOPIFY_STORE_PERMANENT_DOMAIN = 'cell365power-yq7na.myshopify.com';
 const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
-const SHOPIFY_STOREFRONT_TOKEN = 'e315ea6bf6c4520bc5cae80d5e95dd5d';
+const SHOPIFY_STOREFRONT_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN || 'e315ea6bf6c4520bc5cae80d5e95dd5d';
 
 // The GLP-1 Optimization Protocol variant
 export const GLP1_VARIANT_ID = 'gid://shopify/ProductVariant/46265391579276';
