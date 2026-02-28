@@ -155,6 +155,15 @@ const guides: Guide[] = [
     price: 0,
     downloadUrl: '/article',
   },
+  {
+    id: 16,
+    title: 'The GLP-1 Food Framework',
+    description: 'What to eat when you\'re never hungry — the complete nutritional guide for GLP-1 users to maintain optimal health and energy levels.',
+    image: '/images/guide-glp1-food-framework.jpeg',
+    category: 'glp1',
+    price: 0,
+    downloadUrl: '/article',
+  },
 ];
 
 const categories = [
@@ -179,6 +188,65 @@ const GuidesPage = () => {
   const filtered = activeCategory === 'all'
     ? guides
     : guides.filter(g => g.category === activeCategory);
+
+  const categoryLabels: Record<string, string> = {
+    testosterone: 'Testosterone Optimization',
+    glp1: 'GLP-1 Support',
+    longevity: 'Longevity & Wellness',
+  };
+
+  const categoryDescriptions: Record<string, string> = {
+    testosterone: 'Clinically-informed guides to help you understand and optimize your testosterone levels naturally.',
+    glp1: 'Essential resources for GLP-1 users — from nutrition to muscle preservation to energy management.',
+    longevity: 'Science-backed strategies for cellular health, absorption, and daily wellness routines.',
+  };
+
+  const groupedCategories = activeCategory === 'all'
+    ? (['testosterone', 'glp1', 'longevity'] as const)
+    : [activeCategory as 'testosterone' | 'glp1' | 'longevity'];
+
+  const renderGuideCard = (guide: Guide) => (
+    <div className={`guide-card ${guide.comingSoon ? 'coming-soon' : ''}`} key={guide.id}>
+      <div className="guide-card-image">
+        {guide.image ? (
+          <img src={guide.image} alt={guide.title} loading="lazy" />
+        ) : (
+          <div className="guide-card-placeholder">
+            <BookOpen size={40} />
+            <span>Coming Soon</span>
+          </div>
+        )}
+        <div className="guide-price-badge">
+          {guide.comingSoon ? (
+            <span className="badge-coming-soon">COMING SOON</span>
+          ) : guide.price === 0 ? (
+            <span className="badge-free">FREE</span>
+          ) : (
+            <span className="badge-paid">${guide.price.toFixed(2)}</span>
+          )}
+        </div>
+      </div>
+      <div className="guide-card-body">
+        <h3 className="b365-serif">{guide.title}</h3>
+        <p>{guide.description}</p>
+        <div className="guide-card-action">
+          {guide.comingSoon ? (
+            <span className="guide-btn-disabled">Coming Soon</span>
+          ) : guide.price === 0 ? (
+            <a href={guide.downloadUrl} className="guide-btn-free" target={guide.downloadUrl?.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
+              <Download size={16} />
+              Download Free
+            </a>
+          ) : (
+            <a href={guide.paymentUrl} className="guide-btn-paid" target="_blank" rel="noopener noreferrer">
+              <ExternalLink size={16} />
+              Get Guide — ${guide.price.toFixed(2)}
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="b365-page">
@@ -224,8 +292,6 @@ const GuidesPage = () => {
           <p className="guides-hero-sub">
             Expert-backed guides to help you make informed decisions about your health optimization journey.
           </p>
-
-          {/* Category Filters */}
           <div className="guides-filters">
             {categories.map(cat => (
               <button
@@ -240,56 +306,28 @@ const GuidesPage = () => {
         </div>
       </section>
 
-      {/* Guides Grid */}
+      {/* Guides by Category */}
       <section className="guides-grid-section">
-        <div className="guides-grid">
-          {filtered.map(guide => (
-            <div className={`guide-card ${guide.comingSoon ? 'coming-soon' : ''}`} key={guide.id}>
-              <div className="guide-card-image">
-                {guide.image ? (
-                  <img src={guide.image} alt={guide.title} />
-                ) : (
-                  <div className="guide-card-placeholder">
-                    <BookOpen size={40} />
-                    <span>Coming Soon</span>
+        {groupedCategories.map(cat => {
+          const catGuides = filtered.filter(g => g.category === cat);
+          if (catGuides.length === 0) return null;
+          return (
+            <div className="guides-category-group" key={cat}>
+              {activeCategory === 'all' && (
+                <div className="guides-category-header">
+                  <div className={`guides-category-accent accent-${cat}`} />
+                  <div>
+                    <h2 className="b365-serif">{categoryLabels[cat]}</h2>
+                    <p>{categoryDescriptions[cat]}</p>
                   </div>
-                )}
-                <div className="guide-price-badge">
-                  {guide.comingSoon ? (
-                    <span className="badge-coming-soon">COMING SOON</span>
-                  ) : guide.price === 0 ? (
-                    <span className="badge-free">FREE</span>
-                  ) : (
-                    <span className="badge-paid">${guide.price.toFixed(2)}</span>
-                  )}
                 </div>
-              </div>
-
-              <div className="guide-card-body">
-                <h3 className="b365-serif">{guide.title}</h3>
-                <p>{guide.description}</p>
-
-                <div className="guide-card-action">
-                  {guide.comingSoon ? (
-                    <span className="guide-btn-disabled">
-                      Coming Soon
-                    </span>
-                  ) : guide.price === 0 ? (
-                    <a href={guide.downloadUrl} className="guide-btn-free" target={guide.downloadUrl?.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
-                      <Download size={16} />
-                      Download Free
-                    </a>
-                  ) : (
-                    <a href={guide.paymentUrl} className="guide-btn-paid" target="_blank" rel="noopener noreferrer">
-                      <ExternalLink size={16} />
-                      Get Guide — ${guide.price.toFixed(2)}
-                    </a>
-                  )}
-                </div>
+              )}
+              <div className="guides-grid">
+                {catGuides.map(renderGuideCard)}
               </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </section>
 
       {/* CTA Section */}

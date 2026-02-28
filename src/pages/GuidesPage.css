@@ -172,10 +172,54 @@
 .guides-grid-section {
   padding: var(--space-16) var(--space-6) var(--space-24);
   background: var(--b365-white);
-}
-.guides-grid {
   max-width: 1280px;
   margin: 0 auto;
+}
+.guides-category-group {
+  margin-bottom: var(--space-16);
+}
+.guides-category-group:last-child {
+  margin-bottom: 0;
+}
+.guides-category-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--b365-border);
+}
+.guides-category-accent {
+  width: 4px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.accent-testosterone {
+  background: var(--b365-blue);
+}
+.accent-glp1 {
+  background: var(--b365-green-dark);
+}
+.accent-longevity {
+  background: #e67e22;
+}
+.guides-category-header h2 {
+  font-family: var(--font-title);
+  font-size: var(--text-h3);
+  font-weight: 700;
+  color: var(--b365-text);
+  margin: 0 0 var(--space-1);
+  line-height: 1.3;
+}
+.guides-category-header p {
+  font-size: var(--text-body-sm);
+  color: var(--b365-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+.guides-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
