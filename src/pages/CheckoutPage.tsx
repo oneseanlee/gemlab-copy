@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { trackMetaEvent } from "@/lib/meta-pixel";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,6 +25,17 @@ const CheckoutPage = () => {
     (sum, item) => sum + parseFloat(item.price.amount) * item.quantity,
     0
   );
+  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  useEffect(() => {
+    if (items.length > 0) {
+      trackMetaEvent('InitiateCheckout', {
+        value: totalPrice,
+        currency: 'USD',
+        num_items: totalItems,
+      });
+    }
+  }, []); // fire once on mount
 
   const {
     register,

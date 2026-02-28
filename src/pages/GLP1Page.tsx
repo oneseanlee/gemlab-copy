@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import { trackMetaEvent } from '../lib/meta-pixel';
 import './GLP1Page.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
@@ -91,6 +92,10 @@ const GLP1Page = () => {
   const [activeThumb, setActiveThumb] = useState(0);
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
+
+  useEffect(() => {
+    trackMetaEvent('ViewContent', { content_name: 'GLP-1 Optimization Protocol', content_type: 'product', value: 39.95, currency: 'USD' });
+  }, []);
 
   // Urgency countdown timer — 2-hour rolling window
   const getTimeLeft = () => {
