@@ -229,9 +229,9 @@ const GLP1Page = () => {
                             <Tag size={14} />
                             Save $50 + FREE Shipping
                         </div>
-                        <h1>Transform Your Weight Loss Journey with <em>Cellular-Level Support</em></h1>
+                        <h1><strong>40%</strong> of GLP-1 Weight Loss Is <strong>Muscle.</strong></h1>
                         <p className="subhead">
-                            The complete mitochondrial protocol designed to protect your muscle, preserve your metabolism, and maximize your GLP-1 results.
+                            This $1.33/day protocol is designed to change that.
                         </p>
                         <div className="glp1-price-row">
                             <span className="price-big">$39.95</span>
