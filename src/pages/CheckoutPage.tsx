@@ -146,7 +146,7 @@ const CheckoutPage = () => {
 
       <div className="checkout-summary-breakdown">
         <div className="checkout-summary-line"><span>Subtotal</span><span>${totalPrice.toFixed(2)}</span></div>
-        <div className="checkout-summary-line"><span>Shipping</span><span>Calculated at next step</span></div>
+        <div className="checkout-summary-line"><span>Shipping</span><span className="checkout-free-shipping">FREE</span></div>
         <div className="checkout-summary-line"><span>Discount</span><span>—</span></div>
       </div>
       <div className="checkout-summary-total"><span>Total</span><span>${totalPrice.toFixed(2)}</span></div>
