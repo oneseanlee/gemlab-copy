@@ -33,15 +33,15 @@ const CheckoutPage = () => {
     (sum, item) => sum + parseFloat(item.price.amount) * item.quantity, 0
   );
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  // Calculate compare-at prices per item, with overrides for specific products
-  const compareAtOverrides: Record<string, number> = {
-    '8977141104780': 90, // GLP-1 Optimization Protocol
+  // Compare-at price overrides keyed by variant ID (most reliable identifier in cart)
+  const compareAtByVariant: Record<string, number> = {
+    'gid://shopify/ProductVariant/46539809235068': 90, // GLP-1 Optimization Protocol
+    'gid://shopify/ProductVariant/46265391579276': 90, // GLP-1 Optimization Protocol (alt)
   };
 
   const getComparePrice = () => {
     return items.reduce((sum, item) => {
-      const productId = item.product.node.id?.replace('gid://shopify/Product/', '') || '';
-      const override = compareAtOverrides[productId];
+      const override = compareAtByVariant[item.variantId];
       const itemCompare = override ? override * item.quantity : parseFloat(item.price.amount) * item.quantity * 1.5;
       return sum + itemCompare;
     }, 0);
