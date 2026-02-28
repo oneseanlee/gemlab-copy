@@ -43,7 +43,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      check_lead_rate_limit: {
+        Args: { p_cooldown_seconds?: number; p_email: string; p_source: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
