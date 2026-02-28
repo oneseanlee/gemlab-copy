@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useState, useRef, useEffect } from 'react';
 import Lottie from 'lottie-react';
+import { trackMetaEvent } from '../lib/meta-pixel';
 import './GLP1BundlePage.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
@@ -47,6 +48,10 @@ const GLP1BundlePage = () => {
   const isLoading = useCartStore((state) => state.isLoading);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
+
+  useEffect(() => {
+    trackMetaEvent('ViewContent', { content_name: 'Complete GLP-1 Cellular Optimization System', content_type: 'product', value: 175.00, currency: 'USD' });
+  }, []);
 
   const mobileLinks = [
     { label: 'Benefits', href: '#benefits' },

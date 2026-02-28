@@ -1,6 +1,7 @@
 // @ts-nocheck
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { trackMetaEvent } from '../lib/meta-pixel';
 import './NHTOPage.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
@@ -117,6 +118,10 @@ const NHTOPage = () => {
     const navigate = useNavigate();
     const addItem = useCartStore(state => state.addItem);
     const isLoading = useCartStore(state => state.isLoading);
+
+    useEffect(() => {
+      trackMetaEvent('ViewContent', { content_name: 'Non-Hormonal Testosterone Optimizer', content_type: 'product', value: 250.00, currency: 'USD' });
+    }, []);
 
     const mobileLinks = [
       { label: 'Benefits', href: '#benefits' },

@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { trackMetaEvent } from '../lib/meta-pixel';
 import './TPrime365Page.css';
 import '../pages/HomePage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
@@ -109,6 +110,10 @@ const TPrime365Page = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [dosingVisible, setDosingVisible] = useState(false);
   const dosingRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    trackMetaEvent('ViewContent', { content_name: 'TPrime365™', content_type: 'product', value: 149.00, currency: 'USD' });
+  }, []);
 
   useEffect(() => {
     const el = dosingRef.current;
