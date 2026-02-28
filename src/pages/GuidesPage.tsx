@@ -164,6 +164,33 @@ const guides: Guide[] = [
     price: 0,
     downloadUrl: '/article',
   },
+  {
+    id: 17,
+    title: 'After the Shot: The Weight Regain Prevention Playbook',
+    description: 'The evidence-based playbook for maintaining your results after GLP-1 therapy — strategies to prevent weight regain and sustain your transformation.',
+    image: '',
+    category: 'glp1',
+    price: 0,
+    comingSoon: true,
+  },
+  {
+    id: 18,
+    title: 'Skin, Confidence & Your Changing Body',
+    description: 'The GLP-1 body composition guide — how to address skin elasticity, body confidence, and the physical changes that come with rapid weight loss.',
+    image: '',
+    category: 'glp1',
+    price: 0,
+    comingSoon: true,
+  },
+  {
+    id: 19,
+    title: 'The 30-Day GLP-1 Optimization Checklist',
+    description: 'Daily wins that compound — a structured 30-day checklist to maximize your GLP-1 results through nutrition, movement, and supplementation.',
+    image: '',
+    category: 'glp1',
+    price: 0,
+    comingSoon: true,
+  },
 ];
 
 const categories = [
