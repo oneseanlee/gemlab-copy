@@ -1,27 +1,37 @@
 
 
-# Fix Meta Pixel Build Error
+## Capture Checkout Visitor Names
 
-## Problem
-The `<noscript><img>` tag for the Meta Pixel is inside `<head>`, which Vite's HTML parser (parse5) rejects as "disallowed content in noscript in head."
+### Goal
+Create a system to track who reaches the checkout page, including their name, email, cart contents, and timestamp.
 
-## Solution
-Move the Meta Pixel `<noscript>` fallback from `<head>` (line 56-57) into `<body>`, right after the existing GTM noscript block (after line 66).
+### Approach
+Create a dedicated `checkout_leads` table and add a "First Name" field to the checkout form. When a user submits the form, their info is saved to the database before redirecting to Shopify payment.
 
-### File: `index.html`
-1. **Remove** lines 56-57 (the `<noscript><img .../>` tag) from the `<head>` section
-2. **Add** it into `<body>`, right after the GTM noscript iframe (after line 66), like:
+### Changes
 
-```html
-<body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5Z3KRXJR"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- Meta Pixel (noscript) -->
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=147845509971224&ev=PageView&noscript=1"/></noscript>
-    <div id="root"></div>
-    ...
-```
+**1. New Database Table: `checkout_leads`**
+- `id` (uuid, primary key)
+- `created_at` (timestamp)
+- `first_name` (text, required)
+- `last_name` (text, optional)
+- `email` (text, required)
+- `phone` (text, optional)
+- `cart_items` (jsonb -- product names, variant IDs, quantities, prices)
+- `cart_total` (numeric)
+- `completed` (boolean, default false -- can be updated later if purchase is confirmed)
+- RLS policy: allow anonymous inserts with validation (email format, length checks, rate limiting)
 
-This is a one-line move that fixes the build error while keeping the pixel fully functional.
+**2. Update Checkout Form (`src/pages/CheckoutPage.tsx`)**
+- Add "First Name" and "Last Name" fields above the email field
+- Update the Zod validation schema to require first name
+- On form submit, save the lead to `checkout_leads` before opening the Shopify checkout URL
+
+**3. Update Types**
+- The `src/integrations/supabase/types.ts` file will auto-update after migration
+
+### What You Will See
+- The checkout form will have First Name and Last Name fields
+- Every checkout attempt is logged to the database with full cart details
+- You can query this data to see who reached checkout, what they were buying, and follow up with abandoned carts
+
