@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      checkout_leads: {
+        Row: {
+          cart_items: Json
+          cart_total: number
+          completed: boolean
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string | null
+          phone: string | null
+        }
+        Insert: {
+          cart_items?: Json
+          cart_total?: number
+          completed?: boolean
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name?: string | null
+          phone?: string | null
+        }
+        Update: {
+          cart_items?: Json
+          cart_total?: number
+          completed?: boolean
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string | null
+          phone?: string | null
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           created_at: string
