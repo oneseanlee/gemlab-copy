@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { trackMetaEvent } from "@/lib/meta-pixel";
 import { useNavigate, Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +17,9 @@ import ExitIntentPopup from "@/components/Checkout/ExitIntentPopup";
 import "./CheckoutPage.css";
 
 const checkoutSchema = z.object({
-  email: z.string().email("Please enter a valid email"),
+  firstName: z.string().trim().min(1, "First name is required").max(100),
+  lastName: z.string().trim().max(100).optional().or(z.literal("")),
+  email: z.string().email("Please enter a valid email").max(255),
   phone: z.string().optional(),
 });
 
@@ -75,6 +78,21 @@ const CheckoutPage = () => {
 
     setIsSubmitting(true);
     try {
+      // Save checkout lead to database
+      await supabase.from("checkout_leads").insert({
+        first_name: data.firstName.trim(),
+        last_name: data.lastName?.trim() || null,
+        email: data.email.trim(),
+        phone: data.phone || null,
+        cart_items: items.map(i => ({
+          title: i.product.node.title,
+          variantId: i.variantId,
+          quantity: i.quantity,
+          price: i.price.amount,
+        })),
+        cart_total: totalPrice,
+      });
+
       await updateBuyerIdentity({
         email: data.email,
         phone: data.phone || undefined,
@@ -205,8 +223,19 @@ const CheckoutPage = () => {
               <div className="checkout-section">
                 <h2>Contact Information</h2>
                 <p className="checkout-section-note">
-                  Enter your email to proceed. Shipping and payment details are collected securely on the next step.
+                  Enter your details to proceed. Shipping and payment details are collected securely on the next step.
                 </p>
+                <div className="checkout-field-row" style={{ display: 'flex', gap: '0.75rem' }}>
+                  <div className="checkout-field" style={{ flex: 1 }}>
+                    <label>First Name *</label>
+                    <input type="text" placeholder="John" {...register("firstName")} />
+                    {errors.firstName && <div className="checkout-field-error">{errors.firstName.message}</div>}
+                  </div>
+                  <div className="checkout-field" style={{ flex: 1 }}>
+                    <label>Last Name</label>
+                    <input type="text" placeholder="Doe" {...register("lastName")} />
+                  </div>
+                </div>
                 <div className="checkout-field">
                   <label>Email Address *</label>
                   <div className="checkout-field-with-icon">
