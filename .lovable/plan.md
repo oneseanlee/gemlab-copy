@@ -1,72 +1,71 @@
 
-## Ad Landing Page with Auto-Add GLP-1 to Cart
+
+## Redesign /glp1-buy as the GLP-1 Protocol Checkout Section
 
 ### Goal
-Create a new page (route: `/glp1-buy`) specifically for ad traffic. When a user lands on this page, it automatically adds the GLP-1 Optimization Protocol ($39.95) to their cart and immediately presents them with the checkout form to enter their name and email. On submit, their info is saved to the `checkout_leads` database table, and they are redirected to the Shopify payment page.
+Replace the current generic checkout-style layout on `/glp1-buy` with the rich product showcase from the GLP-1 Protocol page's final CTA section. Visitors from ads will see exactly what they're buying -- product images, benefits, bonuses, reviews -- with a simple Name + Email form inline, then get sent to Shopify payment.
 
-### How It Works
-1. User clicks ad link -> lands on `/glp1-buy`
-2. On page load, the GLP-1 Protocol is automatically added to cart (with a loading spinner while this happens)
-3. Once the cart is ready, they see a polished single-page checkout experience with:
-   - Product summary (image, title, price, value anchoring)
-   - Contact form (First Name, Last Name, Email, Phone)
-   - Trust elements (guarantee badge, secure checkout notice, payment badges)
-   - "Continue to Payment" CTA
-4. On submit: lead saved to `checkout_leads` table, then redirected to Shopify payment
+### What Changes
 
-### Visual Design
-- Reuses the same CSS classes and visual language as the existing `/checkout` page (same border radius, colors, typography, trust badges)
-- Clean, focused single-column layout on mobile; two-column on desktop
-- Loading state with spinner + "Preparing your order..." message while cart is being created
-- Product card with image, title, price, compare-at price ($90), savings badge, and per-day cost
+**1. Rewrite `src/pages/GLP1BuyPage.tsx`**
+- Replace the current two-column checkout layout with the `glp1-checkout-section` layout from the protocol page
+- **Left column**: Product image carousel with thumbnail row, promo strip ("SAVE $50 + FREE SHIPPING"), and 4 benefit callout icons (Metabolism, Lean Muscle, Mental Clarity, Fat Burning)
+- **Right column**: Product title, 4.9-star rating (127 reviews), description, orange checkmark list (5 items), price block ($39.95 / ~~$90~~ / 56% OFF), free shipping note, bonuses section (3 bonus cards), guarantee badge, phone line
+- **Replace the "START YOUR PROTOCOL" button** with an inline form: single "Name" field + "Email" field + "Continue to Payment" submit button
+- Keep the auto-add-to-cart logic on mount (unchanged)
+- On submit: save to `checkout_leads` (store the single name in `first_name`, leave `last_name` null), then redirect to Shopify
 
-### Technical Details
+**2. Simplify the form**
+- Remove "First Name" + "Last Name" split -- just one "Name" field
+- Remove "Phone" field and SMS toggle
+- Keep it to: Name (required) + Email (required) + Submit
+- Update Zod schema accordingly
 
-**1. New file: `src/pages/GLP1BuyPage.tsx`**
-- Imports the same `GLP1_VARIANT` product data pattern from the advertorial page
-- Uses `useCartStore` to auto-add item on mount via `useEffect`
-- Uses `react-hook-form` + `zod` for form validation (same schema as CheckoutPage)
-- Saves lead to `checkout_leads` table on submit
-- Calls `updateBuyerIdentity` then opens Shopify checkout URL
-- Shows loading state while cart is being created
-- If cart already has the GLP-1 item, skips the add step
+**3. Update `src/pages/GLP1BuyPage.css`**
+- Import the GLP-1 page styles (`GLP1Page.css`) instead of `CheckoutPage.css`
+- Add minimal overrides for the inline form styling within the checkout section
+- Keep mobile responsiveness (stacked layout, sticky CTA)
 
-**2. New file: `src/pages/GLP1BuyPage.css`**
-- Imports/extends the existing CheckoutPage.css styles
-- Adds a product hero card at the top of the page
-- Minimal additional CSS since it reuses checkout styles
-
-**3. Update: `src/App.tsx`**
-- Add lazy import for `GLP1BuyPage`
-- Add route: `/glp1-buy`
+**4. Remove unused imports**
+- Drop `CheckoutProgressBar`, `SocialProofStrip`, `UrgencyBanner`, `GuaranteeBadge`, `TrustPaymentBadges` component imports since the section uses its own built-in trust elements
 
 ### Page Structure
 ```text
 +------------------------------------------+
-|  [Logo]     Secure Checkout     [Lock]   |
+|  [Logo]      Best 365 Labs               |
 +------------------------------------------+
-|  Progress Bar: [1]---[2]---[3]           |
-+------------------------------------------+
-|                    |                      |
-|  PRODUCT CARD      |  CONTACT FORM       |
-|  [Image]           |  First Name *       |
-|  GLP-1 Protocol    |  Last Name          |
-|  $39.95 (was $90)  |  Email *            |
-|  Save 56%          |  Phone              |
-|  $1.33/day         |                     |
-|                    |  [Secure notice]    |
-|  Urgency Banner    |  [Social proof]     |
-|                    |                      |
-|  Subtotal  $39.95  |                      |
-|  Shipping  FREE    |                      |
-|  Total     $39.95  |                      |
-|                    |                      |
-|  [Continue to Payment ->]                |
-|  Lock SSL Encrypted                      |
-|  [Guarantee Badge]                       |
-|  [Payment Badges]                        |
-+------------------------------------------+
+|  SAVE $50 + FREE SHIPPING                |
++---------------------+--------------------+
+|                     |                    |
+|  [Product Image]    |  GLP-1 Protocol    |
+|                     |  **** 4.9 (127)    |
+|  [Thumb] [Thumb]..  |  Description...    |
+|                     |                    |
+|  [Zap] [Dumbbell]   |  [x] Triple Power  |
+|  [Brain] [Flame]    |  [x] AMPK/Sirtuin  |
+|                     |  [x] 72% lean...   |
+|                     |  [x] Made in USA   |
+|                     |  [x] 60-day guar   |
+|                     |                    |
+|                     |  $39.95  $90  56%  |
+|                     |  FREE SHIPPING     |
+|                     |                    |
+|                     |  YOUR FREE BONUSES |
+|                     |  [Guide][Access]   |
+|                     |  [Shipping]        |
+|                     |                    |
+|                     |  Name: [________]  |
+|                     |  Email:[________]  |
+|                     |  [Continue to Pay] |
+|                     |                    |
+|                     |  60-Day Guarantee  |
+|                     |  Phone support     |
++---------------------+--------------------+
 ```
 
-### No Database Changes Required
-The existing `checkout_leads` table already supports this flow.
+### Technical Details
+- Reuses the same CSS classes from `GLP1Page.css` (`glp1-checkout-section`, `glp1-checkout-grid`, etc.)
+- Thumbnail images array and carousel logic copied from the protocol page
+- Cart auto-add and `checkout_leads` insert logic stays the same
+- The `first_name` column stores the full name entered; `last_name` stays null
+- No database changes needed
