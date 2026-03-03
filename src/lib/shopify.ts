@@ -231,13 +231,14 @@ export async function updateCartBuyerIdentity(
   cartId: string,
   buyerIdentity: BuyerIdentity
 ): Promise<{ success: boolean; checkoutUrl?: string; cartNotFound?: boolean }> {
-  // Build the buyer identity payload — send email/phone only
-  // Shopify reliably pre-fills the Contact field; shipping is collected natively
   const apiPayload: Record<string, unknown> = {
     email: buyerIdentity.email,
   };
   if (buyerIdentity.phone) {
     apiPayload.phone = buyerIdentity.phone;
+  }
+  if (buyerIdentity.deliveryAddressPreferences?.length) {
+    apiPayload.deliveryAddressPreferences = buyerIdentity.deliveryAddressPreferences;
   }
 
   const data = await storefrontApiRequest(CART_BUYER_IDENTITY_UPDATE_MUTATION, {

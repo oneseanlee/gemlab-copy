@@ -103,9 +103,23 @@ const GLP1BuyPage = () => {
         cart_total: PRICE,
       });
 
+      const nameParts = data.name.trim().split(" ");
+      const firstName = nameParts[0];
+      const lastName = nameParts.slice(1).join(" ");
+
       await updateBuyerIdentity({
         email: data.email,
-        deliveryAddressPreferences: [],
+        deliveryAddressPreferences: [{
+          deliveryAddress: {
+            firstName,
+            lastName: lastName || "",
+            address1: "",
+            city: "",
+            province: "",
+            zip: "",
+            country: "US",
+          },
+        }],
       });
 
       window.open(checkoutUrl, "_blank");
