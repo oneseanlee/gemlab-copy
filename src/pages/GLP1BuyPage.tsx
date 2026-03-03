@@ -122,10 +122,10 @@ const GLP1BuyPage = () => {
         }],
       });
 
-      window.open(checkoutUrl, "_blank");
+      window.location.href = checkoutUrl;
     } catch {
       const fallback = getCheckoutUrl();
-      if (fallback) window.open(fallback, "_blank");
+      if (fallback) window.location.href = fallback;
     } finally {
       setIsSubmitting(false);
     }
