@@ -1,0 +1,151 @@
+/* GLP-1 Buy Page — extends CheckoutPage styles */
+@import './CheckoutPage.css';
+
+/* Loading state */
+.glp1buy-loading {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--b365-white);
+  font-family: var(--font-body);
+}
+
+.glp1buy-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--b365-border);
+  border-top-color: #2B7A9E;
+  border-radius: 50%;
+  animation: glp1buy-spin 0.6s linear infinite;
+}
+
+@keyframes glp1buy-spin {
+  to { transform: rotate(360deg); }
+}
+
+.glp1buy-loading p {
+  font-size: 0.95rem;
+  color: var(--b365-text-secondary);
+  font-weight: 500;
+}
+
+/* Product Hero Card */
+.glp1buy-product-card {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+}
+
+.glp1buy-product-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--b365-border);
+  background: var(--b365-gray-50);
+}
+
+.glp1buy-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.glp1buy-product-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.glp1buy-product-info h3 {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--b365-navy);
+  margin: 0 0 0.375rem;
+  line-height: 1.3;
+}
+
+.glp1buy-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.glp1buy-price-current {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--b365-navy);
+}
+
+.glp1buy-price-compare {
+  font-size: 0.85rem;
+  color: var(--b365-gray-400);
+  text-decoration: line-through;
+}
+
+.glp1buy-savings-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  background: rgba(34, 139, 34, 0.1);
+  color: var(--b365-green-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+.glp1buy-per-day {
+  font-size: 0.78rem;
+  color: #2B7A9E;
+  margin-top: 0.25rem;
+}
+
+/* Text input styling (same as email/tel) */
+.checkout-field input[type="text"] {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  min-height: 48px;
+  background: var(--b365-gray-50);
+  border: 1px solid var(--b365-border);
+  border-radius: 10px;
+  color: var(--b365-text);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none !important;
+  box-sizing: border-box;
+}
+
+.checkout-field input[type="text"]::placeholder {
+  color: var(--b365-gray-400);
+}
+
+.checkout-field input[type="text"]:focus {
+  border-color: #2B7A9E;
+  box-shadow: 0 0 0 4px rgba(43, 122, 158, 0.12), 0 0 12px rgba(43, 122, 158, 0.08);
+}
+
+@media (max-width: 600px) {
+  .glp1buy-product-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .glp1buy-product-image {
+    width: 120px;
+    height: 120px;
+  }
+  .glp1buy-price-row {
+    justify-content: center;
+  }
+}
