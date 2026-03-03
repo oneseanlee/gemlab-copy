@@ -98,9 +98,9 @@ const CheckoutPage = () => {
         phone: data.phone || undefined,
         deliveryAddressPreferences: [],
       });
-      window.open(existingCheckoutUrl, "_blank");
+      window.location.href = existingCheckoutUrl;
     } catch {
-      window.open(existingCheckoutUrl, "_blank");
+      window.location.href = existingCheckoutUrl;
     } finally {
       setIsSubmitting(false);
     }
