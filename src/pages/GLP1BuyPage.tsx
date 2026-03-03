@@ -130,10 +130,6 @@ const GLP1BuyPage = () => {
   /* ── Main render ──────────────────────────────────── */
   return (
     <div className="glp1buy-page">
-      {/* Header */}
-      <div className="glp1buy-header">
-        <a href="/"><img src="/images/best365labs-logo.png" alt="Best 365 Labs" /></a>
-      </div>
 
       {/* Checkout Section — mirrors GLP1Page final CTA */}
       <section className="b365-section glp1-checkout-section">
