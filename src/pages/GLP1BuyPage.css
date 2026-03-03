@@ -109,6 +109,7 @@
   -webkit-font-smoothing: antialiased;
   background: var(--b365-white);
   overflow-x: hidden;
+  width: 100%;
 }
 
 /* Header bar */
@@ -136,5 +137,84 @@
 
   .glp1buy-inline-form {
     gap: 10px;
+  }
+}
+
+/* ─── Deep mobile (≤480px) ─── */
+@media (max-width: 480px) {
+  .glp1buy-page .glp1-checkout-section {
+    padding: 20px 12px 24px;
+  }
+
+  .glp1buy-page .glp1-checkout-grid {
+    padding: 0;
+  }
+
+  .glp1buy-page .glp1-checkout-title {
+    font-size: 20px;
+  }
+
+  .glp1buy-page .glp1-checkout-desc {
+    font-size: 12.5px;
+  }
+
+  .glp1buy-page .glp1-checkout-price {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .glp1buy-page .glp1-bonuses-row .bonus-card {
+    padding: 10px;
+  }
+
+  .glp1buy-page .glp1-guarantee-badge {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .glp1buy-page .glp1-guarantee-badge svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .glp1buy-page .glp1-phone-line {
+    font-size: 12px;
+    justify-content: center;
+  }
+
+  .glp1buy-page .glp1-fda-disclaimer {
+    font-size: 10px;
+  }
+
+  .glp1buy-page .glp1-promo-strip {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .glp1buy-page .glp1-thumb-carousel {
+    gap: 4px;
+  }
+
+  .glp1buy-page .thumb-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .glp1buy-page .glp1-checkout-cta {
+    font-size: 15px;
+    padding: 14px;
+    min-height: 48px;
+  }
+
+  .glp1-sticky-mobile-cta {
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .glp1buy-page .glp1-star-rating {
+    font-size: 13px;
+  }
+
+  .glp1buy-page .checkout-big-price {
+    font-size: 28px;
   }
 }
