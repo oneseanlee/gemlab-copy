@@ -9,6 +9,7 @@
   font-family: var(--font-body);
   position: relative;
   z-index: 1;
+  overflow-x: hidden;
 }
 
 /* ── Confirmation Bar ── */
