@@ -109,6 +109,7 @@
   -webkit-font-smoothing: antialiased;
   background: var(--b365-white);
   width: 100%;
+  overflow-x: hidden;
 }
 
 /* Force 12px rounded corners on product display */
@@ -118,6 +119,15 @@
 
 .glp1buy-page .glp1-product-display > img {
   border-radius: 12px;
+}
+
+/* Ensure checkout section doesn't overflow on mobile */
+.glp1buy-page .glp1-checkout-section {
+  overflow: hidden;
+}
+
+.glp1buy-page .glp1-checkout-grid {
+  overflow: hidden;
 }
 
 /* Trust strip below benefit callouts */
@@ -295,6 +305,25 @@
     display: contents;
   }
 
+  /* Force all direct children of checkout-grid to be full width */
+  .glp1buy-page .glp1-checkout-grid > *,
+  .glp1buy-page .glp1-checkout-grid .glp1-checkout-left > *,
+  .glp1buy-page .glp1-checkout-grid .glp1-checkout-right > * {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* Ensure the grid itself constrains children */
+  .glp1buy-page .glp1-checkout-grid {
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
   /* Mobile stack order */
   .glp1buy-page .glp1-promo-strip { order: 1; }
   .glp1buy-page .glp1-product-display { order: 2; }
@@ -308,9 +337,38 @@
   .glp1buy-page .glp1-bonuses-section { order: 10; }
   .glp1buy-page .glp1buy-inline-form { order: 11; }
   .glp1buy-page .glp1-guarantee-badge { order: 12; }
-  .glp1buy-page .glp1-phone-line { order: 13; }
-  .glp1buy-page .glp1-fda-disclaimer { order: 14; }
-  .glp1buy-page .glp1-benefit-callouts { order: 15; }
+  .glp1buy-page .glp1-benefit-callouts { order: 13; }
+  .glp1buy-page .glp1buy-trust-strip { order: 14; }
+  .glp1buy-page .glp1buy-testimonial { order: 15; }
+  .glp1buy-page .glp1-phone-line { order: 16; }
+  .glp1buy-page .glp1-fda-disclaimer { order: 17; }
+
+  .glp1buy-trust-strip {
+    gap: 16px;
+  }
+
+  .glp1buy-trust-item span {
+    font-size: 12px;
+  }
+
+  /* Ensure checkout description doesn't overflow */
+  .glp1buy-page .glp1-checkout-desc {
+    padding-right: 0;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  /* Checklist text wrapping */
+  .glp1buy-page .glp1-check-list li {
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  /* Testimonial text wrapping */
+  .glp1buy-testimonial-quote {
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
 }
 
 /* ─── Deep mobile (≤480px) ─── */
