@@ -111,6 +111,15 @@
   width: 100%;
 }
 
+/* Force 12px rounded corners on product display */
+.glp1buy-page .glp1-product-display {
+  border-radius: 12px;
+}
+
+.glp1buy-page .glp1-product-display > img {
+  border-radius: 12px;
+}
+
 /* Header bar */
 .glp1buy-header {
   display: flex;
