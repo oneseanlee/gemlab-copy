@@ -26,13 +26,16 @@ const GLP1_PRODUCT = {
 
 const PRICE = 39.95;
 
-/* ── Thumbnail images ─────────────────────────────────── */
-const thumbImages = [
-  "/images/glp1-whats-included.png",
-  "/images/product-glp-protocol.png",
-  "/images/triple-power-methylene-blue.png",
-  "/images/metabolism-plus.png",
-  "/images/glp1-risk-free.png",
+/* ── Carousel media (video + images) ──────────────────── */
+const VIDEO_URL = "https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a7a0382782ec0d3bff4f76.mp4";
+type MediaItem = { type: "video"; src: string } | { type: "image"; src: string };
+const carouselMedia: MediaItem[] = [
+  { type: "video", src: VIDEO_URL },
+  { type: "image", src: "/images/glp1-whats-included.png" },
+  { type: "image", src: "/images/glp1-risk-free.png" },
+  { type: "image", src: "/images/product-glp-protocol.png" },
+  { type: "image", src: "/images/triple-power-methylene-blue.png" },
+  { type: "image", src: "/images/metabolism-plus.png" },
 ];
 
 /* ── Form schema ──────────────────────────────────────── */
@@ -164,34 +167,42 @@ const GLP1BuyPage = () => {
           <div className="glp1-checkout-left">
             <div className="glp1-promo-strip">🔥 SAVE $50 + FREE SHIPPING 🔥</div>
 
-            {/* Hero Video */}
-            <div className="glp1buy-hero-video">
-              <video
-                ref={videoRef}
-                src="https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a7a0382782ec0d3bff4f76.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                controls
-              />
-              <div className={`glp1buy-sound-overlay ${showSoundHint ? '' : 'hidden'}`} onClick={handleSoundOverlayClick}>
-                <div className="glp1buy-sound-circle">
-                  <Volume2 size={28} color="#fff" />
-                </div>
-                <span className="glp1buy-sound-label">TAP FOR SOUND</span>
-              </div>
-            </div>
-
+            {/* Main product display — video or image */}
             <div className="glp1-product-display">
-              <img src={thumbImages[activeThumb]} alt="GLP-1 Optimization Protocol" loading="lazy" />
+              {carouselMedia[activeThumb].type === "video" ? (
+                <div className="glp1buy-hero-video">
+                  <video
+                    ref={videoRef}
+                    src={VIDEO_URL}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls
+                  />
+                  <div className={`glp1buy-sound-overlay ${showSoundHint ? '' : 'hidden'}`} onClick={handleSoundOverlayClick}>
+                    <div className="glp1buy-sound-circle">
+                      <Volume2 size={28} color="#fff" />
+                    </div>
+                    <span className="glp1buy-sound-label">TAP FOR SOUND</span>
+                  </div>
+                </div>
+              ) : (
+                <img src={carouselMedia[activeThumb].src} alt="GLP-1 Optimization Protocol" loading="lazy" />
+              )}
             </div>
 
             <div className="glp1-thumb-carousel">
               <button className="thumb-arrow thumb-arrow-left" onClick={() => { const el = document.querySelector('.glp1buy-page .thumb-track'); if (el) el.scrollBy({ left: -80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails left"><ChevronLeft size={16} /></button>
               <div className="thumb-track">
-                {thumbImages.map((src, i) => (
-                  <img key={i} src={src} alt={`Product view ${i + 1}`} className={`thumb-img ${i === activeThumb ? 'active' : ''}`} loading="lazy" onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer' }} />
+                {carouselMedia.map((item, i) => (
+                  item.type === "video" ? (
+                    <div key={i} className={`thumb-img thumb-video ${i === activeThumb ? 'active' : ''}`} onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer' }}>
+                      <Volume2 size={16} />
+                    </div>
+                  ) : (
+                    <img key={i} src={item.src} alt={`Product view ${i + 1}`} className={`thumb-img ${i === activeThumb ? 'active' : ''}`} loading="lazy" onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer' }} />
+                  )
                 ))}
               </div>
               <button className="thumb-arrow thumb-arrow-right" onClick={() => { const el = document.querySelector('.glp1buy-page .thumb-track'); if (el) el.scrollBy({ left: 80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails right"><ChevronRight size={16} /></button>

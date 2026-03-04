@@ -125,13 +125,12 @@
   height: 36px;
 }
 
-/* ─── Hero video ─── */
+/* ─── Hero video (inside product display) ─── */
 .glp1buy-hero-video {
   position: relative;
   width: 100%;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  margin-bottom: 16px;
+  border-radius: 12px;
 }
 
 .glp1buy-hero-video video {
@@ -140,6 +139,16 @@
   object-fit: contain;
   display: block;
   background: #000;
+  border-radius: 12px;
+}
+
+/* Video thumbnail in carousel */
+.thumb-video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a2e;
+  color: #fff;
 }
 
 /* ─── Sound overlay ─── */
@@ -207,21 +216,20 @@
 
   /* Mobile stack order */
   .glp1buy-page .glp1-promo-strip { order: 1; }
-  .glp1buy-page .glp1buy-hero-video { order: 2; }
-  .glp1buy-page .glp1-checkout-title { order: 3; }
-  .glp1buy-page .glp1-star-rating { order: 4; }
-  .glp1buy-page .glp1-checkout-desc { order: 5; }
-  .glp1buy-page .glp1-check-list { order: 6; }
-  .glp1buy-page .glp1-checkout-price { order: 7; }
-  .glp1buy-page .checkout-shipping-note { order: 8; }
-  .glp1buy-page .glp1-bonuses-section { order: 9; }
-  .glp1buy-page .glp1buy-inline-form { order: 10; }
-  .glp1buy-page .glp1-guarantee-badge { order: 11; }
-  .glp1buy-page .glp1-phone-line { order: 12; }
-  .glp1buy-page .glp1-fda-disclaimer { order: 13; }
-  .glp1buy-page .glp1-product-display { order: 14; }
-  .glp1buy-page .glp1-thumb-carousel { order: 15; }
-  .glp1buy-page .glp1-benefit-callouts { order: 16; }
+  .glp1buy-page .glp1-product-display { order: 2; }
+  .glp1buy-page .glp1-thumb-carousel { order: 3; }
+  .glp1buy-page .glp1-checkout-title { order: 4; }
+  .glp1buy-page .glp1-star-rating { order: 5; }
+  .glp1buy-page .glp1-checkout-desc { order: 6; }
+  .glp1buy-page .glp1-check-list { order: 7; }
+  .glp1buy-page .glp1-checkout-price { order: 8; }
+  .glp1buy-page .checkout-shipping-note { order: 9; }
+  .glp1buy-page .glp1-bonuses-section { order: 10; }
+  .glp1buy-page .glp1buy-inline-form { order: 11; }
+  .glp1buy-page .glp1-guarantee-badge { order: 12; }
+  .glp1buy-page .glp1-phone-line { order: 13; }
+  .glp1buy-page .glp1-fda-disclaimer { order: 14; }
+  .glp1buy-page .glp1-benefit-callouts { order: 15; }
 }
 
 /* ─── Deep mobile (≤480px) ─── */
