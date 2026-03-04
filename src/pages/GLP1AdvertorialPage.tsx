@@ -74,7 +74,7 @@ const GLP1AdvertorialPage: React.FC = () => {
     await new Promise(r => setTimeout(r, 300));
     const url = useCartStore.getState().checkoutUrl;
     if (url) {
-      window.open(url, '_blank');
+      window.location.href = url;
     }
   };
 
