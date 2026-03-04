@@ -1,14 +1,26 @@
 
 
-## Plan: GLP-1 Protocol page CTAs add to cart and redirect to /checkout
+## Plan: Scroll to top on route change
 
-### What changes
-On `src/pages/GLP1Page.tsx`, the `handleOrderNow` function (line 141-152) currently adds the GLP-1 item to cart and opens the cart drawer. It should instead navigate directly to `/checkout`.
+### Problem
+When navigating between pages (e.g. from GLP-1 Protocol to Checkout), the browser keeps the previous scroll position instead of starting at the top.
 
 ### Implementation
-1. Add `useNavigate` import from `react-router-dom` (may already be imported)
-2. Initialize `const navigate = useNavigate()` inside the component
-3. In `handleOrderNow` (line 151), replace `useCartStore.getState().setCartOpen(true)` with `navigate('/checkout')`
+Create a `ScrollToTopOnNav` component that listens to route changes via `useLocation` and calls `window.scrollTo(0, 0)` on every pathname change. Add it inside `BrowserRouter` in `src/App.tsx`.
 
-This single change affects all CTA buttons on the page (Order Now, Start Your Protocol, etc.) since they all call the same `handleOrderNow` function. The item is added to cart first, then the user is taken straight to the checkout page with that item ready.
+### Files to change
+
+1. **`src/App.tsx`** — Add a small inline component (or import) that resets scroll on route change:
+   ```tsx
+   import { useLocation } from "react-router-dom";
+   
+   function ScrollToTopOnNav() {
+     const { pathname } = useLocation();
+     useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+     return null;
+   }
+   ```
+   Place `<ScrollToTopOnNav />` inside `AppRoutes`, before `<Routes>`.
+
+One file, ~5 lines of logic.
 
