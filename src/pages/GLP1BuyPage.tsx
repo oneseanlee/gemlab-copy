@@ -279,6 +279,8 @@ const GLP1BuyPage = () => {
 
             {/* Inline Name + Email Form */}
             <form className="glp1buy-inline-form" onSubmit={handleSubmit(onSubmit)}>
+              <h3 className="glp1buy-form-headline">Claim Your 30-Day Protocol — Ships Free in 24–48 Hours</h3>
+              <p className="glp1buy-form-subtext">Enter your details below to reserve your protocol. You'll complete secure payment on the next page — takes less than 60 seconds.</p>
               <div className="glp1buy-field">
                 <label htmlFor="glp1buy-name">Your Name *</label>
                 <input id="glp1buy-name" type="text" placeholder="John Doe" {...register("name")} />
@@ -291,7 +293,7 @@ const GLP1BuyPage = () => {
               </div>
 
               <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading || hasSubmitted.current}>
-                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Redirecting…</> : <>Continue to Payment <ArrowRight size={18} /></>}
+                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Redirecting…</> : <>Get My GLP-1 Protocol <ArrowRight size={18} /></>}
               </button>
 
               <div className="glp1buy-secure-note">
@@ -322,7 +324,7 @@ const GLP1BuyPage = () => {
       <div className="glp1-sticky-mobile-cta">
         <span className="sticky-price">$39.95 <span className="sticky-strike">$90</span></span>
         <button className="sticky-cta-btn" disabled={isSubmitting || isLoading || hasSubmitted.current} onClick={handleSubmit(onSubmit)}>
-          {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> Redirecting…</> : <>Continue to Payment <ArrowRight size={14} /></>}
+          {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> Redirecting…</> : <>Get My GLP-1 Protocol <ArrowRight size={14} /></>}
         </button>
       </div>
     </div>
