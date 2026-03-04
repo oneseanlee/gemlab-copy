@@ -944,6 +944,7 @@
   max-height: 500px;
   object-fit: contain;
   display: block;
+  border-radius: 12px;
 }
 .glp1-stat-overlay {
   position: absolute;
