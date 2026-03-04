@@ -53,16 +53,10 @@ const GLP1BuyPage = () => {
   const hasSubmitted = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  /* Hide sound hint after 3s */
-  useEffect(() => {
-    const t = setTimeout(() => setShowSoundHint(false), 3000);
-    return () => clearTimeout(t);
-  }, []);
-
-  const handleVideoClick = () => {
+  const handleSoundOverlayClick = () => {
     setShowSoundHint(false);
     if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
+      videoRef.current.muted = false;
     }
   };
 
@@ -171,7 +165,7 @@ const GLP1BuyPage = () => {
             <div className="glp1-promo-strip">🔥 SAVE $50 + FREE SHIPPING 🔥</div>
 
             {/* Hero Video */}
-            <div className="glp1buy-hero-video" onClick={handleVideoClick}>
+            <div className="glp1buy-hero-video">
               <video
                 ref={videoRef}
                 src="https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a7a0382782ec0d3bff4f76.mp4"
@@ -181,9 +175,11 @@ const GLP1BuyPage = () => {
                 playsInline
                 controls
               />
-              <div className={`glp1buy-sound-hint ${showSoundHint ? '' : 'hidden'}`}>
-                <Volume2 size={15} />
-                <span>Tap for sound</span>
+              <div className={`glp1buy-sound-overlay ${showSoundHint ? '' : 'hidden'}`} onClick={handleSoundOverlayClick}>
+                <div className="glp1buy-sound-circle">
+                  <Volume2 size={28} color="#fff" />
+                </div>
+                <span className="glp1buy-sound-label">TAP FOR SOUND</span>
               </div>
             </div>
 
@@ -223,7 +219,7 @@ const GLP1BuyPage = () => {
             <ul className="glp1-check-list">
               <li><Check size={16} />Triple Power Methylene Blue + Metabolism+ Tablets — full 30-day protocol</li>
               <li><Check size={16} />Activates AMPK, Sirtuins &amp; Autophagy — three longevity pathways</li>
-              <li><Check size={16} />72% more lean tissue retention vs GLP-1 alone*</li>
+              <li><Check size={16} />Up to 72% more lean tissue retention vs GLP-1 alone*</li>
               <li><Check size={16} />Made in USA — FDA-registered, cGMP-certified facility</li>
               <li><Check size={16} />30-day 100% money-back guarantee, because it works*</li>
             </ul>
