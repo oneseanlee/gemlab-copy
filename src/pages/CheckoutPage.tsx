@@ -96,7 +96,17 @@ const CheckoutPage = () => {
       await updateBuyerIdentity({
         email: data.email,
         phone: data.phone || undefined,
-        deliveryAddressPreferences: [],
+        deliveryAddressPreferences: [{
+          deliveryAddress: {
+            firstName: data.firstName.trim(),
+            lastName: data.lastName?.trim() || "",
+            address1: "",
+            city: "",
+            province: "",
+            zip: "",
+            country: "US",
+          },
+        }],
       });
       window.location.href = existingCheckoutUrl;
     } catch {
