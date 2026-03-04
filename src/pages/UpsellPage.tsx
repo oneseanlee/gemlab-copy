@@ -146,7 +146,7 @@ const UpsellPage: React.FC = () => {
         </button>
         <p className="upsell-secure">
           <Lock size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 6 }} />
-          Secure checkout. Instant digital delivery. 60-day money-back guarantee.
+          Secure checkout. Instant digital delivery. 30-day money-back guarantee.
         </p>
 
         {/* Skip */}
@@ -168,7 +168,7 @@ const UpsellPage: React.FC = () => {
       {/* ── Guarantee ── */}
       <section className="upsell-guarantee" ref={guaranteeRef}>
         <Shield size={40} className="upsell-shield" />
-        <h2 className="upsell-guarantee-heading">60-Day Money-Back Guarantee</h2>
+        <h2 className="upsell-guarantee-heading">30-Day Money-Back Guarantee</h2>
         <p className="upsell-guarantee-text">
           If these guides don't transform your understanding of testosterone optimization, email us for a full refund. No questions asked.
         </p>

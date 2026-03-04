@@ -561,7 +561,7 @@ const GLP1Page = () => {
                         {isLoading ? 'Adding to Cart...' : 'Protect Your Metabolism — $39.95'}
                         <ArrowRight size={16} />
                     </AnimatedCTA>
-                    <p className="glp1-mid-cta-sub"><Check size={14} /> 70% OFF &bull; Limited Launch Pricing</p>
+                    <p className="glp1-mid-cta-sub"><Check size={14} /> 56% OFF &bull; Limited Launch Pricing</p>
                 </div>
             </section>
 
@@ -689,7 +689,7 @@ const GLP1Page = () => {
                             <li><Check size={16} />Activates AMPK, Sirtuins &amp; Autophagy — three longevity pathways</li>
                             <li><Check size={16} />72% more lean tissue retention vs GLP-1 alone*</li>
                             <li><Check size={16} />Made in USA — FDA-registered, cGMP-certified facility</li>
-                            <li><Check size={16} />60-day 100% money-back guarantee, because it works*</li>
+                            <li><Check size={16} />30-day 100% money-back guarantee, because it works*</li>
                         </ul>
 
                         <div className="glp1-checkout-price">
@@ -728,7 +728,7 @@ const GLP1Page = () => {
                         <div className="glp1-guarantee-badge">
                             <ShieldCheck size={28} />
                             <div>
-                                <strong>60-Day Money-Back Guarantee</strong>
+                                <strong>30-Day Money-Back Guarantee</strong>
                                 <span>Try it risk-free. If you're not thrilled with your results, we'll refund every penny — no questions asked.</span>
                             </div>
                         </div>
