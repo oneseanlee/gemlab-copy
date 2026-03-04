@@ -299,6 +299,19 @@
     gap: 10px;
   }
 
+  /* Constrain video height on mobile */
+  .glp1buy-hero-video video {
+    max-height: 360px;
+  }
+
+  /* Add breathing room between stacked sections */
+  .glp1buy-page .glp1-checkout-grid {
+    gap: 16px;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
   /* Flatten columns so children can be reordered */
   .glp1buy-page .glp1-checkout-left,
   .glp1buy-page .glp1-checkout-right {
@@ -315,13 +328,6 @@
     box-sizing: border-box;
     overflow-wrap: anywhere;
     word-break: normal;
-  }
-
-  /* Ensure the grid itself constrains children */
-  .glp1buy-page .glp1-checkout-grid {
-    max-width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
   }
 
   /* Mobile stack order */
@@ -349,6 +355,31 @@
 
   .glp1buy-trust-item span {
     font-size: 12px;
+  }
+
+  /* Add spacing between key sections */
+  .glp1buy-page .glp1-checkout-title {
+    margin-top: 8px;
+  }
+
+  .glp1buy-page .glp1-bonuses-section {
+    margin-top: 4px;
+  }
+
+  .glp1buy-page .glp1buy-inline-form {
+    margin-top: 4px;
+  }
+
+  .glp1buy-page .glp1-benefit-callouts {
+    margin-top: 8px;
+  }
+
+  .glp1buy-page .glp1buy-trust-strip {
+    margin-top: 4px;
+  }
+
+  .glp1buy-page .glp1buy-testimonial {
+    margin-top: 4px;
   }
 
   /* Ensure checkout description doesn't overflow */
