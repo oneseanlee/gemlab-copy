@@ -120,6 +120,78 @@
   border-radius: 12px;
 }
 
+/* Trust strip below benefit callouts */
+.glp1buy-trust-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background: #F8F9FA;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.glp1buy-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #374151;
+}
+
+.glp1buy-trust-item svg {
+  flex-shrink: 0;
+}
+
+.glp1buy-trust-item span {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Testimonial below trust strip */
+.glp1buy-testimonial {
+  background: #F8F9FA;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.glp1buy-testimonial-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.glp1buy-testimonial-quote {
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.5;
+  color: #1f2937;
+  margin: 0 0 8px;
+}
+
+.glp1buy-testimonial-cite {
+  font-size: 13px;
+  font-weight: 700;
+  font-style: normal;
+  color: #374151;
+}
+
+/* Mobile ordering for new elements */
+@media (max-width: 768px) {
+  .glp1buy-page .glp1buy-trust-strip { order: 16; }
+  .glp1buy-page .glp1buy-testimonial { order: 17; }
+
+  .glp1buy-trust-strip {
+    gap: 16px;
+  }
+
+  .glp1buy-trust-item span {
+    font-size: 12px;
+  }
+}
+
 /* Header bar */
 .glp1buy-header {
   display: flex;
