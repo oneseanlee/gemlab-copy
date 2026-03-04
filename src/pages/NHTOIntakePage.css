@@ -2,7 +2,6 @@
   min-height: 100vh;
   background: #ffffff;
   color: var(--b365-gray-900);
-  overflow-x: hidden;
 }
 
 /* Reuse privacy-nav pattern */

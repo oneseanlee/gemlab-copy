@@ -6,7 +6,6 @@
   color: var(--b365-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
   width: 100%;
 }
 
@@ -548,10 +547,13 @@
     left: 0;
     right: 0;
     padding: 0.75rem 1rem;
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
     background: var(--b365-white);
     border-top: 1px solid var(--b365-border);
     box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
     z-index: 50;
+    box-sizing: border-box;
+    max-width: 100%;
   }
   .checkout-mobile-sticky-cta .checkout-submit-btn {
     margin-top: 0;

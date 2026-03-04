@@ -14,7 +14,6 @@
   min-height: 100vh;
   color: var(--b365-text);
   font-family: var(--font-body);
-  overflow-x: hidden;
 }
 
 /* ═══════════════════════════

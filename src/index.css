@@ -176,8 +176,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  overflow-x: hidden;
+html, body {
+  overflow-x: clip;
 }
 
 body {
@@ -187,7 +187,6 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6,
