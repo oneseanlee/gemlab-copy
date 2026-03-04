@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone } from "lucide-react";
+import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Volume2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { GLP1_VARIANT_ID } from "@/lib/shopify";
 import { toast } from "sonner";
@@ -48,8 +48,23 @@ const GLP1BuyPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [cartReady, setCartReady] = useState(false);
   const [activeThumb, setActiveThumb] = useState(0);
+  const [showSoundHint, setShowSoundHint] = useState(true);
   const addedRef = useRef(false);
   const hasSubmitted = useRef(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  /* Hide sound hint after 3s */
+  useEffect(() => {
+    const t = setTimeout(() => setShowSoundHint(false), 3000);
+    return () => clearTimeout(t);
+  }, []);
+
+  const handleVideoClick = () => {
+    setShowSoundHint(false);
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+    }
+  };
 
   /* Auto-add GLP-1 to cart on mount */
   useEffect(() => {
@@ -154,6 +169,23 @@ const GLP1BuyPage = () => {
           {/* LEFT COLUMN — Product Display */}
           <div className="glp1-checkout-left">
             <div className="glp1-promo-strip">🔥 SAVE $50 + FREE SHIPPING 🔥</div>
+
+            {/* Hero Video */}
+            <div className="glp1buy-hero-video" onClick={handleVideoClick}>
+              <video
+                ref={videoRef}
+                src="https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a7a0382782ec0d3bff4f76.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+              />
+              <div className={`glp1buy-sound-hint ${showSoundHint ? '' : 'hidden'}`}>
+                <Volume2 size={15} />
+                <span>Tap for sound</span>
+              </div>
+            </div>
 
             <div className="glp1-product-display">
               <img src={thumbImages[activeThumb]} alt="GLP-1 Optimization Protocol" loading="lazy" />
