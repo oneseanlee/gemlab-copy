@@ -413,7 +413,7 @@ const GLP1AdvertorialPage: React.FC = () => {
               <div className="glp1-save-badge-wrap">
                 <span className="adv-save-badge">
                   <Tag size={14} />
-                  You Save $91.05 (70% OFF)
+                  You Save $50.05 (56% OFF)
                 </span>
               </div>
               <ul className="adv-pricing-includes">
@@ -421,7 +421,7 @@ const GLP1AdvertorialPage: React.FC = () => {
                 <li><CheckCircle size={18} /> No prescription required</li>
                 <li><CheckCircle size={18} /> Free shipping</li>
                 <li><CheckCircle size={18} /> No subscription — one-time purchase</li>
-                <li><CheckCircle size={18} /> 60-day satisfaction guarantee</li>
+                <li><CheckCircle size={18} /> 30-day satisfaction guarantee</li>
               </ul>
               <button onClick={handleBuyNow} disabled={isLoading} className="adv-cta-btn full-width">
                 {isLoading ? 'Processing...' : 'Get the Protocol — $39.95 + Free Shipping'}
@@ -461,9 +461,9 @@ const GLP1AdvertorialPage: React.FC = () => {
               <div className="adv-guarantee-icon">
                 <ShieldCheck size={28} />
               </div>
-              <h3 className="adv-guarantee-title">60-Day Satisfaction Guarantee</h3>
+              <h3 className="adv-guarantee-title">30-Day Satisfaction Guarantee</h3>
               <p className="adv-guarantee-text">
-                Not satisfied with your results? Return the product within 60 days for a full refund. No questions asked. We stand behind the science.
+                Not satisfied with your results? Return the product within 30 days for a full refund. No questions asked. We stand behind the science.
               </p>
             </div>
           </div>
@@ -528,7 +528,7 @@ const GLP1AdvertorialPage: React.FC = () => {
           <div className="adv-final-trust">
             <span><CheckCircle size={18} /> One-time purchase</span>
             <span><CheckCircle size={18} /> No auto-renewals</span>
-            <span><CheckCircle size={18} /> 60-day guarantee</span>
+            <span><CheckCircle size={18} /> 30-day guarantee</span>
             <span><CheckCircle size={18} /> Free shipping</span>
           </div>
           <button onClick={handleBuyNow} disabled={isLoading} className="adv-cta-btn">

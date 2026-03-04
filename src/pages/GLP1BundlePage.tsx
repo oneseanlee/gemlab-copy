@@ -202,7 +202,7 @@ const GLP1BundlePage = () => {
             {/* 4. Trust Strip */}
             <div className="glp1b-trust-strip">
                 {[
-        { Icon: ShieldCheck, title: '60-Day Guarantee', desc: 'Risk-free purchase' },
+        { Icon: ShieldCheck, title: '30-Day Guarantee', desc: 'Risk-free purchase' },
         { Icon: Truck, title: 'Free Shipping', desc: 'Free on all orders' },
         { Icon: Award, title: 'Professional Grade', desc: 'Premium quality' },
         { Icon: Flag, title: 'Made in USA', desc: 'Made in the USA' },
@@ -373,7 +373,7 @@ const GLP1BundlePage = () => {
 
                         <div className="ucos-bundle-trust">
                             <span><Truck size={16} /> Free Shipping</span>
-                            <span><Calendar size={16} /> 60-Day Guarantee</span>
+                            <span><Calendar size={16} /> 30-Day Guarantee</span>
                             <span><Award size={16} /> GMP Certified</span>
                         </div>
                     </div>
@@ -405,12 +405,12 @@ const GLP1BundlePage = () => {
                 </div>
             </section>
 
-            {/* 12. 60-Day Guarantee */}
+            {/* 12. 30-Day Guarantee */}
             <section className="b365-section">
                 <div className="glp1b-guarantee-card">
                     <CertificateLottie />
-                    <h3>Our 60-Day Satisfaction Guarantee</h3>
-                    <p>Try the GLP-1 Cellular Optimization System risk-free for 60 days. If you're not satisfied with your experience, simply return it for a full refund. No questions asked.</p>
+                    <h3>Our 30-Day Satisfaction Guarantee</h3>
+                    <p>Try the GLP-1 Cellular Optimization System risk-free for 30 days. If you're not satisfied with your experience, simply return it for a full refund. No questions asked.</p>
                     <p style={{ fontWeight: 600, color: 'var(--b365-text)', marginTop: 16 }}>Your satisfaction is our priority.</p>
                 </div>
             </section>
@@ -434,7 +434,7 @@ const GLP1BundlePage = () => {
                     <div className="tprime-cta-trust-strip">
                         <span><Lock size={14} /> 256-bit SSL Encrypted</span>
                         <span><Truck size={14} /> Free Shipping</span>
-                        <span><ShieldCheck size={14} /> 60-Day Guarantee</span>
+                        <span><ShieldCheck size={14} /> 30-Day Guarantee</span>
                     </div>
                 </div>
             </section>
