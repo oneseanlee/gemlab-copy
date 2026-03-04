@@ -7,7 +7,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--b365-white);
-  overflow-x: hidden;
 }
 
 /* ─── Hero ─── */
@@ -36,7 +35,7 @@
 }
 .tprime-hero-img img {
   max-height: 600px;
-  max-width: 110%;
+  max-width: 100%;
   object-fit: contain;
   filter: drop-shadow(0 16px 40px rgba(0,0,0,0.15));
 }
@@ -1064,9 +1063,12 @@
     border-top: 1px solid var(--b365-border);
     box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
     padding: var(--space-3) var(--space-4);
+    padding-bottom: calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3);
+    box-sizing: border-box;
+    max-width: 100%;
   }
   .sticky-price {
     font-size: 22px;

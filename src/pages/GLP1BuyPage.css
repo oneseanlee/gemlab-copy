@@ -108,7 +108,6 @@
   color: var(--b365-text);
   -webkit-font-smoothing: antialiased;
   background: var(--b365-white);
-  overflow-x: hidden;
   width: 100%;
 }
 
