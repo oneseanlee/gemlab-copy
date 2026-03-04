@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -90,6 +91,7 @@ const GLP1Page = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const thumbImages = ['/images/glp1-whats-included.png', '/images/product-glp-protocol.png', '/images/triple-power-methylene-blue.png', '/images/metabolism-plus.png', '/images/glp1-risk-free.png'];
   const [activeThumb, setActiveThumb] = useState(0);
+  const navigate = useNavigate();
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
@@ -148,7 +150,7 @@ const GLP1Page = () => {
       quantity: 1,
       selectedOptions: [{ name: 'Size', value: '30-Day Protocol' }]
     });
-    useCartStore.getState().setCartOpen(true);
+    navigate('/checkout');
   };
 
   const faqItems = [
