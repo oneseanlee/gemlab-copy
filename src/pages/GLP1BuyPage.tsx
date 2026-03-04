@@ -27,7 +27,7 @@ const GLP1_PRODUCT = {
 const PRICE = 39.95;
 
 /* ── Carousel media (video + images) ──────────────────── */
-const VIDEO_URL = "https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a7a0382782ec0d3bff4f76.mp4";
+const VIDEO_URL = "https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a89b28edd08719031fc70e.mp4";
 type MediaItem = { type: "video"; src: string } | { type: "image"; src: string };
 const carouselMedia: MediaItem[] = [
   { type: "video", src: VIDEO_URL },
