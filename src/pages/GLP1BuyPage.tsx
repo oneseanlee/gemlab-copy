@@ -49,6 +49,7 @@ const GLP1BuyPage = () => {
   const [cartReady, setCartReady] = useState(false);
   const [activeThumb, setActiveThumb] = useState(0);
   const addedRef = useRef(false);
+  const hasSubmitted = useRef(false);
 
   /* Auto-add GLP-1 to cart on mount */
   useEffect(() => {
@@ -86,12 +87,15 @@ const GLP1BuyPage = () => {
   });
 
   const onSubmit = async (data: FormData) => {
+    if (hasSubmitted.current) return;
+
     const checkoutUrl = getCheckoutUrl();
     if (!checkoutUrl) {
       toast.error("Cart is still loading. Please wait a moment and try again.");
       return;
     }
 
+    hasSubmitted.current = true;
     setIsSubmitting(true);
     try {
       await supabase.from("checkout_leads").insert({
@@ -126,9 +130,8 @@ const GLP1BuyPage = () => {
     } catch {
       const fallback = getCheckoutUrl();
       if (fallback) window.location.href = fallback;
-    } finally {
-      setIsSubmitting(false);
     }
+    // Note: intentionally no finally/setIsSubmitting(false) — keep button disabled after redirect
   };
 
   /* ── Loading state ────────────────────────────────── */
@@ -234,8 +237,8 @@ const GLP1BuyPage = () => {
                 {errors.email && <div className="glp1buy-field-error">{errors.email.message}</div>}
               </div>
 
-              <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading}>
-                {isSubmitting ? <Loader2 size={20} className="animate-spin" /> : <>Continue to Payment <ArrowRight size={18} /></>}
+              <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading || hasSubmitted.current}>
+                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Redirecting…</> : <>Continue to Payment <ArrowRight size={18} /></>}
               </button>
 
               <div className="glp1buy-secure-note">
@@ -265,9 +268,8 @@ const GLP1BuyPage = () => {
       {/* Mobile sticky CTA */}
       <div className="glp1-sticky-mobile-cta">
         <span className="sticky-price">$39.95 <span className="sticky-strike">$90</span></span>
-        <button className="sticky-cta-btn" disabled={isSubmitting || isLoading} onClick={handleSubmit(onSubmit)}>
-          {isSubmitting ? "Processing..." : "Continue to Payment"}
-          <ArrowRight size={14} />
+        <button className="sticky-cta-btn" disabled={isSubmitting || isLoading || hasSubmitted.current} onClick={handleSubmit(onSubmit)}>
+          {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> Redirecting…</> : <>Continue to Payment <ArrowRight size={14} /></>}
         </button>
       </div>
     </div>
