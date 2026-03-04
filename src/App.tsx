@@ -1,9 +1,7 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useCartSync } from "./hooks/useCartSync";
-import './App.css';
-
 // Route-level code splitting — each page loads on demand
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ListiclePage = lazy(() => import("./pages/ListiclePage"));
@@ -39,10 +37,17 @@ const PageLoader = () => (
   </div>
 );
 
+function ScrollToTopOnNav() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
 const AppRoutes = () => {
   useCartSync();
   return (
     <Suspense fallback={<PageLoader />}>
+      <ScrollToTopOnNav />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/article" element={<ListiclePage />} />
