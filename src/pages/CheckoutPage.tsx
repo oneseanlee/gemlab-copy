@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { trackMetaEvent } from "@/lib/meta-pixel";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -31,6 +31,7 @@ const CheckoutPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [smsUpdates, setSmsUpdates] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState(false);
+  const hasSubmitted = useRef(false);
 
   const totalPrice = items.reduce(
     (sum, item) => sum + parseFloat(item.price.amount) * item.quantity, 0
@@ -70,15 +71,17 @@ const CheckoutPage = () => {
   });
 
   const onSubmit = async (data: CheckoutFormData) => {
+    if (hasSubmitted.current) return;
+
     const existingCheckoutUrl = getCheckoutUrl();
     if (!existingCheckoutUrl) {
       toast.error("No active cart found. Please add items and try again.");
       return;
     }
 
+    hasSubmitted.current = true;
     setIsSubmitting(true);
     try {
-      // Save checkout lead to database
       await supabase.from("checkout_leads").insert({
         first_name: data.firstName.trim(),
         last_name: data.lastName?.trim() || null,
@@ -111,9 +114,8 @@ const CheckoutPage = () => {
       window.location.href = existingCheckoutUrl;
     } catch {
       window.location.href = existingCheckoutUrl;
-    } finally {
-      setIsSubmitting(false);
     }
+    // Keep button disabled after redirect — no finally/reset
   };
 
   if (items.length === 0) {
@@ -179,9 +181,9 @@ const CheckoutPage = () => {
       </div>
       <div className="checkout-summary-total"><span>Total</span><span>${totalPrice.toFixed(2)}</span></div>
 
-      <button type="submit" className="checkout-submit-btn" disabled={isSubmitting || isLoading}>
+      <button type="submit" className="checkout-submit-btn" disabled={isSubmitting || isLoading || hasSubmitted.current}>
         {isSubmitting ? (
-          <Loader2 size={20} className="animate-spin" />
+          <><Loader2 size={20} className="animate-spin" /> Redirecting…</>
         ) : (
           <>Continue to Payment <ArrowRight size={18} /></>
         )}
@@ -285,9 +287,9 @@ const CheckoutPage = () => {
 
       {/* Mobile sticky CTA */}
       <div className="checkout-mobile-sticky-cta">
-        <button type="submit" form="checkout-form" className="checkout-submit-btn" disabled={isSubmitting || isLoading}
+        <button type="submit" form="checkout-form" className="checkout-submit-btn" disabled={isSubmitting || isLoading || hasSubmitted.current}
           onClick={handleSubmit(onSubmit)}>
-          {isSubmitting ? <Loader2 size={20} className="animate-spin" /> : <>Continue to Payment <ArrowRight size={18} /></>}
+          {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Redirecting…</> : <>Continue to Payment <ArrowRight size={18} /></>}
         </button>
       </div>
     </div>
