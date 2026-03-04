@@ -235,6 +235,8 @@
   color: var(--b365-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Serif Headlines */
@@ -435,7 +437,7 @@
   min-height: 520px;
 }
 .b365-hero-image {
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -1293,6 +1295,7 @@
   }
   .b365-hero {
     padding: 140px var(--space-4) 0;
+    overflow: hidden;
   }
   .b365-hero-text {
     padding: var(--space-8) var(--space-6);
@@ -1300,7 +1303,9 @@
     align-items: center;
   }
   .b365-hero-text h1 {
-    font-size: var(--text-h2);
+    font-size: 26px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   .b365-hero-text div[style] {
     justify-content: center !important;
