@@ -36,29 +36,35 @@
 .glp1buy-inline-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: var(--space-2);
+  gap: 16px;
+  margin-top: var(--space-4, 16px);
+  background: #f8f9fb;
+  border: 1px solid var(--b365-border, #e5e7eb);
+  border-radius: 12px;
+  padding: 20px;
 }
 
 .glp1buy-field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .glp1buy-field label {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--b365-text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .glp1buy-field input {
   width: 100%;
-  padding: 12px 14px;
-  min-height: 46px;
-  background: var(--b365-gray-50, #f8f9fb);
-  border: 1px solid var(--b365-border);
-  border-radius: 8px;
+  padding: 14px 16px;
+  min-height: 50px;
+  background: #ffffff;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
   color: var(--b365-text);
   font-size: 15px;
   font-family: var(--font-body);
@@ -68,12 +74,13 @@
 }
 
 .glp1buy-field input::placeholder {
-  color: var(--b365-gray-400, #9ca3af);
+  color: #9ca3af;
 }
 
 .glp1buy-field input:focus {
   border-color: var(--b365-blue);
-  box-shadow: 0 0 0 3px rgba(51, 118, 176, 0.12);
+  box-shadow: 0 0 0 3px rgba(51, 118, 176, 0.15);
+  background: #fff;
 }
 
 .glp1buy-field-error {
@@ -85,6 +92,10 @@
 /* Override the CTA to look like a form submit */
 .glp1buy-inline-form .glp1-checkout-cta {
   margin-top: 4px;
+  border-radius: 10px;
+  min-height: 52px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 /* Secure notice under form */
