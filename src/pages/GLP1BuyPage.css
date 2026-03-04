@@ -125,18 +125,82 @@
   height: 36px;
 }
 
+/* ─── Hero video ─── */
+.glp1buy-hero-video {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.glp1buy-hero-video video {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+.glp1buy-sound-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 2;
+}
+
+.glp1buy-sound-hint.hidden {
+  opacity: 0;
+}
+
 @media (max-width: 768px) {
   .glp1buy-page {
     padding-bottom: 80px;
   }
 
   .glp1buy-field input {
-    font-size: 16px; /* prevents iOS zoom */
+    font-size: 16px;
   }
 
   .glp1buy-inline-form {
     gap: 10px;
   }
+
+  /* Flatten columns so children can be reordered */
+  .glp1buy-page .glp1-checkout-left,
+  .glp1buy-page .glp1-checkout-right {
+    display: contents;
+  }
+
+  /* Mobile stack order */
+  .glp1buy-page .glp1-promo-strip { order: 1; }
+  .glp1buy-page .glp1buy-hero-video { order: 2; }
+  .glp1buy-page .glp1-checkout-title { order: 3; }
+  .glp1buy-page .glp1-star-rating { order: 4; }
+  .glp1buy-page .glp1-checkout-price { order: 5; }
+  .glp1buy-page .checkout-shipping-note { order: 6; }
+  .glp1buy-page .glp1-checkout-desc { order: 7; }
+  .glp1buy-page .glp1-check-list { order: 8; }
+  .glp1buy-page .glp1-bonuses-section { order: 9; }
+  .glp1buy-page .glp1buy-inline-form { order: 10; }
+  .glp1buy-page .glp1-guarantee-badge { order: 11; }
+  .glp1buy-page .glp1-phone-line { order: 12; }
+  .glp1buy-page .glp1-fda-disclaimer { order: 13; }
+  .glp1buy-page .glp1-product-display { order: 14; }
+  .glp1buy-page .glp1-thumb-carousel { order: 15; }
+  .glp1buy-page .glp1-benefit-callouts { order: 16; }
 }
 
 /* ─── Deep mobile (≤480px) ─── */
