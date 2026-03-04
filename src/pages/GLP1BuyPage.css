@@ -129,7 +129,6 @@
 .glp1buy-hero-video {
   position: relative;
   width: 100%;
-  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   margin-bottom: 16px;
@@ -138,31 +137,53 @@
 .glp1buy-hero-video video {
   width: 100%;
   aspect-ratio: 1/1;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
-  border-radius: 12px;
+  background: #000;
 }
 
-.glp1buy-sound-hint {
+/* ─── Sound overlay ─── */
+.glp1buy-sound-overlay {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 3;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+.glp1buy-sound-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.glp1buy-sound-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #E53E3E;
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(0,0,0,0.55);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 6px 12px;
-  border-radius: 8px;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-  z-index: 2;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  animation: glp1buy-pulse 1.5s ease-in-out infinite;
 }
 
-.glp1buy-sound-hint.hidden {
-  opacity: 0;
+.glp1buy-sound-label {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+@keyframes glp1buy-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
 }
 
 @media (max-width: 768px) {
@@ -189,10 +210,10 @@
   .glp1buy-page .glp1buy-hero-video { order: 2; }
   .glp1buy-page .glp1-checkout-title { order: 3; }
   .glp1buy-page .glp1-star-rating { order: 4; }
-  .glp1buy-page .glp1-checkout-price { order: 5; }
-  .glp1buy-page .checkout-shipping-note { order: 6; }
-  .glp1buy-page .glp1-checkout-desc { order: 7; }
-  .glp1buy-page .glp1-check-list { order: 8; }
+  .glp1buy-page .glp1-checkout-desc { order: 5; }
+  .glp1buy-page .glp1-check-list { order: 6; }
+  .glp1buy-page .glp1-checkout-price { order: 7; }
+  .glp1buy-page .checkout-shipping-note { order: 8; }
   .glp1buy-page .glp1-bonuses-section { order: 9; }
   .glp1buy-page .glp1buy-inline-form { order: 10; }
   .glp1buy-page .glp1-guarantee-badge { order: 11; }
