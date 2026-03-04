@@ -135,10 +135,10 @@
 
 .glp1buy-hero-video video {
   width: 100%;
-  aspect-ratio: 1/1;
+  max-height: 500px;
   object-fit: contain;
   display: block;
-  background: #000;
+  background: #f8f9fb;
   border-radius: 12px;
 }
 
