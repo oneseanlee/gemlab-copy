@@ -3,6 +3,7 @@
     min-height: 100vh;
     font-family: 'Rethink Sans', sans-serif;
     color: var(--b365-gray-900);
+    overflow-x: hidden;
 }
 
 /* Article Metadata - Editorial Style */

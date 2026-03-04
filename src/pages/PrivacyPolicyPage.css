@@ -2,6 +2,7 @@
   min-height: 100vh;
   background: var(--b365-gray-50);
   color: var(--b365-gray-900);
+  overflow-x: hidden;
 }
 
 .privacy-nav {

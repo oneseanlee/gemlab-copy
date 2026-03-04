@@ -21,6 +21,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--b365-white);
+  overflow-x: hidden;
 }
 
 /* ─── Hero ─── */
