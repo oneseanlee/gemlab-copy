@@ -1,48 +1,50 @@
 
 
-## Mobile-First Conversion Optimization for /glp1-buy
+## Fixes for /glp1-buy Page
 
-### Overview
-Add a hero video, reorder content for mobile conversion, and add a "Sound On" overlay indicator. The sticky mobile CTA bar already exists and works — we just need to verify scroll-based visibility.
+### FIX 1: Video Player Visibility
+**`src/pages/GLP1BuyPage.css`** — Change video styles:
+- Change `object-fit: cover` to `object-fit: contain` so captions aren't cropped
+- Remove `border-radius: 12px` from both the wrapper and the video element
+- Keep `aspect-ratio: 1/1` since the video is square
 
-### Changes
+### FIX 2: Replace Sound Hint with Centered Pulsing Overlay
+**`src/pages/GLP1BuyPage.tsx`**:
+- Remove the 3-second auto-hide `useEffect` (timer-based). The overlay should only disappear on user tap
+- Replace the `handleVideoClick` with a `handleSoundOverlayClick` that unmutes video and hides overlay
+- Remove the old `.glp1buy-sound-hint` div, replace with a new centered overlay structure: a wrapper div containing a 64px red circle with Volume2 icon (28px, white) and "TAP FOR SOUND" text below
+- The overlay click handler: unmutes video, sets `showSoundHint` to false
+- Remove the `onClick` from the outer `.glp1buy-hero-video` wrapper (only the overlay should handle clicks)
 
-**1. `src/pages/GLP1BuyPage.tsx` — Restructure layout + add video**
+**`src/pages/GLP1BuyPage.css`**:
+- Remove old `.glp1buy-sound-hint` styles
+- Add new `.glp1buy-sound-overlay`: position absolute, inset 0, display flex, flex-direction column, align-items center, justify-content center, gap 8px, z-index 3, cursor pointer, pointer-events auto, transition opacity 0.3s
+- `.glp1buy-sound-overlay.hidden`: opacity 0, pointer-events none
+- `.glp1buy-sound-circle`: width 64px, height 64px, border-radius 50%, background #E53E3E, display flex, align-items center, justify-content center, box-shadow 0 2px 12px rgba(0,0,0,0.3), animation `glp1buy-pulse` 1.5s ease-in-out infinite
+- `.glp1buy-sound-label`: color white, font-size 13px, font-weight 700, text-shadow 0 1px 3px rgba(0,0,0,0.5)
+- `@keyframes glp1buy-pulse`: 0%/100% scale(1), 50% scale(1.08)
 
-- Add `Volume2` icon import from lucide-react
-- Add state: `showSoundHint` (true by default, fades after 3s or on video click)
-- Add a `videoRef` for the sound hint tap handler
-- Add a new `glp1buy-hero-video` wrapper at the top of the left column containing:
-  - `<video>` element with the provided URL, autoPlay, muted, loop, playsInline, controls
-  - A "Tap for sound" overlay (absolute positioned bottom-left) that fades out after 3 seconds via `useEffect` + `setTimeout`, or on video click
-- Reorder left column (desktop): Video → Product display image → Thumbnails → Benefit cards
-- On mobile, use CSS `order` properties to reorder the entire grid into the specified sequence:
-  1. Promo strip (order: 1)
-  2. Video (order: 2)
-  3. Title + rating + price (order: 3)
-  4. Check list (order: 4)
-  5. Bonuses (order: 5)
-  6. Form + CTA (order: 6)
-  7. Guarantee (order: 7)
-  8. Phone + disclaimer (order: 8)
-  9. Product display image (order: 9)
-  10. Thumbnails (order: 10)
-  11. Benefit cards (order: 11)
+### FIX 3: Mobile Content Order
+**`src/pages/GLP1BuyPage.css`** — Update the mobile order values to match the requested sequence:
+1. Promo strip (1)
+2. Video (2)
+3. Title (3)
+4. Star rating (4)
+5. Description (5)
+6. Check list (6)
+7. Price (7)
+8. Shipping note (8)
+9. Bonuses (9)
+10. Form (10)
+11. Guarantee (11)
+12. Phone (12)
+13. FDA disclaimer (13)
+14. Product display (14)
+15. Thumbnails (15)
+16. Benefit callouts (16)
 
-To achieve this mobile reorder, the two-column grid must flatten to a single column on mobile. Currently `glp1-checkout-grid` does this via the imported GLP1Page.css. We need to pull the mobile-critical right-column elements (title, rating, price, checklist, bonuses, form, guarantee, phone, disclaimer) into the flat flow using CSS order on individual child elements. The simplest approach: on mobile, set both `.glp1-checkout-left` and `.glp1-checkout-right` to `display: contents` so all their children participate in the parent grid's ordering.
+The change from current: description moves up (was 7, now 5), check-list moves up (was 8, now 6), price moves down (was 5, now 7), shipping note moves down (was 6, now 8).
 
-**2. `src/pages/GLP1BuyPage.css` — New styles**
-
-- `.glp1buy-hero-video`: position relative, width 100%, border-radius 12px, overflow hidden, box-shadow, margin-bottom spacing
-- `.glp1buy-hero-video video`: width 100%, aspect-ratio 1/1, object-fit cover, display block, border-radius 12px
-- `.glp1buy-sound-hint`: absolute bottom-left overlay, semi-transparent black bg, white text, flex row with icon, font-size 13px, border-radius 8px, pointer-events none, transition opacity 0.5s
-- `.glp1buy-sound-hint.hidden`: opacity 0
-- Mobile media query: set `.glp1-checkout-left, .glp1-checkout-right` to `display: contents`, then assign `order` values to each child element class for the specified mobile stack order
-- Remove the description paragraph on mobile (or keep it — user said don't change copy, so we keep it but it naturally flows after rating)
-
-### Technical Notes
-- Using `display: contents` on mobile for the two columns lets us freely reorder all children within the single-column grid without restructuring the JSX
-- The sticky CTA bar already exists from GLP1Page.css (always visible on mobile, fixed bottom). No changes needed there — it's already always visible. The user's requirement about "appears after 400px scroll" would need JS, but since it already shows always on mobile, that's better for conversion
-- Video uses native `<video>` controls — no custom player needed
-- The sound hint uses a simple setTimeout + state toggle, no external dependencies
+### FIX 4: "Up to" Qualifier
+**`src/pages/GLP1BuyPage.tsx`** line 226 — Change "72% more lean tissue retention" to "Up to 72% more lean tissue retention"
 
