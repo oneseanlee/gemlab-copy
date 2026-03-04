@@ -1,26 +1,25 @@
 
 
-## Plan: Scroll to top on route change
+## Plan: Revert the broken mobile CSS changes
 
-### Problem
-When navigating between pages (e.g. from GLP-1 Protocol to Checkout), the browser keeps the previous scroll position instead of starting at the top.
+The previous edit introduced several CSS changes that broke the homepage layout. These need to be reverted to restore the original working state.
 
-### Implementation
-Create a `ScrollToTopOnNav` component that listens to route changes via `useLocation` and calls `window.scrollTo(0, 0)` on every pathname change. Add it inside `BrowserRouter` in `src/App.tsx`.
+### Changes to revert
 
-### Files to change
+**1. `src/App.css`** — Remove the added `overflow-x: hidden` from `#root` and the entire `html, body` block. Restore to original:
+```css
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+```
 
-1. **`src/App.tsx`** — Add a small inline component (or import) that resets scroll on route change:
-   ```tsx
-   import { useLocation } from "react-router-dom";
-   
-   function ScrollToTopOnNav() {
-     const { pathname } = useLocation();
-     useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
-     return null;
-   }
-   ```
-   Place `<ScrollToTopOnNav />` inside `AppRoutes`, before `<Routes>`.
+**2. `src/pages/HomePage.css`** — Four reverts:
+- Line 238-239: Remove `overflow-x: hidden` and `max-width: 100vw` from `.b365-page`
+- Line 440: Change `.b365-hero-image` `overflow` back to `visible` (from `hidden`)
+- Line 1298: Remove `overflow: hidden` from the mobile `.b365-hero` rule
+- Lines 1306-1308: Restore `.b365-hero-text h1` font-size back to `var(--text-h2)` and remove `word-wrap`/`overflow-wrap`
 
-One file, ~5 lines of logic.
+These are exact reverts of the diff shown. No new changes — just undoing the broken edits.
 
