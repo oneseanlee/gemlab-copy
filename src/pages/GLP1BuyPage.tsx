@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Volume2 } from "lucide-react";
+import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Volume2, Shield, FlaskConical, Truck } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { GLP1_VARIANT_ID } from "@/lib/shopify";
 import { toast } from "sonner";
@@ -213,6 +213,20 @@ const GLP1BuyPage = () => {
               <div className="benefit-item"><div className="benefit-icon"><Dumbbell size={20} /></div><span>Preserve Lean Muscle</span></div>
               <div className="benefit-item"><div className="benefit-icon"><Brain size={20} /></div><span>Restore Mental Clarity</span></div>
               <div className="benefit-item"><div className="benefit-icon"><Flame size={20} /></div><span>Optimize Fat Burning</span></div>
+            </div>
+
+            <div className="glp1buy-trust-strip">
+              <div className="glp1buy-trust-item"><Shield size={18} /><span>Made in USA</span></div>
+              <div className="glp1buy-trust-item"><FlaskConical size={18} /><span>cGMP Certified</span></div>
+              <div className="glp1buy-trust-item"><Truck size={18} /><span>Free Shipping</span></div>
+            </div>
+
+            <div className="glp1buy-testimonial">
+              <div className="glp1buy-testimonial-stars">
+                {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#f59e0b" color="#f59e0b" />)}
+              </div>
+              <p className="glp1buy-testimonial-quote">"I started the GLP-1 Protocol three weeks ago and the energy difference is night and day. I'm keeping my muscle, my brain fog is gone, and I actually want to work out again."</p>
+              <cite className="glp1buy-testimonial-cite">— Sarah M., Verified Buyer</cite>
             </div>
           </div>
 
