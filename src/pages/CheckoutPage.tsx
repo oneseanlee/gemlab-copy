@@ -17,8 +17,7 @@ import ExitIntentPopup from "@/components/Checkout/ExitIntentPopup";
 import "./CheckoutPage.css";
 
 const checkoutSchema = z.object({
-  firstName: z.string().trim().min(1, "First name is required").max(100),
-  lastName: z.string().trim().max(100).optional().or(z.literal("")),
+  fullName: z.string().trim().min(1, "Full name is required").max(200),
   email: z.string().email("Please enter a valid email").max(255),
   phone: z.string().optional(),
 });
@@ -83,8 +82,8 @@ const CheckoutPage = () => {
     setIsSubmitting(true);
     try {
       await supabase.from("checkout_leads").insert({
-        first_name: data.firstName.trim(),
-        last_name: data.lastName?.trim() || null,
+        first_name: data.fullName.trim(),
+        last_name: null,
         email: data.email.trim(),
         phone: data.phone || null,
         cart_items: items.map(i => ({
@@ -101,8 +100,8 @@ const CheckoutPage = () => {
         phone: data.phone || undefined,
         deliveryAddressPreferences: [{
           deliveryAddress: {
-            firstName: data.firstName.trim(),
-            lastName: data.lastName?.trim() || "",
+            firstName: data.fullName.trim().split(' ')[0],
+            lastName: data.fullName.trim().split(' ').slice(1).join(' ') || "",
             address1: "",
             city: "",
             province: "",
@@ -237,16 +236,10 @@ const CheckoutPage = () => {
                 <p className="checkout-section-note">
                   Enter your details to proceed. Shipping and payment details are collected securely on the next step.
                 </p>
-                <div className="checkout-field-row" style={{ display: 'flex', gap: '0.75rem' }}>
-                  <div className="checkout-field" style={{ flex: 1 }}>
-                    <label>First Name *</label>
-                    <input type="text" placeholder="John" {...register("firstName")} />
-                    {errors.firstName && <div className="checkout-field-error">{errors.firstName.message}</div>}
-                  </div>
-                  <div className="checkout-field" style={{ flex: 1 }}>
-                    <label>Last Name</label>
-                    <input type="text" placeholder="Doe" {...register("lastName")} />
-                  </div>
+                <div className="checkout-field">
+                  <label>Full Name *</label>
+                  <input type="text" placeholder="John Doe" {...register("fullName")} />
+                  {errors.fullName && <div className="checkout-field-error">{errors.fullName.message}</div>}
                 </div>
                 <div className="checkout-field">
                   <label>Email Address *</label>
@@ -259,10 +252,7 @@ const CheckoutPage = () => {
                 <div className="checkout-field">
                   <label>Phone (optional)</label>
                   <input type="tel" placeholder="+1 (555) 000-0000" {...register("phone")} />
-                  <label className="checkout-sms-toggle">
-                    <input type="checkbox" checked={smsUpdates} onChange={e => setSmsUpdates(e.target.checked)} />
-                    <span>📱 Get SMS order updates</span>
-                  </label>
+                  <span className="checkout-field-hint">📦 Get tracking details & special offers</span>
                 </div>
               </div>
 
