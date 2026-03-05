@@ -1,31 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { trackMetaEvent } from "@/lib/meta-pixel";
 import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Volume2, Shield, FlaskConical, Truck } from "lucide-react";
-import { useCartStore } from "@/stores/cartStore";
-import { TPRIME_VARIANT_ID } from "@/lib/shopify";
+import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Shield, FlaskConical, Truck } from "lucide-react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 import "./TPrimeBuyPage.css";
-
-/* ── TPrime product data ───────────────────────────────── */
-const TPRIME_PRODUCT = {
-  node: {
-    id: "gid://shopify/Product/8988427911308",
-    title: "TPrime365™ — Natural Testosterone Optimization",
-    description: "",
-    handle: "tprime365",
-    priceRange: { minVariantPrice: { amount: "149.00", currencyCode: "USD" } },
-    images: { edges: [{ node: { url: "/images/tprime-bottle.png", altText: "TPrime365" } }] },
-    variants: { edges: [{ node: { id: TPRIME_VARIANT_ID, title: "Monthly Subscription", price: { amount: "149.00", currencyCode: "USD" }, availableForSale: true, selectedOptions: [{ name: "Plan", value: "Monthly Subscription" }] } }] },
-    options: [{ name: "Plan", values: ["Monthly Subscription"] }],
-  },
-};
-
-const PRICE = 149.00;
-const COMPARE_PRICE = 299.00;
 
 /* ── Carousel media ──────────────────────────────────── */
 type MediaItem = { type: "image"; src: string };
@@ -38,6 +20,9 @@ const carouselMedia: MediaItem[] = [
   { type: "image", src: "/images/tprime-sublingual-delivery.jpg" },
 ];
 
+const PRICE = 149.00;
+const COMPARE_PRICE = 299.00;
+
 /* ── Form schema ──────────────────────────────────────── */
 const schema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -47,43 +32,10 @@ type FormData = z.infer<typeof schema>;
 
 /* ── Component ────────────────────────────────────────── */
 const TPrimeBuyPage = () => {
-  const { items, isLoading, addItem, updateBuyerIdentity, getCheckoutUrl } = useCartStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [cartReady, setCartReady] = useState(false);
   const [activeThumb, setActiveThumb] = useState(0);
-  const addedRef = useRef(false);
   const hasSubmitted = useRef(false);
-
-  /* Auto-add TPrime to cart on mount */
-  useEffect(() => {
-    if (addedRef.current) return;
-    addedRef.current = true;
-
-    const alreadyInCart = items.some((i) => i.variantId === TPRIME_VARIANT_ID);
-    if (alreadyInCart) {
-      setCartReady(true);
-      return;
-    }
-
-    (async () => {
-      await addItem({
-        product: TPRIME_PRODUCT,
-        variantId: TPRIME_VARIANT_ID,
-        variantTitle: "Monthly Subscription",
-        price: { amount: "149.00", currencyCode: "USD" },
-        quantity: 1,
-        selectedOptions: [{ name: "Plan", value: "Monthly Subscription" }],
-      });
-      setCartReady(true);
-    })();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /* Track InitiateCheckout once cart is ready */
-  useEffect(() => {
-    if (cartReady) {
-      trackMetaEvent("InitiateCheckout", { value: PRICE, currency: "USD", num_items: 1 });
-    }
-  }, [cartReady]);
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -91,60 +43,24 @@ const TPrimeBuyPage = () => {
 
   const onSubmit = async (data: FormData) => {
     if (hasSubmitted.current) return;
-
-    const checkoutUrl = getCheckoutUrl();
-    if (!checkoutUrl) {
-      toast.error("Cart is still loading. Please wait a moment and try again.");
-      return;
-    }
-
     hasSubmitted.current = true;
     setIsSubmitting(true);
+
     try {
-      await supabase.from("checkout_leads").insert({
+      await supabase.from("leads").insert({
         first_name: data.name.trim(),
-        last_name: null,
         email: data.email.trim(),
-        phone: null,
-        cart_items: [{ title: TPRIME_PRODUCT.node.title, variantId: TPRIME_VARIANT_ID, quantity: 1, price: "149.00" }],
-        cart_total: PRICE,
+        source: "tprime-buy",
       });
 
-      const nameParts = data.name.trim().split(" ");
-      const firstName = nameParts[0];
-      const lastName = nameParts.slice(1).join(" ");
-
-      await updateBuyerIdentity({
-        email: data.email,
-        deliveryAddressPreferences: [{
-          deliveryAddress: {
-            firstName,
-            lastName: lastName || "",
-            address1: "",
-            city: "",
-            province: "",
-            zip: "",
-            country: "US",
-          },
-        }],
-      });
-
-      window.location.href = checkoutUrl;
+      trackMetaEvent("Lead", { content_name: "TPrime365 Buy Page", value: PRICE, currency: "USD" });
+      navigate("/tprime365-intake");
     } catch {
-      const fallback = getCheckoutUrl();
-      if (fallback) window.location.href = fallback;
+      toast.error("Something went wrong. Please try again.");
+      hasSubmitted.current = false;
+      setIsSubmitting(false);
     }
   };
-
-  /* ── Loading state ────────────────────────────────── */
-  if (!cartReady) {
-    return (
-      <div className="tprimebuy-loading">
-        <div className="tprimebuy-loading-spinner" />
-        <p>Preparing your order…</p>
-      </div>
-    );
-  }
 
   /* ── Main render ──────────────────────────────────── */
   return (
@@ -242,10 +158,10 @@ const TPrimeBuyPage = () => {
               </div>
             </div>
 
-            {/* Inline Name + Email Form */}
+            {/* Inline Name + Email Form — Lead Capture */}
             <form className="glp1buy-inline-form" onSubmit={handleSubmit(onSubmit)}>
-              <h3 className="glp1buy-form-headline">Start Your TPrime365™ Protocol — Ships Free in 7–10 Days</h3>
-              <p className="glp1buy-form-subtext">Enter your details below to get started. You'll complete secure payment on the next page — takes less than 60 seconds.</p>
+              <h3 className="glp1buy-form-headline">Check If You Qualify — Free Physician Review</h3>
+              <p className="glp1buy-form-subtext">Enter your details below to start your qualification. A licensed physician will review your intake — takes less than 5 minutes.</p>
               <div className="glp1buy-field">
                 <label htmlFor="tprimebuy-name">Your Name *</label>
                 <input id="tprimebuy-name" type="text" placeholder="John Doe" {...register("name")} />
@@ -257,13 +173,13 @@ const TPrimeBuyPage = () => {
                 {errors.email && <div className="glp1buy-field-error">{errors.email.message}</div>}
               </div>
 
-              <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading || hasSubmitted.current}>
-                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Redirecting…</> : <>Get My TPrime365™ <ArrowRight size={18} /></>}
+              <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting}>
+                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Processing…</> : <>See If I Qualify <ArrowRight size={18} /></>}
               </button>
 
               <div className="glp1buy-secure-note">
                 <Lock size={13} />
-                <span>Secure checkout — SSL encrypted. Payment on next page.</span>
+                <span>HIPAA-compliant — your information is secure.</span>
               </div>
             </form>
 
@@ -288,8 +204,8 @@ const TPrimeBuyPage = () => {
       {/* Mobile sticky CTA */}
       <div className="glp1-sticky-mobile-cta">
         <span className="sticky-price">$149 <span className="sticky-strike">$299</span></span>
-        <button className="sticky-cta-btn" disabled={isSubmitting || isLoading || hasSubmitted.current} onClick={handleSubmit(onSubmit)}>
-          {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> Redirecting…</> : <>Get My TPrime365™ <ArrowRight size={14} /></>}
+        <button className="sticky-cta-btn" disabled={isSubmitting} onClick={handleSubmit(onSubmit)}>
+          {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> Processing…</> : <>See If I Qualify <ArrowRight size={14} /></>}
         </button>
       </div>
     </div>
