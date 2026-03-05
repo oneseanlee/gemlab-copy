@@ -303,7 +303,7 @@ const GuidesPage = () => {
             <li><Link to="/#faq">FAQ</Link></li>
           </ul>
           <div className="b365-nav-right">
-            <AnimatedCTA href="https://www.skool.com/best365labs/about" small target="_blank" rel="noopener noreferrer">Join the Community</AnimatedCTA>
+            <AnimatedCTA href="https://www.skool.com/best-365-labs-community-7298/about" small target="_blank" rel="noopener noreferrer">Join the Community</AnimatedCTA>
           </div>
         </div>
       </nav>
