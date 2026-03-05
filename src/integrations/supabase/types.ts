@@ -79,6 +79,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_checkout_lead_rate_limit: {
+        Args: { p_cooldown_seconds?: number; p_email: string }
+        Returns: boolean
+      }
       check_lead_rate_limit: {
         Args: { p_cooldown_seconds?: number; p_email: string; p_source: string }
         Returns: boolean
