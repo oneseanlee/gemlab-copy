@@ -5,8 +5,9 @@ const SHOPIFY_STORE_PERMANENT_DOMAIN = 'cell365power-yq7na.myshopify.com';
 const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 const SHOPIFY_STOREFRONT_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN || 'e315ea6bf6c4520bc5cae80d5e95dd5d';
 
-// The GLP-1 Optimization Protocol variant
+// Product variant IDs
 export const GLP1_VARIANT_ID = 'gid://shopify/ProductVariant/46265391579276';
+export const TPRIME_VARIANT_ID = 'gid://shopify/ProductVariant/46309997936780';
 
 export interface ShopifyProduct {
   node: {

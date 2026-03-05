@@ -25,6 +25,7 @@ const ThankYouPage = lazy(() => import("./pages/ThankYouPage"));
 const TPrimeAdvertorialPage = lazy(() => import("./pages/TPrimeAdvertorialPage"));
 const GLP1AdvertorialPage = lazy(() => import("./pages/GLP1AdvertorialPage"));
 const GLP1BuyPage = lazy(() => import("./pages/GLP1BuyPage"));
+const TPrimeBuyPage = lazy(() => import("./pages/TPrimeBuyPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ const AppRoutes = () => {
         <Route path="/tprime365-article" element={<TPrimeAdvertorialPage />} />
         <Route path="/glp1-article" element={<GLP1AdvertorialPage />} />
         <Route path="/glp1-buy" element={<GLP1BuyPage />} />
+        <Route path="/tprime-buy" element={<TPrimeBuyPage />} />
         <Route path="/glp1-protocol" element={<GLP1Page />} />
         <Route path="/nhto" element={<NHTOPage />} />
         <Route path="/nhto-intake" element={<NHTOIntakePage />} />
