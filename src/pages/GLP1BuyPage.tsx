@@ -42,6 +42,7 @@ const carouselMedia: MediaItem[] = [
 const schema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().email("Please enter a valid email").max(255),
+  phone: z.string().optional(),
 });
 type FormData = z.infer<typeof schema>;
 
@@ -114,7 +115,7 @@ const GLP1BuyPage = () => {
         first_name: data.name.trim(),
         last_name: null,
         email: data.email.trim(),
-        phone: null,
+        phone: data.phone || null,
         cart_items: [{ title: GLP1_PRODUCT.node.title, variantId: GLP1_VARIANT_ID, quantity: 1, price: "39.95" }],
         cart_total: PRICE,
       });
@@ -290,6 +291,11 @@ const GLP1BuyPage = () => {
                 <label htmlFor="glp1buy-email">Email Address *</label>
                 <input id="glp1buy-email" type="email" placeholder="you@example.com" {...register("email")} />
                 {errors.email && <div className="glp1buy-field-error">{errors.email.message}</div>}
+              </div>
+              <div className="glp1buy-field">
+                <label htmlFor="glp1buy-phone">Phone (optional)</label>
+                <input id="glp1buy-phone" type="tel" placeholder="+1 (555) 000-0000" {...register("phone")} />
+                <span className="glp1buy-field-hint">📦 Get tracking details & special offers</span>
               </div>
 
               <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading || hasSubmitted.current}>
