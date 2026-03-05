@@ -1,50 +1,62 @@
 
 
-## Fixes for /glp1-buy Page
+## Add Database-Level Rate Limiting to checkout_leads
 
-### FIX 1: Video Player Visibility
-**`src/pages/GLP1BuyPage.css`** — Change video styles:
-- Change `object-fit: cover` to `object-fit: contain` so captions aren't cropped
-- Remove `border-radius: 12px` from both the wrapper and the video element
-- Keep `aspect-ratio: 1/1` since the video is square
+### What This Does
+Prevents the same email from submitting the checkout form more than once within 60 seconds, enforced at the database level (not just UI). This mirrors the existing protection on the `leads` table.
 
-### FIX 2: Replace Sound Hint with Centered Pulsing Overlay
-**`src/pages/GLP1BuyPage.tsx`**:
-- Remove the 3-second auto-hide `useEffect` (timer-based). The overlay should only disappear on user tap
-- Replace the `handleVideoClick` with a `handleSoundOverlayClick` that unmutes video and hides overlay
-- Remove the old `.glp1buy-sound-hint` div, replace with a new centered overlay structure: a wrapper div containing a 64px red circle with Volume2 icon (28px, white) and "TAP FOR SOUND" text below
-- The overlay click handler: unmutes video, sets `showSoundHint` to false
-- Remove the `onClick` from the outer `.glp1buy-hero-video` wrapper (only the overlay should handle clicks)
+### Steps
 
-**`src/pages/GLP1BuyPage.css`**:
-- Remove old `.glp1buy-sound-hint` styles
-- Add new `.glp1buy-sound-overlay`: position absolute, inset 0, display flex, flex-direction column, align-items center, justify-content center, gap 8px, z-index 3, cursor pointer, pointer-events auto, transition opacity 0.3s
-- `.glp1buy-sound-overlay.hidden`: opacity 0, pointer-events none
-- `.glp1buy-sound-circle`: width 64px, height 64px, border-radius 50%, background #E53E3E, display flex, align-items center, justify-content center, box-shadow 0 2px 12px rgba(0,0,0,0.3), animation `glp1buy-pulse` 1.5s ease-in-out infinite
-- `.glp1buy-sound-label`: color white, font-size 13px, font-weight 700, text-shadow 0 1px 3px rgba(0,0,0,0.5)
-- `@keyframes glp1buy-pulse`: 0%/100% scale(1), 50% scale(1.08)
+1. **Create a `check_checkout_lead_rate_limit()` database function** — a security-definer function that checks if the same email has submitted within the last 60 seconds on the `checkout_leads` table.
 
-### FIX 3: Mobile Content Order
-**`src/pages/GLP1BuyPage.css`** — Update the mobile order values to match the requested sequence:
-1. Promo strip (1)
-2. Video (2)
-3. Title (3)
-4. Star rating (4)
-5. Description (5)
-6. Check list (6)
-7. Price (7)
-8. Shipping note (8)
-9. Bonuses (9)
-10. Form (10)
-11. Guarantee (11)
-12. Phone (12)
-13. FDA disclaimer (13)
-14. Product display (14)
-15. Thumbnails (15)
-16. Benefit callouts (16)
+2. **Update the RLS policy on `checkout_leads`** — drop the existing INSERT policy and replace it with one that includes the rate-limit check, so duplicate inserts are rejected by the database itself.
 
-The change from current: description moves up (was 7, now 5), check-list moves up (was 8, now 6), price moves down (was 5, now 7), shipping note moves down (was 6, now 8).
+### SQL Migration
 
-### FIX 4: "Up to" Qualifier
-**`src/pages/GLP1BuyPage.tsx`** line 226 — Change "72% more lean tissue retention" to "Up to 72% more lean tissue retention"
+```sql
+-- 1. Rate-limit function for checkout_leads
+CREATE OR REPLACE FUNCTION public.check_checkout_lead_rate_limit(
+  p_email text,
+  p_cooldown_seconds integer DEFAULT 60
+)
+RETURNS boolean
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path TO 'public'
+AS $$
+DECLARE
+  last_submission TIMESTAMP WITH TIME ZONE;
+BEGIN
+  SELECT created_at INTO last_submission
+  FROM public.checkout_leads
+  WHERE email = p_email
+  ORDER BY created_at DESC
+  LIMIT 1;
+
+  IF last_submission IS NULL THEN
+    RETURN TRUE;
+  END IF;
+
+  RETURN (EXTRACT(EPOCH FROM (NOW() - last_submission)) > p_cooldown_seconds);
+END;
+$$;
+
+-- 2. Replace INSERT policy with rate-limited version
+DROP POLICY IF EXISTS "Validated checkout lead inserts" ON public.checkout_leads;
+
+CREATE POLICY "Validated rate-limited checkout lead inserts"
+ON public.checkout_leads
+FOR INSERT
+TO anon, authenticated
+WITH CHECK (
+  char_length(first_name) > 0
+  AND char_length(first_name) <= 100
+  AND char_length(email) > 0
+  AND char_length(email) <= 255
+  AND email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+  AND check_checkout_lead_rate_limit(email, 60)
+);
+```
+
+No frontend code changes needed — the existing `hasSubmitted` ref already prevents double-clicks on the UI side; this adds the server-side safety net.
 
