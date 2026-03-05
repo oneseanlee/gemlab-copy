@@ -1,5 +1,11 @@
 import { useEffect } from 'react';
 import { FileText, Shield, Clock } from 'lucide-react';
+
+declare global {
+  interface Window {
+    dataLayer?: Record<string, unknown>[];
+  }
+}
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import './NHTOIntakePage.css';
 
@@ -16,8 +22,32 @@ const TPrime365IntakePage = () => {
       if (!iframe) return;
 
       if (e.data.type === 'resize' && typeof e.data.height === 'number') {
-        const safeHeight = Math.min(Math.max(e.data.height, 400), 5000);
-        iframe.style.height = safeHeight + 'px';
+        iframe.style.height = e.data.height + 'px';
+      }
+
+      if (e.data.type === 'submit') {
+        console.log('Form submitted successfully!', e.data);
+
+        // Push to GTM dataLayer
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'form_submission',
+          form_name: 'testosterone_intake',
+          vendor_id: 'best365labgqzb',
+          tracking_code: 'TPRIME365',
+        });
+
+        // Fire Meta Pixel browser-side for redundancy
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', 'Lead', {
+            content_name: 'testosterone_intake',
+            content_category: 'intake_form',
+          });
+        }
+      }
+
+      if (e.data.type === 'error') {
+        console.error('Form error:', e.data.error);
       }
     };
 
@@ -83,13 +113,13 @@ const TPrime365IntakePage = () => {
           <div className="intake-iframe-wrapper">
             <iframe
               id="happymd-testosterone-embed"
-              src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=TPRIME365&v=v2"
+              src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=TPRIME365&v=v2&theme=best365"
               width="100%"
               height="800px"
+              scrolling="auto"
               style={{ border: 'none', maxWidth: '100%', display: 'block' }}
               title="happyMD TPrime365 Testosterone Optimization Form"
               allow="camera; microphone"
-              loading="lazy"
             />
           </div>
         </div>
