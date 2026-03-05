@@ -284,17 +284,17 @@ const GLP1BuyPage = () => {
               <p className="glp1buy-form-subtext">Enter your details below to reserve your protocol. You'll complete secure payment on the next page — takes less than 60 seconds.</p>
               <div className="glp1buy-field">
                 <label htmlFor="glp1buy-name">Your Name *</label>
-                <input id="glp1buy-name" type="text" placeholder="John Doe" {...register("name")} />
+                <input id="glp1buy-name" type="text" placeholder="e.g. Sarah Mitchell" {...register("name")} />
                 {errors.name && <div className="glp1buy-field-error">{errors.name.message}</div>}
               </div>
               <div className="glp1buy-field">
                 <label htmlFor="glp1buy-email">Email Address *</label>
-                <input id="glp1buy-email" type="email" placeholder="you@example.com" {...register("email")} />
+                <input id="glp1buy-email" type="email" placeholder="your.email@gmail.com" {...register("email")} />
                 {errors.email && <div className="glp1buy-field-error">{errors.email.message}</div>}
               </div>
               <div className="glp1buy-field">
                 <label htmlFor="glp1buy-phone">Phone (optional)</label>
-                <input id="glp1buy-phone" type="tel" placeholder="+1 (555) 000-0000" {...register("phone")} />
+                <input id="glp1buy-phone" type="tel" placeholder="(555) 123-4567" {...register("phone")} />
                 <span className="glp1buy-field-hint">📦 Get tracking details & special offers</span>
               </div>
 
