@@ -10,14 +10,19 @@ const NHTOIntakePage = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      if (e.origin !== 'https://happymd.co') return;
-
       const iframe = document.getElementById('happymd-testosterone-embed') as HTMLIFrameElement;
       if (!iframe) return;
 
-      if (e.data.type === 'resize' && typeof e.data.height === 'number') {
-        const safeHeight = Math.min(Math.max(e.data.height, 400), 5000);
-        iframe.style.height = safeHeight + 'px';
+      if (e.data && e.data.type === 'resize') {
+        iframe.style.height = e.data.height + 'px';
+      }
+
+      if (e.data && e.data.type === 'submit') {
+        console.log('Form submitted successfully!', e.data);
+      }
+
+      if (e.data && e.data.type === 'error') {
+        console.error('Form error:', e.data.error);
       }
     };
 
@@ -83,13 +88,13 @@ const NHTOIntakePage = () => {
           <div className="intake-iframe-wrapper">
             <iframe
               id="happymd-testosterone-embed"
-              src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=UCOS%2BNHTO&v=v2"
+              src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=UCOSNHTOBEST&v=v2&theme=best365"
               width="100%"
-              height="1200px"
+              height="800px"
+              scrolling="auto"
               style={{ border: 'none', maxWidth: '100%', display: 'block' }}
               title="happyMD Testosterone Optimization Form"
               allow="camera; microphone"
-              loading="lazy"
             />
           </div>
         </div>
