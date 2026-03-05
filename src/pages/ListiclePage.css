@@ -1,31 +1,9 @@
-/* TPrime365 Listicle — Editorial Article */
-
-:root {
-  --listicle-bg: #FFFFFF;
-  --listicle-bg-alt: #F7FAFC;
-  --listicle-bg-dark: #0B1A2B;
-  --listicle-bg-card: #F0F5FA;
-  --listicle-text: #1A1A1A;
-  --listicle-text-secondary: #4A5568;
-  --listicle-text-muted: #718096;
-  --listicle-accent: #1B6B93;
-  --listicle-accent-dark: #145272;
-  --listicle-accent-light: #E3F0F7;
-  --listicle-gold: #C8982E;
-  --listicle-gold-light: #FDF6E3;
-  --listicle-red: #C53030;
-  --listicle-red-light: #FFF5F5;
-  --listicle-green: #276749;
-  --listicle-green-light: #F0FFF4;
-  --listicle-border: #E2E8F0;
-  --listicle-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  --listicle-shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
-}
+/* TPrime365 Listicle — Editorial Article (Brand Colors) */
 
 .listicle-page {
   font-family: 'DM Sans', -apple-system, sans-serif;
-  color: var(--listicle-text);
-  background: var(--listicle-bg);
+  color: var(--b365-gray-900);
+  background: var(--b365-white);
   line-height: 1.7;
   font-size: 17px;
   -webkit-font-smoothing: antialiased;
@@ -33,7 +11,7 @@
 
 /* URGENCY BANNER */
 .listicle-urgency-banner {
-  background: var(--listicle-bg-dark);
+  background: var(--b365-navy);
   color: #fff;
   text-align: center;
   padding: 10px 20px;
@@ -45,7 +23,7 @@
   z-index: 100;
 }
 .listicle-urgency-banner span {
-  color: var(--listicle-gold);
+  color: var(--b365-gold);
   font-weight: 700;
 }
 
@@ -62,20 +40,20 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 0;
-  border-bottom: 1px solid var(--listicle-border);
+  border-bottom: 1px solid var(--b365-gray-200);
   margin-bottom: 32px;
 }
 .listicle-pub-logo {
   font-family: 'Lora', serif;
   font-size: 15px;
   font-weight: 700;
-  color: var(--listicle-accent);
+  color: var(--b365-blue);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 .listicle-pub-tag {
   font-size: 11px;
-  color: var(--listicle-text-muted);
+  color: var(--b365-gray-500);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   font-weight: 600;
@@ -87,12 +65,12 @@
   font-size: clamp(28px, 5vw, 42px);
   font-weight: 700;
   line-height: 1.2;
-  color: var(--listicle-text);
+  color: var(--b365-gray-900);
   margin-bottom: 16px;
 }
 .listicle-subtitle {
   font-size: 19px;
-  color: var(--listicle-text-secondary);
+  color: var(--b365-gray-500);
   line-height: 1.6;
   margin-bottom: 24px;
   font-style: italic;
@@ -105,14 +83,14 @@
   align-items: center;
   gap: 12px;
   padding-bottom: 24px;
-  border-bottom: 1px solid var(--listicle-border);
+  border-bottom: 1px solid var(--b365-gray-200);
   margin-bottom: 32px;
 }
 .listicle-byline-avatar {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--listicle-accent), var(--listicle-accent-dark));
+  background: linear-gradient(135deg, var(--b365-blue), var(--b365-blue-dark));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,11 +101,11 @@
 }
 .listicle-byline-info {
   font-size: 14px;
-  color: var(--listicle-text-muted);
+  color: var(--b365-gray-500);
   line-height: 1.5;
 }
 .listicle-byline-name {
-  color: var(--listicle-text);
+  color: var(--b365-gray-900);
   font-weight: 600;
 }
 
@@ -146,7 +124,7 @@
 }
 .listicle-hero-caption {
   font-size: 13px;
-  color: var(--listicle-text-muted);
+  color: var(--b365-gray-500);
   font-style: italic;
   margin-bottom: 32px;
 }
@@ -154,17 +132,17 @@
 /* BODY COPY */
 .listicle-page p {
   margin-bottom: 20px;
-  color: var(--listicle-text);
+  color: var(--b365-gray-900);
 }
 .listicle-lead {
   font-size: 19px;
   line-height: 1.8;
-  color: var(--listicle-text-secondary);
+  color: var(--b365-gray-500);
 }
 
 /* SECTION BREAKS */
 .listicle-section-alt {
-  background: var(--listicle-bg-alt);
+  background: var(--b365-gray-50);
   margin-left: -24px;
   margin-right: -24px;
   padding: 40px 24px;
@@ -180,12 +158,12 @@
   text-align: center;
   padding: 28px 20px;
   margin: 32px 0;
-  background: var(--listicle-gold-light);
-  border-top: 2px solid var(--listicle-gold);
-  border-bottom: 2px solid var(--listicle-gold);
+  background: #FDF6E3;
+  border-top: 2px solid var(--b365-gold);
+  border-bottom: 2px solid var(--b365-gold);
 }
 .listicle-stars {
-  color: var(--listicle-gold);
+  color: var(--b365-gold);
   font-size: 24px;
   letter-spacing: 4px;
   margin-bottom: 6px;
@@ -193,11 +171,11 @@
 .listicle-star-text {
   font-size: 15px;
   font-weight: 600;
-  color: var(--listicle-text);
+  color: var(--b365-gray-900);
 }
 .listicle-star-sub {
   font-size: 13px;
-  color: var(--listicle-text-muted);
+  color: var(--b365-gray-500);
   margin-top: 4px;
 }
 
@@ -210,7 +188,7 @@
   font-family: 'Lora', serif;
   font-size: 14px;
   font-weight: 700;
-  color: var(--listicle-accent);
+  color: var(--b365-blue);
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 8px;
@@ -222,29 +200,29 @@
   font-weight: 700;
   line-height: 1.3;
   margin-bottom: 16px;
-  color: var(--listicle-text);
+  color: var(--b365-gray-900);
 }
 
 /* CALLOUT BOXES */
 .listicle-callout {
-  border-left: 4px solid var(--listicle-accent);
+  border-left: 4px solid var(--b365-blue);
   padding: 20px 24px;
   margin: 24px 0;
   border-radius: 0 8px 8px 0;
   font-size: 16px;
-  background: var(--listicle-accent-light);
+  background: var(--b365-blue-light);
 }
 .listicle-callout-red {
-  background: var(--listicle-red-light);
-  border-left-color: var(--listicle-red);
+  background: #FFF5F5;
+  border-left-color: var(--b365-red);
 }
 .listicle-callout-gold {
-  background: var(--listicle-gold-light);
-  border-left-color: var(--listicle-gold);
+  background: #FDF6E3;
+  border-left-color: var(--b365-gold);
 }
 .listicle-callout-green {
-  background: var(--listicle-green-light);
-  border-left-color: var(--listicle-green);
+  background: #F0FFF4;
+  border-left-color: var(--b365-green);
 }
 .listicle-callout strong { font-weight: 700; }
 
@@ -258,17 +236,17 @@
   padding: 8px 0 8px 32px;
   position: relative;
   font-size: 16px;
-  color: var(--listicle-text);
+  color: var(--b365-gray-900);
 }
 .listicle-checklist li::before {
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--listicle-red);
+  color: var(--b365-red);
   font-weight: 700;
   font-size: 16px;
 }
-.listicle-checklist-green li::before { color: var(--listicle-green); }
+.listicle-checklist-green li::before { color: var(--b365-green); }
 
 /* H3 */
 .listicle-page h3 {
@@ -276,7 +254,7 @@
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 16px;
-  color: var(--listicle-text);
+  color: var(--b365-gray-900);
 }
 
 /* INGREDIENT CARDS */
@@ -290,18 +268,18 @@
   .listicle-ingredient-grid { grid-template-columns: 1fr; }
 }
 .listicle-ingredient-card {
-  background: #fff;
-  border: 1px solid var(--listicle-border);
+  background: var(--b365-white);
+  border: 1px solid var(--b365-gray-200);
   border-radius: 10px;
   padding: 24px;
   transition: box-shadow 0.2s;
 }
-.listicle-ingredient-card:hover { box-shadow: var(--listicle-shadow-lg); }
+.listicle-ingredient-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.10); }
 .listicle-ingredient-icon {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: var(--listicle-accent-light);
+  background: var(--b365-blue-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -316,13 +294,13 @@
 }
 .listicle-ingredient-dose {
   font-size: 13px;
-  color: var(--listicle-accent);
+  color: var(--b365-blue);
   font-weight: 600;
   margin-bottom: 8px;
 }
 .listicle-ingredient-card p {
   font-size: 14px;
-  color: var(--listicle-text-secondary);
+  color: var(--b365-gray-500);
   margin-bottom: 0;
   line-height: 1.6;
 }
@@ -334,8 +312,8 @@
   margin: 28px 0;
 }
 .listicle-testimonial-card {
-  background: #fff;
-  border: 1px solid var(--listicle-border);
+  background: var(--b365-white);
+  border: 1px solid var(--b365-gray-200);
   border-radius: 10px;
   padding: 24px;
 }
@@ -351,23 +329,23 @@
 }
 .listicle-testimonial-meta {
   font-size: 12px;
-  color: var(--listicle-text-muted);
+  color: var(--b365-gray-500);
 }
 .listicle-testimonial-stars {
-  color: var(--listicle-gold);
+  color: var(--b365-gold);
   font-size: 16px;
   letter-spacing: 2px;
 }
 .listicle-testimonial-body {
   font-size: 15px;
   line-height: 1.7;
-  color: var(--listicle-text-secondary);
+  color: var(--b365-gray-500);
   font-style: italic;
   margin-bottom: 8px;
 }
 .listicle-verified-badge {
   font-size: 12px;
-  color: var(--listicle-green);
+  color: var(--b365-green);
   font-weight: 600;
 }
 
@@ -384,7 +362,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, var(--listicle-accent), var(--listicle-gold));
+  background: linear-gradient(to bottom, var(--b365-blue), var(--b365-gold));
   border-radius: 2px;
 }
 .listicle-timeline-item {
@@ -399,21 +377,21 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--listicle-accent);
+  background: var(--b365-blue);
   border: 2px solid #fff;
-  box-shadow: 0 0 0 2px var(--listicle-accent);
+  box-shadow: 0 0 0 2px var(--b365-blue);
 }
 .listicle-timeline-label {
   font-weight: 700;
   font-size: 14px;
-  color: var(--listicle-accent);
+  color: var(--b365-blue);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 4px;
 }
 .listicle-timeline-text {
   font-size: 15px;
-  color: var(--listicle-text-secondary);
+  color: var(--b365-gray-500);
   line-height: 1.6;
 }
 
@@ -436,29 +414,29 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom: 2px solid var(--listicle-border);
-  background: var(--listicle-bg-alt);
+  border-bottom: 2px solid var(--b365-gray-200);
+  background: var(--b365-gray-50);
 }
 .listicle-comparison-table th.highlight {
-  background: var(--listicle-accent);
+  background: var(--b365-blue);
   color: #fff;
   border-radius: 8px 8px 0 0;
 }
 .listicle-comparison-table td {
   padding: 11px 14px;
-  border-bottom: 1px solid var(--listicle-border);
+  border-bottom: 1px solid var(--b365-gray-200);
   vertical-align: middle;
 }
 .listicle-comparison-table td.highlight {
-  background: var(--listicle-accent-light);
+  background: var(--b365-blue-light);
   font-weight: 600;
 }
-.listicle-comparison-table .check { color: var(--listicle-green); font-weight: 700; font-size: 16px; }
-.listicle-comparison-table .x { color: var(--listicle-red); font-weight: 700; font-size: 16px; }
+.listicle-comparison-table .check { color: var(--b365-green); font-weight: 700; font-size: 16px; }
+.listicle-comparison-table .x { color: var(--b365-red); font-weight: 700; font-size: 16px; }
 
 /* VALUE STACK */
 .listicle-value-stack {
-  background: var(--listicle-bg-dark);
+  background: var(--b365-navy);
   color: #fff;
   border-radius: 12px;
   padding: 36px 32px;
@@ -483,7 +461,7 @@
 .listicle-value-total {
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 2px solid var(--listicle-gold);
+  border-top: 2px solid var(--b365-gold);
 }
 .listicle-value-total-label {
   font-size: 14px;
@@ -508,7 +486,7 @@
 }
 .listicle-value-per-day {
   font-size: 14px;
-  color: var(--listicle-gold);
+  color: var(--b365-gold);
   margin-top: 4px;
   font-weight: 500;
 }
@@ -516,7 +494,7 @@
 /* CTA BUTTON */
 .listicle-cta-btn {
   display: inline-block;
-  background: var(--listicle-gold);
+  background: var(--b365-blue);
   color: #fff;
   text-decoration: none;
   font-size: 17px;
@@ -526,14 +504,14 @@
   text-align: center;
   letter-spacing: 0.5px;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 16px rgba(200,152,46,0.35);
+  box-shadow: 0 4px 16px rgba(51,118,176,0.35);
   width: 100%;
   max-width: 420px;
 }
 .listicle-cta-btn:hover {
-  background: #b8891f;
+  background: var(--b365-blue-dark);
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(200,152,46,0.45);
+  box-shadow: 0 6px 24px rgba(51,118,176,0.45);
 }
 .listicle-cta-wrap {
   text-align: center;
@@ -541,30 +519,30 @@
 }
 .listicle-cta-sub {
   font-size: 13px;
-  color: var(--listicle-text-muted);
+  color: var(--b365-gray-500);
   margin-top: 10px;
 }
 
 /* FAQ */
 .listicle-faq-item {
-  border-bottom: 1px solid var(--listicle-border);
+  border-bottom: 1px solid var(--b365-gray-200);
   padding: 20px 0;
 }
 .listicle-faq-q {
   font-weight: 700;
   font-size: 16px;
   margin-bottom: 8px;
-  color: var(--listicle-text);
+  color: var(--b365-gray-900);
 }
 .listicle-faq-a {
   font-size: 15px;
-  color: var(--listicle-text-secondary);
+  color: var(--b365-gray-500);
   line-height: 1.7;
 }
 
 /* FINAL CTA */
 .listicle-final-cta {
-  background: var(--listicle-bg-dark);
+  background: var(--b365-navy);
   margin: 48px -24px 0;
   padding: 56px 24px;
   text-align: center;
@@ -598,14 +576,14 @@
 .listicle-sep {
   width: 48px;
   height: 3px;
-  background: var(--listicle-accent);
+  background: var(--b365-blue);
   border-radius: 3px;
   margin: 32px 0;
 }
 
 /* DOCTOR QUOTE */
 .listicle-doc-quote {
-  background: var(--listicle-bg-alt);
+  background: var(--b365-gray-50);
   border-radius: 12px;
   padding: 28px;
   margin: 28px 0;
@@ -615,7 +593,7 @@
   content: '"';
   font-family: 'Lora', serif;
   font-size: 64px;
-  color: var(--listicle-accent);
+  color: var(--b365-blue);
   opacity: 0.2;
   position: absolute;
   top: 8px;
@@ -626,7 +604,7 @@
   font-style: italic;
   font-size: 16px;
   line-height: 1.7;
-  color: var(--listicle-text-secondary);
+  color: var(--b365-gray-500);
   margin-bottom: 12px;
   padding-left: 8px;
 }
@@ -634,13 +612,13 @@
   font-style: normal;
   font-size: 14px;
   font-weight: 600;
-  color: var(--listicle-text);
+  color: var(--b365-gray-900);
   display: block;
   padding-left: 8px;
 }
 .listicle-doc-quote cite span {
   font-weight: 400;
-  color: var(--listicle-text-muted);
+  color: var(--b365-gray-500);
 }
 
 /* STAT ROW */
@@ -655,7 +633,7 @@
   .listicle-stat-row { grid-template-columns: 1fr; }
 }
 .listicle-stat-box {
-  background: var(--listicle-accent-light);
+  background: var(--b365-blue-light);
   border-radius: 10px;
   padding: 20px 16px;
 }
@@ -663,13 +641,13 @@
   font-family: 'Lora', serif;
   font-size: 32px;
   font-weight: 700;
-  color: var(--listicle-accent);
+  color: var(--b365-blue);
   line-height: 1;
   margin-bottom: 6px;
 }
 .listicle-stat-label {
   font-size: 13px;
-  color: var(--listicle-text-muted);
+  color: var(--b365-gray-500);
   line-height: 1.4;
 }
 
@@ -684,8 +662,8 @@
   .listicle-process-grid { grid-template-columns: 1fr; }
 }
 .listicle-process-step {
-  background: #fff;
-  border: 1px solid var(--listicle-border);
+  background: var(--b365-white);
+  border: 1px solid var(--b365-gray-200);
   border-radius: 10px;
   padding: 24px;
 }
@@ -693,7 +671,7 @@
   font-family: 'Lora', serif;
   font-size: 28px;
   font-weight: 700;
-  color: var(--listicle-accent);
+  color: var(--b365-blue);
   opacity: 0.3;
   margin-bottom: 8px;
 }
@@ -704,7 +682,7 @@
 }
 .listicle-process-step p {
   font-size: 14px;
-  color: var(--listicle-text-secondary);
+  color: var(--b365-gray-500);
   margin-bottom: 0;
   line-height: 1.6;
 }
