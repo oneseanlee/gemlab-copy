@@ -238,20 +238,20 @@ const CheckoutPage = () => {
                 </p>
                 <div className="checkout-field">
                   <label>Full Name *</label>
-                  <input type="text" placeholder="John Doe" {...register("fullName")} />
+                  <input type="text" placeholder="e.g. Sarah Mitchell" {...register("fullName")} />
                   {errors.fullName && <div className="checkout-field-error">{errors.fullName.message}</div>}
                 </div>
                 <div className="checkout-field">
                   <label>Email Address *</label>
                   <div className="checkout-field-with-icon">
-                    <input type="email" placeholder="you@example.com" {...register("email")} />
+                    <input type="email" placeholder="your.email@gmail.com" {...register("email")} />
                     <MessageSquare size={16} className="checkout-field-icon" />
                   </div>
                   {errors.email && <div className="checkout-field-error">{errors.email.message}</div>}
                 </div>
                 <div className="checkout-field">
                   <label>Phone (optional)</label>
-                  <input type="tel" placeholder="+1 (555) 000-0000" {...register("phone")} />
+                  <input type="tel" placeholder="(555) 123-4567" {...register("phone")} />
                   <span className="checkout-field-hint">📦 Get tracking details & special offers</span>
                 </div>
               </div>
