@@ -4,14 +4,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Shield, FlaskConical, Truck } from "lucide-react";
+import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Shield, FlaskConical, Truck, Volume2 } from "lucide-react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import "./TPrimeBuyPage.css";
 
 /* ── Carousel media ──────────────────────────────────── */
-type MediaItem = { type: "image"; src: string };
+const TPRIME_VIDEO_URL = "https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a8ec727bdf384bda5534e1.mp4";
+type MediaItem = { type: "video"; src: string } | { type: "image"; src: string };
 const carouselMedia: MediaItem[] = [
+  { type: "video", src: TPRIME_VIDEO_URL },
   { type: "image", src: "/images/tprime-hero-composite.png" },
   { type: "image", src: "/images/tprime-whats-included.png" },
   { type: "image", src: "/images/tprime-risk-free.png" },
@@ -34,8 +36,17 @@ type FormData = z.infer<typeof schema>;
 const TPrimeBuyPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeThumb, setActiveThumb] = useState(0);
+  const [showSoundHint, setShowSoundHint] = useState(true);
   const hasSubmitted = useRef(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const navigate = useNavigate();
+
+  const handleSoundOverlayClick = () => {
+    setShowSoundHint(false);
+    if (videoRef.current) {
+      videoRef.current.muted = false;
+    }
+  };
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -73,16 +84,42 @@ const TPrimeBuyPage = () => {
           <div className="glp1-checkout-left">
             <div className="glp1-promo-strip">🔥 SAVE $150 + FREE SHIPPING 🔥</div>
 
-            {/* Main product display */}
+            {/* Main product display — video or image */}
             <div className="glp1-product-display">
-              <img src={carouselMedia[activeThumb].src} alt="TPrime365" loading="lazy" />
+              {carouselMedia[activeThumb].type === "video" ? (
+                <div className="glp1buy-hero-video">
+                  <video
+                    ref={videoRef}
+                    src={TPRIME_VIDEO_URL}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls
+                  />
+                  <div className={`glp1buy-sound-overlay ${showSoundHint ? '' : 'hidden'}`} onClick={handleSoundOverlayClick}>
+                    <div className="glp1buy-sound-circle">
+                      <Volume2 size={28} color="#fff" />
+                    </div>
+                    <span className="glp1buy-sound-label">TAP FOR SOUND</span>
+                  </div>
+                </div>
+              ) : (
+                <img src={carouselMedia[activeThumb].src} alt="TPrime365" loading="lazy" />
+              )}
             </div>
 
             <div className="glp1-thumb-carousel">
               <button className="thumb-arrow thumb-arrow-left" onClick={() => { const el = document.querySelector('.tprimebuy-page .thumb-track'); if (el) el.scrollBy({ left: -80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails left"><ChevronLeft size={16} /></button>
               <div className="thumb-track">
                 {carouselMedia.map((item, i) => (
-                  <img key={i} src={item.src} alt={`Product view ${i + 1}`} className={`thumb-img ${i === activeThumb ? 'active' : ''}`} loading="lazy" onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer' }} />
+                  item.type === "video" ? (
+                    <div key={i} className={`thumb-img thumb-video ${i === activeThumb ? 'active' : ''}`} onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer' }}>
+                      <Volume2 size={16} />
+                    </div>
+                  ) : (
+                    <img key={i} src={item.src} alt={`Product view ${i + 1}`} className={`thumb-img ${i === activeThumb ? 'active' : ''}`} loading="lazy" onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer' }} />
+                  )
                 ))}
               </div>
               <button className="thumb-arrow thumb-arrow-right" onClick={() => { const el = document.querySelector('.tprimebuy-page .thumb-track'); if (el) el.scrollBy({ left: 80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails right"><ChevronRight size={16} /></button>
