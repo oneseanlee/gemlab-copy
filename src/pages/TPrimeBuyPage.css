@@ -1,5 +1,6 @@
 /* TPrime Buy Page — reuses the GLP-1 Protocol page checkout section styles */
 @import './GLP1Page.css';
+@import './GLP1BuyPage.css';
 
 /* Loading state */
 .tprimebuy-loading {
