@@ -15,44 +15,56 @@ const TPrime365IntakePage = () => {
   }, []);
 
   useEffect(() => {
-    const handleMessage = (e: MessageEvent) => {
-      if (e.origin !== 'https://happymd.co') return;
+    let submitted = false;
+    let loadCount = 0;
 
+    const fireConversion = () => {
+      console.log('Testosterone form conversion detected!');
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'form_submission',
+        form_name: 'testosterone_intake',
+        vendor_id: 'best365labgqzb',
+        tracking_code: 'TPRIME365',
+      });
+    };
+
+    const handleMessage = (e: MessageEvent) => {
       const iframe = document.getElementById('happymd-testosterone-embed') as HTMLIFrameElement;
       if (!iframe) return;
 
-      if (e.data.type === 'resize' && typeof e.data.height === 'number') {
+      if (e.data && e.data.type === 'resize') {
         iframe.style.height = e.data.height + 'px';
       }
 
-      if (e.data.type === 'submit') {
-        console.log('Form submitted successfully!', e.data);
-
-        // Push to GTM dataLayer
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: 'form_submission',
-          form_name: 'testosterone_intake',
-          vendor_id: 'best365labgqzb',
-          tracking_code: 'TPRIME365',
-        });
-
-        // Fire Meta Pixel browser-side for redundancy
-        if (typeof window.fbq === 'function') {
-          window.fbq('track', 'Lead', {
-            content_name: 'testosterone_intake',
-            content_category: 'intake_form',
-          });
-        }
-      }
-
-      if (e.data.type === 'error') {
-        console.error('Form error:', e.data.error);
+      if (e.data && e.data.type === 'submit' && !submitted) {
+        submitted = true;
+        fireConversion();
       }
     };
 
+    const handleIframeLoad = () => {
+      loadCount++;
+      if (loadCount >= 2 && !submitted) {
+        submitted = true;
+        fireConversion();
+      }
+    };
+
+    const iframe = document.getElementById('happymd-testosterone-embed') as HTMLIFrameElement;
+
     window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    if (iframe) {
+      iframe.addEventListener('load', handleIframeLoad);
+    }
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+      if (iframe) {
+        iframe.removeEventListener('load', handleIframeLoad);
+      }
+    };
   }, []);
 
   return (
