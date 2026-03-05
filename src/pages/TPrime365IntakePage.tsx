@@ -15,21 +15,6 @@ const TPrime365IntakePage = () => {
   }, []);
 
   useEffect(() => {
-    let submitted = false;
-    let loadCount = 0;
-
-    const fireConversion = () => {
-      console.log('Testosterone form conversion detected!');
-
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'form_submission',
-        form_name: 'testosterone_intake',
-        vendor_id: 'best365labgqzb',
-        tracking_code: 'TPRIME365',
-      });
-    };
-
     const handleMessage = (e: MessageEvent) => {
       const iframe = document.getElementById('happymd-testosterone-embed') as HTMLIFrameElement;
       if (!iframe) return;
@@ -38,32 +23,18 @@ const TPrime365IntakePage = () => {
         iframe.style.height = e.data.height + 'px';
       }
 
-      if (e.data && e.data.type === 'submit' && !submitted) {
-        submitted = true;
-        fireConversion();
+      if (e.data && e.data.type === 'submit') {
+        console.log('Form submitted successfully!', e.data);
+      }
+
+      if (e.data && e.data.type === 'error') {
+        console.error('Form error:', e.data.error);
       }
     };
-
-    const handleIframeLoad = () => {
-      loadCount++;
-      if (loadCount >= 2 && !submitted) {
-        submitted = true;
-        fireConversion();
-      }
-    };
-
-    const iframe = document.getElementById('happymd-testosterone-embed') as HTMLIFrameElement;
 
     window.addEventListener('message', handleMessage);
-    if (iframe) {
-      iframe.addEventListener('load', handleIframeLoad);
-    }
-
     return () => {
       window.removeEventListener('message', handleMessage);
-      if (iframe) {
-        iframe.removeEventListener('load', handleIframeLoad);
-      }
     };
   }, []);
 
@@ -125,7 +96,7 @@ const TPrime365IntakePage = () => {
           <div className="intake-iframe-wrapper">
             <iframe
               id="happymd-testosterone-embed"
-              src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=TPRIME365&v=v2&theme=best365"
+              src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=TPRIME365CELL&v=v2&theme=best365"
               width="100%"
               height="800px"
               scrolling="auto"
