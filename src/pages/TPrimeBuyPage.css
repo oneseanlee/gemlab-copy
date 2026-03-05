@@ -1,0 +1,317 @@
+/* TPrime Buy Page — reuses the GLP-1 Protocol page checkout section styles */
+@import './GLP1Page.css';
+
+/* Loading state */
+.tprimebuy-loading {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--b365-white);
+  font-family: var(--font-body);
+}
+
+.tprimebuy-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--b365-border);
+  border-top-color: var(--b365-blue);
+  border-radius: 50%;
+  animation: tprimebuy-spin 0.6s linear infinite;
+}
+
+@keyframes tprimebuy-spin {
+  to { transform: rotate(360deg); }
+}
+
+.tprimebuy-loading p {
+  font-size: 0.95rem;
+  color: var(--b365-text-secondary);
+  font-weight: 500;
+}
+
+/* Page wrapper */
+.tprimebuy-page {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--b365-text);
+  -webkit-font-smoothing: antialiased;
+  background: var(--b365-white);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Force 12px rounded corners on product display */
+.tprimebuy-page .glp1-product-display {
+  border-radius: 12px;
+}
+
+.tprimebuy-page .glp1-product-display > img {
+  border-radius: 12px;
+}
+
+/* Ensure checkout section doesn't overflow on mobile */
+.tprimebuy-page .glp1-checkout-section {
+  overflow: hidden;
+}
+
+.tprimebuy-page .glp1-checkout-grid {
+  overflow: hidden;
+}
+
+/* Trust strip below benefit callouts */
+.tprimebuy-trust-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background: #F8F9FA;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.tprimebuy-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #374151;
+}
+
+.tprimebuy-trust-item svg {
+  flex-shrink: 0;
+}
+
+.tprimebuy-trust-item span {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Testimonial below trust strip */
+.tprimebuy-testimonial {
+  background: #F8F9FA;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.tprimebuy-testimonial-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.tprimebuy-testimonial-quote {
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.5;
+  color: #1f2937;
+  margin: 0 0 8px;
+}
+
+.tprimebuy-testimonial-cite {
+  font-size: 13px;
+  font-weight: 700;
+  font-style: normal;
+  color: #374151;
+}
+
+/* Mobile ordering for new elements */
+@media (max-width: 768px) {
+  .tprimebuy-page .tprimebuy-trust-strip { order: 16; }
+  .tprimebuy-page .tprimebuy-testimonial { order: 17; }
+
+  .tprimebuy-trust-strip {
+    gap: 16px;
+  }
+
+  .tprimebuy-trust-item span {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tprimebuy-page {
+    padding-bottom: 80px;
+  }
+
+  /* Constrain image height on mobile */
+  .tprimebuy-page .glp1-product-display > img {
+    max-height: 400px;
+    object-fit: contain;
+  }
+
+  /* Add breathing room between stacked sections */
+  .tprimebuy-page .glp1-checkout-grid {
+    gap: 16px;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Flatten columns so children can be reordered */
+  .tprimebuy-page .glp1-checkout-left,
+  .tprimebuy-page .glp1-checkout-right {
+    display: contents;
+  }
+
+  /* Force all direct children of checkout-grid to be full width */
+  .tprimebuy-page .glp1-checkout-grid > *,
+  .tprimebuy-page .glp1-checkout-grid .glp1-checkout-left > *,
+  .tprimebuy-page .glp1-checkout-grid .glp1-checkout-right > * {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* Mobile stack order */
+  .tprimebuy-page .glp1-promo-strip { order: 1; }
+  .tprimebuy-page .glp1-product-display { order: 2; }
+  .tprimebuy-page .glp1-thumb-carousel { order: 3; }
+  .tprimebuy-page .glp1-checkout-title { order: 4; }
+  .tprimebuy-page .glp1-star-rating { order: 5; }
+  .tprimebuy-page .glp1-checkout-desc { order: 6; }
+  .tprimebuy-page .glp1-check-list { order: 7; }
+  .tprimebuy-page .glp1-checkout-price { order: 8; }
+  .tprimebuy-page .checkout-shipping-note { order: 9; }
+  .tprimebuy-page .glp1-bonuses-section { order: 10; }
+  .tprimebuy-page .glp1buy-inline-form { order: 11; }
+  .tprimebuy-page .glp1-guarantee-badge { order: 12; }
+  .tprimebuy-page .glp1-benefit-callouts { order: 13; }
+  .tprimebuy-page .tprimebuy-trust-strip { order: 14; }
+  .tprimebuy-page .tprimebuy-testimonial { order: 15; }
+  .tprimebuy-page .glp1-phone-line { order: 16; }
+  .tprimebuy-page .glp1-fda-disclaimer { order: 17; }
+
+  .tprimebuy-page .glp1-checkout-title {
+    margin-top: 8px;
+  }
+
+  .tprimebuy-page .glp1-bonuses-section {
+    margin-top: 4px;
+  }
+
+  .tprimebuy-page .glp1buy-inline-form {
+    margin-top: 4px;
+  }
+
+  .tprimebuy-page .glp1-benefit-callouts {
+    margin-top: 8px;
+  }
+
+  .tprimebuy-page .tprimebuy-trust-strip {
+    margin-top: 4px;
+  }
+
+  .tprimebuy-page .tprimebuy-testimonial {
+    margin-top: 4px;
+  }
+
+  .tprimebuy-page .glp1-checkout-desc {
+    padding-right: 0;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .tprimebuy-page .glp1-check-list li {
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .tprimebuy-testimonial-quote {
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .tprimebuy-page .glp1buy-field input {
+    font-size: 16px;
+  }
+
+  .tprimebuy-page .glp1buy-inline-form {
+    gap: 10px;
+  }
+}
+
+/* ─── Deep mobile (≤480px) ─── */
+@media (max-width: 480px) {
+  .tprimebuy-page .glp1-checkout-section {
+    padding: 20px 12px 24px;
+  }
+
+  .tprimebuy-page .glp1-checkout-grid {
+    padding: 0;
+  }
+
+  .tprimebuy-page .glp1-checkout-title {
+    font-size: 20px;
+  }
+
+  .tprimebuy-page .glp1-checkout-desc {
+    font-size: 12.5px;
+  }
+
+  .tprimebuy-page .glp1-checkout-price {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tprimebuy-page .glp1-bonuses-row .bonus-card {
+    padding: 10px;
+  }
+
+  .tprimebuy-page .glp1-guarantee-badge {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .tprimebuy-page .glp1-guarantee-badge svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .tprimebuy-page .glp1-phone-line {
+    font-size: 12px;
+    justify-content: center;
+  }
+
+  .tprimebuy-page .glp1-fda-disclaimer {
+    font-size: 10px;
+  }
+
+  .tprimebuy-page .glp1-promo-strip {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .tprimebuy-page .glp1-thumb-carousel {
+    gap: 4px;
+  }
+
+  .tprimebuy-page .thumb-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .tprimebuy-page .glp1-checkout-cta {
+    font-size: 15px;
+    padding: 14px;
+    min-height: 48px;
+  }
+
+  .glp1-sticky-mobile-cta {
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .tprimebuy-page .glp1-star-rating {
+    font-size: 13px;
+  }
+
+  .tprimebuy-page .checkout-big-price {
+    font-size: 28px;
+  }
+}
