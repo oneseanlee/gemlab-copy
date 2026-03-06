@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Star, ChevronDown, Mail, User } from 'lucide-react';
+import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Mail, User } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import AnimatedCTA from '@/components/AnimatedCTA/AnimatedCTA';
 import './FreeTestosteroneGuidePage.css';
@@ -40,22 +40,8 @@ const discoverItems = [
   "The 4-compound approach shown to increase testosterone 60-664% without a single injection",
 ];
 
-const testimonials = [
-  { name: 'Brett Earnshaw', quote: 'My T-levels went from 658 to 749 in two months. More energy, sharper focus, better performance.', img: '/images/testimonial-brett-earnshaw.png' },
-  { name: 'Kerry Reyes', quote: 'I felt the difference in the first week. No crash, no mood swings — just steady energy all day.', img: '/images/testimonial-kerry-reyes-bg.png' },
-  { name: 'Mike VanDyke', quote: 'Rapid improvements in energy and cellular performance. It\'s a game-changer for anyone serious about health.', img: '/images/testimonial-mike-vandyke-bg.png' },
-  { name: 'Sean Lee', quote: 'The sublingual delivery is incredible — absorbs in seconds. I\'m sleeping better and recovering faster.', img: '/images/testimonial-sean-lee.png' },
-  { name: 'Ernesto Cruz', quote: 'T-levels from 280 to 680 in 6 weeks. My wife noticed the difference before I did.', img: '/images/testimonial-ernesto-cruz.png' },
-  { name: 'Jay Atkins', quote: 'Finally a protocol that works without needles. I\'ve got my drive back and I feel 10 years younger.', img: '/images/testimonial-jay-atkins.png' },
-];
 
 
-const faqItems = [
-  { q: "Is this really free? What's the catch?", a: "Yes — 100% free, no credit card required. We created this guide to educate men about their options. If you find it valuable, you may choose to explore our protocols, but there's zero obligation." },
-  { q: 'What format is the guide in?', a: "It's a beautifully designed PDF you can read on any device — phone, tablet, or computer. You'll get instant access via email." },
-  { q: 'Will you spam me with emails?', a: "No. You'll receive the guide and occasional science-backed content (1-2x/month). You can unsubscribe with one click at any time." },
-  { q: 'Who is this guide for?', a: "Any man who wants to understand the difference between replacing testosterone (TRT) and optimizing it naturally. Whether you're 25 or 65, considering TRT or already on it — this guide gives you the full picture." },
-];
 
 /* ── Opt-in form with first name + email ── */
 const OptInForm = ({
@@ -121,21 +107,7 @@ const OptInForm = ({
   );
 };
 
-/* ── FAQ Accordion Item ── */
-const FaqItem = ({ q, a }: { q: string; a: string }) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className={`ftg-faq-item ${open ? 'ftg-faq-open' : ''}`}>
-      <button className="ftg-faq-trigger" onClick={() => setOpen(!open)} aria-expanded={open}>
-        <span>{q}</span>
-        <ChevronDown size={18} className="ftg-faq-chevron" />
-      </button>
-      <div className="ftg-faq-content">
-        <p>{a}</p>
-      </div>
-    </div>
-  );
-};
+
 
 const FreeTestosteroneGuidePage: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -150,9 +122,6 @@ const FreeTestosteroneGuidePage: React.FC = () => {
 
   const trustRef = useScrollReveal<HTMLDivElement>();
   const discoverRef = useScrollReveal<HTMLDivElement>();
-  const midCtaRef = useScrollReveal<HTMLDivElement>();
-  const proofRef = useScrollReveal<HTMLDivElement>();
-  const faqRef = useScrollReveal<HTMLDivElement>();
   const ctaRef = useScrollReveal<HTMLDivElement>();
   const ebookParallax = useParallax(0.06);
 
@@ -241,49 +210,7 @@ const FreeTestosteroneGuidePage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── Mid-Page CTA (P1) ── */}
-      <section className="ftg-mid-cta" ref={midCtaRef}>
-        <p className="ftg-mid-cta-text">Ready to learn the difference?</p>
-        <OptInForm
-          formId="ftg-mid-form"
-          firstName={firstName}
-          email={email}
-          submitted={submitted}
-          onFirstNameChange={setFirstName}
-          onEmailChange={setEmail}
-          onSubmit={handleSubmit}
-        />
-      </section>
 
-      {/* ── Social Proof (P1: headshots) ── */}
-      <section className="ftg-proof" ref={proofRef}>
-        <div className="ftg-proof-badge">
-          <Star size={14} fill="var(--b365-blue)" stroke="var(--b365-blue)" />
-          <span>4.9/5 from 50,000+ clients</span>
-        </div>
-        <h2 className="ftg-section-heading">Real Results From Real Men</h2>
-        <div className="ftg-proof-stack">
-          {testimonials.map((t, i) => (
-            <blockquote className="ftg-quote-block" key={i}>
-              <div className="ftg-quote-header">
-                <img src={t.img} alt={t.name} className="ftg-quote-avatar" loading="lazy" />
-                <cite className="ftg-quote-name">{t.name}</cite>
-              </div>
-              <p className="ftg-quote-text">"{t.quote}"</p>
-            </blockquote>
-          ))}
-        </div>
-      </section>
-
-      {/* ── FAQ Section (P1) ── */}
-      <section className="ftg-faq" ref={faqRef}>
-        <h2 className="ftg-section-heading">Frequently Asked Questions</h2>
-        <div className="ftg-faq-list">
-          {faqItems.map((item, i) => (
-            <FaqItem key={i} q={item.q} a={item.a} />
-          ))}
-        </div>
-      </section>
 
       {/* ── Final CTA ── */}
       <section className="ftg-final-cta" ref={ctaRef}>
