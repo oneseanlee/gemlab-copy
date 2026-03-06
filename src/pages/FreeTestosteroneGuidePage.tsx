@@ -1,8 +1,9 @@
 import React, { useState, FormEvent, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Mail, User } from 'lucide-react';
+import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Mail, User, Phone } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import AnimatedCTA from '@/components/AnimatedCTA/AnimatedCTA';
+import { supabase } from '@/integrations/supabase/client';
 import './FreeTestosteroneGuidePage.css';
 
 /* ── Parallax hook ── */
@@ -43,22 +44,28 @@ const discoverItems = [
 
 
 
-/* ── Opt-in form with first name + email ── */
+/* ── Opt-in form with first name + email + optional phone ── */
 const OptInForm = ({
   formId,
   firstName,
   email,
+  phone,
   submitted,
+  submitting,
   onFirstNameChange,
   onEmailChange,
+  onPhoneChange,
   onSubmit,
 }: {
   formId: string;
   firstName: string;
   email: string;
+  phone: string;
   submitted: boolean;
+  submitting: boolean;
   onFirstNameChange: (v: string) => void;
   onEmailChange: (v: string) => void;
+  onPhoneChange: (v: string) => void;
   onSubmit: (e: FormEvent) => void;
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -79,8 +86,9 @@ const OptInForm = ({
         <input
           type="text"
           className="ftg-input"
-          placeholder="First name"
+          placeholder="e.g. Sarah Mitchell"
           required
+          maxLength={100}
           value={firstName}
           onChange={(e) => onFirstNameChange(e.target.value)}
         />
@@ -90,14 +98,26 @@ const OptInForm = ({
         <input
           type="email"
           className="ftg-input"
-          placeholder="Email address"
+          placeholder="your.email@gmail.com"
           required
+          maxLength={255}
           value={email}
           onChange={(e) => onEmailChange(e.target.value)}
         />
       </div>
-      <AnimatedCTA onClick={() => formRef.current?.requestSubmit()}>
-        GET FREE GUIDE <ArrowRight size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 4 }} />
+      <div className="ftg-input-wrap">
+        <Phone size={16} className="ftg-input-icon" />
+        <input
+          type="tel"
+          className="ftg-input"
+          placeholder="(555) 123-4567 (optional)"
+          maxLength={20}
+          value={phone}
+          onChange={(e) => onPhoneChange(e.target.value)}
+        />
+      </div>
+      <AnimatedCTA onClick={() => formRef.current?.requestSubmit()} disabled={submitting}>
+        {submitting ? 'Submitting…' : 'GET FREE GUIDE'} <ArrowRight size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 4 }} />
       </AnimatedCTA>
       <p className="ftg-privacy-note">
         <Lock size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
@@ -112,7 +132,10 @@ const OptInForm = ({
 const FreeTestosteroneGuidePage: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const hasSubmitted = useRef(false);
 
   // Remove root background so fixed video shows through
   useEffect(() => {
@@ -125,10 +148,32 @@ const FreeTestosteroneGuidePage: React.FC = () => {
   const ctaRef = useScrollReveal<HTMLDivElement>();
   const ebookParallax = useParallax(0.06);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log({ firstName, email });
-    setSubmitted(true);
+    if (hasSubmitted.current || submitting) return;
+    hasSubmitted.current = true;
+    setSubmitting(true);
+
+    try {
+      const { error } = await supabase.from('leads').insert({
+        first_name: firstName.trim(),
+        email: email.trim().toLowerCase(),
+        phone: phone.trim() || null,
+        source: 'free-testosterone-guide',
+      });
+
+      if (error) {
+        console.error('Lead insert error:', error.message);
+        hasSubmitted.current = false;
+      } else {
+        setSubmitted(true);
+      }
+    } catch (err) {
+      console.error('Lead submission failed:', err);
+      hasSubmitted.current = false;
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -156,9 +201,12 @@ const FreeTestosteroneGuidePage: React.FC = () => {
             formId="ftg-hero-form"
             firstName={firstName}
             email={email}
+            phone={phone}
             submitted={submitted}
+            submitting={submitting}
             onFirstNameChange={setFirstName}
             onEmailChange={setEmail}
+            onPhoneChange={setPhone}
             onSubmit={handleSubmit}
           />
         </div>
@@ -228,9 +276,12 @@ const FreeTestosteroneGuidePage: React.FC = () => {
           formId="ftg-cta-form"
           firstName={firstName}
           email={email}
+          phone={phone}
           submitted={submitted}
+          submitting={submitting}
           onFirstNameChange={setFirstName}
           onEmailChange={setEmail}
+          onPhoneChange={setPhone}
           onSubmit={handleSubmit}
         />
         <p className="ftg-cta-micro">Join 50,000+ men optimizing naturally</p>
