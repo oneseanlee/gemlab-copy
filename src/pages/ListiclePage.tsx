@@ -140,6 +140,11 @@ const ListiclePage = () => {
 
         <p>None of these are personality traits. Every single one is a documented symptom of declining testosterone. And the standard medical response creates a problem of its own.</p>
 
+        {/* EDITORIAL IMAGE BREAK */}
+        <div className="listicle-hero-img" style={{ margin: '40px 0' }}>
+          <img src="/images/tprime-listicle-hero-2.png" alt="TPrime365 — Physician-Grade Testosterone Optimization Protocol" />
+        </div>
+
         {/* ROOT CAUSE REFRAME */}
         <div className="listicle-sep" />
 
@@ -197,6 +202,9 @@ const ListiclePage = () => {
       {/* INGREDIENT CARDS */}
       <div className="listicle-section-alt">
         <div className="listicle-content-inner">
+          <div className="listicle-hero-img" style={{ marginBottom: '32px' }}>
+            <img src="/images/tprime-listicle-product.png" alt="TPrime365 Sublingual Testosterone Optimization" />
+          </div>
           <h3>What's Inside Every Dose</h3>
           <p>Four compounds, precisely dosed, working together through a single sublingual delivery. No fillers. No proprietary blends hiding underdosed ingredients.</p>
 
