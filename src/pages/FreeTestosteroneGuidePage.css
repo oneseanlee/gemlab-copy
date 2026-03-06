@@ -105,8 +105,15 @@
 .ftg-form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
   max-width: 460px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
 .ftg-name-row {
@@ -122,6 +129,7 @@
 .ftg-form .animated-cta {
   width: 100%;
   justify-content: center;
+  margin-top: var(--space-1);
 }
 
 .ftg-input-wrap {
@@ -133,29 +141,31 @@
 
 .ftg-input-icon {
   position: absolute;
-  left: 14px;
+  left: 12px;
   color: var(--b365-gray-400);
   pointer-events: none;
+  opacity: 0.7;
 }
 
 .ftg-input {
   width: 100%;
-  padding: 14px 18px 14px 40px;
+  padding: 11px 14px 11px 36px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--b365-border);
-  background: var(--b365-white);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.85);
   color: var(--b365-text);
   font-family: var(--font-body);
-  font-size: var(--text-body);
+  font-size: 0.9rem;
   outline: none;
   transition: border-color var(--duration-fast) var(--ease-default),
               box-shadow var(--duration-fast) var(--ease-default);
 }
 
-.ftg-input::placeholder { color: var(--b365-gray-400); }
+.ftg-input::placeholder { color: var(--b365-gray-400); font-size: 0.85rem; }
 .ftg-input:focus {
   border-color: var(--b365-blue);
-  box-shadow: 0 0 0 3px rgba(51, 118, 176, 0.1);
+  box-shadow: 0 0 0 3px rgba(51, 118, 176, 0.12);
+  background: var(--b365-white);
 }
 
 .ftg-input-row .animated-cta {
@@ -168,10 +178,11 @@
 }
 
 .ftg-privacy-note {
-  font-size: var(--text-caption);
+  font-size: 0.72rem;
   color: var(--b365-gray-400);
-  margin-top: var(--space-1);
+  margin-top: 0;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .ftg-success {
