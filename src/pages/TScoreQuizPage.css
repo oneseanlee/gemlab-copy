@@ -17,7 +17,7 @@
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(180deg, #FFFFFF 0%, #BFD5E6 40%, #5D8AA8 100%);
+  background: #FFFFFF;
 }
 
 .tsq-container {
@@ -92,7 +92,7 @@
   justify-content: center;
   gap: 8px;
   padding: 16px 36px;
-  background: linear-gradient(135deg, #C8982E, #D4A843);
+  background: linear-gradient(135deg, #2563EB, #3B82F6);
   color: #fff;
   font-family: var(--font-body);
   font-size: 1rem;
@@ -102,13 +102,13 @@
   border-radius: 12px;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 4px 20px rgba(200, 152, 46, 0.35);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .tsq-cta-gold:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 28px rgba(200, 152, 46, 0.5);
+  box-shadow: 0 6px 28px rgba(37, 99, 235, 0.5);
 }
 
 .tsq-cta-gold:active {
