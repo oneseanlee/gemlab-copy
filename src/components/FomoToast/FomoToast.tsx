@@ -51,12 +51,17 @@ const FomoToast = () => {
     if (dismissed.current || isDisabled) return;
 
     // On /glp1-buy, only show GLP-1 product with female names
+    // On /tprime-buy, only show TPrime365 with male names
     const product = isGlp1Buy
       ? PRODUCTS.find(p => p.name === 'GLP-1 Optimization Protocol')!
-      : pick(PRODUCTS);
+      : isTprimeBuy
+        ? PRODUCTS.find(p => p.name === 'TPrime365')!
+        : pick(PRODUCTS);
     let name: string;
     if (isGlp1Buy) {
       name = pick(FEMALE_NAMES);
+    } else if (isTprimeBuy) {
+      name = pick(MALE_NAMES);
     } else if (product.gender === 'male') {
       name = pick(MALE_NAMES);
     } else if (product.gender === 'female') {
