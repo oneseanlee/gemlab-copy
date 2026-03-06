@@ -83,7 +83,7 @@ const FomoToast = () => {
       // Schedule next in 12-25s
       timerRef.current = setTimeout(showNext, (Math.random() * 13000) + 12000);
     }, 5000);
-  }, [isDisabled, isGlp1Buy]);
+  }, [isDisabled, isGlp1Buy, isTprimeBuy]);
 
   useEffect(() => {
     if (isDisabled) {
