@@ -72,17 +72,6 @@ const questions: QuizQuestion[] = [
     ],
   },
   {
-    id: 'recovery', category: 'Recovery',
-    question: 'How quickly do you recover from workouts or physical activity?',
-    context: 'Slower recovery is one of the earliest signs of hormonal decline.',
-    options: [
-      { label: 'Back to normal within a day — no issues', score: 0 },
-      { label: 'Takes a little longer than it used to, but manageable', score: 2 },
-      { label: 'Soreness lingers for 2–3 days regularly', score: 4 },
-      { label: 'I avoid hard workouts because recovery takes too long', score: 6 },
-    ],
-  },
-  {
     id: 'mood', category: 'Mood & Motivation',
     question: 'How stable is your mood, and how motivated do you feel day to day?',
     context: 'Testosterone directly influences emotional regulation and drive.',
@@ -91,17 +80,6 @@ const questions: QuizQuestion[] = [
       { label: 'Some irritability or low motivation creeping in', score: 2 },
       { label: 'Noticeable mood swings, lower ambition, less drive', score: 4 },
       { label: 'Flat, unmotivated, or emotionally reactive most days', score: 6 },
-    ],
-  },
-  {
-    id: 'confidence', category: 'Confidence',
-    question: 'Has your sense of confidence or self-assuredness changed?',
-    context: "This one often gets overlooked — but men with declining T report it consistently.",
-    options: [
-      { label: 'I feel as confident and self-assured as ever', score: 0 },
-      { label: 'Slightly less assertive in some situations', score: 2 },
-      { label: 'I second-guess myself more often than I used to', score: 4 },
-      { label: "I've lost a significant amount of confidence — it affects my work and relationships", score: 6 },
     ],
   },
   {
@@ -115,20 +93,9 @@ const questions: QuizQuestion[] = [
       { label: '50+', score: 5 },
     ],
   },
-  {
-    id: 'currentApproach', category: 'Current Approach',
-    question: 'What are you currently doing to address these symptoms?',
-    context: "There's no wrong answer — this helps us understand where you are.",
-    options: [
-      { label: "Nothing yet — I'm just starting to look into this", score: 3 },
-      { label: 'Taking supplements (test boosters, vitamins, etc.)', score: 2 },
-      { label: "Working with a doctor but not seeing results I want", score: 4 },
-      { label: 'Currently on TRT and considering alternatives', score: 4 },
-    ],
-  },
 ];
 
-const symptomCategories = ['energy', 'bodyComposition', 'mentalClarity', 'libido', 'sleep', 'recovery', 'mood', 'confidence'] as const;
+const symptomCategories = ['energy', 'bodyComposition', 'mentalClarity', 'libido', 'sleep', 'mood'] as const;
 
 const categoryLabels: Record<string, string> = {
   energy: 'Energy',
@@ -136,9 +103,7 @@ const categoryLabels: Record<string, string> = {
   mentalClarity: 'Mental Clarity',
   libido: 'Libido & Drive',
   sleep: 'Sleep Quality',
-  recovery: 'Recovery',
   mood: 'Mood & Motivation',
-  confidence: 'Confidence',
 };
 
 const categoryBenefits: Record<string, string> = {
@@ -147,9 +112,7 @@ const categoryBenefits: Record<string, string> = {
   mentalClarity: 'Testosterone receptors in the brain govern focus, processing speed, and cognitive sharpness',
   libido: 'Testosterone is the primary hormonal driver of male libido — optimization restores the signal',
   sleep: 'Men with optimized T levels consistently report deeper, more restorative sleep',
-  recovery: 'Testosterone governs protein synthesis and tissue repair — the foundation of recovery',
   mood: 'Stable testosterone supports emotional regulation, drive, and resilience',
-  confidence: "Confidence isn't abstract — it's downstream of hormonal balance",
 };
 
 type Phase = 'landing' | 'quiz' | 'capture' | 'results';
@@ -552,7 +515,7 @@ const TScoreQuizPage: React.FC = () => {
     });
 
     const totalScore = Object.values(categories).reduce((a, b) => a + b, 0);
-    const percentage = Math.round((totalScore / 56) * 100);
+    const percentage = Math.round((totalScore / 41) * 100);
 
     let tier: 'green' | 'yellow' | 'red' = 'green';
     if (percentage > 60) tier = 'red';
