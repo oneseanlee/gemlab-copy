@@ -16,39 +16,61 @@ const TPrime365IntakePage = () => {
   }, []);
 
   useEffect(() => {
-    const handleMessage = (e: MessageEvent) => {
-      const iframe = document.getElementById('happymd-tprime365-embed') as HTMLIFrameElement;
-      if (!iframe) return;
+    const iframe = document.getElementById('happymd-tprime365-embed') as HTMLIFrameElement;
+    if (!iframe) return;
 
+    let loadCount = 0;
+    let hasFired = false;
+
+    function fireGenerateLead(source: string) {
+      if (hasFired) {
+        console.log('[TPRIME365] generate_lead already fired — skipping (' + source + ')');
+        return;
+      }
+      hasFired = true;
+
+      const eventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
+      // Client-side Meta Pixel — Lead with eventID for dedup
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Lead', {}, { eventID: eventId });
+      }
+
+      // GTM dataLayer push → Web GTM → Server GTM → Meta CAPI
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'generate_lead',
+        form_name: 'testosterone-optimizer',
+        tracking_code: 'TPRIME365CELL',
+        vendor_id: 'best365labgqzb',
+        campaign_name: 'TPRIME365',
+        page_url: window.location.href,
+        page_referrer: document.referrer,
+        event_id: eventId,
+      });
+
+      console.log('[TPRIME365] generate_lead FIRED via ' + source + ' — eventId:', eventId);
+    }
+
+    // METHOD 1: Detect iframe internal navigation (second load = form submitted)
+    const handleLoad = () => {
+      loadCount++;
+      console.log('[TPRIME365] iframe load event #' + loadCount);
+      if (loadCount > 1) {
+        fireGenerateLead('iframe-load');
+      }
+    };
+
+    // METHOD 2: Listen for postMessage (in case HappyMD adds support later)
+    const handleMessage = (e: MessageEvent) => {
       // Auto-resize iframe
       if (e.data?.type === 'resize' || e.data?.type === 'testosterone-form:resize') {
         iframe.style.height = e.data.height + 'px';
       }
 
-      // Form Submission — fire tracking
+      // Form submission via postMessage
       if (e.data?.type === 'submit' || e.data?.type === 'testosterone-form:submit') {
-        const eventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-
-        // Client-side Meta Pixel — Lead with eventID for dedup
-        trackMetaEvent('Lead', {});
-        if (typeof window !== 'undefined' && window.fbq) {
-          window.fbq('track', 'Lead', {}, { eventID: eventId });
-        }
-
-        // GTM dataLayer push
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: 'generate_lead',
-          form_name: 'testosterone-optimizer',
-          tracking_code: (e.data.trackingCode as string) || 'TPRIME365CELL',
-          vendor_id: (e.data.vendorCode as string) || 'best365labgqzb',
-          campaign_name: 'TPRIME365',
-          page_url: window.location.href,
-          page_referrer: document.referrer,
-          event_id: eventId,
-        });
-
-        console.log('[TPRIME365] generate_lead pushed — eventId:', eventId);
+        fireGenerateLead('postMessage');
       }
 
       // Error handling
@@ -57,8 +79,12 @@ const TPrime365IntakePage = () => {
       }
     };
 
+    iframe.addEventListener('load', handleLoad);
     window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    return () => {
+      iframe.removeEventListener('load', handleLoad);
+      window.removeEventListener('message', handleMessage);
+    };
   }, []);
 
   return (
