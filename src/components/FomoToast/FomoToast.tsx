@@ -43,13 +43,20 @@ const FomoToast = () => {
 
   // Only show on product pages and GLP-1 buy page
   const allowedPaths = ['/tprime365', '/glp1-protocol', '/nhto', '/ucos', '/glp1-ucos', '/glp1-buy', '/tprime-buy'];
+  const isGlp1Buy = location.pathname === '/glp1-buy';
   const isDisabled = !allowedPaths.includes(location.pathname);
 
   const showNext = useCallback(() => {
     if (dismissed.current || isDisabled) return;
-    const product = pick(PRODUCTS);
+
+    // On /glp1-buy, only show GLP-1 product with female names
+    const product = isGlp1Buy
+      ? PRODUCTS.find(p => p.name === 'GLP-1 Optimization Protocol')!
+      : pick(PRODUCTS);
     let name: string;
-    if (product.gender === 'male') {
+    if (isGlp1Buy) {
+      name = pick(FEMALE_NAMES);
+    } else if (product.gender === 'male') {
       name = pick(MALE_NAMES);
     } else if (product.gender === 'female') {
       name = Math.random() < 0.9 ? pick(FEMALE_NAMES) : pick(MALE_NAMES);
@@ -70,7 +77,7 @@ const FomoToast = () => {
       // Schedule next in 12-25s
       timerRef.current = setTimeout(showNext, (Math.random() * 13000) + 12000);
     }, 5000);
-  }, [isDisabled]);
+  }, [isDisabled, isGlp1Buy]);
 
   useEffect(() => {
     if (isDisabled) {
