@@ -651,34 +651,9 @@
   color: var(--b365-white);
 }
 
-.ftg-final-cta .ftg-form {
-  max-width: 480px;
+/* Final CTA button centering */
+.ftg-final-cta .animated-cta {
   margin: 0 auto;
-  padding: var(--space-6);
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-md);
-}
-
-.ftg-final-cta .ftg-input {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.18);
-  color: var(--b365-white);
-}
-
-.ftg-final-cta .ftg-input::placeholder {
-  color: rgba(255, 255, 255, 0.45);
-}
-
-.ftg-final-cta .ftg-input:focus {
-  border-color: rgba(51, 118, 176, 0.7);
-  box-shadow: 0 0 0 3px rgba(51, 118, 176, 0.15);
-}
-
-.ftg-final-cta .ftg-input-icon {
-  color: rgba(255, 255, 255, 0.4);
 }
 
 .ftg-cta-headline {
@@ -853,4 +828,163 @@
 
   .ftg-press-logo { height: 22px; }
   .ftg-press-logos { gap: var(--space-6); }
+}
+
+/* ── Hero micro text ── */
+.ftg-hero-micro {
+  font-size: 0.8rem;
+  color: var(--b365-gray-400);
+  margin-top: var(--space-2);
+  letter-spacing: 0.02em;
+}
+
+/* ── Lead Capture Modal ── */
+.ftg-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  animation: ftg-fade-in 0.2s ease-out;
+}
+
+@keyframes ftg-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ftg-slide-up {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.ftg-modal {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--b365-white);
+  border-radius: var(--radius-lg, 16px);
+  padding: var(--space-8) var(--space-6);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  animation: ftg-slide-up 0.3s ease-out;
+}
+
+.ftg-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--b365-gray-400);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: color 0.15s, background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ftg-modal-close:hover {
+  color: var(--b365-text);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.ftg-modal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.ftg-modal-ebook {
+  width: 72px;
+  height: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+}
+
+.ftg-modal-title {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--b365-text);
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.ftg-modal-subtitle {
+  font-size: 0.85rem;
+  color: var(--b365-text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.ftg-modal-subtitle em {
+  font-style: italic;
+  color: var(--b365-blue);
+}
+
+.ftg-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ftg-modal-form .animated-cta {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+.ftg-modal-form .ftg-input {
+  background: var(--b365-bg, #f8f9fa);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.ftg-modal-form .ftg-input:focus {
+  background: var(--b365-white);
+}
+
+.ftg-modal-success {
+  text-align: center;
+  padding: var(--space-6) 0;
+}
+
+.ftg-modal-success-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-3);
+}
+
+.ftg-modal-success h3 {
+  font-family: var(--font-title);
+  font-size: var(--text-h3);
+  color: var(--b365-text);
+  margin: 0 0 var(--space-2);
+}
+
+.ftg-modal-success p {
+  font-size: 0.95rem;
+  color: var(--b365-text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .ftg-modal {
+    padding: var(--space-6) var(--space-4);
+    max-width: 100%;
+    border-radius: var(--radius-md);
+  }
+  .ftg-modal-ebook {
+    width: 56px;
+  }
+  .ftg-modal-title {
+    font-size: 1.15rem;
+  }
 }
