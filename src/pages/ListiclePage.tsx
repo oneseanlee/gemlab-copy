@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ListiclePage.css';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 
 const ListiclePage = () => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+      setScrollProgress(progress);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="listicle-page">
+      {/* READING PROGRESS BAR */}
+      <div className="listicle-progress-bar" style={{ width: `${scrollProgress}%` }} />
       {/* URGENCY BANNER */}
       <div className="listicle-urgency-banner">
         <span>CLINICAL UPDATE:</span> New physician-reviewed data shows 60–664% testosterone increase in 2–4 weeks without injections
