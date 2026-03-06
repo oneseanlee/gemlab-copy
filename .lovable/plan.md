@@ -1,33 +1,27 @@
 
 
-## Placeholder Text for Maximum Conversions
+## Simplify the Free Testosterone Guide Page
 
-Based on direct-response best practices and the brand's Grade 5-7 copy standard, here's the recommended set:
+Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
 
-**Name field:** `e.g. Sarah Mitchell`
-- Uses a real-sounding female name (matches your testimonial persona "Sarah M.")
-- "e.g." prefix signals it's an example, reducing friction
-- Female-first name performs well in health/wellness verticals
+### What gets removed
+- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
+- **FAQ section** (lines 278-286) — the 4-item accordion
+- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
+- **Testimonials data** (`testimonials` array, lines 43-50)
+- **FAQ data** (`faqItems` array, lines 53-58)
+- **FaqItem component** (lines 125-138)
+- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
+- **Unused imports**: `Star`, `ChevronDown`
 
-**Email field:** `your.email@gmail.com`
-- Gmail is the most relatable domain — feels personal, not corporate
-- Lowercase, casual format reduces perceived formality
-- Outperforms generic "you@example.com" which feels like a system default
+### What stays
+1. **Video background** — cinematic feel
+2. **Hero** — headline, subtitle, opt-in form, ebook cover
+3. **Trust strip** — 4 credibility badges
+4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
+5. **Final CTA** — dark video section with second opt-in form
+6. **Footer** — legal/contact
 
-**Phone field:** `(555) 123-4567`
-- Clean US format without country code clutter
-- Familiar pattern that signals "just your number, nothing complicated"
-- No "+1" prefix which can feel intimidating for less tech-savvy users
-
-### Why this combination wins
-1. **Social proof baked in** — "Sarah Mitchell" subtly reinforces that real people use this form
-2. **Familiarity bias** — Gmail and standard phone format match what users see daily
-3. **Low cognitive load** — no jargon, no ambiguity, instant pattern recognition
-
-### Implementation
-Update placeholders in both files:
-- `src/pages/GLP1BuyPage.tsx` — name, email, phone inputs
-- `src/pages/CheckoutPage.tsx` — fullName, email, phone inputs
-
-Three lines changed per file, no logic changes.
+### Result
+The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
 
