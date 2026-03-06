@@ -31,12 +31,8 @@ const TPrime365IntakePage = () => {
 
       const eventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
-      // Client-side Meta Pixel — Lead with eventID for dedup
-      if (typeof window !== 'undefined' && window.fbq) {
-        window.fbq('track', 'Lead', {}, { eventID: eventId });
-      }
-
-      // GTM dataLayer push → Web GTM → Server GTM → Meta CAPI
+      // DO NOT call fbq() here — GTM Pixel_Event tag already fires Lead
+      // Just push to dataLayer and let GTM handle everything
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'generate_lead',
