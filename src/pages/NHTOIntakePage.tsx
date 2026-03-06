@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { FileText, Shield, Clock } from 'lucide-react';
-import { trackMetaEvent } from '@/lib/meta-pixel';
 
 declare global {
   interface Window {
@@ -16,49 +15,66 @@ const NHTOIntakePage = () => {
   }, []);
 
   useEffect(() => {
+    const iframe = document.getElementById('happymd-ucosnhto-embed') as HTMLIFrameElement;
+    if (!iframe) return;
+
+    let loadCount = 0;
+    let hasFired = false;
+
+    function fireGenerateLead(source: string) {
+      if (hasFired) {
+        console.log('[UCOSNHTO] generate_lead already fired — skipping (' + source + ')');
+        return;
+      }
+      hasFired = true;
+
+      const eventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
+      // DO NOT call fbq() here — GTM Pixel_Event tag already fires Lead
+      // Just push to dataLayer and let GTM handle everything
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'generate_lead',
+        form_name: 'testosterone-optimizer',
+        tracking_code: 'UCOSNHTOCELL',
+        vendor_id: 'best365labgqzb',
+        campaign_name: 'UCOSNHTO',
+        page_url: window.location.href,
+        page_referrer: document.referrer,
+        event_id: eventId,
+      });
+
+      console.log('[UCOSNHTO] generate_lead FIRED via ' + source + ' — eventId:', eventId);
+    }
+
+    // METHOD 1: Detect iframe internal navigation (second load = form submitted)
+    const handleLoad = () => {
+      loadCount++;
+      console.log('[UCOSNHTO] iframe load event #' + loadCount);
+      if (loadCount > 1) {
+        fireGenerateLead('iframe-load');
+      }
+    };
+
+    // NO auto-resize — causes endless scroll bug with dropdowns
+    // Using fixed height of 1200px instead
+    // METHOD 2: Listen for postMessage (in case HappyMD adds support later)
     const handleMessage = (e: MessageEvent) => {
-      const iframe = document.getElementById('happymd-ucosnhto-embed') as HTMLIFrameElement;
-      if (!iframe) return;
-
-      // Auto-resize iframe
-      if (e.data?.type === 'resize' || e.data?.type === 'testosterone-form:resize') {
-        iframe.style.height = e.data.height + 'px';
-      }
-
-      // Form Submission — fire tracking
       if (e.data?.type === 'submit' || e.data?.type === 'testosterone-form:submit') {
-        const eventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-
-        // Client-side Meta Pixel — Lead with eventID for dedup
-        trackMetaEvent('Lead', {});
-        if (typeof window !== 'undefined' && window.fbq) {
-          window.fbq('track', 'Lead', {}, { eventID: eventId });
-        }
-
-        // GTM dataLayer push
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: 'generate_lead',
-          form_name: 'testosterone-optimizer',
-          tracking_code: (e.data.trackingCode as string) || 'UCOSNHTOCELL',
-          vendor_id: (e.data.vendorCode as string) || 'best365labgqzb',
-          campaign_name: 'UCOSNHTO',
-          page_url: window.location.href,
-          page_referrer: document.referrer,
-          event_id: eventId,
-        });
-
-        console.log('[UCOSNHTO] generate_lead pushed — eventId:', eventId);
+        fireGenerateLead('postMessage');
       }
 
-      // Error handling
       if (e.data?.type === 'error' || e.data?.type === 'testosterone-form:error') {
         console.error('[UCOSNHTO] HappyMD form error:', e.data.error);
       }
     };
 
+    iframe.addEventListener('load', handleLoad);
     window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    return () => {
+      iframe.removeEventListener('load', handleLoad);
+      window.removeEventListener('message', handleMessage);
+    };
   }, []);
 
   return (
@@ -101,7 +117,7 @@ const NHTOIntakePage = () => {
               id="happymd-ucosnhto-embed"
               src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=UCOSNHTOCELL&v=v2&theme=best365"
               width="100%"
-              height="800px"
+              height="1200px"
               scrolling="auto"
               style={{ border: 'none', maxWidth: '100%', display: 'block' }}
               title="happyMD UCOSNHTO Testosterone Optimization Form"
