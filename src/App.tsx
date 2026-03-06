@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useCartSync } from "./hooks/useCartSync";
+import FomoToast from "./components/FomoToast/FomoToast";
 // Route-level code splitting — each page loads on demand
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ListiclePage = lazy(() => import("./pages/ListiclePage"));
@@ -50,6 +51,7 @@ const AppRoutes = () => {
   return (
     <Suspense fallback={<PageLoader />}>
       <ScrollToTopOnNav />
+      <FomoToast />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/article" element={<ListiclePage />} />
