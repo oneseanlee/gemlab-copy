@@ -386,7 +386,7 @@ const ResultsPhase = ({ result }: { result: TScoreResult }) => {
         <svg className="tsq-gauge" viewBox="0 0 200 120" fill="none">
           <path
             d="M20 100 A80 80 0 0 1 180 100"
-            stroke="#1e293b"
+            stroke="#e2e8f0"
             strokeWidth="14"
             strokeLinecap="round"
             fill="none"
