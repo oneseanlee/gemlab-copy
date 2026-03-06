@@ -44,6 +44,7 @@ const FomoToast = () => {
   // Only show on product pages and GLP-1 buy page
   const allowedPaths = ['/tprime365', '/glp1-protocol', '/nhto', '/ucos', '/glp1-ucos', '/glp1-buy', '/tprime-buy'];
   const isGlp1Buy = location.pathname === '/glp1-buy';
+  const isTprimeBuy = location.pathname === '/tprime-buy';
   const isDisabled = !allowedPaths.includes(location.pathname);
 
   const showNext = useCallback(() => {
