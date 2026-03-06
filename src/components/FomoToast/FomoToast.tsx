@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { CheckCircle, X } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 import './FomoToast.css';
 
 const MALE_NAMES = [
@@ -34,13 +35,17 @@ function pick<T>(arr: T[]): T {
 }
 
 const FomoToast = () => {
+  const location = useLocation();
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState({ name: '', city: '', product: PRODUCTS[0], time: '' });
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
   const dismissed = useRef(false);
 
+  // Disable on quiz page
+  const isDisabled = location.pathname === '/t-score-quiz';
+
   const showNext = useCallback(() => {
-    if (dismissed.current) return;
+    if (dismissed.current || isDisabled) return;
     const product = pick(PRODUCTS);
     let name: string;
     if (product.gender === 'male') {
@@ -64,13 +69,18 @@ const FomoToast = () => {
       // Schedule next in 12-25s
       timerRef.current = setTimeout(showNext, (Math.random() * 13000) + 12000);
     }, 5000);
-  }, []);
+  }, [isDisabled]);
 
   useEffect(() => {
+    if (isDisabled) {
+      setVisible(false);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      return;
+    }
     // First appearance after 8-15s
     timerRef.current = setTimeout(showNext, (Math.random() * 7000) + 8000);
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [showNext]);
+  }, [showNext, isDisabled]);
 
   const handleClose = () => {
     setVisible(false);
