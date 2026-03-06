@@ -2,11 +2,15 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { CheckCircle, X } from 'lucide-react';
 import './FomoToast.css';
 
-const FIRST_NAMES = [
-  'Sarah', 'Mike', 'Jessica', 'David', 'Emily', 'James', 'Ashley', 'Chris',
-  'Amanda', 'Brian', 'Nicole', 'Kevin', 'Lauren', 'Derek', 'Megan', 'Tyler',
-  'Rachel', 'Justin', 'Stephanie', 'Ryan', 'Jennifer', 'Matt', 'Heather',
-  'Andrew', 'Danielle', 'Eric', 'Brittany', 'Josh', 'Tiffany', 'Mark',
+const MALE_NAMES = [
+  'Mike', 'David', 'James', 'Chris', 'Brian', 'Kevin', 'Derek', 'Tyler',
+  'Justin', 'Ryan', 'Matt', 'Andrew', 'Eric', 'Josh', 'Mark',
+];
+
+const FEMALE_NAMES = [
+  'Sarah', 'Jessica', 'Emily', 'Ashley', 'Amanda', 'Nicole', 'Lauren',
+  'Megan', 'Rachel', 'Stephanie', 'Jennifer', 'Heather', 'Danielle',
+  'Brittany', 'Tiffany',
 ];
 
 const CITIES = [
@@ -16,11 +20,11 @@ const CITIES = [
   'Raleigh, NC', 'Orlando, FL', 'Columbus, OH', 'Indianapolis, IN', 'Salt Lake City, UT',
 ];
 
-const PRODUCTS = [
-  { name: 'TPrime365', img: '/images/tprime-bottle.png' },
-  { name: 'GLP-1 Optimization Protocol', img: '/images/product-glp-protocol-new.png' },
-  { name: 'NHTO', img: '/images/nhto-bottle.png' },
-  { name: 'Ultimate Cell Optimization System', img: '/images/product-ucos.png' },
+const PRODUCTS: { name: string; img: string; gender: 'male' | 'female' | 'any' }[] = [
+  { name: 'TPrime365', img: '/images/tprime-bottle.png', gender: 'male' },
+  { name: 'GLP-1 Optimization Protocol', img: '/images/product-glp-protocol-new.png', gender: 'female' },
+  { name: 'NHTO', img: '/images/nhto-bottle.png', gender: 'male' },
+  { name: 'Ultimate Cell Optimization System', img: '/images/product-ucos.png', gender: 'any' },
 ];
 
 const TIME_AGO = ['2 minutes ago', '5 minutes ago', '8 minutes ago', '12 minutes ago', '15 minutes ago', '23 minutes ago', '1 hour ago'];
@@ -37,10 +41,19 @@ const FomoToast = () => {
 
   const showNext = useCallback(() => {
     if (dismissed.current) return;
+    const product = pick(PRODUCTS);
+    let name: string;
+    if (product.gender === 'male') {
+      name = pick(MALE_NAMES);
+    } else if (product.gender === 'female') {
+      name = Math.random() < 0.9 ? pick(FEMALE_NAMES) : pick(MALE_NAMES);
+    } else {
+      name = pick([...MALE_NAMES, ...FEMALE_NAMES]);
+    }
     setData({
-      name: pick(FIRST_NAMES),
+      name,
       city: pick(CITIES),
-      product: pick(PRODUCTS),
+      product,
       time: pick(TIME_AGO),
     });
     setVisible(true);
