@@ -238,6 +238,7 @@ const FreeTestosteroneGuidePage: React.FC = () => {
 
       {/* ── Footer (P2: contact info) ── */}
       <footer className="ftg-footer">
+        <img src="/images/best365labs-logo.png" alt="Best 365 Labs" className="ftg-footer-logo" />
         <p>
           © 2026 Best 365 Labs, Inc. · These statements have not been evaluated by the FDA. This guide is for educational purposes only.
         </p>
