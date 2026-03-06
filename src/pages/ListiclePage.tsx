@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ListiclePage.css';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 
 const ListiclePage = () => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+      setScrollProgress(progress);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="listicle-page">
+      {/* READING PROGRESS BAR */}
+      <div className="listicle-progress-bar" style={{ width: `${scrollProgress}%` }} />
       {/* URGENCY BANNER */}
       <div className="listicle-urgency-banner">
         <span>CLINICAL UPDATE:</span> New physician-reviewed data shows 60–664% testosterone increase in 2–4 weeks without injections
@@ -188,25 +202,25 @@ const ListiclePage = () => {
 
           <div className="listicle-ingredient-grid">
             <div className="listicle-ingredient-card">
-              <div className="listicle-ingredient-icon">⚡</div>
+              <div className="listicle-ingredient-icon">E</div>
               <h4>Enclomiphene</h4>
               <div className="listicle-ingredient-dose">25mg per dose</div>
               <p>Blocks estrogen receptors at the pituitary gland, sending a clear signal to the HPG axis: produce more testosterone. Stimulates natural production without introducing external hormones.</p>
             </div>
             <div className="listicle-ingredient-card">
-              <div className="listicle-ingredient-icon">🔬</div>
+              <div className="listicle-ingredient-icon">S</div>
               <h4>Spermidine</h4>
               <div className="listicle-ingredient-dose">10mg per dose</div>
               <p>A longevity compound shown to support a 48.9% testosterone increase in men under 50, reduce cortisol by 58%, and activate autophagy — your body's cellular renewal process.</p>
             </div>
             <div className="listicle-ingredient-card">
-              <div className="listicle-ingredient-icon">🔓</div>
+              <div className="listicle-ingredient-icon">B</div>
               <h4>Boron</h4>
               <div className="listicle-ingredient-dose">10mg per dose</div>
               <p>Liberates bound testosterone by reducing SHBG (sex hormone-binding globulin). Published data shows a 28% increase in free testosterone within 1 week of supplementation.</p>
             </div>
             <div className="listicle-ingredient-card">
-              <div className="listicle-ingredient-icon">🛡</div>
+              <div className="listicle-ingredient-icon">C</div>
               <h4>Vitamin C</h4>
               <div className="listicle-ingredient-dose">10mg per dose</div>
               <p>Protects Leydig cells — the testosterone-producing cells in the testes — from oxidative stress. Maintains the cellular environment that production depends on.</p>
@@ -507,9 +521,9 @@ const ListiclePage = () => {
         <p>One dropper. 60 seconds. Before bed. Physician-supervised. No injections. No shutdown. No dependency. Results in 2–4 weeks.</p>
         <a href="/tprime365" className="listicle-cta-btn">See If You Qualify — $149/mo →</a>
         <div className="listicle-final-trust">
-          <span>🔬 Physician-Reviewed</span>
-          <span>🇺🇸 Made in USA</span>
-          <span>📦 Free Shipping</span>
+          <span>Physician-Reviewed</span>
+          <span>Made in USA</span>
+          <span>Free Shipping</span>
         </div>
       </div>
 
