@@ -49,12 +49,6 @@ const testimonials = [
   { name: 'Jay Atkins', quote: 'Finally a protocol that works without needles. I\'ve got my drive back and I feel 10 years younger.', img: '/images/testimonial-jay-atkins.png' },
 ];
 
-const pressLogos = [
-  { name: "Men's Health", src: '/images/Men_s_Health.avif' },
-  { name: 'Esquire', src: '/images/Esquire_logo__2017__svg.avif' },
-  { name: 'BuzzFeed', src: '/images/BuzzFeed_9341afbe-6571-4255-aa76-6460b9611a57.avif' },
-  { name: "Men's Journal", src: '/images/MJ.avif' },
-];
 
 const faqItems = [
   { q: "Is this really free? What's the catch?", a: "Yes — 100% free, no credit card required. We created this guide to educate men about their options. If you find it valuable, you may choose to explore our protocols, but there's zero obligation." },
@@ -228,17 +222,6 @@ const FreeTestosteroneGuidePage: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Press Logos (P1) ── */}
-      <div className="ftg-press">
-        <p className="ftg-press-label">As Featured In</p>
-        <div className="ftg-press-logos">
-          {pressLogos.map((logo, i) => (
-            <div key={i} className="ftg-press-logo">
-              <img src={logo.src} alt={logo.name} loading="lazy" />
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* ── Discover Section ── */}
       <section className="ftg-discover" ref={discoverRef}>
