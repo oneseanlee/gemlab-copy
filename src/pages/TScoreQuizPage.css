@@ -147,9 +147,28 @@
 
 .tsq-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--b365-blue), var(--b365-gold));
+  background: var(--b365-blue);
   border-radius: 3px;
-  transition: width 0.4s ease;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 8px rgba(51, 118, 176, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.tsq-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: tsq-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes tsq-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .tsq-progress-label {
