@@ -292,11 +292,7 @@ const GLP1BuyPage = () => {
                 <input id="glp1buy-email" type="email" placeholder="your.email@gmail.com" {...register("email")} />
                 {errors.email && <div className="glp1buy-field-error">{errors.email.message}</div>}
               </div>
-              <div className="glp1buy-field">
-                <label htmlFor="glp1buy-phone">Phone (optional)</label>
-                <input id="glp1buy-phone" type="tel" placeholder="(555) 123-4567" {...register("phone")} />
-                <span className="glp1buy-field-hint">📦 Get tracking details & special offers</span>
-              </div>
+              <p style={{ fontSize: '13px', color: '#DC2626', textAlign: 'center', margin: '8px 0' }}>⚡ Launch pricing — limited availability</p>
 
               <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading || hasSubmitted.current}>
                 {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Redirecting…</> : <>Get My GLP-1 Protocol <ArrowRight size={18} /></>}
