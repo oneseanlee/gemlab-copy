@@ -41,8 +41,9 @@ const FomoToast = () => {
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
   const dismissed = useRef(false);
 
-  // Disable on quiz page
-  const isDisabled = location.pathname === '/t-score-quiz';
+  // Only show on product pages and GLP-1 buy page
+  const allowedPaths = ['/tprime365', '/glp1-protocol', '/nhto', '/ucos', '/glp1-ucos', '/glp1-buy', '/tprime-buy'];
+  const isDisabled = !allowedPaths.includes(location.pathname);
 
   const showNext = useCallback(() => {
     if (dismissed.current || isDisabled) return;
