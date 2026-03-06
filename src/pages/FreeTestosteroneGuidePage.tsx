@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Mail, User, Phone } from 'lucide-react';
+import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Mail, User, Phone, X } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import AnimatedCTA from '@/components/AnimatedCTA/AnimatedCTA';
 import { supabase } from '@/integrations/supabase/client';
@@ -42,11 +42,10 @@ const discoverItems = [
 ];
 
 
-
-
-/* ── Opt-in form with first name + email + optional phone ── */
-const OptInForm = ({
-  formId,
+/* ── Lead Capture Modal ── */
+const LeadModal = ({
+  open,
+  onClose,
   firstName,
   email,
   phone,
@@ -57,7 +56,8 @@ const OptInForm = ({
   onPhoneChange,
   onSubmit,
 }: {
-  formId: string;
+  open: boolean;
+  onClose: () => void;
   firstName: string;
   email: string;
   phone: string;
@@ -70,60 +70,97 @@ const OptInForm = ({
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
 
-  if (submitted) {
-    return (
-      <div className="ftg-success">
-        <h3>You're In! 🎉</h3>
-        <p>Check your inbox — your free guide is on the way.</p>
-      </div>
-    );
-  }
+  // Lock body scroll when open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
+
+  if (!open) return null;
 
   return (
-    <form id={formId} ref={formRef} className="ftg-form" onSubmit={onSubmit}>
-      <div className="ftg-input-wrap">
-        <User size={16} className="ftg-input-icon" />
-        <input
-          type="text"
-          className="ftg-input"
-          placeholder="e.g. Sarah Mitchell"
-          required
-          maxLength={100}
-          value={firstName}
-          onChange={(e) => onFirstNameChange(e.target.value)}
-        />
+    <div className="ftg-modal-backdrop" onClick={onClose}>
+      <div className="ftg-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="ftg-modal-close" onClick={onClose} aria-label="Close">
+          <X size={20} />
+        </button>
+
+        {submitted ? (
+          <div className="ftg-modal-success">
+            <div className="ftg-modal-success-icon">🎉</div>
+            <h3>You're In!</h3>
+            <p>Check your inbox — your free guide is on the way.</p>
+          </div>
+        ) : (
+          <>
+            <div className="ftg-modal-header">
+              <img
+                src="/images/ftg-ebook-cover.png"
+                alt="Free Guide"
+                className="ftg-modal-ebook"
+              />
+              <div>
+                <h3 className="ftg-modal-title">Get Your Free Guide</h3>
+                <p className="ftg-modal-subtitle">
+                  The Difference Between <em>Renting</em> Testosterone and <em>Owning</em> It
+                </p>
+              </div>
+            </div>
+
+            <form ref={formRef} className="ftg-modal-form" onSubmit={onSubmit}>
+              <div className="ftg-input-wrap">
+                <User size={16} className="ftg-input-icon" />
+                <input
+                  type="text"
+                  className="ftg-input"
+                  placeholder="First name"
+                  required
+                  maxLength={100}
+                  autoFocus
+                  value={firstName}
+                  onChange={(e) => onFirstNameChange(e.target.value)}
+                />
+              </div>
+              <div className="ftg-input-wrap">
+                <Mail size={16} className="ftg-input-icon" />
+                <input
+                  type="email"
+                  className="ftg-input"
+                  placeholder="Email address"
+                  required
+                  maxLength={255}
+                  value={email}
+                  onChange={(e) => onEmailChange(e.target.value)}
+                />
+              </div>
+              <div className="ftg-input-wrap">
+                <Phone size={16} className="ftg-input-icon" />
+                <input
+                  type="tel"
+                  className="ftg-input"
+                  placeholder="Phone (optional)"
+                  maxLength={20}
+                  value={phone}
+                  onChange={(e) => onPhoneChange(e.target.value)}
+                />
+              </div>
+              <AnimatedCTA onClick={() => formRef.current?.requestSubmit()} disabled={submitting}>
+                {submitting ? 'Sending…' : 'SEND ME THE FREE GUIDE'}
+                <ArrowRight size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 6 }} />
+              </AnimatedCTA>
+              <p className="ftg-privacy-note">
+                <Lock size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
+                100% Free · No spam · Unsubscribe anytime
+              </p>
+            </form>
+          </>
+        )}
       </div>
-      <div className="ftg-input-wrap">
-        <Mail size={16} className="ftg-input-icon" />
-        <input
-          type="email"
-          className="ftg-input"
-          placeholder="your.email@gmail.com"
-          required
-          maxLength={255}
-          value={email}
-          onChange={(e) => onEmailChange(e.target.value)}
-        />
-      </div>
-      <div className="ftg-input-wrap">
-        <Phone size={16} className="ftg-input-icon" />
-        <input
-          type="tel"
-          className="ftg-input"
-          placeholder="(555) 123-4567 (optional)"
-          maxLength={20}
-          value={phone}
-          onChange={(e) => onPhoneChange(e.target.value)}
-        />
-      </div>
-      <AnimatedCTA onClick={() => formRef.current?.requestSubmit()} disabled={submitting}>
-        {submitting ? 'Submitting…' : 'GET FREE GUIDE'} <ArrowRight size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 4 }} />
-      </AnimatedCTA>
-      <p className="ftg-privacy-note">
-        <Lock size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
-        100% Free · No spam · Unsubscribe anytime
-      </p>
-    </form>
+    </div>
   );
 };
 
@@ -135,6 +172,7 @@ const FreeTestosteroneGuidePage: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const hasSubmitted = useRef(false);
 
   // Remove root background so fixed video shows through
@@ -176,6 +214,9 @@ const FreeTestosteroneGuidePage: React.FC = () => {
     }
   };
 
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => { if (!submitting) setModalOpen(false); };
+
   return (
     <div className="ftg-page">
       {/* ── Full-page Fixed Video Background ── */}
@@ -188,7 +229,6 @@ const FreeTestosteroneGuidePage: React.FC = () => {
 
       {/* ── Hero ── */}
       <section className="ftg-hero">
-        {/* P0: On mobile, CTA-side renders first via CSS order */}
         <div className="ftg-hero-left">
           <span className="ftg-hero-tag">Free Guide</span>
           <h1 className="ftg-hero-headline">
@@ -197,18 +237,13 @@ const FreeTestosteroneGuidePage: React.FC = () => {
           <p className="ftg-hero-sub">
             Most men don't realize they're signing up for a lifetime lease on their own hormones. This guide shows you the difference — and why it matters more than you think.
           </p>
-          <OptInForm
-            formId="ftg-hero-form"
-            firstName={firstName}
-            email={email}
-            phone={phone}
-            submitted={submitted}
-            submitting={submitting}
-            onFirstNameChange={setFirstName}
-            onEmailChange={setEmail}
-            onPhoneChange={setPhone}
-            onSubmit={handleSubmit}
-          />
+          <AnimatedCTA onClick={openModal}>
+            GET FREE GUIDE <ArrowRight size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 4 }} />
+          </AnimatedCTA>
+          <p className="ftg-hero-micro">
+            <Lock size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
+            Free · No credit card required
+          </p>
         </div>
         <div className="ftg-hero-right" ref={ebookParallax}>
           <div className="ftg-ebook-wrapper">
@@ -239,7 +274,6 @@ const FreeTestosteroneGuidePage: React.FC = () => {
         </div>
       </div>
 
-
       {/* ── Discover Section ── */}
       <section className="ftg-discover" ref={discoverRef}>
         <div className="ftg-section-header">
@@ -258,8 +292,6 @@ const FreeTestosteroneGuidePage: React.FC = () => {
         </div>
       </section>
 
-
-
       {/* ── Final CTA ── */}
       <section className="ftg-final-cta" ref={ctaRef}>
         <div className="ftg-cta-video-bg" aria-hidden="true">
@@ -272,22 +304,28 @@ const FreeTestosteroneGuidePage: React.FC = () => {
           Stop Renting.<br />Start Owning.
         </h2>
         <p className="ftg-cta-sub">Get the Free Guide Now.</p>
-        <OptInForm
-          formId="ftg-cta-form"
-          firstName={firstName}
-          email={email}
-          phone={phone}
-          submitted={submitted}
-          submitting={submitting}
-          onFirstNameChange={setFirstName}
-          onEmailChange={setEmail}
-          onPhoneChange={setPhone}
-          onSubmit={handleSubmit}
-        />
+        <AnimatedCTA onClick={openModal}>
+          GET FREE GUIDE <ArrowRight size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 4 }} />
+        </AnimatedCTA>
         <p className="ftg-cta-micro">Join 50,000+ men optimizing naturally</p>
       </section>
 
-      {/* ── Footer (P2: contact info) ── */}
+      {/* ── Lead Capture Modal ── */}
+      <LeadModal
+        open={modalOpen}
+        onClose={closeModal}
+        firstName={firstName}
+        email={email}
+        phone={phone}
+        submitted={submitted}
+        submitting={submitting}
+        onFirstNameChange={setFirstName}
+        onEmailChange={setEmail}
+        onPhoneChange={setPhone}
+        onSubmit={handleSubmit}
+      />
+
+      {/* ── Footer ── */}
       <footer className="ftg-footer">
         <img src="/images/best365labs-logo.png" alt="Best 365 Labs" className="ftg-footer-logo" />
         <p>
