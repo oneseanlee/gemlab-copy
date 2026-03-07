@@ -746,3 +746,30 @@
   margin-bottom: 0;
   line-height: 1.7;
 }
+
+/* ─── INLINE EDITORIAL CTA ─── */
+.listicle-inline-cta {
+  text-align: center;
+  padding: 28px 24px;
+  margin: 36px 0;
+  background: #f0f6fb;
+  border-radius: 10px;
+  border: 1px solid #dce8f3;
+}
+.listicle-inline-cta p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2d3748;
+  margin-bottom: 0;
+  line-height: 1.7;
+}
+.listicle-inline-cta a {
+  color: var(--b365-blue);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.listicle-inline-cta a:hover {
+  border-bottom-color: var(--b365-blue);
+}
