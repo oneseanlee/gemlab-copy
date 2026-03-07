@@ -3,3 +3,5 @@ project_id = "yyuoyitapltnuqhkjyfd"
 [functions]
   [functions.auth-email-hook]
     verify_jwt = false
+  [functions.shopify-order-webhook]
+    verify_jwt = false
