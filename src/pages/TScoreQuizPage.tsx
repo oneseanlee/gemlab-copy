@@ -156,20 +156,19 @@ const useAnimatedCounter = (target: number, duration = 1500, start = false) => {
    ═══════════════════════════════════════════ */
 const LandingPhase = ({ onStart }: { onStart: () => void }) => (
   <div className="tsq-landing">
-    <span className="tsq-brand">BEST 365 LABS</span>
     <h1 className="tsq-landing-headline">What's Your T-Score?</h1>
     <p className="tsq-landing-sub">
-      Take this 2-minute assessment to find out if declining testosterone is behind your symptoms — and what you can do about it.
+      Take this quick 2-minute assessment to find out if low testosterone is behind your symptoms.
     </p>
     <div className="tsq-landing-trust">
-      <span><Clock size={14} /> Takes 2 Minutes</span>
+      <span><Clock size={14} /> 2 Minutes</span>
       <span><FlaskConical size={14} /> Physician-Reviewed</span>
-      <span><Lock size={14} /> 100% Confidential</span>
+      <span><Lock size={14} /> 100% Private</span>
     </div>
     <button className="tsq-cta-gold" onClick={onStart}>
-      Start Your Assessment <ArrowRight size={18} />
+      Start My Assessment <ArrowRight size={18} />
     </button>
-    <p className="tsq-landing-social">50,000+ men have optimized through Best 365 Labs</p>
+    <p className="tsq-landing-social">Join 50,000+ men who've taken the quiz</p>
   </div>
 );
 
@@ -456,7 +455,7 @@ const ResultsPhase = ({ result }: { result: TScoreResult }) => {
       {/* Footer disclaimer */}
       <div className="tsq-disclaimer">
         <p>
-          This assessment is for educational purposes only and does not constitute medical advice, diagnosis, or treatment. Individual results may vary. All medical evaluations are provided by independent licensed healthcare professionals through the happyMD telehealth platform. Best 365 Labs does not provide medical advice, diagnoses, or prescriptions.
+          This assessment is for educational purposes only and does not constitute medical advice, diagnosis, or treatment. Individual results may vary. All medical evaluations are provided by independent licensed healthcare professionals.
         </p>
         <p>
           *These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease.
