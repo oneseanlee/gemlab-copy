@@ -140,6 +140,11 @@ const ListiclePage = () => {
 
         <p>None of these are personality traits. Every single one is a documented symptom of declining testosterone. And the standard medical response creates a problem of its own.</p>
 
+        {/* INLINE CTA #1 — After hook/checklist */}
+        <div className="listicle-inline-cta">
+          <p>If 3 or more of these apply to you, it may be time to check your levels. <a href="/tprime365">See if you qualify for physician-supervised optimization →</a></p>
+        </div>
+
         {/* EDITORIAL IMAGE BREAK */}
         <div className="listicle-hero-img" style={{ margin: '40px 0' }}>
           <img src="/images/tprime-listicle-hero-2.png" alt="TPrime365 — Physician-Grade Testosterone Optimization Protocol" />
@@ -310,6 +315,11 @@ const ListiclePage = () => {
           </div>
         </div>
 
+        {/* INLINE CTA #2 — After testimonials */}
+        <div className="listicle-inline-cta">
+          <p>Men across the country are seeing results in as little as 2–4 weeks. <a href="/tprime365">Check if you qualify for TPrime365 →</a></p>
+        </div>
+
         {/* RESULTS TIMELINE */}
         <div className="listicle-sep" />
         <h3>What to Expect — Week by Week</h3>
@@ -418,6 +428,11 @@ const ListiclePage = () => {
               </tr>
             </tbody>
           </table>
+        </div>
+
+        {/* INLINE CTA #3 — After comparison table */}
+        <div className="listicle-inline-cta">
+          <p>Better ingredients. Better delivery. Lower cost. <a href="/tprime365">See if you qualify — $149/mo →</a></p>
         </div>
 
         {/* VALUE STACK */}
