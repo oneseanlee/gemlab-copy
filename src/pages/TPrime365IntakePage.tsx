@@ -4,7 +4,7 @@ import { trackMetaEvent } from '@/lib/meta-pixel';
 
 declare global {
   interface Window {
-    dataLayer?: Record<string, unknown>[];
+    dataLayer?: Record<string, any>[];
   }
 }
 import SharedFooter from '../components/SharedFooter/SharedFooter';

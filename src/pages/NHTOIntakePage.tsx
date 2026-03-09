@@ -3,7 +3,7 @@ import { FileText, Shield, Clock } from 'lucide-react';
 
 declare global {
   interface Window {
-    dataLayer?: Record<string, unknown>[];
+    dataLayer?: Record<string, any>[];
   }
 }
 import SharedFooter from '../components/SharedFooter/SharedFooter';
