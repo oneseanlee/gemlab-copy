@@ -83,6 +83,7 @@ export const useCartStore = create<CartStore>()(
                 value: parseFloat(item.price.amount) * item.quantity,
                 currency: item.price.currencyCode || 'USD',
               });
+              pushAddToCart(item);
             }
           } else if (existingItem) {
             const newQuantity = existingItem.quantity + item.quantity;
