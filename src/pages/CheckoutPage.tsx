@@ -80,6 +80,7 @@ const CheckoutPage = () => {
 
     hasSubmitted.current = true;
     setIsSubmitting(true);
+    const checkoutUrl = existingCheckoutUrl;
     try {
       await supabase.from("checkout_leads").insert({
         first_name: data.fullName.trim(),
@@ -110,7 +111,6 @@ const CheckoutPage = () => {
           },
         }],
       });
-      const checkoutUrl = existingCheckoutUrl;
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'begin_checkout',
