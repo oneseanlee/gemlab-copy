@@ -110,6 +110,20 @@ const CheckoutPage = () => {
           },
         }],
       });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'begin_checkout',
+        ecommerce: {
+          currency: 'USD',
+          value: totalPrice,
+          items: items.map(i => ({
+            item_id: i.variantId,
+            item_name: i.product.node.title,
+            price: parseFloat(i.price.amount),
+            quantity: i.quantity,
+          })),
+        },
+      });
       window.location.href = existingCheckoutUrl;
     } catch {
       window.location.href = existingCheckoutUrl;
