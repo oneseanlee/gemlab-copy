@@ -110,6 +110,7 @@ const CheckoutPage = () => {
           },
         }],
       });
+      const checkoutUrl = existingCheckoutUrl;
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'begin_checkout',
@@ -124,15 +125,12 @@ const CheckoutPage = () => {
             quantity: i.quantity,
           })),
         },
-        eventCallback: function() {
-          setTimeout(function() {
-            window.location.href = existingCheckoutUrl;
-          }, 500);
-        },
-        eventTimeout: 2000,
       });
+      setTimeout(function() {
+        window.location.href = checkoutUrl;
+      }, 1500);
     } catch {
-      window.location.href = existingCheckoutUrl;
+      window.location.href = checkoutUrl;
     }
     // Keep button disabled after redirect — no finally/reset
   };
