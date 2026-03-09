@@ -1,6 +1,28 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { trackMetaEvent } from '@/lib/meta-pixel';
+
+declare global {
+  interface Window { dataLayer: Record<string, any>[]; }
+}
+
+function pushAddToCart(item: { product: { node: { title: string; id?: string } }; variantId: string; price: { amount: string; currencyCode?: string }; quantity: number }) {
+  window.dataLayer = window.dataLayer || [];
+  const price = parseFloat(item.price.amount);
+  window.dataLayer.push({
+    event: 'add_to_cart',
+    ecommerce: {
+      currency: item.price.currencyCode || 'USD',
+      value: price * item.quantity,
+      items: [{
+        item_id: item.variantId,
+        item_name: item.product.node.title,
+        price,
+        quantity: item.quantity,
+      }],
+    },
+  });
+}
 import {
   type CartItem,
   type BuyerIdentity,
