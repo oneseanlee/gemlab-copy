@@ -5,3 +5,5 @@ project_id = "yyuoyitapltnuqhkjyfd"
     verify_jwt = false
   [functions.shopify-order-webhook]
     verify_jwt = false
+  [functions.admin-dashboard-data]
+    verify_jwt = false
