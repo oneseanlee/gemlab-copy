@@ -3,7 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { trackMetaEvent } from '@/lib/meta-pixel';
 
 declare global {
-  interface Window { dataLayer: Record<string, any>[]; }
+  interface Window { dataLayer?: Record<string, any>[]; }
 }
 
 function pushAddToCart(item: { product: { node: { title: string; id?: string } }; variantId: string; price: { amount: string; currencyCode?: string }; quantity: number }) {
