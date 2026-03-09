@@ -124,8 +124,13 @@ const CheckoutPage = () => {
             quantity: i.quantity,
           })),
         },
+        eventCallback: function() {
+          setTimeout(function() {
+            window.location.href = existingCheckoutUrl;
+          }, 500);
+        },
+        eventTimeout: 2000,
       });
-      window.location.href = existingCheckoutUrl;
     } catch {
       window.location.href = existingCheckoutUrl;
     }
