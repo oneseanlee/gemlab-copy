@@ -6,11 +6,16 @@ declare global {
   interface Window { dataLayer?: Record<string, any>[]; }
 }
 
+function generateEventId() {
+  return Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
 function pushAddToCart(item: { product: { node: { title: string; id?: string } }; variantId: string; price: { amount: string; currencyCode?: string }; quantity: number }) {
   window.dataLayer = window.dataLayer || [];
   const price = parseFloat(item.price.amount);
   window.dataLayer.push({
     event: 'add_to_cart',
+    event_id: generateEventId(),
     ecommerce: {
       currency: item.price.currencyCode || 'USD',
       value: price * item.quantity,
