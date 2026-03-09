@@ -139,6 +139,20 @@ const GLP1BuyPage = () => {
         }],
       });
 
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'begin_checkout',
+        ecommerce: {
+          currency: 'USD',
+          value: PRICE,
+          items: [{
+            item_id: GLP1_VARIANT_ID,
+            item_name: GLP1_PRODUCT.node.title,
+            price: PRICE,
+            quantity: 1,
+          }],
+        },
+      });
       window.location.href = checkoutUrl;
     } catch {
       const fallback = getCheckoutUrl();
