@@ -80,6 +80,7 @@ const CheckoutPage = () => {
 
     hasSubmitted.current = true;
     setIsSubmitting(true);
+    const checkoutUrl = existingCheckoutUrl;
     try {
       await supabase.from("checkout_leads").insert({
         first_name: data.fullName.trim(),
@@ -124,15 +125,12 @@ const CheckoutPage = () => {
             quantity: i.quantity,
           })),
         },
-        eventCallback: function() {
-          setTimeout(function() {
-            window.location.href = existingCheckoutUrl;
-          }, 500);
-        },
-        eventTimeout: 2000,
       });
+      setTimeout(function() {
+        window.location.href = checkoutUrl;
+      }, 1500);
     } catch {
-      window.location.href = existingCheckoutUrl;
+      window.location.href = checkoutUrl;
     }
     // Keep button disabled after redirect — no finally/reset
   };
