@@ -1,27 +1,43 @@
 
 
-## Simplify the Free Testosterone Guide Page
+## Admin Dashboard for Checkout Leads
 
-Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
+### Overview
+Build a password-protected admin dashboard at `/admin` that queries the `checkout_leads` table and displays conversion metrics, daily breakdowns, and individual lead details.
 
-### What gets removed
-- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
-- **FAQ section** (lines 278-286) — the 4-item accordion
-- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
-- **Testimonials data** (`testimonials` array, lines 43-50)
-- **FAQ data** (`faqItems` array, lines 53-58)
-- **FaqItem component** (lines 125-138)
-- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
-- **Unused imports**: `Star`, `ChevronDown`
+### Access Control
+- Simple client-side password gate (prompt for a password stored as a constant or environment variable) -- no auth system needed for an internal tool
+- Not exposed in navigation; access by typing `/admin` directly
 
-### What stays
-1. **Video background** — cinematic feel
-2. **Hero** — headline, subtitle, opt-in form, ebook cover
-3. **Trust strip** — 4 credibility badges
-4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
-5. **Final CTA** — dark video section with second opt-in form
-6. **Footer** — legal/contact
+### Database Changes
+- Add a **SELECT policy** for `anon` role on `checkout_leads` -- currently only `service_role` can read. Alternatively, create an **Edge Function** that uses the service role key to fetch data securely.
+- **Recommended approach**: Use an Edge Function (`admin-dashboard-data`) with a simple bearer token check, so the `checkout_leads` table stays locked down to `service_role` only. The dashboard calls this function with a password/token.
 
-### Result
-The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
+### Edge Function: `supabase/functions/admin-dashboard-data/index.ts`
+- Accepts GET request with `Authorization: Bearer <ADMIN_PASSWORD>` header
+- Validates against a `ADMIN_DASHBOARD_PASSWORD` secret
+- Queries `checkout_leads` ordered by `created_at DESC`
+- Returns all rows (should be small volume)
+
+### Frontend: `src/pages/AdminDashboardPage.tsx`
+- **Password gate**: Simple input + submit, stores password in sessionStorage
+- **Summary cards** at top:
+  - Total leads
+  - Completed (sales)
+  - Abandoned
+  - Conversion rate (%)
+- **Daily breakdown table**: Date | Leads | Sales | Abandoned | Conversion %
+- **Leads table**: Name | Email | Phone | Cart Items | Total | Status | Date
+  - Status shown as green "Completed" or red "Abandoned" badge
+- Styled with existing Tailwind + shadcn components (Card, Table, Badge)
+
+### Route
+- Add `/admin` route to `App.tsx`
+
+### Files to Create/Modify
+1. **Create** `supabase/functions/admin-dashboard-data/index.ts` -- secure data endpoint
+2. **Create** `src/pages/AdminDashboardPage.tsx` -- dashboard UI
+3. **Create** `src/pages/AdminDashboardPage.css` -- minimal custom styles
+4. **Modify** `src/App.tsx` -- add `/admin` route
+5. **Add secret** `ADMIN_DASHBOARD_PASSWORD` via secrets tool
 
