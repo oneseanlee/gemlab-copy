@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { trackMetaEvent } from '@/lib/meta-pixel';
+import { getFbcValue, getFbpValue } from '@/lib/fb-cookies';
 
 declare global {
   interface Window { dataLayer?: Record<string, any>[]; }
