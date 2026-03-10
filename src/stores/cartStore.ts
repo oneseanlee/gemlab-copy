@@ -17,17 +17,14 @@ function pushAddToCart(item: { product: { node: { title: string; id?: string } }
   window.dataLayer.push({
     event: 'add_to_cart',
     event_id: generateEventId(),
-    fbc: getFbcValue(),
-    fbp: getFbpValue(),
+    user_data: {
+      fbc: getFbcValue(),
+      fbp: getFbpValue(),
+    },
     ecommerce: {
       currency: item.price.currencyCode || 'USD',
       value: price * item.quantity,
-      items: [{
-        item_id: item.variantId,
-        item_name: item.product.node.title,
-        price,
-        quantity: item.quantity,
-      }],
+      items: [{ item_id: item.variantId, item_name: item.product.node.title, price, quantity: item.quantity }],
     },
   });
 }
