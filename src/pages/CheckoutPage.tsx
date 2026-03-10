@@ -116,6 +116,8 @@ const CheckoutPage = () => {
       window.dataLayer.push({
         event: 'begin_checkout',
         event_id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        fbc: getFbcValue(),
+        fbp: getFbpValue(),
         user_data: {
           email: data.email.trim(),
           phone_number: data.phone || '',

@@ -17,6 +17,8 @@ function pushAddToCart(item: { product: { node: { title: string; id?: string } }
   window.dataLayer.push({
     event: 'add_to_cart',
     event_id: generateEventId(),
+    fbc: getFbcValue(),
+    fbp: getFbpValue(),
     ecommerce: {
       currency: item.price.currencyCode || 'USD',
       value: price * item.quantity,

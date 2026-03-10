@@ -143,6 +143,8 @@ const GLP1BuyPage = () => {
       window.dataLayer.push({
         event: 'begin_checkout',
         event_id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        fbc: getFbcValue(),
+        fbp: getFbpValue(),
         ecommerce: {
           currency: 'USD',
           value: PRICE,
