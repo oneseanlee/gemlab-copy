@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { trackMetaEvent } from "@/lib/meta-pixel";
+import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
