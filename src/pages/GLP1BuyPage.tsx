@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { trackMetaEvent } from "@/lib/meta-pixel";
+import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -143,6 +144,8 @@ const GLP1BuyPage = () => {
       window.dataLayer.push({
         event: 'begin_checkout',
         event_id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        fbc: getFbcValue(),
+        fbp: getFbpValue(),
         ecommerce: {
           currency: 'USD',
           value: PRICE,

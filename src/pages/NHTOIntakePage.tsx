@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { FileText, Shield, Clock } from 'lucide-react';
+import { getFbcValue, getFbpValue } from '@/lib/fb-cookies';
 
 declare global {
   interface Window {
@@ -42,6 +43,8 @@ const NHTOIntakePage = () => {
         page_url: window.location.href,
         page_referrer: document.referrer,
         event_id: eventId,
+        fbc: getFbcValue(),
+        fbp: getFbpValue(),
       });
 
       console.log('[UCOSNHTO] generate_lead FIRED via ' + source + ' — eventId:', eventId);

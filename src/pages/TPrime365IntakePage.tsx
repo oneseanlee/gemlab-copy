@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { FileText, Shield, Clock } from 'lucide-react';
 import { trackMetaEvent } from '@/lib/meta-pixel';
+import { getFbcValue, getFbpValue } from '@/lib/fb-cookies';
 
 declare global {
   interface Window {
@@ -43,6 +44,8 @@ const TPrime365IntakePage = () => {
         page_url: window.location.href,
         page_referrer: document.referrer,
         event_id: eventId,
+        fbc: getFbcValue(),
+        fbp: getFbpValue(),
       });
 
       console.log('[TPRIME365] generate_lead FIRED via ' + source + ' — eventId:', eventId);

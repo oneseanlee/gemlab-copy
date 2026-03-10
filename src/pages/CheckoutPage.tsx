@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { trackMetaEvent } from "@/lib/meta-pixel";
+import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
@@ -115,6 +116,8 @@ const CheckoutPage = () => {
       window.dataLayer.push({
         event: 'begin_checkout',
         event_id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        fbc: getFbcValue(),
+        fbp: getFbpValue(),
         user_data: {
           email: data.email.trim(),
           phone_number: data.phone || '',
