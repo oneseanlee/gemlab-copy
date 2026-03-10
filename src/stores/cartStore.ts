@@ -92,7 +92,6 @@ export const useCartStore = create<CartStore>()(
                 currency: item.price.currencyCode || 'USD',
               });
               pushAddToCart(item);
-              pushAddToCart(item);
             }
           } else if (existingItem) {
             const newQuantity = existingItem.quantity + item.quantity;
