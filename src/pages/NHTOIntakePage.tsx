@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { FileText, Shield, Clock } from 'lucide-react';
+import { getFbcValue, getFbpValue } from '@/lib/fb-cookies';
 
 declare global {
   interface Window {

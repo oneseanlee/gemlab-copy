@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { FileText, Shield, Clock } from 'lucide-react';
 import { trackMetaEvent } from '@/lib/meta-pixel';
+import { getFbcValue, getFbpValue } from '@/lib/fb-cookies';
 
 declare global {
   interface Window {
