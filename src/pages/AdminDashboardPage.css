@@ -84,6 +84,8 @@
 .stat-card.abandoned::before { background: linear-gradient(90deg, hsl(0 65% 55%), hsl(0 65% 65%)); }
 .stat-card.rate::before { background: linear-gradient(90deg, hsl(45 80% 55%), hsl(45 80% 65%)); }
 .stat-card.revenue::before { background: linear-gradient(90deg, hsl(270 60% 55%), hsl(270 60% 65%)); }
+.stat-card.traffic::before { background: linear-gradient(90deg, hsl(190 70% 50%), hsl(190 70% 60%)); }
+.stat-card.visitors::before { background: linear-gradient(90deg, hsl(30 80% 55%), hsl(30 80% 65%)); }
 
 .stat-card .stat-label {
   font-size: 0.75rem;
