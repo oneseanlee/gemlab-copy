@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useCartSync } from "./hooks/useCartSync";
+import { usePageView } from "./hooks/usePageView";
 import FomoToast from "./components/FomoToast/FomoToast";
 // Route-level code splitting — each page loads on demand
 const HomePage = lazy(() => import("./pages/HomePage"));
