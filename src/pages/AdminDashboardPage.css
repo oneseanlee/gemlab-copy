@@ -165,6 +165,7 @@
   min-width: fit-content;
 }
 
+.funnel-fill.traffic-fill { background: linear-gradient(90deg, hsl(190 70% 50%), hsl(190 60% 55%)); }
 .funnel-fill.leads { background: linear-gradient(90deg, hsl(210 80% 55%), hsl(210 70% 60%)); }
 .funnel-fill.sales { background: linear-gradient(90deg, hsl(145 60% 45%), hsl(145 50% 50%)); }
 
