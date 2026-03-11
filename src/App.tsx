@@ -50,6 +50,7 @@ function ScrollToTopOnNav() {
 
 const AppRoutes = () => {
   useCartSync();
+  usePageView();
   return (
     <Suspense fallback={<PageLoader />}>
       <ScrollToTopOnNav />
