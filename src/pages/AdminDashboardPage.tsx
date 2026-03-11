@@ -14,6 +14,13 @@ interface Lead {
   created_at: string;
 }
 
+interface TrafficData {
+  totalPageViews: number;
+  uniqueVisitors: number;
+  dailyTraffic: { date: string; views: number; unique: number }[];
+  topPages: { page: string; views: number; unique: number }[];
+}
+
 interface DailyBreakdown {
   date: string;
   leads: number;
@@ -21,12 +28,15 @@ interface DailyBreakdown {
   abandoned: number;
   revenue: number;
   conversionRate: number;
+  views: number;
+  unique: number;
 }
 
 export default function AdminDashboardPage() {
   const [password, setPassword] = useState("");
   const [authed, setAuthed] = useState(() => !!sessionStorage.getItem("admin_token"));
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [traffic, setTraffic] = useState<TrafficData>({ totalPageViews: 0, uniqueVisitors: 0, dailyTraffic: [], topPages: [] });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -55,6 +65,7 @@ export default function AdminDashboardPage() {
       }
       if (data?.error) throw new Error(data.error);
       setLeads(data.leads || []);
+      setTraffic(data.traffic || { totalPageViews: 0, uniqueVisitors: 0, dailyTraffic: [], topPages: [] });
     } catch (e: any) {
       setError(e.message || "Failed to load data");
     } finally {
@@ -105,12 +116,18 @@ export default function AdminDashboardPage() {
     return { total, sales, abandoned, rate, revenue };
   }, [leads]);
 
-  // Daily breakdown from filtered leads
+  // Daily breakdown merging leads + traffic
   const dailyBreakdown = useMemo<DailyBreakdown[]>(() => {
-    const map = new Map<string, { leads: number; sales: number; revenue: number }>();
+    const map = new Map<string, { leads: number; sales: number; revenue: number; views: number; unique: number }>();
+
+    // Seed from traffic daily data
+    traffic.dailyTraffic.forEach((t) => {
+      map.set(t.date, { leads: 0, sales: 0, revenue: 0, views: t.views, unique: t.unique });
+    });
+
     filteredLeads.forEach((l) => {
       const day = l.created_at.slice(0, 10);
-      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0 };
+      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0 };
       entry.leads++;
       if (l.completed) {
         entry.sales++;
@@ -118,6 +135,7 @@ export default function AdminDashboardPage() {
       }
       map.set(day, entry);
     });
+
     return Array.from(map.entries())
       .sort((a, b) => b[0].localeCompare(a[0]))
       .map(([date, v]) => ({
@@ -127,8 +145,10 @@ export default function AdminDashboardPage() {
         abandoned: v.leads - v.sales,
         revenue: v.revenue,
         conversionRate: v.leads > 0 ? parseFloat(((v.sales / v.leads) * 100).toFixed(1)) : 0,
+        views: v.views,
+        unique: v.unique,
       }));
-  }, [filteredLeads]);
+  }, [filteredLeads, traffic.dailyTraffic]);
 
   // CSV export
   const exportCSV = () => {
@@ -208,6 +228,14 @@ export default function AdminDashboardPage() {
           <>
             {/* Stats Cards */}
             <div className="admin-stats-grid">
+              <div className="stat-card traffic">
+                <div className="stat-label">Total Page Views</div>
+                <div className="stat-value">{traffic.totalPageViews.toLocaleString()}</div>
+              </div>
+              <div className="stat-card visitors">
+                <div className="stat-label">Unique Visitors</div>
+                <div className="stat-value">{traffic.uniqueVisitors.toLocaleString()}</div>
+              </div>
               <div className="stat-card total">
                 <div className="stat-label">Total Leads</div>
                 <div className="stat-value">{stats.total}</div>
@@ -235,18 +263,32 @@ export default function AdminDashboardPage() {
               <h2>Conversion Funnel</h2>
               <div className="funnel-bar-container">
                 <div className="funnel-row">
+                  <span className="funnel-label">Traffic</span>
+                  <div className="funnel-track">
+                    <div className="funnel-fill traffic-fill" style={{ width: "100%" }}>{traffic.totalPageViews.toLocaleString()}</div>
+                  </div>
+                  <span className="funnel-count">{traffic.uniqueVisitors.toLocaleString()} unique</span>
+                </div>
+                <div className="funnel-row">
                   <span className="funnel-label">Leads</span>
                   <div className="funnel-track">
-                    <div className="funnel-fill leads" style={{ width: "100%" }}>{stats.total}</div>
+                    <div
+                      className="funnel-fill leads"
+                      style={{ width: traffic.totalPageViews > 0 ? `${Math.max((stats.total / traffic.totalPageViews) * 100, 2)}%` : "100%" }}
+                    >
+                      {stats.total}
+                    </div>
                   </div>
-                  <span className="funnel-count">{stats.total}</span>
+                  <span className="funnel-count">
+                    {traffic.totalPageViews > 0 ? ((stats.total / traffic.totalPageViews) * 100).toFixed(1) : "—"}%
+                  </span>
                 </div>
                 <div className="funnel-row">
                   <span className="funnel-label">Completed</span>
                   <div className="funnel-track">
                     <div
                       className="funnel-fill sales"
-                      style={{ width: stats.total > 0 ? `${(stats.sales / stats.total) * 100}%` : "0%" }}
+                      style={{ width: traffic.totalPageViews > 0 ? `${Math.max((stats.sales / traffic.totalPageViews) * 100, 1)}%` : "0%" }}
                     >
                       {stats.sales}
                     </div>
@@ -255,6 +297,35 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
             </div>
+
+            {/* Top Pages */}
+            {traffic.topPages.length > 0 && (
+              <div className="admin-table-card">
+                <div className="table-header">
+                  <h2>Top Pages</h2>
+                </div>
+                <div style={{ overflowX: "auto" }}>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Page</th>
+                        <th className="text-right">Views</th>
+                        <th className="text-right">Unique Visitors</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {traffic.topPages.map((p) => (
+                        <tr key={p.page}>
+                          <td style={{ fontWeight: 500, color: "hsl(220 15% 90%)" }}>{p.page}</td>
+                          <td className="text-right">{p.views.toLocaleString()}</td>
+                          <td className="text-right">{p.unique.toLocaleString()}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
 
             {/* Filters */}
             <div className="admin-filters">
@@ -289,6 +360,8 @@ export default function AdminDashboardPage() {
                   <thead>
                     <tr>
                       <th>Date</th>
+                      <th className="text-right">Views</th>
+                      <th className="text-right">Unique</th>
                       <th className="text-right">Leads</th>
                       <th className="text-right">Sales</th>
                       <th className="text-right">Abandoned</th>
@@ -300,6 +373,8 @@ export default function AdminDashboardPage() {
                     {dailyBreakdown.map((d) => (
                       <tr key={d.date}>
                         <td>{d.date}</td>
+                        <td className="text-right">{d.views.toLocaleString()}</td>
+                        <td className="text-right">{d.unique.toLocaleString()}</td>
                         <td className="text-right">{d.leads}</td>
                         <td className="text-right">{d.sales}</td>
                         <td className="text-right">{d.abandoned}</td>
@@ -308,7 +383,7 @@ export default function AdminDashboardPage() {
                       </tr>
                     ))}
                     {dailyBreakdown.length === 0 && (
-                      <tr><td colSpan={6} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No data for selected filters</td></tr>
+                      <tr><td colSpan={8} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No data for selected filters</td></tr>
                     )}
                   </tbody>
                 </table>
