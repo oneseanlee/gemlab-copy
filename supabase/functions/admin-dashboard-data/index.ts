@@ -33,19 +33,64 @@ Deno.serve(async (req) => {
     Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
   );
 
-  const { data, error } = await supabase
+  // Fetch leads
+  const { data: leads, error: leadsError } = await supabase
     .from("checkout_leads")
     .select("*")
     .order("created_at", { ascending: false });
 
-  if (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+  if (leadsError) {
+    return new Response(JSON.stringify({ error: leadsError.message }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
 
-  return new Response(JSON.stringify({ leads: data }), {
+  // Fetch traffic stats (aggregated)
+  const { data: trafficData, error: trafficError } = await supabase
+    .from("page_views")
+    .select("page_path, visitor_id, created_at");
+
+  const traffic = {
+    totalPageViews: 0,
+    uniqueVisitors: 0,
+    dailyTraffic: [] as { date: string; views: number; unique: number }[],
+    topPages: [] as { page: string; views: number; unique: number }[],
+  };
+
+  if (!trafficError && trafficData) {
+    traffic.totalPageViews = trafficData.length;
+    const uniqueSet = new Set(trafficData.map((r: any) => r.visitor_id));
+    traffic.uniqueVisitors = uniqueSet.size;
+
+    // Daily breakdown
+    const dailyMap = new Map<string, { views: number; visitors: Set<string> }>();
+    trafficData.forEach((r: any) => {
+      const day = r.created_at.slice(0, 10);
+      const entry = dailyMap.get(day) || { views: 0, visitors: new Set<string>() };
+      entry.views++;
+      entry.visitors.add(r.visitor_id);
+      dailyMap.set(day, entry);
+    });
+    traffic.dailyTraffic = Array.from(dailyMap.entries())
+      .sort((a, b) => b[0].localeCompare(a[0]))
+      .map(([date, v]) => ({ date, views: v.views, unique: v.visitors.size }));
+
+    // Top pages
+    const pageMap = new Map<string, { views: number; visitors: Set<string> }>();
+    trafficData.forEach((r: any) => {
+      const entry = pageMap.get(r.page_path) || { views: 0, visitors: new Set<string>() };
+      entry.views++;
+      entry.visitors.add(r.visitor_id);
+      pageMap.set(r.page_path, entry);
+    });
+    traffic.topPages = Array.from(pageMap.entries())
+      .sort((a, b) => b[1].views - a[1].views)
+      .slice(0, 15)
+      .map(([page, v]) => ({ page, views: v.views, unique: v.visitors.size }));
+  }
+
+  return new Response(JSON.stringify({ leads, traffic }), {
     status: 200,
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
