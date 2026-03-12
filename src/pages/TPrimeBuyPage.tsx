@@ -62,7 +62,8 @@ const TPrimeBuyPage = () => {
         first_name: data.name.trim(),
         email: data.email.trim(),
         source: "tprime-buy",
-      });
+        utm_params: getUtmParams(),
+      } as any);
 
       if (insertError) {
         console.error("[TPrimeBuy] Lead insert failed:", insertError.message);

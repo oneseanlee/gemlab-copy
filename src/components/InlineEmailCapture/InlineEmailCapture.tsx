@@ -20,7 +20,8 @@ const InlineEmailCapture = () => {
         first_name: name.trim(),
         email: email.trim(),
         source: "glp1-protocol-inline",
-      });
+        utm_params: getUtmParams(),
+      } as any);
 
       if (error) {
         console.error("[InlineCapture] insert error:", error.message);

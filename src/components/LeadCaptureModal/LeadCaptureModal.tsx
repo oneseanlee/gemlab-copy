@@ -43,6 +43,7 @@ const LeadCaptureModal = ({
         cart_items: [{ title: "GLP-1 Optimization Protocol", variantId: "gid://shopify/ProductVariant/46539809235068", quantity: 1, price: "39.95" }],
         cart_total: 39.95,
         source,
+        utm_params: getUtmParams(),
       } as any);
 
       if (error) {

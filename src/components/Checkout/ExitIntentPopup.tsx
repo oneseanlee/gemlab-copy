@@ -56,7 +56,8 @@ const ExitIntentPopup = () => {
         first_name: name.trim(),
         email: email.trim(),
         source: "exit-intent",
-      });
+        utm_params: getUtmParams(),
+      } as any);
 
       if (error) {
         console.error("[ExitIntent] insert error:", error.message);

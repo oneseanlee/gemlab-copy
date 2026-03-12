@@ -3,7 +3,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useCartSync } from "./hooks/useCartSync";
 import { usePageView } from "./hooks/usePageView";
+import { captureUtmParams } from "./lib/utm";
 import FomoToast from "./components/FomoToast/FomoToast";
+
+// Capture UTM params on initial page load
+captureUtmParams();
 // Route-level code splitting — each page loads on demand
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ListiclePage = lazy(() => import("./pages/ListiclePage"));

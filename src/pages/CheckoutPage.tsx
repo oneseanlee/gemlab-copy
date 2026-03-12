@@ -96,6 +96,7 @@ const CheckoutPage = () => {
         })),
         cart_total: totalPrice,
         source: 'checkout',
+        utm_params: getUtmParams(),
       } as any);
 
       if (insertError) {

@@ -120,6 +120,7 @@ const GLP1BuyPage = () => {
         cart_items: [{ title: GLP1_PRODUCT.node.title, variantId: GLP1_VARIANT_ID, quantity: 1, price: "39.95" }],
         cart_total: PRICE,
         source: 'glp1-buy',
+        utm_params: getUtmParams(),
       } as any);
 
       if (insertError) {
