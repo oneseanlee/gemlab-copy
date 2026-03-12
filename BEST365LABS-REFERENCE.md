@@ -513,7 +513,7 @@ Try risk-free for 60 days. Not satisfied → full refund. No questions asked.
 | `/glp1-ucos` | GLP1BundlePage | GLP-1 Cellular Bundle landing page |
 | `/nhto` | NHTOPage | Non-Hormonal Testosterone Bundle landing page |
 | `/nhto-intake` | NHTOIntakePage | NHTO medical intake form |
-| `/glp1-intake` | GLP1IntakePage | GLP-1 medical intake form |
+
 | `/article` | ListiclePage | Editorial content / digital guides |
 | `/privacy` | PrivacyPolicyPage | Privacy Policy |
 | `/terms` | TermsConditionsPage | Terms and Conditions |

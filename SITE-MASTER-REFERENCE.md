@@ -487,7 +487,7 @@ Try risk-free for 60 days. Not satisfied → full refund. No questions asked.
 | `/ucos` | `UCOSPage.tsx` | Ultimate Cellular Optimization System landing page | — |
 | `/glp1-ucos` | `GLP1BundlePage.tsx` | GLP-1 Cellular Bundle landing page | — |
 | `/tprime365-intake` | `TPrime365IntakePage.tsx` | TPrime365 medical intake form | ← `/tprime365` |
-| `/glp1-intake` | `GLP1IntakePage.tsx` | GLP-1 medical intake form | ← `/glp1-protocol` |
+
 | `/nhto-intake` | `NHTOIntakePage.tsx` | NHTO medical intake form | ← `/nhto` |
 | `/guides` | `GuidesPage.tsx` | Digital guides store | — |
 | `/article` | `ListiclePage.tsx` | Editorial content / advertorial | — |
