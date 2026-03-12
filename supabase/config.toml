@@ -9,3 +9,5 @@ project_id = "yyuoyitapltnuqhkjyfd"
     verify_jwt = false
   [functions.send-lead-notification]
     verify_jwt = false
+  [functions.ghl-sync]
+    verify_jwt = false
