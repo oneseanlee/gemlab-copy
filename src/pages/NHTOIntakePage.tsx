@@ -48,6 +48,13 @@ const NHTOIntakePage = () => {
       });
 
       console.log('[UCOSNHTO] generate_lead FIRED via ' + source + ' — eventId:', eventId);
+
+      // Send email notification
+      fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-lead-notification`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}` },
+        body: JSON.stringify({ type: 'happymd_form', record: { campaign: 'UCOSNHTO', tracking_code: 'UCOSNHTOCELL', page_url: window.location.href } }),
+      }).catch(err => console.error('[UCOSNHTO] notification error:', err));
     }
 
     // METHOD 1: Detect iframe internal navigation (second load = form submitted)
