@@ -192,7 +192,7 @@ const GLP1Page = () => {
 
   return (
     <div className="glp1-page">
-            <ExitIntentPopup />
+            {/* <ExitIntentPopup /> */}
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}
