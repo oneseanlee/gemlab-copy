@@ -11,7 +11,7 @@ const TPrime365Page = lazy(() => import("./pages/TPrime365Page"));
 const GLP1Page = lazy(() => import("./pages/GLP1Page"));
 const NHTOPage = lazy(() => import("./pages/NHTOPage"));
 const NHTOIntakePage = lazy(() => import("./pages/NHTOIntakePage"));
-const GLP1IntakePage = lazy(() => import("./pages/GLP1IntakePage"));
+
 const TPrime365IntakePage = lazy(() => import("./pages/TPrime365IntakePage"));
 const UCOSPage = lazy(() => import("./pages/UCOSPage"));
 const GLP1BundlePage = lazy(() => import("./pages/GLP1BundlePage"));
