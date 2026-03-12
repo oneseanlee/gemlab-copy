@@ -76,7 +76,7 @@ Deno.serve(async (req) => {
   // Fetch intake/guide leads
   const { data: intakeLeads, error: intakeError } = await supabase
     .from("leads")
-    .select("*")
+    .select("*, utm_params")
     .order("created_at", { ascending: false });
 
   if (intakeError) {
