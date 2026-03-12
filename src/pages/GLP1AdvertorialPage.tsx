@@ -99,7 +99,7 @@ const GLP1AdvertorialPage: React.FC = () => {
         ctaLabel="Continue to Checkout →"
         source="glp1-article"
       />
-      <ExitIntentPopup />
+      {/* <ExitIntentPopup /> */}
       {/* ─── 1. Headline ─── */}
       <section className="adv-headline-section">
         <div className="adv-container">
