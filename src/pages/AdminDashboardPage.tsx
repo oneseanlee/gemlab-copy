@@ -12,6 +12,8 @@ interface Lead {
   cart_total: number;
   completed: boolean;
   created_at: string;
+  source?: string;
+  utm_params?: Record<string, string>;
 }
 
 interface IntakeLead {
