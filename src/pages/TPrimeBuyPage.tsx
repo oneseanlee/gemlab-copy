@@ -58,11 +58,19 @@ const TPrimeBuyPage = () => {
     setIsSubmitting(true);
 
     try {
-      await supabase.from("leads").insert({
+      const { error: insertError } = await supabase.from("leads").insert({
         first_name: data.name.trim(),
         email: data.email.trim(),
         source: "tprime-buy",
       });
+
+      if (insertError) {
+        console.error("[TPrimeBuy] Lead insert failed:", insertError.message);
+        toast.error("Could not save your info. Please try again.");
+        hasSubmitted.current = false;
+        setIsSubmitting(false);
+        return;
+      }
 
       trackMetaEvent("Lead", { content_name: "TPrime365 Buy Page", value: PRICE, currency: "USD" });
       navigate("/tprime365-intake");
