@@ -49,6 +49,13 @@ const TPrime365IntakePage = () => {
       });
 
       console.log('[TPRIME365] generate_lead FIRED via ' + source + ' — eventId:', eventId);
+
+      // Send email notification
+      fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-lead-notification`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}` },
+        body: JSON.stringify({ type: 'happymd_form', record: { campaign: 'TPRIME365', tracking_code: 'TPRIME365CELL', page_url: window.location.href } }),
+      }).catch(err => console.error('[TPRIME365] notification error:', err));
     }
 
     // METHOD 1: Detect iframe internal navigation (second load = form submitted)
