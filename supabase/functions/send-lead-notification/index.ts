@@ -104,6 +104,60 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Sync to Go High Level
+    try {
+      const ghlTags: string[] = [];
+      let ghlSource = "Best365 Labs Website";
+
+      if (type === "lead") {
+        ghlTags.push("lead", record.source || "direct");
+        ghlSource = record.source || "direct";
+      } else if (type === "checkout_lead") {
+        ghlTags.push("checkout-lead", "cart-abandonment");
+        ghlSource = record.source || "checkout";
+      } else if (type === "happymd_form") {
+        ghlTags.push("happymd-intake", record.campaign || "unknown");
+        ghlSource = record.campaign || "happymd";
+      }
+
+      // Build UTM tags
+      const utm = record.utm_params;
+      if (utm && typeof utm === "object") {
+        if (utm.utm_source) ghlTags.push(`utm-source:${utm.utm_source}`);
+        if (utm.utm_medium) ghlTags.push(`utm-medium:${utm.utm_medium}`);
+        if (utm.utm_campaign) ghlTags.push(`utm-campaign:${utm.utm_campaign}`);
+      }
+
+      const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+      const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+      await fetch(`${supabaseUrl}/functions/v1/ghl-sync`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${serviceKey}`,
+        },
+        body: JSON.stringify({
+          action: "create_contact",
+          contact: {
+            firstName: record.first_name || record.campaign || "Unknown",
+            email: record.email || "",
+            phone: record.phone || undefined,
+            source: ghlSource,
+            tags: ghlTags,
+            customField: utm && typeof utm === "object" ? {
+              utm_source: utm.utm_source || "",
+              utm_medium: utm.utm_medium || "",
+              utm_campaign: utm.utm_campaign || "",
+            } : undefined,
+          },
+        }),
+      });
+      console.log("GHL sync triggered for", type);
+    } catch (ghlErr) {
+      console.error("GHL sync failed (non-blocking):", ghlErr);
+    }
+
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

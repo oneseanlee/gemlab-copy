@@ -92,6 +92,41 @@ Deno.serve(async (req) => {
   const updatedCount = data?.length || 0;
   console.log("Marked leads as completed", { email, updatedCount });
 
+  // Sync purchase to Go High Level
+  try {
+    const orderItems = (order as any).line_items?.map((li: any) => li.title).join(", ") || "Unknown";
+    const totalPrice = (order as any).total_price || "0.00";
+    const customerName = (order as any).customer?.first_name || (order as any).billing_address?.first_name || email.split("@")[0];
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+    await fetch(`${supabaseUrl}/functions/v1/ghl-sync`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${serviceKey}`,
+      },
+      body: JSON.stringify({
+        action: "add_note",
+        contact: {
+          firstName: customerName,
+          email,
+          source: "Shopify Order",
+          tags: ["customer", "shopify-purchase"],
+        },
+        order: {
+          orderId: order.id,
+          totalPrice,
+          items: orderItems,
+        },
+      }),
+    });
+    console.log("GHL order sync triggered for", email);
+  } catch (ghlErr) {
+    console.error("GHL order sync failed (non-blocking):", ghlErr);
+  }
+
   return new Response(
     JSON.stringify({ success: true, updatedCount }),
     { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
