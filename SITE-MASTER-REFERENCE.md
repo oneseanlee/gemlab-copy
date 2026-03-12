@@ -186,7 +186,7 @@ Report adverse events: 1-385-421-5651
 | **Launch Price** | $39.95 (Save $50 + FREE Shipping) |
 | **Shopify Product ID** | `8977141104780` |
 | **Shopify Variant ID** | `gid://shopify/ProductVariant/46265391579276` |
-| **Intake Form** | `/glp1-intake` |
+
 
 #### What's Included
 1. **Triple Power Methylene Blue** (30-day sublingual supply)
@@ -482,12 +482,12 @@ Try risk-free for 60 days. Not satisfied → full refund. No questions asked.
 |---|---|---|---|
 | `/` | `HomePage.tsx` | Main storefront — all products, testimonials, MODS Max section, FAQ | — |
 | `/tprime365` | `TPrime365Page.tsx` | Flagship testosterone optimizer landing page | → `/tprime365-intake` |
-| `/glp1-protocol` | `GLP1Page.tsx` | GLP-1 Optimization Protocol landing page | → `/glp1-intake` |
+| `/glp1-protocol` | `GLP1Page.tsx` | GLP-1 Optimization Protocol landing page | — |
 | `/nhto` | `NHTOPage.tsx` | Non-Hormonal Testosterone Bundle landing page | → `/nhto-intake` |
 | `/ucos` | `UCOSPage.tsx` | Ultimate Cellular Optimization System landing page | — |
 | `/glp1-ucos` | `GLP1BundlePage.tsx` | GLP-1 Cellular Bundle landing page | — |
 | `/tprime365-intake` | `TPrime365IntakePage.tsx` | TPrime365 medical intake form | ← `/tprime365` |
-| `/glp1-intake` | `GLP1IntakePage.tsx` | GLP-1 medical intake form | ← `/glp1-protocol` |
+
 | `/nhto-intake` | `NHTOIntakePage.tsx` | NHTO medical intake form | ← `/nhto` |
 | `/guides` | `GuidesPage.tsx` | Digital guides store | — |
 | `/article` | `ListiclePage.tsx` | Editorial content / advertorial | — |
