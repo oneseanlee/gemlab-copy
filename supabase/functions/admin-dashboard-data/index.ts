@@ -6,6 +6,9 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
+const MAX_ATTEMPTS = 5;
+const WINDOW_MINUTES = 10;
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -19,19 +22,43 @@ Deno.serve(async (req) => {
     });
   }
 
+  const supabase = createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+  );
+
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+
+  // Check rate limit before validating password
+  const windowStart = new Date(Date.now() - WINDOW_MINUTES * 60 * 1000).toISOString();
+  const { count } = await supabase
+    .from("failed_admin_attempts")
+    .select("*", { count: "exact", head: true })
+    .eq("ip_address", ip)
+    .gte("attempted_at", windowStart);
+
+  if ((count ?? 0) >= MAX_ATTEMPTS) {
+    return new Response(JSON.stringify({ error: "Too many attempts. Try again later." }), {
+      status: 429,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
   const authHeader = req.headers.get("Authorization") || "";
   const token = authHeader.replace("Bearer ", "");
   if (token !== adminPassword) {
+    // Record failed attempt
+    await supabase.from("failed_admin_attempts").insert({ ip_address: ip });
+
+    // Cleanup old attempts (older than 1 hour)
+    const cleanupTime = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+    await supabase.from("failed_admin_attempts").delete().lt("attempted_at", cleanupTime);
+
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
       status: 401,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
-
-  const supabase = createClient(
-    Deno.env.get("SUPABASE_URL")!,
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-  );
 
   // Fetch checkout leads
   const { data: leads, error: leadsError } = await supabase
