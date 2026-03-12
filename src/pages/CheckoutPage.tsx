@@ -83,7 +83,7 @@ const CheckoutPage = () => {
     setIsSubmitting(true);
     const checkoutUrl = existingCheckoutUrl;
     try {
-      await supabase.from("checkout_leads").insert({
+      const { error: insertError } = await supabase.from("checkout_leads").insert({
         first_name: data.fullName.trim(),
         last_name: null,
         email: data.email.trim(),
@@ -96,6 +96,14 @@ const CheckoutPage = () => {
         })),
         cart_total: totalPrice,
       });
+
+      if (insertError) {
+        console.error("[Checkout] Lead insert failed:", insertError.message);
+        toast.error("Could not save your info. Please try again.");
+        hasSubmitted.current = false;
+        setIsSubmitting(false);
+        return;
+      }
 
       await updateBuyerIdentity({
         email: data.email,

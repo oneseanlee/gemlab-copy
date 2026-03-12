@@ -112,7 +112,7 @@ const GLP1BuyPage = () => {
     hasSubmitted.current = true;
     setIsSubmitting(true);
     try {
-      await supabase.from("checkout_leads").insert({
+      const { error: insertError } = await supabase.from("checkout_leads").insert({
         first_name: data.name.trim(),
         last_name: null,
         email: data.email.trim(),
@@ -120,6 +120,14 @@ const GLP1BuyPage = () => {
         cart_items: [{ title: GLP1_PRODUCT.node.title, variantId: GLP1_VARIANT_ID, quantity: 1, price: "39.95" }],
         cart_total: PRICE,
       });
+
+      if (insertError) {
+        console.error("[GLP1Buy] Lead insert failed:", insertError.message);
+        toast.error("Could not save your info. Please try again.");
+        hasSubmitted.current = false;
+        setIsSubmitting(false);
+        return;
+      }
 
       const nameParts = data.name.trim().split(" ");
       const firstName = nameParts[0];
@@ -144,8 +152,13 @@ const GLP1BuyPage = () => {
       window.dataLayer.push({
         event: 'begin_checkout',
         event_id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-        fbc: getFbcValue(),
-        fbp: getFbpValue(),
+        user_data: {
+          email: data.email.trim(),
+          first_name: firstName,
+          last_name: lastName,
+          fbc: getFbcValue(),
+          fbp: getFbpValue(),
+        },
         ecommerce: {
           currency: 'USD',
           value: PRICE,
@@ -157,10 +170,16 @@ const GLP1BuyPage = () => {
           }],
         },
       });
-      window.location.href = checkoutUrl;
+      setTimeout(function() {
+        window.location.href = checkoutUrl;
+      }, 1500);
     } catch {
       const fallback = getCheckoutUrl();
-      if (fallback) window.location.href = fallback;
+      if (fallback) {
+        setTimeout(function() {
+          window.location.href = fallback;
+        }, 1500);
+      }
     }
     // Note: intentionally no finally/setIsSubmitting(false) — keep button disabled after redirect
   };

@@ -33,7 +33,7 @@ Deno.serve(async (req) => {
     Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
   );
 
-  // Fetch leads
+  // Fetch checkout leads
   const { data: leads, error: leadsError } = await supabase
     .from("checkout_leads")
     .select("*")
@@ -41,6 +41,19 @@ Deno.serve(async (req) => {
 
   if (leadsError) {
     return new Response(JSON.stringify({ error: leadsError.message }), {
+      status: 500,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
+  // Fetch intake/guide leads
+  const { data: intakeLeads, error: intakeError } = await supabase
+    .from("leads")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (intakeError) {
+    return new Response(JSON.stringify({ error: intakeError.message }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
@@ -90,7 +103,7 @@ Deno.serve(async (req) => {
       .map(([page, v]) => ({ page, views: v.views, unique: v.visitors.size }));
   }
 
-  return new Response(JSON.stringify({ leads, traffic }), {
+  return new Response(JSON.stringify({ leads, intakeLeads: intakeLeads || [], traffic }), {
     status: 200,
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
