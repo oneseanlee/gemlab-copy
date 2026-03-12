@@ -68,10 +68,11 @@ const faqs = [
 
 const GLP1AdvertorialPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showLeadModal, setShowLeadModal] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
 
-  const handleBuyNow = async () => {
+  const proceedToCheckout = async () => {
     await addItem(GLP1_VARIANT);
     await new Promise(r => setTimeout(r, 300));
     const url = useCartStore.getState().checkoutUrl;
@@ -80,8 +81,25 @@ const GLP1AdvertorialPage: React.FC = () => {
     }
   };
 
+  const handleBuyNow = () => {
+    setShowLeadModal(true);
+  };
+
   return (
     <div className="adv-page glp1-adv-page">
+      <LeadCaptureModal
+        open={showLeadModal}
+        onClose={() => setShowLeadModal(false)}
+        onSuccess={() => {
+          setShowLeadModal(false);
+          proceedToCheckout();
+        }}
+        headline="Almost There! Enter Your Details"
+        subtext="We'll save your spot and send you order updates. Checkout is on the next page."
+        ctaLabel="Continue to Checkout →"
+        source="glp1-article"
+      />
+      <ExitIntentPopup />
       {/* ─── 1. Headline ─── */}
       <section className="adv-headline-section">
         <div className="adv-container">
