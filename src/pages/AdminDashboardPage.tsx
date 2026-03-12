@@ -162,6 +162,48 @@ export default function AdminDashboardPage() {
     return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
   }, [intakeLeads]);
 
+  // Checkout leads by source
+  const checkoutBySource = useMemo(() => {
+    const map = new Map<string, number>();
+    leads.forEach((l) => {
+      const src = l.source || "direct";
+      map.set(src, (map.get(src) || 0) + 1);
+    });
+    return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
+  }, [leads]);
+
+  // UTM breakdown across ALL leads (both tables)
+  const utmBreakdown = useMemo(() => {
+    const campaigns = new Map<string, { leads: number; sales: number; revenue: number }>();
+    const sources = new Map<string, number>();
+    const mediums = new Map<string, number>();
+
+    const processUtm = (utm: Record<string, string> | undefined, completed?: boolean, total?: number) => {
+      if (!utm || Object.keys(utm).length === 0) return;
+      if (utm.utm_source) sources.set(utm.utm_source, (sources.get(utm.utm_source) || 0) + 1);
+      if (utm.utm_medium) mediums.set(utm.utm_medium, (mediums.get(utm.utm_medium) || 0) + 1);
+      if (utm.utm_campaign) {
+        const entry = campaigns.get(utm.utm_campaign) || { leads: 0, sales: 0, revenue: 0 };
+        entry.leads++;
+        if (completed) {
+          entry.sales++;
+          entry.revenue += total || 0;
+        }
+        campaigns.set(utm.utm_campaign, entry);
+      }
+    };
+
+    leads.forEach((l) => processUtm(l.utm_params, l.completed, Number(l.cart_total)));
+    intakeLeads.forEach((l) => processUtm(l.utm_params));
+
+    return {
+      campaigns: Array.from(campaigns.entries()).sort((a, b) => b[1].leads - a[1].leads),
+      sources: Array.from(sources.entries()).sort((a, b) => b[1] - a[1]),
+      mediums: Array.from(mediums.entries()).sort((a, b) => b[1] - a[1]),
+      hasData: campaigns.size > 0 || sources.size > 0,
+    };
+  }, [leads, intakeLeads]);
+
   // Daily breakdown merging leads + traffic
   const dailyBreakdown = useMemo<DailyBreakdown[]>(() => {
     const map = new Map<string, { leads: number; sales: number; revenue: number; views: number; unique: number; intakeLeads: number }>();
