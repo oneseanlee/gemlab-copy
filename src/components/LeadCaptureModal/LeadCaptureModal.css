@@ -1,6 +1,10 @@
 .lead-modal-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   z-index: 9999;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
@@ -8,6 +12,7 @@
   justify-content: center;
   padding: 1rem;
   animation: leadFadeIn 0.25s ease;
+  overflow-y: auto;
 }
 
 @keyframes leadFadeIn {
