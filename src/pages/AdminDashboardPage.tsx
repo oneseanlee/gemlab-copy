@@ -377,25 +377,101 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Intake Leads by Source */}
-            {intakeBySource.length > 0 && (
+            {/* Leads by Source (both tables) */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
+              {intakeBySource.length > 0 && (
+                <div className="admin-table-card">
+                  <div className="table-header"><h2>Intake Leads by Source</h2></div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", padding: "1rem" }}>
+                    {intakeBySource.map(([source, count]) => (
+                      <div key={source} style={{ background: "hsl(220 20% 16%)", border: "1px solid hsl(220 15% 22%)", borderRadius: 8, padding: "0.6rem 1rem", minWidth: 120 }}>
+                        <div style={{ fontSize: "0.75rem", color: "hsl(220 15% 55%)", marginBottom: 2 }}>{source}</div>
+                        <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "hsl(220 15% 90%)" }}>{count}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {checkoutBySource.length > 0 && (
+                <div className="admin-table-card">
+                  <div className="table-header"><h2>Checkout Leads by Source</h2></div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", padding: "1rem" }}>
+                    {checkoutBySource.map(([source, count]) => (
+                      <div key={source} style={{ background: "hsl(220 20% 16%)", border: "1px solid hsl(220 15% 22%)", borderRadius: 8, padding: "0.6rem 1rem", minWidth: 120 }}>
+                        <div style={{ fontSize: "0.75rem", color: "hsl(210 80% 55%)", marginBottom: 2 }}>{source}</div>
+                        <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "hsl(220 15% 90%)" }}>{count}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* UTM Campaign Breakdown */}
+            {utmBreakdown.hasData && (
               <div className="admin-table-card" style={{ marginBottom: "1.5rem" }}>
                 <div className="table-header">
-                  <h2>Intake Leads by Source</h2>
+                  <h2>UTM Campaign Performance</h2>
                 </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", padding: "1rem" }}>
-                  {intakeBySource.map(([source, count]) => (
-                    <div key={source} style={{
-                      background: "hsl(220 20% 16%)",
-                      border: "1px solid hsl(220 15% 22%)",
-                      borderRadius: 8,
-                      padding: "0.6rem 1rem",
-                      minWidth: 140,
-                    }}>
-                      <div style={{ fontSize: "0.75rem", color: "hsl(220 15% 55%)", marginBottom: 2 }}>{source}</div>
-                      <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "hsl(220 15% 90%)" }}>{count}</div>
+                {/* UTM Sources & Mediums chips */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", padding: "1rem 1rem 0" }}>
+                  {utmBreakdown.sources.length > 0 && (
+                    <div>
+                      <div style={{ fontSize: "0.7rem", color: "hsl(220 15% 45%)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Sources</div>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                        {utmBreakdown.sources.map(([src, count]) => (
+                          <span key={src} style={{ fontSize: "0.78rem", padding: "3px 10px", borderRadius: 6, background: "hsl(142 40% 18%)", color: "hsl(142 60% 70%)", border: "1px solid hsl(142 40% 25%)" }}>
+                            {src} <strong>({count})</strong>
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  ))}
+                  )}
+                  {utmBreakdown.mediums.length > 0 && (
+                    <div>
+                      <div style={{ fontSize: "0.7rem", color: "hsl(220 15% 45%)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Mediums</div>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                        {utmBreakdown.mediums.map(([med, count]) => (
+                          <span key={med} style={{ fontSize: "0.78rem", padding: "3px 10px", borderRadius: 6, background: "hsl(210 40% 18%)", color: "hsl(210 60% 70%)", border: "1px solid hsl(210 40% 25%)" }}>
+                            {med} <strong>({count})</strong>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
+                {/* Campaign table */}
+                {utmBreakdown.campaigns.length > 0 && (
+                  <div style={{ overflowX: "auto", padding: "1rem" }}>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Campaign</th>
+                          <th className="text-right">Leads</th>
+                          <th className="text-right">Sales</th>
+                          <th className="text-right">Revenue</th>
+                          <th className="text-right">Conv %</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {utmBreakdown.campaigns.map(([campaign, data]) => (
+                          <tr key={campaign}>
+                            <td style={{ fontWeight: 500, color: "hsl(220 15% 90%)" }}>{campaign}</td>
+                            <td className="text-right">{data.leads}</td>
+                            <td className="text-right">{data.sales}</td>
+                            <td className="text-right">${data.revenue.toFixed(2)}</td>
+                            <td className="text-right">{data.leads > 0 ? ((data.sales / data.leads) * 100).toFixed(1) : "0.0"}%</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                {utmBreakdown.campaigns.length === 0 && (
+                  <p style={{ padding: "1rem", fontSize: "0.85rem", color: "hsl(220 15% 45%)" }}>
+                    UTM sources detected but no campaigns tagged yet.
+                  </p>
+                )}
               </div>
             )}
 
