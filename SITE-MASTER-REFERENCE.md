@@ -482,7 +482,7 @@ Try risk-free for 60 days. Not satisfied → full refund. No questions asked.
 |---|---|---|---|
 | `/` | `HomePage.tsx` | Main storefront — all products, testimonials, MODS Max section, FAQ | — |
 | `/tprime365` | `TPrime365Page.tsx` | Flagship testosterone optimizer landing page | → `/tprime365-intake` |
-| `/glp1-protocol` | `GLP1Page.tsx` | GLP-1 Optimization Protocol landing page | → `/glp1-intake` |
+| `/glp1-protocol` | `GLP1Page.tsx` | GLP-1 Optimization Protocol landing page | — |
 | `/nhto` | `NHTOPage.tsx` | Non-Hormonal Testosterone Bundle landing page | → `/nhto-intake` |
 | `/ucos` | `UCOSPage.tsx` | Ultimate Cellular Optimization System landing page | — |
 | `/glp1-ucos` | `GLP1BundlePage.tsx` | GLP-1 Cellular Bundle landing page | — |
