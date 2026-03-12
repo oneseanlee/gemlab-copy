@@ -14,6 +14,15 @@ interface Lead {
   created_at: string;
 }
 
+interface IntakeLead {
+  id: string;
+  first_name: string;
+  email: string;
+  phone: string | null;
+  source: string;
+  created_at: string;
+}
+
 interface TrafficData {
   totalPageViews: number;
   uniqueVisitors: number;
@@ -30,15 +39,18 @@ interface DailyBreakdown {
   conversionRate: number;
   views: number;
   unique: number;
+  intakeLeads: number;
 }
 
 export default function AdminDashboardPage() {
   const [password, setPassword] = useState("");
   const [authed, setAuthed] = useState(() => !!sessionStorage.getItem("admin_token"));
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [intakeLeads, setIntakeLeads] = useState<IntakeLead[]>([]);
   const [traffic, setTraffic] = useState<TrafficData>({ totalPageViews: 0, uniqueVisitors: 0, dailyTraffic: [], topPages: [] });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [activeTab, setActiveTab] = useState<"checkout" | "intake">("checkout");
 
   // Filters
   const [search, setSearch] = useState("");
@@ -47,6 +59,8 @@ export default function AdminDashboardPage() {
   const [dateTo, setDateTo] = useState("");
 
   const token = sessionStorage.getItem("admin_token") || "";
+
+  const isLive = window.location.hostname === "cell365power.lovable.app";
 
   const fetchData = useCallback(async (t: string) => {
     setLoading(true);
@@ -65,6 +79,7 @@ export default function AdminDashboardPage() {
       }
       if (data?.error) throw new Error(data.error);
       setLeads(data.leads || []);
+      setIntakeLeads(data.intakeLeads || []);
       setTraffic(data.traffic || { totalPageViews: 0, uniqueVisitors: 0, dailyTraffic: [], topPages: [] });
     } catch (e: any) {
       setError(e.message || "Failed to load data");
@@ -84,7 +99,7 @@ export default function AdminDashboardPage() {
     if (authed && token) fetchData(token);
   }, [authed, token, fetchData]);
 
-  // Filtered leads
+  // Filtered checkout leads
   const filteredLeads = useMemo(() => {
     return leads.filter((l) => {
       if (statusFilter === "completed" && !l.completed) return false;
@@ -104,6 +119,24 @@ export default function AdminDashboardPage() {
     });
   }, [leads, search, statusFilter, dateFrom, dateTo]);
 
+  // Filtered intake leads
+  const filteredIntakeLeads = useMemo(() => {
+    return intakeLeads.filter((l) => {
+      if (search) {
+        const q = search.toLowerCase();
+        const match =
+          l.first_name.toLowerCase().includes(q) ||
+          l.email.toLowerCase().includes(q) ||
+          (l.phone || "").includes(q) ||
+          l.source.toLowerCase().includes(q);
+        if (!match) return false;
+      }
+      if (dateFrom && l.created_at.slice(0, 10) < dateFrom) return false;
+      if (dateTo && l.created_at.slice(0, 10) > dateTo) return false;
+      return true;
+    });
+  }, [intakeLeads, search, dateFrom, dateTo]);
+
   // Stats from ALL leads (unfiltered)
   const stats = useMemo(() => {
     const total = leads.length;
@@ -113,26 +146,43 @@ export default function AdminDashboardPage() {
     const revenue = leads
       .filter((l) => l.completed)
       .reduce((sum, l) => sum + Number(l.cart_total), 0);
-    return { total, sales, abandoned, rate, revenue };
-  }, [leads]);
+    const totalAllLeads = total + intakeLeads.length;
+    return { total, sales, abandoned, rate, revenue, totalAllLeads };
+  }, [leads, intakeLeads]);
+
+  // Intake leads by source
+  const intakeBySource = useMemo(() => {
+    const map = new Map<string, number>();
+    intakeLeads.forEach((l) => {
+      map.set(l.source, (map.get(l.source) || 0) + 1);
+    });
+    return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
+  }, [intakeLeads]);
 
   // Daily breakdown merging leads + traffic
   const dailyBreakdown = useMemo<DailyBreakdown[]>(() => {
-    const map = new Map<string, { leads: number; sales: number; revenue: number; views: number; unique: number }>();
+    const map = new Map<string, { leads: number; sales: number; revenue: number; views: number; unique: number; intakeLeads: number }>();
 
     // Seed from traffic daily data
     traffic.dailyTraffic.forEach((t) => {
-      map.set(t.date, { leads: 0, sales: 0, revenue: 0, views: t.views, unique: t.unique });
+      map.set(t.date, { leads: 0, sales: 0, revenue: 0, views: t.views, unique: t.unique, intakeLeads: 0 });
     });
 
     filteredLeads.forEach((l) => {
       const day = l.created_at.slice(0, 10);
-      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0 };
+      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0 };
       entry.leads++;
       if (l.completed) {
         entry.sales++;
         entry.revenue += Number(l.cart_total);
       }
+      map.set(day, entry);
+    });
+
+    filteredIntakeLeads.forEach((l) => {
+      const day = l.created_at.slice(0, 10);
+      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0 };
+      entry.intakeLeads++;
       map.set(day, entry);
     });
 
@@ -147,29 +197,35 @@ export default function AdminDashboardPage() {
         conversionRate: v.leads > 0 ? parseFloat(((v.sales / v.leads) * 100).toFixed(1)) : 0,
         views: v.views,
         unique: v.unique,
+        intakeLeads: v.intakeLeads,
       }));
-  }, [filteredLeads, traffic.dailyTraffic]);
+  }, [filteredLeads, filteredIntakeLeads, traffic.dailyTraffic]);
 
   // CSV export
   const exportCSV = () => {
-    const headers = ["Name", "Email", "Phone", "Cart Total", "Status", "Date", "Cart Items"];
-    const rows = filteredLeads.map((l) => [
-      `${l.first_name} ${l.last_name || ""}`.trim(),
-      l.email,
-      l.phone || "",
-      Number(l.cart_total).toFixed(2),
-      l.completed ? "Completed" : "Abandoned",
-      new Date(l.created_at).toLocaleString(),
-      formatCartItems(l.cart_items),
-    ]);
-    const csv = [headers, ...rows].map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `leads-export-${new Date().toISOString().slice(0, 10)}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+    if (activeTab === "checkout") {
+      const headers = ["Name", "Email", "Phone", "Cart Total", "Status", "Date", "Cart Items"];
+      const rows = filteredLeads.map((l) => [
+        `${l.first_name} ${l.last_name || ""}`.trim(),
+        l.email,
+        l.phone || "",
+        Number(l.cart_total).toFixed(2),
+        l.completed ? "Completed" : "Abandoned",
+        new Date(l.created_at).toLocaleString(),
+        formatCartItems(l.cart_items),
+      ]);
+      downloadCSV([headers, ...rows], "checkout-leads");
+    } else {
+      const headers = ["Name", "Email", "Phone", "Source", "Date"];
+      const rows = filteredIntakeLeads.map((l) => [
+        l.first_name,
+        l.email,
+        l.phone || "",
+        l.source,
+        new Date(l.created_at).toLocaleString(),
+      ]);
+      downloadCSV([headers, ...rows], "intake-leads");
+    }
   };
 
   // Login gate
@@ -205,7 +261,21 @@ export default function AdminDashboardPage() {
       <div className="admin-dashboard-inner">
         {/* Header */}
         <div className="admin-dashboard-header">
-          <h1>Checkout Analytics</h1>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <h1>Analytics Dashboard</h1>
+            <span style={{
+              fontSize: "0.7rem",
+              fontWeight: 600,
+              padding: "2px 8px",
+              borderRadius: 4,
+              background: isLive ? "hsl(142 70% 45%)" : "hsl(45 90% 50%)",
+              color: isLive ? "white" : "hsl(45 90% 15%)",
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
+            }}>
+              {isLive ? "LIVE" : "TEST"}
+            </span>
+          </div>
           <div className="header-actions">
             <button className="export-btn" onClick={() => fetchData(token)}>↻ Refresh</button>
             <button
@@ -236,9 +306,12 @@ export default function AdminDashboardPage() {
                 <div className="stat-label">Unique Visitors</div>
                 <div className="stat-value">{traffic.uniqueVisitors.toLocaleString()}</div>
               </div>
-              <div className="stat-card total">
-                <div className="stat-label">Total Leads</div>
-                <div className="stat-value">{stats.total}</div>
+              <div className="stat-card total" style={{ borderTop: "3px solid hsl(270 60% 55%)" }}>
+                <div className="stat-label">All Leads (Combined)</div>
+                <div className="stat-value">{stats.totalAllLeads}</div>
+                <div style={{ fontSize: "0.72rem", color: "hsl(220 15% 50%)", marginTop: 2 }}>
+                  {stats.total} checkout · {intakeLeads.length} intake
+                </div>
               </div>
               <div className="stat-card sales">
                 <div className="stat-label">Completed Sales</div>
@@ -258,6 +331,29 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
+            {/* Intake Leads by Source */}
+            {intakeBySource.length > 0 && (
+              <div className="admin-table-card" style={{ marginBottom: "1.5rem" }}>
+                <div className="table-header">
+                  <h2>Intake Leads by Source</h2>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", padding: "1rem" }}>
+                  {intakeBySource.map(([source, count]) => (
+                    <div key={source} style={{
+                      background: "hsl(220 20% 16%)",
+                      border: "1px solid hsl(220 15% 22%)",
+                      borderRadius: 8,
+                      padding: "0.6rem 1rem",
+                      minWidth: 140,
+                    }}>
+                      <div style={{ fontSize: "0.75rem", color: "hsl(220 15% 55%)", marginBottom: 2 }}>{source}</div>
+                      <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "hsl(220 15% 90%)" }}>{count}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Conversion Funnel */}
             <div className="funnel-section">
               <h2>Conversion Funnel</h2>
@@ -270,17 +366,17 @@ export default function AdminDashboardPage() {
                   <span className="funnel-count">{traffic.uniqueVisitors.toLocaleString()} unique</span>
                 </div>
                 <div className="funnel-row">
-                  <span className="funnel-label">Leads</span>
+                  <span className="funnel-label">All Leads</span>
                   <div className="funnel-track">
                     <div
                       className="funnel-fill leads"
-                      style={{ width: traffic.totalPageViews > 0 ? `${Math.max((stats.total / traffic.totalPageViews) * 100, 2)}%` : "100%" }}
+                      style={{ width: traffic.totalPageViews > 0 ? `${Math.max((stats.totalAllLeads / traffic.totalPageViews) * 100, 2)}%` : "100%" }}
                     >
-                      {stats.total}
+                      {stats.totalAllLeads}
                     </div>
                   </div>
                   <span className="funnel-count">
-                    {traffic.totalPageViews > 0 ? ((stats.total / traffic.totalPageViews) * 100).toFixed(1) : "—"}%
+                    {traffic.totalPageViews > 0 ? ((stats.totalAllLeads / traffic.totalPageViews) * 100).toFixed(1) : "—"}%
                   </span>
                 </div>
                 <div className="funnel-row">
@@ -337,16 +433,18 @@ export default function AdminDashboardPage() {
                 onChange={(e) => setSearch(e.target.value)}
                 style={{ minWidth: 200 }}
               />
-              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as any)}>
-                <option value="all">All Status</option>
-                <option value="completed">Completed</option>
-                <option value="abandoned">Abandoned</option>
-              </select>
+              {activeTab === "checkout" && (
+                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as any)}>
+                  <option value="all">All Status</option>
+                  <option value="completed">Completed</option>
+                  <option value="abandoned">Abandoned</option>
+                </select>
+              )}
               <input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} title="From date" />
               <input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)} title="To date" />
               <button className="export-btn" onClick={exportCSV}>⬇ Export CSV</button>
               <span style={{ fontSize: "0.78rem", color: "hsl(220 15% 45%)", marginLeft: "auto" }}>
-                {filteredLeads.length} of {leads.length} leads
+                {activeTab === "checkout" ? `${filteredLeads.length} of ${leads.length} leads` : `${filteredIntakeLeads.length} of ${intakeLeads.length} leads`}
               </span>
             </div>
 
@@ -362,9 +460,9 @@ export default function AdminDashboardPage() {
                       <th>Date</th>
                       <th className="text-right">Views</th>
                       <th className="text-right">Unique</th>
-                      <th className="text-right">Leads</th>
+                      <th className="text-right">Checkout Leads</th>
+                      <th className="text-right">Intake Leads</th>
                       <th className="text-right">Sales</th>
-                      <th className="text-right">Abandoned</th>
                       <th className="text-right">Revenue</th>
                       <th className="text-right">Conv %</th>
                     </tr>
@@ -376,8 +474,8 @@ export default function AdminDashboardPage() {
                         <td className="text-right">{d.views.toLocaleString()}</td>
                         <td className="text-right">{d.unique.toLocaleString()}</td>
                         <td className="text-right">{d.leads}</td>
+                        <td className="text-right">{d.intakeLeads}</td>
                         <td className="text-right">{d.sales}</td>
-                        <td className="text-right">{d.abandoned}</td>
                         <td className="text-right">${d.revenue.toFixed(2)}</td>
                         <td className="text-right">{d.conversionRate}%</td>
                       </tr>
@@ -390,61 +488,139 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* All Leads */}
-            <div className="admin-table-card">
-              <div className="table-header">
-                <h2>All Leads</h2>
-                <span style={{ fontSize: "0.78rem", color: "hsl(220 15% 45%)" }}>{filteredLeads.length} results</span>
-              </div>
-              <div style={{ overflowX: "auto" }}>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th>Cart Items</th>
-                      <th className="text-right">Total</th>
-                      <th>Status</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredLeads.map((l) => (
-                      <tr key={l.id}>
-                        <td style={{ fontWeight: 500, color: "hsl(220 15% 90%)" }}>
-                          {l.first_name} {l.last_name || ""}
-                        </td>
-                        <td>{l.email}</td>
-                        <td>{l.phone || "—"}</td>
-                        <td>
-                          <span className="cart-items-preview" title={formatCartItems(l.cart_items)}>
-                            {formatCartItems(l.cart_items) || "—"}
-                          </span>
-                        </td>
-                        <td className="text-right" style={{ fontWeight: 600, color: "hsl(220 15% 90%)" }}>
-                          ${Number(l.cart_total).toFixed(2)}
-                        </td>
-                        <td>
-                          <span className={`status-badge ${l.completed ? "completed" : "abandoned"}`}>
-                            {l.completed ? "Completed" : "Abandoned"}
-                          </span>
-                        </td>
-                        <td style={{ whiteSpace: "nowrap" }}>
-                          {new Date(l.created_at).toLocaleDateString()}{" "}
-                          <span style={{ color: "hsl(220 15% 45%)" }}>
-                            {new Date(l.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                    {filteredLeads.length === 0 && (
-                      <tr><td colSpan={7} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No leads match your filters</td></tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
+            {/* Lead Tabs */}
+            <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.75rem" }}>
+              <button
+                className="export-btn"
+                style={{
+                  background: activeTab === "checkout" ? "hsl(210 80% 55%)" : undefined,
+                  color: activeTab === "checkout" ? "white" : undefined,
+                }}
+                onClick={() => setActiveTab("checkout")}
+              >
+                Checkout Leads ({leads.length})
+              </button>
+              <button
+                className="export-btn"
+                style={{
+                  background: activeTab === "intake" ? "hsl(270 60% 55%)" : undefined,
+                  color: activeTab === "intake" ? "white" : undefined,
+                }}
+                onClick={() => setActiveTab("intake")}
+              >
+                Intake Leads ({intakeLeads.length})
+              </button>
             </div>
+
+            {/* Checkout Leads Table */}
+            {activeTab === "checkout" && (
+              <div className="admin-table-card">
+                <div className="table-header">
+                  <h2>Checkout Leads</h2>
+                  <span style={{ fontSize: "0.78rem", color: "hsl(220 15% 45%)" }}>{filteredLeads.length} results</span>
+                </div>
+                <div style={{ overflowX: "auto" }}>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Cart Items</th>
+                        <th className="text-right">Total</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredLeads.map((l) => (
+                        <tr key={l.id}>
+                          <td style={{ fontWeight: 500, color: "hsl(220 15% 90%)" }}>
+                            {l.first_name} {l.last_name || ""}
+                          </td>
+                          <td>{l.email}</td>
+                          <td>{l.phone || "—"}</td>
+                          <td>
+                            <span className="cart-items-preview" title={formatCartItems(l.cart_items)}>
+                              {formatCartItems(l.cart_items) || "—"}
+                            </span>
+                          </td>
+                          <td className="text-right" style={{ fontWeight: 600, color: "hsl(220 15% 90%)" }}>
+                            ${Number(l.cart_total).toFixed(2)}
+                          </td>
+                          <td>
+                            <span className={`status-badge ${l.completed ? "completed" : "abandoned"}`}>
+                              {l.completed ? "Completed" : "Abandoned"}
+                            </span>
+                          </td>
+                          <td style={{ whiteSpace: "nowrap" }}>
+                            {new Date(l.created_at).toLocaleDateString()}{" "}
+                            <span style={{ color: "hsl(220 15% 45%)" }}>
+                              {new Date(l.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                      {filteredLeads.length === 0 && (
+                        <tr><td colSpan={7} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No leads match your filters</td></tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* Intake Leads Table */}
+            {activeTab === "intake" && (
+              <div className="admin-table-card">
+                <div className="table-header">
+                  <h2>Intake / Guide Leads</h2>
+                  <span style={{ fontSize: "0.78rem", color: "hsl(220 15% 45%)" }}>{filteredIntakeLeads.length} results</span>
+                </div>
+                <div style={{ overflowX: "auto" }}>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Source</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredIntakeLeads.map((l) => (
+                        <tr key={l.id}>
+                          <td style={{ fontWeight: 500, color: "hsl(220 15% 90%)" }}>{l.first_name}</td>
+                          <td>{l.email}</td>
+                          <td>{l.phone || "—"}</td>
+                          <td>
+                            <span style={{
+                              fontSize: "0.75rem",
+                              padding: "2px 8px",
+                              borderRadius: 4,
+                              background: "hsl(270 40% 20%)",
+                              color: "hsl(270 60% 75%)",
+                            }}>
+                              {l.source}
+                            </span>
+                          </td>
+                          <td style={{ whiteSpace: "nowrap" }}>
+                            {new Date(l.created_at).toLocaleDateString()}{" "}
+                            <span style={{ color: "hsl(220 15% 45%)" }}>
+                              {new Date(l.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                      {filteredIntakeLeads.length === 0 && (
+                        <tr><td colSpan={5} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No intake leads match your filters</td></tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>
@@ -465,4 +641,15 @@ function formatCartItems(items: any): string {
   } catch {
     return String(items);
   }
+}
+
+function downloadCSV(data: string[][], prefix: string) {
+  const csv = data.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${prefix}-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
