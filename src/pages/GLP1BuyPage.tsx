@@ -119,7 +119,8 @@ const GLP1BuyPage = () => {
         phone: data.phone || null,
         cart_items: [{ title: GLP1_PRODUCT.node.title, variantId: GLP1_VARIANT_ID, quantity: 1, price: "39.95" }],
         cart_total: PRICE,
-      });
+        source: 'glp1-buy',
+      } as any);
 
       if (insertError) {
         console.error("[GLP1Buy] Lead insert failed:", insertError.message);
