@@ -12,6 +12,8 @@ import '../components/EarlyTestersCarousel/EarlyTestersCarousel.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
+import InlineEmailCapture from '../components/InlineEmailCapture/InlineEmailCapture';
+import ExitIntentPopup from '../components/Checkout/ExitIntentPopup';
 
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
