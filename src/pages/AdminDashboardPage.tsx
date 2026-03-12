@@ -23,6 +23,7 @@ interface IntakeLead {
   phone: string | null;
   source: string;
   created_at: string;
+  utm_params?: Record<string, string>;
 }
 
 interface TrafficData {
