@@ -21,17 +21,43 @@ const GLP1IntakePage = () => {
 
   // Listen for happyMD iframe messages
   useEffect(() => {
+    const iframe = document.getElementById('happymd-glp1-intake-embed') as HTMLIFrameElement;
+    let loadCount = 0;
+    let hasFiredNotification = false;
+
+    const fireNotification = (source: string) => {
+      if (hasFiredNotification) return;
+      hasFiredNotification = true;
+      console.log('[GLP1] HappyMD form completed via ' + source);
+      fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-lead-notification`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}` },
+        body: JSON.stringify({ type: 'happymd_form', record: { campaign: 'GLP1', tracking_code: 'direct-intake', page_url: window.location.href } }),
+      }).catch(err => console.error('[GLP1] notification error:', err));
+    };
+
+    const handleLoad = () => {
+      loadCount++;
+      if (loadCount > 1) fireNotification('iframe-load');
+    };
+
     const handleMessage = (e: MessageEvent) => {
       if (e.origin !== 'https://happymd.co') return;
-      const iframe = document.getElementById('happymd-glp1-intake-embed') as HTMLIFrameElement;
-      if (!iframe) return;
-      if (e.data.type === 'resize' && typeof e.data.height === 'number') {
+      if (iframe && e.data.type === 'resize' && typeof e.data.height === 'number') {
         const safeHeight = Math.min(Math.max(e.data.height, 400), 5000);
         iframe.style.height = safeHeight + 'px';
       }
+      if (e.data?.type === 'submit' || e.data?.type === 'glp1-form:submit') {
+        fireNotification('postMessage');
+      }
     };
+
+    if (iframe) iframe.addEventListener('load', handleLoad);
     window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    return () => {
+      if (iframe) iframe.removeEventListener('load', handleLoad);
+      window.removeEventListener('message', handleMessage);
+    };
   }, []);
 
   return (
