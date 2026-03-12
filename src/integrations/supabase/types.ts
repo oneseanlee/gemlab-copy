@@ -26,6 +26,7 @@ export type Database = {
           last_name: string | null
           phone: string | null
           source: string
+          utm_params: Json | null
         }
         Insert: {
           cart_items?: Json
@@ -38,6 +39,7 @@ export type Database = {
           last_name?: string | null
           phone?: string | null
           source?: string
+          utm_params?: Json | null
         }
         Update: {
           cart_items?: Json
@@ -50,6 +52,7 @@ export type Database = {
           last_name?: string | null
           phone?: string | null
           source?: string
+          utm_params?: Json | null
         }
         Relationships: []
       }
@@ -79,6 +82,7 @@ export type Database = {
           id: string
           phone: string | null
           source: string
+          utm_params: Json | null
         }
         Insert: {
           created_at?: string
@@ -87,6 +91,7 @@ export type Database = {
           id?: string
           phone?: string | null
           source?: string
+          utm_params?: Json | null
         }
         Update: {
           created_at?: string
@@ -95,6 +100,7 @@ export type Database = {
           id?: string
           phone?: string | null
           source?: string
+          utm_params?: Json | null
         }
         Relationships: []
       }
