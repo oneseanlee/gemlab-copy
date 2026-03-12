@@ -6,6 +6,8 @@ import {
   ShoppingCart, Tag, CheckCircle, ArrowRight, ChevronDown,
   Star, Circle
 } from 'lucide-react';
+import LeadCaptureModal from '@/components/LeadCaptureModal/LeadCaptureModal';
+import ExitIntentPopup from '@/components/Checkout/ExitIntentPopup';
 import './GLP1AdvertorialPage.css';
 import '../pages/TPrimeAdvertorialPage.css';
 
