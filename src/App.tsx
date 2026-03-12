@@ -11,7 +11,7 @@ const TPrime365Page = lazy(() => import("./pages/TPrime365Page"));
 const GLP1Page = lazy(() => import("./pages/GLP1Page"));
 const NHTOPage = lazy(() => import("./pages/NHTOPage"));
 const NHTOIntakePage = lazy(() => import("./pages/NHTOIntakePage"));
-const GLP1IntakePage = lazy(() => import("./pages/GLP1IntakePage"));
+
 const TPrime365IntakePage = lazy(() => import("./pages/TPrime365IntakePage"));
 const UCOSPage = lazy(() => import("./pages/UCOSPage"));
 const GLP1BundlePage = lazy(() => import("./pages/GLP1BundlePage"));
@@ -66,7 +66,7 @@ const AppRoutes = () => {
         <Route path="/glp1-protocol" element={<GLP1Page />} />
         <Route path="/nhto" element={<NHTOPage />} />
         <Route path="/nhto-intake" element={<NHTOIntakePage />} />
-        <Route path="/glp1-intake" element={<GLP1IntakePage />} />
+        
         <Route path="/tprime365-intake" element={<TPrime365IntakePage />} />
         <Route path="/ucos" element={<UCOSPage />} />
         <Route path="/glp1-ucos" element={<GLP1BundlePage />} />
