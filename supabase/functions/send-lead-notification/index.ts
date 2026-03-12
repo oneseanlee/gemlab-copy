@@ -70,41 +70,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Send email via Lovable Email API
-    const apiKey = Deno.env.get("LOVABLE_API_KEY");
-    if (!apiKey) {
-      console.error("LOVABLE_API_KEY not configured");
-      return new Response(JSON.stringify({ error: "Email service not configured" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
-    const emailRes = await fetch("https://api.lovable.dev/v1/email/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        to: notificationEmail,
-        subject,
-        html: htmlBody,
-        from: "Best365 Labs Notifications <notify@notify.cell365power.com>",
-        purpose: "transactional",
-      }),
-    });
-
-    if (!emailRes.ok) {
-      const errText = await emailRes.text();
-      console.error("Email send failed:", errText);
-      return new Response(JSON.stringify({ error: "Failed to send notification" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
-    // Sync to Go High Level
+    // Sync to Go High Level (before email so it always runs)
     try {
       const ghlTags: string[] = [];
       let ghlSource = "Best365 Labs Website";
@@ -156,6 +122,36 @@ Deno.serve(async (req) => {
       console.log("GHL sync triggered for", type);
     } catch (ghlErr) {
       console.error("GHL sync failed (non-blocking):", ghlErr);
+    }
+
+    // Send email via Lovable Email API
+    const apiKey = Deno.env.get("LOVABLE_API_KEY");
+    if (!apiKey) {
+      console.error("LOVABLE_API_KEY not configured");
+      return new Response(JSON.stringify({ error: "Email service not configured" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const emailRes = await fetch("https://api.lovable.dev/v1/email/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        to: notificationEmail,
+        subject,
+        html: htmlBody,
+        from: "Best365 Labs Notifications <notify@notify.cell365power.com>",
+        purpose: "transactional",
+      }),
+    });
+
+    if (!emailRes.ok) {
+      const errText = await emailRes.text();
+      console.error("Email send failed:", errText);
     }
 
     return new Response(JSON.stringify({ success: true }), {
