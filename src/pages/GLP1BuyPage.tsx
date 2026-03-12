@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { trackMetaEvent } from "@/lib/meta-pixel";
 import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { supabase } from "@/integrations/supabase/client";
+import { getUtmParams } from "@/lib/utm";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -120,6 +121,7 @@ const GLP1BuyPage = () => {
         cart_items: [{ title: GLP1_PRODUCT.node.title, variantId: GLP1_VARIANT_ID, quantity: 1, price: "39.95" }],
         cart_total: PRICE,
         source: 'glp1-buy',
+        utm_params: getUtmParams(),
       } as any);
 
       if (insertError) {

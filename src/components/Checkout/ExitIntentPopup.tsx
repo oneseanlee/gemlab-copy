@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { X, Gift, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { getUtmParams } from '@/lib/utm';
 import { toast } from 'sonner';
 import './ExitIntentPopup.css';
 
@@ -56,7 +57,8 @@ const ExitIntentPopup = () => {
         first_name: name.trim(),
         email: email.trim(),
         source: "exit-intent",
-      });
+        utm_params: getUtmParams(),
+      } as any);
 
       if (error) {
         console.error("[ExitIntent] insert error:", error.message);

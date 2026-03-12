@@ -3,6 +3,7 @@ import { trackMetaEvent } from "@/lib/meta-pixel";
 import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { getUtmParams } from "@/lib/utm";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -96,6 +97,7 @@ const CheckoutPage = () => {
         })),
         cart_total: totalPrice,
         source: 'checkout',
+        utm_params: getUtmParams(),
       } as any);
 
       if (insertError) {

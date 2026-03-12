@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { trackMetaEvent } from "@/lib/meta-pixel";
 import { supabase } from "@/integrations/supabase/client";
+import { getUtmParams } from "@/lib/utm";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -62,7 +63,8 @@ const TPrimeBuyPage = () => {
         first_name: data.name.trim(),
         email: data.email.trim(),
         source: "tprime-buy",
-      });
+        utm_params: getUtmParams(),
+      } as any);
 
       if (insertError) {
         console.error("[TPrimeBuy] Lead insert failed:", insertError.message);

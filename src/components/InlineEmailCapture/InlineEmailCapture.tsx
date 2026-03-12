@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { getUtmParams } from '@/lib/utm';
 import { toast } from 'sonner';
 import { ArrowRight, Loader2, CheckCircle } from 'lucide-react';
 import './InlineEmailCapture.css';
@@ -20,7 +21,8 @@ const InlineEmailCapture = () => {
         first_name: name.trim(),
         email: email.trim(),
         source: "glp1-protocol-inline",
-      });
+        utm_params: getUtmParams(),
+      } as any);
 
       if (error) {
         console.error("[InlineCapture] insert error:", error.message);

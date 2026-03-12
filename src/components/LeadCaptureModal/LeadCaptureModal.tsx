@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, Gift, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { getUtmParams } from '@/lib/utm';
 import { toast } from 'sonner';
 import './LeadCaptureModal.css';
 
@@ -43,6 +44,7 @@ const LeadCaptureModal = ({
         cart_items: [{ title: "GLP-1 Optimization Protocol", variantId: "gid://shopify/ProductVariant/46539809235068", quantity: 1, price: "39.95" }],
         cart_total: 39.95,
         source,
+        utm_params: getUtmParams(),
       } as any);
 
       if (error) {
