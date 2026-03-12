@@ -720,6 +720,7 @@ export default function AdminDashboardPage() {
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Source</th>
+                        <th>UTM</th>
                         <th>Date</th>
                       </tr>
                     </thead>
@@ -730,15 +731,16 @@ export default function AdminDashboardPage() {
                           <td>{l.email}</td>
                           <td>{l.phone || "—"}</td>
                           <td>
-                            <span style={{
-                              fontSize: "0.75rem",
-                              padding: "2px 8px",
-                              borderRadius: 4,
-                              background: "hsl(270 40% 20%)",
-                              color: "hsl(270 60% 75%)",
-                            }}>
+                            <span style={{ fontSize: "0.75rem", padding: "2px 8px", borderRadius: 4, background: "hsl(270 40% 20%)", color: "hsl(270 60% 75%)" }}>
                               {l.source}
                             </span>
+                          </td>
+                          <td>
+                            {l.utm_params && Object.keys(l.utm_params).length > 0 ? (
+                              <span title={Object.entries(l.utm_params).map(([k, v]) => `${k}=${v}`).join(", ")} style={{ fontSize: "0.72rem", color: "hsl(142 60% 65%)", cursor: "help" }}>
+                                {l.utm_params.utm_campaign || l.utm_params.utm_source || "tagged"}
+                              </span>
+                            ) : <span style={{ color: "hsl(220 15% 35%)" }}>—</span>}
                           </td>
                           <td style={{ whiteSpace: "nowrap" }}>
                             {new Date(l.created_at).toLocaleDateString()}{" "}
@@ -749,7 +751,7 @@ export default function AdminDashboardPage() {
                         </tr>
                       ))}
                       {filteredIntakeLeads.length === 0 && (
-                        <tr><td colSpan={5} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No intake leads match your filters</td></tr>
+                        <tr><td colSpan={6} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No intake leads match your filters</td></tr>
                       )}
                     </tbody>
                   </table>
