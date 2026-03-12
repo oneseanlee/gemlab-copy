@@ -12,6 +12,8 @@ interface Lead {
   cart_total: number;
   completed: boolean;
   created_at: string;
+  source?: string;
+  utm_params?: Record<string, string>;
 }
 
 interface IntakeLead {
@@ -21,6 +23,7 @@ interface IntakeLead {
   phone: string | null;
   source: string;
   created_at: string;
+  utm_params?: Record<string, string>;
 }
 
 interface TrafficData {
@@ -159,6 +162,48 @@ export default function AdminDashboardPage() {
     return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
   }, [intakeLeads]);
 
+  // Checkout leads by source
+  const checkoutBySource = useMemo(() => {
+    const map = new Map<string, number>();
+    leads.forEach((l) => {
+      const src = l.source || "direct";
+      map.set(src, (map.get(src) || 0) + 1);
+    });
+    return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
+  }, [leads]);
+
+  // UTM breakdown across ALL leads (both tables)
+  const utmBreakdown = useMemo(() => {
+    const campaigns = new Map<string, { leads: number; sales: number; revenue: number }>();
+    const sources = new Map<string, number>();
+    const mediums = new Map<string, number>();
+
+    const processUtm = (utm: Record<string, string> | undefined, completed?: boolean, total?: number) => {
+      if (!utm || Object.keys(utm).length === 0) return;
+      if (utm.utm_source) sources.set(utm.utm_source, (sources.get(utm.utm_source) || 0) + 1);
+      if (utm.utm_medium) mediums.set(utm.utm_medium, (mediums.get(utm.utm_medium) || 0) + 1);
+      if (utm.utm_campaign) {
+        const entry = campaigns.get(utm.utm_campaign) || { leads: 0, sales: 0, revenue: 0 };
+        entry.leads++;
+        if (completed) {
+          entry.sales++;
+          entry.revenue += total || 0;
+        }
+        campaigns.set(utm.utm_campaign, entry);
+      }
+    };
+
+    leads.forEach((l) => processUtm(l.utm_params, l.completed, Number(l.cart_total)));
+    intakeLeads.forEach((l) => processUtm(l.utm_params));
+
+    return {
+      campaigns: Array.from(campaigns.entries()).sort((a, b) => b[1].leads - a[1].leads),
+      sources: Array.from(sources.entries()).sort((a, b) => b[1] - a[1]),
+      mediums: Array.from(mediums.entries()).sort((a, b) => b[1] - a[1]),
+      hasData: campaigns.size > 0 || sources.size > 0,
+    };
+  }, [leads, intakeLeads]);
+
   // Daily breakdown merging leads + traffic
   const dailyBreakdown = useMemo<DailyBreakdown[]>(() => {
     const map = new Map<string, { leads: number; sales: number; revenue: number; views: number; unique: number; intakeLeads: number }>();
@@ -201,14 +246,21 @@ export default function AdminDashboardPage() {
       }));
   }, [filteredLeads, filteredIntakeLeads, traffic.dailyTraffic]);
 
+  const formatUtmForCSV = (utm?: Record<string, string>) => {
+    if (!utm || Object.keys(utm).length === 0) return "";
+    return Object.entries(utm).map(([k, v]) => `${k}=${v}`).join("; ");
+  };
+
   // CSV export
   const exportCSV = () => {
     if (activeTab === "checkout") {
-      const headers = ["Name", "Email", "Phone", "Cart Total", "Status", "Date", "Cart Items"];
+      const headers = ["Name", "Email", "Phone", "Source", "UTM", "Cart Total", "Status", "Date", "Cart Items"];
       const rows = filteredLeads.map((l) => [
         `${l.first_name} ${l.last_name || ""}`.trim(),
         l.email,
         l.phone || "",
+        l.source || "direct",
+        formatUtmForCSV(l.utm_params),
         Number(l.cart_total).toFixed(2),
         l.completed ? "Completed" : "Abandoned",
         new Date(l.created_at).toLocaleString(),
@@ -216,12 +268,13 @@ export default function AdminDashboardPage() {
       ]);
       downloadCSV([headers, ...rows], "checkout-leads");
     } else {
-      const headers = ["Name", "Email", "Phone", "Source", "Date"];
+      const headers = ["Name", "Email", "Phone", "Source", "UTM", "Date"];
       const rows = filteredIntakeLeads.map((l) => [
         l.first_name,
         l.email,
         l.phone || "",
         l.source,
+        formatUtmForCSV(l.utm_params),
         new Date(l.created_at).toLocaleString(),
       ]);
       downloadCSV([headers, ...rows], "intake-leads");
@@ -332,25 +385,101 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Intake Leads by Source */}
-            {intakeBySource.length > 0 && (
+            {/* Leads by Source (both tables) */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
+              {intakeBySource.length > 0 && (
+                <div className="admin-table-card">
+                  <div className="table-header"><h2>Intake Leads by Source</h2></div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", padding: "1rem" }}>
+                    {intakeBySource.map(([source, count]) => (
+                      <div key={source} style={{ background: "hsl(220 20% 16%)", border: "1px solid hsl(220 15% 22%)", borderRadius: 8, padding: "0.6rem 1rem", minWidth: 120 }}>
+                        <div style={{ fontSize: "0.75rem", color: "hsl(220 15% 55%)", marginBottom: 2 }}>{source}</div>
+                        <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "hsl(220 15% 90%)" }}>{count}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {checkoutBySource.length > 0 && (
+                <div className="admin-table-card">
+                  <div className="table-header"><h2>Checkout Leads by Source</h2></div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", padding: "1rem" }}>
+                    {checkoutBySource.map(([source, count]) => (
+                      <div key={source} style={{ background: "hsl(220 20% 16%)", border: "1px solid hsl(220 15% 22%)", borderRadius: 8, padding: "0.6rem 1rem", minWidth: 120 }}>
+                        <div style={{ fontSize: "0.75rem", color: "hsl(210 80% 55%)", marginBottom: 2 }}>{source}</div>
+                        <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "hsl(220 15% 90%)" }}>{count}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* UTM Campaign Breakdown */}
+            {utmBreakdown.hasData && (
               <div className="admin-table-card" style={{ marginBottom: "1.5rem" }}>
                 <div className="table-header">
-                  <h2>Intake Leads by Source</h2>
+                  <h2>UTM Campaign Performance</h2>
                 </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", padding: "1rem" }}>
-                  {intakeBySource.map(([source, count]) => (
-                    <div key={source} style={{
-                      background: "hsl(220 20% 16%)",
-                      border: "1px solid hsl(220 15% 22%)",
-                      borderRadius: 8,
-                      padding: "0.6rem 1rem",
-                      minWidth: 140,
-                    }}>
-                      <div style={{ fontSize: "0.75rem", color: "hsl(220 15% 55%)", marginBottom: 2 }}>{source}</div>
-                      <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "hsl(220 15% 90%)" }}>{count}</div>
+                {/* UTM Sources & Mediums chips */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", padding: "1rem 1rem 0" }}>
+                  {utmBreakdown.sources.length > 0 && (
+                    <div>
+                      <div style={{ fontSize: "0.7rem", color: "hsl(220 15% 45%)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Sources</div>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                        {utmBreakdown.sources.map(([src, count]) => (
+                          <span key={src} style={{ fontSize: "0.78rem", padding: "3px 10px", borderRadius: 6, background: "hsl(142 40% 18%)", color: "hsl(142 60% 70%)", border: "1px solid hsl(142 40% 25%)" }}>
+                            {src} <strong>({count})</strong>
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  ))}
+                  )}
+                  {utmBreakdown.mediums.length > 0 && (
+                    <div>
+                      <div style={{ fontSize: "0.7rem", color: "hsl(220 15% 45%)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Mediums</div>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                        {utmBreakdown.mediums.map(([med, count]) => (
+                          <span key={med} style={{ fontSize: "0.78rem", padding: "3px 10px", borderRadius: 6, background: "hsl(210 40% 18%)", color: "hsl(210 60% 70%)", border: "1px solid hsl(210 40% 25%)" }}>
+                            {med} <strong>({count})</strong>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
+                {/* Campaign table */}
+                {utmBreakdown.campaigns.length > 0 && (
+                  <div style={{ overflowX: "auto", padding: "1rem" }}>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Campaign</th>
+                          <th className="text-right">Leads</th>
+                          <th className="text-right">Sales</th>
+                          <th className="text-right">Revenue</th>
+                          <th className="text-right">Conv %</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {utmBreakdown.campaigns.map(([campaign, data]) => (
+                          <tr key={campaign}>
+                            <td style={{ fontWeight: 500, color: "hsl(220 15% 90%)" }}>{campaign}</td>
+                            <td className="text-right">{data.leads}</td>
+                            <td className="text-right">{data.sales}</td>
+                            <td className="text-right">${data.revenue.toFixed(2)}</td>
+                            <td className="text-right">{data.leads > 0 ? ((data.sales / data.leads) * 100).toFixed(1) : "0.0"}%</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                {utmBreakdown.campaigns.length === 0 && (
+                  <p style={{ padding: "1rem", fontSize: "0.85rem", color: "hsl(220 15% 45%)" }}>
+                    UTM sources detected but no campaigns tagged yet.
+                  </p>
+                )}
               </div>
             )}
 
@@ -526,6 +655,8 @@ export default function AdminDashboardPage() {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Source</th>
+                        <th>UTM</th>
                         <th>Cart Items</th>
                         <th className="text-right">Total</th>
                         <th>Status</th>
@@ -540,6 +671,18 @@ export default function AdminDashboardPage() {
                           </td>
                           <td>{l.email}</td>
                           <td>{l.phone || "—"}</td>
+                          <td>
+                            <span style={{ fontSize: "0.75rem", padding: "2px 8px", borderRadius: 4, background: "hsl(210 40% 20%)", color: "hsl(210 60% 70%)" }}>
+                              {l.source || "direct"}
+                            </span>
+                          </td>
+                          <td>
+                            {l.utm_params && Object.keys(l.utm_params).length > 0 ? (
+                              <span title={Object.entries(l.utm_params).map(([k, v]) => `${k}=${v}`).join(", ")} style={{ fontSize: "0.72rem", color: "hsl(142 60% 65%)", cursor: "help" }}>
+                                {l.utm_params.utm_campaign || l.utm_params.utm_source || "tagged"}
+                              </span>
+                            ) : <span style={{ color: "hsl(220 15% 35%)" }}>—</span>}
+                          </td>
                           <td>
                             <span className="cart-items-preview" title={formatCartItems(l.cart_items)}>
                               {formatCartItems(l.cart_items) || "—"}
@@ -562,7 +705,7 @@ export default function AdminDashboardPage() {
                         </tr>
                       ))}
                       {filteredLeads.length === 0 && (
-                        <tr><td colSpan={7} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No leads match your filters</td></tr>
+                        <tr><td colSpan={9} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No leads match your filters</td></tr>
                       )}
                     </tbody>
                   </table>
@@ -585,6 +728,7 @@ export default function AdminDashboardPage() {
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Source</th>
+                        <th>UTM</th>
                         <th>Date</th>
                       </tr>
                     </thead>
@@ -595,15 +739,16 @@ export default function AdminDashboardPage() {
                           <td>{l.email}</td>
                           <td>{l.phone || "—"}</td>
                           <td>
-                            <span style={{
-                              fontSize: "0.75rem",
-                              padding: "2px 8px",
-                              borderRadius: 4,
-                              background: "hsl(270 40% 20%)",
-                              color: "hsl(270 60% 75%)",
-                            }}>
+                            <span style={{ fontSize: "0.75rem", padding: "2px 8px", borderRadius: 4, background: "hsl(270 40% 20%)", color: "hsl(270 60% 75%)" }}>
                               {l.source}
                             </span>
+                          </td>
+                          <td>
+                            {l.utm_params && Object.keys(l.utm_params).length > 0 ? (
+                              <span title={Object.entries(l.utm_params).map(([k, v]) => `${k}=${v}`).join(", ")} style={{ fontSize: "0.72rem", color: "hsl(142 60% 65%)", cursor: "help" }}>
+                                {l.utm_params.utm_campaign || l.utm_params.utm_source || "tagged"}
+                              </span>
+                            ) : <span style={{ color: "hsl(220 15% 35%)" }}>—</span>}
                           </td>
                           <td style={{ whiteSpace: "nowrap" }}>
                             {new Date(l.created_at).toLocaleDateString()}{" "}
@@ -614,7 +759,7 @@ export default function AdminDashboardPage() {
                         </tr>
                       ))}
                       {filteredIntakeLeads.length === 0 && (
-                        <tr><td colSpan={5} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No intake leads match your filters</td></tr>
+                        <tr><td colSpan={6} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No intake leads match your filters</td></tr>
                       )}
                     </tbody>
                   </table>

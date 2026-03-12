@@ -63,7 +63,7 @@ Deno.serve(async (req) => {
   // Fetch checkout leads
   const { data: leads, error: leadsError } = await supabase
     .from("checkout_leads")
-    .select("*")
+    .select("*, source, utm_params")
     .order("created_at", { ascending: false });
 
   if (leadsError) {
@@ -76,7 +76,7 @@ Deno.serve(async (req) => {
   // Fetch intake/guide leads
   const { data: intakeLeads, error: intakeError } = await supabase
     .from("leads")
-    .select("*")
+    .select("*, utm_params")
     .order("created_at", { ascending: false });
 
   if (intakeError) {
