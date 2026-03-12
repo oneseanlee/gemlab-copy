@@ -186,7 +186,7 @@ Report adverse events: 1-385-421-5651
 | **Launch Price** | $39.95 (Save $50 + FREE Shipping) |
 | **Shopify Product ID** | `8977141104780` |
 | **Shopify Variant ID** | `gid://shopify/ProductVariant/46265391579276` |
-| **Intake Form** | `/glp1-intake` |
+
 
 #### What's Included
 1. **Triple Power Methylene Blue** (30-day sublingual supply)
