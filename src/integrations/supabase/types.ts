@@ -25,6 +25,7 @@ export type Database = {
           id: string
           last_name: string | null
           phone: string | null
+          source: string
         }
         Insert: {
           cart_items?: Json
@@ -36,6 +37,7 @@ export type Database = {
           id?: string
           last_name?: string | null
           phone?: string | null
+          source?: string
         }
         Update: {
           cart_items?: Json
@@ -47,6 +49,7 @@ export type Database = {
           id?: string
           last_name?: string | null
           phone?: string | null
+          source?: string
         }
         Relationships: []
       }

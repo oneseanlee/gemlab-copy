@@ -1,0 +1,1 @@
+ALTER TABLE public.checkout_leads ADD COLUMN source text NOT NULL DEFAULT 'direct';
