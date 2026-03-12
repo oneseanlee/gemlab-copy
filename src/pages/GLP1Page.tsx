@@ -12,6 +12,8 @@ import '../components/EarlyTestersCarousel/EarlyTestersCarousel.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
+import InlineEmailCapture from '../components/InlineEmailCapture/InlineEmailCapture';
+import ExitIntentPopup from '../components/Checkout/ExitIntentPopup';
 
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
@@ -190,6 +192,7 @@ const GLP1Page = () => {
 
   return (
     <div className="glp1-page">
+            <ExitIntentPopup />
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}
@@ -467,6 +470,7 @@ const GLP1Page = () => {
                     </AnimatedCTA>
                     <p className="glp1-mid-cta-sub"><Check size={14} /> 30-Day Protocol + FREE Shipping</p>
                 </div>
+                    <InlineEmailCapture />
             </section>
 
             {/* Community Collage Bridge */}
