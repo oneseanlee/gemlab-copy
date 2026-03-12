@@ -1,27 +1,20 @@
 
 
-## Simplify the Free Testosterone Guide Page
+## Plan: Clean Up GHL Test Leads
 
-Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
+Delete the 3 test leads from the `leads` table where emails match the GHL test patterns.
 
-### What gets removed
-- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
-- **FAQ section** (lines 278-286) — the 4-item accordion
-- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
-- **Testimonials data** (`testimonials` array, lines 43-50)
-- **FAQ data** (`faqItems` array, lines 53-58)
-- **FaqItem component** (lines 125-138)
-- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
-- **Unused imports**: `Star`, `ChevronDown`
+### Technical Details
 
-### What stays
-1. **Video background** — cinematic feel
-2. **Hero** — headline, subtitle, opt-in form, ebook cover
-3. **Trust strip** — 4 credibility badges
-4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
-5. **Final CTA** — dark video section with second opt-in form
-6. **Footer** — legal/contact
+Run a single DELETE query via the insert tool (data operation, not schema change):
 
-### Result
-The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
+```sql
+DELETE FROM leads WHERE email IN (
+  'ghltest-e2e@best365labs.com',
+  'ghlfinal@best365labs.com',
+  'ghltest3@best365labs.com'
+);
+```
+
+This removes only the test entries — no schema changes, no code changes needed.
 
