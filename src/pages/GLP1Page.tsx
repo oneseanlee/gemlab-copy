@@ -469,6 +469,7 @@ const GLP1Page = () => {
                     </AnimatedCTA>
                     <p className="glp1-mid-cta-sub"><Check size={14} /> 30-Day Protocol + FREE Shipping</p>
                 </div>
+                    <InlineEmailCapture />
             </section>
 
             {/* Community Collage Bridge */}
