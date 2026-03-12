@@ -246,14 +246,21 @@ export default function AdminDashboardPage() {
       }));
   }, [filteredLeads, filteredIntakeLeads, traffic.dailyTraffic]);
 
+  const formatUtmForCSV = (utm?: Record<string, string>) => {
+    if (!utm || Object.keys(utm).length === 0) return "";
+    return Object.entries(utm).map(([k, v]) => `${k}=${v}`).join("; ");
+  };
+
   // CSV export
   const exportCSV = () => {
     if (activeTab === "checkout") {
-      const headers = ["Name", "Email", "Phone", "Cart Total", "Status", "Date", "Cart Items"];
+      const headers = ["Name", "Email", "Phone", "Source", "UTM", "Cart Total", "Status", "Date", "Cart Items"];
       const rows = filteredLeads.map((l) => [
         `${l.first_name} ${l.last_name || ""}`.trim(),
         l.email,
         l.phone || "",
+        l.source || "direct",
+        formatUtmForCSV(l.utm_params),
         Number(l.cart_total).toFixed(2),
         l.completed ? "Completed" : "Abandoned",
         new Date(l.created_at).toLocaleString(),
@@ -261,12 +268,13 @@ export default function AdminDashboardPage() {
       ]);
       downloadCSV([headers, ...rows], "checkout-leads");
     } else {
-      const headers = ["Name", "Email", "Phone", "Source", "Date"];
+      const headers = ["Name", "Email", "Phone", "Source", "UTM", "Date"];
       const rows = filteredIntakeLeads.map((l) => [
         l.first_name,
         l.email,
         l.phone || "",
         l.source,
+        formatUtmForCSV(l.utm_params),
         new Date(l.created_at).toLocaleString(),
       ]);
       downloadCSV([headers, ...rows], "intake-leads");
