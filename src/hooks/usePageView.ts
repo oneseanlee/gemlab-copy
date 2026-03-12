@@ -16,8 +16,10 @@ export function usePageView() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Skip admin and policy pages
+    // Skip admin routes and preview/dev environments
     if (pathname.startsWith("/admin")) return;
+    const host = window.location.hostname;
+    if (host.includes("preview") || host.includes("localhost") || host.includes("127.0.0.1")) return;
 
     const visitorId = getVisitorId();
 
