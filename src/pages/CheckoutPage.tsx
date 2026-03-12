@@ -95,7 +95,8 @@ const CheckoutPage = () => {
           price: i.price.amount,
         })),
         cart_total: totalPrice,
-      });
+        source: 'checkout',
+      } as any);
 
       if (insertError) {
         console.error("[Checkout] Lead insert failed:", insertError.message);
