@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { getUtmParams } from '@/lib/utm';
 import { toast } from 'sonner';
 import { ArrowRight, Loader2, CheckCircle } from 'lucide-react';
 import './InlineEmailCapture.css';
