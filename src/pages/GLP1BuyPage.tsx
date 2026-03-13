@@ -284,7 +284,6 @@ const GLP1BuyPage = () => {
                   ) : (
                     <img key={i} src={item.src} alt={`Product view ${i + 1}`} className={`thumb-img ${i === activeThumb ? 'active' : ''}`} loading="lazy" onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer' }} width={64} height={64} />
                   )
-                  )
                 ))}
               </div>
               <button className="thumb-arrow thumb-arrow-right" onClick={() => { const el = document.querySelector('.glp1buy-page .thumb-track'); if (el) el.scrollBy({ left: 80, behavior: 'smooth' }); }} aria-label="Scroll thumbnails right"><ChevronRight size={16} /></button>
