@@ -440,6 +440,19 @@ const GLP1BuyPage = () => {
               </div>
             </div>
 
+            {/* FAQ Accordion */}
+            <div className="glp1buy-faq">
+              <h4 className="glp1buy-faq-title">Common Questions</h4>
+              <Accordion type="single" collapsible className="glp1buy-faq-accordion">
+                {faqItems.map((item, i) => (
+                  <AccordionItem key={i} value={`faq-${i}`} className="glp1buy-faq-item">
+                    <AccordionTrigger className="glp1buy-faq-trigger">{item.q}</AccordionTrigger>
+                    <AccordionContent className="glp1buy-faq-content">{item.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+
             <p className="glp1-phone-line">
               <Phone size={14} />
               Questions? Call us: <a href="tel:+13854215651">(385) 421-5651</a>
