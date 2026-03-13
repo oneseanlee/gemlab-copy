@@ -259,7 +259,7 @@ const GLP1BuyPage = () => {
                     loop
                     playsInline
                     controls
-                    preload="metadata"
+                    preload="none"
                   />
                   <div className={`glp1buy-sound-overlay ${showSoundHint ? '' : 'hidden'}`} onClick={handleSoundOverlayClick}>
                     <div className="glp1buy-sound-circle">
@@ -269,7 +269,7 @@ const GLP1BuyPage = () => {
                   </div>
                 </div>
               ) : (
-                <img src={carouselMedia[activeThumb].src} alt="GLP-1 Optimization Protocol" loading={activeThumb === 0 ? "eager" : "lazy"} width={600} height={600} />
+                <img src={carouselMedia[activeThumb].src} alt="GLP-1 Optimization Protocol" loading="eager" width={600} height={600} fetchPriority="high" />
               )}
             </div>
 
@@ -282,7 +282,9 @@ const GLP1BuyPage = () => {
                       <Volume2 size={16} />
                     </div>
                   ) : (
-                    <img key={i} src={item.src} alt={`Product view ${i + 1}`} className={`thumb-img ${i === activeThumb ? 'active' : ''}`} loading="lazy" onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer' }} />
+                    <div key={i} className={`thumb-img thumb-placeholder ${i === activeThumb ? 'active' : ''}`} onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer', background: '#e8f4f8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Package size={14} />
+                    </div>
                   )
                 ))}
               </div>
