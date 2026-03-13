@@ -49,6 +49,43 @@ const schema = z.object({
 });
 type FormData = z.infer<typeof schema>;
 
+/* ── FAQ data ─────────────────────────────────────────── */
+const faqItems = [
+  { q: "What exactly is in the protocol?", a: "You receive two precision-formulated products: Triple Power Methylene Blue (sublingual drops) and Metabolism+ Tablets. Together they activate three longevity pathways — AMPK, Sirtuins, and Autophagy — to protect your metabolism, preserve lean muscle, and eliminate energy crashes while on GLP-1 medications." },
+  { q: "Will this work if I'm on Ozempic, Mounjaro, or Wegovy?", a: "Yes — the protocol is specifically designed to complement GLP-1 receptor agonists. The ingredients are non-pharmaceutical and don't interfere with your medication. Many of our customers use it alongside their prescribed GLP-1 treatment to optimize their results." },
+  { q: "How fast will I see results?", a: "Most users report noticeable improvements in energy and mental clarity within the first 5–7 days. Measurable metabolic and body composition improvements typically appear by weeks 2–3. Full protocol benefits compound over the complete 30-day cycle." },
+  { q: "What if it doesn't work for me?", a: "You're covered by our 30-day, 100% money-back guarantee. If you're not thrilled with your results for any reason, simply contact us and we'll refund every penny — no questions asked, no hoops to jump through." },
+  { q: "Is this a subscription?", a: "No — this is a one-time purchase. You'll receive a complete 30-day supply with no recurring charges, no auto-ship, and no hidden fees. If you love the results (and we think you will), you can reorder anytime." },
+];
+
+/* ── Countdown hook ───────────────────────────────────── */
+const COUNTDOWN_KEY = "glp1buy_countdown_start";
+const COUNTDOWN_MINUTES = 15;
+
+function useCountdown() {
+  const [timeLeft, setTimeLeft] = useState(COUNTDOWN_MINUTES * 60);
+
+  useEffect(() => {
+    let start = Number(sessionStorage.getItem(COUNTDOWN_KEY));
+    if (!start || isNaN(start)) {
+      start = Date.now();
+      sessionStorage.setItem(COUNTDOWN_KEY, String(start));
+    }
+    const tick = () => {
+      const elapsed = Math.floor((Date.now() - start) / 1000);
+      const remaining = Math.max(0, COUNTDOWN_MINUTES * 60 - elapsed);
+      setTimeLeft(remaining);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const mins = Math.floor(timeLeft / 60);
+  const secs = timeLeft % 60;
+  return { mins, secs, expired: timeLeft === 0 };
+}
+
 /* ── Component ────────────────────────────────────────── */
 const GLP1BuyPage = () => {
   const { items, isLoading, addItem, updateBuyerIdentity, getCheckoutUrl } = useCartStore();
