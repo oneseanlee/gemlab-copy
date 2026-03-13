@@ -248,7 +248,7 @@ const GLP1BuyPage = () => {
             <div className="glp1-promo-strip">🔥 SAVE $50 + FREE SHIPPING 🔥</div>
 
             {/* Main product display — video or image */}
-            <div className="glp1-product-display">
+                <div className="glp1-product-display">
               {carouselMedia[activeThumb].type === "video" ? (
                 <div className="glp1buy-hero-video">
                   <video
@@ -259,6 +259,7 @@ const GLP1BuyPage = () => {
                     loop
                     playsInline
                     controls
+                    preload="metadata"
                   />
                   <div className={`glp1buy-sound-overlay ${showSoundHint ? '' : 'hidden'}`} onClick={handleSoundOverlayClick}>
                     <div className="glp1buy-sound-circle">
