@@ -1,36 +1,27 @@
 
 
-## GLP-1 Buy Page Speed Optimization
+## Simplify the Free Testosterone Guide Page
 
-**Problem**: FCP is 5.5 seconds, mainly caused by 2.2 MB of unoptimized PNG images loading eagerly and an auto-playing video.
+Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
 
-### Changes (ordered by impact)
+### What gets removed
+- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
+- **FAQ section** (lines 278-286) — the 4-item accordion
+- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
+- **Testimonials data** (`testimonials` array, lines 43-50)
+- **FAQ data** (`faqItems` array, lines 53-58)
+- **FaqItem component** (lines 125-138)
+- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
+- **Unused imports**: `Star`, `ChevronDown`
 
-**1. Convert carousel images to WebP & lazy-load non-visible ones**
-- Only the first visible media item (video at index 0) loads eagerly
-- All other carousel images get `loading="lazy"` 
-- Convert the 4 large PNGs to WebP (can cut ~60-70% file size)
-- Add explicit `width`/`height` attributes to prevent layout shifts
+### What stays
+1. **Video background** — cinematic feel
+2. **Hero** — headline, subtitle, opt-in form, ebook cover
+3. **Trust strip** — 4 credibility badges
+4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
+5. **Final CTA** — dark video section with second opt-in form
+6. **Footer** — legal/contact
 
-**2. Defer video preload**
-- Change `<video>` from `autoPlay` to `preload="metadata"` initially, then autoplay after the page is interactive
-- Or keep autoPlay but add `preload="none"` so it doesn't block initial render
-
-**3. Lazy-load below-fold images**
-- The testimonial section and payment-methods image are below the fold — ensure they have `loading="lazy"`
-- The `metabolism-plus.png` thumbnail (carousel item 5) should lazy-load
-
-**4. Preload the LCP image**
-- Add a `<link rel="preload">` for whichever image/video is the LCP element so the browser fetches it earlier
-
-### Technical Details
-
-| Change | File(s) | What |
-|---|---|---|
-| Lazy-load carousel images | `GLP1BuyPage.tsx` | Add `loading="lazy"` to non-active carousel images |
-| Video preload strategy | `GLP1BuyPage.tsx` | Change to `preload="metadata"` |
-| WebP conversion | `public/images/` | Convert 4 PNGs to WebP, update references |
-| Preload hint | `index.html` or component `useEffect` | `<link rel="preload" as="image">` for first visible asset |
-
-Expected improvement: FCP from ~5.5s down to ~2-3s range.
+### Result
+The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
 

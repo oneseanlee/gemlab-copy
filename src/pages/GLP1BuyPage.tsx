@@ -34,11 +34,11 @@ const VIDEO_URL = "https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/
 type MediaItem = { type: "video"; src: string } | { type: "image"; src: string };
 const carouselMedia: MediaItem[] = [
   { type: "video", src: VIDEO_URL },
-  { type: "image", src: "/images/glp1-whats-included.png" },
-  { type: "image", src: "/images/glp1-risk-free.png" },
-  { type: "image", src: "/images/product-glp-protocol.png" },
-  { type: "image", src: "/images/triple-power-methylene-blue.png" },
-  { type: "image", src: "/images/metabolism-plus.png" },
+  { type: "image", src: "/images/glp1-whats-included.webp" },
+  { type: "image", src: "/images/glp1-risk-free.webp" },
+  { type: "image", src: "/images/product-glp-protocol.webp" },
+  { type: "image", src: "/images/triple-power-methylene-blue.webp" },
+  { type: "image", src: "/images/metabolism-plus.webp" },
 ];
 
 /* ── Form schema ──────────────────────────────────────── */
@@ -248,7 +248,7 @@ const GLP1BuyPage = () => {
             <div className="glp1-promo-strip">🔥 SAVE $50 + FREE SHIPPING 🔥</div>
 
             {/* Main product display — video or image */}
-            <div className="glp1-product-display">
+                <div className="glp1-product-display">
               {carouselMedia[activeThumb].type === "video" ? (
                 <div className="glp1buy-hero-video">
                   <video
@@ -259,6 +259,7 @@ const GLP1BuyPage = () => {
                     loop
                     playsInline
                     controls
+                    preload="metadata"
                   />
                   <div className={`glp1buy-sound-overlay ${showSoundHint ? '' : 'hidden'}`} onClick={handleSoundOverlayClick}>
                     <div className="glp1buy-sound-circle">
@@ -268,7 +269,7 @@ const GLP1BuyPage = () => {
                   </div>
                 </div>
               ) : (
-                <img src={carouselMedia[activeThumb].src} alt="GLP-1 Optimization Protocol" loading="lazy" />
+                <img src={carouselMedia[activeThumb].src} alt="GLP-1 Optimization Protocol" loading={activeThumb === 0 ? "eager" : "lazy"} width={600} height={600} />
               )}
             </div>
 
