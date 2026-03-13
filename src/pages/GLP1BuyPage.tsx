@@ -350,6 +350,13 @@ const GLP1BuyPage = () => {
               <span className="checkout-strike">$90.00</span>
               <span className="checkout-discount-badge">56% OFF TODAY</span>
             </div>
+
+            {/* Countdown Timer */}
+            <div className="glp1buy-countdown">
+              <Clock size={16} />
+              <span>{timerExpired ? "Offer extended — act now!" : <>Launch pricing expires in <strong>{String(mins).padStart(2, '0')}:{String(secs).padStart(2, '0')}</strong></>}</span>
+            </div>
+
             <p className="checkout-shipping-note">FREE SHIPPING — NO CODE REQUIRED</p>
 
             <div className="glp1-bonuses-section">
