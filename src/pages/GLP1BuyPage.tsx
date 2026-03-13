@@ -6,10 +6,11 @@ import { getUtmParams } from "@/lib/utm";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Volume2, Shield, FlaskConical, Truck } from "lucide-react";
+import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Volume2, Shield, FlaskConical, Truck, Clock, CreditCard, Package, MousePointerClick } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { GLP1_VARIANT_ID } from "@/lib/shopify";
 import { toast } from "sonner";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import "./GLP1BuyPage.css";
 
 /* ── GLP-1 product data ───────────────────────────────── */
