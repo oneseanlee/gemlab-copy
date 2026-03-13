@@ -282,9 +282,8 @@ const GLP1BuyPage = () => {
                       <Volume2 size={16} />
                     </div>
                   ) : (
-                    <div key={i} className={`thumb-img thumb-placeholder ${i === activeThumb ? 'active' : ''}`} onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer', background: '#e8f4f8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Package size={14} />
-                    </div>
+                    <img key={i} src={item.src} alt={`Product view ${i + 1}`} className={`thumb-img ${i === activeThumb ? 'active' : ''}`} loading="lazy" onClick={() => setActiveThumb(i)} style={{ cursor: 'pointer' }} width={64} height={64} />
+                  )
                   )
                 ))}
               </div>
