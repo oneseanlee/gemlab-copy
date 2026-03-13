@@ -102,6 +102,17 @@ Deno.serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Authenticate: only allow calls with the service role key
+  const authHeader = req.headers.get("Authorization") || "";
+  const expectedKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+  if (authHeader !== `Bearer ${expectedKey}`) {
+    console.error("Unauthorized ghl-sync call");
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
   const GHL_API_KEY = Deno.env.get("GHL_API_KEY");
   if (!GHL_API_KEY) {
     console.error("GHL_API_KEY not configured");
