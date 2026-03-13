@@ -88,6 +88,14 @@ function useCountdown() {
 
 /* ── Component ────────────────────────────────────────── */
 const GLP1BuyPage = () => {
+  const { items, isLoading, addItem, updateBuyerIdentity, getCheckoutUrl } = useCartStore();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [cartReady, setCartReady] = useState(false);
+  const [activeThumb, setActiveThumb] = useState(0);
+  const [showSoundHint, setShowSoundHint] = useState(true);
+  const addedRef = useRef(false);
+  const hasSubmitted = useRef(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { mins, secs, expired: timerExpired } = useCountdown();
 
   const handleSoundOverlayClick = () => {
