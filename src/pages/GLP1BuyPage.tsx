@@ -269,7 +269,7 @@ const GLP1BuyPage = () => {
                   </div>
                 </div>
               ) : (
-                <img src={carouselMedia[activeThumb].src} alt="GLP-1 Optimization Protocol" loading="lazy" />
+                <img src={carouselMedia[activeThumb].src} alt="GLP-1 Optimization Protocol" loading={activeThumb === 0 ? "eager" : "lazy"} width={600} height={600} />
               )}
             </div>
 
