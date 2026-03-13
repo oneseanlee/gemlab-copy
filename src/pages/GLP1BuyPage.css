@@ -509,15 +509,18 @@
   .glp1buy-page .glp1-checkout-desc { order: 6; }
   .glp1buy-page .glp1-check-list { order: 7; }
   .glp1buy-page .glp1-checkout-price { order: 8; }
-  .glp1buy-page .checkout-shipping-note { order: 9; }
-  .glp1buy-page .glp1-bonuses-section { order: 10; }
-  .glp1buy-page .glp1buy-inline-form { order: 11; }
-  .glp1buy-page .glp1-guarantee-badge { order: 12; }
-  .glp1buy-page .glp1-benefit-callouts { order: 13; }
-  .glp1buy-page .glp1buy-trust-strip { order: 14; }
-  .glp1buy-page .glp1buy-testimonial { order: 15; }
-  .glp1buy-page .glp1-phone-line { order: 16; }
-  .glp1buy-page .glp1-fda-disclaimer { order: 17; }
+  .glp1buy-page .glp1buy-countdown { order: 9; }
+  .glp1buy-page .checkout-shipping-note { order: 10; }
+  .glp1buy-page .glp1-bonuses-section { order: 11; }
+  .glp1buy-page .glp1buy-how-it-works { order: 12; }
+  .glp1buy-page .glp1buy-inline-form { order: 13; }
+  .glp1buy-page .glp1-guarantee-badge { order: 14; }
+  .glp1buy-page .glp1buy-faq { order: 15; }
+  .glp1buy-page .glp1-benefit-callouts { order: 16; }
+  .glp1buy-page .glp1buy-trust-strip { order: 17; }
+  .glp1buy-page .glp1buy-testimonial { order: 18; }
+  .glp1buy-page .glp1-phone-line { order: 19; }
+  .glp1buy-page .glp1-fda-disclaimer { order: 20; }
 
   .glp1buy-trust-strip {
     gap: 16px;
