@@ -224,6 +224,140 @@
   color: #374151;
 }
 
+/* ─── Countdown Timer ─── */
+.glp1buy-countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #991B1B;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-top: 4px;
+  animation: glp1buy-urgency-pulse 2s ease-in-out infinite;
+}
+
+.glp1buy-countdown strong {
+  font-variant-numeric: tabular-nums;
+  font-size: 16px;
+}
+
+@keyframes glp1buy-urgency-pulse {
+  0%, 100% { background: #FEF2F2; }
+  50% { background: #FEE2E2; }
+}
+
+/* ─── How It Works ─── */
+.glp1buy-how-it-works {
+  background: #F8F9FA;
+  border: 1px solid var(--b365-border, #e5e7eb);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 8px;
+}
+
+.glp1buy-hiw-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #374151;
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.glp1buy-hiw-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.glp1buy-hiw-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  text-align: center;
+}
+
+.glp1buy-hiw-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--b365-blue, #3376b0);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glp1buy-hiw-step span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.3;
+}
+
+.glp1buy-hiw-divider {
+  width: 24px;
+  height: 2px;
+  background: #d1d5db;
+  flex-shrink: 0;
+  margin-bottom: 18px;
+}
+
+/* ─── Payment Method Icons ─── */
+.glp1buy-payment-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: -4px;
+}
+
+.glp1buy-payment-icons img {
+  height: 28px;
+  opacity: 0.7;
+}
+
+/* ─── FAQ Accordion ─── */
+.glp1buy-faq {
+  margin-top: 8px;
+}
+
+.glp1buy-faq-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+}
+
+.glp1buy-faq-item {
+  border-color: var(--b365-border, #e5e7eb);
+}
+
+.glp1buy-faq-trigger {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: left;
+  padding: 12px 0;
+}
+
+.glp1buy-faq-trigger:hover {
+  text-decoration: none !important;
+}
+
+.glp1buy-faq-content {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
 /* Mobile ordering for new elements */
 @media (max-width: 768px) {
   .glp1buy-page .glp1buy-trust-strip { order: 16; }
@@ -375,15 +509,18 @@
   .glp1buy-page .glp1-checkout-desc { order: 6; }
   .glp1buy-page .glp1-check-list { order: 7; }
   .glp1buy-page .glp1-checkout-price { order: 8; }
-  .glp1buy-page .checkout-shipping-note { order: 9; }
-  .glp1buy-page .glp1-bonuses-section { order: 10; }
-  .glp1buy-page .glp1buy-inline-form { order: 11; }
-  .glp1buy-page .glp1-guarantee-badge { order: 12; }
-  .glp1buy-page .glp1-benefit-callouts { order: 13; }
-  .glp1buy-page .glp1buy-trust-strip { order: 14; }
-  .glp1buy-page .glp1buy-testimonial { order: 15; }
-  .glp1buy-page .glp1-phone-line { order: 16; }
-  .glp1buy-page .glp1-fda-disclaimer { order: 17; }
+  .glp1buy-page .glp1buy-countdown { order: 9; }
+  .glp1buy-page .checkout-shipping-note { order: 10; }
+  .glp1buy-page .glp1-bonuses-section { order: 11; }
+  .glp1buy-page .glp1buy-how-it-works { order: 12; }
+  .glp1buy-page .glp1buy-inline-form { order: 13; }
+  .glp1buy-page .glp1-guarantee-badge { order: 14; }
+  .glp1buy-page .glp1buy-faq { order: 15; }
+  .glp1buy-page .glp1-benefit-callouts { order: 16; }
+  .glp1buy-page .glp1buy-trust-strip { order: 17; }
+  .glp1buy-page .glp1buy-testimonial { order: 18; }
+  .glp1buy-page .glp1-phone-line { order: 19; }
+  .glp1buy-page .glp1-fda-disclaimer { order: 20; }
 
   .glp1buy-trust-strip {
     gap: 16px;

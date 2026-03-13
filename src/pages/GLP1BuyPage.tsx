@@ -6,10 +6,11 @@ import { getUtmParams } from "@/lib/utm";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Volume2, Shield, FlaskConical, Truck } from "lucide-react";
+import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Volume2, Shield, FlaskConical, Truck, Clock, CreditCard, Package, MousePointerClick } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { GLP1_VARIANT_ID } from "@/lib/shopify";
 import { toast } from "sonner";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import "./GLP1BuyPage.css";
 
 /* ── GLP-1 product data ───────────────────────────────── */
@@ -48,6 +49,43 @@ const schema = z.object({
 });
 type FormData = z.infer<typeof schema>;
 
+/* ── FAQ data ─────────────────────────────────────────── */
+const faqItems = [
+  { q: "What exactly is in the protocol?", a: "You receive two precision-formulated products: Triple Power Methylene Blue (sublingual drops) and Metabolism+ Tablets. Together they activate three longevity pathways — AMPK, Sirtuins, and Autophagy — to protect your metabolism, preserve lean muscle, and eliminate energy crashes while on GLP-1 medications." },
+  { q: "Will this work if I'm on Ozempic, Mounjaro, or Wegovy?", a: "Yes — the protocol is specifically designed to complement GLP-1 receptor agonists. The ingredients are non-pharmaceutical and don't interfere with your medication. Many of our customers use it alongside their prescribed GLP-1 treatment to optimize their results." },
+  { q: "How fast will I see results?", a: "Most users report noticeable improvements in energy and mental clarity within the first 5–7 days. Measurable metabolic and body composition improvements typically appear by weeks 2–3. Full protocol benefits compound over the complete 30-day cycle." },
+  { q: "What if it doesn't work for me?", a: "You're covered by our 30-day, 100% money-back guarantee. If you're not thrilled with your results for any reason, simply contact us and we'll refund every penny — no questions asked, no hoops to jump through." },
+  { q: "Is this a subscription?", a: "No — this is a one-time purchase. You'll receive a complete 30-day supply with no recurring charges, no auto-ship, and no hidden fees. If you love the results (and we think you will), you can reorder anytime." },
+];
+
+/* ── Countdown hook ───────────────────────────────────── */
+const COUNTDOWN_KEY = "glp1buy_countdown_start";
+const COUNTDOWN_MINUTES = 15;
+
+function useCountdown() {
+  const [timeLeft, setTimeLeft] = useState(COUNTDOWN_MINUTES * 60);
+
+  useEffect(() => {
+    let start = Number(sessionStorage.getItem(COUNTDOWN_KEY));
+    if (!start || isNaN(start)) {
+      start = Date.now();
+      sessionStorage.setItem(COUNTDOWN_KEY, String(start));
+    }
+    const tick = () => {
+      const elapsed = Math.floor((Date.now() - start) / 1000);
+      const remaining = Math.max(0, COUNTDOWN_MINUTES * 60 - elapsed);
+      setTimeLeft(remaining);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const mins = Math.floor(timeLeft / 60);
+  const secs = timeLeft % 60;
+  return { mins, secs, expired: timeLeft === 0 };
+}
+
 /* ── Component ────────────────────────────────────────── */
 const GLP1BuyPage = () => {
   const { items, isLoading, addItem, updateBuyerIdentity, getCheckoutUrl } = useCartStore();
@@ -58,6 +96,7 @@ const GLP1BuyPage = () => {
   const addedRef = useRef(false);
   const hasSubmitted = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { mins, secs, expired: timerExpired } = useCountdown();
 
   const handleSoundOverlayClick = () => {
     setShowSoundHint(false);
@@ -269,6 +308,22 @@ const GLP1BuyPage = () => {
               <p className="glp1buy-testimonial-quote">"I started the GLP-1 Protocol three weeks ago and the energy difference is night and day. I'm keeping my muscle, my brain fog is gone, and I actually want to work out again."</p>
               <cite className="glp1buy-testimonial-cite">— Sarah M., Verified Buyer</cite>
             </div>
+
+            <div className="glp1buy-testimonial">
+              <div className="glp1buy-testimonial-stars">
+                {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#f59e0b" color="#f59e0b" />)}
+              </div>
+              <p className="glp1buy-testimonial-quote">"After 3 months on Mounjaro I hit a wall — weight stalled, energy tanked. Two weeks into this protocol my metabolism woke back up. Down 11 lbs this month and I feel like myself again."</p>
+              <cite className="glp1buy-testimonial-cite">— Jennifer R., Verified Buyer</cite>
+            </div>
+
+            <div className="glp1buy-testimonial">
+              <div className="glp1buy-testimonial-stars">
+                {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#f59e0b" color="#f59e0b" />)}
+              </div>
+              <p className="glp1buy-testimonial-quote">"The brain fog I'd been dealing with for months cleared up in under a week. I'm sleeping deeper, thinking sharper, and my afternoon crashes are completely gone. This is a game-changer."</p>
+              <cite className="glp1buy-testimonial-cite">— Mark D., Verified Buyer</cite>
+            </div>
           </div>
 
           {/* RIGHT COLUMN — Offer + Inline Form */}
@@ -295,6 +350,13 @@ const GLP1BuyPage = () => {
               <span className="checkout-strike">$90.00</span>
               <span className="checkout-discount-badge">56% OFF TODAY</span>
             </div>
+
+            {/* Countdown Timer */}
+            <div className="glp1buy-countdown">
+              <Clock size={16} />
+              <span>{timerExpired ? "Offer extended — act now!" : <>Launch pricing expires in <strong>{String(mins).padStart(2, '0')}:{String(secs).padStart(2, '0')}</strong></>}</span>
+            </div>
+
             <p className="checkout-shipping-note">FREE SHIPPING — NO CODE REQUIRED</p>
 
             <div className="glp1-bonuses-section">
@@ -314,6 +376,27 @@ const GLP1BuyPage = () => {
                   <span className="bonus-free-tag">FREE</span>
                   <span className="bonus-name">Free Priority Shipping</span>
                   <span className="bonus-value">$12 Value</span>
+                </div>
+              </div>
+            </div>
+
+            {/* How It Works — 3 Steps */}
+            <div className="glp1buy-how-it-works">
+              <h4 className="glp1buy-hiw-title">How It Works</h4>
+              <div className="glp1buy-hiw-steps">
+                <div className="glp1buy-hiw-step">
+                  <div className="glp1buy-hiw-num"><MousePointerClick size={18} /></div>
+                  <span>Enter your info</span>
+                </div>
+                <div className="glp1buy-hiw-divider" />
+                <div className="glp1buy-hiw-step">
+                  <div className="glp1buy-hiw-num"><CreditCard size={18} /></div>
+                  <span>Complete secure checkout</span>
+                </div>
+                <div className="glp1buy-hiw-divider" />
+                <div className="glp1buy-hiw-step">
+                  <div className="glp1buy-hiw-num"><Package size={18} /></div>
+                  <span>Ships in 24–48 hrs</span>
                 </div>
               </div>
             </div>
@@ -342,6 +425,11 @@ const GLP1BuyPage = () => {
                 <Lock size={13} />
                 <span>Secure checkout — SSL encrypted. Payment on next page.</span>
               </div>
+
+              {/* Payment Method Icons */}
+              <div className="glp1buy-payment-icons">
+                <img src="/images/payment-methods.webp" alt="Visa, Mastercard, Amex, PayPal accepted" loading="lazy" />
+              </div>
             </form>
 
             <div className="glp1-guarantee-badge">
@@ -350,6 +438,19 @@ const GLP1BuyPage = () => {
                 <strong>30-Day Money-Back Guarantee</strong>
                 <span>Try it risk-free. If you're not thrilled with your results, we'll refund every penny — no questions asked.</span>
               </div>
+            </div>
+
+            {/* FAQ Accordion */}
+            <div className="glp1buy-faq">
+              <h4 className="glp1buy-faq-title">Common Questions</h4>
+              <Accordion type="single" collapsible className="glp1buy-faq-accordion">
+                {faqItems.map((item, i) => (
+                  <AccordionItem key={i} value={`faq-${i}`} className="glp1buy-faq-item">
+                    <AccordionTrigger className="glp1buy-faq-trigger">{item.q}</AccordionTrigger>
+                    <AccordionContent className="glp1buy-faq-content">{item.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
 
             <p className="glp1-phone-line">
