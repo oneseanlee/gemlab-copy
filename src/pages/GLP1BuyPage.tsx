@@ -308,6 +308,22 @@ const GLP1BuyPage = () => {
               <p className="glp1buy-testimonial-quote">"I started the GLP-1 Protocol three weeks ago and the energy difference is night and day. I'm keeping my muscle, my brain fog is gone, and I actually want to work out again."</p>
               <cite className="glp1buy-testimonial-cite">— Sarah M., Verified Buyer</cite>
             </div>
+
+            <div className="glp1buy-testimonial">
+              <div className="glp1buy-testimonial-stars">
+                {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#f59e0b" color="#f59e0b" />)}
+              </div>
+              <p className="glp1buy-testimonial-quote">"After 3 months on Mounjaro I hit a wall — weight stalled, energy tanked. Two weeks into this protocol my metabolism woke back up. Down 11 lbs this month and I feel like myself again."</p>
+              <cite className="glp1buy-testimonial-cite">— Jennifer R., Verified Buyer</cite>
+            </div>
+
+            <div className="glp1buy-testimonial">
+              <div className="glp1buy-testimonial-stars">
+                {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#f59e0b" color="#f59e0b" />)}
+              </div>
+              <p className="glp1buy-testimonial-quote">"The brain fog I'd been dealing with for months cleared up in under a week. I'm sleeping deeper, thinking sharper, and my afternoon crashes are completely gone. This is a game-changer."</p>
+              <cite className="glp1buy-testimonial-cite">— Mark D., Verified Buyer</cite>
+            </div>
           </div>
 
           {/* RIGHT COLUMN — Offer + Inline Form */}
