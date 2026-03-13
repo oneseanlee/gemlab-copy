@@ -34,11 +34,11 @@ const VIDEO_URL = "https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/
 type MediaItem = { type: "video"; src: string } | { type: "image"; src: string };
 const carouselMedia: MediaItem[] = [
   { type: "video", src: VIDEO_URL },
-  { type: "image", src: "/images/glp1-whats-included.png" },
-  { type: "image", src: "/images/glp1-risk-free.png" },
-  { type: "image", src: "/images/product-glp-protocol.png" },
-  { type: "image", src: "/images/triple-power-methylene-blue.png" },
-  { type: "image", src: "/images/metabolism-plus.png" },
+  { type: "image", src: "/images/glp1-whats-included.webp" },
+  { type: "image", src: "/images/glp1-risk-free.webp" },
+  { type: "image", src: "/images/product-glp-protocol.webp" },
+  { type: "image", src: "/images/triple-power-methylene-blue.webp" },
+  { type: "image", src: "/images/metabolism-plus.webp" },
 ];
 
 /* ── Form schema ──────────────────────────────────────── */
