@@ -380,6 +380,27 @@ const GLP1BuyPage = () => {
               </div>
             </div>
 
+            {/* How It Works — 3 Steps */}
+            <div className="glp1buy-how-it-works">
+              <h4 className="glp1buy-hiw-title">How It Works</h4>
+              <div className="glp1buy-hiw-steps">
+                <div className="glp1buy-hiw-step">
+                  <div className="glp1buy-hiw-num"><MousePointerClick size={18} /></div>
+                  <span>Enter your info</span>
+                </div>
+                <div className="glp1buy-hiw-divider" />
+                <div className="glp1buy-hiw-step">
+                  <div className="glp1buy-hiw-num"><CreditCard size={18} /></div>
+                  <span>Complete secure checkout</span>
+                </div>
+                <div className="glp1buy-hiw-divider" />
+                <div className="glp1buy-hiw-step">
+                  <div className="glp1buy-hiw-num"><Package size={18} /></div>
+                  <span>Ships in 24–48 hrs</span>
+                </div>
+              </div>
+            </div>
+
             {/* Inline Name + Email Form */}
             <form className="glp1buy-inline-form" onSubmit={handleSubmit(onSubmit)}>
               <h3 className="glp1buy-form-headline">Claim Your 30-Day Protocol — Ships Free in 24–48 Hours</h3>
@@ -403,6 +424,11 @@ const GLP1BuyPage = () => {
               <div className="glp1buy-secure-note">
                 <Lock size={13} />
                 <span>Secure checkout — SSL encrypted. Payment on next page.</span>
+              </div>
+
+              {/* Payment Method Icons */}
+              <div className="glp1buy-payment-icons">
+                <img src="/images/payment-methods.webp" alt="Visa, Mastercard, Amex, PayPal accepted" loading="lazy" />
               </div>
             </form>
 
