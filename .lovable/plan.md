@@ -1,27 +1,15 @@
 
 
-## Simplify the Free Testosterone Guide Page
+## Create UTM Capture Utility
 
-Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
+**Goal**: Add a new `src/lib/utm-capture.ts` file alongside the existing `src/lib/utm.ts`. This new utility adds first-touch attribution preservation, click ID capture (fbclid/gclid), landing page tracking, and Shopify-compatible attribute formatting.
 
-### What gets removed
-- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
-- **FAQ section** (lines 278-286) — the 4-item accordion
-- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
-- **Testimonials data** (`testimonials` array, lines 43-50)
-- **FAQ data** (`faqItems` array, lines 53-58)
-- **FaqItem component** (lines 125-138)
-- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
-- **Unused imports**: `Star`, `ChevronDown`
+### Changes
 
-### What stays
-1. **Video background** — cinematic feel
-2. **Hero** — headline, subtitle, opt-in form, ebook cover
-3. **Trust strip** — 4 credibility badges
-4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
-5. **Final CTA** — dark video section with second opt-in form
-6. **Footer** — legal/contact
+**1. Create `src/lib/utm-capture.ts`** — New file with the exact code provided by the user, containing:
+- `captureUTMs()` — captures UTM params + click IDs on first landing only (first-touch), stores in sessionStorage under `c365_utm_data`
+- `getStoredUTMs()` — retrieves stored UTM data
+- `getAttributeParams()` — formats stored UTMs as Shopify `attributes[key]=value` query params
 
-### Result
-The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
+**Note**: The existing `src/lib/utm.ts` (using `b365_utm` storage key) remains untouched. The two utilities coexist with separate storage keys and serve different purposes — the original for lead inserts, the new one for Shopify attribution.
 
