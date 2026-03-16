@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { trackMetaEvent } from "@/lib/meta-pixel";
+
 import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";
 import { useForm } from "react-hook-form";
@@ -74,7 +74,7 @@ const TPrimeBuyPage = () => {
         return;
       }
 
-      trackMetaEvent("Lead", { content_name: "TPrime365 Buy Page", value: PRICE, currency: "USD" });
+      
       navigate("/tprime365-intake");
     } catch {
       toast.error("Something went wrong. Please try again.");

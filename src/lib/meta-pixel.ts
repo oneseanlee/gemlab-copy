@@ -1,11 +1,5 @@
-// Type-safe Meta Pixel helper
-// Pixel is loaded globally in index.html — this wrapper guards against missing fbq
-
-declare global {
-  interface Window {
-    fbq?: (...args: unknown[]) => void;
-  }
-}
+// Meta Pixel tracking is handled entirely by GTM via dataLayer pushes.
+// This file is kept as a no-op stub so existing imports don't break.
 
 type MetaStandardEvent =
   | 'ViewContent'
@@ -25,8 +19,7 @@ interface MetaEventParams {
   [key: string]: unknown;
 }
 
-export function trackMetaEvent(event: MetaStandardEvent, params?: MetaEventParams): void {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', event, params);
-  }
+/** No-op — GTM fires all FB Pixel events via dataLayer triggers. */
+export function trackMetaEvent(_event: MetaStandardEvent, _params?: MetaEventParams): void {
+  // intentionally empty
 }

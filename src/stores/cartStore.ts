@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { trackMetaEvent } from '@/lib/meta-pixel';
+
 import { getFbcValue, getFbpValue } from '@/lib/fb-cookies';
 
 declare global {
@@ -82,12 +82,6 @@ export const useCartStore = create<CartStore>()(
                 checkoutUrl: result.checkoutUrl,
                 items: [{ ...item, lineId: result.lineId }],
               });
-              trackMetaEvent('AddToCart', {
-                content_name: item.product.node.title,
-                content_ids: [item.variantId],
-                value: parseFloat(item.price.amount) * item.quantity,
-                currency: item.price.currencyCode || 'USD',
-              });
               pushAddToCart(item);
             }
           } else if (existingItem) {
@@ -96,12 +90,6 @@ export const useCartStore = create<CartStore>()(
             const result = await updateShopifyCartLine(cartId, existingItem.lineId, newQuantity);
             if (result.success) {
               set({ items: get().items.map(i => i.variantId === item.variantId ? { ...i, quantity: newQuantity } : i) });
-              trackMetaEvent('AddToCart', {
-                content_name: item.product.node.title,
-                content_ids: [item.variantId],
-                value: parseFloat(item.price.amount) * item.quantity,
-                currency: item.price.currencyCode || 'USD',
-              });
               pushAddToCart(item);
             } else if (result.cartNotFound) {
               clearCart();
@@ -110,12 +98,6 @@ export const useCartStore = create<CartStore>()(
             const result = await addLineToShopifyCart(cartId, { ...item, lineId: null });
             if (result.success) {
               set({ items: [...get().items, { ...item, lineId: result.lineId ?? null }] });
-              trackMetaEvent('AddToCart', {
-                content_name: item.product.node.title,
-                content_ids: [item.variantId],
-                value: parseFloat(item.price.amount) * item.quantity,
-                currency: item.price.currencyCode || 'USD',
-              });
             } else if (result.cartNotFound) {
               clearCart();
             }

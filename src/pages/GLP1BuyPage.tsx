@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { trackMetaEvent } from "@/lib/meta-pixel";
+
 import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";
@@ -129,12 +129,7 @@ const GLP1BuyPage = () => {
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  /* Track InitiateCheckout once cart is ready */
-  useEffect(() => {
-    if (cartReady) {
-      trackMetaEvent("InitiateCheckout", { value: PRICE, currency: "USD", num_items: 1 });
-    }
-  }, [cartReady]);
+  /* InitiateCheckout tracked via GTM dataLayer — no direct fbq call */
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
