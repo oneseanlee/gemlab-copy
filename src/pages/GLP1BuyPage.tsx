@@ -58,6 +58,29 @@ const GLP1_PRODUCT = {
   },
 };
 
+const FREE_BONUS_PRODUCTS = [
+  {
+    variantId: FREE_MASTER_GUIDE_VARIANT_ID,
+    product: { node: { id: "gid://shopify/Product/9044545110156", title: "The Ultimate GLP-1 User's Master Guide", description: "", handle: "the-ultimate-glp-1-users-master-guide", priceRange: { minVariantPrice: { amount: "0.00", currencyCode: "USD" } }, images: { edges: [{ node: { url: "/images/guide-glp1-master.jpeg", altText: "GLP-1 Master Guide" } }] }, variants: { edges: [{ node: { id: FREE_MASTER_GUIDE_VARIANT_ID, title: "Default Title", price: { amount: "0.00", currencyCode: "USD" }, availableForSale: true, selectedOptions: [] } }] }, options: [] } },
+    variantTitle: "Digital Guide",
+  },
+  {
+    variantId: FREE_LYMPHATIC_VARIANT_ID,
+    product: { node: { id: "gid://shopify/Product/9044545175692", title: "10-Minute Easy Lymphatic Morning Jumpstart System", description: "", handle: "10-minute-easy-lymphatic-morning-jumpstart-system", priceRange: { minVariantPrice: { amount: "0.00", currencyCode: "USD" } }, images: { edges: [{ node: { url: "/images/guide-lymphatic-jumpstart.jpeg", altText: "Lymphatic Jumpstart System" } }] }, variants: { edges: [{ node: { id: FREE_LYMPHATIC_VARIANT_ID, title: "Default Title", price: { amount: "0.00", currencyCode: "USD" }, availableForSale: true, selectedOptions: [] } }] }, options: [] } },
+    variantTitle: "Digital Guide",
+  },
+  {
+    variantId: FREE_ABSORPTION_VARIANT_ID,
+    product: { node: { id: "gid://shopify/Product/9044545208460", title: "Maximize Your Results: Smart Science of Enhanced Absorption", description: "", handle: "maximize-your-results-smart-science-of-enhanced-absorption", priceRange: { minVariantPrice: { amount: "0.00", currencyCode: "USD" } }, images: { edges: [{ node: { url: "/images/guide-maximize-results.jpeg", altText: "Maximize Results Guide" } }] }, variants: { edges: [{ node: { id: FREE_ABSORPTION_VARIANT_ID, title: "Default Title", price: { amount: "0.00", currencyCode: "USD" }, availableForSale: true, selectedOptions: [] } }] }, options: [] } },
+    variantTitle: "Digital Guide",
+  },
+  {
+    variantId: FREE_COMMUNITY_VARIANT_ID,
+    product: { node: { id: "gid://shopify/Product/9044545241228", title: "Best365 Labs Community Access", description: "", handle: "best365-labs-community-access", priceRange: { minVariantPrice: { amount: "0.00", currencyCode: "USD" } }, images: { edges: [{ node: { url: "/images/bonus-community-access.png", altText: "Community Access" } }] }, variants: { edges: [{ node: { id: FREE_COMMUNITY_VARIANT_ID, title: "Default Title", price: { amount: "0.00", currencyCode: "USD" }, availableForSale: true, selectedOptions: [] } }] }, options: [] } },
+    variantTitle: "Membership",
+  },
+];
+
 const PRICE = 39.95;
 
 /* ── Carousel media (video + images) ──────────────────── */
