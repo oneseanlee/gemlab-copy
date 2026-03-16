@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { trackMetaEvent } from '../lib/meta-pixel';
+
 import './NHTOPage.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
