@@ -372,18 +372,21 @@ const GLP1BuyPage = () => {
 
             <div className="glp1-bonuses-section">
               <h4 className="bonuses-title">YOUR FREE BONUSES</h4>
-              <div className="glp1-bonuses-row">
-                <div className="bonus-card">
+              <div className="glp1-bonuses-row glp1-bonuses-row--visual">
+                <div className="bonus-card bonus-card--visual">
+                  <img src="/images/bonus-protocol-guide.png" alt="Complete Protocol Guide" className="bonus-card-img" loading="lazy" width={280} height={180} />
                   <span className="bonus-free-tag">FREE</span>
                   <span className="bonus-name">Complete Protocol Guide</span>
                   <span className="bonus-value">$29 Value</span>
                 </div>
-                <div className="bonus-card">
+                <div className="bonus-card bonus-card--visual">
+                  <img src="/images/bonus-community-access.png" alt="Best365 Labs Community Access" className="bonus-card-img" loading="lazy" width={280} height={180} />
                   <span className="bonus-free-tag">FREE</span>
                   <span className="bonus-name">Community Access</span>
                   <span className="bonus-value">$49 Value</span>
                 </div>
-                <div className="bonus-card">
+                <div className="bonus-card bonus-card--visual">
+                  <img src="/images/bonus-priority-shipping.png" alt="Free Priority Shipping" className="bonus-card-img" loading="lazy" width={280} height={180} />
                   <span className="bonus-free-tag">FREE</span>
                   <span className="bonus-name">Free Priority Shipping</span>
                   <span className="bonus-value">$12 Value</span>
