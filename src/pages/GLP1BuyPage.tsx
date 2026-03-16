@@ -228,7 +228,10 @@ const GLP1BuyPage = () => {
         last_name: null,
         email: data.email.trim(),
         phone: data.phone || null,
-        cart_items: [{ title: GLP1_PRODUCT.node.title, variantId: GLP1_VARIANT_ID, quantity: 1, price: "39.95" }],
+        cart_items: [
+          { title: GLP1_PRODUCT.node.title, variantId: GLP1_VARIANT_ID, quantity: 1, price: "39.95" },
+          ...FREE_BONUS_PRODUCTS.map(b => ({ title: b.product.node.title, variantId: b.variantId, quantity: 1, price: "0.00" })),
+        ],
         cart_total: PRICE,
         source: 'glp1-buy',
         utm_params: getUtmParams(),
