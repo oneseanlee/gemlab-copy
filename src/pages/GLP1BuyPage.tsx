@@ -234,13 +234,14 @@ const GLP1BuyPage = () => {
   /* ── Main render ──────────────────────────────────── */
   return (
     <div className="glp1buy-page">
+      {/* Sticky promo banner */}
+      <div className="glp1buy-sticky-promo">🔥 SAVE $50 + FREE SHIPPING 🔥</div>
 
       {/* Checkout Section — mirrors GLP1Page final CTA */}
       <section className="b365-section glp1-checkout-section">
         <div className="glp1-checkout-grid">
           {/* LEFT COLUMN — Product Display */}
           <div className="glp1-checkout-left">
-            <div className="glp1-promo-strip">🔥 SAVE $50 + FREE SHIPPING 🔥</div>
 
             {/* Main product display — video or image */}
                 <div className="glp1-product-display">
