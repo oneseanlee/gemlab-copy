@@ -159,29 +159,106 @@ const GLP1BuyPage = () => {
     }
   };
 
-  /* Auto-add GLP-1 + free bonuses to cart on mount */
+  /* Auto-add GLP-1 + free bonuses to cart on mount.
+     Creates the cart with ALL lines in a single call so the physical
+     product appears first in the Shopify checkout line-item list. */
   useEffect(() => {
     if (addedRef.current) return;
     addedRef.current = true;
 
     (async () => {
-      // Add the main protocol if not already in cart
-      const alreadyInCart = items.some((i) => i.variantId === GLP1_VARIANT_ID);
-      if (!alreadyInCart) {
-        await addItem({
-          product: GLP1_PRODUCT,
-          variantId: GLP1_VARIANT_ID,
-          variantTitle: "30-Day Protocol",
-          price: { amount: "39.95", currencyCode: "USD" },
-          quantity: 1,
-          selectedOptions: [{ name: "Size", value: "30-Day Protocol" }],
-        });
-      }
+      const currentItems = useCartStore.getState().items;
+      const hasPhysical = currentItems.some((i) => i.variantId === GLP1_VARIANT_ID);
+      const missingBonuses = FREE_BONUS_PRODUCTS.filter(
+        (b) => !currentItems.some((i) => i.variantId === b.variantId)
+      );
 
-      // Always ensure free bonus items are in cart
-      for (const bonus of FREE_BONUS_PRODUCTS) {
-        const alreadyAdded = useCartStore.getState().items.some((i) => i.variantId === bonus.variantId);
-        if (!alreadyAdded) {
+      // If no cart exists yet, create it with physical product first + all bonuses in one call
+      if (!useCartStore.getState().cartId && !hasPhysical) {
+        const allLines = [
+          { quantity: 1, merchandiseId: GLP1_VARIANT_ID },
+          ...FREE_BONUS_PRODUCTS.map((b) => ({ quantity: 1, merchandiseId: b.variantId })),
+        ];
+
+        const { storefrontApiRequest } = await import("@/lib/shopify");
+        const data = await storefrontApiRequest(
+          `mutation cartCreate($input: CartInput!) {
+            cartCreate(input: $input) {
+              cart {
+                id
+                checkoutUrl
+                lines(first: 100) { edges { node { id merchandise { ... on ProductVariant { id } } } } }
+              }
+              userErrors { field message }
+            }
+          }`,
+          { input: { lines: allLines } }
+        );
+
+        const cart = data?.data?.cartCreate?.cart;
+        if (cart?.checkoutUrl) {
+          const lineEdges = cart.lines.edges as Array<{ node: { id: string; merchandise: { id: string } } }>;
+
+          // Build local items array with the physical product first
+          const physicalLine = lineEdges.find((e) => e.node.merchandise.id === GLP1_VARIANT_ID);
+          const localItems: import("@/lib/shopify").CartItem[] = [];
+
+          if (physicalLine) {
+            localItems.push({
+              lineId: physicalLine.node.id,
+              product: GLP1_PRODUCT,
+              variantId: GLP1_VARIANT_ID,
+              variantTitle: "30-Day Protocol",
+              price: { amount: "39.95", currencyCode: "USD" },
+              quantity: 1,
+              selectedOptions: [{ name: "Size", value: "30-Day Protocol" }],
+            });
+          }
+
+          for (const bonus of FREE_BONUS_PRODUCTS) {
+            const line = lineEdges.find((e) => e.node.merchandise.id === bonus.variantId);
+            if (line) {
+              localItems.push({
+                lineId: line.node.id,
+                product: bonus.product,
+                variantId: bonus.variantId,
+                variantTitle: bonus.variantTitle,
+                price: { amount: "0.00", currencyCode: "USD" },
+                quantity: 1,
+                selectedOptions: [],
+              });
+            }
+          }
+
+          try {
+            const url = new URL(cart.checkoutUrl);
+            url.searchParams.set("channel", "online_store");
+            useCartStore.setState({
+              cartId: cart.id,
+              checkoutUrl: url.toString(),
+              items: localItems,
+            });
+          } catch {
+            useCartStore.setState({
+              cartId: cart.id,
+              checkoutUrl: cart.checkoutUrl,
+              items: localItems,
+            });
+          }
+        }
+      } else {
+        // Cart already exists — just back-fill anything missing
+        if (!hasPhysical) {
+          await addItem({
+            product: GLP1_PRODUCT,
+            variantId: GLP1_VARIANT_ID,
+            variantTitle: "30-Day Protocol",
+            price: { amount: "39.95", currencyCode: "USD" },
+            quantity: 1,
+            selectedOptions: [{ name: "Size", value: "30-Day Protocol" }],
+          });
+        }
+        for (const bonus of missingBonuses) {
           await addItem({
             product: bonus.product,
             variantId: bonus.variantId,
