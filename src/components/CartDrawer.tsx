@@ -5,8 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import {
   Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ArrowRight, Loader2 } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, ArrowRight, Loader2, Gift } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { ALL_FREE_VARIANT_IDS, FREE_ITEM_VALUES } from "@/lib/shopify";
 
 export const CartDrawer = () => {
   const navigate = useNavigate();
