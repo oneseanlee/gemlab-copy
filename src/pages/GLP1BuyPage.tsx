@@ -341,6 +341,16 @@ const GLP1BuyPage = () => {
               <span className="star-subtext">4.9 (127 reviews)</span>
             </div>
 
+            <p className="glp1-checkout-desc">The complete cellular optimization system designed to protect your metabolism, preserve lean muscle, and eliminate the energy crashes that sabotage your GLP-1 results. Two precision-formulated products working together through three longevity pathways.*</p>
+
+            <ul className="glp1-check-list">
+              <li><Check size={16} />Triple Power Methylene Blue + Metabolism+ Tablets — full 30-day protocol</li>
+              <li><Check size={16} />Activates AMPK, Sirtuins &amp; Autophagy — three longevity pathways</li>
+              <li><Check size={16} />Up to 72% more lean tissue retention vs GLP-1 alone*</li>
+              <li><Check size={16} />Made in USA — FDA-registered, cGMP-certified facility</li>
+              <li><Check size={16} />30-day 100% money-back guarantee, because it works*</li>
+            </ul>
+
             <div className="glp1-checkout-price">
               <span className="checkout-big-price">$39.95</span>
               <span className="checkout-strike">$90.00</span>
@@ -354,56 +364,6 @@ const GLP1BuyPage = () => {
             </div>
 
             <p className="checkout-shipping-note">FREE SHIPPING — NO CODE REQUIRED</p>
-
-            {/* Inline Name + Email Form — ABOVE THE FOLD */}
-            <form className="glp1buy-inline-form" onSubmit={handleSubmit(onSubmit)}>
-              <h3 className="glp1buy-form-headline">Claim Your 30-Day Protocol — Ships Free in 24–48 Hours</h3>
-              <p className="glp1buy-form-subtext">Enter your details below to reserve your protocol. You'll complete secure payment on the next page — takes less than 60 seconds.</p>
-              <div className="glp1buy-field">
-                <label htmlFor="glp1buy-name">Your Name *</label>
-                <input id="glp1buy-name" type="text" placeholder="e.g. Sarah Mitchell" {...register("name")} />
-                {errors.name && <div className="glp1buy-field-error">{errors.name.message}</div>}
-              </div>
-              <div className="glp1buy-field">
-                <label htmlFor="glp1buy-email">Email Address *</label>
-                <input id="glp1buy-email" type="email" placeholder="your.email@gmail.com" {...register("email")} />
-                {errors.email && <div className="glp1buy-field-error">{errors.email.message}</div>}
-              </div>
-              <p style={{ fontSize: '13px', color: '#DC2626', textAlign: 'center', margin: '8px 0' }}>⚡ Launch pricing — limited availability</p>
-
-              <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading || hasSubmitted.current}>
-                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Redirecting…</> : <>Get My GLP-1 Protocol <ArrowRight size={18} /></>}
-              </button>
-
-              <div className="glp1buy-secure-note">
-                <Lock size={13} />
-                <span>Secure checkout — SSL encrypted. Payment on next page.</span>
-              </div>
-
-              {/* Payment Method Icons */}
-              <div className="glp1buy-payment-icons">
-                <img src="/images/payment-methods.webp" alt="Visa, Mastercard, Amex, PayPal accepted" loading="lazy" />
-              </div>
-            </form>
-
-            <div className="glp1-guarantee-badge">
-              <ShieldCheck size={28} />
-              <div>
-                <strong>30-Day Money-Back Guarantee</strong>
-                <span>Try it risk-free. If you're not thrilled with your results, we'll refund every penny — no questions asked.</span>
-              </div>
-            </div>
-
-            {/* Supporting content — below CTA on desktop */}
-            <p className="glp1-checkout-desc">The complete cellular optimization system designed to protect your metabolism, preserve lean muscle, and eliminate the energy crashes that sabotage your GLP-1 results. Two precision-formulated products working together through three longevity pathways.*</p>
-
-            <ul className="glp1-check-list">
-              <li><Check size={16} />Triple Power Methylene Blue + Metabolism+ Tablets — full 30-day protocol</li>
-              <li><Check size={16} />Activates AMPK, Sirtuins &amp; Autophagy — three longevity pathways</li>
-              <li><Check size={16} />Up to 72% more lean tissue retention vs GLP-1 alone*</li>
-              <li><Check size={16} />Made in USA — FDA-registered, cGMP-certified facility</li>
-              <li><Check size={16} />30-day 100% money-back guarantee, because it works*</li>
-            </ul>
 
             <div className="glp1-bonuses-section">
               <h4 className="bonuses-title">YOUR FREE BONUSES</h4>
@@ -447,6 +407,45 @@ const GLP1BuyPage = () => {
                   <div className="glp1buy-hiw-num"><Package size={18} /></div>
                   <span>Ships in 24–48 hrs</span>
                 </div>
+              </div>
+            </div>
+
+            {/* Inline Name + Email Form */}
+            <form className="glp1buy-inline-form" onSubmit={handleSubmit(onSubmit)}>
+              <h3 className="glp1buy-form-headline">Claim Your 30-Day Protocol — Ships Free in 24–48 Hours</h3>
+              <p className="glp1buy-form-subtext">Enter your details below to reserve your protocol. You'll complete secure payment on the next page — takes less than 60 seconds.</p>
+              <div className="glp1buy-field">
+                <label htmlFor="glp1buy-name">Your Name *</label>
+                <input id="glp1buy-name" type="text" placeholder="e.g. Sarah Mitchell" {...register("name")} />
+                {errors.name && <div className="glp1buy-field-error">{errors.name.message}</div>}
+              </div>
+              <div className="glp1buy-field">
+                <label htmlFor="glp1buy-email">Email Address *</label>
+                <input id="glp1buy-email" type="email" placeholder="your.email@gmail.com" {...register("email")} />
+                {errors.email && <div className="glp1buy-field-error">{errors.email.message}</div>}
+              </div>
+              <p style={{ fontSize: '13px', color: '#DC2626', textAlign: 'center', margin: '8px 0' }}>⚡ Launch pricing — limited availability</p>
+
+              <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading || hasSubmitted.current}>
+                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Redirecting…</> : <>Get My GLP-1 Protocol <ArrowRight size={18} /></>}
+              </button>
+
+              <div className="glp1buy-secure-note">
+                <Lock size={13} />
+                <span>Secure checkout — SSL encrypted. Payment on next page.</span>
+              </div>
+
+              {/* Payment Method Icons */}
+              <div className="glp1buy-payment-icons">
+                <img src="/images/payment-methods.webp" alt="Visa, Mastercard, Amex, PayPal accepted" loading="lazy" />
+              </div>
+            </form>
+
+            <div className="glp1-guarantee-badge">
+              <ShieldCheck size={28} />
+              <div>
+                <strong>30-Day Money-Back Guarantee</strong>
+                <span>Try it risk-free. If you're not thrilled with your results, we'll refund every penny — no questions asked.</span>
               </div>
             </div>
 
