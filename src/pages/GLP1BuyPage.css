@@ -238,6 +238,71 @@
   display: block;
   border-radius: 12px;
 }
+/* ─── Visual Bonus Cards ─── */
+.glp1-bonuses-row--visual {
+  gap: 12px !important;
+}
+
+.bonus-card--visual {
+  align-items: center;
+  text-align: center;
+  padding: 0 12px 14px !important;
+  overflow: hidden;
+  border-radius: 12px !important;
+  border: 1px solid var(--b365-border) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bonus-card--visual:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06) !important;
+}
+
+.bonus-card-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 6px;
+  border-radius: 0 0 8px 8px;
+}
+
+.bonus-card--visual .bonus-free-tag {
+  margin-top: 4px;
+}
+
+.bonus-card--visual .bonus-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--b365-gray-900);
+}
+
+.bonus-card--visual .bonus-value {
+  font-size: 12px;
+  color: var(--b365-text-secondary);
+  font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .glp1-bonuses-row--visual {
+    flex-direction: column;
+    gap: 10px !important;
+  }
+  .bonus-card--visual {
+    flex-direction: row;
+    padding: 0 12px 0 0 !important;
+    align-items: center;
+    text-align: left;
+  }
+  .bonus-card-img {
+    width: 90px;
+    height: 70px;
+    margin-bottom: 0;
+    margin-right: 10px;
+    border-radius: 12px 0 0 12px;
+    flex-shrink: 0;
+  }
+}
 
 
 .glp1buy-countdown {
