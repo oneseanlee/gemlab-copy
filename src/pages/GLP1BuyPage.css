@@ -265,24 +265,25 @@
 .glp1buy-carousel-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 720 / 405;
   overflow: hidden;
   border-radius: 12px;
 }
 
 .glp1buy-carousel-wrap img {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
   border-radius: 12px;
-  opacity: 0;
   transition: opacity 0.6s ease;
 }
 
-.glp1buy-carousel-wrap img.active {
-  opacity: 1;
+.glp1buy-carousel-wrap img:not(:first-child) {
+  position: absolute;
+  inset: 0;
+}
+
+.glp1buy-carousel-wrap img:not(.active) {
+  opacity: 0;
 }
 /* ─── Visual Bonus Cards ─── */
 .glp1-bonuses-row--visual {
