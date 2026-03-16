@@ -57,15 +57,6 @@ const CheckoutPage = () => {
   const savingsPercent = savings > 0 ? Math.round((savings / comparePrice) * 100) : 0;
   const perDay = (totalPrice / 30).toFixed(2);
 
-  useEffect(() => {
-    if (items.length > 0) {
-      trackMetaEvent('InitiateCheckout', {
-        value: totalPrice,
-        currency: 'USD',
-        num_items: totalItems,
-      });
-    }
-  }, []);
 
   const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),

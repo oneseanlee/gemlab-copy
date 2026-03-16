@@ -98,12 +98,6 @@ export const useCartStore = create<CartStore>()(
             const result = await addLineToShopifyCart(cartId, { ...item, lineId: null });
             if (result.success) {
               set({ items: [...get().items, { ...item, lineId: result.lineId ?? null }] });
-              trackMetaEvent('AddToCart', {
-                content_name: item.product.node.title,
-                content_ids: [item.variantId],
-                value: parseFloat(item.price.amount) * item.quantity,
-                currency: item.price.currencyCode || 'USD',
-              });
             } else if (result.cartNotFound) {
               clearCart();
             }
