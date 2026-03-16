@@ -119,9 +119,6 @@ const NHTOPage = () => {
     const addItem = useCartStore(state => state.addItem);
     const isLoading = useCartStore(state => state.isLoading);
 
-    useEffect(() => {
-      trackMetaEvent('ViewContent', { content_name: 'Non-Hormonal Testosterone Optimizer', content_type: 'product', value: 250.00, currency: 'USD' });
-    }, []);
 
     const mobileLinks = [
       { label: 'Benefits', href: '#benefits' },

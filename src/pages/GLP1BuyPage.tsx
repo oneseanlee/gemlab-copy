@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { trackMetaEvent } from "@/lib/meta-pixel";
+
 import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";

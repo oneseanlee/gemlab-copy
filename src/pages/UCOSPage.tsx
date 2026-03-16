@@ -32,9 +32,6 @@ const UCOSPage = () => {
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
-  useEffect(() => {
-    trackMetaEvent('ViewContent', { content_name: 'Ultimate Cellular Optimization System', content_type: 'product', value: 175.00, currency: 'USD' });
-  }, []);
 
   const mobileLinks = [
     { label: 'Benefits', href: '#benefits' },
