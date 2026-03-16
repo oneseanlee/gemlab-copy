@@ -4,10 +4,12 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useCartSync } from "./hooks/useCartSync";
 import { usePageView } from "./hooks/usePageView";
 import { captureUtmParams } from "./lib/utm";
+import { captureUTMs } from "./lib/utm-capture";
 import FomoToast from "./components/FomoToast/FomoToast";
 
 // Capture UTM params on initial page load
 captureUtmParams();
+captureUTMs();
 // Route-level code splitting — each page loads on demand
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ListiclePage = lazy(() => import("./pages/ListiclePage"));
