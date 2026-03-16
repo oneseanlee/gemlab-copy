@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useRef, useEffect } from 'react';
 import Lottie from 'lottie-react';
-import { trackMetaEvent } from '../lib/meta-pixel';
+
 import './GLP1BundlePage.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
