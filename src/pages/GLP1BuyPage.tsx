@@ -159,7 +159,7 @@ const GLP1BuyPage = () => {
     }
   };
 
-  /* Auto-add GLP-1 to cart on mount */
+  /* Auto-add GLP-1 + free bonuses to cart on mount */
   useEffect(() => {
     if (addedRef.current) return;
     addedRef.current = true;
@@ -171,6 +171,7 @@ const GLP1BuyPage = () => {
     }
 
     (async () => {
+      // Add the main protocol first
       await addItem({
         product: GLP1_PRODUCT,
         variantId: GLP1_VARIANT_ID,
@@ -179,6 +180,22 @@ const GLP1BuyPage = () => {
         quantity: 1,
         selectedOptions: [{ name: "Size", value: "30-Day Protocol" }],
       });
+
+      // Add free bonus items sequentially
+      for (const bonus of FREE_BONUS_PRODUCTS) {
+        const alreadyAdded = useCartStore.getState().items.some((i) => i.variantId === bonus.variantId);
+        if (!alreadyAdded) {
+          await addItem({
+            product: bonus.product,
+            variantId: bonus.variantId,
+            variantTitle: bonus.variantTitle,
+            price: { amount: "0.00", currencyCode: "USD" },
+            quantity: 1,
+            selectedOptions: [],
+          });
+        }
+      }
+
       setCartReady(true);
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
