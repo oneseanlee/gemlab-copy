@@ -147,6 +147,11 @@ const GLP1BuyPage = () => {
 
     hasSubmitted.current = true;
     setIsSubmitting(true);
+    const utmParams = getAttributeParams();
+    if (checkoutUrl && utmParams) {
+      const separator = checkoutUrl.includes('?') ? '&' : '?';
+      checkoutUrl = checkoutUrl + separator + utmParams;
+    }
     try {
       const { error: insertError } = await supabase.from("checkout_leads").insert({
         first_name: data.name.trim(),
