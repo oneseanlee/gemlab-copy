@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { trackMetaEvent } from "@/lib/meta-pixel";
+
 import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";
 import { useForm } from "react-hook-form";
