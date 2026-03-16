@@ -97,9 +97,6 @@ const GLP1Page = () => {
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
-  useEffect(() => {
-    trackMetaEvent('ViewContent', { content_name: 'GLP-1 Optimization Protocol', content_type: 'product', value: 39.95, currency: 'USD' });
-  }, []);
 
   // Urgency countdown timer — 2-hour rolling window
   const getTimeLeft = () => {

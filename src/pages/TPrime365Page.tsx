@@ -111,9 +111,6 @@ const TPrime365Page = () => {
   const [dosingVisible, setDosingVisible] = useState(false);
   const dosingRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    trackMetaEvent('ViewContent', { content_name: 'TPrime365™', content_type: 'product', value: 149.00, currency: 'USD' });
-  }, []);
 
   useEffect(() => {
     const el = dosingRef.current;
