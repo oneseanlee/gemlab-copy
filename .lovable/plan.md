@@ -1,51 +1,27 @@
 
 
-## Build Post-Purchase Digital Delivery Email
+## Simplify the Free Testosterone Guide Page
 
-When the existing Shopify `orders/paid` webhook fires and the order contains a GLP-1 Protocol line item, automatically send a branded email with download links and community access.
+Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
 
-### Digital Product Links
+### What gets removed
+- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
+- **FAQ section** (lines 278-286) — the 4-item accordion
+- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
+- **Testimonials data** (`testimonials` array, lines 43-50)
+- **FAQ data** (`faqItems` array, lines 53-58)
+- **FaqItem component** (lines 125-138)
+- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
+- **Unused imports**: `Star`, `ChevronDown`
 
-| Product | Online Version | PDF Download |
-|---------|---------------|--------------|
-| GLP-1 Master Guide | report.cell365power.com/glp1-users-master-guide | Google Drive link |
-| Lymphatic Jumpstart | report.cell365power.com/10-min-lymphatic-jumpstart | Google Drive link |
-| Maximize Your Results | report.cell365power.com/maximize-your-results | Google Drive link |
-| Community Access | skool.com/best-365-labs-community-7298/about | — |
-
-### Step 1 — Create email template
-
-Create `supabase/functions/_shared/email-templates/digital-delivery.tsx` — a branded React Email template matching existing Best365 Labs styling (logo, #3376b0 primary, Playfair Display headings). Contains:
-
-- "Your Digital Guides Are Ready" heading
-- Personalized greeting with customer's first name
-- 3 guide sections, each with two buttons: "Read Online" (report links) and "Download PDF" (Google Drive links)
-- 1 community section with "Join the Community" button (Skool link)
-- Footer note about the GLP-1 Protocol shipping separately
-
-### Step 2 — Create delivery edge function
-
-Create `supabase/functions/send-digital-delivery/index.ts`:
-
-- Accepts POST with `{ email, firstName, orderId }`
-- Renders the digital-delivery template with React Email
-- Sends via the Lovable Email API from `noreply@notify.cell365power.com`
-- Returns success/failure
-
-### Step 3 — Update Shopify order webhook
-
-In `supabase/functions/shopify-order-webhook/index.ts`, after the existing GHL sync block (~line 128), add a non-blocking call to `send-digital-delivery`:
-
-- Check if any `line_items` title contains "GLP-1" or matches the GLP-1 variant ID
-- If yes, call `send-digital-delivery` with the customer email, first name, and order ID
-- Wrapped in try/catch so it never breaks the webhook response
-
-### Step 4 — Register and deploy
-
-- Add `send-digital-delivery` to `supabase/config.toml` with `verify_jwt = false`
-- Deploy both `send-digital-delivery` and `shopify-order-webhook`
+### What stays
+1. **Video background** — cinematic feel
+2. **Hero** — headline, subtitle, opt-in form, ebook cover
+3. **Trust strip** — 4 credibility badges
+4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
+5. **Final CTA** — dark video section with second opt-in form
+6. **Footer** — legal/contact
 
 ### Result
-
-Customers who purchase the GLP-1 Protocol receive a branded email within seconds containing direct links to read their 3 guides online, download PDFs, and join the Skool community.
+The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
 

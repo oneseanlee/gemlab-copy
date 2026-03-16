@@ -127,6 +127,42 @@ Deno.serve(async (req) => {
     console.error("GHL order sync failed (non-blocking):", ghlErr);
   }
 
+  // Send digital delivery email for GLP-1 Protocol orders
+  try {
+    const lineItems = (order as any).line_items || [];
+    const hasGlp1 = lineItems.some((item: any) =>
+      (item.title || "").toLowerCase().includes("glp-1") ||
+      (item.title || "").toLowerCase().includes("glp1")
+    );
+
+    if (hasGlp1) {
+      const deliveryEmail = (order.contact_email || order.email || "").toLowerCase().trim();
+      const deliveryName =
+        (order as any).customer?.first_name ||
+        (order as any).billing_address?.first_name ||
+        deliveryEmail.split("@")[0];
+
+      const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+      const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+      await fetch(`${supabaseUrl}/functions/v1/send-digital-delivery`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${serviceKey}`,
+        },
+        body: JSON.stringify({
+          email: deliveryEmail,
+          firstName: deliveryName,
+          orderId: order.id,
+        }),
+      });
+      console.log("Digital delivery email triggered for", deliveryEmail);
+    }
+  } catch (deliveryErr) {
+    console.error("Digital delivery email failed (non-blocking):", deliveryErr);
+  }
+
   return new Response(
     JSON.stringify({ success: true, updatedCount }),
     { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
