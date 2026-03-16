@@ -40,10 +40,11 @@ const CheckoutPage = () => {
     (sum, item) => sum + parseFloat(item.price.amount) * item.quantity, 0
   );
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  // Compare-at price overrides keyed by variant ID (most reliable identifier in cart)
+  // Compare-at price overrides keyed by variant ID
   const compareAtByVariant: Record<string, number> = {
     'gid://shopify/ProductVariant/46539809235068': 90, // GLP-1 Optimization Protocol
     'gid://shopify/ProductVariant/46265391579276': 90, // GLP-1 Optimization Protocol (alt)
+    ...FREE_ITEM_VALUES, // Free bonus items with their "value" prices
   };
 
   const getComparePrice = () => {
