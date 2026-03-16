@@ -14,7 +14,37 @@ import { toast } from "sonner";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import "./GLP1BuyPage.css";
 
-/* ── GLP-1 product data ───────────────────────────────── */
+const CAROUSEL_IMAGES = [
+  { src: "/images/glp1-carousel-1.jpg", alt: "Best365 Labs customer transformation results" },
+  { src: "/images/glp1-carousel-2.jpg", alt: "Best365 Labs cellular energy optimization" },
+  { src: "/images/glp1-carousel-3.jpg", alt: "Best365 Labs GLP-1 Protocol lifestyle results" },
+];
+
+function BannerCarousel() {
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setActive((p) => (p + 1) % CAROUSEL_IMAGES.length), 2000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="glp1buy-energy-banner">
+      <div className="glp1buy-carousel-wrap">
+        {CAROUSEL_IMAGES.map((img, i) => (
+          <img
+            key={img.src}
+            src={img.src}
+            alt={img.alt}
+            loading="lazy"
+            width={720}
+            height={405}
+            className={i === active ? "active" : ""}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const GLP1_PRODUCT = {
   node: {
     id: "gid://shopify/Product/8542135132284",
