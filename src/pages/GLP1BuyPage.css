@@ -143,7 +143,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: var(--b365-blue);
   color: #fff;
   text-align: center;
   font-size: 14px;
