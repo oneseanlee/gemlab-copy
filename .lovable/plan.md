@@ -1,27 +1,19 @@
 
 
-## Simplify the Free Testosterone Guide Page
+## Replace Static Banner with Auto-Rotating Image Carousel
 
-Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
+**What**: Replace the single `glp1-cellular-energy-hero.jpg` image at line 332 with a rotating slideshow of the 3 uploaded images, cycling every ~2 seconds with a fade transition.
 
-### What gets removed
-- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
-- **FAQ section** (lines 278-286) — the 4-item accordion
-- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
-- **Testimonials data** (`testimonials` array, lines 43-50)
-- **FAQ data** (`faqItems` array, lines 53-58)
-- **FaqItem component** (lines 125-138)
-- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
-- **Unused imports**: `Star`, `ChevronDown`
+### Steps
 
-### What stays
-1. **Video background** — cinematic feel
-2. **Hero** — headline, subtitle, opt-in form, ebook cover
-3. **Trust strip** — 4 credibility badges
-4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
-5. **Final CTA** — dark video section with second opt-in form
-6. **Footer** — legal/contact
+1. **Copy the 3 uploaded images** to `public/images/` as `glp1-carousel-1.jpg`, `glp1-carousel-2.jpg`, `glp1-carousel-3.jpg`
 
-### Result
-The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
+2. **Edit `src/pages/GLP1BuyPage.tsx`** (lines 331-339):
+   - Replace the static `<img>` with a small auto-rotating component using `useState` + `useEffect` with a 2-second interval
+   - Cycle through the 3 images, showing one at a time with a CSS fade transition
+   - Keep the same container class (`glp1buy-energy-banner`) and lazy loading
+
+3. **Edit `src/pages/GLP1BuyPage.css`**:
+   - Add fade-in/out transition styles for the rotating images (CSS `opacity` transition ~0.5s)
+   - Ensure images fill the banner container consistently (object-fit, matching dimensions)
 
