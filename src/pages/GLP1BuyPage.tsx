@@ -139,7 +139,7 @@ const GLP1BuyPage = () => {
   const onSubmit = async (data: FormData) => {
     if (hasSubmitted.current) return;
 
-    const checkoutUrl = getCheckoutUrl();
+    let checkoutUrl = getCheckoutUrl();
     if (!checkoutUrl) {
       toast.error("Cart is still loading. Please wait a moment and try again.");
       return;

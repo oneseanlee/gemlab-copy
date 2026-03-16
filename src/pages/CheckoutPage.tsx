@@ -74,7 +74,12 @@ const CheckoutPage = () => {
 
     hasSubmitted.current = true;
     setIsSubmitting(true);
-    const checkoutUrl = existingCheckoutUrl;
+    let checkoutUrl = existingCheckoutUrl;
+    const utmParams = getAttributeParams();
+    if (utmParams) {
+      const separator = checkoutUrl.includes('?') ? '&' : '?';
+      checkoutUrl = checkoutUrl + separator + utmParams;
+    }
     try {
       const { error: insertError } = await supabase.from("checkout_leads").insert({
         first_name: data.fullName.trim(),
