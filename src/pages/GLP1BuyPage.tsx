@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";
+import { getAttributeParams } from "@/lib/utm-capture";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -138,7 +139,7 @@ const GLP1BuyPage = () => {
   const onSubmit = async (data: FormData) => {
     if (hasSubmitted.current) return;
 
-    const checkoutUrl = getCheckoutUrl();
+    let checkoutUrl = getCheckoutUrl();
     if (!checkoutUrl) {
       toast.error("Cart is still loading. Please wait a moment and try again.");
       return;
@@ -146,6 +147,11 @@ const GLP1BuyPage = () => {
 
     hasSubmitted.current = true;
     setIsSubmitting(true);
+    const utmParams = getAttributeParams();
+    if (checkoutUrl && utmParams) {
+      const separator = checkoutUrl.includes('?') ? '&' : '?';
+      checkoutUrl = checkoutUrl + separator + utmParams;
+    }
     try {
       const { error: insertError } = await supabase.from("checkout_leads").insert({
         first_name: data.name.trim(),

@@ -4,6 +4,7 @@ import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";
+import { getAttributeParams } from "@/lib/utm-capture";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -73,7 +74,12 @@ const CheckoutPage = () => {
 
     hasSubmitted.current = true;
     setIsSubmitting(true);
-    const checkoutUrl = existingCheckoutUrl;
+    let checkoutUrl = existingCheckoutUrl;
+    const utmParams = getAttributeParams();
+    if (utmParams) {
+      const separator = checkoutUrl.includes('?') ? '&' : '?';
+      checkoutUrl = checkoutUrl + separator + utmParams;
+    }
     try {
       const { error: insertError } = await supabase.from("checkout_leads").insert({
         first_name: data.fullName.trim(),
