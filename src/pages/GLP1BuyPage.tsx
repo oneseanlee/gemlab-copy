@@ -164,24 +164,21 @@ const GLP1BuyPage = () => {
     if (addedRef.current) return;
     addedRef.current = true;
 
-    const alreadyInCart = items.some((i) => i.variantId === GLP1_VARIANT_ID);
-    if (alreadyInCart) {
-      setCartReady(true);
-      return;
-    }
-
     (async () => {
-      // Add the main protocol first
-      await addItem({
-        product: GLP1_PRODUCT,
-        variantId: GLP1_VARIANT_ID,
-        variantTitle: "30-Day Protocol",
-        price: { amount: "39.95", currencyCode: "USD" },
-        quantity: 1,
-        selectedOptions: [{ name: "Size", value: "30-Day Protocol" }],
-      });
+      // Add the main protocol if not already in cart
+      const alreadyInCart = items.some((i) => i.variantId === GLP1_VARIANT_ID);
+      if (!alreadyInCart) {
+        await addItem({
+          product: GLP1_PRODUCT,
+          variantId: GLP1_VARIANT_ID,
+          variantTitle: "30-Day Protocol",
+          price: { amount: "39.95", currencyCode: "USD" },
+          quantity: 1,
+          selectedOptions: [{ name: "Size", value: "30-Day Protocol" }],
+        });
+      }
 
-      // Add free bonus items sequentially
+      // Always ensure free bonus items are in cart
       for (const bonus of FREE_BONUS_PRODUCTS) {
         const alreadyAdded = useCartStore.getState().items.some((i) => i.variantId === bonus.variantId);
         if (!alreadyAdded) {
