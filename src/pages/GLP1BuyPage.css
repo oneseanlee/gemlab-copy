@@ -224,7 +224,22 @@
   color: #374151;
 }
 
-/* ─── Countdown Timer ─── */
+/* ─── Energy Banner (below testimonials) ─── */
+.glp1buy-energy-banner {
+  margin-top: 1.25rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.glp1buy-energy-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+
 .glp1buy-countdown {
   display: flex;
   align-items: center;
