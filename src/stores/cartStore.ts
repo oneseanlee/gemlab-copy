@@ -82,12 +82,6 @@ export const useCartStore = create<CartStore>()(
                 checkoutUrl: result.checkoutUrl,
                 items: [{ ...item, lineId: result.lineId }],
               });
-              trackMetaEvent('AddToCart', {
-                content_name: item.product.node.title,
-                content_ids: [item.variantId],
-                value: parseFloat(item.price.amount) * item.quantity,
-                currency: item.price.currencyCode || 'USD',
-              });
               pushAddToCart(item);
             }
           } else if (existingItem) {
