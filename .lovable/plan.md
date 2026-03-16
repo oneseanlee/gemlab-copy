@@ -1,35 +1,27 @@
 
 
-## Get CTA Above the Fold on Desktop GLP-1 Buy Page
+## Simplify the Free Testosterone Guide Page
 
-**Problem**: On desktop (1110×635 viewport), the right column starts with title → stars → description → checklist → price → countdown → shipping note → bonuses → How It Works → **then** the form/CTA. The CTA button is far below the fold.
+Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
 
-**Approach**: Restructure the right column to move the core purchase elements (price, countdown, form) up, and push secondary content (bonuses, How It Works, FAQ) below the form.
+### What gets removed
+- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
+- **FAQ section** (lines 278-286) — the 4-item accordion
+- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
+- **Testimonials data** (`testimonials` array, lines 43-50)
+- **FAQ data** (`faqItems` array, lines 53-58)
+- **FaqItem component** (lines 125-138)
+- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
+- **Unused imports**: `Star`, `ChevronDown`
 
-### Changes to `src/pages/GLP1BuyPage.tsx`
+### What stays
+1. **Video background** — cinematic feel
+2. **Hero** — headline, subtitle, opt-in form, ebook cover
+3. **Trust strip** — 4 credibility badges
+4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
+5. **Final CTA** — dark video section with second opt-in form
+6. **Footer** — legal/contact
 
-Reorder the right column JSX so the sequence becomes:
-
-1. Title
-2. Star rating
-3. Price + discount badge
-4. Countdown timer
-5. Shipping note
-6. **Inline form with CTA** (moved up)
-7. Guarantee badge
-8. Description paragraph (moved down)
-9. Checklist (moved down)
-10. Bonuses section
-11. How It Works
-12. FAQ
-13. Phone line + disclaimer
-
-This puts the form and "Get My GLP-1 Protocol" button within roughly the first 500px of the right column — well above the fold at 635px viewport height.
-
-### Changes to `src/pages/GLP1BuyPage.css`
-
-- Update mobile `order` values to preserve the existing mobile stack order (mobile already works well with its own ordering via `display: contents`).
-- Tighten gap on the description/checklist that now sit below the form so they read as supporting content.
-
-No changes to the left column or mobile layout needed — mobile already uses CSS `order` to control stacking independently.
+### Result
+The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
 

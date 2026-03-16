@@ -585,7 +585,7 @@
     word-break: normal;
   }
 
-  /* Mobile stack order */
+  /* Mobile stack order — preserves original mobile flow */
   .glp1buy-page .glp1-promo-strip { order: 1; }
   .glp1buy-page .glp1-product-display { order: 2; }
   .glp1buy-page .glp1-thumb-carousel { order: 3; }
