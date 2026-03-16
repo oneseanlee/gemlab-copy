@@ -235,7 +235,7 @@ const GLP1BuyPage = () => {
   return (
     <div className="glp1buy-page">
       {/* Sticky promo banner */}
-      <div className="glp1buy-sticky-promo">🔥 SAVE $50 + FREE SHIPPING 🔥</div>
+      <div className="glp1buy-sticky-promo">🔥 Save 56% Off + Free Gifts & Free Shipping 🔥</div>
 
       {/* Checkout Section — mirrors GLP1Page final CTA */}
       <section className="b365-section glp1-checkout-section">
