@@ -331,6 +331,17 @@
   }
 }
 
+/* Desktop CTA above the fold */
+.glp1buy-desktop-cta {
+  display: flex;
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* Mobile: hide desktop CTA, show countdown */
+.glp1buy-mobile-countdown {
+  display: none;
+}
 
 .glp1buy-countdown {
   display: flex;
@@ -357,6 +368,7 @@
   0%, 100% { background: #FEF2F2; }
   50% { background: #FEE2E2; }
 }
+
 
 /* ─── How It Works ─── */
 .glp1buy-how-it-works {
