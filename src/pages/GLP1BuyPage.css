@@ -603,8 +603,9 @@
   .glp1buy-page .glp1-benefit-callouts { order: 16; }
   .glp1buy-page .glp1buy-trust-strip { order: 17; }
   .glp1buy-page .glp1buy-testimonial { order: 18; }
-  .glp1buy-page .glp1-phone-line { order: 19; }
-  .glp1buy-page .glp1-fda-disclaimer { order: 20; }
+  .glp1buy-page .glp1buy-energy-banner { order: 19; }
+  .glp1buy-page .glp1-phone-line { order: 20; }
+  .glp1buy-page .glp1-fda-disclaimer { order: 21; }
 
   .glp1buy-trust-strip {
     gap: 16px;
