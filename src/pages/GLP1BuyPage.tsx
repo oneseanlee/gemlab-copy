@@ -358,10 +358,22 @@ const GLP1BuyPage = () => {
               <span className="checkout-discount-badge">56% OFF TODAY</span>
             </div>
 
-            {/* Countdown Timer */}
-            <div className="glp1buy-countdown">
-              <Clock size={16} />
-              <span>{timerExpired ? "Offer extended — act now!" : <>Launch pricing expires in <strong>{String(mins).padStart(2, '0')}:{String(secs).padStart(2, '0')}</strong></>}</span>
+            {/* Desktop: CTA above the fold | Mobile: countdown timer */}
+            <button
+              type="button"
+              className="glp1buy-desktop-cta glp1-checkout-cta"
+              onClick={() => {
+                const formEl = document.querySelector('.glp1buy-inline-form');
+                if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }}
+            >
+              Get My GLP-1 Protocol <ArrowRight size={18} />
+            </button>
+            <div className="glp1buy-mobile-countdown">
+              <div className="glp1buy-countdown">
+                <Clock size={16} />
+                <span>{timerExpired ? "Offer extended — act now!" : <>Launch pricing expires in <strong>{String(mins).padStart(2, '0')}:{String(secs).padStart(2, '0')}</strong></>}</span>
+              </div>
             </div>
 
             <p className="checkout-shipping-note">FREE SHIPPING — NO CODE REQUIRED</p>

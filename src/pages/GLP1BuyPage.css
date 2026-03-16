@@ -331,6 +331,17 @@
   }
 }
 
+/* Desktop CTA above the fold */
+.glp1buy-desktop-cta {
+  display: flex;
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* Mobile: hide desktop CTA, show countdown */
+.glp1buy-mobile-countdown {
+  display: none;
+}
 
 .glp1buy-countdown {
   display: flex;
@@ -357,6 +368,7 @@
   0%, 100% { background: #FEF2F2; }
   50% { background: #FEE2E2; }
 }
+
 
 /* ─── How It Works ─── */
 .glp1buy-how-it-works {
@@ -622,7 +634,8 @@
   .glp1buy-page .glp1-checkout-desc { order: 6; }
   .glp1buy-page .glp1-check-list { order: 7; }
   .glp1buy-page .glp1-checkout-price { order: 8; }
-  .glp1buy-page .glp1buy-countdown { order: 9; }
+  .glp1buy-page .glp1buy-mobile-countdown { order: 9; display: block; }
+  .glp1buy-page .glp1buy-desktop-cta { display: none; }
   .glp1buy-page .checkout-shipping-note { order: 10; }
   .glp1buy-page .glp1-bonuses-section { order: 11; }
   .glp1buy-page .glp1buy-how-it-works { order: 12; }
