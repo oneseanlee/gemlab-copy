@@ -328,15 +328,7 @@ const GLP1BuyPage = () => {
               <cite className="glp1buy-testimonial-cite">— Mark D., Verified Buyer</cite>
             </div>
 
-            <div className="glp1buy-energy-banner">
-              <img
-                src="/images/glp1-cellular-energy-hero.jpg"
-                alt="Fat loss feels easy when your cells can make energy — Triple Power Methylene Blue and Metabolism+ by Best365 Labs"
-                loading="lazy"
-                width={720}
-                height={405}
-              />
-            </div>
+            <BannerCarousel />
           </div>
 
           {/* RIGHT COLUMN — Offer + Inline Form */}
