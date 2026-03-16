@@ -302,6 +302,10 @@
     border-radius: 12px 0 0 12px;
     flex-shrink: 0;
   }
+  .bonus-card--visual .bonus-free-tag {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
 }
 
 
