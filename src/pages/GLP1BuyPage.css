@@ -157,8 +157,9 @@
   border-radius: 12px;
 }
 
-/* Ensure checkout section doesn't overflow on mobile */
+/* Reduce top whitespace on desktop */
 .glp1buy-page .glp1-checkout-section {
+  padding-top: 24px;
   overflow: hidden;
 }
 

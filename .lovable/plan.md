@@ -1,18 +1,27 @@
 
 
-## Reduce top spacing on desktop GLP-1 Buy page
+## Simplify the Free Testosterone Guide Page
 
-**Problem**: The checkout section has 60px top padding from `.glp1-checkout-section` (in GLP1Page.css) plus additional padding from `.b365-section` (96px in HomePage.css). Combined, this creates excessive whitespace at the top on desktop.
+Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
 
-**Change**: Add a desktop-only override in `src/pages/GLP1BuyPage.css` to reduce the top padding of the checkout section.
+### What gets removed
+- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
+- **FAQ section** (lines 278-286) — the 4-item accordion
+- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
+- **Testimonials data** (`testimonials` array, lines 43-50)
+- **FAQ data** (`faqItems` array, lines 53-58)
+- **FaqItem component** (lines 125-138)
+- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
+- **Unused imports**: `Star`, `ChevronDown`
 
-**File: `src/pages/GLP1BuyPage.css`** — add near the top (after the `.glp1buy-page` rule):
+### What stays
+1. **Video background** — cinematic feel
+2. **Hero** — headline, subtitle, opt-in form, ebook cover
+3. **Trust strip** — 4 credibility badges
+4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
+5. **Final CTA** — dark video section with second opt-in form
+6. **Footer** — legal/contact
 
-```css
-.glp1buy-page .glp1-checkout-section {
-  padding-top: 24px;
-}
-```
-
-This targets only the buy page, reducing the top gap from ~60px to 24px on desktop without affecting mobile (which already has its own override at 32px).
+### Result
+The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
 
