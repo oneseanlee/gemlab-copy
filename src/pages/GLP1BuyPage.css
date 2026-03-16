@@ -572,6 +572,12 @@
     font-size: 16px;
   }
 
+  .glp1buy-sticky-promo {
+    font-size: 11px;
+    padding: 8px 12px;
+    white-space: nowrap;
+  }
+
   .glp1buy-inline-form {
     gap: 10px;
   }
