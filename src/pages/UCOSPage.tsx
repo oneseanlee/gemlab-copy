@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import { trackMetaEvent } from '../lib/meta-pixel';
+
 import './UCOSPage.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
