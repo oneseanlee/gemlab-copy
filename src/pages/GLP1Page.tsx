@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { trackMetaEvent } from '../lib/meta-pixel';
+
 import './GLP1Page.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
