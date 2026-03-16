@@ -325,6 +325,16 @@ const GLP1BuyPage = () => {
               <p className="glp1buy-testimonial-quote">"The brain fog I'd been dealing with for months cleared up in under a week. I'm sleeping deeper, thinking sharper, and my afternoon crashes are completely gone. This is a game-changer."</p>
               <cite className="glp1buy-testimonial-cite">— Mark D., Verified Buyer</cite>
             </div>
+
+            <div className="glp1buy-energy-banner">
+              <img
+                src="/images/glp1-cellular-energy-hero.jpg"
+                alt="Fat loss feels easy when your cells can make energy — Triple Power Methylene Blue and Metabolism+ by Best365 Labs"
+                loading="lazy"
+                width={720}
+                height={405}
+              />
+            </div>
           </div>
 
           {/* RIGHT COLUMN — Offer + Inline Form */}
