@@ -9,6 +9,27 @@ const SHOPIFY_STOREFRONT_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN |
 export const GLP1_VARIANT_ID = 'gid://shopify/ProductVariant/46265391579276';
 export const TPRIME_VARIANT_ID = 'gid://shopify/ProductVariant/46309997936780';
 
+// Free bonus digital products (auto-added with GLP-1 Protocol)
+export const FREE_MASTER_GUIDE_VARIANT_ID = 'gid://shopify/ProductVariant/46743959732364';
+export const FREE_LYMPHATIC_VARIANT_ID = 'gid://shopify/ProductVariant/46743959797900';
+export const FREE_ABSORPTION_VARIANT_ID = 'gid://shopify/ProductVariant/46743959830668';
+export const FREE_COMMUNITY_VARIANT_ID = 'gid://shopify/ProductVariant/46743959863436';
+
+// Compare-at values for free items (displayed as strikethrough)
+export const FREE_ITEM_VALUES: Record<string, number> = {
+  [FREE_MASTER_GUIDE_VARIANT_ID]: 29,
+  [FREE_LYMPHATIC_VARIANT_ID]: 19,
+  [FREE_ABSORPTION_VARIANT_ID]: 19,
+  [FREE_COMMUNITY_VARIANT_ID]: 49,
+};
+
+export const ALL_FREE_VARIANT_IDS = [
+  FREE_MASTER_GUIDE_VARIANT_ID,
+  FREE_LYMPHATIC_VARIANT_ID,
+  FREE_ABSORPTION_VARIANT_ID,
+  FREE_COMMUNITY_VARIANT_ID,
+];
+
 export interface ShopifyProduct {
   node: {
     id: string;

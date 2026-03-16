@@ -382,6 +382,32 @@
   flex-shrink: 0;
 }
 
+.checkout-free-item-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.checkout-free-item-was {
+  font-size: 0.8rem;
+  color: var(--b365-gray-400);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.checkout-free-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+
 /* Value Anchor */
 .checkout-value-anchor {
   padding: 0.875rem 0;

@@ -5,8 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import {
   Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ArrowRight, Loader2 } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, ArrowRight, Loader2, Gift } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { ALL_FREE_VARIANT_IDS, FREE_ITEM_VALUES } from "@/lib/shopify";
 
 export const CartDrawer = () => {
   const navigate = useNavigate();
@@ -50,7 +51,10 @@ export const CartDrawer = () => {
             <>
               <div className="flex-1 overflow-y-auto pr-2 min-h-0">
                 <div className="space-y-4">
-                  {items.map((item) => (
+                  {items.map((item) => {
+                    const isFree = ALL_FREE_VARIANT_IDS.includes(item.variantId);
+                    const freeValue = FREE_ITEM_VALUES[item.variantId];
+                    return (
                     <div key={item.variantId} className="flex gap-4 p-2">
                       <div className="w-16 h-16 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0">
                         {item.product.node.images?.edges?.[0]?.node && (
@@ -62,8 +66,16 @@ export const CartDrawer = () => {
                         {item.selectedOptions.length > 0 && (
                           <p className="text-sm text-muted-foreground">{item.selectedOptions.map(o => o.value).join(' • ')}</p>
                         )}
-                        <p className="font-semibold">${parseFloat(item.price.amount).toFixed(2)}</p>
+                        {isFree && freeValue ? (
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm line-through text-muted-foreground">${freeValue.toFixed(2)}</span>
+                            <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full"><Gift className="h-3 w-3" />FREE</span>
+                          </div>
+                        ) : (
+                          <p className="font-semibold">${parseFloat(item.price.amount).toFixed(2)}</p>
+                        )}
                       </div>
+                      {!isFree && (
                       <div className="flex flex-col items-end gap-2 flex-shrink-0">
                         <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => removeItem(item.variantId)}>
                           <Trash2 className="h-3 w-3" />
@@ -78,8 +90,10 @@ export const CartDrawer = () => {
                           </Button>
                         </div>
                       </div>
+                      )}
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
               <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background">

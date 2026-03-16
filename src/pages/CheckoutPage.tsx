@@ -8,7 +8,8 @@ import { getAttributeParams } from "@/lib/utm-capture";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, ArrowRight, Loader2, ShoppingCart, Lock, Minus, Plus, MessageSquare, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2, ShoppingCart, Lock, Minus, Plus, MessageSquare, ChevronDown, ChevronUp, Gift } from "lucide-react";
+import { FREE_ITEM_VALUES, ALL_FREE_VARIANT_IDS } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import CheckoutProgressBar from "@/components/Checkout/CheckoutProgressBar";
@@ -39,10 +40,11 @@ const CheckoutPage = () => {
     (sum, item) => sum + parseFloat(item.price.amount) * item.quantity, 0
   );
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  // Compare-at price overrides keyed by variant ID (most reliable identifier in cart)
+  // Compare-at price overrides keyed by variant ID
   const compareAtByVariant: Record<string, number> = {
     'gid://shopify/ProductVariant/46539809235068': 90, // GLP-1 Optimization Protocol
     'gid://shopify/ProductVariant/46265391579276': 90, // GLP-1 Optimization Protocol (alt)
+    ...FREE_ITEM_VALUES, // Free bonus items with their "value" prices
   };
 
   const getComparePrice = () => {
@@ -169,35 +171,49 @@ const CheckoutPage = () => {
 
   const orderSummaryContent = (
     <>
-      {items.map((item) => (
-        <div key={item.variantId} className="checkout-summary-item">
-          <div className="checkout-summary-item-image">
-            {item.product.node.images?.edges?.[0]?.node ? (
-              <img src={item.product.node.images.edges[0].node.url} alt={item.product.node.title} />
-            ) : (
-              <div className="checkout-summary-item-placeholder" />
-            )}
-          </div>
-          <div className="checkout-summary-item-details">
-            <h4>{item.product.node.title}</h4>
-            <div className="checkout-qty-controls">
-              <button type="button" className="checkout-qty-btn" onClick={() => updateQuantity(item.variantId, item.quantity - 1)}>
-                <Minus size={12} />
-              </button>
-              <span className="checkout-qty-value">{item.quantity}</span>
-              <button type="button" className="checkout-qty-btn" onClick={() => updateQuantity(item.variantId, item.quantity + 1)}>
-                <Plus size={12} />
-              </button>
+      {items.map((item) => {
+        const isFreeItem = ALL_FREE_VARIANT_IDS.includes(item.variantId);
+        const freeItemValue = FREE_ITEM_VALUES[item.variantId];
+
+        return (
+          <div key={item.variantId} className="checkout-summary-item">
+            <div className="checkout-summary-item-image">
+              {item.product.node.images?.edges?.[0]?.node ? (
+                <img src={item.product.node.images.edges[0].node.url} alt={item.product.node.title} />
+              ) : (
+                <div className="checkout-summary-item-placeholder" />
+              )}
             </div>
-            {item.selectedOptions.length > 0 && (
-              <span className="checkout-qty-options">{item.selectedOptions.map(o => o.value).join(" · ")}</span>
-            )}
+            <div className="checkout-summary-item-details">
+              <h4>{item.product.node.title}</h4>
+              {!isFreeItem && (
+                <div className="checkout-qty-controls">
+                  <button type="button" className="checkout-qty-btn" onClick={() => updateQuantity(item.variantId, item.quantity - 1)}>
+                    <Minus size={12} />
+                  </button>
+                  <span className="checkout-qty-value">{item.quantity}</span>
+                  <button type="button" className="checkout-qty-btn" onClick={() => updateQuantity(item.variantId, item.quantity + 1)}>
+                    <Plus size={12} />
+                  </button>
+                </div>
+              )}
+              {item.selectedOptions.length > 0 && (
+                <span className="checkout-qty-options">{item.selectedOptions.map(o => o.value).join(" · ")}</span>
+              )}
+            </div>
+            <div className="checkout-summary-item-price">
+              {isFreeItem && freeItemValue ? (
+                <div className="checkout-free-item-price">
+                  <span className="checkout-free-item-was">${freeItemValue.toFixed(2)}</span>
+                  <span className="checkout-free-badge"><Gift size={12} /> FREE</span>
+                </div>
+              ) : (
+                <>${(parseFloat(item.price.amount) * item.quantity).toFixed(2)}</>
+              )}
+            </div>
           </div>
-          <div className="checkout-summary-item-price">
-            ${(parseFloat(item.price.amount) * item.quantity).toFixed(2)}
-          </div>
-        </div>
-      ))}
+        );
+      })}
 
       {/* Value Anchor */}
       <div className="checkout-value-anchor">

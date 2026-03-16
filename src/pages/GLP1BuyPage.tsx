@@ -9,7 +9,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Volume2, Shield, FlaskConical, Truck, Clock, CreditCard, Package, MousePointerClick } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
-import { GLP1_VARIANT_ID } from "@/lib/shopify";
+import { GLP1_VARIANT_ID, FREE_MASTER_GUIDE_VARIANT_ID, FREE_LYMPHATIC_VARIANT_ID, FREE_ABSORPTION_VARIANT_ID, FREE_COMMUNITY_VARIANT_ID, ALL_FREE_VARIANT_IDS } from "@/lib/shopify";
 import { toast } from "sonner";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import "./GLP1BuyPage.css";
@@ -57,6 +57,29 @@ const GLP1_PRODUCT = {
     options: [{ name: "Size", values: ["30-Day Protocol"] }],
   },
 };
+
+const FREE_BONUS_PRODUCTS = [
+  {
+    variantId: FREE_MASTER_GUIDE_VARIANT_ID,
+    product: { node: { id: "gid://shopify/Product/9044545110156", title: "The Ultimate GLP-1 User's Master Guide", description: "", handle: "the-ultimate-glp-1-users-master-guide", priceRange: { minVariantPrice: { amount: "0.00", currencyCode: "USD" } }, images: { edges: [{ node: { url: "/images/guide-glp1-master.jpeg", altText: "GLP-1 Master Guide" } }] }, variants: { edges: [{ node: { id: FREE_MASTER_GUIDE_VARIANT_ID, title: "Default Title", price: { amount: "0.00", currencyCode: "USD" }, availableForSale: true, selectedOptions: [] } }] }, options: [] } },
+    variantTitle: "Digital Guide",
+  },
+  {
+    variantId: FREE_LYMPHATIC_VARIANT_ID,
+    product: { node: { id: "gid://shopify/Product/9044545175692", title: "10-Minute Easy Lymphatic Morning Jumpstart System", description: "", handle: "10-minute-easy-lymphatic-morning-jumpstart-system", priceRange: { minVariantPrice: { amount: "0.00", currencyCode: "USD" } }, images: { edges: [{ node: { url: "/images/guide-lymphatic-jumpstart.jpeg", altText: "Lymphatic Jumpstart System" } }] }, variants: { edges: [{ node: { id: FREE_LYMPHATIC_VARIANT_ID, title: "Default Title", price: { amount: "0.00", currencyCode: "USD" }, availableForSale: true, selectedOptions: [] } }] }, options: [] } },
+    variantTitle: "Digital Guide",
+  },
+  {
+    variantId: FREE_ABSORPTION_VARIANT_ID,
+    product: { node: { id: "gid://shopify/Product/9044545208460", title: "Maximize Your Results: Smart Science of Enhanced Absorption", description: "", handle: "maximize-your-results-smart-science-of-enhanced-absorption", priceRange: { minVariantPrice: { amount: "0.00", currencyCode: "USD" } }, images: { edges: [{ node: { url: "/images/guide-maximize-results.jpeg", altText: "Maximize Results Guide" } }] }, variants: { edges: [{ node: { id: FREE_ABSORPTION_VARIANT_ID, title: "Default Title", price: { amount: "0.00", currencyCode: "USD" }, availableForSale: true, selectedOptions: [] } }] }, options: [] } },
+    variantTitle: "Digital Guide",
+  },
+  {
+    variantId: FREE_COMMUNITY_VARIANT_ID,
+    product: { node: { id: "gid://shopify/Product/9044545241228", title: "Best365 Labs Community Access", description: "", handle: "best365-labs-community-access", priceRange: { minVariantPrice: { amount: "0.00", currencyCode: "USD" } }, images: { edges: [{ node: { url: "/images/bonus-community-access.png", altText: "Community Access" } }] }, variants: { edges: [{ node: { id: FREE_COMMUNITY_VARIANT_ID, title: "Default Title", price: { amount: "0.00", currencyCode: "USD" }, availableForSale: true, selectedOptions: [] } }] }, options: [] } },
+    variantTitle: "Membership",
+  },
+];
 
 const PRICE = 39.95;
 
@@ -136,7 +159,7 @@ const GLP1BuyPage = () => {
     }
   };
 
-  /* Auto-add GLP-1 to cart on mount */
+  /* Auto-add GLP-1 + free bonuses to cart on mount */
   useEffect(() => {
     if (addedRef.current) return;
     addedRef.current = true;
@@ -148,6 +171,7 @@ const GLP1BuyPage = () => {
     }
 
     (async () => {
+      // Add the main protocol first
       await addItem({
         product: GLP1_PRODUCT,
         variantId: GLP1_VARIANT_ID,
@@ -156,6 +180,22 @@ const GLP1BuyPage = () => {
         quantity: 1,
         selectedOptions: [{ name: "Size", value: "30-Day Protocol" }],
       });
+
+      // Add free bonus items sequentially
+      for (const bonus of FREE_BONUS_PRODUCTS) {
+        const alreadyAdded = useCartStore.getState().items.some((i) => i.variantId === bonus.variantId);
+        if (!alreadyAdded) {
+          await addItem({
+            product: bonus.product,
+            variantId: bonus.variantId,
+            variantTitle: bonus.variantTitle,
+            price: { amount: "0.00", currencyCode: "USD" },
+            quantity: 1,
+            selectedOptions: [],
+          });
+        }
+      }
+
       setCartReady(true);
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -188,7 +228,10 @@ const GLP1BuyPage = () => {
         last_name: null,
         email: data.email.trim(),
         phone: data.phone || null,
-        cart_items: [{ title: GLP1_PRODUCT.node.title, variantId: GLP1_VARIANT_ID, quantity: 1, price: "39.95" }],
+        cart_items: [
+          { title: GLP1_PRODUCT.node.title, variantId: GLP1_VARIANT_ID, quantity: 1, price: "39.95" },
+          ...FREE_BONUS_PRODUCTS.map(b => ({ title: b.product.node.title, variantId: b.variantId, quantity: 1, price: "0.00" })),
+        ],
         cart_total: PRICE,
         source: 'glp1-buy',
         utm_params: getUtmParams(),
