@@ -1356,6 +1356,7 @@
   }
   .glp1-checkout-desc {
     font-size: 13px;
+    min-height: 160px;
   }
   .glp1-promo-strip {
     font-size: 13px;
