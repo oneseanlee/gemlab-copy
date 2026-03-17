@@ -128,11 +128,10 @@ const TPrime365IntakePage = () => {
         <div className="intake-iframe-container">
           <div className="intake-iframe-wrapper">
             <iframe
-              id="happymd-tprime365-embed"
+              id="happymd-testosterone-embed"
               src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=TPRIME365CELL&v=v2&theme=best365"
               width="100%"
-              height="1200px"
-              scrolling="auto"
+              height="800px"
               style={{ border: 'none', maxWidth: '100%', display: 'block' }}
               title="happyMD TPrime365 Testosterone Optimization Form"
               allow="camera; microphone"
