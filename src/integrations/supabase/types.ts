@@ -161,11 +161,34 @@ export type Database = {
         }
         Relationships: []
       }
+      intake_completions: {
+        Row: {
+          created_at: string
+          id: string
+          source: string
+          tracking_code: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          source: string
+          tracking_code: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          source?: string
+          tracking_code?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           created_at: string
           email: string
           first_name: string
+          happymd_completed: boolean
+          happymd_completed_at: string | null
           id: string
           last_name: string | null
           phone: string | null
@@ -176,6 +199,8 @@ export type Database = {
           created_at?: string
           email: string
           first_name: string
+          happymd_completed?: boolean
+          happymd_completed_at?: string | null
           id?: string
           last_name?: string | null
           phone?: string | null
@@ -186,6 +211,8 @@ export type Database = {
           created_at?: string
           email?: string
           first_name?: string
+          happymd_completed?: boolean
+          happymd_completed_at?: string | null
           id?: string
           last_name?: string | null
           phone?: string | null
@@ -259,6 +286,10 @@ export type Database = {
       enqueue_email: {
         Args: { payload: Json; queue_name: string }
         Returns: number
+      }
+      mark_intake_completed: {
+        Args: { p_email: string; p_source: string }
+        Returns: boolean
       }
       move_to_dlq: {
         Args: {
