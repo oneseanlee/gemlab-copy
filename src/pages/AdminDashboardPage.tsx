@@ -725,6 +725,7 @@ export default function AdminDashboardPage() {
                       <th className="text-right">Unique</th>
                       <th className="text-right">Checkout Leads</th>
                       <th className="text-right">Intake Leads</th>
+                      <th className="text-right">Intake Completed</th>
                       <th className="text-right">Sales</th>
                       <th className="text-right">Revenue</th>
                       <th className="text-right">Conv %</th>
@@ -738,13 +739,14 @@ export default function AdminDashboardPage() {
                         <td className="text-right">{d.unique.toLocaleString()}</td>
                         <td className="text-right">{d.leads}</td>
                         <td className="text-right">{d.intakeLeads}</td>
+                        <td className="text-right" style={{ color: d.intakeCompleted > 0 ? "hsl(160 70% 55%)" : undefined }}>{d.intakeCompleted}</td>
                         <td className="text-right">{d.sales}</td>
                         <td className="text-right">${d.revenue.toFixed(2)}</td>
                         <td className="text-right">{d.conversionRate}%</td>
                       </tr>
                     ))}
                     {dailyBreakdown.length === 0 && (
-                      <tr><td colSpan={8} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No data for selected filters</td></tr>
+                      <tr><td colSpan={9} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No data for selected filters</td></tr>
                     )}
                   </tbody>
                 </table>
