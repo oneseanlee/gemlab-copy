@@ -636,7 +636,7 @@ const GLP1BuyPage = () => {
       <div className="glp1-sticky-mobile-cta">
         <span className="sticky-price">$39.95 <span className="sticky-strike">$90</span></span>
         <button className="sticky-cta-btn" disabled={isSubmitting || isLoading || hasSubmitted.current} onClick={handleSubmit(onSubmit)}>
-          {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> Redirecting…</> : <>Get My GLP-1 Protocol <ArrowRight size={14} /></>}
+          {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> <span>Redirecting…</span></> : <><span>Get My GLP-1 Protocol</span> <ArrowRight size={14} /></>}
         </button>
       </div>
     </div>
