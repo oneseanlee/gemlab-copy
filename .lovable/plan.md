@@ -1,22 +1,27 @@
 
 
-## Add 4 Images to the GLP-1 Buy Page Product Thumbnail Carousel
+## Simplify the Free Testosterone Guide Page
 
-The user wants to add the 4 uploaded images to the `carouselMedia` array — the thumbnail strip below the main video/image display (the product gallery with clickable thumbnails, not the auto-rotating banner carousel at the bottom).
+Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
 
-### Current State
-`carouselMedia` (line 89-96) has 6 items: 1 video + 5 images. These render as the main product display + clickable thumbnail strip.
+### What gets removed
+- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
+- **FAQ section** (lines 278-286) — the 4-item accordion
+- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
+- **Testimonials data** (`testimonials` array, lines 43-50)
+- **FAQ data** (`faqItems` array, lines 53-58)
+- **FaqItem component** (lines 125-138)
+- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
+- **Unused imports**: `Star`, `ChevronDown`
 
-### Steps
+### What stays
+1. **Video background** — cinematic feel
+2. **Hero** — headline, subtitle, opt-in form, ebook cover
+3. **Trust strip** — 4 credibility badges
+4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
+5. **Final CTA** — dark video section with second opt-in form
+6. **Footer** — legal/contact
 
-1. **Copy 4 uploaded images to `public/images/`**:
-   - `user-uploads://4.jpg` → `public/images/glp1-product-4.jpg`
-   - `user-uploads://5.jpg` → `public/images/glp1-product-5.jpg`
-   - `user-uploads://7.jpg` → `public/images/glp1-product-7.jpg`
-   - `user-uploads://1-8.png` → `public/images/glp1-product-8.png`
-
-2. **Append 4 new entries to `carouselMedia`** in `GLP1BuyPage.tsx` (after line 95), bringing the total to 10 items (1 video + 9 images).
-
-### Files Changed
-- `src/pages/GLP1BuyPage.tsx` — add 4 image entries to `carouselMedia`
+### Result
+The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
 
