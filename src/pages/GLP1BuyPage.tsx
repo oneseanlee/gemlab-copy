@@ -15,9 +15,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import "./GLP1BuyPage.css";
 
 const CAROUSEL_IMAGES = [
-  { src: "/images/glp1-carousel-1.jpg", alt: "Best365 Labs customer transformation results" },
-  { src: "/images/glp1-carousel-2.jpg", alt: "Best365 Labs cellular energy optimization" },
-  { src: "/images/glp1-carousel-3.jpg", alt: "Best365 Labs GLP-1 Protocol lifestyle results" },
+  { src: "/images/glp1-carousel-1.webp", alt: "Best365 Labs customer transformation results" },
+  { src: "/images/glp1-carousel-2.webp", alt: "Best365 Labs cellular energy optimization" },
+  { src: "/images/glp1-carousel-3.webp", alt: "Best365 Labs GLP-1 Protocol lifestyle results" },
 ];
 
 function BannerCarousel() {
@@ -93,9 +93,9 @@ const carouselMedia: MediaItem[] = [
   { type: "image", src: "/images/product-glp-protocol.webp" },
   { type: "image", src: "/images/triple-power-methylene-blue.webp" },
   { type: "image", src: "/images/metabolism-plus.webp" },
-  { type: "image", src: "/images/glp1-product-4.jpg" },
+  { type: "image", src: "/images/glp1-product-4.webp" },
   { type: "image", src: "/images/glp1-product-8.png" },
-  { type: "image", src: "/images/glp1-product-9.jpg" },
+  { type: "image", src: "/images/glp1-product-9.webp" },
 ];
 
 /* ── Form schema ──────────────────────────────────────── */
