@@ -100,6 +100,7 @@ export default function AdminDashboardPage() {
       if (data?.error) throw new Error(data.error);
       setLeads(data.leads || []);
       setIntakeLeads(data.intakeLeads || []);
+      setFallbackCompletions(data.fallbackCompletions || []);
       setTraffic(data.traffic || { totalPageViews: 0, uniqueVisitors: 0, dailyTraffic: [], topPages: [] });
     } catch (e: any) {
       setError(e.message || "Failed to load data");
