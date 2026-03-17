@@ -272,7 +272,7 @@ export default function AdminDashboardPage() {
         formatUtmForCSV(l.utm_params),
         Number(l.cart_total).toFixed(2),
         l.completed ? "Completed" : "Abandoned",
-        new Date(l.created_at).toLocaleString(),
+        toPTFull(l.created_at),
         formatCartItems(l.cart_items),
       ]);
       downloadCSV([headers, ...rows], "checkout-leads");
