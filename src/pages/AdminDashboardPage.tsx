@@ -284,7 +284,7 @@ export default function AdminDashboardPage() {
         l.phone || "",
         l.source,
         formatUtmForCSV(l.utm_params),
-        new Date(l.created_at).toLocaleString(),
+        toPTFull(l.created_at),
       ]);
       downloadCSV([headers, ...rows], "intake-leads");
     }
