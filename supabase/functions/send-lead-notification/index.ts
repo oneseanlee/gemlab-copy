@@ -133,7 +133,6 @@ Deno.serve(async (req) => {
     const { data: msgId, error: enqueueError } = await supabase.rpc("enqueue_email", {
       queue_name: "transactional_emails",
       payload: {
-        run_id: LOVABLE_RUN_ID,
         to: notificationEmail,
         from: `Best365 Labs Notifications <notify@${SENDER_DOMAIN}>`,
         sender_domain: SENDER_DOMAIN,
