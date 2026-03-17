@@ -598,21 +598,52 @@ export default function AdminDashboardPage() {
                   <span className="funnel-count">{traffic.uniqueVisitors.toLocaleString()} unique</span>
                 </div>
                 <div className="funnel-row">
-                  <span className="funnel-label">All Leads</span>
+                  <span className="funnel-label">Popup Leads</span>
                   <div className="funnel-track">
                     <div
                       className="funnel-fill leads"
-                      style={{ width: traffic.totalPageViews > 0 ? `${Math.max((stats.totalAllLeads / traffic.totalPageViews) * 100, 2)}%` : "100%" }}
+                      style={{ width: traffic.totalPageViews > 0 ? `${Math.max((intakeLeads.length / traffic.totalPageViews) * 100, 2)}%` : "100%" }}
                     >
-                      {stats.totalAllLeads}
+                      {intakeLeads.length}
                     </div>
                   </div>
                   <span className="funnel-count">
-                    {traffic.totalPageViews > 0 ? ((stats.totalAllLeads / traffic.totalPageViews) * 100).toFixed(1) : "—"}%
+                    {traffic.totalPageViews > 0 ? ((intakeLeads.length / traffic.totalPageViews) * 100).toFixed(1) : "—"}%
                   </span>
                 </div>
                 <div className="funnel-row">
-                  <span className="funnel-label">Completed</span>
+                  <span className="funnel-label">Intake Done</span>
+                  <div className="funnel-track">
+                    <div
+                      className="funnel-fill"
+                      style={{
+                        width: traffic.totalPageViews > 0 ? `${Math.max((stats.intakeCompleted / traffic.totalPageViews) * 100, 1)}%` : "0%",
+                        background: "linear-gradient(90deg, hsl(160 70% 45%), hsl(160 60% 55%))",
+                      }}
+                    >
+                      {stats.intakeCompleted}
+                    </div>
+                  </div>
+                  <span className="funnel-count">
+                    {intakeLeads.length > 0 ? ((stats.intakeCompleted / intakeLeads.length) * 100).toFixed(1) : "—"}%
+                  </span>
+                </div>
+                <div className="funnel-row">
+                  <span className="funnel-label">Checkout</span>
+                  <div className="funnel-track">
+                    <div
+                      className="funnel-fill leads"
+                      style={{ width: traffic.totalPageViews > 0 ? `${Math.max((stats.total / traffic.totalPageViews) * 100, 1)}%` : "0%" }}
+                    >
+                      {stats.total}
+                    </div>
+                  </div>
+                  <span className="funnel-count">
+                    {traffic.totalPageViews > 0 ? ((stats.total / traffic.totalPageViews) * 100).toFixed(1) : "—"}%
+                  </span>
+                </div>
+                <div className="funnel-row">
+                  <span className="funnel-label">Sales</span>
                   <div className="funnel-track">
                     <div
                       className="funnel-fill sales"
