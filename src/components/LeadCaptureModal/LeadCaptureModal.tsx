@@ -37,9 +37,10 @@ const LeadCaptureModal = ({
 
     setSubmitting(true);
     try {
+      const { firstName: fn, lastName: ln } = splitName(name);
       const { error } = await supabase.from("checkout_leads").insert({
-        first_name: name.trim(),
-        last_name: null,
+        first_name: fn,
+        last_name: ln,
         email: email.trim(),
         phone: null,
         cart_items: [{ title: "GLP-1 Optimization Protocol", variantId: "gid://shopify/ProductVariant/46539809235068", quantity: 1, price: "39.95" }],

@@ -300,9 +300,10 @@ const GLP1BuyPage = () => {
       checkoutUrl = checkoutUrl + separator + utmParams;
     }
     try {
+      const { firstName: fn, lastName: ln } = splitName(data.name);
       const { error: insertError } = await supabase.from("checkout_leads").insert({
-        first_name: data.name.trim(),
-        last_name: null,
+        first_name: fn,
+        last_name: ln,
         email: data.email.trim(),
         phone: data.phone || null,
         cart_items: [

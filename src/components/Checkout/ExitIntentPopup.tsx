@@ -54,8 +54,10 @@ const ExitIntentPopup = () => {
 
     setSubmitting(true);
     try {
+      const { firstName: fn, lastName: ln } = splitName(name);
       const { error } = await supabase.from("leads").insert({
-        first_name: name.trim(),
+        first_name: fn,
+        last_name: ln,
         email: email.trim(),
         source: "exit-intent",
         utm_params: getUtmParams(),

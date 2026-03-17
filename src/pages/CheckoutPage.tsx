@@ -83,9 +83,10 @@ const CheckoutPage = () => {
       checkoutUrl = checkoutUrl + separator + utmParams;
     }
     try {
+      const { firstName: fn, lastName: ln } = splitName(data.fullName);
       const { error: insertError } = await supabase.from("checkout_leads").insert({
-        first_name: data.fullName.trim(),
-        last_name: null,
+        first_name: fn,
+        last_name: ln,
         email: data.email.trim(),
         phone: data.phone || null,
         cart_items: items.map(i => ({

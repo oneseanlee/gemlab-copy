@@ -59,8 +59,10 @@ const TPrimeBuyPage = () => {
     setIsSubmitting(true);
 
     try {
+      const { firstName: fn, lastName: ln } = splitName(data.name);
       const { error: insertError } = await supabase.from("leads").insert({
-        first_name: data.name.trim(),
+        first_name: fn,
+        last_name: ln,
         email: data.email.trim(),
         source: "tprime-buy",
         utm_params: getUtmParams(),
