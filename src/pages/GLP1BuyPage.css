@@ -854,13 +854,9 @@
     padding-right: 0;
     word-break: normal;
     overflow-wrap: anywhere;
-    min-height: 160px;
   }
 
   /* Checklist text wrapping */
-  .glp1buy-page .glp1-check-list {
-    min-height: 340px;
-  }
   .glp1buy-page .glp1-check-list li {
     word-break: normal;
     overflow-wrap: anywhere;
