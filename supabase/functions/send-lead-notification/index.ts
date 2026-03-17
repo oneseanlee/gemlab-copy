@@ -6,29 +6,23 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const FROM_EMAIL = "Best365 Labs Notifications <notify@notify.cell365power.com>";
-
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
-  const resendKey = Deno.env.get("RESEND_API_KEY");
-  if (!resendKey) {
-    console.error("RESEND_API_KEY not configured");
-    return new Response(JSON.stringify({ error: "Email service not configured" }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
-  }
-
+  const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const notificationEmail = Deno.env.get("NOTIFICATION_EMAIL");
+
   if (!notificationEmail) {
     return new Response(JSON.stringify({ error: "NOTIFICATION_EMAIL not configured" }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+
+  const supabase = createClient(supabaseUrl, serviceKey);
 
   try {
     const body = await req.json();
@@ -103,9 +97,6 @@ Deno.serve(async (req) => {
         if (utm.utm_campaign) ghlTags.push(`utm-campaign:${utm.utm_campaign}`);
       }
 
-      const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-      const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-
       await fetch(`${supabaseUrl}/functions/v1/ghl-sync`, {
         method: "POST",
         headers: {
@@ -133,35 +124,37 @@ Deno.serve(async (req) => {
       console.error("GHL sync failed (non-blocking):", ghlErr);
     }
 
-    // Send notification email via Resend
-    const resendRes = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${resendKey}`,
-      },
-      body: JSON.stringify({
-        from: FROM_EMAIL,
-        to: [notificationEmail],
+    // Enqueue notification email via the durable email queue
+    const messageId = crypto.randomUUID();
+    const textBody = htmlBody.replace(/<[^>]*>/g, "");
+
+    const { error: enqueueError } = await supabase.rpc("enqueue_email", {
+      queue_name: "transactional_emails",
+      payload: {
+        to: notificationEmail,
+        from: "Best365 Labs <notify@cell365power.com>",
+        sender_domain: "notify.cell365power.com",
         subject,
         html: htmlBody,
-        text: htmlBody.replace(/<[^>]*>/g, ""),
-      }),
+        text: textBody,
+        purpose: "transactional",
+        label: "lead_notification",
+        message_id: messageId,
+        queued_at: new Date().toISOString(),
+      },
     });
 
-    if (!resendRes.ok) {
-      const errText = await resendRes.text();
-      console.error("Resend email failed:", resendRes.status, errText);
-      return new Response(JSON.stringify({ error: `Email send failed: ${errText}` }), {
+    if (enqueueError) {
+      console.error("Failed to enqueue notification email:", enqueueError);
+      return new Response(JSON.stringify({ error: "Failed to enqueue email" }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const resendData = await resendRes.json();
-    console.log("Notification email sent via Resend", { type, id: resendData.id });
+    console.log("Notification email enqueued", { type, messageId });
 
-    return new Response(JSON.stringify({ success: true, id: resendData.id }), {
+    return new Response(JSON.stringify({ success: true, message_id: messageId }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {

@@ -30,33 +30,33 @@ export const SignupEmail = ({
 }: SignupEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Verify your email — welcome to Best 365 Labs</Preview>
+    <Preview>Confirm your email for {siteName}</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
           src="https://cell365power.lovable.app/images/best365labs-logo.png"
-          alt="Best 365 Labs"
-          width={160}
-          height={40}
-          style={logo}
+          width="160"
+          height="auto"
+          alt="Best365 Labs"
+          style={{ marginBottom: '24px' }}
         />
-        <Heading style={h1}>Welcome aboard</Heading>
+        <Heading style={h1}>Confirm your email</Heading>
         <Text style={text}>
-          You're one step away from unlocking your peak performance with{' '}
+          Thanks for signing up for{' '}
           <Link href={siteUrl} style={link}>
-            <strong>Best 365 Labs</strong>
+            <strong>{siteName}</strong>
           </Link>
-          .
+          !
         </Text>
         <Text style={text}>
-          Verify your email (
+          Please confirm your email address (
           <Link href={`mailto:${recipient}`} style={link}>
             {recipient}
           </Link>
-          ) to get started:
+          ) by clicking the button below:
         </Text>
         <Button style={button} href={confirmationUrl}>
-          Verify My Email
+          Verify Email
         </Button>
         <Text style={footer}>
           If you didn't create an account, you can safely ignore this email.
@@ -69,29 +69,27 @@ export const SignupEmail = ({
 export default SignupEmail
 
 const main = { backgroundColor: '#ffffff', fontFamily: "'Plus Jakarta Sans', Arial, sans-serif" }
-const container = { padding: '32px 28px' }
-const logo = { marginBottom: '28px' }
+const container = { padding: '20px 25px' }
 const h1 = {
-  fontSize: '24px',
+  fontSize: '22px',
   fontWeight: 'bold' as const,
   color: '#0A1628',
   margin: '0 0 20px',
   fontFamily: "'Playfair Display', Georgia, serif",
 }
 const text = {
-  fontSize: '15px',
-  color: '#5A6578',
-  lineHeight: '1.6',
-  margin: '0 0 24px',
+  fontSize: '14px',
+  color: '#55575d',
+  lineHeight: '1.5',
+  margin: '0 0 25px',
 }
 const link = { color: '#3376b0', textDecoration: 'underline' }
 const button = {
   backgroundColor: '#3376b0',
   color: '#ffffff',
-  fontSize: '15px',
-  fontWeight: '600' as const,
+  fontSize: '14px',
   borderRadius: '8px',
-  padding: '14px 24px',
+  padding: '12px 20px',
   textDecoration: 'none',
 }
-const footer = { fontSize: '12px', color: '#9CA3AF', margin: '32px 0 0' }
+const footer = { fontSize: '12px', color: '#999999', margin: '30px 0 0' }

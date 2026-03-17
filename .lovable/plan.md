@@ -1,89 +1,27 @@
 
 
-## Plan: Remove Resend — Route All Emails Through Your Existing System
+## Simplify the Free Testosterone Guide Page
 
-### Why This Is the Best Way
+Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
 
-Your project already has:
-- A verified email domain (`cell365power.com`) in Lovable
-- A working email API (`sendLovableEmail` via `@lovable.dev/email-js`)
-- A durable queue system (`enqueue_email` RPC + `process-email-queue` cron every 5s)
-- Built-in retry logic, rate-limit handling, dead-letter queues, and send logging
+### What gets removed
+- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
+- **FAQ section** (lines 278-286) — the 4-item accordion
+- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
+- **Testimonials data** (`testimonials` array, lines 43-50)
+- **FAQ data** (`faqItems` array, lines 53-58)
+- **FaqItem component** (lines 125-138)
+- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
+- **Unused imports**: `Star`, `ChevronDown`
 
-Two edge functions bypass all of this and call Resend directly. That's the sole reason Resend exists in this project. Removing it means:
-- **One email system** instead of two
-- **No Resend account or domain verification needed**
-- **All emails get retries, logging, and rate-limit protection** automatically
+### What stays
+1. **Video background** — cinematic feel
+2. **Hero** — headline, subtitle, opt-in form, ebook cover
+3. **Trust strip** — 4 credibility badges
+4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
+5. **Final CTA** — dark video section with second opt-in form
+6. **Footer** — legal/contact
 
-### What Changes
-
-**1. Rewrite `send-lead-notification/index.ts`**
-- Remove Resend API key check and `fetch("https://api.resend.com/emails", ...)`
-- Add Supabase service-role client
-- Keep all HTML template building exactly as-is
-- Keep all GHL sync logic exactly as-is
-- After GHL sync, enqueue the notification email:
-```typescript
-await supabase.rpc('enqueue_email', {
-  queue_name: 'transactional_emails',
-  payload: {
-    to: notificationEmail,
-    from: 'Best365 Labs <notify@cell365power.com>',
-    sender_domain: 'notify.cell365power.com',
-    subject,
-    html: htmlBody,
-    text: htmlBody.replace(/<[^>]*>/g, ''),
-    purpose: 'transactional',
-    message_id: crypto.randomUUID(),
-    queued_at: new Date().toISOString(),
-  }
-})
-```
-
-**2. Rewrite `send-digital-delivery/index.ts`**
-- Remove Resend API key check and `fetch("https://api.resend.com/emails", ...)`
-- Add Supabase service-role client
-- Keep React Email template rendering (`DigitalDeliveryEmail`) exactly as-is
-- Enqueue the rendered email:
-```typescript
-await supabase.rpc('enqueue_email', {
-  queue_name: 'transactional_emails',
-  payload: {
-    to: email,
-    from: 'Best 365 Labs <noreply@cell365power.com>',
-    sender_domain: 'notify.cell365power.com',
-    subject: 'Your Digital Guides & Community Access Are Ready 🎉',
-    html,
-    text,
-    purpose: 'transactional',
-    message_id: crypto.randomUUID(),
-    queued_at: new Date().toISOString(),
-  }
-})
-```
-
-**3. Upgrade `auth-email-hook/index.ts` to use the queue**
-- The current version sends emails directly (old pattern). It should be upgraded to enqueue via `enqueue_email` RPC for retry safety and consistency.
-- Use `scaffold_auth_email_templates` with `confirm_overwrite: true` to get the queue-based version, then redeploy.
-
-**4. Deploy all three updated edge functions**
-
-### What Stays the Same
-- All email templates (HTML and React Email components) — no visual changes
-- GHL sync logic in lead notifications
-- The `process-email-queue` cron job (already running)
-- All database tables and RPC functions
-
-### From Addresses
-| Email Type | From Address |
-|---|---|
-| Auth (signup, recovery, etc.) | `cell365power <noreply@cell365power.com>` |
-| Lead/checkout notifications | `Best365 Labs <notify@cell365power.com>` |
-| Digital delivery (customer) | `Best 365 Labs <noreply@cell365power.com>` |
-
-All sent through the verified `notify.cell365power.com` infrastructure automatically.
-
-### After Implementation
-- Remove `notify.cell365power.com` from your Resend dashboard
-- The `RESEND_API_KEY` secret becomes unused (can clean up later, harmless to leave)
+### Result
+The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
 

@@ -1,5 +1,6 @@
 import * as React from "npm:react@18.3.1";
 import { renderAsync } from "npm:@react-email/components@0.0.22";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 import { DigitalDeliveryEmail } from "../_shared/email-templates/digital-delivery.tsx";
 
 const corsHeaders = {
@@ -8,21 +9,13 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const FROM_EMAIL = "Best 365 Labs <noreply@cell365power.com>";
-
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
-  const resendKey = Deno.env.get("RESEND_API_KEY");
-  if (!resendKey) {
-    console.error("RESEND_API_KEY not configured");
-    return new Response(
-      JSON.stringify({ error: "Email service not configured" }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
-  }
+  const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
   let email: string;
   let firstName: string;
@@ -58,40 +51,42 @@ Deno.serve(async (req) => {
       { plainText: true }
     );
 
-    // Send via Resend
-    const resendRes = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${resendKey}`,
-      },
-      body: JSON.stringify({
-        from: FROM_EMAIL,
-        to: [email],
+    // Enqueue via the durable email queue
+    const supabase = createClient(supabaseUrl, serviceKey);
+    const messageId = crypto.randomUUID();
+
+    const { error: enqueueError } = await supabase.rpc("enqueue_email", {
+      queue_name: "transactional_emails",
+      payload: {
+        to: email,
+        from: "Best 365 Labs <noreply@cell365power.com>",
+        sender_domain: "notify.cell365power.com",
         subject: "Your Digital Guides & Community Access Are Ready 🎉",
         html,
         text,
-      }),
+        purpose: "transactional",
+        label: "digital_delivery",
+        message_id: messageId,
+        queued_at: new Date().toISOString(),
+      },
     });
 
-    if (!resendRes.ok) {
-      const errText = await resendRes.text();
-      console.error("Resend email failed:", resendRes.status, errText);
+    if (enqueueError) {
+      console.error("Failed to enqueue digital delivery email:", enqueueError);
       return new Response(
-        JSON.stringify({ error: `Email send failed: ${errText}` }),
+        JSON.stringify({ error: "Failed to enqueue email" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    const resendData = await resendRes.json();
-    console.log("Digital delivery email sent via Resend", { email, id: resendData.id });
+    console.log("Digital delivery email enqueued", { email, messageId });
 
     return new Response(
-      JSON.stringify({ success: true, id: resendData.id }),
+      JSON.stringify({ success: true, message_id: messageId }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Failed to send email";
+    const message = err instanceof Error ? err.message : "Failed to enqueue email";
     console.error("Digital delivery email failed", { error: message, email });
     return new Response(
       JSON.stringify({ error: message }),
