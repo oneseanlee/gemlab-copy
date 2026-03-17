@@ -6,6 +6,8 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+const SENDER_DOMAIN = "notify.cell365power.com";
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -22,7 +24,6 @@ Deno.serve(async (req) => {
   try {
     const body = await req.json();
     const { type, record } = body;
-    // type: "lead", "checkout_lead", or "happymd_form"
 
     let subject = "";
     let htmlBody = "";
@@ -86,7 +87,6 @@ Deno.serve(async (req) => {
         ghlSource = record.campaign || "happymd";
       }
 
-      // Build UTM tags
       const utm = record.utm_params;
       if (utm && typeof utm === "object") {
         if (utm.utm_source) ghlTags.push(`utm-source:${utm.utm_source}`);
@@ -124,37 +124,36 @@ Deno.serve(async (req) => {
       console.error("GHL sync failed (non-blocking):", ghlErr);
     }
 
-    // Send email via Lovable Email API
-    const apiKey = Deno.env.get("LOVABLE_API_KEY");
-    if (!apiKey) {
-      console.error("LOVABLE_API_KEY not configured");
-      return new Response(JSON.stringify({ error: "Email service not configured" }), {
+    // Enqueue notification email via the durable email queue
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabase = createClient(supabaseUrl, serviceKey);
+
+    const { data: msgId, error: enqueueError } = await supabase.rpc("enqueue_email", {
+      queue_name: "transactional_emails",
+      payload: {
+        to: notificationEmail,
+        from: `Best365 Labs Notifications <notify@${SENDER_DOMAIN}>`,
+        sender_domain: SENDER_DOMAIN,
+        subject,
+        html: htmlBody,
+        text: htmlBody.replace(/<[^>]*>/g, ""),
+        purpose: "transactional",
+        template_name: "lead_notification",
+      },
+    });
+
+    if (enqueueError) {
+      console.error("Email enqueue failed:", enqueueError.message);
+      return new Response(JSON.stringify({ error: enqueueError.message }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const emailRes = await fetch("https://api.lovable.dev/v1/email/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        to: notificationEmail,
-        subject,
-        html: htmlBody,
-        from: "Best365 Labs Notifications <notify@notify.cell365power.com>",
-        purpose: "transactional",
-      }),
-    });
+    console.log("Notification email enqueued", { type, message_id: msgId });
 
-    if (!emailRes.ok) {
-      const errText = await emailRes.text();
-      console.error("Email send failed:", errText);
-    }
-
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({ success: true, message_id: msgId }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {
