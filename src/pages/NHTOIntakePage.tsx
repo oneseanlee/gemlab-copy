@@ -71,9 +71,7 @@ const NHTOIntakePage = () => {
     const handleMessage = (e: MessageEvent) => {
       if (e.origin !== 'https://happymd.co') return;
 
-      if (e.data?.type === 'resize' && iframe) {
-        iframe.style.height = e.data.height + 'px';
-      }
+      // resize handler removed — causes infinite loop with HappyMD dropdowns
 
       if (e.data?.type === 'submit' || e.data?.type === 'testosterone-form:submit') {
         fireGenerateLead('postMessage');
