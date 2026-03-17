@@ -587,7 +587,7 @@ const GLP1BuyPage = () => {
               <p style={{ fontSize: '13px', color: '#DC2626', textAlign: 'center', margin: '8px 0' }}>⚡ Launch pricing — limited availability</p>
 
               <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading || hasSubmitted.current}>
-                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Redirecting…</> : <>Get My GLP-1 Protocol <ArrowRight size={18} /></>}
+                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> <span>Redirecting…</span></> : <><span>Get My GLP-1 Protocol</span> <ArrowRight size={18} /></>}
               </button>
 
               <div className="glp1buy-secure-note">
