@@ -165,6 +165,8 @@ const TPrime365Page = () => {
         source: 'tprime365',
       });
       localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
+      localStorage.setItem('intake_lead_email', email);
+      localStorage.setItem('intake_lead_source', 'tprime365');
       setShowLeadModal(false);
       navigate('/tprime365-intake');
     } catch {

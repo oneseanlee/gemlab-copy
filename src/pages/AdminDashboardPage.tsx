@@ -31,6 +31,14 @@ interface IntakeLead {
   source: string;
   created_at: string;
   utm_params?: Record<string, string>;
+  happymd_completed?: boolean;
+  happymd_completed_at?: string | null;
+}
+
+interface FallbackCompletion {
+  source: string;
+  tracking_code: string;
+  created_at: string;
 }
 
 interface TrafficData {
@@ -50,6 +58,7 @@ interface DailyBreakdown {
   views: number;
   unique: number;
   intakeLeads: number;
+  intakeCompleted: number;
 }
 
 export default function AdminDashboardPage() {
@@ -57,6 +66,7 @@ export default function AdminDashboardPage() {
   const [authed, setAuthed] = useState(() => !!sessionStorage.getItem("admin_token"));
   const [leads, setLeads] = useState<Lead[]>([]);
   const [intakeLeads, setIntakeLeads] = useState<IntakeLead[]>([]);
+  const [fallbackCompletions, setFallbackCompletions] = useState<FallbackCompletion[]>([]);
   const [traffic, setTraffic] = useState<TrafficData>({ totalPageViews: 0, uniqueVisitors: 0, dailyTraffic: [], topPages: [] });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -90,6 +100,7 @@ export default function AdminDashboardPage() {
       if (data?.error) throw new Error(data.error);
       setLeads(data.leads || []);
       setIntakeLeads(data.intakeLeads || []);
+      setFallbackCompletions(data.fallbackCompletions || []);
       setTraffic(data.traffic || { totalPageViews: 0, uniqueVisitors: 0, dailyTraffic: [], topPages: [] });
     } catch (e: any) {
       setError(e.message || "Failed to load data");
@@ -159,8 +170,29 @@ export default function AdminDashboardPage() {
       .filter((l) => l.completed)
       .reduce((sum, l) => sum + Number(l.cart_total), 0);
     const totalAllLeads = total + intakeLeads.length;
-    return { total, sales, abandoned, rate, revenue, totalAllLeads };
-  }, [leads, intakeLeads]);
+    const intakeCompleted = intakeLeads.filter((l) => l.happymd_completed).length + fallbackCompletions.length;
+    return { total, sales, abandoned, rate, revenue, totalAllLeads, intakeCompleted };
+  }, [leads, intakeLeads, fallbackCompletions]);
+
+  // Intake funnel by source
+  const intakeFunnel = useMemo(() => {
+    const sources = new Map<string, { popup: number; completed: number }>();
+    intakeLeads.forEach((l) => {
+      const entry = sources.get(l.source) || { popup: 0, completed: 0 };
+      entry.popup++;
+      if (l.happymd_completed) entry.completed++;
+      sources.set(l.source, entry);
+    });
+    // Add fallback completions
+    fallbackCompletions.forEach((c) => {
+      const entry = sources.get(c.source) || { popup: 0, completed: 0 };
+      entry.completed++;
+      sources.set(c.source, entry);
+    });
+    return Array.from(sources.entries())
+      .filter(([src]) => ['tprime365', 'nhto'].includes(src))
+      .sort((a, b) => b[1].popup - a[1].popup);
+  }, [intakeLeads, fallbackCompletions]);
 
   // Intake leads by source
   const intakeBySource = useMemo(() => {
@@ -215,16 +247,16 @@ export default function AdminDashboardPage() {
 
   // Daily breakdown merging leads + traffic
   const dailyBreakdown = useMemo<DailyBreakdown[]>(() => {
-    const map = new Map<string, { leads: number; sales: number; revenue: number; views: number; unique: number; intakeLeads: number }>();
+    const map = new Map<string, { leads: number; sales: number; revenue: number; views: number; unique: number; intakeLeads: number; intakeCompleted: number }>();
 
     // Seed from traffic daily data
     traffic.dailyTraffic.forEach((t) => {
-      map.set(t.date, { leads: 0, sales: 0, revenue: 0, views: t.views, unique: t.unique, intakeLeads: 0 });
+      map.set(t.date, { leads: 0, sales: 0, revenue: 0, views: t.views, unique: t.unique, intakeLeads: 0, intakeCompleted: 0 });
     });
 
     filteredLeads.forEach((l) => {
       const day = toPTDate(l.created_at);
-      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0 };
+      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0, intakeCompleted: 0 };
       entry.leads++;
       if (l.completed) {
         entry.sales++;
@@ -235,8 +267,17 @@ export default function AdminDashboardPage() {
 
     filteredIntakeLeads.forEach((l) => {
       const day = toPTDate(l.created_at);
-      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0 };
+      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0, intakeCompleted: 0 };
       entry.intakeLeads++;
+      if (l.happymd_completed) entry.intakeCompleted++;
+      map.set(day, entry);
+    });
+
+    // Add fallback completions to daily
+    fallbackCompletions.forEach((c) => {
+      const day = toPTDate(c.created_at);
+      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0, intakeCompleted: 0 };
+      entry.intakeCompleted++;
       map.set(day, entry);
     });
 
@@ -252,8 +293,9 @@ export default function AdminDashboardPage() {
         views: v.views,
         unique: v.unique,
         intakeLeads: v.intakeLeads,
+        intakeCompleted: v.intakeCompleted,
       }));
-  }, [filteredLeads, filteredIntakeLeads, traffic.dailyTraffic]);
+  }, [filteredLeads, filteredIntakeLeads, fallbackCompletions, traffic.dailyTraffic]);
 
   const formatUtmForCSV = (utm?: Record<string, string>) => {
     if (!utm || Object.keys(utm).length === 0) return "";
@@ -394,6 +436,13 @@ export default function AdminDashboardPage() {
                 <div className="stat-label">Total Revenue</div>
                 <div className="stat-value">${stats.revenue.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
               </div>
+              <div className="stat-card" style={{ borderTop: "3px solid hsl(160 70% 45%)" }}>
+                <div className="stat-label">Intake Completed</div>
+                <div className="stat-value">{stats.intakeCompleted}</div>
+                <div style={{ fontSize: "0.72rem", color: "hsl(220 15% 50%)", marginTop: 2 }}>
+                  HappyMD forms submitted
+                </div>
+              </div>
             </div>
 
             {/* Intake Leads by Source */}
@@ -426,6 +475,48 @@ export default function AdminDashboardPage() {
                 </div>
               )}
             </div>
+
+            {/* Intake Funnel */}
+            {intakeFunnel.length > 0 && (
+              <div className="funnel-section" style={{ marginBottom: "1.5rem" }}>
+                <h2>Intake Funnel</h2>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                  {intakeFunnel.map(([source, data]) => {
+                    const rate = data.popup > 0 ? ((data.completed / data.popup) * 100).toFixed(0) : "0";
+                    const fillPct = data.popup > 0 ? Math.max((data.completed / data.popup) * 100, 3) : 0;
+                    return (
+                      <div key={source} style={{ background: "hsl(220 20% 13%)", borderRadius: 8, padding: "1rem 1.25rem" }}>
+                        <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "hsl(220 15% 90%)", marginBottom: "0.75rem", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                          {source}
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: 140 }}>
+                            <span style={{ fontSize: "0.78rem", color: "hsl(220 15% 55%)" }}>Popup Leads:</span>
+                            <span style={{ fontSize: "1.1rem", fontWeight: 700, color: "hsl(220 15% 90%)" }}>{data.popup}</span>
+                          </div>
+                          <span style={{ color: "hsl(220 15% 35%)", fontSize: "1.1rem" }}>→</span>
+                          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: 160 }}>
+                            <span style={{ fontSize: "0.78rem", color: "hsl(220 15% 55%)" }}>Form Completed:</span>
+                            <span style={{ fontSize: "1.1rem", fontWeight: 700, color: "hsl(160 70% 55%)" }}>{data.completed}</span>
+                          </div>
+                          <span style={{ color: "hsl(220 15% 35%)", fontSize: "1.1rem" }}>→</span>
+                          <span style={{ fontSize: "1.1rem", fontWeight: 700, color: data.completed > 0 ? "hsl(160 70% 55%)" : "hsl(0 60% 60%)" }}>{rate}%</span>
+                        </div>
+                        <div style={{ height: 8, background: "hsl(220 20% 18%)", borderRadius: 4, overflow: "hidden" }}>
+                          <div style={{
+                            height: "100%",
+                            width: `${fillPct}%`,
+                            background: "linear-gradient(90deg, hsl(160 70% 45%), hsl(160 60% 55%))",
+                            borderRadius: 4,
+                            transition: "width 0.6s ease",
+                          }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* UTM Campaign Breakdown */}
             {utmBreakdown.hasData && (
@@ -507,21 +598,52 @@ export default function AdminDashboardPage() {
                   <span className="funnel-count">{traffic.uniqueVisitors.toLocaleString()} unique</span>
                 </div>
                 <div className="funnel-row">
-                  <span className="funnel-label">All Leads</span>
+                  <span className="funnel-label">Popup Leads</span>
                   <div className="funnel-track">
                     <div
                       className="funnel-fill leads"
-                      style={{ width: traffic.totalPageViews > 0 ? `${Math.max((stats.totalAllLeads / traffic.totalPageViews) * 100, 2)}%` : "100%" }}
+                      style={{ width: traffic.totalPageViews > 0 ? `${Math.max((intakeLeads.length / traffic.totalPageViews) * 100, 2)}%` : "100%" }}
                     >
-                      {stats.totalAllLeads}
+                      {intakeLeads.length}
                     </div>
                   </div>
                   <span className="funnel-count">
-                    {traffic.totalPageViews > 0 ? ((stats.totalAllLeads / traffic.totalPageViews) * 100).toFixed(1) : "—"}%
+                    {traffic.totalPageViews > 0 ? ((intakeLeads.length / traffic.totalPageViews) * 100).toFixed(1) : "—"}%
                   </span>
                 </div>
                 <div className="funnel-row">
-                  <span className="funnel-label">Completed</span>
+                  <span className="funnel-label">Intake Done</span>
+                  <div className="funnel-track">
+                    <div
+                      className="funnel-fill"
+                      style={{
+                        width: traffic.totalPageViews > 0 ? `${Math.max((stats.intakeCompleted / traffic.totalPageViews) * 100, 1)}%` : "0%",
+                        background: "linear-gradient(90deg, hsl(160 70% 45%), hsl(160 60% 55%))",
+                      }}
+                    >
+                      {stats.intakeCompleted}
+                    </div>
+                  </div>
+                  <span className="funnel-count">
+                    {intakeLeads.length > 0 ? ((stats.intakeCompleted / intakeLeads.length) * 100).toFixed(1) : "—"}%
+                  </span>
+                </div>
+                <div className="funnel-row">
+                  <span className="funnel-label">Checkout</span>
+                  <div className="funnel-track">
+                    <div
+                      className="funnel-fill leads"
+                      style={{ width: traffic.totalPageViews > 0 ? `${Math.max((stats.total / traffic.totalPageViews) * 100, 1)}%` : "0%" }}
+                    >
+                      {stats.total}
+                    </div>
+                  </div>
+                  <span className="funnel-count">
+                    {traffic.totalPageViews > 0 ? ((stats.total / traffic.totalPageViews) * 100).toFixed(1) : "—"}%
+                  </span>
+                </div>
+                <div className="funnel-row">
+                  <span className="funnel-label">Sales</span>
                   <div className="funnel-track">
                     <div
                       className="funnel-fill sales"
@@ -603,6 +725,7 @@ export default function AdminDashboardPage() {
                       <th className="text-right">Unique</th>
                       <th className="text-right">Checkout Leads</th>
                       <th className="text-right">Intake Leads</th>
+                      <th className="text-right">Intake Completed</th>
                       <th className="text-right">Sales</th>
                       <th className="text-right">Revenue</th>
                       <th className="text-right">Conv %</th>
@@ -616,13 +739,14 @@ export default function AdminDashboardPage() {
                         <td className="text-right">{d.unique.toLocaleString()}</td>
                         <td className="text-right">{d.leads}</td>
                         <td className="text-right">{d.intakeLeads}</td>
+                        <td className="text-right" style={{ color: d.intakeCompleted > 0 ? "hsl(160 70% 55%)" : undefined }}>{d.intakeCompleted}</td>
                         <td className="text-right">{d.sales}</td>
                         <td className="text-right">${d.revenue.toFixed(2)}</td>
                         <td className="text-right">{d.conversionRate}%</td>
                       </tr>
                     ))}
                     {dailyBreakdown.length === 0 && (
-                      <tr><td colSpan={8} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No data for selected filters</td></tr>
+                      <tr><td colSpan={9} style={{ textAlign: "center", padding: "2rem", color: "hsl(220 15% 40%)" }}>No data for selected filters</td></tr>
                     )}
                   </tbody>
                 </table>
