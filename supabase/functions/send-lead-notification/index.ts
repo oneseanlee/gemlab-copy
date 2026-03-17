@@ -7,6 +7,7 @@ const corsHeaders = {
 };
 
 const SENDER_DOMAIN = "notify.cell365power.com";
+const LOVABLE_RUN_ID = "wpczgwxsriezaubncuom";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
