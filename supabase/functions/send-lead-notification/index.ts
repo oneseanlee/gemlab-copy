@@ -6,6 +6,89 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+const GHL_API_BASE = "https://services.leadconnectorhq.com";
+
+async function ghlRequest(
+  path: string,
+  method: string,
+  body: Record<string, unknown>,
+  apiKey: string
+) {
+  const res = await fetch(`${GHL_API_BASE}${path}`, {
+    method,
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+      Version: "2021-07-28",
+    },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    console.error(`GHL API error [${res.status}] ${path}:`, JSON.stringify(data));
+    throw new Error(`GHL API call failed [${res.status}]: ${JSON.stringify(data)}`);
+  }
+  return data;
+}
+
+async function findOrCreateContact(
+  apiKey: string,
+  locationId: string,
+  contact: { firstName: string; email: string; phone?: string; source?: string; tags?: string[] }
+): Promise<string> {
+  const searchRes = await fetch(
+    `${GHL_API_BASE}/contacts/?locationId=${locationId}&query=${encodeURIComponent(contact.email)}`,
+    {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        Version: "2021-07-28",
+      },
+    }
+  );
+  const searchData = await searchRes.json();
+
+  if (searchData.contacts?.length > 0) {
+    const existing = searchData.contacts[0];
+    console.log("Found existing GHL contact:", existing.id);
+    if (contact.tags?.length) {
+      await ghlRequest(`/contacts/${existing.id}`, "PUT", {
+        tags: [...new Set([...(existing.tags || []), ...contact.tags])],
+      }, apiKey);
+    }
+    return existing.id;
+  }
+
+  const createData = await ghlRequest("/contacts/", "POST", {
+    locationId,
+    firstName: contact.firstName,
+    email: contact.email,
+    phone: contact.phone || undefined,
+    source: contact.source || "Best365 Labs Website",
+    tags: contact.tags || [],
+  }, apiKey);
+
+  console.log("Created new GHL contact:", createData.contact?.id);
+  return createData.contact?.id;
+}
+
+async function sendGHLEmail(
+  apiKey: string,
+  contactId: string,
+  subject: string,
+  html: string,
+  emailTo: string,
+  emailFrom: string
+) {
+  return await ghlRequest("/conversations/messages", "POST", {
+    type: "Email",
+    contactId,
+    subject,
+    html,
+    emailTo: emailTo,
+    emailFrom: emailFrom,
+  }, apiKey);
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -14,9 +97,18 @@ Deno.serve(async (req) => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const notificationEmail = Deno.env.get("NOTIFICATION_EMAIL");
+  const GHL_API_KEY = Deno.env.get("GHL_API_KEY");
+  const GHL_LOCATION_ID = Deno.env.get("GHL_LOCATION_ID");
 
   if (!notificationEmail) {
     return new Response(JSON.stringify({ error: "NOTIFICATION_EMAIL not configured" }), {
+      status: 500,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
+  if (!GHL_API_KEY || !GHL_LOCATION_ID) {
+    return new Response(JSON.stringify({ error: "GHL credentials not configured" }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
@@ -74,92 +166,73 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Sync to Go High Level (before email so it always runs)
-    try {
-      const ghlTags: string[] = [];
-      let ghlSource = "Best365 Labs Website";
+    // Step 1: Sync contact to GHL (with tags)
+    const ghlTags: string[] = [];
+    let ghlSource = "Best365 Labs Website";
 
-      if (type === "lead") {
-        ghlTags.push("lead", record.source || "direct");
-        ghlSource = record.source || "direct";
-      } else if (type === "checkout_lead") {
-        ghlTags.push("checkout-lead", "cart-abandonment");
-        ghlSource = record.source || "checkout";
-      } else if (type === "happymd_form") {
-        ghlTags.push("happymd-intake", record.campaign || "unknown");
-        ghlSource = record.campaign || "happymd";
-      }
-
-      const utm = record.utm_params;
-      if (utm && typeof utm === "object") {
-        if (utm.utm_source) ghlTags.push(`utm-source:${utm.utm_source}`);
-        if (utm.utm_medium) ghlTags.push(`utm-medium:${utm.utm_medium}`);
-        if (utm.utm_campaign) ghlTags.push(`utm-campaign:${utm.utm_campaign}`);
-      }
-
-      await fetch(`${supabaseUrl}/functions/v1/ghl-sync`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${serviceKey}`,
-        },
-        body: JSON.stringify({
-          action: "create_contact",
-          contact: {
-            firstName: record.first_name || record.campaign || "Unknown",
-            email: record.email || "",
-            phone: record.phone || undefined,
-            source: ghlSource,
-            tags: ghlTags,
-            customField: utm && typeof utm === "object" ? {
-              utm_source: utm.utm_source || "",
-              utm_medium: utm.utm_medium || "",
-              utm_campaign: utm.utm_campaign || "",
-            } : undefined,
-          },
-        }),
-      });
-      console.log("GHL sync triggered for", type);
-    } catch (ghlErr) {
-      console.error("GHL sync failed (non-blocking):", ghlErr);
+    if (type === "lead") {
+      ghlTags.push("lead", record.source || "direct");
+      ghlSource = record.source || "direct";
+    } else if (type === "checkout_lead") {
+      ghlTags.push("checkout-lead", "cart-abandonment");
+      ghlSource = record.source || "checkout";
+    } else if (type === "happymd_form") {
+      ghlTags.push("happymd-intake", record.campaign || "unknown");
+      ghlSource = record.campaign || "happymd";
     }
 
-    // Enqueue notification email via the durable email queue
-    const messageId = crypto.randomUUID();
-    const textBody = htmlBody.replace(/<[^>]*>/g, "");
+    const utm = record.utm_params;
+    if (utm && typeof utm === "object") {
+      if (utm.utm_source) ghlTags.push(`utm-source:${utm.utm_source}`);
+      if (utm.utm_medium) ghlTags.push(`utm-medium:${utm.utm_medium}`);
+      if (utm.utm_campaign) ghlTags.push(`utm-campaign:${utm.utm_campaign}`);
+    }
 
-    const { error: enqueueError } = await supabase.rpc("enqueue_email", {
-      queue_name: "transactional_emails",
-      payload: {
-        to: notificationEmail,
-        from: "Best365 Labs <notify@cell365power.com>",
-        sender_domain: "notify.cell365power.com",
-        subject,
-        html: htmlBody,
-        text: textBody,
-        purpose: "transactional",
-        label: "lead_notification",
-        message_id: messageId,
-        queued_at: new Date().toISOString(),
-      },
+    const contactId = await findOrCreateContact(GHL_API_KEY, GHL_LOCATION_ID, {
+      firstName: record.first_name || record.campaign || "Unknown",
+      email: record.email || "",
+      phone: record.phone || undefined,
+      source: ghlSource,
+      tags: ghlTags,
     });
 
-    if (enqueueError) {
-      console.error("Failed to enqueue notification email:", enqueueError);
-      return new Response(JSON.stringify({ error: "Failed to enqueue email" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    console.log("GHL contact synced:", contactId);
 
-    console.log("Notification email enqueued", { type, messageId });
+    // Step 2: Send notification email via GHL
+    // Find/create the admin contact to receive notifications
+    const adminContactId = await findOrCreateContact(GHL_API_KEY, GHL_LOCATION_ID, {
+      firstName: "Admin",
+      email: notificationEmail,
+      source: "Internal",
+      tags: ["admin-notifications"],
+    });
 
-    return new Response(JSON.stringify({ success: true, message_id: messageId }), {
+    const emailResult = await sendGHLEmail(
+      GHL_API_KEY,
+      adminContactId,
+      subject,
+      htmlBody,
+      notificationEmail,
+      "Best365 Labs <notify@cell365power.com>"
+    );
+
+    console.log("GHL notification email sent:", emailResult?.messageId || "ok");
+
+    // Log to email_send_log
+    await supabase.from("email_send_log").insert({
+      message_id: emailResult?.messageId || crypto.randomUUID(),
+      template_name: "lead_notification",
+      recipient_email: notificationEmail,
+      status: "sent",
+    });
+
+    return new Response(JSON.stringify({ success: true, contactId, messageId: emailResult?.messageId }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {
     console.error("Notification error:", err);
-    return new Response(JSON.stringify({ error: "Internal error" }), {
+    const errorMessage = err instanceof Error ? err.message : "Internal error";
+    return new Response(JSON.stringify({ error: errorMessage }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
