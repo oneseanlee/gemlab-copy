@@ -142,8 +142,9 @@ export default function AdminDashboardPage() {
           l.source.toLowerCase().includes(q);
         if (!match) return false;
       }
-      if (dateFrom && l.created_at.slice(0, 10) < dateFrom) return false;
-      if (dateTo && l.created_at.slice(0, 10) > dateTo) return false;
+      const ptDate = toPTDate(l.created_at);
+      if (dateFrom && ptDate < dateFrom) return false;
+      if (dateTo && ptDate > dateTo) return false;
       return true;
     });
   }, [intakeLeads, search, dateFrom, dateTo]);
