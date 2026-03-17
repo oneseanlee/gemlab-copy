@@ -72,9 +72,7 @@ const TPrime365IntakePage = () => {
     const handleMessage = (e: MessageEvent) => {
       if (e.origin !== 'https://happymd.co') return;
 
-      if (e.data?.type === 'resize' && iframe) {
-        iframe.style.height = e.data.height + 'px';
-      }
+      // resize handler removed — causes infinite loop with HappyMD dropdowns
 
       if (e.data?.type === 'submit' || e.data?.type === 'testosterone-form:submit') {
         fireGenerateLead('postMessage');
@@ -133,7 +131,8 @@ const TPrime365IntakePage = () => {
               id="happymd-testosterone-embed"
               src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=TPRIME365CELL&v=v2&theme=best365"
               width="100%"
-              height="800px"
+              height="1200px"
+              scrolling="auto"
               style={{ border: 'none', maxWidth: '100%', display: 'block' }}
               title="happyMD TPrime365 Testosterone Optimization Form"
               allow="camera; microphone"
