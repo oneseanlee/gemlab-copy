@@ -31,6 +31,14 @@ interface IntakeLead {
   source: string;
   created_at: string;
   utm_params?: Record<string, string>;
+  happymd_completed?: boolean;
+  happymd_completed_at?: string | null;
+}
+
+interface FallbackCompletion {
+  source: string;
+  tracking_code: string;
+  created_at: string;
 }
 
 interface TrafficData {
