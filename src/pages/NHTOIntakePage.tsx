@@ -16,7 +16,7 @@ const NHTOIntakePage = () => {
   }, []);
 
   useEffect(() => {
-    const iframe = document.getElementById('happymd-ucosnhto-embed') as HTMLIFrameElement;
+    const iframe = document.getElementById('happymd-testosterone-embed') as HTMLIFrameElement;
     if (!iframe) return;
 
     let loadCount = 0;
@@ -66,11 +66,13 @@ const NHTOIntakePage = () => {
       }
     };
 
-    // NO auto-resize — causes endless scroll bug with dropdowns
-    // Using fixed height of 1200px instead
-    // METHOD 2: Listen for postMessage (in case HappyMD adds support later)
     const handleMessage = (e: MessageEvent) => {
       if (e.origin !== 'https://happymd.co') return;
+
+      if (e.data?.type === 'resize' && iframe) {
+        iframe.style.height = e.data.height + 'px';
+      }
+
       if (e.data?.type === 'submit' || e.data?.type === 'testosterone-form:submit') {
         fireGenerateLead('postMessage');
       }
@@ -125,11 +127,10 @@ const NHTOIntakePage = () => {
         <div className="intake-iframe-container">
           <div className="intake-iframe-wrapper">
             <iframe
-              id="happymd-ucosnhto-embed"
+              id="happymd-testosterone-embed"
               src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=UCOSNHTOCELL&v=v2&theme=best365"
               width="100%"
-              height="1200px"
-              scrolling="auto"
+              height="800px"
               style={{ border: 'none', maxWidth: '100%', display: 'block' }}
               title="happyMD UCOSNHTO Testosterone Optimization Form"
               allow="camera; microphone"
