@@ -161,6 +161,8 @@ const NHTOPage = () => {
                 source: 'nhto',
             });
             localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
+            localStorage.setItem('intake_lead_email', email);
+            localStorage.setItem('intake_lead_source', 'nhto');
             setShowLeadModal(false);
             navigate('/nhto-intake');
         } catch {
