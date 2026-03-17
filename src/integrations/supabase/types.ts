@@ -80,6 +80,7 @@ export type Database = {
           email: string
           first_name: string
           id: string
+          last_name: string | null
           phone: string | null
           source: string
           utm_params: Json | null
@@ -89,6 +90,7 @@ export type Database = {
           email: string
           first_name: string
           id?: string
+          last_name?: string | null
           phone?: string | null
           source?: string
           utm_params?: Json | null
@@ -98,6 +100,7 @@ export type Database = {
           email?: string
           first_name?: string
           id?: string
+          last_name?: string | null
           phone?: string | null
           source?: string
           utm_params?: Json | null

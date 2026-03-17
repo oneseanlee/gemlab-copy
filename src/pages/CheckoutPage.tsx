@@ -4,6 +4,7 @@ import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";
+import { splitName } from "@/lib/split-name";
 import { getAttributeParams } from "@/lib/utm-capture";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -83,9 +84,10 @@ const CheckoutPage = () => {
       checkoutUrl = checkoutUrl + separator + utmParams;
     }
     try {
+      const { firstName: fn, lastName: ln } = splitName(data.fullName);
       const { error: insertError } = await supabase.from("checkout_leads").insert({
-        first_name: data.fullName.trim(),
-        last_name: null,
+        first_name: fn,
+        last_name: ln,
         email: data.email.trim(),
         phone: data.phone || null,
         cart_items: items.map(i => ({

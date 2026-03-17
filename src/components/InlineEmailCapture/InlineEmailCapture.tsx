@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { getUtmParams } from '@/lib/utm';
+import { splitName } from '@/lib/split-name';
 import { toast } from 'sonner';
 import { ArrowRight, Loader2, CheckCircle } from 'lucide-react';
 import './InlineEmailCapture.css';
@@ -17,8 +18,10 @@ const InlineEmailCapture = () => {
 
     setSubmitting(true);
     try {
+      const { firstName: fn, lastName: ln } = splitName(name);
       const { error } = await supabase.from("leads").insert({
-        first_name: name.trim(),
+        first_name: fn,
+        last_name: ln,
         email: email.trim(),
         source: "glp1-protocol-inline",
         utm_params: getUtmParams(),

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { X, Gift, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { getUtmParams } from '@/lib/utm';
+import { splitName } from '@/lib/split-name';
 import { toast } from 'sonner';
 import './ExitIntentPopup.css';
 
@@ -53,8 +54,10 @@ const ExitIntentPopup = () => {
 
     setSubmitting(true);
     try {
+      const { firstName: fn, lastName: ln } = splitName(name);
       const { error } = await supabase.from("leads").insert({
-        first_name: name.trim(),
+        first_name: fn,
+        last_name: ln,
         email: email.trim(),
         source: "exit-intent",
         utm_params: getUtmParams(),

@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 
 import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";
+import { splitName } from "@/lib/split-name";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -59,8 +60,10 @@ const TPrimeBuyPage = () => {
     setIsSubmitting(true);
 
     try {
+      const { firstName: fn, lastName: ln } = splitName(data.name);
       const { error: insertError } = await supabase.from("leads").insert({
-        first_name: data.name.trim(),
+        first_name: fn,
+        last_name: ln,
         email: data.email.trim(),
         source: "tprime-buy",
         utm_params: getUtmParams(),
