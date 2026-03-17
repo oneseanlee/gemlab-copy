@@ -760,9 +760,9 @@ export default function AdminDashboardPage() {
                             ) : <span style={{ color: "hsl(220 15% 35%)" }}>—</span>}
                           </td>
                           <td style={{ whiteSpace: "nowrap" }}>
-                            {new Date(l.created_at).toLocaleDateString()}{" "}
+                            {toPTDisplay(l.created_at)}{" "}
                             <span style={{ color: "hsl(220 15% 45%)" }}>
-                              {new Date(l.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                              {toPTTime(l.created_at)}
                             </span>
                           </td>
                         </tr>
