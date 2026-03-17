@@ -64,17 +64,17 @@ const TPrime365IntakePage = () => {
       const leadEmail = localStorage.getItem('intake_lead_email');
       const leadSource = localStorage.getItem('intake_lead_source') || 'tprime365';
       if (leadEmail) {
-        supabase.rpc('mark_intake_completed', { p_email: leadEmail, p_source: leadSource })
-          .then(({ error }) => {
+        (supabase.rpc as any)('mark_intake_completed', { p_email: leadEmail, p_source: leadSource })
+          .then(({ error }: { error: any }) => {
             if (error) console.error('[TPRIME365] mark_intake_completed error:', error);
             else console.log('[TPRIME365] intake completion saved for', leadEmail);
           });
       } else {
         // Fallback: no email available, log to intake_completions
-        supabase.from('intake_completions').insert({
+        (supabase.from as any)('intake_completions').insert({
           source: 'tprime365',
           tracking_code: 'TPRIME365CELL',
-        }).then(({ error }) => {
+        }).then(({ error }: { error: any }) => {
           if (error) console.error('[TPRIME365] intake_completions insert error:', error);
           else console.log('[TPRIME365] fallback intake completion logged');
         });
