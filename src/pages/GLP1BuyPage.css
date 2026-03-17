@@ -947,3 +947,29 @@
     font-size: 28px;
   }
 }
+
+/* ── Simple credibility footer ── */
+.glp1buy-simple-footer {
+  background: var(--b365-navy);
+  text-align: center;
+  padding: 28px 20px 24px;
+}
+
+.glp1buy-footer-logo {
+  height: 28px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.glp1buy-footer-address {
+  font-size: var(--text-body-sm);
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+
+.glp1buy-footer-copy {
+  font-size: var(--text-caption);
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
