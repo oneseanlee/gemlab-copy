@@ -1049,7 +1049,7 @@
   overflow-x: auto;
   scrollbar-width: none;
   flex: 1;
-  max-width: 400px;
+  max-width: 468px;
 }
 .thumb-track::-webkit-scrollbar { display: none; }
 .thumb-img {
