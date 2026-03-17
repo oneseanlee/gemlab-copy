@@ -337,6 +337,9 @@ export default function AdminDashboardPage() {
             }}>
               {isLive ? "LIVE" : "TEST"}
             </span>
+            <span style={{ fontSize: "0.7rem", color: "hsl(220 15% 45%)", fontStyle: "italic" }}>
+              All times Pacific (PT)
+            </span>
           </div>
           <div className="header-actions">
             <button className="export-btn" onClick={() => fetchData(token)}>↻ Refresh</button>
