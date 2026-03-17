@@ -93,9 +93,9 @@ const carouselMedia: MediaItem[] = [
   { type: "image", src: "/images/product-glp-protocol.webp" },
   { type: "image", src: "/images/triple-power-methylene-blue.webp" },
   { type: "image", src: "/images/metabolism-plus.webp" },
-  { type: "image", src: "/images/glp1-product-4.jpg" },
+  { type: "image", src: "/images/glp1-product-4.webp" },
   { type: "image", src: "/images/glp1-product-8.png" },
-  { type: "image", src: "/images/glp1-product-9.jpg" },
+  { type: "image", src: "/images/glp1-product-9.webp" },
 ];
 
 /* ── Form schema ──────────────────────────────────────── */
