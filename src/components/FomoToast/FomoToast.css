@@ -91,3 +91,10 @@
     max-width: none;
   }
 }
+
+/* Lift toast above sticky mobile CTA bars */
+@media (max-width: 767px) {
+  .fomo-toast {
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+}
