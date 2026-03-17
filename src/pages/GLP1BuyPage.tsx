@@ -15,9 +15,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import "./GLP1BuyPage.css";
 
 const CAROUSEL_IMAGES = [
-  { src: "/images/glp1-carousel-1.jpg", alt: "Best365 Labs customer transformation results" },
-  { src: "/images/glp1-carousel-2.jpg", alt: "Best365 Labs cellular energy optimization" },
-  { src: "/images/glp1-carousel-3.jpg", alt: "Best365 Labs GLP-1 Protocol lifestyle results" },
+  { src: "/images/glp1-carousel-1.webp", alt: "Best365 Labs customer transformation results" },
+  { src: "/images/glp1-carousel-2.webp", alt: "Best365 Labs cellular energy optimization" },
+  { src: "/images/glp1-carousel-3.webp", alt: "Best365 Labs GLP-1 Protocol lifestyle results" },
 ];
 
 function BannerCarousel() {
