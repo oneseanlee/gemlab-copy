@@ -117,10 +117,153 @@
 /* Override the CTA to look like a form submit */
 .glp1buy-inline-form .glp1-checkout-cta {
   margin-top: 4px;
-  border-radius: 10px;
   min-height: 52px;
   font-size: 16px;
   font-weight: 700;
+}
+
+/* ─── Animated Gradient-Border CTA ─── */
+@keyframes glp1buy-border-shift {
+  to { transform: translateX(-25%); }
+}
+
+.glp1buy-page .glp1-checkout-cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  border: none;
+  border-radius: 100px;
+  padding: 3px;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 4px 20px rgba(2, 54, 123, 0.25), 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  height: auto;
+  min-height: 56px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #fff;
+  filter: none;
+}
+
+.glp1buy-page .glp1-checkout-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 400%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    #a7bfde 0%,
+    var(--b365-blue, #02367b) 25%,
+    #5a9fd4 50%,
+    var(--b365-blue-dark, #01244f) 75%,
+    #a7bfde 100%
+  );
+  background-size: 25% 100%;
+  animation: glp1buy-border-shift 2s linear infinite;
+  border-radius: 100px;
+}
+
+.glp1buy-page .glp1-checkout-cta > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Inner fill – sits on top of the gradient border */
+.glp1buy-page .glp1-checkout-cta::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: linear-gradient(135deg, var(--b365-blue, #02367b) 0%, var(--b365-blue-dark, #01244f) 100%);
+  border-radius: 100px;
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.glp1buy-page .glp1-checkout-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(2, 54, 123, 0.4), 0 2px 8px rgba(0, 0, 0, 0.15);
+  filter: none;
+}
+
+.glp1buy-page .glp1-checkout-cta:hover::after {
+  background: linear-gradient(135deg, #0a4a9e 0%, var(--b365-blue, #02367b) 100%);
+}
+
+.glp1buy-page .glp1-checkout-cta:active {
+  transform: translateY(0);
+}
+
+.glp1buy-page .glp1-checkout-cta:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.glp1buy-page .glp1-checkout-cta:disabled::before {
+  animation-play-state: paused;
+}
+
+/* Also style the sticky mobile CTA button */
+.glp1buy-page .glp1-sticky-mobile-cta .sticky-cta-btn {
+  position: relative;
+  border: none;
+  border-radius: 100px;
+  padding: 3px;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 12px rgba(2, 54, 123, 0.3);
+}
+
+.glp1buy-page .glp1-sticky-mobile-cta .sticky-cta-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 400%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    #a7bfde 0%,
+    var(--b365-blue, #02367b) 25%,
+    #5a9fd4 50%,
+    var(--b365-blue-dark, #01244f) 75%,
+    #a7bfde 100%
+  );
+  background-size: 25% 100%;
+  animation: glp1buy-border-shift 2s linear infinite;
+  border-radius: 100px;
+}
+
+.glp1buy-page .glp1-sticky-mobile-cta .sticky-cta-btn::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: linear-gradient(135deg, var(--b365-blue, #02367b) 0%, var(--b365-blue-dark, #01244f) 100%);
+  border-radius: 100px;
+  z-index: 1;
+}
+
+.glp1buy-page .glp1-sticky-mobile-cta .sticky-cta-btn > * {
+  position: relative;
+  z-index: 2;
 }
 
 /* Secure notice under form */
