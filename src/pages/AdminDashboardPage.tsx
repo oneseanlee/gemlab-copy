@@ -223,7 +223,7 @@ export default function AdminDashboardPage() {
     });
 
     filteredLeads.forEach((l) => {
-      const day = l.created_at.slice(0, 10);
+      const day = toPTDate(l.created_at);
       const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0 };
       entry.leads++;
       if (l.completed) {
