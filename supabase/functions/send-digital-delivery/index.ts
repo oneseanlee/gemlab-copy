@@ -60,6 +60,7 @@ Deno.serve(async (req) => {
     const { data: msgId, error: enqueueError } = await supabase.rpc("enqueue_email", {
       queue_name: "transactional_emails",
       payload: {
+        run_id: LOVABLE_RUN_ID,
         to: email,
         from: `Best 365 Labs <noreply@${FROM_DOMAIN}>`,
         sender_domain: SENDER_DOMAIN,
@@ -67,7 +68,7 @@ Deno.serve(async (req) => {
         html,
         text,
         purpose: "transactional",
-        template_name: "digital_delivery",
+        label: "digital_delivery",
       },
     });
 
