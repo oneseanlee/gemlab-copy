@@ -1372,6 +1372,7 @@
   }
   .glp1-check-list {
     text-align: left;
+    min-height: 340px;
   }
   .glp1-check-list li {
     font-size: 13px;
