@@ -1018,6 +1018,7 @@
 @media (max-width: 768px) {
   .glp1-benefit-callouts {
     grid-template-columns: 1fr;
+    min-height: 260px;
   }
 }
 
