@@ -17,7 +17,7 @@ const TPrime365IntakePage = () => {
   }, []);
 
   useEffect(() => {
-    const iframe = document.getElementById('happymd-tprime365-embed') as HTMLIFrameElement;
+    const iframe = document.getElementById('happymd-testosterone-embed') as HTMLIFrameElement;
     if (!iframe) return;
 
     let loadCount = 0;
@@ -67,11 +67,13 @@ const TPrime365IntakePage = () => {
       }
     };
 
-    // NO auto-resize — it causes the endless scroll bug with dropdowns
-    // Using fixed height of 1200px instead
-    // Still listen for postMessage submit (in case HappyMD adds it later)
     const handleMessage = (e: MessageEvent) => {
       if (e.origin !== 'https://happymd.co') return;
+
+      if (e.data?.type === 'resize' && iframe) {
+        iframe.style.height = e.data.height + 'px';
+      }
+
       if (e.data?.type === 'submit' || e.data?.type === 'testosterone-form:submit') {
         fireGenerateLead('postMessage');
       }
@@ -126,11 +128,10 @@ const TPrime365IntakePage = () => {
         <div className="intake-iframe-container">
           <div className="intake-iframe-wrapper">
             <iframe
-              id="happymd-tprime365-embed"
+              id="happymd-testosterone-embed"
               src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=TPRIME365CELL&v=v2&theme=best365"
               width="100%"
-              height="1200px"
-              scrolling="auto"
+              height="800px"
               style={{ border: 'none', maxWidth: '100%', display: 'block' }}
               title="happyMD TPrime365 Testosterone Optimization Form"
               allow="camera; microphone"

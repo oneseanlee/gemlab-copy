@@ -1,22 +1,27 @@
 
 
-## Update TPrime365 Intake Iframe
+## Simplify the Free Testosterone Guide Page
 
-Align the iframe embed with the official HappyMD snippet the user provided, while preserving the existing advanced tracking logic.
+Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
 
-### Changes to `src/pages/TPrime365IntakePage.tsx`
+### What gets removed
+- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
+- **FAQ section** (lines 278-286) — the 4-item accordion
+- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
+- **Testimonials data** (`testimonials` array, lines 43-50)
+- **FAQ data** (`faqItems` array, lines 53-58)
+- **FaqItem component** (lines 125-138)
+- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
+- **Unused imports**: `Star`, `ChevronDown`
 
-1. **Iframe element updates:**
-   - Change `id` from `happymd-tprime365-embed` to `happymd-testosterone-embed`
-   - Change default `height` from `1200px` to `800px`
-   - Remove `scrolling="auto"` (not in the official snippet)
-   - Keep existing `allow="camera; microphone"` and `title`
+### What stays
+1. **Video background** — cinematic feel
+2. **Hero** — headline, subtitle, opt-in form, ebook cover
+3. **Trust strip** — 4 credibility badges
+4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
+5. **Final CTA** — dark video section with second opt-in form
+6. **Footer** — legal/contact
 
-2. **Re-enable auto-resize via postMessage:**
-   - Add a `resize` handler in the existing `handleMessage` function: when `e.data.type === 'resize'`, set `iframe.style.height = e.data.height + 'px'`
-   - This was previously disabled due to an "endless scroll bug" — the official embed now supports it, so we re-enable it
-
-3. **Update the iframe ID reference** in the `useEffect` hook from `happymd-tprime365-embed` to `happymd-testosterone-embed`
-
-All existing tracking logic (load-count detection, `generate_lead` dataLayer push, deduplication, `send-lead-notification` call) remains untouched.
+### Result
+The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
 
