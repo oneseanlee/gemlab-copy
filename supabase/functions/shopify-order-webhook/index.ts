@@ -19,6 +19,47 @@ function verifyShopifyHmac(body: string, hmacHeader: string, secret: string): bo
   }
 }
 
+function normalizeEmail(value?: string | null): string {
+  return (value ?? "").trim().toLowerCase();
+}
+
+function normalizeName(value?: string | null): string {
+  return (value ?? "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9\s'-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function toAmount(value: unknown): number | null {
+  const numericValue = typeof value === "number" ? value : Number(value);
+  if (!Number.isFinite(numericValue)) return null;
+  return Number(numericValue.toFixed(2));
+}
+
+function getOrderNames(order: Record<string, any>) {
+  const firstName = normalizeName(
+    order.customer?.first_name || order.billing_address?.first_name || ""
+  );
+  const lastName = normalizeName(
+    order.customer?.last_name || order.billing_address?.last_name || ""
+  );
+  const fullName = normalizeName(`${firstName} ${lastName}`.trim());
+
+  return { firstName, fullName };
+}
+
+function isNameMatch(leadName: string, orderFirstName: string, orderFullName: string): boolean {
+  if (!leadName) return false;
+  if (orderFullName && leadName === orderFullName) return true;
+  if (orderFirstName && (leadName === orderFirstName || leadName.startsWith(`${orderFirstName} `))) {
+    return true;
+  }
+  return false;
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -33,10 +74,8 @@ Deno.serve(async (req) => {
     });
   }
 
-  // Read body once for both verification and parsing
   const rawBody = await req.text();
 
-  // Verify HMAC signature
   const hmac = req.headers.get("X-Shopify-Hmac-Sha256") || "";
   if (!verifyShopifyHmac(rawBody, hmac, webhookSecret)) {
     console.error("Invalid HMAC signature");
@@ -46,8 +85,7 @@ Deno.serve(async (req) => {
     });
   }
 
-  // Parse order payload
-  let order: { email?: string; contact_email?: string; id?: number };
+  let order: Record<string, any>;
   try {
     order = JSON.parse(rawBody);
   } catch {
@@ -57,7 +95,7 @@ Deno.serve(async (req) => {
     });
   }
 
-  const email = (order.contact_email || order.email || "").toLowerCase().trim();
+  const email = normalizeEmail(order.contact_email || order.email || "");
   if (!email) {
     console.warn("Order has no email, skipping", { orderId: order.id });
     return new Response(JSON.stringify({ skipped: true, reason: "no email" }), {
@@ -68,31 +106,99 @@ Deno.serve(async (req) => {
 
   console.log("Processing paid order", { orderId: order.id, email });
 
-  // Update checkout_leads using service role
   const supabase = createClient(
     Deno.env.get("SUPABASE_URL")!,
     Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
   );
 
-  const { data, error } = await supabase
-    .from("checkout_leads")
-    .update({ completed: true })
-    .eq("email", email)
-    .eq("completed", false)
-    .select("id");
+  const orderCreatedAt = new Date(order.processed_at || order.created_at || Date.now());
+  const windowStart = new Date(orderCreatedAt.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  const windowEnd = new Date(orderCreatedAt.getTime() + 24 * 60 * 60 * 1000).toISOString();
+  const orderAmount = toAmount(order.total_price);
+  const { firstName: orderFirstName, fullName: orderFullName } = getOrderNames(order);
 
-  if (error) {
-    console.error("Failed to update checkout_leads", { error, email });
-    return new Response(JSON.stringify({ error: "DB update failed" }), {
+  const { data: pendingLeads, error: pendingLeadsError } = await supabase
+    .from("checkout_leads")
+    .select("id, email, first_name, cart_total, created_at")
+    .eq("completed", false)
+    .gte("created_at", windowStart)
+    .lte("created_at", windowEnd)
+    .order("created_at", { ascending: false })
+    .limit(500);
+
+  if (pendingLeadsError) {
+    console.error("Failed to load pending checkout leads", { error: pendingLeadsError, email });
+    return new Response(JSON.stringify({ error: "DB lookup failed" }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
 
-  const updatedCount = data?.length || 0;
-  console.log("Marked leads as completed", { email, updatedCount });
+  const emailMatches = (pendingLeads || []).filter((lead) => normalizeEmail(lead.email) === email);
 
-  // Sync purchase to Go High Level
+  let matchedLeadIds = emailMatches.map((lead) => lead.id);
+  let reconciliationStrategy: "email" | "name_total_fallback" | "unmatched" = "email";
+
+  if (matchedLeadIds.length === 0 && orderAmount !== null) {
+    const fallbackMatches = (pendingLeads || []).filter((lead) => {
+      const leadAmount = toAmount(lead.cart_total);
+      const leadName = normalizeName(lead.first_name);
+      return leadAmount === orderAmount && isNameMatch(leadName, orderFirstName, orderFullName);
+    });
+
+    if (fallbackMatches.length === 1) {
+      matchedLeadIds = [fallbackMatches[0].id];
+      reconciliationStrategy = "name_total_fallback";
+      console.warn("Webhook used fallback lead reconciliation", {
+        orderId: order.id,
+        email,
+        matchedLeadId: fallbackMatches[0].id,
+        orderFullName,
+        orderAmount,
+      });
+    } else if (fallbackMatches.length > 1) {
+      reconciliationStrategy = "unmatched";
+      console.error("Ambiguous fallback lead reconciliation", {
+        orderId: order.id,
+        email,
+        orderFullName,
+        orderAmount,
+        candidateLeadIds: fallbackMatches.map((lead) => lead.id),
+      });
+    }
+  }
+
+  let updatedCount = 0;
+
+  if (matchedLeadIds.length > 0) {
+    const { data, error } = await supabase
+      .from("checkout_leads")
+      .update({ completed: true })
+      .in("id", matchedLeadIds)
+      .eq("completed", false)
+      .select("id");
+
+    if (error) {
+      console.error("Failed to update checkout_leads", { error, email, matchedLeadIds });
+      return new Response(JSON.stringify({ error: "DB update failed" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    updatedCount = data?.length || 0;
+  } else {
+    reconciliationStrategy = "unmatched";
+    console.warn("No checkout lead matched paid order", {
+      orderId: order.id,
+      email,
+      orderFullName,
+      orderAmount,
+    });
+  }
+
+  console.log("Marked leads as completed", { email, updatedCount, reconciliationStrategy });
+
   try {
     const orderItems = (order as any).line_items?.map((li: any) => li.title).join(", ") || "Unknown";
     const totalPrice = (order as any).total_price || "0.00";
@@ -127,7 +233,6 @@ Deno.serve(async (req) => {
     console.error("GHL order sync failed (non-blocking):", ghlErr);
   }
 
-  // Send digital delivery email for GLP-1 Protocol orders
   try {
     const lineItems = (order as any).line_items || [];
     const hasGlp1 = lineItems.some((item: any) =>
@@ -136,7 +241,7 @@ Deno.serve(async (req) => {
     );
 
     if (hasGlp1) {
-      const deliveryEmail = (order.contact_email || order.email || "").toLowerCase().trim();
+      const deliveryEmail = normalizeEmail(order.contact_email || order.email || "");
       const deliveryName =
         (order as any).customer?.first_name ||
         (order as any).billing_address?.first_name ||
@@ -164,7 +269,7 @@ Deno.serve(async (req) => {
   }
 
   return new Response(
-    JSON.stringify({ success: true, updatedCount }),
+    JSON.stringify({ success: true, updatedCount, reconciliationStrategy }),
     { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
   );
 });
