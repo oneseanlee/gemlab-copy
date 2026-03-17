@@ -67,11 +67,13 @@ const TPrime365IntakePage = () => {
       }
     };
 
-    // NO auto-resize — it causes the endless scroll bug with dropdowns
-    // Using fixed height of 1200px instead
-    // Still listen for postMessage submit (in case HappyMD adds it later)
     const handleMessage = (e: MessageEvent) => {
       if (e.origin !== 'https://happymd.co') return;
+
+      if (e.data?.type === 'resize' && iframe) {
+        iframe.style.height = e.data.height + 'px';
+      }
+
       if (e.data?.type === 'submit' || e.data?.type === 'testosterone-form:submit') {
         fireGenerateLead('postMessage');
       }
