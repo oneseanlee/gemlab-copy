@@ -476,6 +476,48 @@ export default function AdminDashboardPage() {
               )}
             </div>
 
+            {/* Intake Funnel */}
+            {intakeFunnel.length > 0 && (
+              <div className="funnel-section" style={{ marginBottom: "1.5rem" }}>
+                <h2>Intake Funnel</h2>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                  {intakeFunnel.map(([source, data]) => {
+                    const rate = data.popup > 0 ? ((data.completed / data.popup) * 100).toFixed(0) : "0";
+                    const fillPct = data.popup > 0 ? Math.max((data.completed / data.popup) * 100, 3) : 0;
+                    return (
+                      <div key={source} style={{ background: "hsl(220 20% 13%)", borderRadius: 8, padding: "1rem 1.25rem" }}>
+                        <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "hsl(220 15% 90%)", marginBottom: "0.75rem", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                          {source}
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: 140 }}>
+                            <span style={{ fontSize: "0.78rem", color: "hsl(220 15% 55%)" }}>Popup Leads:</span>
+                            <span style={{ fontSize: "1.1rem", fontWeight: 700, color: "hsl(220 15% 90%)" }}>{data.popup}</span>
+                          </div>
+                          <span style={{ color: "hsl(220 15% 35%)", fontSize: "1.1rem" }}>→</span>
+                          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: 160 }}>
+                            <span style={{ fontSize: "0.78rem", color: "hsl(220 15% 55%)" }}>Form Completed:</span>
+                            <span style={{ fontSize: "1.1rem", fontWeight: 700, color: "hsl(160 70% 55%)" }}>{data.completed}</span>
+                          </div>
+                          <span style={{ color: "hsl(220 15% 35%)", fontSize: "1.1rem" }}>→</span>
+                          <span style={{ fontSize: "1.1rem", fontWeight: 700, color: data.completed > 0 ? "hsl(160 70% 55%)" : "hsl(0 60% 60%)" }}>{rate}%</span>
+                        </div>
+                        <div style={{ height: 8, background: "hsl(220 20% 18%)", borderRadius: 4, overflow: "hidden" }}>
+                          <div style={{
+                            height: "100%",
+                            width: `${fillPct}%`,
+                            background: "linear-gradient(90deg, hsl(160 70% 45%), hsl(160 60% 55%))",
+                            borderRadius: 4,
+                            transition: "width 0.6s ease",
+                          }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* UTM Campaign Breakdown */}
             {utmBreakdown.hasData && (
               <div className="admin-table-card" style={{ marginBottom: "1.5rem" }}>
