@@ -1027,6 +1027,8 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  min-height: 68px;
+  contain: layout style;
 }
 .thumb-arrow {
   display: flex;
