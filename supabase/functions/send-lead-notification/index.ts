@@ -213,7 +213,7 @@ Deno.serve(async (req) => {
       subject,
       htmlBody,
       notificationEmail,
-      "Best365 Labs <notify@cell365power.com>"
+      "Best 365 Labs <info@email.cell365power.com>"
     );
 
     console.log("GHL notification email sent:", emailResult?.messageId || "ok");
