@@ -58,6 +58,7 @@ interface DailyBreakdown {
   views: number;
   unique: number;
   intakeLeads: number;
+  intakeCompleted: number;
 }
 
 export default function AdminDashboardPage() {
@@ -65,6 +66,7 @@ export default function AdminDashboardPage() {
   const [authed, setAuthed] = useState(() => !!sessionStorage.getItem("admin_token"));
   const [leads, setLeads] = useState<Lead[]>([]);
   const [intakeLeads, setIntakeLeads] = useState<IntakeLead[]>([]);
+  const [fallbackCompletions, setFallbackCompletions] = useState<FallbackCompletion[]>([]);
   const [traffic, setTraffic] = useState<TrafficData>({ totalPageViews: 0, uniqueVisitors: 0, dailyTraffic: [], topPages: [] });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
