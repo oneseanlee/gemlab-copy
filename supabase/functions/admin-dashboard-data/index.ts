@@ -91,6 +91,10 @@ Deno.serve(async (req) => {
     .from("page_views")
     .select("page_path, visitor_id, created_at");
 
+  // Helper: convert UTC timestamp to Pacific Time date string (YYYY-MM-DD)
+  const toPTDate = (utcStr: string) =>
+    new Date(utcStr).toLocaleDateString("en-CA", { timeZone: "America/Los_Angeles" });
+
   const traffic = {
     totalPageViews: 0,
     uniqueVisitors: 0,
@@ -103,10 +107,10 @@ Deno.serve(async (req) => {
     const uniqueSet = new Set(trafficData.map((r: any) => r.visitor_id));
     traffic.uniqueVisitors = uniqueSet.size;
 
-    // Daily breakdown
+    // Daily breakdown (bucketed by Pacific Time)
     const dailyMap = new Map<string, { views: number; visitors: Set<string> }>();
     trafficData.forEach((r: any) => {
-      const day = r.created_at.slice(0, 10);
+      const day = toPTDate(r.created_at);
       const entry = dailyMap.get(day) || { views: 0, visitors: new Set<string>() };
       entry.views++;
       entry.visitors.add(r.visitor_id);

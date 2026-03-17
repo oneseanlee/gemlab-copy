@@ -2,6 +2,13 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import "./AdminDashboardPage.css";
 
+// Pacific Time utilities — all dates/times displayed in PT
+const PT_TZ = "America/Los_Angeles";
+const toPTDate = (utc: string) => new Date(utc).toLocaleDateString("en-CA", { timeZone: PT_TZ }); // YYYY-MM-DD
+const toPTDisplay = (utc: string) => new Date(utc).toLocaleDateString("en-US", { timeZone: PT_TZ });
+const toPTTime = (utc: string) => new Date(utc).toLocaleTimeString("en-US", { timeZone: PT_TZ, hour: "2-digit", minute: "2-digit" });
+const toPTFull = (utc: string) => new Date(utc).toLocaleString("en-US", { timeZone: PT_TZ });
+
 interface Lead {
   id: string;
   first_name: string;
@@ -116,8 +123,9 @@ export default function AdminDashboardPage() {
           (l.phone || "").includes(q);
         if (!match) return false;
       }
-      if (dateFrom && l.created_at.slice(0, 10) < dateFrom) return false;
-      if (dateTo && l.created_at.slice(0, 10) > dateTo) return false;
+      const ptDate = toPTDate(l.created_at);
+      if (dateFrom && ptDate < dateFrom) return false;
+      if (dateTo && ptDate > dateTo) return false;
       return true;
     });
   }, [leads, search, statusFilter, dateFrom, dateTo]);
@@ -134,8 +142,9 @@ export default function AdminDashboardPage() {
           l.source.toLowerCase().includes(q);
         if (!match) return false;
       }
-      if (dateFrom && l.created_at.slice(0, 10) < dateFrom) return false;
-      if (dateTo && l.created_at.slice(0, 10) > dateTo) return false;
+      const ptDate = toPTDate(l.created_at);
+      if (dateFrom && ptDate < dateFrom) return false;
+      if (dateTo && ptDate > dateTo) return false;
       return true;
     });
   }, [intakeLeads, search, dateFrom, dateTo]);
@@ -214,7 +223,7 @@ export default function AdminDashboardPage() {
     });
 
     filteredLeads.forEach((l) => {
-      const day = l.created_at.slice(0, 10);
+      const day = toPTDate(l.created_at);
       const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0 };
       entry.leads++;
       if (l.completed) {
@@ -225,7 +234,7 @@ export default function AdminDashboardPage() {
     });
 
     filteredIntakeLeads.forEach((l) => {
-      const day = l.created_at.slice(0, 10);
+      const day = toPTDate(l.created_at);
       const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0 };
       entry.intakeLeads++;
       map.set(day, entry);
@@ -263,7 +272,7 @@ export default function AdminDashboardPage() {
         formatUtmForCSV(l.utm_params),
         Number(l.cart_total).toFixed(2),
         l.completed ? "Completed" : "Abandoned",
-        new Date(l.created_at).toLocaleString(),
+        toPTFull(l.created_at),
         formatCartItems(l.cart_items),
       ]);
       downloadCSV([headers, ...rows], "checkout-leads");
@@ -275,7 +284,7 @@ export default function AdminDashboardPage() {
         l.phone || "",
         l.source,
         formatUtmForCSV(l.utm_params),
-        new Date(l.created_at).toLocaleString(),
+        toPTFull(l.created_at),
       ]);
       downloadCSV([headers, ...rows], "intake-leads");
     }
@@ -327,6 +336,9 @@ export default function AdminDashboardPage() {
               textTransform: "uppercase",
             }}>
               {isLive ? "LIVE" : "TEST"}
+            </span>
+            <span style={{ fontSize: "0.7rem", color: "hsl(220 15% 45%)", fontStyle: "italic" }}>
+              All times Pacific (PT)
             </span>
           </div>
           <div className="header-actions">
@@ -697,9 +709,9 @@ export default function AdminDashboardPage() {
                             </span>
                           </td>
                           <td style={{ whiteSpace: "nowrap" }}>
-                            {new Date(l.created_at).toLocaleDateString()}{" "}
+                            {toPTDisplay(l.created_at)}{" "}
                             <span style={{ color: "hsl(220 15% 45%)" }}>
-                              {new Date(l.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                              {toPTTime(l.created_at)}
                             </span>
                           </td>
                         </tr>
@@ -751,9 +763,9 @@ export default function AdminDashboardPage() {
                             ) : <span style={{ color: "hsl(220 15% 35%)" }}>—</span>}
                           </td>
                           <td style={{ whiteSpace: "nowrap" }}>
-                            {new Date(l.created_at).toLocaleDateString()}{" "}
+                            {toPTDisplay(l.created_at)}{" "}
                             <span style={{ color: "hsl(220 15% 45%)" }}>
-                              {new Date(l.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                              {toPTTime(l.created_at)}
                             </span>
                           </td>
                         </tr>

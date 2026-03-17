@@ -1,39 +1,27 @@
 
 
-## Convert All Timestamps to Pacific Time (PT)
+## Simplify the Free Testosterone Guide Page
 
-There are two places where timestamps need to be converted from UTC to Pacific Time:
+Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
 
-### 1. Edge Function (daily traffic bucketing)
+### What gets removed
+- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
+- **FAQ section** (lines 278-286) — the 4-item accordion
+- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
+- **Testimonials data** (`testimonials` array, lines 43-50)
+- **FAQ data** (`faqItems` array, lines 53-58)
+- **FaqItem component** (lines 125-138)
+- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
+- **Unused imports**: `Star`, `ChevronDown`
 
-The `admin-dashboard-data` edge function groups page views into daily buckets using `r.created_at.slice(0, 10)`, which extracts the UTC date. This means a visit at 11pm PT on Sunday gets bucketed as Monday in UTC.
+### What stays
+1. **Video background** — cinematic feel
+2. **Hero** — headline, subtitle, opt-in form, ebook cover
+3. **Trust strip** — 4 credibility badges
+4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
+5. **Final CTA** — dark video section with second opt-in form
+6. **Footer** — legal/contact
 
-**Fix**: Convert each `created_at` to Pacific Time before slicing the date. Use `toLocaleString('en-CA', { timeZone: 'America/Los_Angeles' }).slice(0, 10)` to get the PT date string (en-CA gives YYYY-MM-DD format).
-
-### 2. Frontend (AdminDashboardPage.tsx)
-
-Multiple places display or bucket by date using raw UTC timestamps:
-
-- **Lead table timestamps** (lines ~700, ~754): `new Date(l.created_at).toLocaleDateString()` and `.toLocaleTimeString()` — these use the browser's local timezone. Need to force `timeZone: 'America/Los_Angeles'`.
-- **Daily breakdown bucketing** (lines ~217, ~228): `l.created_at.slice(0, 10)` extracts the UTC date for lead grouping. Need to convert to PT first.
-- **Date filter comparison** (lines ~119-120): `l.created_at.slice(0, 10)` compared against date-picker values. Same fix needed.
-- **CSV export timestamps** (lines ~266, ~278): `new Date(l.created_at).toLocaleString()` — force PT timezone.
-
-### Implementation
-
-**A. Create a PT utility** at the top of `AdminDashboardPage.tsx`:
-```typescript
-const toPT = (utc: string) => new Date(utc).toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
-const toPTDate = (utc: string) => new Date(utc).toLocaleDateString("en-CA", { timeZone: "America/Los_Angeles" }); // YYYY-MM-DD
-```
-
-**B. Update `admin-dashboard-data/index.ts`**: Use the same PT conversion when bucketing `dailyTraffic` and `topPages`.
-
-**C. Update all frontend date displays and groupings** to use `toPTDate()` / `toPT()` instead of raw UTC slicing or default locale.
-
-**D. Add a "All times Pacific (PT)" label** to the dashboard header for clarity.
-
-### Files Changed
-- `supabase/functions/admin-dashboard-data/index.ts` — PT-aware daily bucketing
-- `src/pages/AdminDashboardPage.tsx` — PT formatting everywhere
+### Result
+The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
 
