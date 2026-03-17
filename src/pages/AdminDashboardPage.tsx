@@ -170,8 +170,29 @@ export default function AdminDashboardPage() {
       .filter((l) => l.completed)
       .reduce((sum, l) => sum + Number(l.cart_total), 0);
     const totalAllLeads = total + intakeLeads.length;
-    return { total, sales, abandoned, rate, revenue, totalAllLeads };
-  }, [leads, intakeLeads]);
+    const intakeCompleted = intakeLeads.filter((l) => l.happymd_completed).length + fallbackCompletions.length;
+    return { total, sales, abandoned, rate, revenue, totalAllLeads, intakeCompleted };
+  }, [leads, intakeLeads, fallbackCompletions]);
+
+  // Intake funnel by source
+  const intakeFunnel = useMemo(() => {
+    const sources = new Map<string, { popup: number; completed: number }>();
+    intakeLeads.forEach((l) => {
+      const entry = sources.get(l.source) || { popup: 0, completed: 0 };
+      entry.popup++;
+      if (l.happymd_completed) entry.completed++;
+      sources.set(l.source, entry);
+    });
+    // Add fallback completions
+    fallbackCompletions.forEach((c) => {
+      const entry = sources.get(c.source) || { popup: 0, completed: 0 };
+      entry.completed++;
+      sources.set(c.source, entry);
+    });
+    return Array.from(sources.entries())
+      .filter(([src]) => ['tprime365', 'nhto'].includes(src))
+      .sort((a, b) => b[1].popup - a[1].popup);
+  }, [intakeLeads, fallbackCompletions]);
 
   // Intake leads by source
   const intakeBySource = useMemo(() => {
