@@ -66,11 +66,13 @@ const NHTOIntakePage = () => {
       }
     };
 
-    // NO auto-resize — causes endless scroll bug with dropdowns
-    // Using fixed height of 1200px instead
-    // METHOD 2: Listen for postMessage (in case HappyMD adds support later)
     const handleMessage = (e: MessageEvent) => {
       if (e.origin !== 'https://happymd.co') return;
+
+      if (e.data?.type === 'resize' && iframe) {
+        iframe.style.height = e.data.height + 'px';
+      }
+
       if (e.data?.type === 'submit' || e.data?.type === 'testosterone-form:submit') {
         fireGenerateLead('postMessage');
       }
