@@ -521,7 +521,7 @@ const GLP1BuyPage = () => {
               </div>
             </div>
 
-            <p className="checkout-shipping-note">FREE SHIPPING — NO CODE REQUIRED</p>
+            <p className="checkout-shipping-note">🎁 FREE Digital Guides + Community Access + Free Shipping Included</p>
 
             <div className="glp1-bonuses-section">
               <h4 className="bonuses-title">YOUR FREE BONUSES</h4>
