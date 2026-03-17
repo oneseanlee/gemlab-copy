@@ -514,7 +514,7 @@ const GLP1BuyPage = () => {
                 if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }}
             >
-              Get My GLP-1 Protocol <ArrowRight size={18} />
+              <span>Get My GLP-1 Protocol</span> <ArrowRight size={18} />
             </button>
             <div className="glp1buy-mobile-countdown">
               <div className="glp1buy-countdown">
