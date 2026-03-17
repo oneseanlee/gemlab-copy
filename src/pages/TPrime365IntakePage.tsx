@@ -17,7 +17,7 @@ const TPrime365IntakePage = () => {
   }, []);
 
   useEffect(() => {
-    const iframe = document.getElementById('happymd-tprime365-embed') as HTMLIFrameElement;
+    const iframe = document.getElementById('happymd-testosterone-embed') as HTMLIFrameElement;
     if (!iframe) return;
 
     let loadCount = 0;
