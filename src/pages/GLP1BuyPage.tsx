@@ -514,7 +514,7 @@ const GLP1BuyPage = () => {
                 if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }}
             >
-              Get My GLP-1 Protocol <ArrowRight size={18} />
+              <span>Get My GLP-1 Protocol</span> <ArrowRight size={18} />
             </button>
             <div className="glp1buy-mobile-countdown">
               <div className="glp1buy-countdown">
@@ -587,7 +587,7 @@ const GLP1BuyPage = () => {
               <p style={{ fontSize: '13px', color: '#DC2626', textAlign: 'center', margin: '8px 0' }}>⚡ Launch pricing — limited availability</p>
 
               <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading || hasSubmitted.current}>
-                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Redirecting…</> : <>Get My GLP-1 Protocol <ArrowRight size={18} /></>}
+                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> <span>Redirecting…</span></> : <><span>Get My GLP-1 Protocol</span> <ArrowRight size={18} /></>}
               </button>
 
               <div className="glp1buy-secure-note">
@@ -636,7 +636,7 @@ const GLP1BuyPage = () => {
       <div className="glp1-sticky-mobile-cta">
         <span className="sticky-price">$39.95 <span className="sticky-strike">$90</span></span>
         <button className="sticky-cta-btn" disabled={isSubmitting || isLoading || hasSubmitted.current} onClick={handleSubmit(onSubmit)}>
-          {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> Redirecting…</> : <>Get My GLP-1 Protocol <ArrowRight size={14} /></>}
+          {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> <span>Redirecting…</span></> : <><span>Get My GLP-1 Protocol</span> <ArrowRight size={14} /></>}
         </button>
       </div>
     </div>
