@@ -73,10 +73,10 @@ Deno.serve(async (req) => {
     });
   }
 
-  // Fetch intake/guide leads
+  // Fetch intake/guide leads (now includes happymd_completed fields)
   const { data: intakeLeads, error: intakeError } = await supabase
     .from("leads")
-    .select("*, utm_params")
+    .select("*, utm_params, happymd_completed, happymd_completed_at")
     .order("created_at", { ascending: false });
 
   if (intakeError) {
@@ -85,6 +85,12 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+
+  // Fetch fallback intake completions (for cases where email wasn't available)
+  const { data: fallbackCompletions } = await supabase
+    .from("intake_completions")
+    .select("source, tracking_code, created_at")
+    .order("created_at", { ascending: false });
 
   // Fetch traffic stats (aggregated)
   const { data: trafficData, error: trafficError } = await supabase
@@ -134,7 +140,12 @@ Deno.serve(async (req) => {
       .map(([page, v]) => ({ page, views: v.views, unique: v.visitors.size }));
   }
 
-  return new Response(JSON.stringify({ leads, intakeLeads: intakeLeads || [], traffic }), {
+  return new Response(JSON.stringify({
+    leads,
+    intakeLeads: intakeLeads || [],
+    fallbackCompletions: fallbackCompletions || [],
+    traffic,
+  }), {
     status: 200,
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
