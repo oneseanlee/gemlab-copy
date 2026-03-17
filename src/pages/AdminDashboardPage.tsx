@@ -436,6 +436,13 @@ export default function AdminDashboardPage() {
                 <div className="stat-label">Total Revenue</div>
                 <div className="stat-value">${stats.revenue.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
               </div>
+              <div className="stat-card" style={{ borderTop: "3px solid hsl(160 70% 45%)" }}>
+                <div className="stat-label">Intake Completed</div>
+                <div className="stat-value">{stats.intakeCompleted}</div>
+                <div style={{ fontSize: "0.72rem", color: "hsl(220 15% 50%)", marginTop: 2 }}>
+                  HappyMD forms submitted
+                </div>
+              </div>
             </div>
 
             {/* Intake Leads by Source */}
