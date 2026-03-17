@@ -982,7 +982,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  min-height: 108px;
+  min-height: 132px;
+  contain: layout style;
 }
 .glp1-benefit-callouts .benefit-item {
   display: flex;
