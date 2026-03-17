@@ -2,6 +2,13 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import "./AdminDashboardPage.css";
 
+// Pacific Time utilities — all dates/times displayed in PT
+const PT_TZ = "America/Los_Angeles";
+const toPTDate = (utc: string) => new Date(utc).toLocaleDateString("en-CA", { timeZone: PT_TZ }); // YYYY-MM-DD
+const toPTDisplay = (utc: string) => new Date(utc).toLocaleDateString("en-US", { timeZone: PT_TZ });
+const toPTTime = (utc: string) => new Date(utc).toLocaleTimeString("en-US", { timeZone: PT_TZ, hour: "2-digit", minute: "2-digit" });
+const toPTFull = (utc: string) => new Date(utc).toLocaleString("en-US", { timeZone: PT_TZ });
+
 interface Lead {
   id: string;
   first_name: string;
