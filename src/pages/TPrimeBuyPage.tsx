@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 
 import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";
+import { splitName } from "@/lib/split-name";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";

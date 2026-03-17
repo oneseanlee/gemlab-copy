@@ -4,6 +4,7 @@ import { getFbcValue, getFbpValue } from "@/lib/fb-cookies";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";
+import { splitName } from "@/lib/split-name";
 import { getAttributeParams } from "@/lib/utm-capture";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
