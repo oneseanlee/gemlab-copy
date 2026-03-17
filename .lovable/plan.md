@@ -1,27 +1,18 @@
 
 
-## Simplify the Free Testosterone Guide Page
+## Update GHL "From" Email Address
 
-Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
+Two-line change across two edge functions, then redeploy.
 
-### What gets removed
-- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
-- **FAQ section** (lines 278-286) — the 4-item accordion
-- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
-- **Testimonials data** (`testimonials` array, lines 43-50)
-- **FAQ data** (`faqItems` array, lines 53-58)
-- **FaqItem component** (lines 125-138)
-- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
-- **Unused imports**: `Star`, `ChevronDown`
+### Changes
 
-### What stays
-1. **Video background** — cinematic feel
-2. **Hero** — headline, subtitle, opt-in form, ebook cover
-3. **Trust strip** — 4 credibility badges
-4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
-5. **Final CTA** — dark video section with second opt-in form
-6. **Footer** — legal/contact
+**1. `supabase/functions/send-digital-delivery/index.ts`**
+- Change `emailFrom` from `Best 365 Labs <noreply@cell365power.com>` to `Best 365 Labs <info@email.cell365power.com>`
 
-### Result
-The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
+**2. `supabase/functions/send-lead-notification/index.ts`**
+- Change `emailFrom` from `Best365 Labs <notify@cell365power.com>` to `Best 365 Labs <info@email.cell365power.com>`
+
+**3. Redeploy both edge functions**
+
+Both functions will use the verified subdomain `email.cell365power.com`, which keeps your root domain reputation isolated from transactional email traffic.
 
