@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { X, Gift, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { getUtmParams } from '@/lib/utm';
+import { splitName } from '@/lib/split-name';
 import { toast } from 'sonner';
 import './LeadCaptureModal.css';
 
