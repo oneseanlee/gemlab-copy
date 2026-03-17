@@ -640,6 +640,15 @@ const GLP1BuyPage = () => {
           {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> <span>Redirecting…</span></> : <><span>Get My GLP-1 Protocol</span> <ArrowRight size={14} /></>}
         </button>
       </div>
+
+      {/* Simple credibility footer */}
+      <footer className="glp1buy-simple-footer">
+        <img src="/images/best365labs-logo-white.png" alt="Best 365 Labs" className="glp1buy-footer-logo" />
+        <p className="glp1buy-footer-address">
+          Best 365 Labs, Inc &middot; 14857 S Concorde Park Dr, Bluffdale, UT 84065 &middot; Publicly Traded: BHIC
+        </p>
+        <p className="glp1buy-footer-copy">&copy; {new Date().getFullYear()} Best 365 Labs, Inc. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
