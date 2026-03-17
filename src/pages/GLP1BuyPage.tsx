@@ -95,6 +95,7 @@ const carouselMedia: MediaItem[] = [
   { type: "image", src: "/images/metabolism-plus.webp" },
   { type: "image", src: "/images/glp1-product-4.jpg" },
   { type: "image", src: "/images/glp1-product-8.png" },
+  { type: "image", src: "/images/glp1-product-9.jpg" },
 ];
 
 /* ── Form schema ──────────────────────────────────────── */
