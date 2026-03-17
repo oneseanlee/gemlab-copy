@@ -43,8 +43,10 @@ const NHTOIntakePage = () => {
         page_url: window.location.href,
         page_referrer: document.referrer,
         event_id: eventId,
-        fbc: getFbcValue(),
-        fbp: getFbpValue(),
+        user_data: {
+          fbc: getFbcValue(),
+          fbp: getFbpValue(),
+        },
       });
 
       console.log('[UCOSNHTO] generate_lead FIRED via ' + source + ' — eventId:', eventId);
