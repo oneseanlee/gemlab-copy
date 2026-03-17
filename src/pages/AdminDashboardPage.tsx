@@ -247,16 +247,16 @@ export default function AdminDashboardPage() {
 
   // Daily breakdown merging leads + traffic
   const dailyBreakdown = useMemo<DailyBreakdown[]>(() => {
-    const map = new Map<string, { leads: number; sales: number; revenue: number; views: number; unique: number; intakeLeads: number }>();
+    const map = new Map<string, { leads: number; sales: number; revenue: number; views: number; unique: number; intakeLeads: number; intakeCompleted: number }>();
 
     // Seed from traffic daily data
     traffic.dailyTraffic.forEach((t) => {
-      map.set(t.date, { leads: 0, sales: 0, revenue: 0, views: t.views, unique: t.unique, intakeLeads: 0 });
+      map.set(t.date, { leads: 0, sales: 0, revenue: 0, views: t.views, unique: t.unique, intakeLeads: 0, intakeCompleted: 0 });
     });
 
     filteredLeads.forEach((l) => {
       const day = toPTDate(l.created_at);
-      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0 };
+      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0, intakeCompleted: 0 };
       entry.leads++;
       if (l.completed) {
         entry.sales++;
@@ -267,8 +267,17 @@ export default function AdminDashboardPage() {
 
     filteredIntakeLeads.forEach((l) => {
       const day = toPTDate(l.created_at);
-      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0 };
+      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0, intakeCompleted: 0 };
       entry.intakeLeads++;
+      if (l.happymd_completed) entry.intakeCompleted++;
+      map.set(day, entry);
+    });
+
+    // Add fallback completions to daily
+    fallbackCompletions.forEach((c) => {
+      const day = toPTDate(c.created_at);
+      const entry = map.get(day) || { leads: 0, sales: 0, revenue: 0, views: 0, unique: 0, intakeLeads: 0, intakeCompleted: 0 };
+      entry.intakeCompleted++;
       map.set(day, entry);
     });
 
@@ -284,8 +293,9 @@ export default function AdminDashboardPage() {
         views: v.views,
         unique: v.unique,
         intakeLeads: v.intakeLeads,
+        intakeCompleted: v.intakeCompleted,
       }));
-  }, [filteredLeads, filteredIntakeLeads, traffic.dailyTraffic]);
+  }, [filteredLeads, filteredIntakeLeads, fallbackCompletions, traffic.dailyTraffic]);
 
   const formatUtmForCSV = (utm?: Record<string, string>) => {
     if (!utm || Object.keys(utm).length === 0) return "";
