@@ -134,7 +134,7 @@ Deno.serve(async (req) => {
       subject: "Your Digital Guides & Community Access Are Ready 🎉",
       html,
       emailTo: email,
-      emailFrom: "Best 365 Labs <noreply@cell365power.com>",
+      emailFrom: "Best 365 Labs <info@email.cell365power.com>",
     }, GHL_API_KEY);
 
     console.log("Digital delivery email sent via GHL", { email, messageId: emailResult?.messageId });
