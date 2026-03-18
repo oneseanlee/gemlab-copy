@@ -2,6 +2,7 @@ import * as React from "npm:react@18.3.1";
 import { renderAsync } from "npm:@react-email/components@0.0.22";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 import { DigitalDeliveryEmail } from "../_shared/email-templates/digital-delivery.tsx";
+import { DigitalDeliveryLateEmail } from "../_shared/email-templates/digital-delivery-late.tsx";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
