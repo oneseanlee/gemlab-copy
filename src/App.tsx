@@ -35,6 +35,7 @@ const GLP1AdvertorialPage = lazy(() => import("./pages/GLP1AdvertorialPage"));
 const GLP1BuyPage = lazy(() => import("./pages/GLP1BuyPage"));
 const TPrimeBuyPage = lazy(() => import("./pages/TPrimeBuyPage"));
 const TScoreQuizPage = lazy(() => import("./pages/TScoreQuizPage"));
+const BookingPage = lazy(() => import("./pages/BookingPage"));
 const AdminDashboardPage = lazy(() => import("./pages/AdminDashboardPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -86,6 +87,7 @@ const AppRoutes = () => {
         <Route path="/free-testosterone-guide/thank-you" element={<ThankYouPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/t-score-quiz" element={<TScoreQuizPage />} />
+        <Route path="/book" element={<BookingPage />} />
         <Route path="/admin" element={<AdminDashboardPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
