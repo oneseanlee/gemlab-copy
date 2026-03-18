@@ -59,16 +59,6 @@ const BookingPage: React.FC = () => {
       const start = new Date(year, month, 1);
       const end = new Date(year, month + 1, 0, 23, 59, 59);
 
-      const { data, error: fnError } = await supabase.functions.invoke(
-        'ghl-calendar-slots',
-        {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          body: undefined,
-        }
-      );
-
-      // supabase.functions.invoke doesn't support query params, so use fetch directly
       const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
       const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
