@@ -87,6 +87,7 @@ const AppRoutes = () => {
         <Route path="/free-testosterone-guide/thank-you" element={<ThankYouPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/t-score-quiz" element={<TScoreQuizPage />} />
+        <Route path="/book" element={<BookingPage />} />
         <Route path="/admin" element={<AdminDashboardPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
