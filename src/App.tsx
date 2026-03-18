@@ -35,6 +35,7 @@ const GLP1AdvertorialPage = lazy(() => import("./pages/GLP1AdvertorialPage"));
 const GLP1BuyPage = lazy(() => import("./pages/GLP1BuyPage"));
 const TPrimeBuyPage = lazy(() => import("./pages/TPrimeBuyPage"));
 const TScoreQuizPage = lazy(() => import("./pages/TScoreQuizPage"));
+const BookingPage = lazy(() => import("./pages/BookingPage"));
 const AdminDashboardPage = lazy(() => import("./pages/AdminDashboardPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
