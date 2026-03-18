@@ -119,9 +119,15 @@ Deno.serve(async (req) => {
   console.log("Rendering digital delivery email", { email, firstName, orderId });
 
   try {
-    const html = await renderAsync(
-      React.createElement(DigitalDeliveryEmail, { firstName, orderId })
-    );
+    const emailComponent = variant === "late"
+      ? React.createElement(DigitalDeliveryLateEmail, { firstName })
+      : React.createElement(DigitalDeliveryEmail, { firstName, orderId });
+
+    const html = await renderAsync(emailComponent);
+
+    const subject = variant === "late"
+      ? "Your Bonus Digital Guides Are Here 📚"
+      : "Your Digital Guides & Community Access Are Ready 🎉";
 
     // Step 1: Find/create GHL contact
     const contactId = await findOrCreateContact(GHL_API_KEY, GHL_LOCATION_ID, {
