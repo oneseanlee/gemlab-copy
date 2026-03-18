@@ -293,10 +293,16 @@ const BookingPage: React.FC = () => {
                   className="cal-confirm-btn"
                 >
                   Continue to Book — {formatSlotTime(selectedSlot)}
+                  <ArrowRight size={18} />
                 </a>
               )}
             </div>
           )}
+
+          <div className="cal-timezone">
+            <Globe size={12} />
+            Times shown in {timezone.replace(/_/g, ' ')}
+          </div>
         </section>
       </main>
 
