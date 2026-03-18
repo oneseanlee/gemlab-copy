@@ -28,10 +28,10 @@
 
 /* ── Main Grid ── */
 .booking-main {
-  max-width: 1280px;
+  max-width: 1340px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 380px 1fr;
   gap: 56px;
   padding: 64px 40px 80px;
   align-items: start;
@@ -59,11 +59,11 @@
 
 .booking-info h1 {
   font-family: var(--font-heading);
-  font-size: clamp(30px, 3.2vw, 46px);
+  font-size: clamp(28px, 3vw, 42px);
   font-weight: 700;
   line-height: 1.12;
   color: var(--b365-navy);
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   letter-spacing: -0.01em;
 }
 .booking-info h1 em {
@@ -72,10 +72,10 @@
 }
 
 .booking-subtitle {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.7;
   color: var(--b365-gray-500);
-  margin-bottom: 36px;
+  margin-bottom: 32px;
   max-width: 460px;
 }
 
@@ -83,16 +83,16 @@
 .booking-highlights {
   list-style: none;
   padding: 0;
-  margin: 0 0 36px;
+  margin: 0 0 32px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 .booking-highlights li {
   display: flex;
   align-items: center;
-  gap: 14px;
-  font-size: 14px;
+  gap: 12px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--b365-text);
   line-height: 1.4;
@@ -101,8 +101,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 10px;
   background: hsla(210, 54%, 44%, 0.06);
   color: var(--b365-blue);
@@ -128,44 +128,57 @@
 }
 
 /* ═══════════════════════════════════
-   CUSTOM CALENDAR — Premium Card
+   CALENDAR CARD
    ═══════════════════════════════════ */
 .booking-calendar-custom {
   background: var(--b365-white);
   border-radius: 20px;
   border: 1px solid var(--b365-gray-200);
-  padding: 32px;
   position: relative;
+  overflow: hidden;
   box-shadow:
     0 1px 3px hsla(210, 20%, 50%, 0.06),
     0 8px 24px hsla(210, 20%, 50%, 0.08),
     0 24px 48px hsla(210, 20%, 50%, 0.04);
 }
 
-/* ── Decorative top accent ── */
+/* Top accent bar */
 .booking-calendar-custom::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 24px;
-  right: 24px;
+  left: 0;
+  right: 0;
   height: 3px;
-  border-radius: 0 0 3px 3px;
   background: linear-gradient(90deg, var(--b365-blue), var(--b365-blue-dark));
 }
 
-/* ── Calendar Header ── */
+/* ── Inner flex — Calendar | Slots ── */
+.cal-inner {
+  display: flex;
+  min-height: 440px;
+}
+.cal-inner--with-slots .cal-calendar-side {
+  border-right: 1px solid var(--b365-gray-200);
+}
+
+/* ── Calendar Side ── */
+.cal-calendar-side {
+  flex: 1 1 auto;
+  padding: 28px 28px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
 .cal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--b365-gray-200);
+  margin-bottom: 20px;
 }
 .cal-month-label {
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--b365-navy);
   margin: 0;
@@ -175,9 +188,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   border: 1px solid var(--b365-gray-200);
   background: var(--b365-white);
   color: var(--b365-navy);
@@ -188,7 +201,6 @@
   background: hsla(210, 54%, 44%, 0.06);
   color: var(--b365-blue);
   border-color: hsla(210, 54%, 44%, 0.2);
-  box-shadow: 0 2px 6px hsla(210, 54%, 44%, 0.1);
 }
 .cal-nav-btn:disabled {
   opacity: 0.3;
@@ -199,8 +211,8 @@
 .cal-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  margin-bottom: 6px;
+  gap: 2px;
+  margin-bottom: 4px;
 }
 .cal-weekday {
   text-align: center;
@@ -209,16 +221,16 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--b365-gray-400);
-  padding: 6px 0;
+  padding: 4px 0;
 }
 
 /* ── Day Grid ── */
 .cal-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
+  gap: 4px;
   position: relative;
-  min-height: 260px;
+  flex: 1;
 }
 
 .cal-loading-overlay {
@@ -229,7 +241,7 @@
   justify-content: center;
   background: hsla(0, 0%, 100%, 0.85);
   backdrop-filter: blur(4px);
-  border-radius: 12px;
+  border-radius: 8px;
   z-index: 2;
 }
 .cal-spinner {
@@ -245,14 +257,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1.5px solid transparent;
   background: transparent;
   color: var(--b365-gray-300);
   cursor: default;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.15s ease;
   position: relative;
 }
 .cal-day-empty {
@@ -260,7 +272,7 @@
 }
 .cal-day-past {
   color: var(--b365-gray-300);
-  opacity: 0.5;
+  opacity: 0.45;
 }
 .cal-day-available {
   color: var(--b365-navy);
@@ -273,17 +285,12 @@
   border-color: var(--b365-blue);
   background: hsla(210, 54%, 44%, 0.08);
   color: var(--b365-blue);
-  transform: scale(1.06);
-  box-shadow: 0 2px 8px hsla(210, 54%, 44%, 0.12);
 }
 .cal-day-selected {
   background: var(--b365-blue) !important;
   color: var(--b365-white) !important;
   border-color: var(--b365-blue) !important;
-  box-shadow:
-    0 2px 8px hsla(210, 54%, 44%, 0.35),
-    0 0 0 3px hsla(210, 54%, 44%, 0.12);
-  transform: scale(1.06);
+  box-shadow: 0 2px 8px hsla(210, 54%, 44%, 0.3);
   font-weight: 700;
 }
 .cal-day-today {
@@ -292,9 +299,9 @@
 .cal-day-today::after {
   content: '';
   position: absolute;
-  bottom: 5px;
-  width: 5px;
-  height: 5px;
+  bottom: 3px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--b365-blue);
 }
@@ -302,21 +309,33 @@
   background: var(--b365-white);
 }
 
-/* ── Availability dot indicator ── */
+/* Availability dot */
 .cal-day-available::before {
   content: '';
   position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 5px;
-  height: 5px;
+  top: 4px;
+  right: 4px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: #2ecc71;
-  box-shadow: 0 0 4px hsla(145, 63%, 49%, 0.4);
 }
 .cal-day-selected::before {
   background: var(--b365-white);
-  box-shadow: none;
+}
+
+/* ── Timezone ── */
+.cal-timezone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--b365-gray-400);
+  margin-top: 12px;
+}
+.cal-timezone svg {
+  opacity: 0.5;
 }
 
 /* ── Error ── */
@@ -324,135 +343,157 @@
   text-align: center;
   color: #c0392b;
   font-size: 13px;
-  margin-top: 16px;
-  padding: 12px;
+  margin-top: 12px;
+  padding: 10px;
   background: hsla(0, 62%, 42%, 0.06);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
-/* ── Slots Section ── */
-.cal-slots-section {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--b365-gray-200);
-  animation: calSlotsFadeIn 0.3s ease;
+/* ═══════════════════════════════════
+   SLOTS SIDE PANEL
+   ═══════════════════════════════════ */
+.cal-slots-side {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  animation: calSlotsSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: hsla(210, 20%, 98%, 1);
 }
-@keyframes calSlotsFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes calSlotsSlideIn {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
 }
-.cal-slots-title {
+
+.cal-slots-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-heading);
-  font-size: 14px;
+  gap: 10px;
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--b365-gray-200);
+}
+.cal-slots-header svg {
+  color: var(--b365-blue);
+  flex-shrink: 0;
+}
+.cal-slots-label {
+  display: block;
+  font-size: 13px;
   font-weight: 700;
   color: var(--b365-navy);
-  margin: 0 0 16px;
-  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
-.cal-slots-title svg {
-  color: var(--b365-blue);
+.cal-slots-date {
+  display: block;
+  font-size: 11px;
+  color: var(--b365-gray-500);
+  margin-top: 2px;
 }
+
 .cal-no-slots {
   font-size: 13px;
   color: var(--b365-gray-400);
   text-align: center;
-  padding: 16px 0;
+  padding: 24px 16px;
 }
 
-.cal-slots-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 8px;
+/* ── Scrollable slot list ── */
+.cal-slots-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 380px;
+
+  /* Subtle scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--b365-gray-300) transparent;
 }
+.cal-slots-list::-webkit-scrollbar {
+  width: 4px;
+}
+.cal-slots-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.cal-slots-list::-webkit-scrollbar-thumb {
+  background: var(--b365-gray-300);
+  border-radius: 4px;
+}
+
+/* ── Individual Slot ── */
 .cal-slot {
-  padding: 11px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
   border-radius: 10px;
   border: 1.5px solid var(--b365-gray-200);
   background: var(--b365-white);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+  min-height: 42px;
+}
+.cal-slot-time {
   font-size: 13px;
   font-weight: 600;
   color: var(--b365-navy);
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 .cal-slot:hover {
   border-color: var(--b365-blue);
-  background: hsla(210, 54%, 44%, 0.06);
+  background: hsla(210, 54%, 44%, 0.04);
+}
+.cal-slot:hover .cal-slot-time {
   color: var(--b365-blue);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px hsla(210, 54%, 44%, 0.1);
 }
+
+/* Selected slot expands to show confirm */
 .cal-slot-selected {
-  background: var(--b365-blue) !important;
-  color: var(--b365-white) !important;
   border-color: var(--b365-blue) !important;
-  box-shadow:
-    0 2px 8px hsla(210, 54%, 44%, 0.35),
-    0 0 0 3px hsla(210, 54%, 44%, 0.1);
-  transform: translateY(-1px);
+  background: var(--b365-blue) !important;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px 8px;
 }
-
-/* ── Confirm Button ── */
-.cal-confirm-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  margin-top: 20px;
-  padding: 15px 24px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--b365-blue), var(--b365-blue-dark));
+.cal-slot-selected .cal-slot-time {
   color: var(--b365-white);
-  font-size: 15px;
-  font-weight: 700;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:
-    0 4px 14px hsla(210, 54%, 44%, 0.3),
-    0 1px 3px hsla(210, 54%, 44%, 0.2);
-  letter-spacing: 0.01em;
-  animation: calSlotsFadeIn 0.25s ease;
-}
-.cal-confirm-btn:hover {
-  background: linear-gradient(135deg, var(--b365-blue-dark), var(--b365-navy));
-  box-shadow:
-    0 6px 20px hsla(210, 54%, 44%, 0.4),
-    0 2px 6px hsla(210, 54%, 44%, 0.2);
-  transform: translateY(-2px);
-}
-.cal-confirm-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px hsla(210, 54%, 44%, 0.3);
+  font-size: 13px;
 }
 
-/* ── Timezone Note ── */
-.cal-timezone {
-  text-align: center;
-  font-size: 11px;
-  color: var(--b365-gray-400);
-  margin-top: 20px;
-  display: flex;
+/* Confirm button inside slot */
+.cal-slot-confirm {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
+  width: 100%;
+  padding: 7px 12px;
+  border-radius: 7px;
+  background: var(--b365-white);
+  color: var(--b365-blue);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  letter-spacing: 0.01em;
 }
-.cal-timezone svg {
-  opacity: 0.5;
+.cal-slot-confirm:hover {
+  background: hsla(210, 54%, 95%, 1);
 }
 
-/* ── Responsive ── */
-@media (max-width: 900px) {
+/* ═══════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════ */
+@media (max-width: 1024px) {
   .booking-main {
     grid-template-columns: 1fr;
     padding: 40px 20px 60px;
     gap: 32px;
+    max-width: 720px;
   }
   .booking-info {
     text-align: center;
@@ -473,28 +514,45 @@
   }
 }
 
+@media (max-width: 600px) {
+  .cal-inner {
+    flex-direction: column;
+  }
+  .cal-inner--with-slots .cal-calendar-side {
+    border-right: none;
+    border-bottom: 1px solid var(--b365-gray-200);
+  }
+  .cal-slots-side {
+    width: 100%;
+    animation-name: calSlotsFadeIn;
+  }
+  @keyframes calSlotsFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .cal-slots-list {
+    max-height: 240px;
+  }
+  .cal-calendar-side {
+    padding: 24px 16px 16px;
+  }
+  .booking-calendar-custom {
+    border-radius: 16px;
+  }
+}
+
 @media (max-width: 480px) {
   .booking-info h1 {
     font-size: 26px;
   }
-  .booking-calendar-custom {
-    padding: 24px 16px;
-    border-radius: 16px;
-  }
-  .cal-grid {
-    gap: 4px;
-    min-height: 220px;
-  }
   .cal-day {
-    border-radius: 10px;
-  }
-  .cal-slots-grid {
-    grid-template-columns: repeat(3, 1fr);
+    border-radius: 8px;
+    font-size: 12px;
   }
   .cal-day-available::before {
-    width: 4px;
-    height: 4px;
-    top: 4px;
-    right: 4px;
+    width: 3px;
+    height: 3px;
+    top: 3px;
+    right: 3px;
   }
 }
