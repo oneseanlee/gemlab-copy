@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import { Calendar, Shield, TrendingUp, Users, CheckCircle, ChevronLeft, ChevronRight, Clock, Loader2 } from 'lucide-react';
 
