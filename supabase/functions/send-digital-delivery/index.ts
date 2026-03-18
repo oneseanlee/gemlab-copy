@@ -2,6 +2,7 @@ import * as React from "npm:react@18.3.1";
 import { renderAsync } from "npm:@react-email/components@0.0.22";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 import { DigitalDeliveryEmail } from "../_shared/email-templates/digital-delivery.tsx";
+import { DigitalDeliveryLateEmail } from "../_shared/email-templates/digital-delivery-late.tsx";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -93,12 +94,14 @@ Deno.serve(async (req) => {
   let email: string;
   let firstName: string;
   let orderId: string | number | undefined;
+  let variant: "default" | "late" = "default";
 
   try {
     const body = await req.json();
     email = body.email;
     firstName = body.firstName || "there";
     orderId = body.orderId;
+    if (body.variant === "late") variant = "late";
   } catch {
     return new Response(
       JSON.stringify({ error: "Invalid JSON" }),
@@ -116,9 +119,15 @@ Deno.serve(async (req) => {
   console.log("Rendering digital delivery email", { email, firstName, orderId });
 
   try {
-    const html = await renderAsync(
-      React.createElement(DigitalDeliveryEmail, { firstName, orderId })
-    );
+    const emailComponent = variant === "late"
+      ? React.createElement(DigitalDeliveryLateEmail, { firstName })
+      : React.createElement(DigitalDeliveryEmail, { firstName, orderId });
+
+    const html = await renderAsync(emailComponent);
+
+    const subject = variant === "late"
+      ? "Your Bonus Digital Guides Are Here 📚"
+      : "Your Digital Guides & Community Access Are Ready 🎉";
 
     // Step 1: Find/create GHL contact
     const contactId = await findOrCreateContact(GHL_API_KEY, GHL_LOCATION_ID, {
@@ -131,7 +140,7 @@ Deno.serve(async (req) => {
     const emailResult = await ghlRequest("/conversations/messages", "POST", {
       type: "Email",
       contactId,
-      subject: "Your Digital Guides & Community Access Are Ready 🎉",
+      subject,
       html,
       emailTo: email,
       emailFrom: "Best 365 Labs <info@email.cell365power.com>",
