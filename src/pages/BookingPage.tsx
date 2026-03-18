@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import { Calendar, Shield, TrendingUp, Users, CheckCircle, ChevronLeft, ChevronRight, Clock, Loader2 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+
 import './BookingPage.css';
 
 const highlights = [
