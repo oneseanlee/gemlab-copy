@@ -94,12 +94,14 @@ Deno.serve(async (req) => {
   let email: string;
   let firstName: string;
   let orderId: string | number | undefined;
+  let variant: "default" | "late" = "default";
 
   try {
     const body = await req.json();
     email = body.email;
     firstName = body.firstName || "there";
     orderId = body.orderId;
+    if (body.variant === "late") variant = "late";
   } catch {
     return new Response(
       JSON.stringify({ error: "Invalid JSON" }),
