@@ -140,7 +140,7 @@ Deno.serve(async (req) => {
     const emailResult = await ghlRequest("/conversations/messages", "POST", {
       type: "Email",
       contactId,
-      subject: "Your Digital Guides & Community Access Are Ready 🎉",
+      subject,
       html,
       emailTo: email,
       emailFrom: "Best 365 Labs <info@email.cell365power.com>",
