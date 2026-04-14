@@ -1,27 +1,26 @@
 
 
-## Simplify the Free Testosterone Guide Page
+# Query GoHighLevel AI Bots
 
-Strip the page down to just the essentials: Hero with form, trust strip, "Inside This Guide" list, and final CTA. Remove all the heavy middle sections.
+## What we'll do
 
-### What gets removed
-- **Testimonials section** (lines 258-276) — the 6 quote cards with headshots
-- **FAQ section** (lines 278-286) — the 4-item accordion
-- **Mid-page CTA** (lines 244-256) — redundant third form between discover and testimonials
-- **Testimonials data** (`testimonials` array, lines 43-50)
-- **FAQ data** (`faqItems` array, lines 53-58)
-- **FaqItem component** (lines 125-138)
-- **Unused refs**: `midCtaRef`, `proofRef`, `faqRef`
-- **Unused imports**: `Star`, `ChevronDown`
+Create a temporary edge function (or use a one-off script via the existing `ghl-sync` infrastructure) to call the GHL Conversation AI API and retrieve all AI bot/agent configurations from your account.
 
-### What stays
-1. **Video background** — cinematic feel
-2. **Hero** — headline, subtitle, opt-in form, ebook cover
-3. **Trust strip** — 4 credibility badges
-4. **"Inside This Guide"** — the 7-item discover list (gives just enough value preview)
-5. **Final CTA** — dark video section with second opt-in form
-6. **Footer** — legal/contact
+## Steps
 
-### Result
-The page goes from 7 sections down to 4 content sections. Clean, fast, focused on one action: enter name + email to get the guide.
+1. **Call the GHL API** — Hit `GET https://services.leadconnectorhq.com/conversation-ai/agents/search?limit=100` using your existing `GHL_API_KEY` and `GHL_LOCATION_ID` secrets. The API requires `Version: 2021-04-15` header.
+
+2. **Retrieve full agent details** — For each agent returned, call `GET /conversation-ai/agents/{agentId}` to get the complete configuration (name, status, model, prompt/instructions, actions, channels, settings).
+
+3. **List actions per agent** — Call `GET /conversation-ai/agents/{agentId}/actions/list` to see what each bot can do (book appointments, transfer calls, etc.).
+
+4. **Report findings** — Compile everything into a clear summary: agent names, statuses, what channels they're active on, their configured actions, and any relevant settings.
+
+## Technical approach
+
+I'll use `code--exec` to run a quick script that calls the GHL API using your existing secrets (`GHL_API_KEY`, `GHL_LOCATION_ID`) from the edge function environment. No permanent code changes needed — this is a one-time information-gathering task.
+
+## No code changes to your project
+
+This is purely a read-only investigation. No files in your codebase will be modified.
 
