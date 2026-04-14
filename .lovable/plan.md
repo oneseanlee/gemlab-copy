@@ -1,26 +1,24 @@
 
 
-# Query GoHighLevel AI Bots
+# Write Client Summary Email
 
-## What we'll do
+This is a document generation task — I'll write a comprehensive, professional email summarizing everything that's been built and configured in the Best365 Labs system, including how to configure and test the GHL AI bots.
 
-Create a temporary edge function (or use a one-off script via the existing `ghl-sync` infrastructure) to call the GHL Conversation AI API and retrieve all AI bot/agent configurations from your account.
+## What the email will cover
 
-## Steps
+1. **Website & Funnel Pages** — All live pages (homepage, product pages, advertorials, quiz, guides, checkout, booking, admin dashboard)
+2. **GoHighLevel Integration** — CRM sync, contact tagging, lead capture pipeline, transactional emails via GHL Conversations API
+3. **AI Bots Overview** — The 4 bots discovered (Support Agent, NHTO Advisor, GLP-1 Specialist, TPrime365 Concierge), their current modes, and step-by-step instructions on how to configure them in the GHL dashboard
+4. **Shopify Integration** — Order webhook processing, abandoned cart reconciliation, digital delivery automation
+5. **Email System** — Auth emails via Lovable queue, transactional emails via GHL (lead notifications, digital delivery)
+6. **Booking System** — GHL calendar integration on /book page
+7. **How to Test Everything** — Step-by-step testing checklist for each system
 
-1. **Call the GHL API** — Hit `GET https://services.leadconnectorhq.com/conversation-ai/agents/search?limit=100` using your existing `GHL_API_KEY` and `GHL_LOCATION_ID` secrets. The API requires `Version: 2021-04-15` header.
+## Deliverable
 
-2. **Retrieve full agent details** — For each agent returned, call `GET /conversation-ai/agents/{agentId}` to get the complete configuration (name, status, model, prompt/instructions, actions, channels, settings).
+A polished, client-ready email saved as a PDF to `/mnt/documents/`. Professional formatting, clear sections, actionable testing steps.
 
-3. **List actions per agent** — Call `GET /conversation-ai/agents/{agentId}/actions/list` to see what each bot can do (book appointments, transfer calls, etc.).
+## No code changes
 
-4. **Report findings** — Compile everything into a clear summary: agent names, statuses, what channels they're active on, their configured actions, and any relevant settings.
-
-## Technical approach
-
-I'll use `code--exec` to run a quick script that calls the GHL API using your existing secrets (`GHL_API_KEY`, `GHL_LOCATION_ID`) from the edge function environment. No permanent code changes needed — this is a one-time information-gathering task.
-
-## No code changes to your project
-
-This is purely a read-only investigation. No files in your codebase will be modified.
+This is a document generation task only. No project files will be modified.
 
