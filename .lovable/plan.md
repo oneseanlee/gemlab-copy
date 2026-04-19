@@ -1,9 +1,9 @@
 
-Research task — query DB to check intake activity for these two leads.
+Research task — pull last 3 days of activity (Apr 14-16, 2026 PT) across all tables and summarize.
 
 Steps:
-1. Query `leads` for Ryan (rjsimon7883@yahoo.com) and Carlos (carlosrod62@icloud.com) to confirm capture + `happymd_completed` status + timestamp.
-2. Query `intake_completions` table for any tracking_code='TPRIME365CELL' entries near their timestamps (fallback when email isn't passed to HappyMD).
-3. Check `page_views` for `/tprime365-intake` visits around their lead capture times to see if they actually loaded the iframe page.
-4. Cross-reference timing to determine: (a) only submitted popup, (b) loaded intake page but didn't complete, or (c) completed but tracking failed.
-5. Deliver concise inline answer per user — no PDF, no code changes.
+1. Query `page_views`, `leads`, `checkout_leads`, `intake_completions`, `email_send_log` for the last 3 days (PT timezone).
+2. Break down by source/page: traffic, leads captured, intake completions, checkout leads, sales (digital delivery emails sent).
+3. Day-by-day summary plus 3-day totals.
+4. Highlight notable events (new leads, drop-offs, anomalies).
+5. Deliver concise inline summary — no PDF, no code changes.
