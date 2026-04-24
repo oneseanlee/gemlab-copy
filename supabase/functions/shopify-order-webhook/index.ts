@@ -116,6 +116,29 @@ Deno.serve(async (req) => {
   const windowEnd = new Date(orderCreatedAt.getTime() + 24 * 60 * 60 * 1000).toISOString();
   const orderAmount = toAmount(order.total_price);
   const { firstName: orderFirstName, fullName: orderFullName } = getOrderNames(order);
+  const shopifyOrderId = order.id != null ? String(order.id) : null;
+
+  // Idempotency check: if this Shopify order_id has already been recorded, skip.
+  if (shopifyOrderId) {
+    const { data: existing, error: existingError } = await supabase
+      .from("checkout_leads")
+      .select("id")
+      .eq("shopify_order_id", shopifyOrderId)
+      .limit(1);
+
+    if (existingError) {
+      console.error("Idempotency lookup failed", { error: existingError, shopifyOrderId });
+    } else if (existing && existing.length > 0) {
+      console.log("Order already processed — skipping duplicate webhook fire", {
+        shopifyOrderId,
+        email,
+      });
+      return new Response(
+        JSON.stringify({ success: true, duplicate: true, shopifyOrderId }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+  }
 
   const { data: pendingLeads, error: pendingLeadsError } = await supabase
     .from("checkout_leads")
@@ -173,7 +196,7 @@ Deno.serve(async (req) => {
   if (matchedLeadIds.length > 0) {
     const { data, error } = await supabase
       .from("checkout_leads")
-      .update({ completed: true })
+      .update({ completed: true, shopify_order_id: shopifyOrderId })
       .in("id", matchedLeadIds)
       .eq("completed", false)
       .select("id");
