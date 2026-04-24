@@ -9,6 +9,20 @@ const corsHeaders = {
 const MAX_ATTEMPTS = 5;
 const WINDOW_MINUTES = 10;
 
+// Test email patterns to filter out from admin dashboard
+const TEST_EMAIL_PATTERNS = [
+  /@example\.com$/i,
+  /@test\.com$/i,
+  /^test@/i,
+  /^ghltest@/i,
+  /fakedata/i,
+  /rrerwrew/i,
+];
+const isTestEmail = (email?: string | null): boolean => {
+  if (!email) return false;
+  return TEST_EMAIL_PATTERNS.some((re) => re.test(email));
+};
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -63,7 +77,7 @@ Deno.serve(async (req) => {
   // Fetch checkout leads
   const { data: leads, error: leadsError } = await supabase
     .from("checkout_leads")
-    .select("*, source, utm_params")
+    .select("*, source, utm_params, shopify_order_id")
     .order("created_at", { ascending: false });
 
   if (leadsError) {
@@ -72,6 +86,9 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+
+  // Filter test data
+  const cleanLeads = (leads || []).filter((l: any) => !isTestEmail(l.email));
 
   // Fetch intake/guide leads (now includes happymd_completed fields)
   const { data: intakeLeads, error: intakeError } = await supabase
@@ -85,6 +102,8 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+
+  const cleanIntakeLeads = (intakeLeads || []).filter((l: any) => !isTestEmail(l.email));
 
   // Fetch fallback intake completions (for cases where email wasn't available)
   const { data: fallbackCompletions } = await supabase
@@ -141,8 +160,8 @@ Deno.serve(async (req) => {
   }
 
   return new Response(JSON.stringify({
-    leads,
-    intakeLeads: intakeLeads || [],
+    leads: cleanLeads,
+    intakeLeads: cleanIntakeLeads,
     fallbackCompletions: fallbackCompletions || [],
     traffic,
   }), {
