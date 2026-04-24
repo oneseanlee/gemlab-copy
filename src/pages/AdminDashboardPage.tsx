@@ -163,15 +163,22 @@ export default function AdminDashboardPage() {
   // Stats from ALL leads (unfiltered)
   const stats = useMemo(() => {
     const total = leads.length;
-    const sales = leads.filter((l) => l.completed).length;
+    const completedLeads = leads.filter((l) => l.completed);
+    const sales = completedLeads.length;
+    // Unique paying customers (deduped by email) — true human-customer count
+    const uniqueCustomerEmails = new Set(
+      completedLeads.map((l) => (l.email || "").trim().toLowerCase()).filter(Boolean)
+    );
+    const uniqueCustomers = uniqueCustomerEmails.size;
     const abandoned = total - sales;
     const rate = total > 0 ? ((sales / total) * 100).toFixed(1) : "0.0";
-    const revenue = leads
-      .filter((l) => l.completed)
-      .reduce((sum, l) => sum + Number(l.cart_total), 0);
+    const revenue = completedLeads.reduce((sum, l) => sum + Number(l.cart_total), 0);
     const totalAllLeads = total + intakeLeads.length;
     const intakeCompleted = intakeLeads.filter((l) => l.happymd_completed).length + fallbackCompletions.length;
-    return { total, sales, abandoned, rate, revenue, totalAllLeads, intakeCompleted };
+    const intakeRate = intakeLeads.length > 0
+      ? ((intakeCompleted / intakeLeads.length) * 100).toFixed(1)
+      : "0.0";
+    return { total, sales, uniqueCustomers, abandoned, rate, revenue, totalAllLeads, intakeCompleted, intakeRate };
   }, [leads, intakeLeads, fallbackCompletions]);
 
   // Intake funnel by source
@@ -423,13 +430,21 @@ export default function AdminDashboardPage() {
               <div className="stat-card sales">
                 <div className="stat-label">Completed Sales</div>
                 <div className="stat-value">{stats.sales}</div>
+                <div style={{ fontSize: "0.72rem", color: "hsl(220 15% 50%)", marginTop: 2 }}>
+                  {stats.uniqueCustomers} unique customer{stats.uniqueCustomers === 1 ? "" : "s"}
+                </div>
               </div>
               <div className="stat-card abandoned">
                 <div className="stat-label">Abandoned</div>
                 <div className="stat-value">{stats.abandoned}</div>
               </div>
               <div className="stat-card rate">
-                <div className="stat-label">Conversion Rate</div>
+                <div
+                  className="stat-label"
+                  title="Completed checkouts ÷ checkout leads"
+                >
+                  Checkout Conv. Rate
+                </div>
                 <div className="stat-value">{stats.rate}%</div>
               </div>
               <div className="stat-card revenue">
@@ -442,6 +457,15 @@ export default function AdminDashboardPage() {
                 <div style={{ fontSize: "0.72rem", color: "hsl(220 15% 50%)", marginTop: 2 }}>
                   HappyMD forms submitted
                 </div>
+              </div>
+              <div className="stat-card" style={{ borderTop: "3px solid hsl(160 70% 45%)" }}>
+                <div
+                  className="stat-label"
+                  title="HappyMD forms completed ÷ intake leads captured"
+                >
+                  Intake Conv. Rate
+                </div>
+                <div className="stat-value">{stats.intakeRate}%</div>
               </div>
             </div>
 
