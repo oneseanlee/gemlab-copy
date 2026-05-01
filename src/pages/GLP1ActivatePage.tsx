@@ -1,6 +1,5 @@
 // @ts-nocheck
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import React, { useState, useEffect } from 'react';
 import './GLP1ActivatePage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
@@ -75,6 +74,12 @@ const GLP1ActivatePage: React.FC = () => {
 
   const selected = VARIANTS[purchase];
 
+  useEffect(() => {
+    const prev = document.title;
+    document.title = 'GLP-1 Activate — Your GLP-1 Has a Blind Spot. This Fixes It.';
+    return () => { document.title = prev; };
+  }, []);
+
   const handleAdd = async () => {
     await addItem({
       product: ACTIVATE_PRODUCT,
@@ -89,15 +94,6 @@ const GLP1ActivatePage: React.FC = () => {
 
   return (
     <div className="glpa-page">
-      <Helmet>
-        <title>GLP-1 Activate — Your GLP-1 Has a Blind Spot. This Fixes It.</title>
-        <meta name="description" content="Sublingual cellular support designed for GLP-1 therapy. NAD+, 1-MNA, Spermidine, Boron. Bypasses the gut. Preorder now — ships May 1, 2026." />
-        <meta property="og:title" content="GLP-1 Activate — GLP-1 Cellular Companion™" />
-        <meta property="og:description" content="The first sublingual cellular support formula designed specifically for GLP-1 therapy." />
-        <meta property="og:image" content={PRODUCT_IMG} />
-        <link rel="canonical" href="https://cell365power.com/glp1-activate" />
-      </Helmet>
-
       {/* PROMO BANNER */}
       {showBanner && (
         <div className="glpa-promo">
@@ -123,7 +119,17 @@ const GLP1ActivatePage: React.FC = () => {
           </div>
         </div>
       </nav>
-      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileMenu
+        isOpen={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        links={[
+          { label: 'Benefits', href: '#benefits' },
+          { label: 'Science', href: '#science' },
+          { label: 'Stack', href: '#stack' },
+          { label: 'FAQ', href: '#faq' },
+          { label: 'Shop All', href: '/' },
+        ]}
+      />
 
       {/* HERO */}
       <section className="glpa-section dark glpa-hero">
