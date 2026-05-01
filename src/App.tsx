@@ -37,6 +37,7 @@ const TPrimeBuyPage = lazy(() => import("./pages/TPrimeBuyPage"));
 const TScoreQuizPage = lazy(() => import("./pages/TScoreQuizPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
 const AdminDashboardPage = lazy(() => import("./pages/AdminDashboardPage"));
+const GLP1ActivatePage = lazy(() => import("./pages/GLP1ActivatePage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -71,6 +72,7 @@ const AppRoutes = () => {
         <Route path="/glp1-buy" element={<GLP1BuyPage />} />
         <Route path="/tprime-buy" element={<TPrimeBuyPage />} />
         <Route path="/glp1-protocol" element={<GLP1Page />} />
+        <Route path="/glp1-activate" element={<GLP1ActivatePage />} />
         <Route path="/nhto" element={<NHTOPage />} />
         <Route path="/nhto-intake" element={<NHTOIntakePage />} />
         

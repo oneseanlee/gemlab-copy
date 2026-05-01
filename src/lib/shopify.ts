@@ -9,6 +9,11 @@ const SHOPIFY_STOREFRONT_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN |
 export const GLP1_VARIANT_ID = 'gid://shopify/ProductVariant/46265391579276';
 export const TPRIME_VARIANT_ID = 'gid://shopify/ProductVariant/46309997936780';
 
+// GLP-1 Activate — sublingual GLP-1 Cellular Companion (3 purchase options)
+export const GLP1_ACTIVATE_ONETIME_VARIANT_ID = 'gid://shopify/ProductVariant/48537979519116';
+export const GLP1_ACTIVATE_MONTHLY_VARIANT_ID = 'gid://shopify/ProductVariant/48537979551884';
+export const GLP1_ACTIVATE_BIMONTHLY_VARIANT_ID = 'gid://shopify/ProductVariant/48537979584652';
+
 // Free bonus digital products (auto-added with GLP-1 Protocol)
 export const FREE_MASTER_GUIDE_VARIANT_ID = 'gid://shopify/ProductVariant/46743959732364';
 export const FREE_LYMPHATIC_VARIANT_ID = 'gid://shopify/ProductVariant/46743959797900';
