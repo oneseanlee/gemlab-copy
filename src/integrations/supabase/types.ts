@@ -285,6 +285,10 @@ export type Database = {
         Args: { payload: Json; queue_name: string }
         Returns: number
       }
+      mark_intake_completed_private: {
+        Args: { p_email: string; p_source: string }
+        Returns: boolean
+      }
       move_to_dlq: {
         Args: {
           dlq_name: string
