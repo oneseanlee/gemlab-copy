@@ -24,7 +24,8 @@ import {
   Activity,
 } from 'lucide-react';
 
-const PRODUCT_IMG = 'https://best365labs.com/wp-content/uploads/2026/04/GLP-1-Activate-1.jpg';
+import glp1ActivateBottle from '@/assets/glp1-activate-bottle.png';
+const PRODUCT_IMG = glp1ActivateBottle;
 const PRODUCT_IMG_FALLBACK = '/images/product-glp-protocol.png';
 
 const ACTIVATE_PRODUCT = {
