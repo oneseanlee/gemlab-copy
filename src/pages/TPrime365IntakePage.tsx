@@ -64,11 +64,13 @@ const TPrime365IntakePage = () => {
       const leadEmail = localStorage.getItem('intake_lead_email');
       const leadSource = localStorage.getItem('intake_lead_source') || 'tprime365';
       if (leadEmail) {
-        (supabase.rpc as any)('mark_intake_completed', { p_email: leadEmail, p_source: leadSource })
-          .then(({ error }: { error: any }) => {
-            if (error) console.error('[TPRIME365] mark_intake_completed error:', error);
-            else console.log('[TPRIME365] intake completion saved for', leadEmail);
-          });
+        fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mark-intake-completed`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}` },
+          body: JSON.stringify({ email: leadEmail, source: leadSource }),
+        })
+          .then(() => console.log('[TPRIME365] intake completion saved for', leadEmail))
+          .catch((err) => console.error('[TPRIME365] mark_intake_completed error:', err));
       } else {
         // Fallback: no email available, log to intake_completions
         (supabase.from as any)('intake_completions').insert({
