@@ -277,14 +277,6 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      check_checkout_lead_rate_limit: {
-        Args: { p_cooldown_seconds?: number; p_email: string }
-        Returns: boolean
-      }
-      check_lead_rate_limit: {
-        Args: { p_cooldown_seconds?: number; p_email: string; p_source: string }
-        Returns: boolean
-      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
@@ -292,10 +284,6 @@ export type Database = {
       enqueue_email: {
         Args: { payload: Json; queue_name: string }
         Returns: number
-      }
-      mark_intake_completed: {
-        Args: { p_email: string; p_source: string }
-        Returns: boolean
       }
       move_to_dlq: {
         Args: {
