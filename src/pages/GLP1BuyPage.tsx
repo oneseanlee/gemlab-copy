@@ -608,6 +608,11 @@ const GLP1BuyPage = () => {
                 <input id="glp1buy-email" type="email" placeholder="your.email@gmail.com" {...register("email")} />
                 {errors.email && <div className="glp1buy-field-error">{errors.email.message}</div>}
               </div>
+              <div className="glp1buy-field">
+                <label htmlFor="glp1buy-phone">Phone (optional — for shipping updates)</label>
+                <input id="glp1buy-phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="(555) 123-4567" {...register("phone")} />
+                {errors.phone && <div className="glp1buy-field-error">{errors.phone.message}</div>}
+              </div>
               <p style={{ fontSize: '13px', color: '#DC2626', textAlign: 'center', margin: '8px 0' }}>⚡ Launch pricing — limited availability</p>
 
               <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting || isLoading || hasSubmitted.current}>
