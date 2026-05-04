@@ -1,0 +1,2 @@
+ALTER TABLE public.checkout_leads ADD COLUMN IF NOT EXISTS recovery_email_sent_at TIMESTAMPTZ;
+CREATE INDEX IF NOT EXISTS idx_checkout_leads_recovery ON public.checkout_leads (created_at) WHERE completed = false AND recovery_email_sent_at IS NULL;

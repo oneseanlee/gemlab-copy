@@ -142,7 +142,7 @@ Deno.serve(async (req) => {
 
   const { data: pendingLeads, error: pendingLeadsError } = await supabase
     .from("checkout_leads")
-    .select("id, email, first_name, cart_total, created_at")
+    .select("id, email, first_name, cart_total, created_at, phone")
     .eq("completed", false)
     .gte("created_at", windowStart)
     .lte("created_at", windowEnd)
@@ -161,6 +161,25 @@ Deno.serve(async (req) => {
 
   let matchedLeadIds = emailMatches.map((lead) => lead.id);
   let reconciliationStrategy: "email" | "name_total_fallback" | "unmatched" = "email";
+
+  // Phone-number fallback (when email differs at Shopify checkout)
+  const orderPhoneRaw = (order as any).customer?.phone || (order as any).billing_address?.phone || (order as any).shipping_address?.phone || "";
+  const orderPhoneDigits = String(orderPhoneRaw).replace(/\D/g, "");
+  if (matchedLeadIds.length === 0 && orderPhoneDigits.length >= 7) {
+    const phoneMatches = (pendingLeads || []).filter((lead) => {
+      const leadDigits = String(lead.phone || "").replace(/\D/g, "");
+      return leadDigits.length >= 7 && leadDigits.slice(-10) === orderPhoneDigits.slice(-10);
+    });
+    if (phoneMatches.length === 1) {
+      matchedLeadIds = [phoneMatches[0].id];
+      reconciliationStrategy = "name_total_fallback"; // reuse field; keep enum stable
+      console.warn("Webhook used phone fallback reconciliation", {
+        orderId: order.id,
+        email,
+        matchedLeadId: phoneMatches[0].id,
+      });
+    }
+  }
 
   if (matchedLeadIds.length === 0 && orderAmount !== null) {
     const fallbackMatches = (pendingLeads || []).filter((lead) => {

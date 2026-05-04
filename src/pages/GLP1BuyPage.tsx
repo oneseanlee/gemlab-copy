@@ -103,7 +103,14 @@ const carouselMedia: MediaItem[] = [
 const schema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().email("Please enter a valid email").max(255),
-  phone: z.string().optional(),
+  phone: z
+    .string()
+    .trim()
+    .optional()
+    .refine(
+      (v) => !v || /^[\d\s().+-]{7,20}$/.test(v),
+      "Please enter a valid phone number"
+    ),
 });
 type FormData = z.infer<typeof schema>;
 
@@ -295,11 +302,6 @@ const GLP1BuyPage = () => {
 
     hasSubmitted.current = true;
     setIsSubmitting(true);
-    const utmParams = getAttributeParams();
-    if (checkoutUrl && utmParams) {
-      const separator = checkoutUrl.includes('?') ? '&' : '?';
-      checkoutUrl = checkoutUrl + separator + utmParams;
-    }
     try {
       const { firstName: fn, lastName: ln } = splitName(data.name);
       const { error: insertError } = await supabase.from("checkout_leads").insert({
@@ -328,22 +330,44 @@ const GLP1BuyPage = () => {
       const firstName = nameParts[0];
       const lastName = nameParts.slice(1).join(" ");
 
-      await updateBuyerIdentity({
-        email: data.email,
-        deliveryAddressPreferences: [{
-          deliveryAddress: {
-            firstName,
-            lastName: lastName || "",
-            address1: "",
-            city: "",
-            province: "",
-            zip: "",
-            country: "US",
-          },
-        }],
+      // Pre-fill Shopify checkout via buyer identity. Only send email + phone —
+      // sending an empty deliveryAddress (blank address1/city/zip) causes
+      // Shopify to discard the entire buyer identity update.
+      const buyerResult = await updateBuyerIdentity({
+        email: data.email.trim(),
+        phone: data.phone?.trim() || undefined,
+        deliveryAddressPreferences: [],
       });
+      if (buyerResult.checkoutUrl) {
+        checkoutUrl = buyerResult.checkoutUrl;
+      }
+
+      // Belt-and-suspenders: append checkout pre-fill query params so the
+      // contact + name fields populate even if buyer identity was dropped.
+      try {
+        const url = new URL(checkoutUrl);
+        url.searchParams.set("checkout[email]", data.email.trim());
+        url.searchParams.set("checkout[shipping_address][first_name]", firstName);
+        if (lastName) url.searchParams.set("checkout[shipping_address][last_name]", lastName);
+        if (data.phone?.trim()) url.searchParams.set("checkout[shipping_address][phone]", data.phone.trim());
+        checkoutUrl = url.toString();
+      } catch {
+        /* ignore URL parse errors */
+      }
+
+      // Append UTM/attribution params last
+      const utmParams = getAttributeParams();
+      if (utmParams) {
+        const separator = checkoutUrl.includes('?') ? '&' : '?';
+        checkoutUrl = checkoutUrl + separator + utmParams;
+      }
 
       window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'lead_captured',
+        source: 'glp1-buy',
+        user_data: { email: data.email.trim(), first_name: firstName, last_name: lastName },
+      });
       window.dataLayer.push({
         event: 'begin_checkout',
         event_id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
@@ -365,15 +389,12 @@ const GLP1BuyPage = () => {
           }],
         },
       });
-      setTimeout(function() {
-        window.location.href = checkoutUrl;
-      }, 1500);
+      // Redirect immediately — no artificial delay.
+      window.location.href = checkoutUrl;
     } catch {
       const fallback = getCheckoutUrl();
       if (fallback) {
-        setTimeout(function() {
-          window.location.href = fallback;
-        }, 1500);
+        window.location.href = fallback;
       }
     }
     // Note: intentionally no finally/setIsSubmitting(false) — keep button disabled after redirect
@@ -586,6 +607,11 @@ const GLP1BuyPage = () => {
                 <label htmlFor="glp1buy-email">Email Address *</label>
                 <input id="glp1buy-email" type="email" placeholder="your.email@gmail.com" {...register("email")} />
                 {errors.email && <div className="glp1buy-field-error">{errors.email.message}</div>}
+              </div>
+              <div className="glp1buy-field">
+                <label htmlFor="glp1buy-phone">Phone (optional — for shipping updates)</label>
+                <input id="glp1buy-phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="(555) 123-4567" {...register("phone")} />
+                {errors.phone && <div className="glp1buy-field-error">{errors.phone.message}</div>}
               </div>
               <p style={{ fontSize: '13px', color: '#DC2626', textAlign: 'center', margin: '8px 0' }}>⚡ Launch pricing — limited availability</p>
 
