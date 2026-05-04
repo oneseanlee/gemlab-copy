@@ -1,6 +1,10 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import './GLP1ActivatePage.css';
+import './HomePage.css';        // shared b365-promo-banner / b365-nav / b365-section
+import './TPrime365Page.css';   // shared tprime-hero-container / tprime-hero-img / tprime-hero-text
+import './GLP1Page.css';        // shared glp1-* hero tweaks (no harm if unused)
+
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
@@ -15,16 +19,14 @@ import {
   Accordion, AccordionItem, AccordionTrigger, AccordionContent,
 } from '@/components/ui/accordion';
 import {
-  Menu, X, Zap, Shield, Flame, Droplet, Clock, Check, Plus, Minus,
+  Menu, X, Shield, Flame, Droplet, Clock, Check, Plus, Minus,
   Bone, Dumbbell, AlertCircle, Truck, FlaskConical, BadgeCheck, ArrowRight,
-  Activity, Sparkles, Recycle,
+  Activity,
 } from 'lucide-react';
 
-/* Product image — Best365Labs CDN with local fallback */
 const PRODUCT_IMG = 'https://best365labs.com/wp-content/uploads/2026/04/GLP-1-Activate-1.jpg';
 const PRODUCT_IMG_FALLBACK = '/images/product-glp-protocol.png';
 
-/* Minimal product shape for cart payloads */
 const ACTIVATE_PRODUCT = {
   node: {
     id: 'gid://shopify/Product/9252736073868',
@@ -40,10 +42,10 @@ const ACTIVATE_PRODUCT = {
 
 type PurchaseType = 'onetime' | 'monthly' | 'bimonthly';
 
-const VARIANTS: Record<PurchaseType, { id: string; price: string; label: string; subLabel: string; saveTag: boolean }> = {
-  onetime:    { id: GLP1_ACTIVATE_ONETIME_VARIANT_ID,    price: '30.00', label: 'One-Time',           subLabel: '',                 saveTag: false },
-  monthly:    { id: GLP1_ACTIVATE_MONTHLY_VARIANT_ID,    price: '27.00', label: 'Monthly',            subLabel: 'Save 10%',         saveTag: true  },
-  bimonthly:  { id: GLP1_ACTIVATE_BIMONTHLY_VARIANT_ID,  price: '27.00', label: 'Every 2 Months',     subLabel: 'Save 10%',         saveTag: true  },
+const VARIANTS: Record<PurchaseType, { id: string; price: string; label: string; saveTag: boolean }> = {
+  onetime:   { id: GLP1_ACTIVATE_ONETIME_VARIANT_ID,   price: '30.00', label: 'One-Time',       saveTag: false },
+  monthly:   { id: GLP1_ACTIVATE_MONTHLY_VARIANT_ID,   price: '27.00', label: 'Monthly',        saveTag: true  },
+  bimonthly: { id: GLP1_ACTIVATE_BIMONTHLY_VARIANT_ID, price: '27.00', label: 'Every 2 Months', saveTag: true  },
 };
 
 const faqs = [
@@ -92,68 +94,86 @@ const GLP1ActivatePage: React.FC = () => {
     setCartOpen(true);
   };
 
+  const mobileLinks = [
+    { label: 'Benefits', href: '#benefits' },
+    { label: 'Science', href: '#science' },
+    { label: 'Stack', href: '#stack' },
+    { label: 'FAQ', href: '#faq' },
+    { label: 'Shop All', href: '/' },
+  ];
+
   return (
     <div className="glpa-page">
-      {/* PROMO BANNER */}
+      <MobileMenu links={mobileLinks} isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+
+      {/* 1. Promo banner — shared b365-promo-banner */}
       {showBanner && (
-        <div className="glpa-promo">
-          <span>Preorder Now — Ships May 1, 2026 · Free Shipping on U.S. Orders Over $40</span>
-          <button onClick={() => setShowBanner(false)} aria-label="Dismiss"><X size={16} /></button>
+        <div className="b365-promo-banner">
+          <span className="promo-desktop">🧪 Preorder Now — Ships May 1, 2026 · Free U.S. Shipping over $40</span>
+          <span className="promo-mobile">🧪 Preorder · Ships May 1 · Free Shipping $40+</span>
+          <button onClick={() => setShowBanner(false)} aria-label="Close banner">✕</button>
         </div>
       )}
 
-      {/* STICKY NAV */}
-      <nav className="glpa-nav">
-        <div className="glpa-nav-inner">
-          <a href="/" className="glpa-logo">Cell365Power</a>
-          <div className="glpa-nav-links">
-            <a href="#benefits">Benefits</a>
-            <a href="#science">Science</a>
-            <a href="#stack">Stack</a>
-            <a href="#faq">FAQ</a>
-          </div>
-          <div className="glpa-nav-actions">
-            <AnimatedCTA small onClick={handleAdd}>Preorder Now</AnimatedCTA>
+      {/* 2. Nav — shared b365-nav with Best365Labs logo */}
+      <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
+        <div className="b365-nav-inner">
+          <button className="b365-hamburger" aria-label="Menu" onClick={() => setMobileOpen(true)}>
+            <Menu size={24} />
+          </button>
+          <a href="/">
+            <img src="/images/best365labs-logo.png" alt="Best 365 Labs" style={{ height: 36 }} />
+          </a>
+          <ul className="b365-nav-links">
+            <li><a href="#benefits">Benefits</a></li>
+            <li><a href="#science">Science</a></li>
+            <li><a href="#stack">Stack</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+          <div className="b365-nav-right">
             <CartDrawer />
-            <button className="glpa-menu-btn" onClick={() => setMobileOpen(true)} aria-label="Menu"><Menu size={24} /></button>
+            <AnimatedCTA href="#" small onClick={handleAdd} disabled={isLoading}>
+              {isLoading ? 'Adding…' : 'Preorder Now'}
+            </AnimatedCTA>
           </div>
         </div>
       </nav>
-      <MobileMenu
-        isOpen={mobileOpen}
-        onClose={() => setMobileOpen(false)}
-        links={[
-          { label: 'Benefits', href: '#benefits' },
-          { label: 'Science', href: '#science' },
-          { label: 'Stack', href: '#stack' },
-          { label: 'FAQ', href: '#faq' },
-          { label: 'Shop All', href: '/' },
-        ]}
-      />
 
-      {/* HERO */}
-      <section className="glpa-section dark glpa-hero">
-        <div className="glpa-hero-grid">
-          <div>
+      {/* 3. Hero — uses shared tprime-hero-container layout */}
+      <section className={`glpa-hero-section ${!showBanner ? 'no-banner' : ''}`}>
+        <div className="tprime-hero-container">
+          <div className="tprime-hero-img">
+            <img
+              src={PRODUCT_IMG}
+              alt="GLP-1 Activate sublingual dropper bottle"
+              width="600"
+              height="600"
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = PRODUCT_IMG_FALLBACK; }}
+            />
+          </div>
+          <div className="tprime-hero-text">
             <span className="glpa-eyebrow">GLP-1 Cellular Companion™</span>
-            <h1>Your GLP-1 Has a Blind Spot. This Fixes It.</h1>
+            <h1>Your GLP-1 Has a <em>Blind Spot.</em> This Fixes It.</h1>
             <p className="glpa-subhead">
               The first sublingual cellular support formula designed specifically for GLP-1 therapy.
               Bypasses the gut entirely. Reaches your bloodstream in 5–15 minutes. Zero GLP-1 interference.
             </p>
             <div className="glpa-pills">
-              <span className="glpa-pill"><Droplet size={14} /> Bypasses the Gut — Absorbs in Under 15 Minutes</span>
-              <span className="glpa-pill"><Flame size={14} /> Powers the Burn — Direct NAD+ Fuels Fat Metabolism</span>
-              <span className="glpa-pill"><Shield size={14} /> Protects Muscle, Bone & Hormones</span>
+              <span className="glpa-pill"><Droplet size={12} /> Bypasses the Gut</span>
+              <span className="glpa-pill"><Flame size={12} /> Powers Fat Metabolism</span>
+              <span className="glpa-pill"><Shield size={12} /> Protects Muscle & Bone</span>
             </div>
 
             {/* Buy box */}
             <div className="glpa-buybox">
               <div className="glpa-purchase-toggle">
-                {(['onetime','monthly','bimonthly'] as PurchaseType[]).map((p) => (
-                  <button key={p}
+                {(['onetime', 'monthly', 'bimonthly'] as PurchaseType[]).map((p) => (
+                  <button
+                    key={p}
                     className={`glpa-toggle-btn ${purchase === p ? 'active' : ''}`}
-                    onClick={() => setPurchase(p)}>
+                    onClick={() => setPurchase(p)}
+                    type="button"
+                  >
                     {VARIANTS[p].label}
                     {VARIANTS[p].saveTag && <span className="glpa-save-tag">SAVE 10%</span>}
                     <small>${VARIANTS[p].price}{p !== 'onetime' ? ' / shipment' : ''}</small>
@@ -175,7 +195,7 @@ const GLP1ActivatePage: React.FC = () => {
                   <span>{qty}</span>
                   <button onClick={() => setQty((q) => q + 1)} aria-label="Increase"><Plus size={14} /></button>
                 </div>
-                <AnimatedCTA onClick={handleAdd}>
+                <AnimatedCTA onClick={handleAdd} disabled={isLoading}>
                   {isLoading ? 'Adding…' : 'Preorder Now'} <ArrowRight size={16} />
                 </AnimatedCTA>
               </div>
@@ -185,303 +205,272 @@ const GLP1ActivatePage: React.FC = () => {
             <div className="glpa-trust-row">
               <span><FlaskConical size={14} /> 3rd Party Lab Tested</span>
               <span><BadgeCheck size={14} /> FDA-Registered Facility</span>
-              <span><Truck size={14} /> Free U.S. Shipping $40+</span>
+              <span><Truck size={14} /> Free Shipping $40+</span>
               <span><Droplet size={14} /> Sublingual Delivery</span>
               <span><Check size={14} /> Made in USA</span>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="glpa-hero-img-wrap">
-            <img
-              src={PRODUCT_IMG}
-              alt="GLP-1 Activate sublingual dropper bottle"
-              className="glpa-hero-img"
-              loading="eager"
-              onError={(e) => { (e.currentTarget as HTMLImageElement).src = PRODUCT_IMG_FALLBACK; }}
-            />
+      {/* 4. The Hidden Problem */}
+      <section className="b365-section" id="benefits">
+        <h2 className="b365-section-heading b365-serif">The Hidden Problem with <em>GLP-1 Therapy</em></h2>
+        <p className="glpa-lede">
+          GLP-1 medications (Ozempic®, Wegovy®, Mounjaro®, Zepbound®) slow gastric emptying — meaning your capsules,
+          tablets, and powders absorb unpredictably or not at all. Published research shows GLP-1 drugs alter oral
+          supplement absorption by <strong>64–205%</strong>.
+        </p>
+        <div className="glpa-card-grid-3">
+          <div className="glpa-pcard">
+            <div className="glpa-pcard-icon"><Clock size={22} /></div>
+            <h3>Capsules sit in your stomach</h3>
+            <p>Unabsorbed for hours — your nutrients never reach your bloodstream when you need them.</p>
+          </div>
+          <div className="glpa-pcard">
+            <div className="glpa-pcard-icon"><AlertCircle size={22} /></div>
+            <h3>Powders ferment instead of fueling</h3>
+            <p>Slowed transit means powders sit and ferment in the gut rather than reaching your cells.</p>
+          </div>
+          <div className="glpa-pcard">
+            <div className="glpa-pcard-icon"><Activity size={22} /></div>
+            <h3>Tablets break down unpredictably</h3>
+            <p>Dissolution windows shift wildly, making consistent dosing nearly impossible.</p>
           </div>
         </div>
       </section>
 
-      {/* THE HIDDEN PROBLEM */}
-      <section className="glpa-section light" id="benefits">
-        <div className="glpa-container">
-          <span className="glpa-eyebrow" style={{ display: 'block', textAlign: 'center' }}>The Hidden Problem</span>
-          <h2 className="glpa-h2 center" style={{ textAlign: 'center' }}>The Hidden Problem With GLP-1 Therapy</h2>
-          <p className="glpa-lede">
-            GLP-1 medications (Ozempic®, Wegovy®, Mounjaro®, Zepbound®) slow gastric emptying — meaning your capsules,
-            tablets, and powders absorb unpredictably or not at all. Published research shows GLP-1 drugs alter oral
-            supplement absorption by <strong>64–205%</strong>.
-          </p>
-          <div className="glpa-card-grid-3">
-            <div className="glpa-pcard">
-              <div className="glpa-pcard-icon"><Clock size={22} /></div>
-              <h3>Capsules sit in your stomach</h3>
-              <p>Unabsorbed for hours — your nutrients never reach your bloodstream when you need them.</p>
-            </div>
-            <div className="glpa-pcard">
-              <div className="glpa-pcard-icon"><AlertCircle size={22} /></div>
-              <h3>Powders ferment instead of fueling</h3>
-              <p>Slowed transit means powders sit and ferment in the gut rather than reaching your cells.</p>
-            </div>
-            <div className="glpa-pcard">
-              <div className="glpa-pcard-icon"><Activity size={22} /></div>
-              <h3>Tablets break down unpredictably</h3>
-              <p>Dissolution windows shift wildly, making consistent dosing nearly impossible.</p>
-            </div>
+      {/* 5. The Solution */}
+      <section className="b365-section b365-section-alt" id="science">
+        <h2 className="b365-section-heading b365-serif">GLP-1 Activate <em>Bypasses the Gut</em> Entirely</h2>
+        <p className="glpa-lede">
+          Delivered under the tongue, GLP-1 Activate reaches your bloodstream in <strong>5–15 minutes</strong> —
+          completely bypassing the digestive system that GLP-1 medications have slowed down.
+        </p>
+        <div className="glpa-absorption">
+          <div className="glpa-abscard">
+            <h4>Oral Capsules</h4>
+            <p className="glpa-abs-time">Onset: 60–180 minutes (slowed further by GLP-1)</p>
+            <div className="glpa-bar"><div className="glpa-bar-fill slow" style={{ width: '32%' }} /></div>
+            <p className="glpa-abs-stat">GLP-1 medications can reduce oral bioavailability by <strong>64–205%</strong>.</p>
+          </div>
+          <div className="glpa-abscard">
+            <h4>GLP-1 Activate (Sublingual)</h4>
+            <p className="glpa-abs-time">Onset: 5–15 minutes</p>
+            <div className="glpa-bar"><div className="glpa-bar-fill" style={{ width: '92%' }} /></div>
+            <p className="glpa-abs-stat">Direct mucosal absorption — <strong>no gut, no GLP-1 interference</strong>.</p>
           </div>
         </div>
       </section>
 
-      {/* THE SOLUTION */}
-      <section className="glpa-section dark" id="science">
-        <div className="glpa-container">
-          <span className="glpa-eyebrow" style={{ display: 'block', textAlign: 'center' }}>The Solution</span>
-          <h2 className="glpa-h2 center" style={{ textAlign: 'center' }}>GLP-1 Activate Bypasses the Gut Entirely</h2>
-          <p className="glpa-lede">
-            Delivered under the tongue, GLP-1 Activate reaches your bloodstream in <strong>5–15 minutes</strong> —
-            completely bypassing the digestive system that GLP-1 medications have slowed down.
-          </p>
-          <div className="glpa-absorption">
-            <div className="glpa-abscard">
-              <h4>Oral Capsules</h4>
-              <p className="glpa-abs-time">Onset: 60–180 minutes (slowed further by GLP-1)</p>
-              <div className="glpa-bar"><div className="glpa-bar-fill slow" style={{ width: '32%' }} /></div>
-              <p className="glpa-abs-stat">Studies show GLP-1 medications reduce oral bioavailability by <strong>up to 64–205%</strong>.</p>
-            </div>
-            <div className="glpa-abscard">
-              <h4>GLP-1 Activate (Sublingual)</h4>
-              <p className="glpa-abs-time">Onset: 5–15 minutes</p>
-              <div className="glpa-bar"><div className="glpa-bar-fill" style={{ width: '92%' }} /></div>
-              <p className="glpa-abs-stat">Direct mucosal absorption — <strong>no gut, no GLP-1 interference</strong>.</p>
-            </div>
+      {/* 6. Dual NAD+ Strategy */}
+      <section className="b365-section">
+        <h2 className="b365-section-heading b365-serif">The Dual NAD+ <em>Strategy™</em></h2>
+        <p className="glpa-lede">
+          Most supplements give you a precursor and hope your body converts it. We deliver actual NAD+ molecules
+          directly into your bloodstream, then 1-MNA locks them in by blocking the enzyme that breaks NAD+ down.
+          Fast boost + all-day preservation in a single dose.
+        </p>
+        <div className="glpa-compare">
+          <div className="glpa-cmp bad">
+            <h3>Other NAD+ Supplements</h3>
+            <ul>
+              <li><X size={18} /> Give you a precursor (NR, NMN)</li>
+              <li><X size={18} /> Rely on your body to convert it</li>
+              <li><X size={18} /> Conversion fails when GLP-1 slows the gut</li>
+              <li><X size={18} /> Rapid breakdown — short-lived elevation</li>
+            </ul>
+          </div>
+          <div className="glpa-cmp good">
+            <h3>GLP-1 Activate</h3>
+            <ul>
+              <li><Check size={18} /> <strong>Direct NAD+ delivery</strong> sublingually</li>
+              <li><Check size={18} /> Bypasses conversion bottlenecks entirely</li>
+              <li><Check size={18} /> 1-MNA <strong>blocks NAD+ breakdown</strong></li>
+              <li><Check size={18} /> Sustained elevation across the full day</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* DUAL NAD+ STRATEGY */}
-      <section className="glpa-section light">
-        <div className="glpa-container">
-          <span className="glpa-eyebrow" style={{ display: 'block', textAlign: 'center' }}>Signature Mechanism</span>
-          <h2 className="glpa-h2 center" style={{ textAlign: 'center' }}>The Dual NAD+ Strategy™</h2>
-          <p className="glpa-lede">
-            Most supplements give you a precursor and hope your body converts it. We deliver actual NAD+ molecules
-            directly into your bloodstream, then 1-MNA locks them in by blocking the enzyme that breaks NAD+ down.
-            Fast boost + all-day preservation in a single dose.
-          </p>
-          <div className="glpa-compare">
-            <div className="glpa-cmp bad">
-              <h3>Other NAD+ Supplements</h3>
-              <ul>
-                <li><X size={18} /> Give you a precursor (NR, NMN)</li>
-                <li><X size={18} /> Rely on your body to convert it</li>
-                <li><X size={18} /> Conversion fails when GLP-1 slows the gut</li>
-                <li><X size={18} /> Rapid breakdown — short-lived elevation</li>
-              </ul>
-            </div>
-            <div className="glpa-cmp good">
-              <h3>GLP-1 Activate</h3>
-              <ul>
-                <li><Check size={18} /> <strong>Direct NAD+ delivery</strong> sublingually</li>
-                <li><Check size={18} /> Bypasses conversion bottlenecks entirely</li>
-                <li><Check size={18} /> 1-MNA <strong>blocks NAD+ breakdown</strong></li>
-                <li><Check size={18} /> Sustained elevation across the full day</li>
-              </ul>
-            </div>
+      {/* 7. Ingredients */}
+      <section className="b365-section b365-section-alt" id="formula">
+        <h2 className="b365-section-heading b365-serif">Why Each Ingredient <em>Earns Its Place</em></h2>
+        <p className="glpa-lede">Four molecules. One sublingual dose. Engineered to do what your GLP-1 can't.</p>
+        <div className="glpa-card-grid-4">
+          <div className="glpa-icard">
+            <div className="glpa-icard-dose">NAD+ · 20 mg</div>
+            <h3>NAD+</h3>
+            <div className="glpa-nick">The Battery Charger</div>
+            <p>Your cells need fuel to burn the fat GLP-1 is mobilizing. NAD+ powers your mitochondria. Without it, released fat just gets re-stored.<span className="footnote">*</span></p>
+          </div>
+          <div className="glpa-icard">
+            <div className="glpa-icard-dose">1-MNA · 25 mg</div>
+            <h3>1-MNA</h3>
+            <div className="glpa-nick">The Battery Protector</div>
+            <p>Prevents NAD+ breakdown. Keeps levels elevated all day. Adds cardiovascular and anti-inflammatory benefits that stack on top of GLP-1's heart-health effects.<span className="footnote">*</span></p>
+          </div>
+          <div className="glpa-icard">
+            <div className="glpa-icard-dose">Spermidine · 10 mg</div>
+            <h3>Spermidine</h3>
+            <div className="glpa-nick">The Cellular Cleanup Crew</div>
+            <p>Amplifies autophagy — your body's recycling system. GLP-1's caloric restriction starts the process; spermidine supercharges it.<span className="footnote">*</span></p>
+          </div>
+          <div className="glpa-icard">
+            <div className="glpa-icard-dose">Boron · 10 mg</div>
+            <h3>Boron</h3>
+            <div className="glpa-nick">The Hormone & Bone Shield</div>
+            <p>Rapid weight loss can weaken bones and disrupt hormones. Boron protects both during aggressive fat loss — preserving what GLP-1 can accidentally strip away.<span className="footnote">*</span></p>
           </div>
         </div>
       </section>
 
-      {/* INGREDIENTS */}
-      <section className="glpa-section dark" id="formula">
-        <div className="glpa-container">
-          <span className="glpa-eyebrow" style={{ display: 'block', textAlign: 'center' }}>The Formula</span>
-          <h2 className="glpa-h2 center" style={{ textAlign: 'center' }}>Why Each Ingredient Earns Its Place</h2>
-          <p className="glpa-lede">Four molecules. One sublingual dose. Engineered to do what your GLP-1 can't.</p>
-          <div className="glpa-card-grid-4">
-            <div className="glpa-icard">
-              <div className="glpa-icard-dose">NAD+ · 20 mg</div>
-              <h3>NAD+</h3>
-              <div className="glpa-nick">The Battery Charger</div>
-              <p>Your cells need fuel to burn the fat GLP-1 is mobilizing. NAD+ powers your mitochondria. Without it, released fat just gets re-stored.<span className="footnote">*</span></p>
-            </div>
-            <div className="glpa-icard">
-              <div className="glpa-icard-dose">1-MNA · 25 mg</div>
-              <h3>1-MNA</h3>
-              <div className="glpa-nick">The Battery Protector</div>
-              <p>Prevents NAD+ breakdown. Keeps levels elevated all day. Adds cardiovascular and anti-inflammatory benefits that stack on top of your GLP-1's own heart-health effects.<span className="footnote">*</span></p>
-            </div>
-            <div className="glpa-icard">
-              <div className="glpa-icard-dose">Spermidine · 10 mg</div>
-              <h3>Spermidine</h3>
-              <div className="glpa-nick">The Cellular Cleanup Crew</div>
-              <p>Amplifies autophagy — your body's recycling system. GLP-1's caloric restriction starts this process; spermidine supercharges it.<span className="footnote">*</span></p>
-            </div>
-            <div className="glpa-icard">
-              <div className="glpa-icard-dose">Boron · 10 mg</div>
-              <h3>Boron</h3>
-              <div className="glpa-nick">The Hormone & Bone Shield</div>
-              <p>Rapid weight loss can weaken bones and disrupt hormones. Boron protects both during aggressive fat loss — preserving what GLP-1 can accidentally strip away.<span className="footnote">*</span></p>
-            </div>
+      {/* 8. What GLP-1 Strips Away */}
+      <section className="b365-section">
+        <h2 className="b365-section-heading b365-serif">What GLP-1 Can <em>Quietly Take From You</em></h2>
+        <p className="glpa-lede">Aggressive fat loss has a downside. Most patients aren't told until it's too late.</p>
+        <div className="glpa-strips">
+          <div className="glpa-strip">
+            <div className="glpa-strip-icon"><Dumbbell size={26} /></div>
+            <p>Up to <strong>40%</strong> of weight lost on GLP-1 is muscle.</p>
+          </div>
+          <div className="glpa-strip">
+            <div className="glpa-strip-icon"><Bone size={26} /></div>
+            <p>Bone density loss <strong>accelerates</strong> during rapid fat loss.</p>
+          </div>
+          <div className="glpa-strip">
+            <div className="glpa-strip-icon"><Activity size={26} /></div>
+            <p>Hormonal disruption is <strong>common</strong> during caloric restriction.</p>
+          </div>
+        </div>
+        <p className="glpa-strip-close">GLP-1 Activate is engineered to protect all three.</p>
+      </section>
+
+      {/* 9. How To Use */}
+      <section className="b365-section b365-section-alt">
+        <h2 className="b365-section-heading b365-serif">How To <em>Use</em></h2>
+        <p className="glpa-lede">Three steps. Sixty seconds. Once a day.</p>
+        <div className="glpa-steps">
+          <div className="glpa-step">
+            <div className="glpa-step-num">01</div>
+            <h4>Place 20 drops (1 mL) under tongue</h4>
+            <p>Use the calibrated dropper for a precise daily dose.</p>
+          </div>
+          <div className="glpa-step">
+            <div className="glpa-step-num">02</div>
+            <h4>Hold 60–90 seconds</h4>
+            <p>Sublingual mucosa absorbs the formula directly into your bloodstream.</p>
+          </div>
+          <div className="glpa-step">
+            <div className="glpa-step-num">03</div>
+            <h4>Swallow remainder</h4>
+            <p>Take once daily, morning preferred for sustained energy.</p>
+          </div>
+        </div>
+        <div className="glpa-zero-int">
+          ✓ Works with all injectable and oral GLP-1 medications with zero interference.
+        </div>
+      </section>
+
+      {/* 10. Choose Your Plan */}
+      <section className="b365-section">
+        <h2 className="b365-section-heading b365-serif">Choose Your <em>Plan</em></h2>
+        <p className="glpa-lede">Subscribe and save 10% on every shipment. Pause or cancel anytime.</p>
+        <div className="glpa-subs">
+          <div
+            className={`glpa-subcard ${purchase === 'onetime' ? 'active' : ''}`}
+            onClick={() => setPurchase('onetime')}
+          >
+            <h3>One-Time Purchase</h3>
+            <div className="glpa-subprice">$30.00</div>
+            <ul>
+              <li><Check size={16} /> 30-day supply</li>
+              <li><Check size={16} /> No commitment</li>
+              <li><Check size={16} /> Free shipping over $40</li>
+            </ul>
+          </div>
+          <div
+            className={`glpa-subcard ${purchase === 'monthly' ? 'active' : ''}`}
+            onClick={() => setPurchase('monthly')}
+          >
+            <h3>Monthly Subscription <span className="glpa-save-tag">BEST</span></h3>
+            <div className="glpa-subprice">$27.00<small>/ month</small></div>
+            <ul>
+              <li><Check size={16} /> Save 10% on every shipment</li>
+              <li><Check size={16} /> Pause or cancel anytime</li>
+              <li><Check size={16} /> Never run out</li>
+              <li><Check size={16} /> Free shipping included</li>
+            </ul>
+          </div>
+        </div>
+        <p className="glpa-subs-extra">
+          Subscribers also get early access to new Best365Labs formulas and member-only pricing on UCOS,
+          Triple Power Methylene Blue, and the GLP-1 Cellular Bundle.
+        </p>
+        <div style={{ textAlign: 'center', marginTop: 32 }}>
+          <AnimatedCTA onClick={handleAdd} disabled={isLoading}>
+            {isLoading ? 'Adding…' : 'Preorder Now'} <ArrowRight size={16} />
+          </AnimatedCTA>
+        </div>
+      </section>
+
+      {/* 11. Cross-sell */}
+      <section className="b365-section b365-section-alt" id="stack">
+        <h2 className="b365-section-heading b365-serif">Stack With the <em>Complete GLP-1 System</em></h2>
+        <p className="glpa-lede">GLP-1 Activate is the cellular companion. These complete the protocol.</p>
+        <div className="glpa-cross">
+          <div className="glpa-xcard">
+            <h4>GLP-1 Optimization Protocol</h4>
+            <div className="glpa-xprice">$39.95</div>
+            <p>Complete 30-day system for muscle preservation, energy, and metabolic optimization on GLP-1 therapy.</p>
+            <a href="/glp1-protocol">Add to Stack <ArrowRight size={14} /></a>
+          </div>
+          <div className="glpa-xcard">
+            <h4>GLP-1 Cellular Bundle</h4>
+            <div className="glpa-xprice">$279</div>
+            <p>4-product bundle including consultation and prescription medication. Total value: $340.</p>
+            <a href="/glp1-ucos">Add to Stack <ArrowRight size={14} /></a>
+          </div>
+          <div className="glpa-xcard">
+            <h4>Triple Power Methylene Blue</h4>
+            <div className="glpa-xprice">Best365Labs</div>
+            <p>Pharmaceutical-grade methylene blue for mitochondrial energy and cognitive performance.</p>
+            <a href="https://best365labs.com" target="_blank" rel="noopener noreferrer">Shop Now <ArrowRight size={14} /></a>
           </div>
         </div>
       </section>
 
-      {/* WHAT GLP-1 STRIPS AWAY */}
-      <section className="glpa-section light">
-        <div className="glpa-container">
-          <span className="glpa-eyebrow" style={{ display: 'block', textAlign: 'center' }}>Hidden Cost</span>
-          <h2 className="glpa-h2 center" style={{ textAlign: 'center' }}>What GLP-1 Can Quietly Take From You</h2>
-          <p className="glpa-lede">Aggressive fat loss has a downside. Most patients aren't told until it's too late.</p>
-          <div className="glpa-strips">
-            <div className="glpa-strip">
-              <div className="glpa-strip-icon"><Dumbbell size={26} /></div>
-              <p>Up to <strong>40%</strong> of weight lost on GLP-1 is muscle.</p>
-            </div>
-            <div className="glpa-strip">
-              <div className="glpa-strip-icon"><Bone size={26} /></div>
-              <p>Bone density loss <strong>accelerates</strong> during rapid fat loss.</p>
-            </div>
-            <div className="glpa-strip">
-              <div className="glpa-strip-icon"><Activity size={26} /></div>
-              <p>Hormonal disruption is <strong>common</strong> during caloric restriction.</p>
-            </div>
-          </div>
-          <p className="glpa-strip-close">GLP-1 Activate is engineered to protect all three.</p>
+      {/* 12. FAQ */}
+      <section className="b365-section" id="faq">
+        <h2 className="b365-section-heading b365-serif">Questions, <em>Answered</em></h2>
+        <div className="glpa-faq" style={{ marginTop: 32 }}>
+          <Accordion type="single" collapsible defaultValue="item-0">
+            {faqs.map((f, i) => (
+              <AccordionItem key={i} value={`item-${i}`}>
+                <AccordionTrigger>{f.q}</AccordionTrigger>
+                <AccordionContent style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--b365-text-secondary)' }}>
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
-      {/* HOW TO USE */}
-      <section className="glpa-section dark">
-        <div className="glpa-container">
-          <span className="glpa-eyebrow" style={{ display: 'block', textAlign: 'center' }}>Daily Ritual</span>
-          <h2 className="glpa-h2 center" style={{ textAlign: 'center' }}>How To Use</h2>
-          <p className="glpa-lede">Three steps. Sixty seconds. Once a day.</p>
-          <div className="glpa-steps">
-            <div className="glpa-step">
-              <div className="glpa-step-num">01</div>
-              <h4>Place 20 drops (1 mL) under tongue</h4>
-              <p>Use the calibrated dropper for a precise daily dose.</p>
-            </div>
-            <div className="glpa-step">
-              <div className="glpa-step-num">02</div>
-              <h4>Hold 60–90 seconds</h4>
-              <p>Sublingual mucosa absorbs the formula directly into your bloodstream.</p>
-            </div>
-            <div className="glpa-step">
-              <div className="glpa-step-num">03</div>
-              <h4>Swallow remainder</h4>
-              <p>Take once daily, morning preferred for sustained energy.</p>
-            </div>
-          </div>
-          <div className="glpa-zero-int">
-            ✓ Works with all injectable and oral GLP-1 medications with zero interference.
-          </div>
-        </div>
-      </section>
-
-      {/* SUBSCRIPTION VALUE STACK */}
-      <section className="glpa-section light">
-        <div className="glpa-container">
-          <span className="glpa-eyebrow" style={{ display: 'block', textAlign: 'center' }}>Pricing</span>
-          <h2 className="glpa-h2 center" style={{ textAlign: 'center' }}>Choose Your Plan</h2>
-          <p className="glpa-lede">Subscribe and save 10% on every shipment. Pause or cancel anytime.</p>
-          <div className="glpa-subs">
-            <div
-              className={`glpa-subcard ${purchase === 'onetime' ? 'active' : ''}`}
-              onClick={() => setPurchase('onetime')}
-            >
-              <h3>One-Time Purchase</h3>
-              <div className="glpa-subprice">$30.00</div>
-              <ul>
-                <li><Check size={16} /> 30-day supply</li>
-                <li><Check size={16} /> No commitment</li>
-                <li><Check size={16} /> Free shipping over $40</li>
-              </ul>
-            </div>
-            <div
-              className={`glpa-subcard ${purchase === 'monthly' ? 'active' : ''}`}
-              onClick={() => setPurchase('monthly')}
-            >
-              <h3>Monthly Subscription <span className="glpa-save-tag">BEST</span></h3>
-              <div className="glpa-subprice">$27.00<small>/ month</small></div>
-              <ul>
-                <li><Check size={16} /> Save 10% on every shipment</li>
-                <li><Check size={16} /> Pause or cancel anytime</li>
-                <li><Check size={16} /> Never run out</li>
-                <li><Check size={16} /> Free shipping included</li>
-              </ul>
-            </div>
-          </div>
-          <p className="glpa-subs-extra">
-            Subscribers also get early access to new Cell365Power formulas and member-only pricing on UCOS,
-            Triple Power Methylene Blue, and the GLP-1 Cellular Bundle.
-          </p>
-          <div style={{ textAlign: 'center', marginTop: 32 }}>
-            <AnimatedCTA onClick={handleAdd}>Preorder Now <ArrowRight size={16} /></AnimatedCTA>
-          </div>
-        </div>
-      </section>
-
-      {/* CROSS-SELL */}
-      <section className="glpa-section dark" id="stack">
-        <div className="glpa-container">
-          <span className="glpa-eyebrow" style={{ display: 'block', textAlign: 'center' }}>The Full System</span>
-          <h2 className="glpa-h2 center" style={{ textAlign: 'center' }}>Stack With the Complete GLP-1 System</h2>
-          <p className="glpa-lede">GLP-1 Activate is the cellular companion. These complete the protocol.</p>
-          <div className="glpa-cross">
-            <div className="glpa-xcard">
-              <h4>GLP-1 Optimization Protocol</h4>
-              <div className="glpa-xprice">$39.95</div>
-              <p>Complete 30-day system for muscle preservation, energy, and metabolic optimization on GLP-1 therapy.</p>
-              <a href="/glp1-protocol">Add to Stack <ArrowRight size={14} /></a>
-            </div>
-            <div className="glpa-xcard">
-              <h4>GLP-1 Cellular Bundle</h4>
-              <div className="glpa-xprice">$279</div>
-              <p>4-product bundle including consultation and prescription medication. Total value: $340.</p>
-              <a href="/glp1-ucos">Add to Stack <ArrowRight size={14} /></a>
-            </div>
-            <div className="glpa-xcard">
-              <h4>Triple Power Methylene Blue</h4>
-              <div className="glpa-xprice">Best365Labs</div>
-              <p>Pharmaceutical-grade methylene blue for mitochondrial energy and cognitive performance.</p>
-              <a href="https://best365labs.com" target="_blank" rel="noopener noreferrer">Shop Now <ArrowRight size={14} /></a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="glpa-section light" id="faq">
-        <div className="glpa-container">
-          <span className="glpa-eyebrow" style={{ display: 'block', textAlign: 'center' }}>FAQ</span>
-          <h2 className="glpa-h2 center" style={{ textAlign: 'center' }}>Questions, Answered</h2>
-          <div className="glpa-faq" style={{ marginTop: 32 }}>
-            <Accordion type="single" collapsible defaultValue="item-0">
-              {faqs.map((f, i) => (
-                <AccordionItem key={i} value={`item-${i}`}>
-                  <AccordionTrigger>{f.q}</AccordionTrigger>
-                  <AccordionContent style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--b365-text-secondary)' }}>{f.a}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="glpa-section dark glpa-final-cta">
+      {/* 13. Final CTA */}
+      <section className="glpa-final-cta">
         <h2>Don't Let GLP-1 Take More Than the Weight.</h2>
         <p className="sub">Protect your muscle. Protect your bones. Power your burn. One dropper a day.</p>
         <div className="glpa-final-price">
           $27<small>/ month subscription</small> &nbsp;·&nbsp; $30<small>one-time</small>
         </div>
-        <AnimatedCTA onClick={handleAdd}>Preorder GLP-1 Activate <ArrowRight size={16} /></AnimatedCTA>
+        <AnimatedCTA onClick={handleAdd} disabled={isLoading}>
+          {isLoading ? 'Adding…' : 'Preorder GLP-1 Activate'} <ArrowRight size={16} />
+        </AnimatedCTA>
         <p className="glpa-final-trust">Ships May 1, 2026 · 3rd Party Lab Tested · Free U.S. Shipping $40+</p>
       </section>
 
-      {/* FDA DISCLAIMER */}
+      {/* 14. FDA Disclaimer */}
       <div className="glpa-disclaimer">
         *These statements have not been evaluated by the Food and Drug Administration.
         This product is not intended to diagnose, treat, cure, or prevent any disease.
@@ -497,7 +486,9 @@ const GLP1ActivatePage: React.FC = () => {
           <small>{purchase === 'onetime' ? 'One-time' : purchase === 'monthly' ? 'Monthly · Save 10%' : 'Every 2mo · Save 10%'}</small>
         </div>
         <div style={{ marginLeft: 'auto' }}>
-          <AnimatedCTA small onClick={handleAdd}>Preorder Now</AnimatedCTA>
+          <AnimatedCTA small onClick={handleAdd} disabled={isLoading}>
+            {isLoading ? 'Adding…' : 'Preorder'}
+          </AnimatedCTA>
         </div>
       </div>
     </div>
