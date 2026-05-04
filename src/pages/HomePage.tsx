@@ -134,7 +134,7 @@ const products = [
     priceNote: 'Subscribe & Save 10% · Ships May 1, 2026',
     shippingBadge: 'Free Shipping $40+',
     image: '/images/product-glp1-activate.png',
-    mobileImage: '/images/product-glp1-activate.png',
+    mobileImage: '/images/mobile-glp1-activate.png',
     href: '/glp1-activate',
   },
   {
