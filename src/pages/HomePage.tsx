@@ -133,8 +133,8 @@ const products = [
     priceSuffix: '/mo',
     priceNote: 'Subscribe & Save 10% · Ships May 1, 2026',
     shippingBadge: 'Free Shipping $40+',
-    image: '/images/product-glp-protocol.png',
-    mobileImage: '/images/product-glp-protocol.png',
+    image: '/images/product-glp1-activate.png',
+    mobileImage: '/images/product-glp1-activate.png',
     href: '/glp1-activate',
   },
   {
