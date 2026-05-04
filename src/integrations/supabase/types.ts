@@ -25,6 +25,7 @@ export type Database = {
           id: string
           last_name: string | null
           phone: string | null
+          recovery_email_sent_at: string | null
           shopify_order_id: string | null
           source: string
           utm_params: Json | null
@@ -39,6 +40,7 @@ export type Database = {
           id?: string
           last_name?: string | null
           phone?: string | null
+          recovery_email_sent_at?: string | null
           shopify_order_id?: string | null
           source?: string
           utm_params?: Json | null
@@ -53,6 +55,7 @@ export type Database = {
           id?: string
           last_name?: string | null
           phone?: string | null
+          recovery_email_sent_at?: string | null
           shopify_order_id?: string | null
           source?: string
           utm_params?: Json | null
