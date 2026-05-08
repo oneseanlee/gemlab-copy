@@ -9,6 +9,14 @@ export function useScrollReveal<T extends HTMLElement>(options?: IntersectionObs
 
     el.classList.add('b365-reveal');
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTallerThanViewport = el.getBoundingClientRect().height > window.innerHeight;
+
+    if (prefersReducedMotion || isTallerThanViewport) {
+      el.classList.add('b365-revealed');
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -16,7 +24,7 @@ export function useScrollReveal<T extends HTMLElement>(options?: IntersectionObs
           observer.unobserve(el);
         }
       },
-      { threshold: 0.15, ...options }
+      { threshold: 0, rootMargin: '0px 0px -10% 0px', ...options }
     );
 
     observer.observe(el);
