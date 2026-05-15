@@ -1,74 +1,76 @@
 ## Goal
 
-Switch the TPrime365 funnel so customers **pay first** via the new HappyMD embedded checkout, then complete intake. Today the flow is: lead form → HappyMD intake → (payment after physician review). New flow: HappyMD checkout (payment) → HappyMD intake → success.
+Give HappyMD (Darren) a single webhook URL they can POST to when a TPrime365 customer completes **both payment and the intake form**. We mark that lead as fully converted in our database and fire downstream events (GHL sync, admin notification, conversion analytics).
 
-## What HappyMD gave us
+## Endpoint
 
-The PDF provides three install options for `https://app.happymd.co/embed/checkout`:
+`POST https://yyuoyitapltnuqhkjyfd.supabase.co/functions/v1/happymd-conversion-webhook`
 
-1. **Button snippet** + `embed-helper.js` (opens modal)
-2. **Iframe** (page-builder safe)
-3. **Hosted URL** (for ads/email)
+- New Supabase Edge Function: `supabase/functions/happymd-conversion-webhook/index.ts`
+- `verify_jwt = false` (external service) — added to `supabase/config.toml`
+- Auth: shared secret in header `x-happymd-signature` (HMAC-SHA256 of raw body using `HAPPYMD_WEBHOOK_SECRET`). We'll request that secret from the user once, then share the value with Darren.
 
-Params: `product=tprime365`, `plan=subscription`, `partner=cell365power`, `theme=best365`, optional `tracking_code=…`.
+## Expected payload (what we ask Darren to send)
 
-Note: the PDF iframe example has a typo (`partner=cell365powerpower`) — we use `cell365power`.
+```json
+{
+  "event": "conversion.completed",
+  "email": "customer@example.com",
+  "tracking_code": "TPRIME365CELL",
+  "product": "tprime365",
+  "happymd_order_id": "hmd_abc123",
+  "amount": 199.00,
+  "intake_completed_at": "2026-05-15T12:34:56Z",
+  "payment_completed_at": "2026-05-15T12:30:00Z"
+}
+```
 
-## Recommended approach
+Only `event`, `email`, and `tracking_code` are required; the rest are optional metadata.
 
-Use the **iframe embed** on the buy pages (consistent with how we already embed the HappyMD intake on `TPrime365IntakePage`), and the **button snippet (modal)** on the marketing/landing pages where the CTA currently scrolls to a form. Hosted URL stays available for paid ads.
+## What the function does
 
-This keeps payment + intake fully on HappyMD — no Shopify/Stripe code changes on our side. We only swap CTAs and embeds.
+1. Validate HMAC signature → 401 if mismatch.
+2. Validate body with Zod → 400 on bad input.
+3. Lookup lead in `public.leads` by normalized email + source `tprime365`.
+4. Update the lead row:
+   - `happymd_completed = true`
+   - `happymd_completed_at = now()` (only if not already set)
+5. Insert a row into `public.intake_completions` (`source='tprime365'`, `tracking_code` from payload) for analytics parity with the iframe path.
+6. Fire side effects (best-effort, errors logged but not fatal):
+   - Call existing `ghl-sync` function with a `conversion_completed` tag so the contact gets tagged in GHL.
+   - Call existing `send-lead-notification` function with `type: 'happymd_conversion'` so the team gets an email.
+7. Return `200 { success: true, lead_id, already_completed }`.
 
-## Pages affected
+Idempotent: re-deliveries with the same email won't double-update or double-notify (we check `happymd_completed` first and return `already_completed: true`).
 
-| Page | Today | After |
-|---|---|---|
-| `src/pages/TPrimeBuyPage.tsx` (`/tprime-buy`) | Inline name+email lead form → navigates to `/tprime365-intake` | Replace right-column form with HappyMD **checkout iframe**. Keep lead capture as a *silent* pre-write (optional). |
-| `src/pages/TPrime365Page.tsx` (`/tprime365`) | "See If I Qualify" buttons route to `/tprime-buy` or `/tprime365-intake` | Swap primary CTAs to HappyMD **button snippet** (modal checkout). |
-| `src/pages/TPrime365IntakePage.tsx` (`/tprime365-intake`) | HappyMD intake iframe | **Keep as-is** — HappyMD redirects here after payment. Confirm with HappyMD that post-payment redirect lands on this URL (or update redirect param). |
-| `src/pages/TPrimeAdvertorialPage.tsx`, `ListiclePage.tsx`, `TScoreQuizPage.tsx`, `NHTOPage.tsx` | Various TPrime CTAs | Update CTAs that currently go to the lead form to open the checkout modal instead. |
-| `src/components/MobileMenu`, sticky mobile CTA bars | Link to `/tprime-buy` | Same — these still land on the buy page, which now shows the checkout. |
+## Database changes
 
-## Implementation steps
+Small migration to support the webhook:
 
-1. **Create `src/components/HappyMDCheckout/HappyMDCheckout.tsx`**
-   - Two exports:
-     - `<HappyMDCheckoutIframe product plan partner theme trackingCode height />` — renders the iframe.
-     - `<HappyMDCheckoutButton ...props>label</HappyMDCheckoutButton>` — renders the `<button data-happymd-checkout …>` and lazy-loads `https://app.happymd.co/embed-helper.js` once via a module-level guard.
-   - Defaults: `product="tprime365"`, `plan="subscription"`, `partner="cell365power"`, `theme="best365"`.
-   - Forward UTM/`tracking_code` from `getUtmParams()` so HappyMD attribution lines up with our existing `TPRIME365CELL` analytics.
+- Add `RPC` `mark_happymd_completed_private(p_email text, p_tracking_code text)` (SECURITY DEFINER) that does the lead update + intake_completions insert atomically and returns the lead row. Mirrors the existing `mark_intake_completed_private` pattern.
+- No table schema changes needed — `leads.happymd_completed` and `leads.happymd_completed_at` already exist.
 
-2. **`TPrimeBuyPage.tsx`**
-   - Replace the right-column `<form className="glp1buy-inline-form">` with `<HappyMDCheckoutIframe height={1100} />`.
-   - Remove `useForm`, zod schema, `onSubmit`, `splitName`, `supabase.from("leads").insert(...)`, `useNavigate` (unless still needed for sticky CTA fallback).
-   - Update sticky mobile CTA: instead of submitting the form, scroll to the iframe (or open the modal via `<HappyMDCheckoutButton>`).
-   - Keep all upper marketing content (carousel, testimonials, trust strip, bonuses).
-   - Keep the existing GTM `generate_lead` / Meta Pixel hooks but move them to fire on a `postMessage` from HappyMD if/when they expose one (otherwise drop — payment event will come from HappyMD's webhook side).
+## Secret
 
-3. **`TPrime365Page.tsx`**
-   - Convert the primary CTAs ("See If I Qualify", sticky CTA) to `<HappyMDCheckoutButton>` so the modal opens in-place. Secondary "Learn more" links stay as-is.
-   - Remove the routes-to-`/tprime-buy` redirects on those CTAs only if the user wants the modal everywhere; otherwise leave the buy page link as a fallback.
+Add one new secret via the secrets tool:
+- `HAPPYMD_WEBHOOK_SECRET` — random 32-byte hex string we generate and share with Darren.
 
-4. **Other TPrime entry points** (`TPrimeAdvertorialPage`, `ListiclePage`, `TScoreQuizPage` final CTA, `NHTOPage` if it cross-sells TPrime):
-   - Replace the "Get TPrime365" CTAs with `<HappyMDCheckoutButton>` (modal).
+## Files touched
 
-5. **Tracking + lead capture (optional, recommended)**
-   - Keep a *non-blocking* `supabase.from("leads").insert(...)` triggered when the iframe/modal opens (source: `tprime-checkout`) so we still see funnel entries in the admin dashboard even before HappyMD reports a paid order. This preserves the Lead Funnel Architecture memory rule.
-   - Coordinate with HappyMD on a webhook to mark `happymd_completed` once payment + intake clear (separate follow-up; not part of this UI task).
+- **New:** `supabase/functions/happymd-conversion-webhook/index.ts`
+- **Edit:** `supabase/config.toml` (register function with `verify_jwt = false`)
+- **New migration:** create `mark_happymd_completed_private` RPC
 
-6. **Confirm post-payment redirect** with HappyMD partners@: should land on `https://www.cell365power.com/tprime365-intake` (or a new `/tprime365-thank-you`) so existing `mark-intake-completed` + Meta `Lead` events still fire on the same domain.
+## Out of scope (call out, don't build)
 
-7. **QA checklist**
-   - Iframe loads on `/tprime-buy` desktop + mobile, no console errors.
-   - Button snippet opens modal on `/tprime365` and other pages.
-   - `tracking_code=TPRIME365CELL` (or UTM-derived) is present in the embed URL.
-   - Sticky mobile CTA scrolls to / opens checkout.
-   - No layout regression on the marketing sections we left alone.
+- No changes to the existing `/tprime365-intake` iframe flow — it keeps firing its own `mark-intake-completed` call. The new webhook is additive and authoritative when HappyMD calls it.
+- No retry queue on our side — we rely on HappyMD's webhook retry behavior.
+- No admin UI changes; the existing dashboard already reads `happymd_completed`.
 
-## Open questions for you
+## Handoff to Darren
 
-1. **CTA terminology**: keep "See If I Qualify" or switch to "Start TPrime365 — $149/mo" (HappyMD's default copy) now that it's a direct checkout?
-2. **Modal vs iframe on `/tprime-buy`**: I recommend **iframe** (more conversion-friendly, no extra click). Confirm.
-3. **Keep silent lead capture** when the user opens checkout? (Recommended yes — protects analytics if they bounce mid-checkout.)
-4. **Other TPrime pages** — should I update *every* TPrime CTA on the site in this same change, or just `/tprime-buy` + `/tprime365` and leave advertorials/listicles for a follow-up?
+Once deployed, send him:
+- URL: `…/functions/v1/happymd-conversion-webhook`
+- Header: `x-happymd-signature: <hex HMAC-SHA256 of raw body using shared secret>`
+- Sample payload (above)
+- The shared secret value (separate channel)

@@ -285,6 +285,13 @@ export type Database = {
         Args: { payload: Json; queue_name: string }
         Returns: number
       }
+      mark_happymd_completed_private: {
+        Args: { p_email: string; p_tracking_code: string }
+        Returns: {
+          already_completed: boolean
+          lead_id: string
+        }[]
+      }
       mark_intake_completed_private: {
         Args: { p_email: string; p_source: string }
         Returns: boolean
