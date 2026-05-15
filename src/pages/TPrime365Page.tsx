@@ -133,7 +133,8 @@ const TPrime365Page = () => {
 
   const handleStartProtocol = (e?: React.MouseEvent) => {
     e?.preventDefault();
-    setShowLeadModal(true);
+    // Pay-first flow: send users straight to the HappyMD-embedded checkout on /tprime-buy
+    navigate('/tprime-buy');
   };
 
   const handleLeadSubmit = async (e: React.FormEvent) => {

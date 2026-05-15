@@ -1,70 +1,74 @@
-## /glp1-buy funnel audit
+## Goal
 
-**Data (last 60 days):**
-- 307 page views / 248 unique visitors on `/glp1-buy`
-- 34 checkout leads captured (form-fill rate ~13.7% — healthy)
-- Only **2 of 34** marked completed = **5.9% post-lead conversion**
-- For comparison: `direct` source converts 6/17 = 35%; `checkout` source 1/5 = 20%
-- The drop happens **after** the lead form submits — visitors hit the form, get redirected, then don't pay
+Switch the TPrime365 funnel so customers **pay first** via the new HappyMD embedded checkout, then complete intake. Today the flow is: lead form → HappyMD intake → (payment after physician review). New flow: HappyMD checkout (payment) → HappyMD intake → success.
 
-**Root causes identified in the code:**
+## What HappyMD gave us
 
-1. **Hard 1500ms delay before redirect** (`GLP1BuyPage.tsx` L368–370). Users see "Redirecting…" for 1.5s with no feedback. On mobile this is enough time for impatient users to back out, and any nav/JS interruption kills the redirect entirely.
-2. **Buyer identity missing email pre-fill on checkout, requires re-typing**. We pass an empty address (`address1: "", city: "", zip: ""`) which Shopify treats as invalid and discards — so the customer lands on Shopify checkout with a blank form, even though we already have their name + email. Re-entering data is the #1 abandonment trigger.
-3. **No phone field collected** on the inline form, even though the schema accepts one. Without phone we can't trigger SMS recovery, and Shopify checkout asks again.
-4. **No abandoned-cart recovery.** 32 leads have email + name + cart but received zero follow-up. Even one recovery email at 1hr typically reclaims 8–15%.
-5. **Webhook reconciliation works only on email/name match.** The 2 "completed" leads matched correctly, but if a customer types one email in our form and a different one at Shopify checkout, we never mark it complete — so true completion is likely modestly higher than 5.9% but still very low.
+The PDF provides three install options for `https://app.happymd.co/embed/checkout`:
 
-## Fixes to ship
+1. **Button snippet** + `embed-helper.js` (opens modal)
+2. **Iframe** (page-builder safe)
+3. **Hosted URL** (for ads/email)
 
-### 1. Eliminate redirect delay + show real progress (highest impact)
-File: `src/pages/GLP1BuyPage.tsx`
-- Remove the `setTimeout(..., 1500)`. Redirect immediately after `updateBuyerIdentity` resolves (it already awaits Shopify).
-- Fire the GTM `begin_checkout` event before the redirect (already does — keep).
-- Keep the spinner on the button so visual continuity is preserved.
+Params: `product=tprime365`, `plan=subscription`, `partner=cell365power`, `theme=best365`, optional `tracking_code=…`.
 
-### 2. Pre-fill Shopify checkout with name + email (and phone if given)
-File: `src/pages/GLP1BuyPage.tsx`
-- Drop the empty `deliveryAddressPreferences` block. Sending an address with empty `address1`/`city`/`zip` causes Shopify to throw the buyer-identity update away. Pass **only** `email` and (if provided) `phone` — Shopify will then pre-fill the contact step on checkout.
-- Add an optional **phone** input to the inline form (already in the Zod schema). Format-validate US numbers loosely (`/^[\d\s().+-]{7,20}$/`).
+Note: the PDF iframe example has a typo (`partner=cell365powerpower`) — we use `cell365power`.
 
-### 3. Append `checkout[email]` & `checkout[shipping_address][first_name]` query params
-File: `src/pages/GLP1BuyPage.tsx`
-- Shopify accepts these as additional URL hints when buyer-identity update is dropped. Append to the checkout URL alongside the existing UTM params for belt-and-suspenders pre-fill.
+## Recommended approach
 
-### 4. Abandoned-cart recovery email at 1 hour
-New edge function: `supabase/functions/recover-abandoned-checkout/index.ts`
-- Cron-invoked (every 15 min) via `pg_cron` calling the function.
-- Selects from `checkout_leads` where `completed = false`, `created_at` between 60 min and 75 min ago, `source = 'glp1-buy'`, and no prior recovery email logged in `email_send_log` for that lead.
-- Sends a single recovery email via existing `send-digital-delivery` infra/Resend with subject "Your protocol is still reserved — complete checkout" and a CTA back to `/glp1-buy?recover=1` (which we'll already pass UTMs back through).
-- Logs to `email_send_log` so we never double-send.
+Use the **iframe embed** on the buy pages (consistent with how we already embed the HappyMD intake on `TPrime365IntakePage`), and the **button snippet (modal)** on the marketing/landing pages where the CTA currently scrolls to a form. Hosted URL stays available for paid ads.
 
-Migration needed:
-- Add `recovery_email_sent_at timestamptz` column to `checkout_leads` (cleaner than scanning `email_send_log` for joins).
-- Schedule pg_cron job to invoke the function every 15 min.
+This keeps payment + intake fully on HappyMD — no Shopify/Stripe code changes on our side. We only swap CTAs and embeds.
 
-### 5. Improve webhook reconciliation
-File: `supabase/functions/shopify-order-webhook/index.ts`
-- In addition to email + (name+total) fallback, add a **phone-number fallback**: if the order's `customer.phone` matches a pending lead's `phone`, mark it complete. Reduces unmatched orders when customers use different emails.
-- Lower the unmatched-order risk by also matching on **first_name + cart_total within 4 hours** (tighter than the current 30-day window) when email differs.
+## Pages affected
 
-### 6. Light analytic add-on
-- Add `dataLayer.push({event: 'lead_captured', source: 'glp1-buy'})` so we can measure form-fill→Shopify-load drop in GTM separately from Shopify-load→purchase drop.
+| Page | Today | After |
+|---|---|---|
+| `src/pages/TPrimeBuyPage.tsx` (`/tprime-buy`) | Inline name+email lead form → navigates to `/tprime365-intake` | Replace right-column form with HappyMD **checkout iframe**. Keep lead capture as a *silent* pre-write (optional). |
+| `src/pages/TPrime365Page.tsx` (`/tprime365`) | "See If I Qualify" buttons route to `/tprime-buy` or `/tprime365-intake` | Swap primary CTAs to HappyMD **button snippet** (modal checkout). |
+| `src/pages/TPrime365IntakePage.tsx` (`/tprime365-intake`) | HappyMD intake iframe | **Keep as-is** — HappyMD redirects here after payment. Confirm with HappyMD that post-payment redirect lands on this URL (or update redirect param). |
+| `src/pages/TPrimeAdvertorialPage.tsx`, `ListiclePage.tsx`, `TScoreQuizPage.tsx`, `NHTOPage.tsx` | Various TPrime CTAs | Update CTAs that currently go to the lead form to open the checkout modal instead. |
+| `src/components/MobileMenu`, sticky mobile CTA bars | Link to `/tprime-buy` | Same — these still land on the buy page, which now shows the checkout. |
 
-## Out of scope (call out, don't build)
-- A/B testing framework — too heavy for one session.
-- SMS recovery — requires Twilio/GHL conversation API setup and explicit consent UX.
-- Replacing Shopify hosted checkout with custom — large project, high risk.
+## Implementation steps
 
-## Expected impact
-- Removing the 1.5s delay alone typically recovers 5–10% of post-form drop-off.
-- Proper email/phone pre-fill on Shopify cuts checkout abandonment 10–20%.
-- A single 1-hour recovery email on this volume (~30/mo leads) should recover **2–4 additional orders/month** — roughly doubling current `/glp1-buy` conversion.
+1. **Create `src/components/HappyMDCheckout/HappyMDCheckout.tsx`**
+   - Two exports:
+     - `<HappyMDCheckoutIframe product plan partner theme trackingCode height />` — renders the iframe.
+     - `<HappyMDCheckoutButton ...props>label</HappyMDCheckoutButton>` — renders the `<button data-happymd-checkout …>` and lazy-loads `https://app.happymd.co/embed-helper.js` once via a module-level guard.
+   - Defaults: `product="tprime365"`, `plan="subscription"`, `partner="cell365power"`, `theme="best365"`.
+   - Forward UTM/`tracking_code` from `getUtmParams()` so HappyMD attribution lines up with our existing `TPRIME365CELL` analytics.
 
-## Files touched
-- `src/pages/GLP1BuyPage.tsx` (redirect timing, buyer identity, phone field, URL params, dataLayer event)
-- `supabase/functions/shopify-order-webhook/index.ts` (phone + tighter name/total fallback)
-- `supabase/functions/recover-abandoned-checkout/index.ts` (new)
-- Database migration: add `recovery_email_sent_at` column + pg_cron schedule
+2. **`TPrimeBuyPage.tsx`**
+   - Replace the right-column `<form className="glp1buy-inline-form">` with `<HappyMDCheckoutIframe height={1100} />`.
+   - Remove `useForm`, zod schema, `onSubmit`, `splitName`, `supabase.from("leads").insert(...)`, `useNavigate` (unless still needed for sticky CTA fallback).
+   - Update sticky mobile CTA: instead of submitting the form, scroll to the iframe (or open the modal via `<HappyMDCheckoutButton>`).
+   - Keep all upper marketing content (carousel, testimonials, trust strip, bonuses).
+   - Keep the existing GTM `generate_lead` / Meta Pixel hooks but move them to fire on a `postMessage` from HappyMD if/when they expose one (otherwise drop — payment event will come from HappyMD's webhook side).
 
-Approve and I'll implement all of the above in one pass.
+3. **`TPrime365Page.tsx`**
+   - Convert the primary CTAs ("See If I Qualify", sticky CTA) to `<HappyMDCheckoutButton>` so the modal opens in-place. Secondary "Learn more" links stay as-is.
+   - Remove the routes-to-`/tprime-buy` redirects on those CTAs only if the user wants the modal everywhere; otherwise leave the buy page link as a fallback.
+
+4. **Other TPrime entry points** (`TPrimeAdvertorialPage`, `ListiclePage`, `TScoreQuizPage` final CTA, `NHTOPage` if it cross-sells TPrime):
+   - Replace the "Get TPrime365" CTAs with `<HappyMDCheckoutButton>` (modal).
+
+5. **Tracking + lead capture (optional, recommended)**
+   - Keep a *non-blocking* `supabase.from("leads").insert(...)` triggered when the iframe/modal opens (source: `tprime-checkout`) so we still see funnel entries in the admin dashboard even before HappyMD reports a paid order. This preserves the Lead Funnel Architecture memory rule.
+   - Coordinate with HappyMD on a webhook to mark `happymd_completed` once payment + intake clear (separate follow-up; not part of this UI task).
+
+6. **Confirm post-payment redirect** with HappyMD partners@: should land on `https://www.cell365power.com/tprime365-intake` (or a new `/tprime365-thank-you`) so existing `mark-intake-completed` + Meta `Lead` events still fire on the same domain.
+
+7. **QA checklist**
+   - Iframe loads on `/tprime-buy` desktop + mobile, no console errors.
+   - Button snippet opens modal on `/tprime365` and other pages.
+   - `tracking_code=TPRIME365CELL` (or UTM-derived) is present in the embed URL.
+   - Sticky mobile CTA scrolls to / opens checkout.
+   - No layout regression on the marketing sections we left alone.
+
+## Open questions for you
+
+1. **CTA terminology**: keep "See If I Qualify" or switch to "Start TPrime365 — $149/mo" (HappyMD's default copy) now that it's a direct checkout?
+2. **Modal vs iframe on `/tprime-buy`**: I recommend **iframe** (more conversion-friendly, no extra click). Confirm.
+3. **Keep silent lead capture** when the user opens checkout? (Recommended yes — protects analytics if they bounce mid-checkout.)
+4. **Other TPrime pages** — should I update *every* TPrime CTA on the site in this same change, or just `/tprime-buy` + `/tprime365` and leave advertorials/listicles for a follow-up?
