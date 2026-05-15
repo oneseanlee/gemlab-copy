@@ -66,7 +66,7 @@ export function HappyMDCheckoutIframe(
       scrolling="auto"
       allow="payment *; clipboard-write"
       className={className}
-      style={{ border: 0, width: "100%", maxWidth: "100%", display: "block", borderRadius: 12, background: "#fff" }}
+      style={{ border: 0, width: "100%", maxWidth: "800px", display: "block", borderRadius: 12, background: "#fff", margin: "0 auto" }}
     />
   );
 }
