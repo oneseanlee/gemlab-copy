@@ -164,7 +164,7 @@ const TPrimeBuyPage = () => {
             <div id="tprime-checkout-embed" className="tprime-checkout-embed">
               <h3 className="glp1buy-form-headline">Start TPrime365 — $149/mo</h3>
               <p className="glp1buy-form-subtext">Secure checkout powered by HappyMD. After payment, you'll complete a quick physician intake (5 minutes).</p>
-              <HappyMDCheckoutIframe height={900} />
+              <HappyMDCheckoutIframe height={1100} />
               <div className="glp1buy-secure-note" style={{ marginTop: 12 }}>
                 <Lock size={13} />
                 <span>HIPAA-compliant — your information is secure.</span>
