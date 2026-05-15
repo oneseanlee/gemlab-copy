@@ -1,14 +1,7 @@
 import { useState, useRef } from "react";
 
-import { supabase } from "@/integrations/supabase/client";
-import { getUtmParams } from "@/lib/utm";
-import { splitName } from "@/lib/split-name";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader2, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Shield, FlaskConical, Truck, Volume2 } from "lucide-react";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { ArrowRight, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Shield, FlaskConical, Truck, Volume2 } from "lucide-react";
+import { HappyMDCheckoutIframe } from "@/components/HappyMDCheckout/HappyMDCheckout";
 import "./TPrimeBuyPage.css";
 
 /* ── Carousel media ──────────────────────────────────── */
@@ -27,21 +20,11 @@ const carouselMedia: MediaItem[] = [
 const PRICE = 149.00;
 const COMPARE_PRICE = 299.00;
 
-/* ── Form schema ──────────────────────────────────────── */
-const schema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().email("Please enter a valid email").max(255),
-});
-type FormData = z.infer<typeof schema>;
-
 /* ── Component ────────────────────────────────────────── */
 const TPrimeBuyPage = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeThumb, setActiveThumb] = useState(0);
   const [showSoundHint, setShowSoundHint] = useState(true);
-  const hasSubmitted = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const navigate = useNavigate();
 
   const handleSoundOverlayClick = () => {
     setShowSoundHint(false);
@@ -50,40 +33,9 @@ const TPrimeBuyPage = () => {
     }
   };
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  });
-
-  const onSubmit = async (data: FormData) => {
-    if (hasSubmitted.current) return;
-    hasSubmitted.current = true;
-    setIsSubmitting(true);
-
-    try {
-      const { firstName: fn, lastName: ln } = splitName(data.name);
-      const { error: insertError } = await supabase.from("leads").insert({
-        first_name: fn,
-        last_name: ln,
-        email: data.email.trim(),
-        source: "tprime-buy",
-        utm_params: getUtmParams(),
-      } as any);
-
-      if (insertError) {
-        console.error("[TPrimeBuy] Lead insert failed:", insertError.message);
-        toast.error("Could not save your info. Please try again.");
-        hasSubmitted.current = false;
-        setIsSubmitting(false);
-        return;
-      }
-
-      
-      navigate("/tprime365-intake");
-    } catch {
-      toast.error("Something went wrong. Please try again.");
-      hasSubmitted.current = false;
-      setIsSubmitting(false);
-    }
+  const scrollToCheckout = () => {
+    const el = document.getElementById("tprime-checkout-embed");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   /* ── Main render ──────────────────────────────────── */
@@ -208,30 +160,16 @@ const TPrimeBuyPage = () => {
               </div>
             </div>
 
-            {/* Inline Name + Email Form — Lead Capture */}
-            <form className="glp1buy-inline-form" onSubmit={handleSubmit(onSubmit)}>
-              <h3 className="glp1buy-form-headline">Check If You Qualify — Free Physician Review</h3>
-              <p className="glp1buy-form-subtext">Enter your details below to start your qualification. A licensed physician will review your intake — takes less than 5 minutes.</p>
-              <div className="glp1buy-field">
-                <label htmlFor="tprimebuy-name">Your Name *</label>
-                <input id="tprimebuy-name" type="text" placeholder="John Doe" {...register("name")} />
-                {errors.name && <div className="glp1buy-field-error">{errors.name.message}</div>}
-              </div>
-              <div className="glp1buy-field">
-                <label htmlFor="tprimebuy-email">Email Address *</label>
-                <input id="tprimebuy-email" type="email" placeholder="you@example.com" {...register("email")} />
-                {errors.email && <div className="glp1buy-field-error">{errors.email.message}</div>}
-              </div>
-
-              <button type="submit" className="glp1-checkout-cta" disabled={isSubmitting}>
-                {isSubmitting ? <><Loader2 size={20} className="animate-spin" /> Processing…</> : <>See If I Qualify <ArrowRight size={18} /></>}
-              </button>
-
-              <div className="glp1buy-secure-note">
+            {/* HappyMD Embedded Checkout — pay first, intake after */}
+            <div id="tprime-checkout-embed" className="tprime-checkout-embed">
+              <h3 className="glp1buy-form-headline">Start TPrime365 — $149/mo</h3>
+              <p className="glp1buy-form-subtext">Secure checkout powered by HappyMD. After payment, you'll complete a quick physician intake (5 minutes).</p>
+              <HappyMDCheckoutIframe height={1100} />
+              <div className="glp1buy-secure-note" style={{ marginTop: 12 }}>
                 <Lock size={13} />
                 <span>HIPAA-compliant — your information is secure.</span>
               </div>
-            </form>
+            </div>
 
             <div className="glp1-guarantee-badge">
               <ShieldCheck size={28} />
@@ -254,8 +192,8 @@ const TPrimeBuyPage = () => {
       {/* Mobile sticky CTA */}
       <div className="glp1-sticky-mobile-cta">
         <span className="sticky-price">$149 <span className="sticky-strike">$299</span></span>
-        <button className="sticky-cta-btn" disabled={isSubmitting} onClick={handleSubmit(onSubmit)}>
-          {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> Processing…</> : <>See If I Qualify <ArrowRight size={14} /></>}
+        <button className="sticky-cta-btn" onClick={scrollToCheckout}>
+          Start TPrime365 <ArrowRight size={14} />
         </button>
       </div>
     </div>
