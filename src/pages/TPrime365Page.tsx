@@ -43,7 +43,7 @@ const tprimeTestimonials = [
 const MidPageCTA = ({ onClick }: { onClick: (e?: React.MouseEvent) => void }) => (
   <div className="tprime-mid-cta">
     <AnimatedCTA onClick={onClick}>
-      See If I Qualify
+      Start My Transformation
       <ArrowRight size={16} />
     </AnimatedCTA>
   </div>
@@ -249,7 +249,7 @@ const TPrime365Page = () => {
                     <div className="b365-nav-right">
                         <CartDrawer />
                         <AnimatedCTA onClick={handleStartProtocol} small>
-                          See If I Qualify
+                          Start TPrime Today
                           <ArrowRight size={14} />
                         </AnimatedCTA>
                     </div>
@@ -271,7 +271,7 @@ const TPrime365Page = () => {
                             <span className="price-big">$149</span>
                             <span className="price-note">/month — Includes Physician Consultation via HappyMD</span>
                         </div>
-                        <p className="guarantee-text">Complete your intake to see if you qualify</p>
+                        <p className="guarantee-text">Join 2,000+ men already optimizing — start in under 5 minutes</p>
 
                         {/* Urgency line */}
                         <div className="tprime-urgency-line">
@@ -280,7 +280,7 @@ const TPrime365Page = () => {
                         </div>
 
                         <AnimatedCTA onClick={handleStartProtocol}>
-                             See If I Qualify
+                             Start My TPrime Protocol
                             <ArrowRight size={16} />
                         </AnimatedCTA>
 
@@ -336,7 +336,7 @@ const TPrime365Page = () => {
                             </span>
                             <span>
                                 <ShieldCheck size={16} />
-                                Complete your intake to see if you qualify
+                                5-minute intake — no waiting rooms, no labs required
                             </span>
                         </div>
                     </div>
@@ -625,15 +625,15 @@ const TPrime365Page = () => {
                     <div className="tprime-final-price-box">
                         <span className="big-price">$149/month</span>
                         <span className="note">Includes everything: Formula + Physician Consultation + Free Shipping</span>
-                        <span className="guarantee-text">Complete your intake to see if you qualify</span>
+                        <span className="guarantee-text">Lock in $149/mo — physician review included</span>
                     </div>
                     <AnimatedCTA onClick={handleStartProtocol} className="btn-white-cta">
-                         See If I Qualify
+                         Claim My Spot — Start Today
                         <ArrowRight size={16} />
                     </AnimatedCTA>
                     <div className="tprime-cta-trust-points">
                         <span><Check size={14} /> Licensed physician reviews every order</span>
-                        <span><Check size={14} /> See if you qualify in minutes</span>
+                        <span><Check size={14} /> Start in under 5 minutes</span>
                         <span><Check size={14} /> FDA-registered compounding pharmacy</span>
                         <span><Check size={14} /> Free shipping — discreet packaging</span>
                         <span><Check size={14} /> Cancel subscription anytime</span>
@@ -821,7 +821,7 @@ const TPrime365Page = () => {
             <div className="tprime-sticky-mobile-cta">
               <span className="sticky-price">$149<span>/mo</span></span>
               <button className="sticky-cta-btn" onClick={handleStartProtocol}>
-                See If I Qualify
+                Start Today
                 <ArrowRight size={14} />
               </button>
             </div>
