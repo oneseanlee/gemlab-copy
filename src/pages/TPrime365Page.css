@@ -1230,14 +1230,28 @@
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  background: rgba(51, 118, 176, 0.08);
-  color: var(--b365-blue, #3376b0);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(245, 158, 11, 0.08));
+  color: #b91c1c;
+  border: 1px solid rgba(239, 68, 68, 0.18);
   border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 12.5px;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   margin-bottom: 14px;
+}
+.tprime-eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #ef4444;
+  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55);
+  animation: tprime-pulse-dot 1.6s ease-out infinite;
+}
+@keyframes tprime-pulse-dot {
+  0%   { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
 }
 .tprime-checkout-header h2 {
   font-size: clamp(32px, 5vw, 52px);
@@ -1248,13 +1262,51 @@
 }
 .tprime-checkout-header h2 em {
   font-style: italic;
-  color: var(--b365-blue, #3376b0);
+  background: linear-gradient(135deg, #3376b0 0%, #2a6191 60%, #1e4773 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .tprime-checkout-sub {
   font-size: 17px;
   line-height: 1.55;
   color: #475569;
   margin: 0;
+}
+.tprime-checkout-sub strong {
+  color: #0f172a;
+  font-weight: 800;
+}
+.tprime-checkout-trustrow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 14px;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+.tprime-checkout-trustrow > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+.tprime-checkout-trustrow svg { color: #3376b0; }
+.tprime-trust-stars {
+  color: #f59e0b;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+@media (max-width: 480px) {
+  .tprime-checkout-trustrow { gap: 6px 8px; font-size: 12px; }
+  .tprime-checkout-trustrow > span { padding: 6px 10px; }
 }
 
 .tprime-checkout-grid {
