@@ -739,14 +739,21 @@ const TPrime365Page = () => {
               <div className="tprime-checkout-inner">
                 <div className="tprime-checkout-header">
                   <span className="tprime-checkout-eyebrow">
-                    <ShieldCheck size={14} /> Physician-Reviewed · HIPAA-Compliant
+                    <span className="tprime-eyebrow-dot" aria-hidden="true" />
+                    47 men started TPrime today · Limited spots this week
                   </span>
                   <h2 className="b365-serif">
-                    Start Your <em>Transformation</em> Today
+                    Your Higher-T Life <em>Starts Right Here</em>
                   </h2>
                   <p className="tprime-checkout-sub">
-                    Secure checkout below. Pay first, then complete a 5-minute physician intake. If you're not approved, you won't be charged.
+                    Lock in <strong>$149/mo</strong> (save $150), complete a 5-minute physician intake, and ship in 24 hours. Not approved? You won't be charged — guaranteed.
                   </p>
+                  <div className="tprime-checkout-trustrow">
+                    <span><span className="tprime-trust-stars">★★★★★</span> 4.8/5 · 2,500+ men</span>
+                    <span><Truck size={14} /> Ships in 24h</span>
+                    <span><ShieldCheck size={14} /> 30-Day Guarantee</span>
+                    <span><Lock size={14} /> HIPAA · SSL Secure</span>
+                  </div>
                 </div>
 
                 <div className="tprime-checkout-grid">
