@@ -14,6 +14,7 @@ import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { supabase } from '@/integrations/supabase/client';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { HappyMDCheckoutIframe } from '@/components/HappyMDCheckout/HappyMDCheckout';
 
 const TPRIME_VARIANT_ID = 'gid://shopify/ProductVariant/46309997936780';
 const TPRIME_PRODUCT = {
@@ -133,8 +134,13 @@ const TPrime365Page = () => {
 
   const handleStartProtocol = (e?: React.MouseEvent) => {
     e?.preventDefault();
-    // Pay-first flow: send users straight to the HappyMD-embedded checkout on /tprime-buy
-    navigate('/tprime-buy');
+    // Pay-first flow: smooth-scroll to the embedded HappyMD checkout at the bottom of this page.
+    const el = document.getElementById('tprime365-checkout');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      navigate('/tprime-buy');
+    }
   };
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
