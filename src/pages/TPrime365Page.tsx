@@ -792,7 +792,7 @@ const TPrime365Page = () => {
                       <h3>Secure Checkout</h3>
                       <span><Lock size={13} /> SSL · HIPAA</span>
                     </div>
-                    <HappyMDCheckoutIframe height={1150} />
+                    <HappyMDCheckoutIframe height={1800} />
                     <div className="tprime-checkout-iframe-foot">
                       <Lock size={13} />
                       <span>Your information is encrypted &amp; HIPAA-compliant. After payment, you'll complete a quick 5-minute physician intake.</span>
