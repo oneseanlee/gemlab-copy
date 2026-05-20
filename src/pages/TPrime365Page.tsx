@@ -14,6 +14,7 @@ import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { supabase } from '@/integrations/supabase/client';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { HappyMDCheckoutIframe } from '@/components/HappyMDCheckout/HappyMDCheckout';
 
 const TPRIME_VARIANT_ID = 'gid://shopify/ProductVariant/46309997936780';
 const TPRIME_PRODUCT = {
@@ -133,8 +134,13 @@ const TPrime365Page = () => {
 
   const handleStartProtocol = (e?: React.MouseEvent) => {
     e?.preventDefault();
-    // Pay-first flow: send users straight to the HappyMD-embedded checkout on /tprime-buy
-    navigate('/tprime-buy');
+    // Pay-first flow: smooth-scroll to the embedded HappyMD checkout at the bottom of this page.
+    const el = document.getElementById('tprime365-checkout');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      navigate('/tprime-buy');
+    }
   };
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
@@ -726,6 +732,86 @@ const TPrime365Page = () => {
             {/* Post-FAQ CTA */}
             <section className="b365-section">
               <MidPageCTA onClick={handleStartProtocol} />
+            </section>
+
+            {/* Embedded HappyMD Checkout — pay first, intake after */}
+            <section className="tprime-checkout-section" id="tprime365-checkout">
+              <div className="tprime-checkout-inner">
+                <div className="tprime-checkout-header">
+                  <span className="tprime-checkout-eyebrow">
+                    <ShieldCheck size={14} /> Physician-Reviewed · HIPAA-Compliant
+                  </span>
+                  <h2 className="b365-serif">
+                    Start Your <em>Transformation</em> Today
+                  </h2>
+                  <p className="tprime-checkout-sub">
+                    Secure checkout below. Pay first, then complete a 5-minute physician intake. If you're not approved, you won't be charged.
+                  </p>
+                </div>
+
+                <div className="tprime-checkout-grid">
+                  {/* LEFT — Offer summary */}
+                  <aside className="tprime-checkout-offer">
+                    <div className="tprime-offer-promo">🔥 SAVE $150 + FREE SHIPPING — TODAY ONLY</div>
+                    <div className="tprime-offer-imgwrap">
+                      <img src="/images/tprime-bottle.png" alt="TPrime365 bottle" loading="lazy" />
+                    </div>
+                    <h3 className="tprime-offer-title">TPrime365™ Monthly Protocol</h3>
+                    <div className="tprime-offer-stars">
+                      {'★★★★★'} <span>4.8 / 5 · 94 verified reviews</span>
+                    </div>
+                    <div className="tprime-offer-price">
+                      <span className="big">$149</span>
+                      <span className="per">/mo</span>
+                      <span className="strike">$299</span>
+                      <span className="badge">50% OFF</span>
+                    </div>
+                    <ul className="tprime-offer-list">
+                      <li><Check size={16} /> Enclomiphene + Spermidine + Boron + Vitamin C sublingual</li>
+                      <li><Check size={16} /> MODS Max™ 10x absorption technology</li>
+                      <li><Check size={16} /> Physician consultation included ($150 value)</li>
+                      <li><Check size={16} /> Free priority shipping ($12 value)</li>
+                      <li><Check size={16} /> Community access ($49 value)</li>
+                      <li><Check size={16} /> Pause or cancel anytime</li>
+                    </ul>
+                    <div className="tprime-offer-trust">
+                      <span><Shield size={14} /> Made in USA</span>
+                      <span><FlaskConical size={14} /> FDA-Registered 503A</span>
+                      <span><Lock size={14} /> HIPAA Secure</span>
+                      <span><Truck size={14} /> Free Shipping</span>
+                    </div>
+                    <blockquote className="tprime-offer-quote">
+                      "Testosterone went from 658 to 749 in two months. More energy, better sleep, and I'm building muscle again — no injections."
+                      <cite>— Brett E., Verified Buyer</cite>
+                    </blockquote>
+                  </aside>
+
+                  {/* RIGHT — HappyMD iframe */}
+                  <div className="tprime-checkout-iframe-wrap">
+                    <div className="tprime-checkout-iframe-head">
+                      <h3>Secure Checkout</h3>
+                      <span><Lock size={13} /> SSL · HIPAA</span>
+                    </div>
+                    <HappyMDCheckoutIframe height={1150} />
+                    <div className="tprime-checkout-iframe-foot">
+                      <Lock size={13} />
+                      <span>Your information is encrypted &amp; HIPAA-compliant. After payment, you'll complete a quick 5-minute physician intake.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="tprime-checkout-guarantee">
+                  <ShieldCheck size={26} />
+                  <div>
+                    <strong>Physician-Reviewed Protocol</strong>
+                    <span>Your intake is reviewed by an independent licensed physician. If you're not approved, you won't be charged.</span>
+                  </div>
+                </div>
+
+                <p className="tprime-checkout-fda">
+                  *These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.
+                </p>
+              </div>
             </section>
 
             {/* Footer */}

@@ -1,76 +1,57 @@
+# Add Embedded Checkout to TPrime365 Page
+
 ## Goal
+Add a beautifully designed HappyMD checkout section at the bottom of `/tprime365` and re-wire every "See If I Qualify" CTA to smooth-scroll to that section instead of navigating to `/tprime-buy`.
 
-Give HappyMD (Darren) a single webhook URL they can POST to when a TPrime365 customer completes **both payment and the intake form**. We mark that lead as fully converted in our database and fire downstream events (GHL sync, admin notification, conversion analytics).
+## What Changes
 
-## Endpoint
+### 1. New `#tprime365-checkout` section (bottom of page, before sticky mobile CTA)
+A premium, conversion-optimized checkout block matching the medical-clean aesthetic of the page:
 
-`POST https://yyuoyitapltnuqhkjyfd.supabase.co/functions/v1/happymd-conversion-webhook`
+- **Section header** — Playfair serif headline: *"Start Your Transformation Today"* + supporting line: *"Secure checkout — physician intake completed after payment (5 min)."*
+- **Two-column layout (desktop) / stacked (mobile):**
+  - **Left column** — Offer summary card:
+    - Product visual (`/images/tprime-bottle.png`)
+    - Price block: `$149/mo` with `$299` strikethrough + "50% OFF" badge
+    - Bulleted "What's Included" (formula, physician consult, free shipping, community access)
+    - 5-star rating + 1 short testimonial
+    - Trust strip: Made in USA · FDA-Registered · HIPAA · 503A Pharmacy
+  - **Right column** — `<HappyMDCheckoutIframe height={1150} />`
+    - HIPAA lock note below iframe
+    - Phone support line `(385) 421-5651`
+    - FDA disclaimer footnote
+- **Guarantee badge** below grid: "Physician-Reviewed — If you're not approved, you won't be charged."
 
-- New Supabase Edge Function: `supabase/functions/happymd-conversion-webhook/index.ts`
-- `verify_jwt = false` (external service) — added to `supabase/config.toml`
-- Auth: shared secret in header `x-happymd-signature` (HMAC-SHA256 of raw body using `HAPPYMD_WEBHOOK_SECRET`). We'll request that secret from the user once, then share the value with Darren.
+All styling uses existing tokens from `TPrime365Page.css` plus a new `tprime-checkout-*` block (mirrors the polish of the `/tprime-buy` right column). Animations: subtle fade-in on scroll. Mobile-first responsive.
 
-## Expected payload (what we ask Darren to send)
+### 2. Re-wire every CTA
+Replace `handleStartProtocol`'s `navigate('/tprime-buy')` with a smooth scroll:
 
-```json
-{
-  "event": "conversion.completed",
-  "email": "customer@example.com",
-  "tracking_code": "TPRIME365CELL",
-  "product": "tprime365",
-  "happymd_order_id": "hmd_abc123",
-  "amount": 199.00,
-  "intake_completed_at": "2026-05-15T12:34:56Z",
-  "payment_completed_at": "2026-05-15T12:30:00Z"
-}
+```ts
+const handleStartProtocol = (e?: React.MouseEvent) => {
+  e?.preventDefault();
+  document.getElementById('tprime365-checkout')
+    ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 ```
 
-Only `event`, `email`, and `tracking_code` are required; the rest are optional metadata.
+This automatically updates all 11 CTA touchpoints already wired to `handleStartProtocol`:
+- Nav bar CTA (line 245)
+- Hero CTA (line 276)
+- 6× `MidPageCTA` blocks (lines 368, 396, 453, 560, 593, 728)
+- Final white CTA (line 624)
+- Sticky mobile CTA (line 737)
 
-## What the function does
+CTA copy stays **"See If I Qualify"** (per clinical-page terminology memory).
 
-1. Validate HMAC signature → 401 if mismatch.
-2. Validate body with Zod → 400 on bad input.
-3. Lookup lead in `public.leads` by normalized email + source `tprime365`.
-4. Update the lead row:
-   - `happymd_completed = true`
-   - `happymd_completed_at = now()` (only if not already set)
-5. Insert a row into `public.intake_completions` (`source='tprime365'`, `tracking_code` from payload) for analytics parity with the iframe path.
-6. Fire side effects (best-effort, errors logged but not fatal):
-   - Call existing `ghl-sync` function with a `conversion_completed` tag so the contact gets tagged in GHL.
-   - Call existing `send-lead-notification` function with `type: 'happymd_conversion'` so the team gets an email.
-7. Return `200 { success: true, lead_id, already_completed }`.
+### 3. Remove the lead-capture modal flow
+Since the user no longer needs to capture a lead before redirecting to intake, the `showLeadModal` / `handleLeadSubmit` paths become dead code. We leave them in place untouched (no removal) to keep scope minimal — they simply won't be triggered.
 
-Idempotent: re-deliveries with the same email won't double-update or double-notify (we check `happymd_completed` first and return `already_completed: true`).
+## Files Modified
+- `src/pages/TPrime365Page.tsx` — change `handleStartProtocol`, add `<section id="tprime365-checkout">` near the bottom (before sticky mobile CTA / footer), import `HappyMDCheckoutIframe`
+- `src/pages/TPrime365Page.css` — add `.tprime-checkout-section`, grid, offer-card, and price/badge styles
 
-## Database changes
-
-Small migration to support the webhook:
-
-- Add `RPC` `mark_happymd_completed_private(p_email text, p_tracking_code text)` (SECURITY DEFINER) that does the lead update + intake_completions insert atomically and returns the lead row. Mirrors the existing `mark_intake_completed_private` pattern.
-- No table schema changes needed — `leads.happymd_completed` and `leads.happymd_completed_at` already exist.
-
-## Secret
-
-Add one new secret via the secrets tool:
-- `HAPPYMD_WEBHOOK_SECRET` — random 32-byte hex string we generate and share with Darren.
-
-## Files touched
-
-- **New:** `supabase/functions/happymd-conversion-webhook/index.ts`
-- **Edit:** `supabase/config.toml` (register function with `verify_jwt = false`)
-- **New migration:** create `mark_happymd_completed_private` RPC
-
-## Out of scope (call out, don't build)
-
-- No changes to the existing `/tprime365-intake` iframe flow — it keeps firing its own `mark-intake-completed` call. The new webhook is additive and authoritative when HappyMD calls it.
-- No retry queue on our side — we rely on HappyMD's webhook retry behavior.
-- No admin UI changes; the existing dashboard already reads `happymd_completed`.
-
-## Handoff to Darren
-
-Once deployed, send him:
-- URL: `…/functions/v1/happymd-conversion-webhook`
-- Header: `x-happymd-signature: <hex HMAC-SHA256 of raw body using shared secret>`
-- Sample payload (above)
-- The shared secret value (separate channel)
+## Out of Scope
+- No changes to `/tprime-buy`, `/tprime365-intake`, or any tracking codes
+- No backend / Supabase / edge function changes
+- No copy changes outside the new section
