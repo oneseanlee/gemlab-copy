@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { FileText, Shield, Clock } from 'lucide-react';
 
 import { getFbcValue, getFbpValue } from '@/lib/fb-cookies';
+import { getRefParam } from '@/lib/ref';
 import { supabase } from '@/integrations/supabase/client';
 
 declare global {
@@ -16,6 +17,12 @@ const TPrime365IntakePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Partner ref overrides default tracking code so happyMD attributes
+  // the consultation to the referring partner (see install guide).
+  const ref = getRefParam();
+  const trackingCode = ref || 'TPRIME365CELL';
+  const iframeSrc = `https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=${encodeURIComponent(trackingCode)}&v=v2&theme=best365${ref ? `&ref=${encodeURIComponent(ref)}` : ''}`;
 
   useEffect(() => {
     const iframe = document.getElementById('happymd-testosterone-embed') as HTMLIFrameElement;
@@ -39,9 +46,10 @@ const TPrime365IntakePage = () => {
       window.dataLayer.push({
         event: 'generate_lead',
         form_name: 'testosterone-optimizer',
-        tracking_code: 'TPRIME365CELL',
+        tracking_code: trackingCode,
         vendor_id: 'best365labgqzb',
         campaign_name: 'TPRIME365',
+        ref: ref || undefined,
         page_url: window.location.href,
         page_referrer: document.referrer,
         event_id: eventId,
@@ -57,7 +65,7 @@ const TPrime365IntakePage = () => {
       fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-lead-notification`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}` },
-        body: JSON.stringify({ type: 'happymd_form', record: { campaign: 'TPRIME365', tracking_code: 'TPRIME365CELL', page_url: window.location.href } }),
+        body: JSON.stringify({ type: 'happymd_form', record: { campaign: 'TPRIME365', tracking_code: trackingCode, ref: ref || undefined, page_url: window.location.href } }),
       }).catch(err => console.error('[TPRIME365] notification error:', err));
 
       // Save HappyMD completion to database
@@ -75,7 +83,7 @@ const TPrime365IntakePage = () => {
         // Fallback: no email available, log to intake_completions
         (supabase.from as any)('intake_completions').insert({
           source: 'tprime365',
-          tracking_code: 'TPRIME365CELL',
+          tracking_code: trackingCode,
         }).then(({ error }: { error: any }) => {
           if (error) console.error('[TPRIME365] intake_completions insert error:', error);
           else console.log('[TPRIME365] fallback intake completion logged');
@@ -112,7 +120,7 @@ const TPrime365IntakePage = () => {
       iframe.removeEventListener('load', handleLoad);
       window.removeEventListener('message', handleMessage);
     };
-  }, []);
+  }, [trackingCode, ref]);
 
   return (
     <div className="intake-page">
@@ -152,7 +160,7 @@ const TPrime365IntakePage = () => {
           <div className="intake-iframe-wrapper">
             <iframe
               id="happymd-testosterone-embed"
-              src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=TPRIME365CELL&v=v2&theme=best365"
+              src={iframeSrc}
               width="100%"
               height="1200px"
               scrolling="auto"
