@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { getUtmParams } from "@/lib/utm";
+import { getRefParam } from "@/lib/ref";
 
 /**
  * HappyMD embedded checkout — TPrime365.
@@ -27,8 +28,12 @@ function buildCheckoutUrl({
 }: HappyMDCheckoutProps) {
   const params = new URLSearchParams({ product, plan, partner, theme });
   const utm = getUtmParams() as Record<string, string | undefined>;
-  const code = trackingCode || utm?.utm_campaign || "TPRIME365CELL";
+  const ref = getRefParam() || undefined;
+  // Partner ref (?ref=...) takes precedence over UTM campaign so partner
+  // attribution wins inside happyMD even when ads append their own UTMs.
+  const code = trackingCode || ref || utm?.utm_campaign || "TPRIME365CELL";
   if (code) params.set("tracking_code", code);
+  if (ref) params.set("ref", ref);
   // Forward UTM params (HappyMD ignores unknown keys safely)
   Object.entries(utm || {}).forEach(([k, v]) => {
     if (v && !params.has(k)) params.set(k, String(v));
@@ -90,7 +95,8 @@ export function HappyMDCheckoutButton(
   }, []);
 
   const utm = getUtmParams() as Record<string, string | undefined>;
-  const code = trackingCode || utm?.utm_campaign || "TPRIME365CELL";
+  const ref = getRefParam() || undefined;
+  const code = trackingCode || ref || utm?.utm_campaign || "TPRIME365CELL";
 
   return (
     <button
