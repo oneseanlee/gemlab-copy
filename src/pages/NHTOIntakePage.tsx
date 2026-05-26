@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { FileText, Shield, Clock } from 'lucide-react';
 import { getFbcValue, getFbpValue } from '@/lib/fb-cookies';
+import { getRefParam } from '@/lib/ref';
 import { supabase } from '@/integrations/supabase/client';
 
 declare global {
@@ -15,6 +16,12 @@ const NHTOIntakePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Partner ref overrides default tracking code so happyMD attributes
+  // the consultation to the referring partner (see install guide).
+  const ref = getRefParam();
+  const trackingCode = ref || 'UCOSNHTOCELL';
+  const iframeSrc = `https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=${encodeURIComponent(trackingCode)}&v=v2&theme=best365${ref ? `&ref=${encodeURIComponent(ref)}` : ''}`;
 
   useEffect(() => {
     const iframe = document.getElementById('happymd-testosterone-embed') as HTMLIFrameElement;
@@ -38,9 +45,10 @@ const NHTOIntakePage = () => {
       window.dataLayer.push({
         event: 'generate_lead',
         form_name: 'testosterone-optimizer',
-        tracking_code: 'UCOSNHTOCELL',
+        tracking_code: trackingCode,
         vendor_id: 'best365labgqzb',
         campaign_name: 'UCOSNHTO',
+        ref: ref || undefined,
         page_url: window.location.href,
         page_referrer: document.referrer,
         event_id: eventId,
@@ -56,7 +64,7 @@ const NHTOIntakePage = () => {
       fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-lead-notification`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}` },
-        body: JSON.stringify({ type: 'happymd_form', record: { campaign: 'UCOSNHTO', tracking_code: 'UCOSNHTOCELL', page_url: window.location.href } }),
+        body: JSON.stringify({ type: 'happymd_form', record: { campaign: 'UCOSNHTO', tracking_code: trackingCode, ref: ref || undefined, page_url: window.location.href } }),
       }).catch(err => console.error('[UCOSNHTO] notification error:', err));
 
       // Save HappyMD completion to database
@@ -74,7 +82,7 @@ const NHTOIntakePage = () => {
         // Fallback: no email available, log to intake_completions
         (supabase.from as any)('intake_completions').insert({
           source: 'nhto',
-          tracking_code: 'UCOSNHTOCELL',
+          tracking_code: trackingCode,
         }).then(({ error }: { error: any }) => {
           if (error) console.error('[UCOSNHTO] intake_completions insert error:', error);
           else console.log('[UCOSNHTO] fallback intake completion logged');
@@ -111,7 +119,7 @@ const NHTOIntakePage = () => {
       iframe.removeEventListener('load', handleLoad);
       window.removeEventListener('message', handleMessage);
     };
-  }, []);
+  }, [trackingCode, ref]);
 
   return (
     <div className="intake-page">
@@ -151,7 +159,7 @@ const NHTOIntakePage = () => {
           <div className="intake-iframe-wrapper">
             <iframe
               id="happymd-testosterone-embed"
-              src="https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=UCOSNHTOCELL&v=v2&theme=best365"
+              src={iframeSrc}
               width="100%"
               height="1200px"
               scrolling="auto"
