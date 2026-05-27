@@ -77,6 +77,100 @@
   margin-bottom: var(--space-6);
 }
 
+.partners-hero-microproof {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(51,118,176,0.18);
+  flex-wrap: wrap;
+}
+.partners-hero-microproof span {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--b365-text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.partners-hero-microproof strong {
+  display: block;
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--b365-blue);
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.partners-product-period {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--b365-text-secondary);
+  margin-left: 2px;
+}
+
+/* ─── Asset Kit ─── */
+.partners-kit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.partners-kit-card {
+  background: var(--b365-white);
+  border: 1px solid var(--b365-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: transform var(--duration-normal), box-shadow var(--duration-normal), border-color var(--duration-normal);
+}
+.partners-kit-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--b365-blue);
+  box-shadow: 0 12px 28px rgba(15, 36, 64, 0.08);
+}
+.partners-kit-icon {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: rgba(51,118,176,0.10);
+  color: var(--b365-blue);
+  margin-bottom: var(--space-4);
+}
+.partners-kit-card h4 {
+  font-family: var(--font-title);
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 var(--space-2);
+  color: var(--b365-text);
+}
+.partners-kit-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--b365-text-secondary);
+  margin: 0;
+}
+
+/* Apply card: form needs more horizontal room */
+.partners-apply-card { max-width: 780px; }
+.partners-apply-card > .partner-form,
+.partners-apply-card > .partner-form-success {
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 1024px) {
+  .partners-kit-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .partners-kit-grid { grid-template-columns: 1fr; }
+  .partners-hero-microproof { justify-content: center; gap: var(--space-4); }
+}
+
 /* ─── Value Props ─── */
 .partners-value-grid {
   display: grid;

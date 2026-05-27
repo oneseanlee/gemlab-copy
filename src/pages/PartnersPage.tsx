@@ -1,14 +1,19 @@
-// @ts-nocheck
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import './PartnersPage.css';
 import '../pages/HomePage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import LogoCarousel from '../components/LogoCarousel/LogoCarousel';
+import MobileMenu from '../components/MobileMenu/MobileMenu';
+import PartnerApplicationForm from '../components/PartnerApplicationForm/PartnerApplicationForm';
+import PartnerFAQ from '../components/PartnerFAQ/PartnerFAQ';
+import partnersHero from '../assets/partners-hero.jpg';
 import {
   Percent, TrendingUp, FlaskConical, Users,
   HeartPulse, Video, Dumbbell, Atom, MonitorSmartphone, Megaphone,
-  ShieldCheck, BadgeCheck, Award, Building2, Menu
+  ShieldCheck, BadgeCheck, Award, Building2, Menu,
+  Link2, FileText, ImageIcon, BarChart3,
 } from 'lucide-react';
 
 const valueProps = [
@@ -56,16 +61,46 @@ const ugcVideos = [
   'https://storage.googleapis.com/msgsndr/5qn625UKZAh4DtULiYYp/media/69940ec41d5e04501a7a9db9.mp4',
 ];
 
-const PartnersPage = () => {
-  const [showBanner, setShowBanner] = useState(true);
+const assetKit = [
+  { Icon: Link2, title: 'Tracking Link', desc: 'Personal URL with 60-day cookie attribution.' },
+  { Icon: FileText, title: 'Swipe Copy', desc: 'Email scripts, captions, hooks that convert.' },
+  { Icon: ImageIcon, title: 'Product Imagery', desc: 'Hero shots, lifestyle photos, UGC clips.' },
+  { Icon: BarChart3, title: 'Live Dashboard', desc: 'Track clicks, conversions, and earnings.' },
+];
 
-  const handleApplyClick = () => {
-    const subject = encodeURIComponent('Partner Application — Best 365 Labs');
-    const body = encodeURIComponent(
-      'Hi Best 365 Labs Team,\n\nI\'m interested in becoming an affiliate partner.\n\nName:\nCompany / Brand:\nWebsite / Social Links:\nAudience Size:\nMessage:\n\nLooking forward to hearing from you.'
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-80px' },
+  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+};
+
+const PartnersPage: React.FC = () => {
+  const [showBanner, setShowBanner] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = 'Affiliate Partner Program — Earn 20% | Best 365 Labs';
+    const meta = document.querySelector('meta[name="description"]');
+    const prevDesc = meta?.getAttribute('content') ?? '';
+    meta?.setAttribute(
+      'content',
+      'Join the Best 365 Labs partner program. Earn 20% recurring commission promoting patent-pending men\'s health products from a publicly traded brand.'
     );
-    window.location.href = `mailto:info@best365labs.com?subject=${subject}&body=${body}`;
-  };
+    return () => {
+      document.title = prevTitle;
+      if (meta && prevDesc) meta.setAttribute('content', prevDesc);
+    };
+  }, []);
+
+  const navLinks = [
+    { label: 'Why Partner', href: '#why' },
+    { label: 'Products', href: '#products' },
+    { label: 'Earnings', href: '#earnings' },
+    { label: 'FAQ', href: '#faq' },
+    { label: 'Apply', href: '#apply' },
+  ];
 
   return (
     <div className="partners-page">
@@ -81,7 +116,11 @@ const PartnersPage = () => {
       {/* 2. Navigation */}
       <nav className={`b365-nav ${showBanner ? 'with-banner' : ''}`}>
         <div className="b365-nav-inner">
-          <button className="b365-hamburger" aria-label="Menu">
+          <button
+            className="b365-hamburger"
+            aria-label="Menu"
+            onClick={() => setMenuOpen(true)}
+          >
             <Menu size={24} />
           </button>
           <a href="/">
@@ -91,20 +130,26 @@ const PartnersPage = () => {
             <li><a href="#why">Why Partner</a></li>
             <li><a href="#products">Products</a></li>
             <li><a href="#earnings">Earnings</a></li>
+            <li><a href="#faq">FAQ</a></li>
             <li><a href="#apply">Apply</a></li>
           </ul>
           <div className="b365-nav-right">
-            <a href="#" className="b365-login-link">Log In</a>
             <AnimatedCTA href="#apply" small>Apply Now</AnimatedCTA>
           </div>
         </div>
       </nav>
+      <MobileMenu links={navLinks} isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
       {/* 3. Hero — Lifestyle Image Card (TPrime365 Style) */}
       <section className={`partners-hero-section ${!showBanner ? 'no-banner' : ''}`}>
         <div className="partners-hero-container">
           <div className="partners-hero-img">
-            <img src="/placeholder.svg" alt="Best 365 Labs partner program" />
+            <img
+              src={partnersHero}
+              alt="Best 365 Labs partner holding a premium supplement bottle"
+              width={1024}
+              height={1024}
+            />
           </div>
           <div className="partners-hero-text">
             <span className="partners-hero-badge">Affiliate Program</span>
@@ -115,12 +160,17 @@ const PartnersPage = () => {
             <AnimatedCTA href="#apply">
               Apply to Become a Partner
             </AnimatedCTA>
+            <div className="partners-hero-microproof">
+              <span><strong>20%</strong> commission</span>
+              <span><strong>60-day</strong> cookie</span>
+              <span><strong>$50</strong> avg / sale</span>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Why Partner With Us */}
-      <section id="why" className="b365-section">
+      <motion.section id="why" className="b365-section" {...fadeUp}>
         <h2 className="b365-section-heading b365-serif">
           Why Partner With <em>Us</em>
         </h2>
@@ -135,10 +185,10 @@ const PartnersPage = () => {
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* Product Portfolio */}
-      <section id="products" className="b365-section b365-section-alt">
+      <motion.section id="products" className="b365-section b365-section-alt" {...fadeUp}>
         <h2 className="b365-section-heading b365-serif">
           Products You'll <em>Promote</em>
         </h2>
@@ -147,16 +197,18 @@ const PartnersPage = () => {
           {products.map((p, i) => (
             <div className="partners-product-card" key={i}>
               <h4>{p.name}</h4>
-              <div className="partners-product-price">{p.price}<span style={{ fontSize: 13, fontWeight: 400, color: 'var(--b365-text-secondary)' }}>{p.period}</span></div>
+              <div className="partners-product-price">
+                {p.price}<span className="partners-product-period">{p.period}</span>
+              </div>
               <div className="partners-product-hook">{p.hook}</div>
               <div className="partners-product-commission">You earn {p.commission}</div>
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* UGC Video Testimonials */}
-      <section className="b365-section">
+      <motion.section className="b365-section" {...fadeUp}>
         <h2 className="b365-section-heading b365-serif">See the <em>Results</em></h2>
         <div className="partners-ugc-grid">
           {ugcVideos.map((src, i) => (
@@ -165,10 +217,10 @@ const PartnersPage = () => {
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* Who This Is For */}
-      <section className="b365-section b365-section-alt">
+      <motion.section className="b365-section b365-section-alt" {...fadeUp}>
         <h2 className="b365-section-heading b365-serif">
           Who This Is <em>For</em>
         </h2>
@@ -182,10 +234,10 @@ const PartnersPage = () => {
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* How It Works */}
-      <section className="b365-section">
+      <motion.section className="b365-section" {...fadeUp}>
         <h2 className="b365-section-heading b365-serif">
           How It <em>Works</em>
         </h2>
@@ -208,10 +260,27 @@ const PartnersPage = () => {
             <p>Share with your audience and earn 20% on every sale.</p>
           </div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* Asset Kit */}
+      <motion.section className="b365-section b365-section-alt" {...fadeUp}>
+        <h2 className="b365-section-heading b365-serif">
+          What You'll <em>Get</em>
+        </h2>
+        <p className="partners-sub">Everything you need to start sending traffic on day one.</p>
+        <div className="partners-kit-grid">
+          {assetKit.map((k, i) => (
+            <div className="partners-kit-card" key={i}>
+              <span className="partners-kit-icon"><k.Icon size={22} /></span>
+              <h4>{k.title}</h4>
+              <p>{k.desc}</p>
+            </div>
+          ))}
+        </div>
+      </motion.section>
 
       {/* Commission Breakdown */}
-      <section id="earnings" className="b365-section b365-section-alt">
+      <motion.section id="earnings" className="b365-section" {...fadeUp}>
         <h2 className="b365-section-heading b365-serif">
           Earning <em>Potential</em>
         </h2>
@@ -241,10 +310,10 @@ const PartnersPage = () => {
         <p className="partners-commission-note">
           These are example projections. Top partners earn significantly more with larger audiences.
         </p>
-      </section>
+      </motion.section>
 
       {/* Trust Signals */}
-      <section className="b365-section">
+      <motion.section className="b365-section b365-section-alt" {...fadeUp}>
         <h2 className="b365-section-heading b365-serif">
           Trusted & <em>Verified</em>
         </h2>
@@ -259,7 +328,16 @@ const PartnersPage = () => {
           ))}
         </div>
         <LogoCarousel />
-      </section>
+      </motion.section>
+
+      {/* FAQ */}
+      <motion.section id="faq" className="b365-section" {...fadeUp}>
+        <h2 className="b365-section-heading b365-serif">
+          Partner <em>Questions</em>
+        </h2>
+        <p className="partners-sub">Everything you might be wondering about the program.</p>
+        <PartnerFAQ />
+      </motion.section>
 
       {/* Application CTA — Light Blue Card */}
       <section id="apply" className="partners-apply-section">
@@ -268,12 +346,7 @@ const PartnersPage = () => {
           <p>
             Send us your details and our partnerships team will get back to you within 48 hours with everything you need to start earning.
           </p>
-          <AnimatedCTA
-            href="#"
-            onClick={(e: React.MouseEvent) => { e.preventDefault(); handleApplyClick(); }}
-          >
-            Apply Now — Start Earning 20%
-          </AnimatedCTA>
+          <PartnerApplicationForm />
         </div>
       </section>
 
