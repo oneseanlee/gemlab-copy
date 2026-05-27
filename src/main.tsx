@@ -9,6 +9,8 @@ import "./index.css";
 const CHUNK_RELOAD_KEY = "__chunk_reload_attempted__";
 function isChunkLoadError(err: unknown): boolean {
   const msg = (err as any)?.message || String(err || "");
+  // Opaque cross-origin "Script error." has no message/stack — never treat as chunk error.
+  if (!msg || msg === "Script error." || msg === "[object Event]") return false;
   return (
     /Failed to fetch dynamically imported module/i.test(msg) ||
     /Importing a module script failed/i.test(msg) ||
