@@ -3,12 +3,9 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 
 /**
- * Smoke test: the LiveChat (text.com) widget is loaded globally via index.html,
- * which means it is present on EVERY route in this React SPA (no per-route
- * mounting required). This test verifies the snippet is intact so the widget
- * keeps loading site-wide.
- *
- * Routes covered (all routes share the same index.html shell):
+ * Smoke test: the expired LiveChat (text.com) widget must not be loaded globally.
+ * The third-party script throws "License expired" and surfaces as opaque
+ * browser "Script error." events that can trip blank-screen detection.
  */
 const ROUTES = [
   "/",
@@ -39,7 +36,7 @@ const ROUTES = [
   "/this-route-does-not-exist",
 ];
 
-const ORG_ID = "afad8ec9-9c40-4801-8637-d86f7a08e51c";
+const EXPIRED_ORG_ID = "afad8ec9-9c40-4801-8637-d86f7a08e51c";
 
 let html = "";
 
@@ -47,39 +44,26 @@ beforeAll(() => {
   html = readFileSync(resolve(__dirname, "../../index.html"), "utf-8");
 });
 
-describe("LiveChat widget — global snippet (loads on every route)", () => {
-  it("includes the LiveChat organizationId in index.html", () => {
-    expect(html).toContain(`window.__lc.organizationId = "${ORG_ID}"`);
+describe("LiveChat widget — disabled expired global snippet", () => {
+  it("does not include the expired LiveChat organizationId in index.html", () => {
+    expect(html).not.toContain(`window.__lc.organizationId = "${EXPIRED_ORG_ID}"`);
   });
 
-  it("registers window.LiveChatWidget initializer", () => {
-    expect(html).toMatch(/n\.LiveChatWidget=n\.LiveChatWidget\|\|e/);
+  it("does not register the LiveChatWidget initializer", () => {
+    expect(html).not.toMatch(/n\.LiveChatWidget=n\.LiveChatWidget\|\|e/);
   });
 
-  it("loads the LiveChat tracking script source", () => {
-    expect(html).toContain("https://cdn.livechatinc.com/tracking.js");
-  });
-
-  it("provides a <noscript> chat fallback link", () => {
-    expect(html).toContain(
-      `https://www.text.com/chat-with/${ORG_ID}/`,
-    );
-  });
-
-  it("places the LiveChat snippet inside <body> (not <head>)", () => {
-    const bodyStart = html.indexOf("<body>");
-    const lcIndex = html.indexOf("window.__lc");
-    expect(bodyStart).toBeGreaterThan(-1);
-    expect(lcIndex).toBeGreaterThan(bodyStart);
+  it("does not load the expired LiveChat tracking script source", () => {
+    expect(html).not.toContain("https://cdn.livechatinc.com/tracking.js");
   });
 });
 
 describe.each(ROUTES)("LiveChat widget available on route %s", (route) => {
-  it(`route "${route}" inherits the global LiveChat snippet from index.html`, () => {
+  it(`route "${route}" does not inherit the expired global LiveChat snippet`, () => {
     // SPA architecture: every route renders into the same index.html shell,
-    // so verifying the snippet exists once guarantees per-route availability.
+    // so verifying the snippet is absent once guarantees it is absent per-route.
     expect(route.startsWith("/")).toBe(true);
-    expect(html).toContain(`window.__lc.organizationId = "${ORG_ID}"`);
-    expect(html).toContain("https://cdn.livechatinc.com/tracking.js");
+    expect(html).not.toContain(`window.__lc.organizationId = "${EXPIRED_ORG_ID}"`);
+    expect(html).not.toContain("https://cdn.livechatinc.com/tracking.js");
   });
 });
