@@ -73,9 +73,3 @@ export function useHappyMDPurchaseTag({ tag = "tprime365-purchase", trackingCode
     return () => window.removeEventListener("message", handleMessage);
   }, [tag, trackingCode, enabled]);
 }
-
-declare global {
-  interface Window {
-    dataLayer?: Record<string, unknown>[];
-  }
-}
