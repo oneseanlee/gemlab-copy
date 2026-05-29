@@ -390,9 +390,9 @@ const HomePage = () => {
             {/* Trusted-by micro-badge */}
             <div className="hero-trusted-badge hero-entrance hero-entrance-5">
               <div className="trusted-avatars">
-                <img src="/images/avatar-woman-1.jpg" alt="Client" />
-                <img src="/images/avatar-man-1.jpg" alt="Client" />
-                <img src="/images/avatar-woman-2.jpg" alt="Client" />
+                <img src="/images/avatar-woman-1.jpg" alt="Best 365 Labs client" />
+                <img src="/images/avatar-man-1.jpg" alt="Best 365 Labs client" />
+                <img src="/images/avatar-woman-2.jpg" alt="Best 365 Labs client" />
               </div>
               <span>Trusted by <strong>50,000+</strong> clients</span>
             </div>

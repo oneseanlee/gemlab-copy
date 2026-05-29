@@ -9,7 +9,7 @@ const BenefitsTimeline = () => {
             <div className="benefits-container">
                 <div className="benefits-image-col">
                     <div className="benefits-image">
-                        <img src="/images/sec3.webp" alt="Magic Foam" />
+                        <img src="/images/sec3.webp" alt="Best 365 Labs benefits illustration" />
                     </div>
                 </div>
 

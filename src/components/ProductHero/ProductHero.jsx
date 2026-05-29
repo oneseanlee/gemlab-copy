@@ -39,7 +39,7 @@ const ProductHero = () => {
             <div className="gallery-container">
                 {/* Main image fills the container */}
                 <div className={`main-image ${isAnimating ? 'slide-out' : 'slide-in'}`}>
-                    <img src={productImages[activeIndex]} alt="GemLab Body Wash" />
+                    <img src={productImages[activeIndex]} alt="Best 365 Labs product image" />
                 </div>
                 {/* Thumbnails overlay on the left */}
                 <div className="thumbnail-list">

@@ -65,7 +65,7 @@ const AccordionSection = () => {
             </div>
             <div className="accordion-right">
                 <div className="lifestyle-image">
-                    <img src="/images/sec2.webp" alt="GemLab Lifestyle background" />
+                    <img src="/images/sec2.webp" alt="Best 365 Labs lifestyle background" />
                 </div>
             </div>
         </section>
