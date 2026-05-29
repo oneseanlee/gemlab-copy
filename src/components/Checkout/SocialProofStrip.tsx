@@ -5,9 +5,9 @@ const SocialProofStrip = () => (
   <div className="checkout-social-proof">
     <div className="checkout-social-proof-top">
       <div className="checkout-social-proof-avatars">
-        <img src="/images/avatar-woman-1.jpg" alt="Customer" />
-        <img src="/images/avatar-man-1.jpg" alt="Customer" />
-        <img src="/images/avatar-woman-2.jpg" alt="Customer" />
+        <img src="/images/avatar-woman-1.jpg" alt="Verified Best 365 Labs customer" />
+        <img src="/images/avatar-man-1.jpg" alt="Verified Best 365 Labs customer" />
+        <img src="/images/avatar-woman-2.jpg" alt="Verified Best 365 Labs customer" />
       </div>
       <div className="checkout-social-proof-rating">
         <div className="checkout-social-proof-stars">

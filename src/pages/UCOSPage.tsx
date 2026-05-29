@@ -5,6 +5,8 @@ import './UCOSPage.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
+import JsonLd from '../components/JsonLd';
+import { ucosProductSchema, ucosFaqSchema } from '../lib/seo-schemas';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
@@ -64,6 +66,8 @@ const UCOSPage = () => {
 
   return (
     <div className="ucos-page">
+      <JsonLd id="ucos-product" schema={ucosProductSchema} />
+      <JsonLd id="ucos-faq" schema={ucosFaqSchema} />
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}

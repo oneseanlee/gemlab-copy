@@ -6,6 +6,8 @@ import './GLP1BundlePage.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
+import JsonLd from '../components/JsonLd';
+import { glp1UcosProductSchema } from '../lib/seo-schemas';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
@@ -83,6 +85,7 @@ const GLP1BundlePage = () => {
 
   return (
     <div className="glp1b-page">
+            <JsonLd id="glp1-ucos-product" schema={glp1UcosProductSchema} />
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}

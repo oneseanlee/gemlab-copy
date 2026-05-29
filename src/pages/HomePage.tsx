@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import './HomePage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
+import JsonLd from '../components/JsonLd';
+import { organizationSchema, websiteSchema } from '../lib/seo-schemas';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import TrustBadges from '../components/TrustBadges/TrustBadges';
@@ -339,6 +341,8 @@ const HomePage = () => {
 
   return (
     <div className="b365-page">
+      <JsonLd id="org" schema={organizationSchema} />
+      <JsonLd id="website" schema={websiteSchema} />
       <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
       {/* 1. Social Proof Ticker Banner */}
@@ -390,9 +394,9 @@ const HomePage = () => {
             {/* Trusted-by micro-badge */}
             <div className="hero-trusted-badge hero-entrance hero-entrance-5">
               <div className="trusted-avatars">
-                <img src="/images/avatar-woman-1.jpg" alt="Client" />
-                <img src="/images/avatar-man-1.jpg" alt="Client" />
-                <img src="/images/avatar-woman-2.jpg" alt="Client" />
+                <img src="/images/avatar-woman-1.jpg" alt="Best 365 Labs client" />
+                <img src="/images/avatar-man-1.jpg" alt="Best 365 Labs client" />
+                <img src="/images/avatar-woman-2.jpg" alt="Best 365 Labs client" />
               </div>
               <span>Trusted by <strong>50,000+</strong> clients</span>
             </div>

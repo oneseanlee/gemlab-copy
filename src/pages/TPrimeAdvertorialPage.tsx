@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './TPrimeAdvertorialPage.css';
+import JsonLd from '../components/JsonLd';
+import { tprimeAdvertorialFaqSchema } from '../lib/seo-schemas';
 
 const CTA_LINK = "https://cell365power.lovable.app/tprime365";
 
@@ -44,6 +46,7 @@ const TPrimeAdvertorialPage: React.FC = () => {
 
   return (
     <div className="adv-page">
+      <JsonLd id="tprime-adv-faq" schema={tprimeAdvertorialFaqSchema} />
       {/* ─── 1. Headline Section ─── */}
       <section className="adv-headline-section">
         <div className="adv-container">

@@ -6,6 +6,8 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
 import './GLP1Page.css';
+import JsonLd from '../components/JsonLd';
+import { glp1ProtocolProductSchema, glp1ProtocolFaqSchema } from '../lib/seo-schemas';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
 import '../components/EarlyTestersCarousel/EarlyTestersCarousel.css';
@@ -189,6 +191,8 @@ const GLP1Page = () => {
 
   return (
     <div className="glp1-page">
+            <JsonLd id="glp1-protocol-product" schema={glp1ProtocolProductSchema} />
+            <JsonLd id="glp1-protocol-faq" schema={glp1ProtocolFaqSchema} />
             {/* <ExitIntentPopup /> */}
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
