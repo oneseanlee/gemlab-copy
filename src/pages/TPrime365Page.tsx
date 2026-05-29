@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import './TPrime365Page.css';
 import '../pages/HomePage.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
+import JsonLd from '../components/JsonLd';
+import { tprime365ProductSchema, tprime365FaqSchema } from '../lib/seo-schemas';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { Menu, ArrowRight, X, Check, ChevronRight, Syringe, Pill, FlaskConical, Dna, Zap, Dumbbell, Shield, Brain, Flame, Heart, Target, Moon, Bone, Clock, ShieldCheck, Lightbulb, Calendar, AlertCircle, Building2, BadgeCheck, Microscope, Flag, Stethoscope, Lock, Package, Headphones, Truck } from 'lucide-react';
@@ -221,6 +223,8 @@ const TPrime365Page = () => {
 
   return (
     <div className="tprime-page">
+            <JsonLd id="tprime365-product" schema={tprime365ProductSchema} />
+            <JsonLd id="tprime365-faq" schema={tprime365FaqSchema} />
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}

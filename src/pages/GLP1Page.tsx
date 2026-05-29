@@ -6,6 +6,8 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
 import './GLP1Page.css';
+import JsonLd from '../components/JsonLd';
+import { glp1ProtocolProductSchema, glp1ProtocolFaqSchema } from '../lib/seo-schemas';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
 import '../components/EarlyTestersCarousel/EarlyTestersCarousel.css';
