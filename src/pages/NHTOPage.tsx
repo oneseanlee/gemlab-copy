@@ -189,6 +189,7 @@ const NHTOPage = () => {
 
     return (
         <div className="nhto-page">
+            <JsonLd id="nhto-product" schema={nhtoProductSchema} />
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
             {/* 1. Promo Banner */}
