@@ -10,6 +10,7 @@ import { getRefParam } from "@/lib/ref";
 
 const HELPER_SRC = "https://app.happymd.co/embed-helper.js";
 const CHECKOUT_BASE = "https://app.happymd.co/embed/checkout";
+const PARENT_VENDOR_ID = "TPRIME365CELL";
 
 export type HappyMDCheckoutProps = {
   product?: string;
@@ -26,15 +27,27 @@ function buildCheckoutUrl({
   theme = "best365",
   trackingCode,
 }: HappyMDCheckoutProps) {
-  const params = new URLSearchParams({ product, plan, partner, theme });
+  // Resolve sub-referrer attribution. Direct URL ?ref= (captured at app
+  // load) → 30-day stored ref → parent vendor floor. UTM campaign is NOT
+  // a fallback — partner ref is the only override of the parent code.
+  const directRef =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get("ref")?.trim().slice(0, 64) || undefined
+      : undefined;
+  const storedRef = getRefParam() || undefined;
+  const code = trackingCode || directRef || storedRef || PARENT_VENDOR_ID;
+
+  const params = new URLSearchParams({
+    product,
+    plan,
+    partner,
+    theme,
+    vendor_id: PARENT_VENDOR_ID,
+    tracking_code: code,
+  });
+
+  // Forward UTM params for HappyMD's own analytics (do not affect tracking_code)
   const utm = getUtmParams() as Record<string, string | undefined>;
-  const ref = getRefParam() || undefined;
-  // Partner ref (?ref=...) takes precedence over UTM campaign so partner
-  // attribution wins inside happyMD even when ads append their own UTMs.
-  const code = trackingCode || ref || utm?.utm_campaign || "TPRIME365CELL";
-  if (code) params.set("tracking_code", code);
-  if (ref) params.set("ref", ref);
-  // Forward UTM params (HappyMD ignores unknown keys safely)
   Object.entries(utm || {}).forEach(([k, v]) => {
     if (v && !params.has(k)) params.set(k, String(v));
   });
@@ -94,9 +107,12 @@ export function HappyMDCheckoutButton(
     loadHelperOnce();
   }, []);
 
-  const utm = getUtmParams() as Record<string, string | undefined>;
-  const ref = getRefParam() || undefined;
-  const code = trackingCode || ref || utm?.utm_campaign || "TPRIME365CELL";
+  const directRef =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get("ref")?.trim().slice(0, 64) || undefined
+      : undefined;
+  const storedRef = getRefParam() || undefined;
+  const code = trackingCode || directRef || storedRef || PARENT_VENDOR_ID;
 
   return (
     <button
@@ -106,6 +122,7 @@ export function HappyMDCheckoutButton(
       data-happymd-plan={plan}
       data-happymd-partner={partner}
       data-happymd-theme={theme}
+      data-happymd-vendor={PARENT_VENDOR_ID}
       data-happymd-tracking={code}
     >
       {children}
