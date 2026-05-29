@@ -6,6 +6,8 @@ import './NHTOPage.css';
 import '../pages/HomePage.css';
 import '../pages/TPrime365Page.css';
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
+import JsonLd from '../components/JsonLd';
+import { nhtoProductSchema } from '../lib/seo-schemas';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';

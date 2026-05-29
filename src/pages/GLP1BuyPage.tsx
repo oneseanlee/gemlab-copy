@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { getUtmParams } from "@/lib/utm";
 import { splitName } from "@/lib/split-name";
 import { getAttributeParams } from "@/lib/utm-capture";
+import JsonLd from "@/components/JsonLd";
+import { glp1BuyFaqSchema } from "@/lib/seo-schemas";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -413,6 +415,7 @@ const GLP1BuyPage = () => {
   /* ── Main render ──────────────────────────────────── */
   return (
     <div className="glp1buy-page">
+      <JsonLd id="glp1-buy-faq" schema={glp1BuyFaqSchema} />
       {/* Sticky promo banner */}
       <div className="glp1buy-sticky-promo">🔥 Save 56% Off + Free Gifts & Free Shipping 🔥</div>
 

@@ -191,6 +191,8 @@ const GLP1Page = () => {
 
   return (
     <div className="glp1-page">
+            <JsonLd id="glp1-protocol-product" schema={glp1ProtocolProductSchema} />
+            <JsonLd id="glp1-protocol-faq" schema={glp1ProtocolFaqSchema} />
             {/* <ExitIntentPopup /> */}
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 

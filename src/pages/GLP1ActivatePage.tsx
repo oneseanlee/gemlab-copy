@@ -6,6 +6,8 @@ import './TPrime365Page.css';   // shared tprime-hero-container / tprime-hero-im
 import './GLP1Page.css';        // shared glp1-* hero tweaks (no harm if unused)
 
 import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
+import JsonLd from '../components/JsonLd';
+import { glp1ActivateProductSchema, glp1ActivateFaqSchema } from '../lib/seo-schemas';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
@@ -105,6 +107,8 @@ const GLP1ActivatePage: React.FC = () => {
 
   return (
     <div className="glpa-page">
+      <JsonLd id="glp1-activate-product" schema={glp1ActivateProductSchema} />
+      <JsonLd id="glp1-activate-faq" schema={glp1ActivateFaqSchema} />
       <MobileMenu links={mobileLinks} isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
       {/* 1. Promo banner — shared b365-promo-banner */}
