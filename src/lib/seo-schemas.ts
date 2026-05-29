@@ -266,4 +266,5 @@ export const tprimeAdvertorialFaqSchema = faqPage([
   { q: "How long until I see results?", a: "Most men report noticeable improvements in energy, mood, and drive within 2-4 weeks. Blood work typically shows significant testosterone increases within the same timeframe." },
   { q: "Do I need blood work?", a: "Blood work is not required to start but is recommended. Many men get baseline labs before starting and follow-up labs at 4-6 weeks to track their progress." },
   { q: "Is this a subscription?", a: "Yes, TPrime365 ships monthly. But there are no contracts and no commitments — you can cancel anytime with no penalties or fees." },
+  { q: "Can I take this with other supplements?", a: "Yes. TPrime365 is compatible with most supplements. However, if you're currently on TRT or any prescription medication, the reviewing physician will evaluate compatibility during your consultation." },
 ]);
