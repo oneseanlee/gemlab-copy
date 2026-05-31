@@ -8,6 +8,19 @@ const corsHeaders = {
 
 const GHL_API_BASE = "https://services.leadconnectorhq.com";
 
+// HTML-escape values interpolated into the admin notification email body to
+// prevent stored-XSS / HTML injection from attacker-controlled record fields.
+function esc(v: unknown): string {
+  const s = v == null ? "" : String(v);
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
+    .slice(0, 500);
+}
+
 async function ghlRequest(
   path: string,
   method: string,
@@ -120,43 +133,50 @@ Deno.serve(async (req) => {
     const body = await req.json();
     const { type, record } = body;
 
+    if (typeof type !== "string" || !record || typeof record !== "object") {
+      return new Response(JSON.stringify({ error: "Invalid payload" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     let subject = "";
     let htmlBody = "";
 
     if (type === "lead") {
-      subject = `🟢 New Lead: ${record.first_name} (${record.source})`;
+      subject = `🟢 New Lead: ${esc(record.first_name)} (${esc(record.source)})`;
       htmlBody = `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
           <h2 style="color:#3376b0;">New Lead Captured</h2>
           <table style="width:100%;border-collapse:collapse;">
-            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${record.first_name}</td></tr>
-            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;">${record.email}</td></tr>
-            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Source</td><td style="padding:8px;border-bottom:1px solid #eee;">${record.source || "unknown"}</td></tr>
-            <tr><td style="padding:8px;font-weight:bold;">Time</td><td style="padding:8px;">${record.created_at || new Date().toISOString()}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(record.first_name)}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(record.email)}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Source</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(record.source || "unknown")}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;">Time</td><td style="padding:8px;">${esc(record.created_at || new Date().toISOString())}</td></tr>
           </table>
         </div>`;
     } else if (type === "checkout_lead") {
-      subject = `🛒 New Checkout Lead: ${record.first_name}`;
+      subject = `🛒 New Checkout Lead: ${esc(record.first_name)}`;
       htmlBody = `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
           <h2 style="color:#3376b0;">New Checkout Lead</h2>
           <table style="width:100%;border-collapse:collapse;">
-            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${record.first_name}</td></tr>
-            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;">${record.email}</td></tr>
-            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Cart Total</td><td style="padding:8px;border-bottom:1px solid #eee;">$${record.cart_total}</td></tr>
-            <tr><td style="padding:8px;font-weight:bold;">Time</td><td style="padding:8px;">${record.created_at || new Date().toISOString()}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(record.first_name)}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(record.email)}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Cart Total</td><td style="padding:8px;border-bottom:1px solid #eee;">$${esc(record.cart_total)}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;">Time</td><td style="padding:8px;">${esc(record.created_at || new Date().toISOString())}</td></tr>
           </table>
         </div>`;
     } else if (type === "happymd_form") {
-      subject = `📋 HappyMD Form Completed: ${record.campaign || "Unknown Campaign"}`;
+      subject = `📋 HappyMD Form Completed: ${esc(record.campaign || "Unknown Campaign")}`;
       htmlBody = `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
           <h2 style="color:#3376b0;">HappyMD Intake Form Submitted</h2>
           <table style="width:100%;border-collapse:collapse;">
-            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Campaign</td><td style="padding:8px;border-bottom:1px solid #eee;">${record.campaign}</td></tr>
-            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Tracking Code</td><td style="padding:8px;border-bottom:1px solid #eee;">${record.tracking_code}</td></tr>
-            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Page URL</td><td style="padding:8px;border-bottom:1px solid #eee;">${record.page_url}</td></tr>
-            <tr><td style="padding:8px;font-weight:bold;">Time</td><td style="padding:8px;">${new Date().toISOString()}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Campaign</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(record.campaign)}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Tracking Code</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(record.tracking_code)}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Page URL</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(record.page_url)}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;">Time</td><td style="padding:8px;">${esc(new Date().toISOString())}</td></tr>
           </table>
         </div>`;
     } else {
