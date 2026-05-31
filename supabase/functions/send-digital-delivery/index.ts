@@ -81,6 +81,18 @@ Deno.serve(async (req) => {
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+  // Service-role-only: this function is only invoked server-side by
+  // shopify-order-webhook. Reject any external caller.
+  const authHeader = req.headers.get("Authorization") || "";
+  const token = authHeader.replace(/^Bearer\s+/i, "");
+  if (!serviceKey || token !== serviceKey) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
   const GHL_API_KEY = Deno.env.get("GHL_API_KEY");
   const GHL_LOCATION_ID = Deno.env.get("GHL_LOCATION_ID");
 

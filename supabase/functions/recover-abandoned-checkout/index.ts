@@ -93,6 +93,17 @@ Deno.serve(async (req) => {
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+  // Service-role-only: this function is meant to be invoked by a scheduled
+  // cron job. Reject unauthenticated/anon callers to prevent email spam.
+  const token = (req.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  if (!serviceKey || token !== serviceKey) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
   const ghlApiKey = Deno.env.get("GHL_API_KEY");
   const ghlLocationId = Deno.env.get("GHL_LOCATION_ID");
 

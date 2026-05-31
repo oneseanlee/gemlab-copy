@@ -45,6 +45,22 @@ Deno.serve(async (req) => {
     return new Response("ok", { headers: corsHeaders });
   }
 
+  // Service-role-only guard. This function is not wired into client code;
+  // only trusted server-side callers (or future internal proxies that hold
+  // the service role key) may invoke it. Blocks anon-key abuse that would
+  // let anyone tag arbitrary GHL contacts.
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  const token = (req.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  if (!serviceKey || token !== serviceKey) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
+  // Allowlist of tags this endpoint may apply.
+  const ALLOWED_TAGS = new Set(["tprime365-purchase", "glp1-purchase", "ucos-purchase"]);
+
   const GHL_API_KEY = Deno.env.get("GHL_API_KEY");
   const GHL_LOCATION_ID = Deno.env.get("GHL_LOCATION_ID");
   if (!GHL_API_KEY || !GHL_LOCATION_ID) {
@@ -61,6 +77,13 @@ Deno.serve(async (req) => {
 
     if (!EMAIL_RE.test(email) || email.length > 255) {
       return new Response(JSON.stringify({ error: "Invalid email" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!ALLOWED_TAGS.has(tag)) {
+      return new Response(JSON.stringify({ error: "Tag not allowed" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
