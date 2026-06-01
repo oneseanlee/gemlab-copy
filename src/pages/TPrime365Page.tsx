@@ -17,6 +17,7 @@ import { useCartStore } from '../stores/cartStore';
 import { supabase } from '@/integrations/supabase/client';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { HappyMDCheckoutIframe } from '@/components/HappyMDCheckout/HappyMDCheckout';
+import { useHappyMDPurchaseTag } from '@/hooks/useHappyMDPurchaseTag';
 
 const TPRIME_VARIANT_ID = 'gid://shopify/ProductVariant/46309997936780';
 const TPRIME_PRODUCT = {
@@ -113,6 +114,9 @@ const TPrime365Page = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [dosingVisible, setDosingVisible] = useState(false);
   const dosingRef = useRef<HTMLElement>(null);
+
+  // HappyMD checkout is embedded at the bottom of this page.
+  useHappyMDPurchaseTag({ tag: 'tprime365-purchase', source: 'tprime365' });
 
 
   useEffect(() => {

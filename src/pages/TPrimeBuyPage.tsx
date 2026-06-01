@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 
 import { ArrowRight, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, ChevronRight, Star, ShieldCheck, Phone, Shield, FlaskConical, Truck, Volume2 } from "lucide-react";
 import { HappyMDCheckoutIframe } from "@/components/HappyMDCheckout/HappyMDCheckout";
+import { useHappyMDPurchaseTag } from "@/hooks/useHappyMDPurchaseTag";
 import "./TPrimeBuyPage.css";
 
 /* ── Carousel media ──────────────────────────────────── */
@@ -25,6 +26,9 @@ const TPrimeBuyPage = () => {
   const [activeThumb, setActiveThumb] = useState(0);
   const [showSoundHint, setShowSoundHint] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Listen for HappyMD checkout success → persist buyer + tag GHL contact.
+  useHappyMDPurchaseTag({ tag: "tprime365-purchase", source: "tprime-buy" });
 
   const handleSoundOverlayClick = () => {
     setShowSoundHint(false);
