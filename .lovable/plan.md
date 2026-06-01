@@ -1,49 +1,44 @@
-## Goal
+## Wire up HappyMD purchase capture on TPrime buy pages
 
-Make HappyMD sub-referrer attribution actually work for the TPrime365 embedded checkout, matching the official HappyMD snippet, so links like `cell365power.com/tprime365?ref=jay-atkins` credit Jay under the Cell365Power parent vendor.
+Goal: Start capturing who buys TPrime so we have a record on our side (not just HappyMD's), and tag those contacts in GHL.
 
-## What the HappyMD email revealed
+### What to change
 
-1. **`vendor_id` must be on the iframe URL** (currently missing from our checkout iframe — this is the likely root cause of attribution failing).
-2. Ref should persist 30 days across sessions via `localStorage`, not session-only.
-3. Resolution order: URL `?ref=` → stored ref → `TPRIME365CELL`.
-4. UTM `utm_campaign` should NOT be a fallback (your call — partner ref wins, parent code is the only floor).
+1. **Mount `useHappyMDPurchaseTag` on the buy pages**
+   - `src/pages/TPrimeBuyPage.tsx` → `useHappyMDPurchaseTag({ tag: "tprime365-purchase" })`
+   - `src/pages/TPrime365Page.tsx` and `src/pages/NHTOPage.tsx` (both embed HappyMD) → same hook
+   - `src/pages/TPrime365IntakePage.tsx` / `src/pages/NHTOIntakePage.tsx` if they host the iframe → same hook
 
-## Changes
+2. **Record the buyer on our side (new)**
+   - Today, the hook only tags GHL. If no lead row exists (buy page has no pre-form), we still see nothing in the dashboard.
+   - Extend `happymd-purchase-tag` edge function to also insert a row into `public.leads` (or flip `happymd_completed=true` on an existing row) using `mark_happymd_completed_private`. If no lead exists, insert a minimal one with `source = 'tprime365-purchase'` so it shows in reports.
+   - Also write an `intake_completions` row so the admin funnel counts it.
 
-### 1. `src/lib/ref.ts` — upgrade storage
+3. **Auth hardening for the edge function**
+   - The hook currently calls the function with the **anon** key, but the function requires the **service role** key (recent security fix). As-is, every call will 401.
+   - Fix: keep the function service-role-only, and have the hook call a thin public wrapper — OR relax this specific function to accept anon calls but (a) validate origin is `https://app.happymd.co`, (b) rate-limit by email, (c) only allow the 3 allowlisted tags. Recommend the second option since the client must call it directly from the browser.
 
-- Switch `sessionStorage` → `localStorage` with 30-day TTL, stored as `{ value, expires }` (matches HappyMD's shape exactly).
-- Light sanitization only: trim + length cap at 64. Do NOT lowercase or strip characters — HappyMD's own snippet stores the raw value, and partner slugs may be case-sensitive on their side.
-- `getRefParam()` returns `null` and purges if expired.
-- Keep exported names (`captureRefParam`, `getRefParam`) so all call sites continue working with no edits.
+4. **Capture the buyer's email reliably**
+   - Hook reads `localStorage.intake_lead_email`, which is only set on flows with a pre-checkout form. On `/tprime-buy` there is no such form.
+   - Options:
+     a. Add a small pre-iframe email capture on `/tprime-buy` (name + email + phone, same pattern as `/glp1-buy`) — best for capture rate and gives us a lead even for non-buyers.
+     b. Rely entirely on the postMessage payload carrying the buyer's email from HappyMD (requires HappyMD to include it).
+   - Recommend (a) for `/tprime-buy` so we get 100% capture, and use postMessage email as a fallback/confirmation.
 
-### 2. `src/components/HappyMDCheckout/HappyMDCheckout.tsx` — fix the iframe URL
+5. **Confirm HappyMD's success event**
+   - The hook listens for 6 candidate event names. Before this can fire in production, HappyMD must confirm which one they emit (and ideally include `email` in the payload).
+   - Action: I'll add `console.info` logging of every message received from the HappyMD origin so we can see the real event shape in the browser console on a test purchase, then narrow the matcher.
 
-- **Add `vendor_id=TPRIME365CELL`** to the checkout URL (the missing piece).
-- Drop `utm_campaign` from the `tracking_code` resolution. New order: explicit prop → URL `?ref=` → stored ref → `TPRIME365CELL`.
-- Continue forwarding UTM params as separate query keys (they don't override `tracking_code`, just preserved for HappyMD's own analytics).
-- No change to button variant logic beyond the same `tracking_code` precedence.
+### Files to touch
 
-### 3. `src/App.tsx` — no change
+- `src/hooks/useHappyMDPurchaseTag.ts` — add debug logging, send email from payload when present
+- `src/pages/TPrimeBuyPage.tsx` — mount hook (+ optional pre-iframe lead capture form)
+- `src/pages/TPrime365Page.tsx`, `src/pages/NHTOPage.tsx` (and intake pages if they embed) — mount hook
+- `supabase/functions/happymd-purchase-tag/index.ts` — allow anon with origin + rate-limit + allowlist; also upsert lead + intake_completion
+- `supabase/migrations/<new>.sql` — add a `private.check_happymd_purchase_rate_limit` helper if we go the rate-limit route
 
-`captureRefParam()` is already called at module load. Picks up the new logic automatically.
+### Open questions before I build
 
-### 4. `src/pages/TPrime365IntakePage.tsx` — no change
-
-Already builds its own URL with `vendor_id=best365labgqzb` for the intake form (different HappyMD product). The upgraded `getRefParam()` flows through with no edits needed.
-
-## Verification
-
-After build, in the preview:
-1. `/?ref=jay-atkins` → SPA-navigate to `/tprime365` → inspect checkout iframe `src`, expect `vendor_id=TPRIME365CELL&tracking_code=jay-atkins`.
-2. Clear storage → `/tprime365?ref=jay-atkins` direct → same.
-3. Clear storage → `/tprime365` cold → expect `vendor_id=TPRIME365CELL&tracking_code=TPRIME365CELL`.
-4. Confirm intake page `/tprime365-intake` still gets the ref appended to its own iframe URL.
-
-## Files touched
-
-- `src/lib/ref.ts` (rewrite, ~25 lines)
-- `src/components/HappyMDCheckout/HappyMDCheckout.tsx` (add vendor_id, drop UTM fallback in tracking_code)
-
-No DB, no edge functions, no UI changes, no other files touched.
+1. On `/tprime-buy`, do you want a **pre-iframe lead capture form** (name/email/phone gate, like `/glp1-buy`) so we capture intent even from non-buyers? Or keep the iframe immediately visible and only capture confirmed buyers from the postMessage?
+2. Should I mount the hook on **all** HappyMD-embedding pages (`/tprime-buy`, `/tprime365`, `/nhto`, intake pages), or just `/tprime-buy` for now?
+3. Have you (or HappyMD) confirmed the exact postMessage event name + payload shape they emit on payment success? If not, I'll ship with debug logging so you can capture it on the next live purchase and I'll narrow it after.
