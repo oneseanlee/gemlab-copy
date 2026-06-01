@@ -3,6 +3,7 @@ import { FileText, Shield, Clock } from 'lucide-react';
 import { getFbcValue, getFbpValue } from '@/lib/fb-cookies';
 import { getRefParam } from '@/lib/ref';
 import { supabase } from '@/integrations/supabase/client';
+import { useHappyMDPurchaseTag } from '@/hooks/useHappyMDPurchaseTag';
 
 declare global {
   interface Window {
@@ -21,6 +22,8 @@ const NHTOIntakePage = () => {
   // the consultation to the referring partner (see install guide).
   const ref = getRefParam();
   const trackingCode = ref || 'UCOSNHTOCELL';
+
+  useHappyMDPurchaseTag({ tag: 'tprime365-purchase', source: 'nhto', trackingCode });
   const iframeSrc = `https://happymd.co/embed/testosterone-optimizer?vendor_id=best365labgqzb&tracking_code=${encodeURIComponent(trackingCode)}&v=v2&theme=best365${ref ? `&ref=${encodeURIComponent(ref)}` : ''}`;
 
   useEffect(() => {

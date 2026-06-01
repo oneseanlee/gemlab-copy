@@ -17,6 +17,7 @@ import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/com
 import Autoplay from 'embla-carousel-autoplay';
 import { supabase } from '@/integrations/supabase/client';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { useHappyMDPurchaseTag } from '@/hooks/useHappyMDPurchaseTag';
 
 const NHTO_VARIANT_ID = 'gid://shopify/ProductVariant/46309998133388';
 const NHTO_PRODUCT = {
@@ -113,6 +114,8 @@ const NHTOPage = () => {
     const [showBanner, setShowBanner] = useState(true);
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    useHappyMDPurchaseTag({ tag: 'tprime365-purchase', source: 'nhto' });
     const [showLeadModal, setShowLeadModal] = useState(false);
     const [leadForm, setLeadForm] = useState({ firstName: '', email: '' });
     const [leadSubmitting, setLeadSubmitting] = useState(false);
