@@ -10,7 +10,7 @@ import { getRefParam } from "@/lib/ref";
 
 const HELPER_SRC = "https://app.happymd.co/embed-helper.js";
 const CHECKOUT_BASE = "https://app.happymd.co/embed/checkout";
-const PARENT_VENDOR_ID = "TPRIME365CELL";
+const PARENT_VENDOR_ID = "cell365power";
 
 export type HappyMDCheckoutProps = {
   product?: string;
@@ -22,7 +22,7 @@ export type HappyMDCheckoutProps = {
 
 function buildCheckoutUrl({
   product = "tprime365",
-  plan = "subscription",
+  plan = "monthly",
   partner = "cell365power",
   theme = "best365",
   trackingCode,
@@ -95,7 +95,7 @@ export function HappyMDCheckoutButton(
 ) {
   const {
     product = "tprime365",
-    plan = "subscription",
+    plan = "monthly",
     partner = "cell365power",
     theme = "best365",
     trackingCode,
@@ -122,7 +122,7 @@ export function HappyMDCheckoutButton(
       data-happymd-plan={plan}
       data-happymd-partner={partner}
       data-happymd-theme={theme}
-      data-happymd-vendor={PARENT_VENDOR_ID}
+      data-vendor-id={PARENT_VENDOR_ID}
       data-happymd-tracking={code}
     >
       {children}
