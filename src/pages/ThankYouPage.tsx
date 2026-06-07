@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, ArrowLeft } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const ThankYouPage: React.FC = () => (
+  <>
+    <SEO title={"Thank You | Best 365 Labs"} description={"Thank you for your purchase."} path={"/free-testosterone-guide/thank-you"} noindex={true} />
   <div style={{
     minHeight: '100vh',
     background: 'var(--b365-navy)',
@@ -45,6 +48,7 @@ const ThankYouPage: React.FC = () => (
       <ArrowLeft size={14} /> Back to Home
     </Link>
   </div>
+  </>
 );
 
 export default ThankYouPage;
