@@ -20,6 +20,7 @@ import GuaranteeBadge from "@/components/Checkout/GuaranteeBadge";
 import TrustPaymentBadges from "@/components/Checkout/TrustPaymentBadges";
 import ExitIntentPopup from "@/components/Checkout/ExitIntentPopup";
 import "./CheckoutPage.css";
+import SEO from '@/components/SEO';
 
 const checkoutSchema = z.object({
   fullName: z.string().trim().min(1, "Full name is required").max(200),
@@ -253,6 +254,7 @@ const CheckoutPage = () => {
 
   return (
     <div className="checkout-page">
+      <SEO title={"Checkout | Best 365 Labs"} description={"Complete your order."} path={"/checkout"} noindex={true} />
       {/* <ExitIntentPopup /> */}
       <div className="checkout-container">
         <div className="checkout-header">

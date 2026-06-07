@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 
 import glp1ActivateBottle from '@/assets/glp1-activate-bottle.png';
+import SEO from '@/components/SEO';
 const PRODUCT_IMG = glp1ActivateBottle;
 const PRODUCT_IMG_FALLBACK = '/images/product-glp-protocol.png';
 
@@ -107,6 +108,7 @@ const GLP1ActivatePage: React.FC = () => {
 
   return (
     <div className="glpa-page">
+      <SEO title={"GLP-1 Activate | Sublingual NAD+ Support for GLP-1 Therapy"} description={"Sublingual cellular support designed for GLP-1 therapy. Bypasses the gut, powers the burn, protects what GLP-1 strips away. $27/mo."} path={"/glp1-activate"} />
       <JsonLd id="glp1-activate-product" schema={glp1ActivateProductSchema} />
       <JsonLd id="glp1-activate-faq" schema={glp1ActivateFaqSchema} />
       <MobileMenu links={mobileLinks} isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />

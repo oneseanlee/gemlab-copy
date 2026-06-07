@@ -6,6 +6,7 @@ import AnimatedCTA from '../components/AnimatedCTA/AnimatedCTA';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { Download, ExternalLink, BookOpen } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 interface Guide {
   id: number;
@@ -340,6 +341,7 @@ const GuidesPage = () => {
           if (catGuides.length === 0) return null;
           return (
             <div className="guides-category-group" key={cat}>
+      <SEO title={"Free Health Optimization Guides | Best 365 Labs"} description={"Free expert guides on testosterone optimization, GLP-1 therapy, cellular health, and metabolic performance."} path={"/guides"} />
               {activeCategory === 'all' && (
                 <div className="guides-category-header">
                   <div className={`guides-category-accent accent-${cat}`} />

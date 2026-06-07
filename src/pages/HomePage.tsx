@@ -12,6 +12,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 import Autoplay from 'embla-carousel-autoplay';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Menu, ArrowRight, Brain, Flame, Zap, Dumbbell, Check, Truck, CheckCircle, Headphones, BadgeCheck, Shield } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 /* ──── Parallax hook ──── */
 const useParallax = (speed = 0.3) => {
@@ -341,6 +342,7 @@ const HomePage = () => {
 
   return (
     <div className="b365-page">
+      <SEO title={"Best 365 Labs | Precision-Grade Testosterone & Metabolic Optimization"} description={"Precision-grade testosterone and metabolic support powered by MODS Max™ 10x Absorption Technology. No needles. No hormonal shutdown. Science-backed results."} path={"/"} />
       <JsonLd id="org" schema={organizationSchema} />
       <JsonLd id="website" schema={websiteSchema} />
       <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />

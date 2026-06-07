@@ -18,6 +18,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { supabase } from '@/integrations/supabase/client';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useHappyMDPurchaseTag } from '@/hooks/useHappyMDPurchaseTag';
+import SEO from '@/components/SEO';
 
 const NHTO_VARIANT_ID = 'gid://shopify/ProductVariant/46309998133388';
 const NHTO_PRODUCT = {
@@ -192,6 +193,7 @@ const NHTOPage = () => {
 
     return (
         <div className="nhto-page">
+      <SEO title={"Non-Hormonal Testosterone Bundle | Rx Optimizer + UCOS Stack"} description={"Maximum cellular and hormonal synergy — prescription-grade Enclomiphene + complete UCOS stack. $250."} path={"/nhto"} />
             <JsonLd id="nhto-product" schema={nhtoProductSchema} />
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 

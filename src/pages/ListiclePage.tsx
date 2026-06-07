@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ListiclePage.css';
 import SharedFooter from '../components/SharedFooter/SharedFooter';
+import SEO from '@/components/SEO';
 
 const ListiclePage = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -17,6 +18,7 @@ const ListiclePage = () => {
 
   return (
     <div className="listicle-page">
+      <SEO title={"The Science Behind Testosterone Optimization | Best 365 Labs"} description={"Evidence-based guide to natural testosterone optimization with TPrime365. Lab-verified results from real users."} path={"/article"} />
       {/* READING PROGRESS BAR */}
       <div className="listicle-progress-bar" style={{ width: `${scrollProgress}%` }} />
       {/* URGENCY BANNER */}

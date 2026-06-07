@@ -4,6 +4,7 @@ import { ArrowRight, Lock, Check, Zap, Flame, Brain, Dumbbell, ChevronLeft, Chev
 import { HappyMDCheckoutIframe } from "@/components/HappyMDCheckout/HappyMDCheckout";
 import { useHappyMDPurchaseTag } from "@/hooks/useHappyMDPurchaseTag";
 import "./TPrimeBuyPage.css";
+import SEO from '@/components/SEO';
 
 /* ── Carousel media ──────────────────────────────────── */
 const TPRIME_VIDEO_URL = "https://assets.cdn.filesafe.space/aYvoAsXxf5xBOSngnm2U/media/69a8ec727bdf384bda5534e1.mp4";
@@ -45,6 +46,7 @@ const TPrimeBuyPage = () => {
   /* ── Main render ──────────────────────────────────── */
   return (
     <div className="tprimebuy-page">
+      <SEO title={"Get TPrime365™ | Best 365 Labs"} description={"Order TPrime365 — 4-in-1 sublingual testosterone optimization."} path={"/tprime-buy"} noindex={true} />
 
       {/* Checkout Section */}
       <section className="b365-section glp1-checkout-section">

@@ -5,6 +5,7 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import AnimatedCTA from '@/components/AnimatedCTA/AnimatedCTA';
 import { supabase } from '@/integrations/supabase/client';
 import './FreeTestosteroneGuidePage.css';
+import SEO from '@/components/SEO';
 
 /* ── Parallax hook ── */
 const useParallax = (speed = 0.08) => {
@@ -219,6 +220,7 @@ const FreeTestosteroneGuidePage: React.FC = () => {
 
   return (
     <div className="ftg-page">
+      <SEO title={"Free Testosterone Guide | Best 365 Labs"} description={"Download our free guide to natural testosterone optimization."} path={"/free-testosterone-guide"} />
       {/* ── Full-page Fixed Video Background ── */}
       <div className="ftg-hero-video-bg" aria-hidden="true">
         <video autoPlay muted loop playsInline className="ftg-hero-video">

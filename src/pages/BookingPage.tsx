@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './BookingPage.css';
+import SEO from '@/components/SEO';
 
 /* ── Constants ── */
 const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -198,6 +199,7 @@ const BookingPage: React.FC = () => {
 
   return (
     <div className="bp-page">
+      <SEO title={"Book a Consultation | Best 365 Labs"} description={"Schedule a consultation with Best 365 Labs health optimization specialists."} path={"/book"} />
       {/* ── Nav ── */}
       <nav className="bp-nav">
         <a href="/" className="bp-nav-logo">

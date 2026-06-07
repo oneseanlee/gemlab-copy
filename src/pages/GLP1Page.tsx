@@ -21,6 +21,7 @@ import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { GLP1_VARIANT_ID } from '../lib/shopify';
 import { Menu, Tag, ArrowRight, Sunrise, Coffee, Utensils, ChevronLeft, ChevronRight, X, Check, Zap, Flame, Brain, Target, Footprints, Trophy, Dna, Recycle, AlertCircle, Lock, ShieldCheck, Package, Headphones, Dumbbell, Clock, Star, Phone } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 // Lazy-loading video component — plays only when in viewport
 const LazyVideo = ({ src }: { src: string }) => {
@@ -191,6 +192,7 @@ const GLP1Page = () => {
 
   return (
     <div className="glp1-page">
+      <SEO title={"GLP-1 Optimization Protocol | Preserve Muscle During GLP-1 Therapy"} description={"Preserve muscle and energy during GLP-1 weight loss therapy. 72% more lean mass preserved vs GLP-1 alone. $39.95 one-time."} path={"/glp1-protocol"} />
             <JsonLd id="glp1-protocol-product" schema={glp1ProtocolProductSchema} />
             <JsonLd id="glp1-protocol-faq" schema={glp1ProtocolFaqSchema} />
             {/* <ExitIntentPopup /> */}

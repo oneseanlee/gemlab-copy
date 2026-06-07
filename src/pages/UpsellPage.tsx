@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Check, Shield, Lock, ArrowRight } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import './UpsellPage.css';
+import SEO from '@/components/SEO';
 
 /* ── Countdown Timer ── */
 const CountdownTimer = () => {
@@ -73,6 +74,7 @@ const UpsellPage: React.FC = () => {
 
   return (
     <div className="upsell-page">
+      <SEO title={"Upgrade | Best 365 Labs"} description={"Upgrade your testosterone guide bundle."} path={"/free-testosterone-guide/upgrade"} noindex={true} />
       {/* ── Full-page Fixed Video Background (same as FTG) ── */}
       <div className="ftg-hero-video-bg" aria-hidden="true">
         <video autoPlay muted loop playsInline className="ftg-hero-video">

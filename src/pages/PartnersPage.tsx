@@ -10,6 +10,7 @@ import PartnerApplicationForm from '../components/PartnerApplicationForm/Partner
 import PartnerFAQ from '../components/PartnerFAQ/PartnerFAQ';
 import partnersHero from '../assets/partners-hero.jpg';
 import {
+import SEO from '@/components/SEO';
   Percent, TrendingUp, FlaskConical, Users,
   HeartPulse, Video, Dumbbell, Atom, MonitorSmartphone, Megaphone,
   ShieldCheck, BadgeCheck, Award, Building2, Menu,
@@ -104,6 +105,7 @@ const PartnersPage: React.FC = () => {
 
   return (
     <div className="partners-page">
+      <SEO title={"Partner Program | Earn 20% Commission — Best 365 Labs"} description={"Join the Best 365 Labs partner program. Earn 20% commission on TPrime365, UCOS, GLP-1 products."} path={"/partners"} />
 
       {/* 1. Promo Banner */}
       {showBanner && (

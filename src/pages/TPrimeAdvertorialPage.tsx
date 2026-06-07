@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './TPrimeAdvertorialPage.css';
 import JsonLd from '../components/JsonLd';
 import { tprimeAdvertorialFaqSchema } from '../lib/seo-schemas';
+import SEO from '@/components/SEO';
 
 const CTA_LINK = "https://cell365power.lovable.app/tprime365";
 
@@ -46,6 +47,7 @@ const TPrimeAdvertorialPage: React.FC = () => {
 
   return (
     <div className="adv-page">
+      <SEO title={"TPrime365 — The Science Behind Natural Testosterone Optimization"} description={"How TPrime365 uses the HPG axis to boost testosterone 60-664% without injections or shutdown."} path={"/tprime365-article"} noindex={true} />
       <JsonLd id="tprime-adv-faq" schema={tprimeAdvertorialFaqSchema} />
       {/* ─── 1. Headline Section ─── */}
       <section className="adv-headline-section">

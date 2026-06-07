@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import "./AdminDashboardPage.css";
+import SEO from '@/components/SEO';
 
 // Pacific Time utilities — all dates/times displayed in PT
 const PT_TZ = "America/Los_Angeles";
@@ -510,6 +511,7 @@ export default function AdminDashboardPage() {
                     const fillPct = data.popup > 0 ? Math.max((data.completed / data.popup) * 100, 3) : 0;
                     return (
                       <div key={source} style={{ background: "hsl(220 20% 13%)", borderRadius: 8, padding: "1rem 1.25rem" }}>
+      <SEO title={"Admin Dashboard | Best 365 Labs"} description={"Internal admin dashboard."} path={"/admin"} noindex={true} />
                         <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "hsl(220 15% 90%)", marginBottom: "0.75rem", textTransform: "uppercase", letterSpacing: "0.04em" }}>
                           {source}
                         </div>
