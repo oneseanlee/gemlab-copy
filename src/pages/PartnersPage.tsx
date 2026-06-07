@@ -15,6 +15,7 @@ import {
   ShieldCheck, BadgeCheck, Award, Building2, Menu,
   Link2, FileText, ImageIcon, BarChart3,
 } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const valueProps = [
   { Icon: Percent, title: '20% Commission', desc: 'Competitive recurring commissions on every referral you send our way.' },
@@ -104,6 +105,7 @@ const PartnersPage: React.FC = () => {
 
   return (
     <div className="partners-page">
+      <SEO title={"Partner Program | Earn 20% Commission — Best 365 Labs"} description={"Join the Best 365 Labs partner program. Earn 20% commission on TPrime365, UCOS, GLP-1 products."} path={"/partners"} />
 
       {/* 1. Promo Banner */}
       {showBanner && (

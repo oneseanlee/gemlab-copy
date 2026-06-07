@@ -18,6 +18,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { HappyMDCheckoutIframe } from '@/components/HappyMDCheckout/HappyMDCheckout';
 import { useHappyMDPurchaseTag } from '@/hooks/useHappyMDPurchaseTag';
+import SEO from '@/components/SEO';
 
 const TPRIME_VARIANT_ID = 'gid://shopify/ProductVariant/46309997936780';
 const TPRIME_PRODUCT = {
@@ -227,6 +228,7 @@ const TPrime365Page = () => {
 
   return (
     <div className="tprime-page">
+      <SEO title={"TPrime365™ | Natural Testosterone Optimization — No Needles, No Shutdown"} description={"4-in-1 sublingual testosterone optimizer. Boosts T-levels 60–664% in 2-4 weeks without injections or shutdown. Physician-reviewed. $149/mo."} path={"/tprime365"} />
             <JsonLd id="tprime365-product" schema={tprime365ProductSchema} />
             <JsonLd id="tprime365-faq" schema={tprime365FaqSchema} />
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />

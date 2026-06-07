@@ -14,6 +14,7 @@ import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import EarlyTestersCarousel from '../components/EarlyTestersCarousel/EarlyTestersCarousel';
 import { Menu, Shield, Zap, Activity, Moon, Stethoscope, ShieldCheck, Truck, Award, Flag, Check, Lock, Calendar, Package, Headphones } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const CertificateLottie = () => {
   const [data, setData] = useState(null);
@@ -85,6 +86,7 @@ const GLP1BundlePage = () => {
 
   return (
     <div className="glp1b-page">
+      <SEO title={"GLP-1 Cellular Bundle | Complete 24-Hour Metabolic Optimization"} description={"Complete 24-hour cellular optimization — 4 products working together for maximum GLP-1 results. $175."} path={"/glp1-ucos"} />
             <JsonLd id="glp1-ucos-product" schema={glp1UcosProductSchema} />
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 

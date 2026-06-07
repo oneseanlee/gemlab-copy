@@ -12,6 +12,7 @@ import MobileMenu from '../components/MobileMenu/MobileMenu';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { Menu, ArrowRight, Sunrise, Sun, Moon, BadgeCheck, Clock, Flag, ShieldCheck, Zap, Brain, Dumbbell, Activity, Sparkles, Heart, RefreshCw, Bed, Dna, Shield, Gem, Flame, ChevronRight, Check, Truck, Package, Award, Lock, Headphones, AlertCircle } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const UCOS_VARIANT_ID = 'gid://shopify/ProductVariant/46309998067852';
 const UCOS_PRODUCT = {
@@ -66,6 +67,7 @@ const UCOSPage = () => {
 
   return (
     <div className="ucos-page">
+      <SEO title={"UCOS | 24-Hour Cellular Optimization System by Best 365 Labs"} description={"24-hour energy, focus, and longevity optimization with Activate365, Mito365, and Restore365. MODS Max™ 10x absorption. $175."} path={"/ucos"} />
       <JsonLd id="ucos-product" schema={ucosProductSchema} />
       <JsonLd id="ucos-faq" schema={ucosFaqSchema} />
             <MobileMenu links={mobileLinks} isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />

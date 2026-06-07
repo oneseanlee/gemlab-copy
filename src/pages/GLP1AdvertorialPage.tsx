@@ -10,6 +10,7 @@ import LeadCaptureModal from '@/components/LeadCaptureModal/LeadCaptureModal';
 import ExitIntentPopup from '@/components/Checkout/ExitIntentPopup';
 import './GLP1AdvertorialPage.css';
 import '../pages/TPrimeAdvertorialPage.css';
+import SEO from '@/components/SEO';
 
 const GLP1_VARIANT = {
   variantId: 'gid://shopify/ProductVariant/46539809235068',
@@ -87,6 +88,7 @@ const GLP1AdvertorialPage: React.FC = () => {
 
   return (
     <div className="adv-page glp1-adv-page">
+      <SEO title={"GLP-1 Optimization — Protect What GLP-1 Strips Away"} description={"Why your GLP-1 therapy needs cellular support to preserve muscle and metabolism."} path={"/glp1-article"} noindex={true} />
       <LeadCaptureModal
         open={showLeadModal}
         onClose={() => setShowLeadModal(false)}

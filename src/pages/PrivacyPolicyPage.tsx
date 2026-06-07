@@ -1,9 +1,11 @@
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import './PrivacyPolicyPage.css';
+import SEO from '@/components/SEO';
 
 const PrivacyPolicyPage = () => {
   return (
     <div className="privacy-page">
+      <SEO title={"Privacy Policy | Best 365 Labs"} description={"Best 365 Labs privacy policy — how we collect, use, and protect your data."} path={"/privacy"} />
       <nav className="privacy-nav">
         <div className="privacy-nav-inner">
           <a href="/">

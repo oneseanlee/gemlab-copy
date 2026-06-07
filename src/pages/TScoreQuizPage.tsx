@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ArrowRight, ArrowLeft, Lock, Check, Shield, Clock, FlaskConical, ChevronRight } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import './TScoreQuizPage.css';
+import SEO from '@/components/SEO';
 
 /* ═══════════════════════════════════════════
    DATA
@@ -556,6 +557,7 @@ const TScoreQuizPage: React.FC = () => {
 
   return (
     <div className="tsq-page" ref={containerRef}>
+      <SEO title={"Testosterone Score Quiz | Best 365 Labs"} description={"Take our free quiz to assess your testosterone health and get personalized recommendations."} path={"/t-score-quiz"} />
       <div className="tsq-bg" aria-hidden="true" />
       <div className="tsq-container">
         {phase === 'landing' && <LandingPhase onStart={handleStart} />}

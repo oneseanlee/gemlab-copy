@@ -16,6 +16,7 @@ import { GLP1_VARIANT_ID, FREE_MASTER_GUIDE_VARIANT_ID, FREE_LYMPHATIC_VARIANT_I
 import { toast } from "sonner";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import "./GLP1BuyPage.css";
+import SEO from '@/components/SEO';
 
 const CAROUSEL_IMAGES = [
   { src: "/images/glp1-carousel-1.webp", alt: "Best365 Labs customer transformation results" },
@@ -415,6 +416,7 @@ const GLP1BuyPage = () => {
   /* ── Main render ──────────────────────────────────── */
   return (
     <div className="glp1buy-page">
+      <SEO title={"Get the GLP-1 Optimization Protocol | Best 365 Labs"} description={"Order the GLP-1 Optimization Protocol — preserve muscle and energy during GLP-1 therapy."} path={"/glp1-buy"} noindex={true} />
       <JsonLd id="glp1-buy-faq" schema={glp1BuyFaqSchema} />
       {/* Sticky promo banner */}
       <div className="glp1buy-sticky-promo">🔥 Save 56% Off + Free Gifts & Free Shipping 🔥</div>

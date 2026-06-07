@@ -13,6 +13,7 @@ declare global {
 }
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import './NHTOIntakePage.css';
+import SEO from '@/components/SEO';
 
 const TPrime365IntakePage = () => {
   useEffect(() => {
@@ -127,6 +128,7 @@ const TPrime365IntakePage = () => {
 
   return (
     <div className="intake-page">
+      <SEO title={"TPrime365 Health Intake | Best 365 Labs"} description={"Complete your health intake for TPrime365."} path={"/tprime365-intake"} noindex={true} />
       <nav className="intake-nav">
         <div className="intake-nav-inner">
           <a href="/">

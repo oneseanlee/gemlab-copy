@@ -1,9 +1,11 @@
 import SharedFooter from '../components/SharedFooter/SharedFooter';
 import './PrivacyPolicyPage.css';
+import SEO from '@/components/SEO';
 
 const ReturnPolicyPage = () => {
   return (
     <div className="privacy-page">
+      <SEO title={"Return Policy | Best 365 Labs"} description={"Best 365 Labs return and refund policy — 30-day money-back guarantee."} path={"/returns"} />
       <nav className="privacy-nav">
         <div className="privacy-nav-inner">
           <a href="/">
