@@ -419,7 +419,7 @@ const HomePage = () => {
                 <div className="icon-wrap">
                   <b.Icon size={22} />
                 </div>
-                <h4>{b.label}</h4>
+                <span className="benefit-label">{b.label}</span>
               </div>
             </div>
           ))}
@@ -695,7 +695,7 @@ const HomePage = () => {
           ].map((guide, i) => (
             <a href="/guides" className="b365-guide-card" key={i}>
               <img src={guide.img} alt={guide.title} loading="lazy" />
-              <h4>{guide.title}</h4>
+              <h3>{guide.title}</h3>
             </a>
           ))}
         </div>
