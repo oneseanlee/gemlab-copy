@@ -10,12 +10,12 @@ import PartnerApplicationForm from '../components/PartnerApplicationForm/Partner
 import PartnerFAQ from '../components/PartnerFAQ/PartnerFAQ';
 import partnersHero from '../assets/partners-hero.jpg';
 import {
-import SEO from '@/components/SEO';
   Percent, TrendingUp, FlaskConical, Users,
   HeartPulse, Video, Dumbbell, Atom, MonitorSmartphone, Megaphone,
   ShieldCheck, BadgeCheck, Award, Building2, Menu,
   Link2, FileText, ImageIcon, BarChart3,
 } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const valueProps = [
   { Icon: Percent, title: '20% Commission', desc: 'Competitive recurring commissions on every referral you send our way.' },
