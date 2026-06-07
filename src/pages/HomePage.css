@@ -546,6 +546,7 @@
   margin: 0 0 var(--space-2);
 }
 .b365-benefit-card .benefit-label {
+  display: block;
   font-size: var(--text-body-sm);
   font-weight: 600;
   color: var(--b365-text);
