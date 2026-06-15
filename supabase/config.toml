@@ -15,3 +15,5 @@ project_id = "yyuoyitapltnuqhkjyfd"
     verify_jwt = true
   [functions.send-digital-delivery]
     verify_jwt = false
+  [functions.enrich-leads-with-ghl]
+    verify_jwt = false
