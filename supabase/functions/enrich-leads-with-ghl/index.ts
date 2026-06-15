@@ -30,9 +30,9 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   const adminPassword = Deno.env.get("ADMIN_DASHBOARD_PASSWORD");
-  const auth = req.headers.get("authorization") || "";
-  const token = auth.replace(/^Bearer\s+/i, "");
-  if (!adminPassword || token !== adminPassword) {
+  const body = await req.json().catch(() => ({}));
+  const provided = body.password || req.headers.get("x-admin-password") || "";
+  if (!adminPassword || provided !== adminPassword) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
   }
 
@@ -44,7 +44,6 @@ Deno.serve(async (req) => {
 
   const supabase = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 
-  const body = await req.json().catch(() => ({}));
   const since = body.since || "2026-04-01";
 
   // Pull leads missing phones
