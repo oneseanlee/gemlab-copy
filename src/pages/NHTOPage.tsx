@@ -16,6 +16,8 @@ import { Menu, CheckCircle, ShieldCheck, Gift, Shrink, Baby, Link2, AlertTriangl
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { supabase } from '@/integrations/supabase/client';
+import { getUtmParams } from '@/lib/utm';
+import { splitName } from '@/lib/split-name';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useHappyMDPurchaseTag } from '@/hooks/useHappyMDPurchaseTag';
 import SEO from '@/components/SEO';
@@ -161,10 +163,13 @@ const NHTOPage = () => {
         }
         setLeadSubmitting(true);
         try {
+            const { firstName: fn, lastName: ln } = splitName(firstName);
             await supabase.from('leads').insert({
-                first_name: firstName,
+                first_name: fn.slice(0, 100),
+                last_name: ln ? ln.slice(0, 100) : null,
                 email: email,
                 source: 'nhto',
+                utm_params: getUtmParams(),
             });
             localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
             localStorage.setItem('intake_lead_email', email);
