@@ -1,43 +1,35 @@
 ## Goal
-Install HappyMD's signed attribution loader site-wide and align the TPrime365 embed snippet with the canonical install guide (June 3, 2026). NHTO and NHTO Bundle pages stay untouched. Plan default remains `monthly`.
+Produce a new PDF (`site_report_june_mtd_2026.pdf`) covering **Jun 1 – Jun 16, 2026 (today inclusive, UTC)** with a full activity + traffic-source breakdown.
 
-## Current state vs PDF
-| Item | Status |
-|---|---|
-| `app.happymd.co/partner.js` site-wide loader in `<head>` | ❌ missing |
-| `embed-helper.js` URL | ✅ correct |
-| `data-happymd-partner="cell365power"` | ✅ default |
-| `data-vendor-id="cell365power"` | ❌ emits `data-happymd-vendor="TPRIME365CELL"` |
-| Iframe `vendor_id` URL param | ❌ sends `TPRIME365CELL`, should be `cell365power` |
-| Plan default | Keep `monthly` (current code sends `subscription` — rename) |
+## Sections
 
-## Changes
+1. **Executive summary** — totals for the period: page views, unique visitors, intake leads, checkout leads, intake completions, HappyMD completions, top landing page, top traffic source.
 
-### 1. `index.html` — add partner.js loader
-Inside `<head>`, after existing preconnects:
-```html
-<link rel="preconnect" href="https://app.happymd.co" />
-<script src="https://app.happymd.co/partner.js"
-        data-partner-id="cell365power"
-        async></script>
-```
+2. **Traffic overview** (from `page_views`)
+   - Total page views, unique visitors, active days, avg views/day
+   - Daily trend (Jun 1 → today)
+   - Top pages by views (with unique-visitor count)
+   - Today-only snapshot (views, visitors, top pages)
 
-### 2. `src/components/HappyMDCheckout/HappyMDCheckout.tsx`
-Only affects the TPrime365 embedded checkout (NHTO pages don't use this component's button/iframe with embed — they're left alone).
+3. **Traffic sources** (derived from `leads.utm_params` + `checkout_leads.utm_params` + `source` columns, since `page_views` has no referrer)
+   - Breakdown by `utm_source` / `utm_medium` / `utm_campaign`
+   - Lead count + checkout count per source
+   - Landing pages associated with each source (joined via timestamp-adjacent `page_views` where possible, else from `utm_params.landing_page`)
+   - Direct vs paid vs organic bucket
+   - Note clearly that anonymous page-view traffic has no referrer captured, so source attribution is based on leads that submitted with UTM params
 
-- Change `PARENT_VENDOR_ID` from `"TPRIME365CELL"` to `"cell365power"` so the iframe URL sends `vendor_id=cell365power`.
-- Default `plan` from `"subscription"` → `"monthly"` (matches PDF allowed values `one_time | monthly` and matches our current subscription intent).
-- In `HappyMDCheckoutButton`, replace `data-happymd-vendor={PARENT_VENDOR_ID}` with `data-vendor-id="cell365power"` (canonical attribute name).
-- Keep `data-happymd-tracking={code}` for sub-affiliate `?ref=` overrides — additive, doesn't conflict.
+4. **Leads activity (Jun 1 – today)**
+   - Intake leads: count, by `source` page, with names/emails/phones
+   - Checkout leads: count, by `source`, cart totals, completion status
+   - Intake completions and HappyMD completions counts
 
-### 3. NHTO / NHTO Bundle pages — no changes
-Per user: leave `/nhto`, `/nhto-bundle` (and intake) untouched.
+5. **Conversion funnel** — Page views → Leads → Checkout leads → Completions, with rates.
 
-## Verification (post-deploy)
-1. Incognito → `cell365power.com` → DevTools → Application → Session Storage → confirm `happymd_attribution_v1` key with `journeyId` + `sig` within ~5s.
-2. Navigate to `/tprime-buy` → click into checkout iframe → confirm same `journeyId` flows through.
-3. Optional $0.50 live test (`4242 4242 4242 4242`) → check `app.happymd.co/partner-portal` for Clicks +1 / Conversions +1 under `cell365power`.
+## Technical
+- Pull data via `psql` for the window `created_at >= '2026-06-01' AND created_at < '2026-06-17'` (UTC).
+- Filter test emails using the same `TEST_EMAIL_PATTERNS` regex set used in `admin-dashboard-data`.
+- Build with `reportlab` (matches prior v3 report style); save to `/mnt/documents/site_report_june_mtd_2026.pdf`.
+- QA: render each page to image with `pdftoppm`, inspect for clipping/overflow, fix, then deliver.
 
-## Out of scope
-- `useHappyMDPurchaseTag` hook and `happymd-purchase-tag` edge function (already wired previously).
-- NHTO pages and any other product surface.
+## Caveat to surface in the PDF
+`page_views` only stores `page_path` + `visitor_id` (no referrer/UTM), so "where is traffic coming from" is answered from UTM params attached to leads + landing-page distribution. If you want true per-visit source attribution going forward, we'd need to add a `referrer` / `utm_*` column to `page_views` (separate task).
