@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ArrowRight, ArrowLeft, Lock, Check, Shield, Clock, FlaskConical, ChevronRight } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { getUtmParams } from '@/lib/utm';
+import { splitName } from '@/lib/split-name';
 import './TScoreQuizPage.css';
 import SEO from '@/components/SEO';
 
@@ -541,11 +543,14 @@ const TScoreQuizPage: React.FC = () => {
 
     // Save to leads table
     try {
+      const { firstName: fn, lastName: ln } = splitName(firstName || '');
       await supabase.from('leads').insert({
-        first_name: firstName || 'Quiz User',
-        email,
+        first_name: (fn || '').slice(0, 100) || null,
+        last_name: ln ? ln.slice(0, 100) : null,
+        email: email.slice(0, 255),
         source: 'tscore-quiz',
-      });
+        utm_params: getUtmParams(),
+      } as any);
     } catch (err) {
       console.error('Lead save error:', err);
     }

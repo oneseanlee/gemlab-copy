@@ -22,7 +22,7 @@ const InlineEmailCapture = () => {
       const { error } = await supabase.from("leads").insert({
         first_name: fn,
         last_name: ln,
-        email: email.trim(),
+        email: email.trim().toLowerCase(),
         source: "glp1-protocol-inline",
         utm_params: getUtmParams(),
       } as any);

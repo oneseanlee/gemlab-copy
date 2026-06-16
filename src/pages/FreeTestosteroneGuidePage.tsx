@@ -4,6 +4,8 @@ import { Users, Building2, Stethoscope, FlaskConical, ArrowRight, Lock, Mail, Us
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import AnimatedCTA from '@/components/AnimatedCTA/AnimatedCTA';
 import { supabase } from '@/integrations/supabase/client';
+import { getUtmParams } from '@/lib/utm';
+import { splitName } from '@/lib/split-name';
 import './FreeTestosteroneGuidePage.css';
 import SEO from '@/components/SEO';
 
@@ -194,12 +196,15 @@ const FreeTestosteroneGuidePage: React.FC = () => {
     setSubmitting(true);
 
     try {
+      const { firstName: fn, lastName: ln } = splitName(firstName);
       const { error } = await supabase.from('leads').insert({
-        first_name: firstName.trim(),
-        email: email.trim().toLowerCase(),
-        phone: phone.trim() || null,
+        first_name: fn.slice(0, 100),
+        last_name: ln ? ln.slice(0, 100) : null,
+        email: email.trim().toLowerCase().slice(0, 255),
+        phone: phone.trim().slice(0, 20) || null,
         source: 'free-testosterone-guide',
-      });
+        utm_params: getUtmParams(),
+      } as any);
 
       if (error) {
         console.error('Lead insert error:', error.message);

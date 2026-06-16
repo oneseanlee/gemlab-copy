@@ -15,6 +15,8 @@ import Autoplay from 'embla-carousel-autoplay';
 import { CartDrawer } from '../components/CartDrawer';
 import { useCartStore } from '../stores/cartStore';
 import { supabase } from '@/integrations/supabase/client';
+import { getUtmParams } from '@/lib/utm';
+import { splitName } from '@/lib/split-name';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { HappyMDCheckoutIframe } from '@/components/HappyMDCheckout/HappyMDCheckout';
 import { useHappyMDPurchaseTag } from '@/hooks/useHappyMDPurchaseTag';
@@ -173,10 +175,13 @@ const TPrime365Page = () => {
     }
     setLeadSubmitting(true);
     try {
+      const { firstName: fn, lastName: ln } = splitName(firstName);
       await supabase.from('leads').insert({
-        first_name: firstName,
+        first_name: fn.slice(0, 100),
+        last_name: ln ? ln.slice(0, 100) : null,
         email: email,
         source: 'tprime365',
+        utm_params: getUtmParams(),
       });
       localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
       localStorage.setItem('intake_lead_email', email);
