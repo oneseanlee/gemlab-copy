@@ -1,14 +1,16 @@
-## Fix: Remove blank space below checkout iframe on /tprime365
+## Fix: Auto-resize HappyMD iframe via postMessage
 
-The HappyMD checkout iframe auto-sizes to its content, but the surrounding container on the TPrime365 page is leaving blank space below the form.
+HappyMD confirmed the iframe sends `{ type: "ttp-checkout:resize", height: <number> }` from `https://app.happymd.co`, and `cell365power.com` is in their allow-list so the message will cross the boundary.
 
 ### Changes
 
-1. **In `src/pages/TPrime365Page.css`**, add `height: auto !important; min-height: 0 !important;` to:
-   - `#tprime365-checkout`
-   - `.tprime-checkout-section`
-   - `.tprime-checkout-iframe-wrap`
+**`src/components/HappyMDCheckout/HappyMDCheckout.tsx`** — update `HappyMDCheckoutIframe`:
+- Convert `height` prop to React state (default fallback `1100`).
+- Add a `useEffect` that listens for `window` `message` events.
+- Filter `event.origin === "https://app.happymd.co"`.
+- Check `event.data.type === "ttp-checkout:resize"` and read `event.data.height`.
+- Clamp height to `300–4000`, add `24px` padding (matches HappyMD embed-helper.js), and `setHeight(...)`.
+- Re-render the `<iframe>` with the dynamic `height={height}`.
+- Keep `scrolling="auto"` for taller intake steps.
 
-2. **Verify** `.tprime-checkout-grid` already uses `align-items: start` (prevents grid row stretching); it does — no change needed.
-
-No other files touched. No layout or visual changes beyond eliminating the excess blank space.
+This fixes the blank space below the form on `/tprime365` and every other page using `HappyMDCheckoutIframe`.

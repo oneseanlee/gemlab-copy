@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getUtmParams } from "@/lib/utm";
 import { getRefParam } from "@/lib/ref";
 
@@ -74,12 +74,32 @@ export function HappyMDCheckoutIframe(
 ) {
   const { height = 1100, className, title = "TPrime365 Checkout", ...rest } = props;
   const src = useMemo(() => buildCheckoutUrl(rest), [rest.product, rest.plan, rest.partner, rest.theme, rest.trackingCode]);
+  const [iframeHeight, setIframeHeight] = useState<number>(height);
+
+  useEffect(() => {
+    const handler = (event: MessageEvent) => {
+      if (event.origin !== "https://app.happymd.co") return;
+      const data: any = event.data;
+      if (!data || typeof data !== "object") return;
+      let msgHeight: unknown;
+      if (data.type === "ttp-checkout:resize") msgHeight = data.height;
+      else if (typeof data.height === "number") msgHeight = data.height;
+      else if (data.payload && typeof data.payload.height === "number") msgHeight = data.payload.height;
+      if (typeof msgHeight === "number" && msgHeight > 0) {
+        const clamped = Math.min(Math.max(msgHeight, 300), 4000);
+        setIframeHeight(clamped + 24);
+      }
+    };
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, []);
+
   return (
     <iframe
       src={src}
       title={title}
       width="100%"
-      height={height}
+      height={iframeHeight}
       frameBorder={0}
       scrolling="auto"
       allow="payment *; clipboard-write"
