@@ -1216,6 +1216,12 @@
   border-top: 1px solid rgba(51, 118, 176, 0.08);
   border-bottom: 1px solid rgba(51, 118, 176, 0.08);
 }
+#tprime365-checkout,
+.tprime-checkout-section,
+.tprime-checkout-iframe-wrap {
+  height: auto !important;
+  min-height: 0 !important;
+}
 .tprime-checkout-inner {
   max-width: 1200px;
   margin: 0 auto;
