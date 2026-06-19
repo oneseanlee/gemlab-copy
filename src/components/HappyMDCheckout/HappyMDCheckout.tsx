@@ -81,13 +81,8 @@ export function HappyMDCheckoutIframe(
       if (event.origin !== "https://app.happymd.co") return;
       const data: any = event.data;
       if (!data || typeof data !== "object") return;
-      let msgHeight: unknown;
-      if (data.type === "ttp-checkout:resize") msgHeight = data.height;
-      else if (typeof data.height === "number") msgHeight = data.height;
-      else if (data.payload && typeof data.payload.height === "number") msgHeight = data.payload.height;
-      if (typeof msgHeight === "number" && msgHeight > 0) {
-        const clamped = Math.min(Math.max(msgHeight, 300), 4000);
-        setIframeHeight(clamped + 24);
+      if (data.type === "ttp-checkout:resize" && typeof data.height === "number") {
+        setIframeHeight(Math.min(Math.max(data.height, 300), 4000));
       }
     };
     window.addEventListener("message", handler);
@@ -104,7 +99,7 @@ export function HappyMDCheckoutIframe(
       scrolling="auto"
       allow="payment *; clipboard-write"
       className={className}
-      style={{ border: 0, width: "100%", maxWidth: "100%", display: "block", borderRadius: 12, background: "#fff" }}
+      style={{ border: 0, width: "100%", display: "block" }}
     />
   );
 }
